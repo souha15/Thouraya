@@ -1,0 +1,185 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <nav class="d-flex p-0 bd-highlight tasks-nav mt-2 finance-nav">
+
+        <a [routerLink]="['/ticket-add']" class="p-2 flex-fill bd-highlight stop-btn">
+          <span><i class="fa fa-plus"></i></span>
+          إضافة تذكرة
+        </a>
+
+        <a [routerLink]="['/ticket-list-client']" class="p-2 flex-fill bd-highlight stop-btn">
+          <span><i class="fa fa-list"></i></span>
+          قائمة التذاكر
+        </a>
+
+      </nav>
+      <header>
+        <h3 class="task-head">   قائمة التذاكر</h3>
+      </header>
+      <div class="table-responsive mandate">
+        <table class="table text-center table-bordered table-striped theme-table">
+          <thead>
+
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">العنوان</th>
+              <th scope="col">التاريخ</th>
+              <th scope="col">التفاصيل</th>
+              <th scope="col">الحالة </th>
+              <th scope="col">تعديل</th>
+              <th scope="col">حذف</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ne of ticketList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; let i = index">
+              <th scope="row">{{(p-1) * count + i + 1}}</th>
+              <td (click)="populateForm(ne)" data-toggle="modal" data-target="#myModal1">{{ne.titre}}</td>
+              <td (click)="populateForm(ne)" data-toggle="modal" data-target="#myModal1">{{ne.date}}</td>
+              <td (click)="populateForm(ne)" data-toggle="modal" data-target="#myModal1">{{ne.details}}</td>
+              <td (click)="populateForm(ne)" data-toggle="modal" data-target="#myModal1"
+                  [ngClass]="{
+
+    'work': ne.etat === 'تحت الإجراء',
+    'done': ne.etat === 'منجزة',
+    'wait': ne.etat === 'في الإنتظار'
+}">
+                {{ne.etat}}
+              </td>
+              <td (click)="populateForm(ne)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></a></td>
+              <td (click)="populateForm(ne)"><a class="btn btn-danger" (click)="onDelete(ne.id)"><i class="fa fa-trash"></i></a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div> <!-- End Table Responsive -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                               nextLabel="التالي"></pagination-controls>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+        <h3 class="popup-head">{{ticket.titre}}</h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="task-form form-row stop-form">
+            <form class="task-form form-row service-form">
+
+              <div class="col-md-4">
+                <label>التاريخ </label>
+                {{ticket.date}}
+              </div>
+
+              <div class="col-md-8">
+                <label>التفاصيل </label>
+                {{ticket.details}}
+              </div>
+
+
+              <div class="col-md-4">
+                <label>الحالة </label>
+                {{ticket.etat}}
+              </div>
+
+              <div class="col-md-4" *ngIf="ticket.remarque!=null">
+                <label>الملاحظات </label>
+                {{ticket.remarque}}
+              </div>
+
+              <div class="col-md-12">
+                <label>المرفقات </label>
+                <span class="data">
+                  <span *ngFor="let pr of ticketfiles">
+                    <i class="ml-2 fa fa-arrow-down" style="color:dodgerblue"></i>
+                    <a (click)="download(pr.path)" class="ml-3" style="color:dodgerblue">{{pr.path}}</a>
+
+                  </span>
+                </span>
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="myModal" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تعديل التذكرة</h2>
+          <form class="form-row task-form service-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <div class="col-sm-12">
+              <label for="eve-title">العنوان</label>
+              <input type="text" id="eve-title" name="titre" #titre="ngModel" [(ngModel)]="ticketService.formData.titre" required style="width:300px;" />
+              <div *ngIf=" titre.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب عنوان التذكرة .
+
+              </div>
+            </div>
+
+            <div class="col-sm-12">
+              <label for="eve-title">التفاصيل</label>
+              <textarea class="form-control" id="eve-title" name="details" #details="ngModel" [(ngModel)]="ticketService.formData.details" required></textarea>
+
+              <div *ngIf=" details.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب تفاصيل التذكرة
+
+              </div>
+            </div>
+            <div class="col-sm-12">
+              <br />
+              <label for="eve-title"> المرفقات</label>
+              <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+                <ngx-dropzone-label>اسحب  المرفقات  هنا او اضغط للتحميل</ngx-dropzone-label>
+                <ngx-dropzone-image-preview *ngFor="let f of files1" [removable]="true" [file]="f" (removed)="onRemove(f)">
+                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-image-preview>
+              </ngx-dropzone>
+            </div>
+
+
+            <div class="col-12 text-left mt-3">
+              <input class="btn btn-primary px-4" type="submit" value="إضافة" />
+              <input class="btn btn-danger px-4" type="reset" value="إلغاء" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

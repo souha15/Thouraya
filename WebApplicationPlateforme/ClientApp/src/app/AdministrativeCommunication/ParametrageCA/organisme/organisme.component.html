@@ -1,0 +1,47 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+      <app-acmenu></app-acmenu>
+      <!-- Tasks Page Content -->
+      <section class="page-content">
+        <h4 class="my-2 task-head">  إضافة جهة</h4>
+        <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+          <div class="col-3">
+            <label for="renter"><span><i class="fa fa-home"></i></span>الجهة</label>
+          </div>
+          <div class="col-9 renter">
+            <input type="text" id="renter" class="mb-2" placeholder="الإسم المختصر" name="shortnom" #shortnom="ngModel" [(ngModel)]="organisme.shortnom" required />
+            <div *ngIf="shortnom.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب اسم.
+            </div>
+            <input type="text" class="mb-2" placeholder="الإسم الكامل" name="nomcomplet" #nomcomplet="ngModel" [(ngModel)]="organisme.nomcomplet" required/>
+            
+            <input type="text" class="mb-2" placeholder="الهاتف" name="tel" #tel="ngModel" [(ngModel)]="organisme.tel" />
+            <input type="text" class="mb-2" placeholder="العنوان" name="addresse" #addresse="ngModel" [(ngModel)]="organisme.addresse" />
+            <input type="text" class="mb-2" placeholder="الفاكس" name="fax" #fax="ngModel" [(ngModel)]="organisme.fax" />
+            <input type="text" class="mb-2" placeholder="البريد الإلكتروني" name="email" #email="ngModel" [(ngModel)]="organisme.email" />
+          </div>
+
+          <div class="mx-auto my-3">
+            <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
+            <button class="btn btn-danger px-2 ml-3" type="reset"><span class="ml-4"><i class="fa fa-trash"></i></span>حذف الحقول</button>
+           
+          </div>
+        </form>
+      </section>
+    </div><!-- End col-9 -->
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

@@ -1,0 +1,76 @@
+.isred {
+  background: #ff6666;
+}
+
+.isgreen {
+  background: #33ff77;
+}
+
+.page-content {
+  direction: rtl;
+}
+
+.box-menu {
+  position: fixed;
+  top: 140px;
+  left: 16px;
+  padding: 0;
+  width: 200px;
+  border: 1px solid #108199;
+  z-index: 99999;
+  display: none;
+}
+
+  .box-menu a {
+    display: block;
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    padding: 6px 0;
+    border-bottom: 1px solid #d1d1d1;
+    background-color: #fff;
+    color: #108199;
+  }
+
+    .box-menu a:hover {
+      background-color: #108199;
+      color: #fff;
+    }
+
+/*--- form style---*/
+.task-form input[type='date'] {
+  width: 200px
+}
+
+.tab-btn {
+  background-color: #fff;
+  color: #108199;
+  border: 1px solid #108199;
+}
+
+  .tab-btn:hover,
+  .tab-btn.active {
+    background-color: #108199;
+    color: #fff;
+  }
+
+input#files2 {
+  display: none
+}
+
+.stop-form label {
+  min-width: 126px;
+  background: #91c3d8;
+  color: #444;
+}
+
+.file-label {
+  cursor: pointer;
+}
+
+.dropzone {
+  font-size: 18px;
+  color: #2196f3;
+  border: 2px dashed #2196f3;
+  width: 500px;
+}

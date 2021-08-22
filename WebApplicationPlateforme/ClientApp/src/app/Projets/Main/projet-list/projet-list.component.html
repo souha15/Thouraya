@@ -1,0 +1,129 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <app-projet-menu></app-projet-menu>
+      <header>
+        <h3 class="task-head">قائمة المشاريع</h3>
+      </header>
+
+      <div class="table-responsive">
+        <table class="table table-bordered theme-table text-center">
+          <thead>
+            <tr>
+              <th scope="col">المشاريع النشطة</th>
+              <th scope="col">المشاريع المغلقة</th>
+              <th scope="col">المشاريع المتعثرة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="table-success">{{nb1}}</td>
+              <td class="table-active">{{nb3}}</td>
+              <td class="table-danger">{{nb2}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pro-list">
+        <div class="form-group pull-right">
+          <input type="text"
+                 class="search form-control"
+                 placeholder="ما الذي تبحث عنه ؟" [(ngModel)]="filter" />
+        </div>
+        <span class="counter pull-right"></span>
+        <div class="tabel-cont table-responsive">
+          <table class="table table-striped theme-table table-bordered results">
+            <thead class="">
+              <tr>
+                <th scope="col">م</th>
+                <th scope="col">المشروع</th>
+                <th scope="col">القسم</th>
+                <th scope="col">مبلغ الدعم</th>
+                <th scope="col">الجهة الداعمة</th>
+                <th scope="col">تاريخ الدعم</th>
+                <th scope="col">الحالة</th>
+                <th scope="col">الأداء</th>
+                <th scope="col" *ngIf="testclose">غلق</th>
+                <th scope="col" *ngIf="testrole">تعديل</th>
+                <th scope="col" *ngIf="testrole">حذف </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ev of prList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p } ; let i = index">
+                <th scope="row" [routerLink]="['/projet-details', ev.id]">{{(p-1) * count + i + 1}}</th>
+
+                <td [routerLink]="['/projet-details', ev.id]">{{ev.titre}}</td>
+                <td [routerLink]="['/projet-details', ev.id]">{{ev.classe}}</td>
+                <td [routerLink]="['/projet-details', ev.id]">{{ev.prix}}</td>
+                <td [routerLink]="['/projet-details', ev.id]">{{ev.orgnom}}</td>
+                <td [routerLink]="['/projet-details', ev.id]">{{ev.datesupport}}</td>
+                <td [routerLink]="['/projet-details', ev.id]">{{ev.etat}}</td>
+                <td [routerLink]="['/projet-details', ev.id]">{{ev.evaluation}}</td>
+                <td (click)="populateForm(ev)" *ngIf="testclose">
+                  <a class="btn btn-primary" data-toggle="modal" data-target="#myModal2"><i class="fa fa-times"></i>   غلق     </a>
+                </td>
+
+                <td *ngIf="testrole"><a class="btn btn-success" [routerLink]="['/projet-edit', ev.id]"><i class="fa fa-edit"></i>تعديل</a></td>
+                <td *ngIf="testrole"><a (click)="onDelete(ev.id)" class="btn btn-danger"><i class="fa fa-trash"></i>حذف</a></td>
+              </tr>
+            </tbody>
+          </table>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                   nextLabel="التالي"></pagination-controls>
+            </ul>
+          </nav>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+
+<!-- accept-->
+<div id="myModal2" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+        <h3 class="popup-head">غلق المشروع</h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="task-form form-row stop-form">
+
+
+            <p class="text-center" style="text-align:center">هل أنت متأكد من غلق المشروع  ؟</p>
+
+
+
+            <div class="mx-auto my-3 text-center">
+              <button class="btn btn-success px-2 ml-3" (click)="accept()"><span class="ml-2"><i class="fa fa-save"></i></span> موافق</button>
+              <button class="btn btn-danger px-2 ml-3"><span class="ml-2"><i class="fa fa-times"></i></span> إلغاء</button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

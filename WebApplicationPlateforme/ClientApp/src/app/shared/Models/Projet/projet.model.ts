@@ -1,0 +1,35 @@
+export class Projet {
+  id: number;
+  classe :string;
+  dirid :string;
+  dirnom :string;
+  descriptiondir :string;
+  titre :string;
+  duree :string;
+  date :string;
+  moisjours :string;
+  orgnom :string;
+  orgid: number;
+  prix :string;
+  dateFin :string;
+  typeRembourssement :string;
+  numcheque :string;
+  compte :string;
+  datesupport :string;
+  numReception :string;
+  activite :string;
+  etat :string;
+  rapport :string;
+  dateupload :string;
+  evaluation :string;
+  remarque :string;
+  attibut1 :string;
+  attribut2 :string;
+  attribut3 :string;
+  attribut4 :string;
+  attribut5 :string;
+  attribut6 :string;
+  creatorName :string;
+  datenereg :string;
+  idUserCreator :string;
+}

@@ -1,0 +1,96 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+
+      <app-menu-cheque></app-menu-cheque>
+      <header>
+        <h3 class="task-head">قائمة الشيكات</h3>
+      </header>
+
+      <div class="table-responsive">
+
+
+        <table class="table table-bordered theme-table text-center">
+          <thead>
+            <tr>
+              <th scope="col">شيكات جاري العمل عليها</th>
+              <th scope="col">شيكات مكتملة</th>
+              <th scope="col">شيكات متعثرة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="table-primary">{{nb1}}</td>
+              <td class="table-success">{{nb2}}</td>
+              <td class="table-danger">{{nb3}}</td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+      <div class="pro-list">
+        <div class="form-group pull-right">
+          <input type="text"
+                 class="search form-control"
+                 [(ngModel)]="filter"
+                 placeholder="ما الذي تبحث عنه ؟" />
+        </div>
+
+        <div class="tabel-cont table-responsive">
+          <table class="table table-striped theme-table table-bordered results table-hover cur">
+            <thead class="">
+              <tr>
+                <th scope="col">م</th>
+                <th scope="col">رقم الشيك</th>
+                <th scope="col">المبلغ</th>
+                <th scope="col">الغرض</th>
+                <th scope="col">تاريخ التحرير</th>
+                <th scope="col">القسم</th>
+                <th scope="col">المستلم</th>
+                <th scope="col">الحالة</th>
+                <th scope="col" *ngIf="testrole">تعديل</th>
+                <th scope="col" *ngIf="testrole">حذف</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr tr *ngFor="let ev of cheq |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p } ; let i = index; let even=even"
+                  [style.background-color]="ev.rowClicked ? '#c3c6eb' : (even ? '' : '')"
+                  (click)="ev.rowClicked = !ev.rowClicked">
+                <th scope="row" (click)="populateForm(ev)" [routerLink]="['/chequec-details', ev.id]">{{(p-1) * count + i + 1}}</th>
+                <td (click)="populateForm(ev)" [routerLink]="['/chequec-details', ev.id]">{{ev.numcheque}}</td>
+                <td (click)="populateForm(ev)" [routerLink]="['/chequec-details', ev.id]">{{ev.prix}}</td>
+                <td (click)="populateForm(ev)" [routerLink]="['/chequec-details', ev.id]">{{ev.raison}}</td>
+                <td (click)="populateForm(ev)" [routerLink]="['/chequec-details', ev.id]">{{ev.dateEcriture}}</td>
+                <td (click)="populateForm(ev)" [routerLink]="['/chequec-details', ev.id]">{{ev.classe}}</td>
+                <td (click)="populateForm(ev)" [routerLink]="['/chequec-details', ev.id]">{{ev.recepteur}}</td>
+                <td (click)="populateForm(ev)" [routerLink]="['/chequec-details', ev.id]">{{ev.etat}}</td>
+                <td *ngIf="testrole"><a class="btn btn-success" [routerLink]="['/chequec-edit', ev.id]"><i class="fa fa-edit"></i>تعديل</a></td>
+                <td *ngIf="testrole"><a (click)="onDelete(ev.id)" class="btn btn-danger"><i class="fa fa-trash"></i>حذف</a></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                   nextLabel="التالي"></pagination-controls>
+            </ul>
+          </nav>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

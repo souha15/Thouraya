@@ -1,0 +1,278 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <!-- End Sidebar -->
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">قائمة الفواتير المعتمدة</h3>
+      </header>
+      <div class="form-group pull-right">
+        <input type="text"
+               class="search form-control"
+               placeholder="ما الذي تبحث عنه ؟" name="search" [(ngModel)]="filter" />
+      </div>
+      <span class="counter pull-right"></span>
+      <div class="table-responsive">
+        <table class="table results text-center table-bordered theme-table">
+          <thead>
+            <tr>
+
+              <th scope="col">رقم الفاتورة</th>
+              <th scope="col">عرض التفاصيل</th>
+              <th scope="col">صرف</th>
+            </tr>
+
+          </thead>
+          <tbody>
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+              <td (click)="populateForm(cg)">{{cg.id}}</td>
+              <td (click)="populateForm(cg)">
+                <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-eye fa-lg"></i>
+                </a>
+              </td>
+              <td (click)="populateForm(cg)" *ngIf="cg.attribut2=='معتمدة'"><a class="btn btn-success" data-toggle="modal" data-target="#myModal2" *ngIf="cg.attribut2=='معتمدة'">صرف</a></td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+<div id="myModal" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تفاصيل الفاتورة</h2>
+          <div class="form-row task-form service-form text-center">
+
+            <div class="col-md-12">
+              <span class="completed" *ngIf="etatok">الحالة :{{fact.attribut2}}</span>
+              <span class="notcompleted" *ngIf="!etatok">الحالة :{{fact.attribut2}}</span>
+              <br />
+              <br />
+            </div>
+
+            <div class="col-md-6">
+
+              <div>
+                <label>رقم الفاتورة</label>
+                <p>{{fact.id}}</p>
+              </div>
+              <div>
+                <label>الموظف المسجل </label>
+                <p>{{fact.usernamecreator}}</p>
+              </div>
+              <div>
+                <label>الصنف</label>
+                <p>{{fact.categorie}}</p>
+              </div>
+              <div>
+                <label>تاريخ اضافة الفاتورة</label>
+                <p>{{fact.date}}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div>
+                <label>الفرع الأول</label>
+                <p>{{fact.brancheone}}</p>
+              </div>
+              <div>
+                <label>الفرع الثاني</label>
+                <p>{{fact.branchetwo}}</p>
+              </div>
+
+              <div>
+                <label>المبلغ</label>
+                <p>{{fact.prix}}</p>
+              </div>
+              <div>
+                <label>اسم المستفيد</label>
+                <p>{{fact.beneficiaire}}</p>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <label>المستندات</label>
+              <div class="file-links">
+                <ul *ngFor="let pd of listPjFiltred;">
+                  <li>
+                    <a (click)="download(pd.path)"><i class="fa fa-download  fa-2x"></i></a>
+                    {{pd.path}}
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div>
+                <label>التفاصيل</label>
+                <p>
+                  {{fact.detail}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تعديل الفاتورة</h2>
+          <div class="col-md-12">
+            <span class="completed" *ngIf="etatok">الحالة :{{fact.attribut2}}</span>
+            <span class="notcompleted" *ngIf="!etatok">الحالة :{{fact.attribut2}}</span>
+            <br />
+            <br />
+          </div>
+          <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <div class="col-md-6">
+              <label for="bill-date">تاريخ إضافة الفاتورة </label>
+              <input type="date" id="bill-date" name="date" #date="ngModel" [(ngModel)]="factureService.formData.date" required />
+              <div *ngIf="date.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب تاريخ إضافة الفاتورة .
+
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="reg-emp">الموظف المسجل للفاتورة</label>
+              <input type="text" id="reg-emp" value="{{UserNameConnected}}" disabled />
+            </div>
+            <div class="col-md-6">
+              <label for="amount">المبلغ</label>
+              <input type="number" min="0" id="amount" name="prix" #prix="ngModel" [(ngModel)]="factureService.formData.prix" required />
+              <div *ngIf="prix.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب  المبلغ.
+
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="the-type">الصنف</label>
+              <select id="the-type" name="categorie" #categorie="ngModel" [(ngModel)]="factureService.formData.categorie">
+                <option [ngValue]="undefined" selected disabled>-الصنف-</option>
+                <option *ngFor="let item of typeFacture" value="{{item.nom}}">{{item.nom}}</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="the-type">الفرع الأول</label>
+              <select id="the-type" name="brancheone" #brancheone="ngModel" [(ngModel)]="factureService.formData.brancheone">
+                <option [ngValue]="undefined" selected disabled>-الفرع-</option>
+                <option *ngFor="let item of brancheOne" value="{{item.nom}}">{{item.nom}}</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="the-type">الفرع الثاني</label>
+              <select id="the-type" name="branchetwo" #branchetwo="ngModel" [(ngModel)]="factureService.formData.branchetwo">
+                <option [ngValue]="undefined" selected disabled>-الفرع-</option>
+                <option *ngFor="let item of brancheTwo" value="{{item.nom}}">{{item.nom}}</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="">إضافة سند</label>
+              <input type="file" id="doc" (change)="upload($event)" #inputFile />
+              <label for="doc" class="file-label">
+                <span><i class="fa fa-file-alt fa-lg"></i></span> ارفاق
+                <span class="mr-4"><i class="fa fa-upload"></i></span>
+              </label>
+            </div>
+            <div class="col-md-6">
+              <label for="payee">اسم المستفيد</label>
+              <input type="text" id="payee" name="beneficiaire" #beneficiaire="ngModel" [(ngModel)]="factureService.formData.beneficiaire" />
+            </div>
+            <div class="col-md-6">
+              <label for="">التفاصيل</label>
+              <textarea class="form-control" name="detail" #detail="ngModel" [(ngModel)]="factureService.formData.detail"></textarea>
+            </div>
+
+            <div class="col-md-12 text-left">
+              <input type="submit"
+                     style="width: 130px;"
+                     class="btn btn-info next"
+                     value="إضافة" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<!-- getBack-->
+<div id="myModal2" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+        <h3 class="popup-head">إعتماد الفاتورة</h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="task-form form-row stop-form">
+
+
+            <p class="text-center" style="text-align:center">هل أنت متأكد من صرف الفاتورة  ؟</p>
+
+
+
+            <div class="mx-auto my-3 text-center">
+              <button class="btn btn-success px-2 ml-3" (click)="getBack()"><span class="ml-2"><i class="fa fa-save"></i></span> موافق</button>
+              <button class="btn btn-danger px-2 ml-3"><span class="ml-2"><i class="fa fa-times"></i></span> إلغاء</button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+

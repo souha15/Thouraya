@@ -1,0 +1,134 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+
+      <header>
+        <h3 class="task-head">طلب صرف شيك</h3>
+      </header>
+      <div class="events1">
+        <form class="form-row events-form mb-3"  #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <div class="col-md-12">
+            <div class="w-100">
+              <label class="main">
+                <span><i class="fa fa-info-circle"></i></span> المعلومات
+                الأساسية
+              </label>
+            </div>
+            <div class="d-flex w-100 justify-content-between flex-wrap">
+              <div>
+                <label for="devision">القسم</label>
+                <select id="devision" name="calsse" #calsse="ngModel" [(ngModel)]="ch.calsse">
+                  <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                  <option *ngFor="let item of classesList" value="{{item.nom}}">{{item.nom}}</option>
+                </select>
+              </div>
+              <div>
+                <label for="entry-date">تاريخ الادخال</label>
+                <input type="date" id="entry-date" name="dateEntre" #dateEntre="ngModel" [(ngModel)]="ch.dateEntre" />
+              </div>
+              <div>
+                <label for="req-num">رقم الطلب</label>
+                <input type="number" min="0" id="req-num" value="{{id}}" disabled />
+              </div>
+              <div>
+                <label for="applyer">مقدم الطلب</label>
+                <input type="text" id="applyer" name="demandeur" #demandeur="ngModel" [(ngModel)]="ch.demandeur" />
+              </div>
+              <div>
+                <label for="property">الصفة</label>
+                <input type="text" id="property" name="description" #description="ngModel" [(ngModel)]="ch.description" />
+              </div>
+              <div>
+                <label for="topic">موضوع الطلب</label>
+                <input type="text" id="topic" name="sujet" #sujet="ngModel" [(ngModel)]="ch.sujet" />
+              </div>
+              <div>
+                <label for="amount">المبلغ رقما</label>
+                <input type="number" min="0" id="amount" name="prixnb" #prixnb="ngModel" [(ngModel)]="ch.prixnb" />
+              </div>
+              <div>
+                <label for="amount-text">المبلغ كتابة</label>
+                <input type="text" id="amount-text" name="prixlettre" #prixlettre="ngModel" [(ngModel)]="ch.prixlettre" />
+              </div>
+              <div>
+                <label for="amount-text">مدخل البیانات</label>
+                <input type="text" id="amount-text" value="{{UserNameConnected}}" disabled/>
+              </div>
+            </div>
+
+            <div class="w-100">
+              <label class="main"><span><i class="fa fa-edit"></i></span> التفاصيل</label>
+            </div>
+            <div class="d-flex w-100 justify-content-between flex-wrap">
+              <div>
+                <label for="property">البيان</label>
+                <input type="text" id="property" name="article" #article="ngModel" [(ngModel)]="ar.article" />
+              </div>
+              <div>
+                <label for="amount-2">المبلغ</label>
+                <input type="number"
+                       min="0"
+                       name="prix" #prix="ngModel" [(ngModel)]="ar.prix"
+                       id="amount-2" />
+              </div>
+              <div>
+                <label for="topic">التفاصيل</label>
+                <input type="text"
+                       style="width: 200px"
+                       name="detail" #detail="ngModel" [(ngModel)]="ar.detail"
+                       id="topic" />
+              </div>
+              <div class="w-100 text-center">
+                <input class="btn btn-info"
+                       style="width: 120px"
+                       type="button"
+                       id="add-inputs1" (click)="addar()" value="اضافة" />
+
+              </div>
+
+              <div class="table-responsive new-table2" *ngIf="artest">
+                <table class="table table-bordered text-center table-striped">
+                  <thead class="thead-primary">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">البيان</th>
+                      <th scope="col">المبلغ</th>
+                      <th scope="col">التفاصيل</th>
+                      <th scope="col">حذف</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let dp of arlis ; let i = index">
+                      <th scope="row">{{i+1}}</th>
+                      <td>{{dp.article}}</td>
+                      <td>{{dp.prix}}</td>
+                      <td>{{dp.detail}}</td>
+                      <td><a (click)="delar(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 text-left mt-3">
+            <input class="btn btn-info px-4" type="submit" value="حفظ" />
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

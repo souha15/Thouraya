@@ -1,0 +1,1187 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <app-menu-settings-orphelin></app-menu-settings-orphelin>
+      <header>
+        <h3 class="task-head"> إضافة يتيم</h3>
+      </header>
+
+
+
+      <!-----Test The -->
+      <div class="accordion" id="accordionExample">
+
+
+        <div class="card">
+
+          <div class="courses" id="headingOne">
+
+            <a class="accord" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              البيانات الأساسية
+            </a>
+
+          </div>
+
+          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="card-body">
+
+
+              <div class="events1">
+                <form class="form-row events-form mb-3" #form="ngForm" autocomplete="off" (submit)="onSubmitOr(form)">
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+                        <div class="ml-3">
+                          <label for="target">		الاسم الثلاثي </label>
+                          <input type="text" name="nom" #nom="ngModel" [(ngModel)]="orph.nom" />
+                        </div>
+                        <div class="ml-3">
+                          <label for="number">	تاريخ الميلاد </label>
+                          <input type="date" name="dateNais" #dateNais="ngModel" [(ngModel)]="orph.dateNais" />
+                        </div>
+                        <div class="ml-3">
+                          <label for="number">	مكان الولادة </label>
+                          <input type="text" name="lieuNais" #lieuNais="ngModel" [(ngModel)]="orph.lieuNais" />
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="number">الجنسية </label>
+                          <input type="text" name="nat" #nat="ngModel" [(ngModel)]="orph.nat" />
+                        </div>
+
+
+                        <div class="ml-3">
+                          <label for="number">	رقم الهوية  </label>
+                          <input type="number" min="8" maxlength="10" name="cin" #cin="ngModel" [(ngModel)]="orph.cin" />
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="number">		الجنس  </label>
+
+                          <select id="account" name="sexe" #sexe="ngModel" [(ngModel)]="orph.sexe">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="ذكر">ذكر </option>
+                            <option value="أنثى">أنثى</option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="number">		رقم الجوال </label>
+                          <input type="text" name="tel" #tel="ngModel" [(ngModel)]="orph.tel" />
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="number">		اسم صاحب الرقم </label>
+                          <input type="text" name="propNumTel" #propNumTel="ngModel" [(ngModel)]="orph.propNumTel" />
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="number">	اليتيم فقد  </label>
+                          <select id="account" name="lose" #lose="ngModel" [(ngModel)]="orph.lose">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="الام">الام  </option>
+                            <option value="الاب">الاب </option>
+                            <option value="الام والاب">الام والاب </option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="number">		اليتيم يعيش مع  </label>
+                          <select id="account" name="liveWith" #liveWith="ngModel" [(ngModel)]="orph.liveWith">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option *ngFor="let item of liveswithList" value="{{item.nom}}">{{item.nom}}</option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="number">		المحافظة </label>
+                          <input type="text" name="cite" #cite="ngModel" [(ngModel)]="orph.cite" />
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="number">	المدينة </label>
+                          <input type="text" name="ville" #ville="ngModel" [(ngModel)]="orph.ville" />
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="number">		الحي </label>
+                          <input type="text" name="quartier" #quartier="ngModel" [(ngModel)]="orph.quartier" />
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="number">	اسم أقرب مسجد  </label>
+                          <input type="text" name="mosquee" #mosquee="ngModel" [(ngModel)]="orph.mosquee" />
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="number">	الملاحظات </label>
+                          <input type="text" id="link5" name="req" #req="ngModel" [(ngModel)]="orph.req" placeholder="الملاحظات" (keydown.enter)="$event.preventDefault()" style="width:515px;" />
+
+                        </div>
+
+
+                        <div class="ml-3">
+
+                          <label for="number">إضافة سند</label>
+                          <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+                            <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                            <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+                              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                          </ngx-dropzone>
+
+
+                        </div>
+
+                        <div class="col-12 text-left">
+                          <input class="btn btn-info px-4" type="submit" value="حفظ" />
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <!------------------------->
+
+        <div class="card">
+          <div class="courses" id="headingTwo">
+
+            <a class="accord" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+              البيانات الدراسية
+            </a>
+          </div>
+          <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
+            <div class="card-body">
+
+
+
+
+              <div class="events1">
+                <form class="form-row events-form mb-3">
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+                        <div class="ml-3">
+                          <label for="target">	يدرس  </label>
+                          <select id="account" name="education" #education="ngModel" [(ngModel)]="edu.education" (change)="testEdu($event)">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="نعم">نعم  </option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3" *ngIf="eduNon">
+                          <label for="number">السبب  </label>
+                          <input type="text" name="raisonedu" #raisonedu="ngModel" [(ngModel)]="edu.raisonedu" id="link5" placeholder="الملاحظات" (keydown.enter)="$event.preventDefault()" style="width:515px;" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="eduOui">
+                          <label for="number">	المرحلة  </label>
+                          <select id="account" name="niveau" #niveau="ngModel" [(ngModel)]="edu.niveau">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="التحضيرية">التحضيرية  </option>
+                            <option value="الابتدائية">الابتدائية </option>
+                            <option value="المتوسطة">المتوسطة  </option>
+                            <option value="الثانوية">الثانوية   </option>
+                            <option value="الجامعية">الجامعية  </option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3" *ngIf="eduOui">
+                          <label for="number">	الفصل  </label>
+                          <input type="text" name="classe" #classe="ngModel" [(ngModel)]="edu.classe" />
+                        </div>
+
+
+                        <div class="ml-3" *ngIf="eduOui">
+                          <label for="number">	اسم الجهة التعليمية   </label>
+                          <input type="text" min="8" maxlength="10" name="Autorite" #Autorite="ngModel" [(ngModel)]="edu.Autorite" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="eduOui">
+                          <label for="number">		نوع الجهة التعليمية    </label>
+
+                          <select id="account" name="typeAutorite" #typeAutorite="ngModel" [(ngModel)]="edu.typeAutorite">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="حكومية">حكومية  </option>
+                            <option value="اهلية">اهلية  </option>
+                            <option value="خاصة">خاصة  </option>
+                            <option value="عالمية">عالمية </option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3" *ngIf="eduOui">
+                          <label for="number">		رقم الهاتف </label>
+                          <input type="text" name="tel" #tel="ngModel" [(ngModel)]="edu.tel" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="eduOui">
+                          <label for="number">		اسم المرشد   </label>
+                          <input type="text" name="conseillerSocialNom" #conseillerSocialNom="ngModel" [(ngModel)]="edu.conseillerSocialNom" />
+                        </div>
+
+
+                        <div class="ml-3" *ngIf="eduOui">
+                          <label for="number">		رقم جوال المرشد </label>
+                          <input type="text" name="conseillerSocialNumTel" #conseillerSocialNumTel="ngModel" [(ngModel)]="edu.conseillerSocialNumTel" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="eduOui">
+                          <label for="number">	المستوى الدراسي   </label>
+
+                          <select id="account" name="mention" #mention="ngModel" [(ngModel)]="edu.mention">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="امتياز مع مرتبة الشرف ">امتياز مع مرتبة الشرف   </option>
+                            <option value="امتياز ">امتياز   </option>
+                            <option value="جيد جدا ">جيد جدا   </option>
+                            <option value="جيد">جيد </option>
+                            <option value="متوسط ">متوسط  </option>
+                            <option value="مقبول ">مقبول  </option>
+                            <option value="ضعيف ">ضعيف  </option>
+                            <option value="راسب">راسب </option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3" *ngIf="eduOui">
+                          <label for="number">	فترة الدراسة </label>
+                          <select id="account" name="periode" #periode="ngModel" [(ngModel)]="edu.periode">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="صباحي ">صباحي   </option>
+                            <option value="مسائي ">مسائي  </option>
+                            <option value="صباحي ومسائي ">صباحي ومسائي  </option>
+                          </select>
+                        </div>
+
+                        <div class="col-12 text-left">
+                          <input class="btn btn-info px-4" type="submit" value="حفظ" (click)="onSubmitEdu()" />
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </form>
+
+                <form class="form-row events-form mb-3" *ngIf="eduOui">
+
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+                      <label class="main">
+                        <span><i class="fa fa-music"></i></span>
+                        المهارات
+                      </label>
+
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+
+
+                        <div class="ml-3">
+                          <label for="number">		مهارات اليتيم   </label>
+                          <select id="account" name="nomOrph" #nomOrph="ngModel" [(ngModel)]="tal.nomOrph"  (change)="addTal(event)" >
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option *ngFor="let item of talentList" value="{{item.nom}}">{{item.nom}}</option>
+                          </select>
+                        </div>
+
+
+                      </div>
+
+                    </div>
+
+                    <div class="table-responsive new-table2" *ngIf="talTest">
+                      <table class="table table-bordered text-center table-striped">
+                        <thead class="thead-gestimary">
+                          <tr>
+
+                            <th scope="col">م</th>
+                            <th scope="col">	الاسم </th>
+                            <th scope="col">حذف</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let dp of talList ; let i = index;">
+                            <td>{{i+1}}</td>
+                            <td>{{dp.nomOrph}}</td>
+                            <td><a (click)="delTal(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+                      <br />
+
+                      <div class="col-12 text-left">
+                        <input class="btn btn-info px-4" type="submit" value="إضافة" (click)="submitTal()" />
+
+                      </div>
+                    </div>
+                  </div>
+
+                </form>
+
+
+                <form class="form-row events-form mb-3" *ngIf="eduOui">
+
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+                      <label class="main">
+                        <span><i class="fa fa-book"></i></span>
+                        المواد الضعيف التحيل بها
+                      </label>
+
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+
+
+                        <div class="ml-3">
+                          <label for="number">	المواد   </label>
+                          <select id="account" name="nomOrph" #nomOrph="ngModel" [(ngModel)]="mat.nomOrph" (change)="addMat($event)">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option *ngFor="let item of matiereList" value="{{item.nom}}">{{item.nom}}</option>
+                          </select>
+                        </div>
+
+
+     
+                      </div>
+
+                    </div>
+
+                    <div class="table-responsive new-table2" *ngIf="matTest">
+                      <table class="table table-bordered text-center table-striped">
+                        <thead class="thead-gestimary">
+                          <tr>
+
+                            <th scope="col">م</th>
+                            <th scope="col">	الاسم </th>
+
+                            <th scope="col">حذف</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr *ngFor="let dp of matList; let i = index;">
+                            <td>{{i+1}}</td>
+                            <td>{{dp.nomOrph}}</td>
+                            <td><a (click)="delMat(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                          </tr>
+
+                        </tbody>
+                      </table>
+
+                      <br />
+                      <div class="col-12 text-left">
+                        <input class="btn btn-info px-4" type="submit" value="إضافة" (click)="submitMat()" />
+
+                      </div>
+                    </div>
+                  </div>
+
+                </form>
+              </div>
+
+
+
+            </div>
+          </div>
+        </div>
+
+
+        <!--------Sante-------->
+
+        <div class="card">
+          <div class="courses" id="headingThree">
+
+            <a class="accord" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+              البيانات الصحية
+            </a>
+
+          </div>
+          <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+            <div class="card-body">
+
+              <div class="events1">
+                <form class="form-row events-form mb-3">
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+                        <div class="ml-3">
+                          <label for="target">	يعاني من مرض   </label>
+                          <select id="account" name="malade" #malade="ngModel" [(ngModel)]="san.malade" (change)="testSan($event)">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="نعم">نعم  </option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+
+
+                        <div class="ml-3" *ngIf="sanOui">
+                          <label for="number">	نوع المرض   </label>
+                          <select id="account" name="typeMaladie" #typeMaladie="ngModel" [(ngModel)]="san.typeMaladie">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option *ngFor="let item of maladieList" value="{{item.nom}}">{{item.nom}}</option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3" *ngIf="sanOui">
+                          <label for="number">	طبيعة المرض  </label>
+                          <input type="text" name="natureMaladie" #natureMaladie="ngModel" [(ngModel)]="san.natureMaladie" />
+                        </div>
+
+
+                        <div class="ml-3" *ngIf="sanOui">
+                          <label for="number">تكلفة العلاج شهريا   </label>
+                          <input type="number" min="8" maxlength="10" name="prix" #prix="ngModel" [(ngModel)]="san.prix" />
+                        </div>
+
+                        <div class="col-12 text-left">
+                          <input class="btn btn-info px-4" type="submit" value="حفظ" (click)="onSubmitSante()" />
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </form>
+
+
+                <form class="form-row events-form mb-3">
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+
+                      <label class="main">
+                        <span><i class="fa fa-book"></i></span>
+                       	معلومات الجانب الاجتماعي و النفسي
+                      </label>
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+                        <div class="ml-3">
+                          <label for="target">	يعاني من مشاكل نفسية او اجتماعية   </label>
+                          <select id="account" name="maladiePsy" #maladiePsy="ngModel" [(ngModel)]="psy.maladiePsy" (change)="testPsy($event)">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="نعم">نعم  </option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+
+
+                        <div class="ml-3" *ngIf="psyOui">
+                          <label for="number">	نوعها  </label>
+                          <input type="text" name="type" #type="ngModel" [(ngModel)]="psy.type" />
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="target">	يحظر جلسات دعم نفسي     </label>
+                          <select id="account" name="docteur" #docteur="ngModel" [(ngModel)]="psy.docteur" (change)="testdoc($event)">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="نعم">نعم  </option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+
+
+                        <div class="ml-3" *ngIf="docOui">
+                          <label for="number">	الفترة    </label>
+                          <select id="account" name="periode" #periode="ngModel" [(ngModel)]="psy.periode">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="صبحي ">صباحي   </option>
+                            <option value="مسائي ">مسائي  </option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3" *ngIf="docNon">
+                          <label for="number">يحتاج جلسات دعم نفسي    </label>
+                          <select id="account" name="besoinsDoc" #besoinsDoc="ngModel" [(ngModel)]="psy.besoinsDoc">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="نعم">نعم  </option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3" *ngIf="docNon">
+                          <label for="number">	الفترة    </label>
+                          <select id="account" name="periode" #periode="ngModel" [(ngModel)]="psy.periode">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="صبحي ">صباحي   </option>
+                            <option value="مسائي ">مسائي  </option>
+                          </select>
+                        </div>
+
+                        <div class="col-12 text-left">
+                          <input class="btn btn-info px-4" type="submit" value="حفظ" (click)="onSubmitPsy()" />
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </form>
+
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--------Psy-------->
+
+        <div class="card">
+          <div class="courses" id="headingFour">
+
+            <a class="accord" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+              	معلومات الجانب الاقتصادي
+            </a>
+
+          </div>
+          <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#accordionExample">
+            <div class="card-body">
+
+              <div class="events1">
+                <form class="form-row events-form mb-3">
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+                        <div class="ml-3">
+                          <label for="target">	يوجد مصدر اساسي للاسرة  </label>
+                          <select id="account" name="source" #source="ngModel" [(ngModel)]="fn.source" (change)="testFn($event)">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="نعم">نعم  </option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+
+
+                        <div class="ml-3" *ngIf="fnOui">
+                          <label for="number">		المصدر   </label>
+                          <input type="text" name="attribut2" #attribut2="ngModel" [(ngModel)]="fn.attribut2" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="fnOui">
+                          <label for="number">	قيمة الدخل  </label>
+                          <input type="number" name="salaire" #salaire="ngModel" [(ngModel)]="fn.salaire" />
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="target">	يوجد للاسرة مشاريع انتاجية  </label>
+                          <select id="account" name="projetFinan" #projetFinan="ngModel" [(ngModel)]="fn.projetFinan" (change)="testPj($event)">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="نعم">نعم  </option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3" *ngIf="pjOui">
+                          <label for="number">		المصدر   </label>
+                          <input type="text" name="sourceProjet" #sourceProjet="ngModel" [(ngModel)]="fn.sourceProjet" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="pjOui">
+                          <label for="number">	قيمة الدخل  </label>
+                          <input type="number" name="prixProjet" #prixProjet="ngModel" [(ngModel)]="fn.prixProjet" />
+                        </div>
+
+
+                        <div class="ml-3">
+                          <label for="target">	&nbsp;&nbsp;	يوجد للاسرة عقارات  </label>
+                          <select id="account" name="dotation" #dotation="ngModel" [(ngModel)]="fn.dotation" (change)="testDot($event)">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="نعم">نعم  </option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="target">	&nbsp;&nbsp;	تتلقى اسرة اليتيم اعانات  </label>
+                          <select id="account" name="subvention" #subvention="ngModel" [(ngModel)]="fn.subvention" (change)="testSub($event)">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="نعم">نعم  </option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+
+                        <div class="col-12 text-left">
+                          <input class="btn btn-info px-4" type="submit" value="حفظ" (click)="onSubmitFinance()" />
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </form>
+
+
+                <form class="form-row events-form mb-3" *ngIf="addDotTest && dotOui">
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+
+                      <label class="main">
+                        <span><i class="fa fa-building"></i></span>
+                        العقارات
+                      </label>
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+
+
+                        <div class="ml-3" *ngIf="dotOui && addDotTest">
+                          <label for="number">	&nbsp;&nbsp;	نوع العقارات   </label>
+                          <select id="account" name="typeDotation" #typeDotation="ngModel" [(ngModel)]="dot.typeDotation" (change)="addDot($event)">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option *ngFor="let item of dotationList" value="{{item.nom}}">{{item.nom}}</option>
+                          </select>
+                        </div>
+
+
+
+                        <div class="table-responsive new-table2" *ngIf="dotTest">
+                          <table class="table table-bordered text-center table-striped">
+                            <thead class="thead-gestimary">
+                              <tr>
+
+                                <th scope="col">م</th>
+                                <th scope="col">الاسم</th>
+                                <th scope="col">حذف</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let dp of dotList; let i = index;">
+                                <td>{{i+1}}</td>
+                                <td>{{dp.typeDotation}}</td>
+                                <td><a (click)="delDot(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div class="col-12 text-left" *ngIf="addDotTest">
+                          <input class="btn btn-info px-4" type="submit" value="إضافة" (click)="onSubmitDot()" />
+
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+                </form>
+
+
+
+                <form class="form-row events-form mb-3" *ngIf="addDotTest && subOui">
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+
+                      <label class="main">
+                        <span><i class="fa fa-money-bill"></i></span>
+                        اعانات
+                      </label>
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+
+
+                        <div class="ml-3" *ngIf="subOui">
+                          <label for="number">الجهة  </label>
+                          <select id="account" name="typeDotation" #typeDotation="ngModel" [(ngModel)]="sub.typeDotation">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option *ngFor="let item of organismeList" value="{{item.nom}}">{{item.nom}}</option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3" *ngIf="subOui">
+                          <label for="number">	نوع الاعانات   </label>
+                          <select id="account" name="type" #type="ngModel" [(ngModel)]="sub.type">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option *ngFor="let item of subventionList" value="{{item.nom}}">{{item.nom}}</option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3" *ngIf="subOui">
+                          <label for="number">	قيمة الدعم   </label>
+                          <input type="number" name="somme" #somme="ngModel" [(ngModel)]="sub.somme" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="subOui">
+                          <label for="target">	الية الاعانات   </label>
+                          <select id="account" name="mecanisme" #mecanisme="ngModel" [(ngModel)]="sub.mecanisme">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="شهرية ">شهرية   </option>
+                            <option value="سنوية ">سنوية </option>
+                            <option value="دورية ">دورية </option>
+                          </select>
+                        </div>
+
+
+                        <div class="ml-3">
+                          <input class="btn btn-info px-4" type="submit" value="إضافة" (click)="addSub()" />
+
+                        </div>
+                        <div class="table-responsive new-table2" *ngIf="subTest">
+                          <table class="table table-bordered text-center table-striped">
+                            <thead class="thead-gestimary">
+                              <tr>
+
+                                <th scope="col">م</th>
+                                <th scope="col">الجهة</th>
+                                <th scope="col">نوع الاعانات </th>
+                                <th scope="col">قيمة الدعم</th>
+                                <th scope="col">الية الاعانات</th>
+                                <th scope="col">حذف</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr *ngFor="let dp of subList; let i = index;">
+                                <td>{{i+1}}</td>
+                                <td>{{dp.typeDotation}}</td>
+                                <td>{{dp.type}}</td>
+                                <td>{{dp.somme}}</td>
+                                <td>{{dp.mecanisme}}</td>
+                                <td><a (click)="delSub(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                              </tr>
+
+                            </tbody>
+                          </table>
+                        </div>
+
+                        <div class="col-12 text-left" *ngIf="addDotTest">
+                          <input class="btn btn-info px-4" type="submit" value="إضافة" (click)="onSubmitSub()" />
+
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+
+                </form>
+
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+
+        <!--------Finan-------->
+        <div class="card">
+          <div class="courses" id="headingFive">
+
+            <a class="accord" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+             	بيانات عائلة اليتيم
+            </a>
+
+          </div>
+          <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+            <div class="card-body">
+
+              <div class="events1">
+                <form class="form-row events-form mb-3">
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+
+                      <label class="main">
+                        <span><i class="fa fa-user"></i></span>
+                        بيانات والد اليتيم
+                      </label>
+
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+
+                        <div class="ml-3">
+                          <label for="number">	الاسم الرباعي</label>
+                          <input type="text" name="nom" #nom="ngModel" [(ngModel)]="per.nom" />
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="number">	    رقم الهوية</label>
+                          <input type="number" name="cin" #cin="ngModel" [(ngModel)]="per.cin" />
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="number">	المهنة </label>
+                          <input type="text" name="travail" #travail="ngModel" [(ngModel)]="per.travail" />
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="target">	على قيد الحياة   </label>
+                          <select id="account" name="alive" #alive="ngModel" [(ngModel)]="per.alive" (change)="testPer($event)">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="نعم">نعم  </option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3" *ngIf="perOui">
+                          <label for="number">		تاريخ الوفاة    </label>
+                          <input type="date" name="datedeces" #datedeces="ngModel" [(ngModel)]="per.datedeces" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="perOui">
+                          <label for="number">		السبب </label>
+                          <input type="text" id="link5" name="raison" #raison="ngModel" [(ngModel)]="per.raison" placeholder="السبب" (keydown.enter)="$event.preventDefault()" style="width:515px;" />
+
+                        </div>
+
+                        <div class="ml-3" *ngIf="perOui">
+                          <label for="number">		مكان الوفاة  </label>
+                          <input type="text" name="lieudeces" #lieudeces="ngModel" [(ngModel)]="per.lieudeces" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="perOui">
+                          <label for="number">		المعاش  </label>
+                          <input type="text" name="salaire" #salaire="ngModel" [(ngModel)]="per.salaire" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="perOui">
+                          <label for="number">		عدد الزوجات   </label>
+                          <input type="number" name="nbfemme" #nbfemme="ngModel" [(ngModel)]="per.nbfemme" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="perOui">
+                          <label for="number">		عدد الابناء   </label>
+                          <input type="number" name="nbenfant" #nbenfant="ngModel" [(ngModel)]="per.nbenfant" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="perOui">
+                          <label for="number">		ملاحظات اضافية </label>
+                          <input type="text" id="link5" name="req" #req="ngModel" [(ngModel)]="per.req" placeholder="الملاحظات" (keydown.enter)="$event.preventDefault()" style="width:515px;" />
+
+                        </div>
+
+                        <div class="col-12 text-left">
+                          <input class="btn btn-info px-4" type="submit" value="حفظ" (click)="onSubmitPere()" />
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </form>
+
+
+                <form class="form-row events-form mb-3">
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+
+                      <label class="main">
+                        <span><i class="fa fa-user"></i></span>
+                        بيانات والدة  اليتيم
+                      </label>
+
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+
+                        <div class="ml-3">
+                          <label for="number">	الاسم الرباعي</label>
+                          <input type="text" name="nom" #nom="ngModel" [(ngModel)]="mer.nom" />
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="number">	    رقم الهوية</label>
+                          <input type="number" name="cin" #cin="ngModel" [(ngModel)]="mer.cin" />
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="number">		تاريخ الميلاد   </label>
+                          <input type="date" name="dateNais" #dateNais="ngModel" [(ngModel)]="mer.dateNais" />
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="target">	على قيد الحياة   </label>
+                          <select id="account" name="alive" #alive="ngModel" [(ngModel)]="mer.alive" (change)="testMer($event)">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="نعم">نعم  </option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3" *ngIf="merOui">
+                          <label for="number">		تاريخ الوفاة    </label>
+                          <input type="date" name="datedeces" #datedeces="ngModel" [(ngModel)]="mer.datedeces" />
+                        </div>
+
+
+                        <div class="ml-3" *ngIf="merOui">
+                          <label for="number">		مكان الوفاة  </label>
+                          <input type="text" name="lieudeces" #lieudeces="ngModel" [(ngModel)]="mer.lieudeces" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="merOui">
+                          <label for="number">		السبب </label>
+                          <input type="text" id="link5" name="raison" #raison="ngModel" [(ngModel)]="mer.raison" placeholder="السبب" (keydown.enter)="$event.preventDefault()" style="width:515px;" />
+
+                        </div>
+
+
+                        <div class="ml-3" *ngIf="merNon">
+                          <label for="number">		المستوى التعليمي </label>
+                          <input type="text" name="niveauScolaire" #niveauScolaire="ngModel" [(ngModel)]="mer.niveauScolaire" />
+                        </div>
+
+
+                        <div class="ml-3" *ngIf="merNon">
+                          <label for="number">	المهنة </label>
+                          <input type="text" name="travail" #travail="ngModel" [(ngModel)]="mer.travail" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="merNon">
+                          <label for="number">	مكان العمل </label>
+                          <input type="text" name="lieuTravail" #lieuTravail="ngModel" [(ngModel)]="mer.lieuTravail" />
+                        </div>
+
+
+                        <div class="ml-3" *ngIf="merNon">
+                          <label for="number">		المعاش  </label>
+                          <input type="text" name="salaire" #salaire="ngModel" [(ngModel)]="mer.salaire" />
+                        </div>
+
+
+                        <div class="ml-3" *ngIf="merNon">
+                          <label for="number">			المهارات   </label>
+                          <select id="account" name="talent" #talent="ngModel" [(ngModel)]="mer.talent">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option *ngFor="let item of talentList" value="{{item.nom}}">{{item.nom}}</option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3" *ngIf="merNon">
+                          <label for="number">	الحالة الصحية   </label>
+                          <select id="account" name="sante" #sante="ngModel" [(ngModel)]="mer.sante">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option *ngFor="let item of maladieList" value="{{item.nom}}">{{item.nom}}</option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3" *ngIf="merNon">
+                          <label for="number">		الحالة الاجتماعية   </label>
+                          <select id="account" name="statutSociale" #statutSociale="ngModel" [(ngModel)]="mer.statutSociale">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="ارملة ">ارملة </option>
+                            <option value="مطلقة ">مطلقة </option>
+                            <option value="متزوجة ">متزوجة </option>
+                          </select>
+                        </div>
+
+
+                        <div class="ml-3" *ngIf="merNon">
+                          <label for="target">	تعيل ابنائها   </label>
+                          <select id="account" name="soutientEnfant" #soutientEnfant="ngModel" [(ngModel)]="mer.soutientEnfant">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="نعم">نعم  </option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3" *ngIf="merNon">
+                          <label for="number">		عدد الابناء   </label>
+                          <input type="number" name="nbEnfant" #nbEnfant="ngModel" [(ngModel)]="mer.nbEnfant" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="merNon">
+                          <label for="number">		رقم الجوال   </label>
+                          <input type="number" name="tel" #tel="ngModel" [(ngModel)]="mer.tel" />
+                        </div>
+
+                        <div class="col-12 text-left">
+                          <input class="btn btn-info px-4" type="submit" value="حفظ" (click)="onSubmitMere()" />
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </form>
+
+                <form class="form-row events-form mb-3">
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+
+                      <label class="main">
+                        <span><i class="fa fa-user"></i></span>
+                        	بيانات وصي اليتيم
+                      </label>
+
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+                        <div class="ml-3">
+                          <label for="target">	الوصي هو أم اليتيم  </label>
+                          <select id="account" name="mere" #mere="ngModel" [(ngModel)]="tut.mere" (change)="testTut($event)">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option value="نعم">نعم  </option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3" *ngIf="tutOui">
+                          <label for="number">لاسم الثلاثي</label>
+                          <input type="text" name="nom" #nom="ngModel" [(ngModel)]="tut.nom" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="tutOui">
+                          <label for="number"> رقم الهوية</label>
+                          <input type="number" name="cin" #cin="ngModel" [(ngModel)]="tut.cin" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="tutOui">
+                          <label for="number">نوع القرابة   </label>
+                          <select id="account" name="parente" #parente="ngModel" [(ngModel)]="tut.parente">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option *ngFor="let item of parenteList" value="{{item.nom}}">{{item.nom}}</option>
+                          </select>
+                        </div>
+
+                        <div class="ml-3" *ngIf="tutOui">
+                          <label for="number">المستوى التعليمي   </label>
+                          <input type="date" name="niveauScolaire" #niveauScolaire="ngModel" [(ngModel)]="tut.niveauScolaire" />
+                        </div>
+
+
+                        <div class="ml-3" *ngIf="tutOui">
+                          <label for="number">	المهنة </label>
+                          <input type="text" name="travail" #travail="ngModel" [(ngModel)]="tut.travail" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="tutOui">
+                          <label for="number">	مكان العمل </label>
+                          <input type="text"  name="raison" #raison="ngModel" [(ngModel)]="tut.lieuTravail"/>
+
+                        </div>
+
+
+                        <div class="ml-3" *ngIf="tutOui">
+                          <label for="number">	الراتب </label>
+                          <input type="number" name="salaire" #salaire="ngModel" [(ngModel)]="tut.salaire" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="tutOui">
+                          <label for="number">	المهارات  </label>
+                          <select id="account" name="talent" #talent="ngModel" [(ngModel)]="tut.talent">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option *ngFor="let item of talentList" value="{{item.nom}}">{{item.nom}}</option>
+                          </select>
+                        </div>
+
+
+                        <div class="ml-3" *ngIf="tutOui">
+                          <label for="number">	الحالة الصحية   </label>
+                          <select id="account" name="sante" #sante="ngModel" [(ngModel)]="tut.sante">
+                            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                            <option *ngFor="let item of maladieList" value="{{item.nom}}">{{item.nom}}</option>
+                          </select>
+                        </div>
+
+
+                        <div class="ml-3" *ngIf="tutOui">
+                          <label for="number">	عدد المعالين   </label>
+                          <input type="number" name="nbOrphelin" #nbOrphelin="ngModel" [(ngModel)]="tut.nbOrphelin" />
+                        </div>
+
+                        <div class="ml-3" *ngIf="tutOui">
+                          <label for="number">		رقم الجوال   </label>
+                          <input type="number" name="tel" #tel="ngModel" [(ngModel)]="tut.tel" />
+                        </div>
+
+                        <div class="col-12 text-left">
+                          <input class="btn btn-info px-4" type="submit" value="حفظ" (click)="onSubmitTuteur()" />
+
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+
+                </form>
+
+              </div>
+              </div>
+            </div>
+        </div>
+
+        <!--------Famille--------
+
+        <div class="card">
+          <div class="courses" id="headingFiveFive">
+
+            <a class="accord" data-toggle="collapse" data-target="#collapseFiveFive" aria-expanded="false" aria-controls="collapseFiveFive">
+              بيانات عائلة اليتيم
+            </a>
+
+          </div>
+          <div id="collapseFiveFive" class="collapse" aria-labelledby="headingFiveFive" data-parent="#accordionExample">
+            <div class="card-body">
+
+            </div>
+          </div>
+        </div>
+
+
+      
+        <div class="card">
+          <div class="courses" id="headingSeven">
+
+            <a class="accord" data-toggle="collapse" data-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+              بيانات وصي اليتيم
+            </a>
+
+          </div>
+          <div id="collapseSeven" class="collapse" aria-labelledby="headingSeven" data-parent="#accordionExample">
+            <div class="card-body">
+
+            </div>
+          </div>
+        </div>-->
+
+      </div>
+
+    </div>
+
+    </div>
+
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

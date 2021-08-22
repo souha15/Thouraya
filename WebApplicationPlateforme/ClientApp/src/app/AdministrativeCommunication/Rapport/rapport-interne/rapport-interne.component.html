@@ -1,0 +1,111 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+      <h4 class="my-2 task-head">تقرير المعاملات الصادرة </h4>
+
+
+
+      <!-- Transaction1 Page Content -->
+      <section class="page-content text-right">
+        <h3> قيم المتغيرات  <span><i class="fa fa-search"></i></span></h3>
+        <form action="" class="task-form form-row stop-form">
+
+
+          <div class="col-sm-6">
+            <label>جهة المعاملة</label>
+            <select (change)="testOr($event)" [disabled]="!testor">
+              <option [ngValue]="undefined" selected disabled>-جهة المعاملة-</option>
+              <option *ngFor="let item of ListOrg" value="{{item.id}}">{{item.shortnom}}</option>
+            </select>
+          </div>
+          <div class="col-sm-6">
+            <label>صاحب المعاملة</label>
+            <select (change)="testProp($event)" [disabled]="!testprop">
+              <option [ngValue]="undefined" selected disabled>-صاحب المعاملة-</option>
+              <option *ngFor="let item of ListProp" value="{{item.id}}">{{item.nom}} {{item.prenom}}</option>
+            </select>
+          </div>
+
+          <div class="col-sm-6">
+
+            <div class="form-group">
+              <input type="radio" name="tra" id="t2" (change)="testEnregTemp($event)" [disabled]="!testenregtemp">
+              <label for="t2"> المعاملات المحفوظة مؤقتا</label>
+            </div>
+            <div class="form-group">
+              <input type="radio" name="tra" id="t1" (change)="testMyTr($event)" [disabled]="!testmytr">
+              <label for="t1">معاملاتي </label>
+            </div>
+          </div>
+          <div class="col-sm-6">
+
+            <div class="form-group">
+              <input type="radio" name="tra" id="t4" (change)="testEnregDef($event)" [disabled]="!testenregdef">
+              <label for="t4">المعاملات المحفوظة نهائيا</label>
+            </div>
+
+          </div>
+          <div class="buttons col-12 text-left">
+            <button class="px-2 ml-3" type="submit" (click)="listTr()"><span class="ml-2"><i class="fa fa-print"></i></span> تكوين</button>
+            <button class="px-2 ml-3" type="reset"><span class="ml-2"><i class="fa fa-times"></i></span> حذف</button>
+          </div>
+        </form>
+        <hr>
+
+
+        <h3>نتيجة البحث <span><i class="fa fa-search"></i></span></h3>
+        <div class="table-responsive" id="htmlData">
+          <table class="table table-striped results table-bordered">
+            <thead>
+              <tr>
+
+                <th scope="col">رقم المعاملة</th>
+                <th scope="col">نوع المعاملة</th>
+                <th scope="col">تاريخ التسجيل</th>
+                <th scope="col">الجهة المسجلة للمعاملة</th>
+                <th scope="col">الأولوية</th>
+                <th scope="col">درجة السرية</th>
+
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tr of trListF ">
+
+                <td>{{tr.id}}</td>
+                <td>{{tr.typeInterne}}</td>
+                <td>{{tr.date}}</td>
+                <td>{{tr.orgEnregTr}}</td>
+                <td>{{tr.priorite}}</td>
+                <td>{{tr.securite}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+        <!-- Pagination -->
+
+        <div class="save">
+          <a (click)="openPDF()" class="btn"><span><i class="fa fa-print fa-2x"></i></span></a>
+        </div>
+      </section>
+
+
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+
+
+
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

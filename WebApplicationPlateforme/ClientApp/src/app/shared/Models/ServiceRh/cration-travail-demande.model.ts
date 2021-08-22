@@ -1,0 +1,32 @@
+export class CrationTravailDemande {
+  id: number;
+  username:string;
+  titreposte:string;
+  selection:string;
+  tacheTravail:string;
+  competence:string;
+  diplome:string;
+  datedebut:string;
+  iddir :string;
+  nomdir :string;
+  datedir :string;
+  etatdir  :string;
+  etat :string;
+  idrh :string;
+  etatrh:string;
+  nomrh :string;
+  daterh :string;
+  datedg :string;
+  etatdg :string;
+  iddg:string;
+  nomdg:string;
+attribut1: number;
+  attribut2 :string;
+  attribut3 :string;
+  attribut4 :string;
+  attribut5 :string;
+  attribut6 :string;
+  dateenreg :string;
+  userNameCreator :string;
+  idUserCreator :string;
+}

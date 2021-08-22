@@ -1,0 +1,98 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <app-cars-menu></app-cars-menu>
+      <header>
+        <h3 class="task-head">تقديم طلب صيانة</h3>
+      </header>
+      <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="col-md-6">
+          <label for="card-num">رقم اللوحة </label>
+          <input type="text" id="card-num" name="matricule" #matricule="ngModel" [(ngModel)]="voiture.matricule" (change)="mattest($event)" />
+          <div *ngIf="matricule.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب رقم اللوحة .
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="car-type">نوع السيارة </label>
+          <input type="text" id="car-type" name="type" #type="ngModel" [(ngModel)]="voiture.type" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="buy-date">تاريخ الصيانة </label>
+          <input type="date" id="buy-date" name="daterepair" #daterepair="ngModel" [(ngModel)]="voiture.daterepair" />
+        </div>
+        <div class="col-md-6">
+          <label for="repairs">الأعطال </label>
+          <input type="text" id="repairs" name="panne" #panne="ngModel" [(ngModel)]="voiture.panne" />
+        </div>
+
+        <div class="col-md-12">
+          <p></p>
+        </div>
+        <div class="col-md-4">
+          <label for="">التسعيرة الأولى</label>
+          <ngx-dropzone (change)="upload1($event);onSelect1($event)" class="dropzone" #inputFile>
+            <ngx-dropzone-label>
+              <span><i class="fa fa-file-alt fa-lg"></i></span> ارفاق
+              <span class="mr-4"><i class="fa fa-upload"></i></span>
+            </ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove1(f)">
+              <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
+        </div>
+        <div class="col-md-4">
+          <label for="">التسعيرة الثانية</label>
+          <ngx-dropzone (change)="upload2($event);onSelect2($event)" class="dropzone" #inputFile>
+            <ngx-dropzone-label>
+              <span><i class="fa fa-file-alt fa-lg"></i></span> ارفاق
+              <span class="mr-4"><i class="fa fa-upload"></i></span>
+            </ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files2" [removable]="true" (removed)="onRemove2(f)">
+              <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
+        </div>
+        <div class="col-md-4">
+          <label for="">التسعيرة الثالثة</label>
+
+          <ngx-dropzone (change)="upload3($event);onSelect3($event)" class="dropzone" #inputFile>
+            <ngx-dropzone-label>
+              <span><i class="fa fa-file-alt fa-lg"></i></span> ارفاق
+              <span class="mr-4"><i class="fa fa-upload"></i></span>
+            </ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files3" [removable]="true" (removed)="onRemove3(f)">
+              <ngx-dropzone-label>{{ f.name }}</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
+        </div>
+
+        <div class="col-md-12">
+          <p></p>
+        </div>
+        <div class="col-md-6">
+          <label for="notes01">الملاحظات </label>
+          <textarea id="notes01" class="form-control" name="req" #req="ngModel" [(ngModel)]="voiture.req"></textarea>
+        </div>
+        <div class="col-md-12 text-left">
+          <input type="submit"
+                 style="width: 130px;"
+                 class="btn btn-primary mt-2"
+                 value="تقديم" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

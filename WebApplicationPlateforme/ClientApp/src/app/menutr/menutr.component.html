@@ -1,0 +1,41 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head"> الإتصالات الإداریة</h3>
+      </header>
+      <div class="row que-serv">
+        <div class="que-serv">
+          <a [routerLink]="['/transaction-global-r']" class="p-2 flex-fill bd-highlight stop-btn">
+            <span><i class="fa fa-arrow-alt-circle-left"></i></span>
+            الواردة
+          </a>
+
+          <a [routerLink]="['/transaction-global-e']" class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-arrow-alt-circle-right"></i></span>
+            الصادرة
+          </a>
+
+          <a [routerLink]="['/transaction-global-i']" class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-arrows-alt"></i></span>
+            الداخلية
+          </a>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

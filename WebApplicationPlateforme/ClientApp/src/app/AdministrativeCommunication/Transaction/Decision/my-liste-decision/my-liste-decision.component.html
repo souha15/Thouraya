@@ -1,0 +1,204 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+
+      <header>
+        <h3 class="task-head">  قائمة التعاميم والقرارات </h3>
+      </header>
+      <div class="form-group pull-right">
+        <input type="text"
+               class="search form-control"
+               placeholder="ما الذي تبحث عنه ؟"
+               name="search" [(ngModel)]="filter" />
+      </div>
+      <span class="counter pull-right"></span>
+      <div class="table-responsive">
+        <table class="table results text-center table-bordered theme-table">
+          <thead>
+            <tr>
+              <th scope="col">الرقم</th>
+              <th scope="col">قرار/تعميم</th>
+              <th scope="col">داخلي/خارجي</th>
+              <th scope="col">العنوان</th>
+              <th scope="col">عرض التفاصيل</th>
+              <th scope="col">تعديل</th>
+              <th scope="col">حذف</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+              <th>{{cg.id}}</th>
+              <td (click)="populateForm(cg)">{{cg.type}}</td>
+              <td (click)="populateForm(cg)">{{cg.decision}}</td>
+              <td (click)="populateForm(cg)">{{cg.titre}}</td>
+              <td>
+                <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-eye fa-lg"></i>
+                </a>
+              </td>
+              <td (click)="populateForm(cg)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1">تعديل</a></td>
+              <td (click)="populateForm(cg)"><a class="btn btn-danger" (click)="onDelete(cg.id)">حذف</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+
+<div id="myModal" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تفاصيل القرار/ التعميم </h2>
+          <div class="form-row task-form service-form text-center">
+
+            <div class="col-md-6">
+
+              <div>
+                <label>الرقم </label>
+                <p>{{fact.id}}</p>
+              </div>
+
+              <div>
+                <label>
+                  داخلي/خارجي
+                </label>
+                <p>{{fact.decision}}</p>
+              </div>
+
+              <div>
+                <label>العنوان</label>
+                <p>{{fact.titre}}</p>
+              </div>
+
+            </div>
+            <div class="col-md-6">
+
+              <div>
+                <label>قرار/تعميم</label>
+                <p>{{fact.type}}</p>
+              </div>
+
+
+              <div *ngIf="bb">
+                <label>
+                  الجهة
+                </label>
+                <p>{{fact.org}}</p>
+              </div>
+
+
+              <div>
+                <label>
+                  التفاصيل
+                </label>
+                <p>{{fact.detail}}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تعديل القرار/ التعميم</h2>
+
+          <form class="form-row task-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <div class="col-md-6">
+              <label for="">قرار/تعميم</label>
+              <select name="type" #type="ngModel" [(ngModel)]="trinService.formData.type" required>
+                <option [ngValue]="undefined" selected disabled>قرار/تعميم</option>
+                <option value="قرار">قرار</option>
+                <option value="تعميم">تعميم</option>
+                <option value="لائحة">لائحة</option>
+              </select>
+
+              <div *ngIf="type.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب  قرار/تعميم .
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="">داخلي/خارجي</label>
+
+              <input type="radio" name="in-out" id="ch1" (change)="test($event)" value="داخلي" checked />
+              <label for="ch1" class="radio-lab">داخلي</label>
+
+              <input type="radio" class="choise2" name="in-out" id="ch2" (change)="test($event)" value="خارجي" />
+              <label for="ch2" class="radio-lab">خارجي</label>
+              <div class="content2">
+                <label for="">الجهة</label>
+                <input type="text" name="org" #org="ngModel" [(ngModel)]="trinService.formData.org" />
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="">العنوان</label>
+              <input type="text" name="titre" #titre="ngModel" [(ngModel)]="trinService.formData.titre" />
+            </div>
+
+            <div class="col-md-6">
+              <label for="">التفاصيل</label>
+              <textarea class="form-control" name="detail" #detail="ngModel" [(ngModel)]="trinService.formData.detail"></textarea>
+            </div>
+            <div class="col-12 text-center text-md-left mt-3">
+              <input class="btn btn-info"
+                     style="width: 130px;"
+                     type="submit"
+                     value="إضافة" />
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

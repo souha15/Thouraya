@@ -1,0 +1,39 @@
+/*Add Project Page*/
+.main1 {
+  margin-top: 0 !important;
+  margin-bottom: 8px !important;
+}
+
+.form-box {
+  border: 2px solid #107f98;
+  padding: 10px;
+  margin: 20px 0;
+  border-radius: 10px;
+}
+
+.add-inputs0 {
+  width: 130px;
+  padding: 10px;
+  background: #344760;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.events-form label.main.big {
+  min-width: 172px;
+}
+
+.small-boxes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+  .small-boxes div {
+    margin-left: 25px;
+  }
+
+  .small-boxes label,
+  .small-boxes .data {
+    min-width: 50px !important;
+    max-width: 120px !important;
+  }

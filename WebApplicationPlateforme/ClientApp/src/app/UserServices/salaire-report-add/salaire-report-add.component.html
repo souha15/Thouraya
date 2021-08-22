@@ -1,0 +1,75 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <div class="text-left">
+        <a (click)="print()"><i class="fa fa-print" style="color:cornflowerblue;font-size:35px;"></i></a>
+      </div>
+
+      <div class="content printed-page" id="htmlData">
+        <div class="container">
+          <header class="text-center"
+                  style="border-bottom: 2px solid #444; margin-bottom: 50px">
+            <div class="logo"><img src="assets/images/logo.jpg" alt="" /></div>
+            <div class="date">............</div>
+            <h4>بسم الله الرحمن الرحيم</h4>
+            <h3>وزارة الشئون الإسلامية والدعوة والإرشاد</h3>
+            <h3>فرع الوزارة بمنطقة جازان</h3>
+            <h3>
+              المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات بمحافظة أبو عريش
+            </h3>
+          </header>
+          <h3 class="text-center mb-5">مشهد تعريفي بالراتب</h3>
+          <table class="table table-bordered">
+            <tbody>
+              <tr>
+                <td>الاسم</td>
+                <td colspan="3">{{UserNameConnected}}</td>
+                <td>الوظيفة</td>
+                <td>{{emploi}}</td>
+              </tr>
+              <tr>
+                <td>الهوية</td>
+                <td colspan="3">{{cin}}</td>
+                <td>الجنسية</td>
+                <td>{{nat}}</td>
+              </tr>
+              <tr>
+                <td>الراتب الشهري</td>
+                <td>{{salaire}}</td>
+                <td>البدلات</td>
+                <td>{{aiond}}</td>
+                <td>الإجمالي</td>
+                <td>{{totin}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <p class="text-center"
+             style="
+						width: 50%;
+						margin: 30px auto;
+						font-size: 20px;
+						font-weight: 400;
+					">
+            تشهد جمعية الدعوة والإرشاد وتوعية الجاليات في محافظة ابوعريش بأن
+            الموظف الموضح بياناته أعلاه أحد منسوبيها ولا يزال على راس العمل حتى
+            تاريخه. وقد أعطي هذا المشهد بناء على طلبه دون أدنى مسؤولية.
+          </p>
+          <div class="text-center mt-3 mr-auto"
+               style="width: 300px; font-weight: bold">
+            <p>مدير المكتب التعاوني بمحافظة أبو عريش <br />نبيل سالم العطاس</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

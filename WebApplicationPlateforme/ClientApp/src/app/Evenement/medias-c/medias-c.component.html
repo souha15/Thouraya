@@ -1,0 +1,299 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+     
+      <!-- Tasks Page Content -->
+      <section class="page-content">
+        <h4 class="my-2 task-head">تعديل الفعالية رقم {{ev.id}}</h4>
+      <div class="events1">
+        <form class="form-row events-form mb-3" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <div class="col-md-12 d-flex w-100 justify-content-between">
+            <div>
+              <label for="devision"><span><i class="fa fa-sitemap"></i></span> القسم</label>
+              <select id="devision" name="classe" #classe="ngModel" [(ngModel)]="ev.classe" required>
+                <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                <option *ngFor="let item of classList" value="{{item.nom}}">{{item.nom}}</option>
+              </select>
+            </div>
+
+            <input type="text" name="id" #id="ngModel" [(ngModel)]="ev.id" hidden />
+
+            <div>
+              <label for="date-time">
+                <span><i class="fa fa-calendar-alt"></i></span> التاريخ
+                والوقت
+              </label>
+              <input type="date" id="date-time" name="datetime" #datetime="ngModel" [(ngModel)]="ev.datetime" required style="width:170px" />
+            </div>
+
+
+
+
+            <div>
+              <label for="site">
+                <span><i class="fa fa-map-marker-alt"></i></span>
+                الموقع
+              </label>
+              <input type="text" id="site" name="localisation" #localisation="ngModel" [(ngModel)]="ev.localisation" required />
+            </div>
+          </div>
+
+          <div class="col-md-12 d-flex w-100 justify-content-between">
+            <div *ngIf="classe.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب القسم .
+            </div>
+            <div *ngIf="datetime.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب التاريخ .
+            </div>
+            <div></div>
+          </div>
+          <div class="col-md-12">
+            <label class="main" for="project"><span><i class="fa fa-spinner"></i></span> المشروع</label>
+            <input type="text" id="project" class="ml-3" name="projet" #projet="ngModel" [(ngModel)]="ev.projet" required />
+
+            <label for="act-type">نوع النشاط</label>
+            <select id="act-type" class="ml-3" style="width:120px" name="typeAct" #typeAct="ngModel" [(ngModel)]="ev.typeAct" required>
+              <option [ngValue]="undefined" selected disabled>-نوع النشاط-</option>
+              <option *ngFor="let item of activityList" value="{{item.nom}}">{{item.nom}}</option>
+            </select>
+
+
+            <label for="address">العنوان</label>
+            <input type="text" id="address" name="attribut2" #attribut2="ngModel" [(ngModel)]="ev.attribut2" required />
+          </div>
+
+          <div class="col-md-12">
+            <div class="row">
+              <div class="col-sm-4">
+                <div *ngIf="projet.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                  مطلوب المشروع .
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div *ngIf="typeAct.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                  مطلوب نوع النشاط .
+                </div>
+              </div>
+              <div class="col-sm-4">
+                <div *ngIf="attribut2.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                  مطلوب العنوان .
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-12">
+            <label class="main"><span><i class="fa fa-users"></i></span> المستفيدون</label>
+            <label for="types">الفئة</label>
+            <select id="types" class="ml-4" name="beneficiaire" #beneficiaire="ngModel" [(ngModel)]="ev.beneficiaire">
+              <option [ngValue]="undefined" selected disabled>-الفئة-</option>
+              <option *ngFor="let item of beneficiaireList" value="{{item.nom}}">{{item.nom}}</option>
+            </select>
+            <label for="langs">اللغة</label>
+            <select id="langs" class="ml-4" name="langue" #langue="ngModel" [(ngModel)]="ev.langue">
+              <option [ngValue]="undefined" selected disabled>-اللغة-</option>
+              <option value="العربية">العربية</option>
+              <option value="الإنجليزية">الإنجليزية</option>
+              <option value="الفرنسية">الفرنسية</option>
+              <option value="البلغارية">البلغارية</option>
+              <option value="الفلبينية">الفلبينية</option>
+              <option value="ألمانية">ألمانية</option>
+              <option value="الهندية">الهندية</option>
+              <option value="الهولندية">الهولندية</option>
+              <option value="الدانماركية">الدانماركية</option>
+              <option value="الإيطالية">الإيطالية </option>
+              <option value="الكورية">الكورية </option>
+              <option value="النرويجية">النرويجية </option>
+              <option value="الروسية">الروسية </option>
+              <option value="التركية">التركية </option>
+            </select>
+            <label for="num">العدد</label>
+            <input type="number" id="num" min="0" name="nombre" #nombre="ngModel" [(ngModel)]="ev.nombre" />
+          </div>
+          <div class="col-md-12 event-team">
+            <label class="main">
+              <span><i class="fa fa-users-cog"></i></span> لجنة
+              التنفيذ
+            </label>
+
+            <!-- New Table To Add Values -->
+            <div class="table-responsive new-table1">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-primary">
+                  <tr>
+                    <th scope="col">الاسم</th>
+                    <th scope="col">المهمة</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pr of parlF| paginate: { itemsPerPage: 2, currentPage: c } ">
+                    <td>{{pr.nom}}</td>
+                    <td>{{pr.tache}}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <pagination-controls (pageChange)="c = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+              </ul>
+            </nav>
+          </div>
+          <div class="col-md-12">
+            <label class="main">
+              <span><i class="fa fa-mosque"></i></span> الوسائل
+              الدعوية
+            </label>
+            <label for="type-way">الصنف</label>
+            <select id="type-way" class="ml-4" name="outils" #outils="ngModel" [(ngModel)]="ev.outils">
+              <option [ngValue]="undefined" selected disabled>-الصنف-</option>
+              <option *ngFor="let item of outilsList" value="{{item.nom}}">{{item.nom}}</option>
+            </select>
+            <label for="number3">العدد</label>
+            <input type="number" id="number3" min="0" name="nboutils" #nboutils="ngModel" [(ngModel)]="ev.nboutils" />
+          </div>
+          <div class="col-md-12">
+            <label class="main"><span><i class="fa fa-coins"></i></span> المصروفات</label>
+
+
+            <!-- New Table To Add Values -->
+            <div class="table-responsive new-table2">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-primary">
+                  <tr>
+                    <th scope="col">الصنف</th>
+                    <th scope="col">التكلفة</th>
+                    <th scope="col">العدد</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of deplF| paginate: { itemsPerPage: 2, currentPage: p }">
+                    <td>{{dp.type}}</td>
+                    <td>{{dp.prix}}</td>
+                    <td>{{dp.nombre}}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+              </ul>
+            </nav>
+          </div>
+          <div class="col-md-12">
+            <label class="main"><span><i class="fa fa-photo-video"></i></span> الاعلام</label>
+
+          </div>
+
+          <div class="table-responsive new-table2">
+            <table class="table table-bordered text-center table-striped">
+              <thead class="thead-primary">
+                <tr>
+                  <th scope="col">المنصة</th>
+
+                  <th scope="col">الرابط</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dp of medialF| paginate: { itemsPerPage: 2, currentPage: t }">
+                  <td>{{dp.nom}}</td>
+                  <td>{{dp.path}}</td>
+
+                </tr>
+
+              </tbody>
+            </table>
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <pagination-controls (pageChange)="t = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+              </ul>
+            </nav>
+          </div>
+
+          <div class="col-md-12">
+            <label class="main"><span><i class="fa fa-file-upload"></i></span> التوثيق</label>
+            <ul *ngFor="let pd of listPjFiltred;">
+              <li *ngIf="pd.type=='img'">
+                <label for="photos" class="file-label">
+                  <a (click)="download(pd.path)">  <span><i class="fa fa-images fa-lg"></i></span></a>
+                  {{pd.path}}
+                  <span class="mr-4"><i class="fa fa-upload"></i></span>
+
+                </label>
+
+
+
+              </li>
+
+            </ul>
+
+            <ul *ngFor="let pd of listPjFiltred;">
+              <li *ngIf="pd.type=='vid'">
+                <label for="photos" class="file-label">
+                  <a (click)="download(pd.path)">  <span><i class="fa fa-video fa-lg"></i></span></a>
+                  {{pd.path}}
+                  <span class="mr-4"><i class="fa fa-upload"></i></span>
+
+                </label>
+
+
+
+              </li>
+
+            </ul>
+
+            <ul *ngFor="let pd of listPjFiltred;">
+              <li *ngIf="pd.type=='img'">
+                <label for="photos" class="file-label">
+                  <a (click)="download(pd.path)"> <span><i class="fa fa-headphones fa-lg"></i></span></a>
+                  {{pd.path}}
+                  <span class="mr-4"><i class="fa fa-upload"></i></span>
+
+                </label>
+
+
+
+              </li>
+
+            </ul>
+          </div>
+
+
+
+          <div class="col-md-12">
+            <label for="results" class="main">
+              <span><i class="fa fa-users-cog"></i></span>
+              الثمرات
+            </label>
+            <input type="text" id="results" class="last" name="stat" #stat="ngModel" [(ngModel)]="ev.stat" />
+          </div>
+          <div class="col-md-12">
+            <label class="main"><span><i class="fa fa-edit"></i></span> التوصيات</label>
+            <input type="text" id="name" min="0" class="last" name="recommandation" #recommandation="ngModel" [(ngModel)]="ev.recommandation" />
+          </div>
+
+          <div class="col-12 text-left">
+            <input class="btn btn-primary px-4" type="submit" value="حفظ" />
+          </div>
+        </form>
+      </div>
+      </section>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

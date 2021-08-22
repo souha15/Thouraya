@@ -1,0 +1,356 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">دوراتي التدريبية</h3>
+      </header>
+      <div class="form-group pull-right">
+        <input type="text"
+               class="search form-control"
+               placeholder="ما الذي تبحث عنه ؟"
+               name="search" [(ngModel)]="filter" />
+      </div>
+      <div class="table-responsive">
+        <table class="table text-center table-bordered theme-table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">عنوان الدورة</th>
+              <th scope="col">اختصاص الدورة</th>
+              <th scope="col">الجهة المقدمة</th>
+              <th scope="col">مدة الدورة</th>
+              <th scope="col">  الحالة</th>
+              <th scope="col">تفاصيل الدورة</th>
+
+              <th scope="col">حذف</th>
+              <th scope="col">تعديل</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+              <th scope="row">{{cg.id}}</th>
+              <td (click)="populateForm(cg)">{{cg.titre}}</td>
+              <td (click)="populateForm(cg)">{{cg.specialite}}</td>
+              <td (click)="populateForm(cg)">{{cg.org}}</td>
+              <td (click)="populateForm(cg)">{{cg.duree}}</td>
+
+              <td (click)="populateForm(cg)">
+                <a class="btn btn-warning" (click)="populateForm(cg);done()">{{cg.attribut2}}</a>
+
+
+              </td>
+
+
+
+              <td>
+                <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-eye fa-lg"></i>
+                </a>
+              </td>
+              <td (click)="populateForm(cg)"><a class="btn btn-danger" (click)="onDelete(cg.id)">حذف</a></td>
+              <td (click)="populateForm(cg)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1">تعديل</a></td>
+
+            </tr>
+
+            <tr *ngFor="let cg of factList1 |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+              <th scope="row">{{cg.id}}</th>
+              <td (click)="populateForm1(cg)">{{cg.titre}}</td>
+              <td (click)="populateForm1(cg)">{{cg.specialite}}</td>
+              <td (click)="populateForm1(cg)">{{cg.org}}</td>
+              <td (click)="populateForm1(cg)">{{cg.duree}}</td>
+              <td (click)="populateForm1(cg)">
+                <a class="btn btn-warning" (click)="populateForm1(cg);done1()">{{cg.attribut2}}</a>
+
+
+              </td>
+              <td>
+                <a class="btn show-details-btn text-info" (click)="populateForm1(cg)" data-toggle="modal" data-target="#myModal2">
+                  <i class="fa fa-eye fa-lg"></i>
+                </a>
+              </td>
+              <td (click)="populateForm1(cg)"><a class="btn btn-danger" (click)="onDelete1(cg.id)">حذف</a></td>
+              <td></td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- End Table Responsive -->
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+<div id="myModal" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تفاصيل الدورة</h2>
+          <div class="form-row task-form service-form text-center">
+
+            <div class="col-md-12">
+              <span class="completed" *ngIf="etatok">الحالة :{{fact.etat}}</span>
+              <span class="notcompleted" *ngIf="!etatok">الحالة :{{fact.etat}}</span>
+              <br />
+              <br />
+            </div>
+            <div class="col-md-6">
+
+              <div>
+                <label>رقم </label>
+                <p>{{fact.id}}</p>
+              </div>
+              <div>
+                <label>الاختصاص</label>
+                <p>{{fact.specialite}}</p>
+              </div>
+
+              <div>
+                <label>مدة الدورة</label>
+                <p>{{fact.duree}}</p>
+              </div>
+
+            </div>
+            <div class="col-md-6">
+
+              <div>
+                <label>عنوان الدورة</label>
+                <p>{{fact.titre}}</p>
+              </div>
+              <div>
+                <label>الجهة المقدمة</label>
+                <p>{{fact.org}}</p>
+              </div>
+
+              <div>
+                <label>رابط الدورة</label>
+                <p>{{fact.lien}}</p>
+              </div>
+
+            </div>
+
+            <div class="col-md-12">
+              <label>التفاصيل</label>
+              <p>{{fact.detail}}</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تعديل الدورة</h2>
+
+          <form class="form-row task-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <div class="col-md-6">
+              <label for="">عنوان الدورة</label>
+              <input type="text" name="titre" #titre="ngModel" [(ngModel)]="atService.formData.titre" required />
+              <div *ngIf="titre.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب عنوان الدورة .
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="">الاختصاص</label>
+              <select name="specialite" #specialite="ngModel" [(ngModel)]="atService.formData.specialite">
+                <option [ngValue]="undefined" selected disabled>اختر تخصص</option>
+                <option *ngFor="let item of SpecList" value="{{item.nom}}">{{item.nom}}</option>
+              </select>
+
+            </div>
+            <div class="col-md-6">
+              <label for="">تخصص آخر</label>
+              <input type="text" name="autreSpec" #autreSpec="ngModel" [(ngModel)]="atService.formData.autreSpec" />
+            </div>
+            <div class="col-md-6">
+              <label for="">الجهة المقدمة</label>
+              <input type="text" name="org" #org="ngModel" [(ngModel)]="atService.formData.org" />
+            </div>
+            <div class="col-md-6">
+              <label for="">مدة الدورة</label>
+              <input type="number" min="0" name="duree" #duree="ngModel" [(ngModel)]="atService.formData.duree" />
+            </div>
+            <div class="col-md-6">
+              <label for="">تكلفة الدورة</label>
+              <input type="number" min="0" name="prix" #prix="ngModel" [(ngModel)]="atService.formData.prix" />
+            </div>
+            <div class="col-md-6">
+              <label for="">رابط الدورة</label>
+              <input type="text" name="lien" #lien="ngModel" [(ngModel)]="atService.formData.lien" />
+            </div>
+            <div class="col-md-6">
+              <label for="">التفاصيل</label>
+              <textarea class="form-control" name="detail" #detail="ngModel" [(ngModel)]="atService.formData.detail"></textarea>
+            </div>
+            <div class="col-12 text-center text-md-left mt-3">
+              <input class="btn btn-info"
+                     style="width: 130px;"
+                     type="submit"
+                     value="تعديل" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div id="myModal2" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تفاصيل الدورة</h2>
+          <div class="form-row task-form service-form text-center">
+
+            <div class="col-md-12">
+              <span class="completed" *ngIf="etatok">الحالة :{{fact1.etat}}</span>
+              <span class="notcompleted" *ngIf="!etatok">الحالة :{{fact1.etat}}</span>
+              <br />
+              <br />
+            </div>
+            <div class="col-md-6">
+
+              <div>
+                <label>رقم </label>
+                <p>{{fact1.id}}</p>
+              </div>
+              <div>
+                <label>الاختصاص</label>
+                <p>{{fact1.specialite}}</p>
+              </div>
+
+              <div>
+                <label>مدة الدورة</label>
+                <p>{{fact1.duree}}</p>
+              </div>
+
+            </div>
+            <div class="col-md-6">
+
+              <div>
+                <label>عنوان الدورة</label>
+                <p>{{fact1.titre}}</p>
+              </div>
+              <div>
+                <label>الجهة المقدمة</label>
+                <p>{{fact1.org}}</p>
+              </div>
+
+              <div>
+                <label>مكان الدورة</label>
+                <p>{{fact1.attribut4}}</p>
+              </div>
+
+            </div>
+
+            <div class="col-md-12">
+              <label>التفاصيل</label>
+              <p>{{fact1.detail}}</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div id="myModal3" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تعديل الدورة</h2>
+
+          <form class="form-row task-form" #formP="ngForm" autocomplete="off" (submit)="onSubmit1(formP)">
+            <div class="col-md-6">
+              <label for="">عنوان الدورة</label>
+              <input type="text" value="{{fact1.titre}}" disabled />
+            </div>
+            <div class="col-md-6">
+              <label for="">الاختصاص</label>
+              <input type="text" value="{{fact1.specialite}}" disabled />
+            </div>
+            <div class="col-md-6">
+              <label for="">الجهة المقدمة</label>
+              <input type="text" value="{{fact1.org}}" disabled />
+            </div>
+            <div class="col-md-6">
+              <label for="">مدة الدورة</label>
+              <input type="number" value="{{fact1.duree}}" disabled />
+            </div>
+            <div class="col-md-6">
+              <label for="">مكان الدورة </label>
+              <input type="text" name="attribut4" #attribut4="ngModel" [(ngModel)]="atforService.formData.attribut4" />
+            </div>
+            <div class="col-md-6">
+              <label for="">التفاصيل</label>
+              <textarea class="form-control" name="detail" #detail="ngModel" [(ngModel)]="atforService.formData.detail"> </textarea>
+            </div>
+            <div class="col-12 text-center text-md-left mt-3">
+              <input class="btn btn-info"
+                     style="width: 130px;"
+                     type="submit"
+                     value="تعديل" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

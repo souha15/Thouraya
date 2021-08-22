@@ -1,0 +1,165 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <nav class="d-flex p-0 bd-highlight tasks-nav mt-2 finance-nav">
+
+        <a [routerLink]="['/filesorg-lis']" class="p-2 flex-fill bd-highlight stop-btn">
+          <span><i class="fa fa-list"></i></span>
+          وثائق جهة
+        </a>
+
+        <a [routerLink]="['/filesorg-add']" class="p-2 flex-fill bd-highlight stop-btn">
+          <span><i class="fa fa-plus"></i></span>
+          إضافة وثائق جهة
+        </a>
+      </nav>
+      <header>
+        <h3 class="task-head">عرض وثائق جهة</h3>
+      </header>
+
+      <div class="form-group pull-right">
+        <input type="text"
+               class="search form-control"
+               placeholder="ما الذي تبحث عنه ؟"
+               name="search" [(ngModel)]="filter" />
+      </div>
+      <span class="counter pull-right"></span>
+
+
+      <div class="table-responsive">
+        <table class="table text-center table-bordered theme-table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">اسم الوثيقة</th>
+              <th scope="col">تاريخ انتهاء الوثيقة</th>
+              <th scope="col">الوثيقة</th>
+              <th scope="col">تعديل</th>
+              <th scope="col">حذف</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+              <th scope="row">{{cg.id}}</th>
+              <td>{{cg.nomfile}}</td>
+              <td>{{cg.dateExpiration}}</td>
+              <td>
+                <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-file-download fa-lg"></i>
+                </a>
+              </td>
+              <td (click)="populateForm(cg)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1">تعديل</a></td>
+              <td (click)="populateForm(cg)"><a class="btn btn-danger" (click)="onDelete(cg.id)">حذف</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+
+
+<div id="myModal" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تنزيل وثيقة {{fact.nomfile}}</h2>
+          <div class="form-row task-form service-form text-center">
+
+
+            <div class="col-md-12">
+              <div>
+                <label>الوثيقة</label>
+                <p>
+                  <a (click)="download(fact.path)"><i class="fa fa-download  fa-2x"></i></a>
+                  {{fact.path}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تعديل الساعات الإضافية</h2>
+
+          <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <div class="col-md-6">
+              <label for="">اسم الوثيقة</label>
+              <select name="nomfile" #nomfile="ngModel" [(ngModel)]="orgService.formData.nomfile">
+                <option [ngValue]="undefined" selected disabled>اسم الوثيقة</option>
+                <option *ngFor="let item of panneList" value="{{item.nom}}">{{item.nom}}</option>
+              </select>
+
+              <div *ngIf="nomfile.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب اسم الوثيقة .
+              </div>
+              <div>
+                <label for="">تاريخ الانتهاء</label>
+                <input type="date" name="dateExpiration" #dateExpiration="ngModel" [(ngModel)]="orgService.formData.dateExpiration" />
+              </div>
+
+              <div *ngIf="dateExpiration.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب تاريخ الانتهاء .
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="">إرفاق الوثيقة</label>
+              <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+                <ngx-dropzone-label>اسحب الملف هنا او اضغط للتحميل</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+            </div>
+
+            <div class="col-12 text-center text-md-left mt-3">
+              <input class="btn btn-info"
+                     style="width: 130px;"
+                     type="submit"
+                     value="اضافة" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,352 @@
+<app-nav-menu></app-nav-menu>
+
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+
+      <app-list-projet-client></app-list-projet-client>
+      <header>
+        <h3 class="task-head">إضافة مشروع</h3>
+      </header>
+      <div class="events1">
+        <form class="form-row events-form mb-3" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+          <div class="col-md-12">
+            <div class="form-box p-4">
+              <div class="w-100 text-right">
+                <label class="main">
+                  <span><i class="fa fa-file-invoice-dollar"></i></span>
+                  تفاصيل المشروع
+                </label>
+              </div>
+
+
+
+              <div class="w-100 d-flex justify-content-start flex-wrap">
+                <div class="ml-3">
+                  <label for="pay-method">
+                    اسم
+                    المشروع
+                  </label>
+                  <input type="text" id="pay-method" name="nom" #nom="ngModel" [(ngModel)]="pr.nom">
+
+                  <div *ngIf="nom.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                    مطلوب المشروع .
+                  </div>
+                </div>
+                <div class="ml-3">
+                  <label for="check-num">رقم المشروع</label>
+                  <input type="number"
+                         min="0"
+                         name="num" #num="ngModel" [(ngModel)]="pr.num"
+                         id="check-num" />
+                </div>
+                <div>
+                  <label for="account">العميل</label>
+                  <select id="account" name="idClient" #idClient="ngModel" [(ngModel)]="pr.idClient" (change)="getClt($event)">
+                    <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                    <option *ngFor="let item of cltList" value="{{item.id}}">{{item.nom}}</option>
+                  </select>
+                </div>
+              </div>
+
+
+
+              <div class="w-100 d-flex justify-content-start flex-wrap">
+                <div class="ml-3">
+                  <label for="pay-method">
+                    مدة المشروع
+                  </label>
+                  <input type="text" id="pay-method" name="duree" #duree="ngModel" [(ngModel)]="pr.duree">
+
+                  <div *ngIf="dureePar.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                    مطلوب المشروع .
+                  </div>
+                </div>
+                <div class="ml-3">
+                  <label for="check-num">	 باليوم/ بالشهر </label>
+                  <select name="dureePar" #dureePar="ngModel" [(ngModel)]="pr.dureePar"
+                          id="check-num">
+
+                    <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                    <option value="باليوم">باليوم</option>
+                    <option value="بالشهر">بالشهر</option>
+
+                  </select>
+                </div>
+                <div>
+                  <label for="account">	تاريخ الاستلام </label>
+                  <input type="date" id="account" name="dateReception" #dateReception="ngModel" [(ngModel)]="pr.dateReception" />
+
+                </div>
+              </div>
+
+
+
+              <div class="w-100 d-flex justify-content-start flex-wrap">
+                <div class="ml-3">
+                  <label for="pay-method">
+                    تاريخ البداية
+                  </label>
+                  <input type="date" id="pay-method" name="dateDebut" #dateDebut="ngModel" [(ngModel)]="pr.dateDebut">
+                </div>
+                <div class="ml-3">
+                  <label for="check-num">	 	تاريخ النهاية </label>
+                  <input type="date"
+                         name="dateFin" #dateFin="ngModel" [(ngModel)]="pr.dateFin"
+                         id="check-num" />
+                </div>
+                <div>
+                  <label for="account">	مدير المشروع </label>
+                  <select id="account" name="idDir" #idDir="ngModel" [(ngModel)]="pr.idDir" (change)="getDir($event)">
+                    <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                    <option *ngFor="let item of ouvrierList" value="{{item.id}}">{{item.fullName}}</option>
+                  </select>
+                </div>
+              </div>
+
+
+              <div class="w-100 text-right">
+                <label class="main">
+                  <span><i class="fa fa-users"></i></span>
+                  فريق المشروع
+                </label>
+              </div>
+
+              <div class="w-100 d-flex justify-content-start flex-wrap">
+
+                <div class="col-sm-6">
+
+                  <label for="account">		 فريق المشروع </label>
+                  <select id="account" name="idUserCreator" #idUserCreator="ngModel" [(ngModel)]="ouv.idUserCreator" (change)="getOuvrier($event)">
+                    <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                    <option *ngFor="let item of ouvrierList" value="{{item.id}}">{{item.fullName}}</option>
+                  </select>
+                </div>
+                <div class="col-sm-4">
+
+                  <a (click)="addOuv()"
+                     class="btn mt-md-4"
+                     style="
+                        width: 100px;
+                        padding: 5px;
+                        color: #fff;
+                        background: #344760;
+                        margin-top: 20px;
+                      ">إضافة</a>
+
+                </div>
+
+                <div class="table-responsive new-table2" *ngIf="OuvTest || ot">
+                  <table class="table table-bordered text-center table-striped">
+                    <thead class="thead-primary">
+                      <tr>
+
+                        <th scope="col">الإسم</th>
+
+                        <th scope="col">حذف</th>
+                      </tr>
+                    </thead>
+                    <tbody *ngIf="OuvTest">
+                      <tr *ngFor="let dp of OuvrierList">
+                        <td>{{dp.nomUser}}</td>
+
+                        <td><a (click)="del(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                      </tr>
+
+                    </tbody>
+                    <tbody *ngIf="ot">
+                      <tr *ngFor="let dp of OuvList">
+                        <td>{{dp.nomUser}}</td>
+
+                        <td><a (click)="del11(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+
+              </div>
+
+
+              <div class="w-100 text-right">
+                <label class="main">
+                  <span><i class="fa fa-file-alt"></i></span>
+                  المستندات
+                </label>
+              </div>
+
+              <div class="row">
+                <div class="col-sm-5">
+                  <label for="">الإسم </label>
+                  <input type="text" id="report" class="ml-4" name="typec" #typec="ngModel" [(ngModel)]="pj.typec" />
+                </div>
+                <div class="col-sm-3">
+                  <input type="file" id="report-copy" (change)="upload1($event)" #inputFile />
+                  <label for="report-copy" class="file-label">
+                    <span><i class="fa fa-file-alt fa-lg"></i></span> المستند
+                    <span class="mr-2"><i class="fa fa-upload"></i></span>
+                  </label>
+                </div>
+                <div class="col-sm-4">
+
+                  <a (click)="addFile()"
+                     class="btn mt-md-4"
+                     style="
+                        width: 100px;
+                        padding: 5px;
+                        color: #fff;
+                        background: #344760;
+                        margin-top: 20px;
+                      ">إضافة</a>
+                </div>
+
+
+              </div>
+
+              <div class="table-responsive my-3" *ngIf="FileTest || ft">
+                <table class="table table-bordered table-striped theme-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">الإسم</th>
+                      <th scope="col">المستند</th>
+
+                      <th scope="col">حذف</th>
+                    </tr>
+                  </thead>
+                  <tbody *ngIf="FileTest">
+                    <tr *ngFor="let dp of filelist">
+                      <td>{{dp.typec}}</td>
+                      <td>{{dp.pathc}}</td>
+
+
+                      <td><a (click)="del9(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                    </tr>
+                  </tbody>
+
+                  <tbody  *ngIf="ft">
+                    <tr *ngFor="let dp of filesList">
+                      <td>{{dp.typec}}</td>
+                      <td>{{dp.pathc}}</td>
+
+
+                      <td><a (click)="del99(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <!--- <div class="row w-100 d-flex form-box">
+                      <div class="col-md-8 col-sm-12">
+                        <label class="main">
+                          <span><i class="fa fa-clipboard-list"></i></span>
+                          الأهداف
+                        </label>
+                        <div class="d-flex w-100 justify-content-start flex-wrap">
+                          <div class="ml-3">
+                            <label for="target">الهدف</label>
+                            <input type="text" id="target"
+                                   name="but" #but="ngModel" [(ngModel)]="buti.but" />
+                          </div>
+                          <div>
+                            <label for="number">العدد</label>
+                            <input type="number" min="0" id="number"
+                                   name="nbbut" #nbbut="ngModel" [(ngModel)]="buti.nbbut" />
+                          </div>
+                        </div>
+                        <div class="d-flex w-100 justify-content-start flex-wrap">
+                          <div class="ml-3">
+                            <label for="cost">التكلفة</label>
+                            <input type="text" id="cost"
+                                   name="prix" #prix="ngModel" [(ngModel)]="buti.prix" />
+                          </div>
+                          <div>
+                            <label for="number2">الاجمالي</label>
+                            <input type="number"
+                                   min="0"
+                                   id="number2"
+                                   name="tot" #tot="ngModel" [(ngModel)]="buti.tot" />
+                          </div>
+                        </div>
+                        <div class="d-flex w-100 justify-content-start flex-wrap">
+                          <div class="ml-3">
+                            <label for="part">الفئة المستفيدة</label>
+                            <select id="category" class="ml-4" name="benef" #benef="ngModel" [(ngModel)]="buti.benef">
+                              <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                              <option *ngFor="let item of PayTypeList" value="{{item.nom}}">{{item.nom}}</option>
+                            </select>
+                          </div>
+                          <div>
+                            <label for="number3">العدد</label>
+                            <input type="number"
+                                   min="0"
+                                   name="nbbenef" #nbbenef="ngModel" [(ngModel)]="buti.nbbenef"
+                                   id="number3" />
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-md-4 col-sm-12">
+                        <a (click)="addbuti()"
+                           class="btn mt-md-4"
+                           style="
+                                width: 130px;
+                                padding: 10px;
+                                color: #fff;
+                                background: #344760;
+                                margin-top: 20px;
+                              ">إضافة</a>
+                      </div>
+
+                      <div class="table-responsive new-table2" *ngIf="buttest">
+                        <table class="table table-bordered text-center table-striped">
+                          <thead class="thead-primary">
+                            <tr>
+
+                              <th scope="col">الهدف</th>
+                              <th scope="col">العدد</th>
+                              <th scope="col">التكلفة</th>
+                              <th scope="col">الاجمالي</th>
+                              <th scope="col">الفئة المستفيدة</th>
+                              <th scope="col">العدد</th>
+                              <th scope="col">حذف</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr *ngFor="let dp of butList">
+                              <td>{{dp.but}}</td>
+                              <td>{{dp.nbbut}}</td>
+                              <td>{{dp.prix}}</td>
+                              <td>{{dp.tot}}</td>
+                              <td>{{dp.benef}}</td>
+                              <td>{{dp.nbbenef}}</td>
+                              <td><a (click)="del2(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                            </tr>
+
+                          </tbody>
+                        </table>
+                      </div>
+                    </div>
+
+          -->
+
+          <div class="col-12 text-left">
+            <input class="btn btn-info px-4" type="submit" value="حفظ" />
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

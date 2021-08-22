@@ -1,0 +1,146 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">المركبات</h3>
+      </header>
+
+      <div class="tabel-cont table-responsive">
+        <table class="table table-striped theme-table table-bordered results">
+          <thead class="">
+            <tr>
+              <th scope="col">م</th>
+              <th scope="col">نوع السيارة</th>
+              <th scope="col">الموديل</th>
+              <th scope="col">رقم الهيكل</th>
+              <th scope="col">رقم اللوحة</th>
+              <th scope="col">موعد تجديد الاستمارة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cg of factList; let i = index;">
+              <th scope="row">{{i+1}}</th>
+              <td>{{cg.marque}}</td>
+              <td>{{cg.model}}</td>
+              <td>{{cg.num}}</td>
+              <td>{{cg.matricule}}</td>
+              <td>{{cg.datefinforme}}</td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+
+
+      <h3 style="width: 100%; color:cornflowerblue" class="text-center mb-3">إضافة مركبة</h3>
+      <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+        <div class="col-md-6">
+          <label for="card-num">رقم اللوحة </label>
+          <input type="text" id="card-num" name="matricule" #matricule="ngModel" [(ngModel)]="voiture.matricule" />
+        </div>
+
+        <div *ngIf="matricule.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+          مطلوب رقم اللوحة .
+
+        </div>
+        <div class="col-md-6">
+          <label for="car-type">رقم الهيكل </label>
+          <input type="text" id="item-name" name="num" #num="ngModel" [(ngModel)]="voiture.num" />
+        </div>
+        <div class="col-md-6">
+          <label for="keys">الماركة </label>
+          <input type="text" id="keys" name="marque" #marque="ngModel" [(ngModel)]="voiture.marque" />
+        </div>
+        <div class="col-md-6">
+          <label for="areas">الطراز</label>
+          <input type="text" id="areas" name="genre" #genre="ngModel" [(ngModel)]="voiture.genre" />
+        </div>
+        <div class="col-md-6">
+          <label for="buy-date">الموديل</label>
+          <input type="text" id="buy-date" name="model" #model="ngModel" [(ngModel)]="voiture.model" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="amount">المستلم</label>
+          <input type="text" id="amount" name="model" #recepeteur="ngModel" [(ngModel)]="voiture.recepeteur" />
+        </div>
+        <div class="col-md-6">
+          <label for="drive-end-date">تاريخ انتهاء الاستمارة</label>
+          <input type="date" id="drive-end-date" name="datefinforme" #datefinforme="ngModel" [(ngModel)]="voiture.datefinforme" />
+        </div>
+        <div class="col-md-6">
+          <label for="save-end-date">تاريخ انتهاء التأمين </label>
+          <input type="date" id="save-end-date" name="datefinassurance" #datefinassurance="ngModel" [(ngModel)]="voiture.datefinassurance" />
+        </div>
+
+
+        <div class="col-md-12">
+          <div class="mb-3">
+            <label for="uploads">المرفقات</label>
+            <div class="row">
+              <div class="col-sm-4">
+
+                <ngx-dropzone (change)="upload1($event);onSelect1($event)" class="dropzone" #inputFile>
+                  <ngx-dropzone-label class="file-label" for="photos">
+                    <span><i class="fa fa-file fa-lg"></i></span> الإستمارة
+                    <span class="mr-4"><i class="fa fa-upload"></i></span>
+                  </ngx-dropzone-label>
+                  <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove1(f)">
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                  </ngx-dropzone-preview>
+                </ngx-dropzone>
+              </div>
+              <div class="col-sm-4">
+
+                <ngx-dropzone (change)="upload2($event);onSelect2($event)" class="dropzone" #inputFile>
+                  <ngx-dropzone-label for="audio" class="file-label">
+                    <span><i class="fa fa-file fa-lg"></i></span>
+                    التأمين
+                    <span class="mr-4"><i class="fa fa-upload"></i></span>
+                  </ngx-dropzone-label>
+                  <ngx-dropzone-preview *ngFor="let f of files2" [removable]="true" (removed)="onRemove2(f)">
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                  </ngx-dropzone-preview>
+                </ngx-dropzone>
+              </div>
+              <div class="col-sm-4">
+
+
+                <ngx-dropzone (change)="upload3($event);onSelect3($event)" class="dropzone" #inputFile>
+                  <ngx-dropzone-label for="audio" class="file-label">
+                    <span><i class="fa fa-file fa-lg"></i></span>
+                    الفحص
+                    <span class="mr-4"><i class="fa fa-upload"></i></span>
+                  </ngx-dropzone-label>
+                  <ngx-dropzone-preview *ngFor="let f of files3" [removable]="true" (removed)="onRemove3(f)">
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                  </ngx-dropzone-preview>
+                </ngx-dropzone>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-12 text-left">
+          <input type="submit"
+                 style="width: 130px;"
+                 class="btn btn-primary next"
+                 value="تسجيل" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

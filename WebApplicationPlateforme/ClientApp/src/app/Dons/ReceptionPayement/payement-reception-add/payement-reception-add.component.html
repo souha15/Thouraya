@@ -1,0 +1,323 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">إضافة سند قبض</h3>
+      </header>
+      <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="col-md-6">
+          <label>نوع التبرع</label><br />
+
+          <input type="radio" id="pay-method1" name="paying" value="1" (change)="testdons($event)" checked />
+          <p class="radio-lab" for="pay-method1">تحويل بنكي</p>
+
+          <input type="radio" id="pay-method2" name="paying" value="2" (change)="testdons($event)" />
+          <p class="radio-lab" for="pay-method2">شيك</p>
+
+          <input type="radio" id="pay-method3" name="paying" value="3" (change)="testdons($event)" />
+          <p class="radio-lab" for="pay-method3">جهاز سحب</p>
+
+          <input type="radio" id="pay-method4" name="paying" value="4" (change)="testdons($event)" />
+          <p class="radio-lab" for="pay-method4">نقدي</p>
+
+          <div class="pay-method1">
+            <label for="">تاريخ التحويل</label>
+            <input type="date" id="" name="dateTransfert" #dateTransfert="ngModel" [(ngModel)]="pr.dateTransfert" />
+            <label for="">البنك المسحوب منه</label>
+            <input type="text" id="" name="banqueEmis" #banqueEmis="ngModel" [(ngModel)]="pr.banqueEmis" />
+            <label for="">البنك المسحوب عليه</label>
+            <input type="text" id="" name="banqueRecep" #banqueRecep="ngModel" [(ngModel)]="pr.banqueRecep" />
+            <label for="">رقم العملية</label>
+            <input type="number" min="0" id="" name="numOperation" #numOperation="ngModel" [(ngModel)]="pr.numOperation" (change)="testnumOp($event)" />
+
+            <label for="">ارفاق صورة الفاتورة</label>
+            <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+              <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+              <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+              </ngx-dropzone-preview>
+            </ngx-dropzone>
+          </div>
+          <div class="pay-method2">
+            <label for="">تاريخ الشيك</label>
+            <input type="date" id="" name="dateCheque" #dateCheque="ngModel" [(ngModel)]="pr.dateCheque" />
+            <label for="">رقم الشيك</label>
+            <input type="number" min="0" id="" name="numCheque" #numCheque="ngModel" [(ngModel)]="pr.numCheque" />
+            <label for="">اسم البنك</label>
+            <input type="text" id="" name="nomBanqueCheque" #nomBanqueCheque="ngModel" [(ngModel)]="pr.nomBanqueCheque" />
+            <label for="">صاحب الشيك</label>
+            <input type="text" id="" name="propCheque" #propCheque="ngModel" [(ngModel)]="pr.propCheque" />
+            <label for="">ارفاق صورة الشيك</label>
+            <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+              <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+              <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+              </ngx-dropzone-preview>
+            </ngx-dropzone>
+          </div>
+          <div class="pay-method3">
+            <label for="">تاريخ العملية</label>
+            <input type="date" id="" name="dateOperation" #dateOperation="ngModel" [(ngModel)]="pr.dateOperation" />
+            <label for="">رقم المكينة</label>
+            <input type="number" min="0" id="" name="numMachine" #numMachine="ngModel" [(ngModel)]="pr.numMachine" />
+            <label for="">رقم العملية</label>
+            <input type="text" id="" name="numOperation" #numOperation="ngModel" [(ngModel)]="pr.numOperation" (change)="testnumOp($event)" />
+            <label for="">ارفاق صورة الايصال</label>
+            <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+              <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+              <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+                <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+              </ngx-dropzone-preview>
+            </ngx-dropzone>
+          </div>
+
+          <div>
+            <label for="amount1">قيمة التبرع</label>
+            <input type="number" min="0" id="amount1" name="prixDons" #prixDons="ngModel" [(ngModel)]="pr.prixDons" />
+          </div>
+          <div>
+            <label for="amount3">قيمة التبرع كتابة</label>
+            <input type="text" id="amount3" name="prixDonsEcriture" #prixDonsEcriture="ngModel" [(ngModel)]="pr.prixDonsEcriture" />
+          </div>
+          <div>
+            <label for="donate-date">تاريخ التبرع </label>
+            <input type="date" id="donate-date" name="dateDons" #dateDons="ngModel" [(ngModel)]="pr.dateDons" />
+          </div>
+          <div>
+            <label for="notes">ملاحظات</label>
+            <textarea id="notes" class="form-control" name="req" #req="ngModel" [(ngModel)]="pr.req"></textarea>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label>المشروع/البرنامج</label><br />
+          <input type="radio" id="programs" name="programs" checked />
+          <p class="radio-lab" for="programs">مشروع/برنامج</p>
+          <input type="radio" id="other-input" name="programs" />
+          <p class="radio-lab" for="other-input">أخرى</p>
+          <div class="programs">
+            <label>المشروع/البرنامج</label>
+            <select id="prog" name="projet" #projet="ngModel" [(ngModel)]="pr.projet">
+              <option [ngValue]="undefined" selected disabled>المشروع</option>
+              <option *ngFor="let item of pd" value="{{item.nom}}">{{item.nom}}</option>
+            </select>
+          </div>
+          <div class="other-input">
+            <label for="other">أخرى</label>
+            <input type="text" id="other" name="projet" #projet="ngModel" [(ngModel)]="pr.projet" />
+          </div>
+          <div>
+            <label for="emp-name">اسم المندوب</label>
+            <select id="emp-name" name="delegueNom" #delegueNom="ngModel" [(ngModel)]="pr.delegueNom">
+              <option [ngValue]="undefined" selected disabled>اسم المندوب</option>
+              <option *ngFor="let item of usersList" value="{{item.fullName}}">{{item.fullName}}</option>
+            </select>
+          </div>
+          <div>
+            <label for="payee-name">اسم المتبرع</label>
+            <select id="payee-name" name="idDonneur" #idDonneur="ngModel" [(ngModel)]="pr.idDonneur" (change)="donNom($event)">
+              <option [ngValue]="undefined" selected disabled>اسم المتبرع</option>
+              <option *ngFor="let item of del" value="{{item.id}}">{{item.nom}}{{item.prenom}}</option>
+            </select>
+
+          </div>
+          <div>
+            <a href="#" class="btn btn-success create-donater-btn" data-toggle="modal" data-target="#myModal1">تسجيل متبرع</a>
+          </div>
+          <div>
+            <label for="mob-num">رقم الجوال</label>
+            <input type="text" id="mob-num" name="tel" #tel="ngModel" [(ngModel)]="pr.tel" />
+          </div>
+          <div>
+            <label for="id-num">رقم الهوية</label>
+            <input type="text" id="id-num" name="cin" #cin="ngModel" [(ngModel)]="pr.cin" />
+          </div>
+          <div>
+            <label for="writer">الموظف المسجل</label>
+            <input type="text" id="writer" value="{{UserNameConnected}}" disabled />
+          </div>
+          <div>
+            <label for="write-date">تاريخ التسجيل </label>
+            <input type="text" id="write-date" value="{{date}}" disabled />
+          </div>
+        </div>
+
+        <div class="col-md-12 text-left">
+          <a (click)="openPDF()" class="btn" style="width: 70px;">
+            <img style="width: 100%;" src="/assets/images/printer2.png" alt="" />
+          </a>
+          <input type="submit"
+                 style="width: 130px;"
+                 class="btn btn-info next"
+                 value="إضافة" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تسجيل متبرع</h2>
+
+          <div class="task-form form-row">
+            <div class="col-12">
+              <input type="radio"
+                     id="person"
+                     class="choise1"
+                     name="paying"
+                     checked />
+              <label class="radio-lab active" for="person">فرد</label>
+
+              <input type="radio" id="place" class="choise2" name="paying" />
+              <label class="radio-lab" for="place">جهة</label>
+
+              <div class="content1 text-center">
+                <form class="form-row" #formp="ngForm" autocomplete="off" (submit)="onSubmitPar(formp)">
+                  <div class="col-md-6">
+                    <label for="person-name">الاسم</label>
+                    <input type="text" id="person-name" name="nom" #nom="ngModel" [(ngModel)]="par.nom" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="grand">اللقب</label>
+                    <input type="text" id="grand" name="prenom" #prenom="ngModel" [(ngModel)]="par.prenom" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="mobile1">رقم الجوال</label>
+                    <input type="number" min="0" id="mobile1" name="tel" #tel="ngModel" [(ngModel)]="par.tel" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="email0">الايميل</label>
+                    <input type="email" id="email0" name="email" #email="ngModel" [(ngModel)]="par.email" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="id-num">رقم الهوية</label>
+                    <input type="number" min="0" id="id-num" name="cin" #cin="ngModel" [(ngModel)]="par.cin" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="nation">الجنسية</label>
+                    <input type="text" id="nation" name="nationalite" #nationalite="ngModel" [(ngModel)]="par.nationalite" />
+                  </div>
+                  <div class="col-md-12 text-center mt-3">
+                    <input type="submit"
+                           style="width: 130px;"
+                           class="btn btn-success"
+                           value="تسجيل" />
+                  </div>
+                </form>
+              </div>
+              <div class="content2">
+                <form class="form-row" #formo="ngForm" autocomplete="off" (submit)="onSubmitOr(formo)">
+                  <div class="col-md-6">
+                    <label for="place-name">اسم الجهة</label>
+                    <input type="text" id="place-name" name="nomOrg" #nomOrg="ngModel" [(ngModel)]="or.nomOrg" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="manager">اسم المدير</label>
+                    <input type="text" id="manager" name="nomDir" #nomDir="ngModel" [(ngModel)]="or.nomDir" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="mobile2">رقم الجوال</label>
+                    <input type="number" min="0" id="mobile2" name="tel" #tel="ngModel" [(ngModel)]="or.tel" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="email1">الايميل الشخصي</label>
+                    <input type="email" id="email1" name="email" #email="ngModel" [(ngModel)]="or.email" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="tel-num">رقم الهاتف</label>
+                    <input type="tel" id="tel-num" name="phone" #phone="ngModel" [(ngModel)]="or.phone" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="fax">الفاكس</label>
+                    <input type="tel" id="fax" name="fax" #fax="ngModel" [(ngModel)]="or.fax" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="email2">ايميل الجهة</label>
+                    <input type="email" id="email2" name="emailOrg" #emailOrg="ngModel" [(ngModel)]="or.emailOrg" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="employee">الموظف المسؤول</label>
+                    <input type="text" id="employee" name="employee" #employee="ngModel" [(ngModel)]="or.employee" />
+                  </div>
+                  <div class="col-md-6">
+                    <label for="mobile3">جوال المسؤول</label>
+                    <input type="number" min="0" id="mobile3" name="telEmp" #telEmp="ngModel" [(ngModel)]="or.telEmp" />
+                  </div>
+                  <div class="col-md-12 text-center mt-3">
+                    <input type="submit"
+                           style="width: 130px;"
+                           class="btn btn-success"
+                           value="تسجيل" />
+                  </div>
+                </form>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!--Print-->
+
+<div class="container" id="htmlData" style="display: none;">
+  <div class="receipt-page">
+    <nav class="receipt-header">
+      <div class="date">
+        تاريخ السند: <span>{{prC.dateDons}}</span>
+        <p>رقم السند: <span>{{prC.id}}</span></p>
+      </div>
+      <h2>سند قبض</h2>
+      <div class="print-date">تاريخ الطباعة : <span>{{date}}</span></div>
+    </nav>
+    <main class="receipt-body">
+      <div class="row">
+        <div class="col-4">
+          <p>استلمت من السيد :</p>
+          <p>المبلغ :</p>
+          <p>طريقة الدفع :</p>
+          <p>وذلك لأجل :</p>
+          <p>ملاحظات :</p>
+        </div>
+        <div class="col-8">
+          <p>{{prC.doneurNom}}</p>
+          <p>  {{prC.prixDonsEcriture}} ( {{prC.prixDons}} )</p>
+          <p>{{prC.typeDons}}</p>
+          <p>{{prC.projet}}</p>
+          <p>{{prC.req}}</p>
+        </div>
+      </div>
+    </main>
+    <div class="footer">
+      <p>
+        <span class="lbl">اسم المستلم :</span><span> --------------- </span>
+      </p>
+      <p>
+        <span class="lbl">توقيع المستلم :</span><span> -------------- </span>
+      </p>
+    </div>
+  </div>
+</div>

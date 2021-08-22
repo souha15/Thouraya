@@ -1,0 +1,68 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+      <nav class="d-flex p-0 bd-highlight tasks-nav mt-2">
+        <a [routerLink]="['/administration-list']" href="" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-list "></i></span>
+          قائمة الإدارات
+        </a>
+        <a [routerLink]="['/new-administration']" href="" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-building"></i></span>
+          إضافة إدارة
+        </a>
+        <a [routerLink]="['/etablissement-list']" href="" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-list-ul"></i></span>
+          قائمة الأقسام
+        </a>
+        <a [routerLink]="['/new-etablissement']" href="" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-building"></i></span>
+          إضافة قسم
+        </a>
+
+        <a [routerLink]="['/nom-file-org']" href="" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-file"></i></span>
+          اسم وثيقة جهة
+        </a>
+
+      </nav>
+      <h4 class="my-2 task-head">إدارة جديدة</h4>
+      <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+
+        <div class="col-sm-6">
+          <label for="task"><span><i class="fa fa-calendar-check"></i></span>الإدارة</label>
+          <input type="text" id="task" class="t" name="nom" #nom="ngModel" [(ngModel)]="admin.nom" (change)="testnom($event)">
+        </div>
+        <div class="col-12">
+          <label for="task-details"><span><i class="fa fa-list"></i></span>وصف الإدارة</label>
+          <input type="text" id="task-details" name="description" #description="ngModel" [(ngModel)]="admin.Description">
+        </div>
+
+        <div class="col-sm-6">
+          
+        </div>
+
+
+
+        <div class="save">
+          <button type="submit" class="btn btn-success"><span><i class="fa fa-save"></i></span> حفظ</button>
+
+        </div>
+      </form>
+
+
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

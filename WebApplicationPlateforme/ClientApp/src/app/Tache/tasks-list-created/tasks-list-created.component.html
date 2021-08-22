@@ -1,0 +1,111 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <nav class="d-flex p-0 bd-highlight tasks-nav mt-2">
+        <a [routerLink]="['/tasks-list-received']" href="" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-arrow-alt-circle-left"></i></span>
+          الواردة
+          <span class="badge badge-danger">{{nb}}</span>
+        </a>
+
+
+        <a [routerLink]="['/tasks-list-created']" href="" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-arrow-alt-circle-right"></i></span>
+          الصادرة
+        </a>
+      </nav>
+      <h2 class="task-head">قائمة المهام المنشأة</h2>
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
+      <div class="tabel-cont">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col" (click)="sort('id')">
+                <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('tacheNom')">
+                عنوان المهمة
+                <span class="glyphicon sort-icon" *ngIf="key =='tacheNom'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('creatorName')">
+                مسندة إلى
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('creatorName')">
+                التاريخ
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('creatorName')">
+                الاولوية
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('etat')">
+                <p style="color:white">
+                  <span class="glyphicon sort-icon" *ngIf="key =='etat'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </p>
+                الحالة
+              </th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tache of filtredtachelist |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; let i = index">
+              <th scope="row" [routerLink]="['/timelinetache', tache.id]">{{(p-1) * count + i + 1}}</th>
+              <td [routerLink]="['/tache-global-details', tache.id]">{{tache.tacheNom}}</td>
+              <td [routerLink]="['/tache-global-details', tache.id]" *ngIf="tache.createur!=null">{{tache.createur}}</td>
+              <td [routerLink]="['/tache-global-details', tache.id]" *ngIf="tache.createur===null">الجميع</td>
+              <td [routerLink]="['/tache-global-details', tache.id]">{{tache.date}}</td>
+              <td [routerLink]="['/tache-global-details', tache.id]">{{tache.priorite}}</td>
+
+              <td [ngClass]="{
+
+    'work': tache.etat === 'تحت الإجراء',
+    'done': tache.etat === 'منجزة',
+    'notdone': tache.etat === 'غير منجزة',
+    'closed': tache.etat === 'مغلقة',
+    'wait': tache.etat === 'في الإنتظار',
+     'finished': tache.etat === 'للتقييم',
+    'retarde': tache.etat === 'متاخرة'
+}">
+                <!--  'closed': tache.etat === 'مغلقة'-->
+                <a [routerLink]="['/tache-global-details', tache.id]" style="color:white">{{tache.etat}}</a>
+
+                <!-- <span class="task-st in-work" *ngIf="tache.etat == 'تحت الإجراء'">{{tache.etat}}</span>
+    <span class="task-st done" *ngIf="tache.etat == 'منجزة'">{{tache.etat}}</span>
+    <span class="task-st not-done" *ngIf="tache.etat == 'غير منجزة'">{{tache.etat}}</span>
+     -->
+
+
+              </td>
+            </tr>
+
+          </tbody>
+
+
+        </table>
+      </div>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                               nextLabel="التالي"></pagination-controls>
+        </ul>
+      </nav>
+
+      --
+
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

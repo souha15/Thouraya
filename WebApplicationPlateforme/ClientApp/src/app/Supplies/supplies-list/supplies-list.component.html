@@ -1,0 +1,76 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <nav class="d-flex p-0 bd-highlight tasks-nav mt-2 finance-nav">
+
+        <a [routerLink]="['/supplies-list']" class="p-2 flex-fill bd-highlight stop-btn">
+          <span><i class="fa fa-desktop"></i></span>
+          قائمة العهد
+        </a>
+
+        <a [routerLink]="['/supplies-add']" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-list"></i></span>
+          تسجيل عهدة
+        </a>
+
+        <a [routerLink]="['/cars-add']" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-car"></i></span>
+          المركبات
+        </a>
+
+      </nav>
+      <header>
+        <h3 class="task-head">قائمة العهد</h3>
+      </header>
+      <div class="pro-list">
+        <div class="form-group pull-right">
+          <input type="text"
+                 class="search form-control"
+                 placeholder="بحث باسم الصنف أو اسم مستلم العهدة" [(ngModel)]="filter" />
+        </div>
+        <span class="counter pull-right"></span>
+        <div class="tabel-cont table-responsive">
+          <table class="table table-striped theme-table table-bordered results table-hover cur">
+            <thead class="">
+              <tr>
+                <th scope="col">م</th>
+                <th scope="col">رقم الصنف</th>
+                <th scope="col">اسم الصنف</th>
+                <th scope="col">الوحدة</th>
+                <th scope="col">الكمية الموجودة</th>
+                <th scope="col">الحالة</th>
+                <th scope="col" *ngIf="testrole">حذف</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sup of supList |  orderBy: key : reverse | filter:filter ; let i = index; let even=even"
+                  [style.background-color]="sup.rowClicked ? '#c3c6eb' : (even ? '' : '')"
+                  (click)="sup.rowClicked = !sup.rowClicked">
+                <th scope="row" (click)="populateForm(sup)" [routerLink]="['/supplies-edit', sup.id]">{{(p-1) * count + i + 1}}</th>
+                <td (click)="populateForm(sup)" [routerLink]="['/supplies-edit', sup.id]">{{sup.num}}</td>
+                <td (click)="populateForm(sup)" [routerLink]="['/supplies-edit', sup.id]">{{sup.categ}}</td>
+                <td (click)="populateForm(sup)" [routerLink]="['/supplies-edit', sup.id]">{{sup.classe}}</td>
+                <td (click)="populateForm(sup)" [routerLink]="['/supplies-edit', sup.id]">{{sup.quanitite}}</td>
+                <td (click)="populateForm(sup)" [routerLink]="['/supplies-edit', sup.id]">{{sup.etat}}</td>
+                <td *ngIf="testrole"><a (click)="onDelete(sup.id)" class="btn btn-danger"><i class="fa fa-trash"></i>حذف</a></td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

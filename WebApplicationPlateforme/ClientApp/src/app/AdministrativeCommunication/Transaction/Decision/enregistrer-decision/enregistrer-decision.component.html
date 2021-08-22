@@ -1,0 +1,64 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">إضافة قرارات وتعميم</h3>
+      </header>
+      <form class="form-row task-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="col-md-6">
+          <label for="">قرار/تعميم</label>
+          <select name="type" #type="ngModel" [(ngModel)]="de.type" required>
+            <option [ngValue]="undefined" selected disabled>قرار/تعميم</option>
+            <option value="قرار">قرار</option>
+            <option value="تعميم">تعميم</option>
+            <option value="لائحة">لائحة</option>
+          </select>
+
+          <div *ngIf="type.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب  قرار/تعميم .
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="">داخلي/خارجي</label>
+
+          <input type="radio" name="in-out" id="ch1" (change)="test($event)" value="داخلي" checked />
+          <label for="ch1" class="radio-lab">داخلي</label>
+
+          <input type="radio" class="choise2" name="in-out" id="ch2" (change)="test($event)" value="خارجي" />
+          <label for="ch2" class="radio-lab">خارجي</label>
+          <div class="content2">
+            <label for="">الجهة</label>
+            <input type="text" name="org" #org="ngModel" [(ngModel)]="de.org" />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <label for="">العنوان</label>
+          <input type="text" name="titre" #titre="ngModel" [(ngModel)]="de.titre" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="">التفاصيل</label>
+          <textarea class="form-control" name="detail" #detail="ngModel" [(ngModel)]="de.detail"></textarea>
+        </div>
+        <div class="col-12 text-center text-md-left mt-3">
+          <input class="btn btn-info"
+                 style="width: 130px;"
+                 type="submit"
+                 value="إضافة" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

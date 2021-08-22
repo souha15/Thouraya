@@ -1,0 +1,117 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">قائمة  الشكاوي</h3>
+      </header>
+      <div class="leave-request-list">
+        <div class="table-responsive">
+          <table class="table table-bordered text-center table-striped">
+            <thead class="thead-primary">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">تاريخ المشكلة</th>
+                <th scope="col">تاريخ التظلم</th>
+                <th scope="col">الطرف الثاني للتظلم</th>
+                <th scope="col">سبب التظلم</th>
+                <th scope="col">تعديل</th>
+                <th scope="col">حذف</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p } ; let i = index;">
+                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{(p-1) * count + i + 1}}</th>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.dateprob}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.dateplaint}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.partieB}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.raison}}</td>
+                <td><a class="btn btn-success" [routerLink]="['/plaint-edit', cg.id]"><i class="fa fa-edit"></i>تعديل</a></td>
+                <td><a (click)="onDelete(cg.id)" class="btn btn-danger"><i class="fa fa-trash"></i>حذف</a></td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+
+      </div>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapcongeService.formData">
+        <h3 class="popup-head">الشكوى</h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="task-form form-row stop-form">
+
+            <form class="task-form form-row service-form">
+
+              <div class="col-md-4">
+                <label for="permision-hours">تاريخ المشكلة</label>
+                {{dem.dateprob}}
+
+              </div>
+              <div class="col-md-4">
+                <label for="permision-hours">تاريخ التظلم</label>
+                {{dem.dateplaint}}
+
+              </div>
+
+
+              <div class="col-md-4">
+                <label for="permision-hours">الطرف الثاني للتظلم</label>
+                {{dem.partieB}}
+
+              </div>
+
+
+
+              <div class="col-md-8">
+                <label for="permision-hours">سبب التظلم</label>
+                {{dem.raison}}
+
+              </div>
+
+
+              <div class="col-md-12">
+                <label for="permision-hours">شرح التظلم</label>
+                {{dem.description}}
+
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

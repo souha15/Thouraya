@@ -1,0 +1,156 @@
+
+
+.emp-data-reg .nav-pills .nav-link {
+  border-radius: .25rem;
+  text-align: center;
+  background: #344760;
+  color: #fff;
+  border-left: 1px solid #fff;
+  padding: 8px 0;
+}
+
+  .emp-data-reg .nav-pills .nav-link.active {
+    background: #276985;
+  }
+
+
+.pointer-link {
+  cursor: pointer;
+}
+
+div.form-group label {
+  color: black;
+  font-weight: bold;
+}
+
+
+
+.validation {
+  position: relative;
+}
+
+.input-help {
+  position: absolute;
+  right: 100px;
+  width: 200px;
+  padding: 10px;
+  background: #fefefe;
+  font-size: .875em;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px #aaa;
+  border: 1px solid red;
+  opacity: 0.9;
+}
+
+.input-helpe {
+  position: absolute;
+  bottom: 280px;
+  right: 560px;
+  width: 200px;
+  padding: 10px;
+  background: #fefefe;
+  font-size: .875em;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px #aaa;
+  border: 1px solid red;
+  opacity: 0.9;
+}
+
+  .input-helpe::before {
+    content: "\25b2";
+    position: absolute;
+    top: -12px;
+    left: 90px;
+    right: 0;
+    font-size: 16px;
+    line-height: 16px;
+    color: red;
+    text-shadow: none;
+  }
+
+.input-help::before {
+  content: "\25b2";
+  position: absolute;
+  top: -12px;
+  left: 90px;
+  right: 0;
+  font-size: 16px;
+  line-height: 16px;
+  color: red;
+  text-shadow: none;
+}
+
+.input-help p {
+  margin-bottom: 0;
+}
+
+.input-help ul {
+  margin-top: 10px;
+}
+
+
+.input-helpe p {
+  margin-bottom: 0;
+}
+
+.input-helpe ul {
+  margin-top: 10px;
+}
+
+
+/**
+    CheckBox
+
+*/
+
+input[type=checkbox] {
+  position: absolute;
+  opacity: 0;
+  vertical-align: middle;
+}
+
+  input[type=checkbox] + label::before,
+  input[type=checkbox] + label::after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    display: block;
+  }
+
+ul#menu li {
+  display: inline;
+}
+
+input[type=checkbox] + label::before {
+  left: 0.5rem;
+  top: 0.15rem;
+  width: 0.9rem;
+  height: 0.9rem;
+  border: 0.05rem solid black;
+  background: white;
+}
+
+input[type=checkbox]:checked + label::after {
+  left: 0.6rem;
+  top: 0.28rem;
+  height: 0.8rem;
+  border-left: 0.8rem solid #81a0e3;
+}
+
+input[type=checkbox]:focus + label::before {
+  outline: 0.05rem dotted;
+}
+
+
+.without_ampm::-webkit-datetime-edit-ampm-field {
+  display: none;
+}
+
+input[type=time]::-webkit-clear-button {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -o-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  margin: -10px;
+}

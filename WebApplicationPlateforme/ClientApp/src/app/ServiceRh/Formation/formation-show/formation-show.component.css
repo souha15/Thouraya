@@ -1,0 +1,103 @@
+.accord {
+  padding: 8px 8px;
+  border: 1px solid #d1d1d1;
+  display: block;
+  text-decoration: none;
+  border-radius: 5px;
+  color: #276985;
+  font-size: 18px;
+  transition: 0.3s ease-in-out;
+  margin-top: 15px;
+}
+
+  .accord:first-of-type {
+    margin-top: 0;
+  }
+
+  .accord:after {
+    content: "\02795";
+    /* Unicode character for "plus" sign (+) */
+    font-size: 15px;
+    color: #fff;
+    float: left;
+    margin-right: 5px;
+    margin-top: 3px;
+    transition: 0.3s ease-in-out;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    border-radius: 50%;
+    background: #276985;
+  }
+
+  .accord.active {
+    background-color: #276985;
+    color: #fff;
+    border-radius: 5px 5px 0 0;
+  }
+
+    .accord.active:after {
+      content: "\2796";
+      /* Unicode character for "minus" sign (-) */
+      color: #276985;
+      background: #fff;
+    }
+
+  .accord:hover:after {
+    color: #276985;
+    background: #fff;
+  }
+
+  .accord:hover {
+    background-color: #276985;
+    color: #fff;
+    text-decoration: none;
+  }
+
+.panel {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid;
+  border-color: transparent #276985 #276985 #276985;
+  border-radius: 0 0 5px 5px;
+  display: none;
+  color: #276985;
+}
+
+/* Editing in form style*/
+.task-form input:focus,
+.task-form select:focus {
+  outline: none;
+  border: 1px solid #2196f3;
+}
+
+.service-form p {
+  border: 1px solid #2196f3;
+  color: #276985;
+  background-color: #fff;
+}
+/* Queries And Services*/
+.que-serv h3 {
+  color: #2196f3;
+  text-align: center;
+  border-bottom: 2px dashed;
+  padding-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.que-serv a {
+  text-decoration: none;
+  display: block;
+  padding: 8px 10px;
+  text-align: center;
+  margin-bottom: 10px;
+  border: 1px solid;
+  border-radius: 10px;
+  color: #2196f3;
+}
+
+  .que-serv a:hover {
+    background: #2196f3;
+    color: #fff;
+  }

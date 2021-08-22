@@ -1,0 +1,103 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+      <app-main-farametrage-finance-page></app-main-farametrage-finance-page>
+      <!-- Tasks Page Content -->
+      <section class="page-content">
+        <h4 class="my-2 task-head">تسجيل حالة الوقف </h4>
+        <div class="row">
+          <div class="col-sm-6">
+            <div>
+              <p>&nbsp;</p>
+            </div>
+
+            <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+              <input type="hidden" name="id" [value]="dotationService.formData.id" />
+              <div>
+                <label for="stop-name"><span><i class="fa fa-genderless"></i></span>نوع الوقف</label>
+                <input type="text" id="stop-name" name="nom" #nom="ngModel" [(ngModel)]="dotationService.formData.nom" required />
+
+                <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="alert alert-danger">
+
+                  <div *ngIf="nom.errors.required">
+                    مطلوب اسم.
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label for="stop-address"><span><i class="fa fa-info"></i></span>وصف الوقف</label>
+                <input type="text" id="stop-address" class="" name="description" #description="ngModel" [(ngModel)]="dotationService.formData.description" required>
+                <br />
+
+                <div class="col-sm-12">
+                  <button type="submit" class="btn btn-primary" [disabled]="nom.invalid"><span><i class="fa fa-save"></i></span> حفظ</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="col-sm-6">
+            <div>
+              <p>&nbsp;</p>
+            </div>
+            <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
+            <div class="tabel-cont">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">
+
+                      الوقف
+                    </th>
+
+                    <th scope="col">
+                      الوصف
+
+                    </th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dotation of allDotation | async| orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+
+                    <td>{{dotation.nom}}</td>
+                    <td>{{dotation.description}}</td>
+                    <td><a class="btn btn-success" (click)="populateForm(dotation)"><i class="fa fa-edit"></i>تعديل</a></td>
+                    <td><a (click)="onDelete(dotation.id)" class="btn btn-danger"><i class="fa fa-trash"></i>حذف</a></td>
+
+
+                  </tr>
+
+                </tbody>
+
+
+              </table>
+
+            </div>
+
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+              </ul>
+            </nav>
+
+          </div>
+        </div>
+      </section>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

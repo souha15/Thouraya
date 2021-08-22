@@ -1,0 +1,46 @@
+/*----------------------------------
+---------- Forbidden page ----------
+-----------------------------------*/
+.forbidden {
+  font-family: 'Oxanium', cursive;
+  color: #276985;
+}
+
+  .forbidden h2 {
+    font-size: 35px
+  }
+
+  .forbidden .text {
+    font-size: 28px;
+    display: block;
+  }
+
+  .forbidden > p {
+    font-size: 70px;
+    padding: 0;
+    margin: 0;
+  }
+
+    .forbidden > p span {
+      color: #276985;
+    }
+
+  .forbidden .stop {
+    background: #fff;
+    padding: 20px;
+    display: inline-block;
+    border: 5px solid #276985;
+    border-radius: 30%;
+    color: #276985;
+    padding-top: 4%;
+    margin: 20px auto 0;
+  }
+
+    .forbidden .stop h1 {
+      font-size: 2.5rem;
+    }
+
+    .forbidden .stop span.icon {
+      font-size: 80px;
+      display: block
+    }

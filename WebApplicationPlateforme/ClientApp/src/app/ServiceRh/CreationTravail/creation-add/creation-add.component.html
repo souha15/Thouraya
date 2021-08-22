@@ -1,0 +1,59 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">طلب استحداث وظيفة</h3>
+      </header>
+      <form class="form-row task-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="col-md-6">
+          <label for="job-title">المسمى الوظيفي</label>
+          <input type="text"  id="job-title" value="{{position}}" disabled  />
+        </div>
+        <div class="col-md-6">
+          <label for="">آلية اختيار المرشح</label>
+          <select  name="selection" #selection="ngModel" [(ngModel)]="ct.selection">
+            <option [ngValue]="undefined" selected disabled>آلية اختيار المرشح</option>
+            <option value="تكليف">تكليف</option>
+            <option value="ترقية">ترقية</option>
+            <option value="نقل">نقل</option>
+            <option value="اعلان خارجي">اعلان خارجي</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="">المهام الوظيفية</label>
+          <input type="text" name="tacheTravail" #tacheTravail="ngModel" [(ngModel)]="ct.tacheTravail" />
+        </div>
+        <div class="col-md-6">
+          <label for="">الخبرات المطلوبة</label>
+          <input type="text" name="competence" #competence="ngModel" [(ngModel)]="ct.competence" />
+        </div>
+        <div class="col-md-6">
+          <label for="">الشهادات والدورات المطلوبة</label>
+          <input type="text" name="diplome" #diplome="ngModel" [(ngModel)]="ct.diplome"/>
+        </div>
+
+        <div class="col-md-6">
+          <label for="">تاريخ بداية العمل</label>
+          <input type="date" name="datedebut" #datedebut="ngModel" [(ngModel)]="ct.datedebut" />
+        </div>
+        <div class="col-12 text-center text-md-left mt-3">
+          <input class="btn btn-info"
+                 style="width: 130px;"
+                 type="submit"
+                 value="طلب" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

@@ -1,0 +1,43 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">الفعاليات</h3>
+      </header>
+      <div class="news px-3">
+        <div class="news-box row" *ngFor="let ne of newsList">
+          <div class="col-md-3">
+            <div class="journalist-img">
+              <img src="/uploads/{{ne.attribut2}}" alt="Image" />
+            </div>
+          </div>
+          <div class="col-md-9">
+            <div class="news-content">
+              <h4>
+                {{ne.adr}}
+              </h4>
+              <p>
+                {{ne.bref}}
+              </p>
+              <a [routerLink]="['/event-two-detail', ne.id]" class="btn btn-primary">المزيد</a>
+              <span class="news-date">{{ne.date}}</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- End News -->
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

@@ -1,0 +1,306 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">التعاميم والقرارات</h3>
+      </header>
+      <div class="decisions">
+        <ul class="nav nav-tabs custum-tabs" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active"
+               id="general-tab"
+               data-toggle="tab"
+               href="#general"
+               role="tab"
+               aria-controls="general"
+               aria-selected="true">التعاميم<span class="mr-2">({{nbd1}})</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"
+               id="decisions-tab"
+               data-toggle="tab"
+               href="#decisions"
+               role="tab"
+               aria-controls="decisions"
+               aria-selected="false">القرارات<span class="mr-2">({{nbd2}})</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link"
+               id="rules-tab"
+               data-toggle="tab"
+               href="#rules"
+               role="tab"
+               aria-controls="rules"
+               aria-selected="false">اللوائح<span class="mr-2">({{nbd3}})</span></a>
+          </li>
+        </ul>
+        <div class="filtering">
+          <div>
+            <a (click)="iterne()" class="ml-3">
+              <span class="ml-2"><i class="fa fa-sign-in-alt"></i></span>داخلية
+            </a>
+            <a (click)="externe()" class="ml-3">
+              <span class="ml-2"><i class="fa fa-sign-out-alt"></i></span>خارجية
+            </a>
+            <a (click)="show()">
+              <span class="ml-2"><i class="fa fa-search"></i></span>البحث
+              المتقدم
+            </a>
+            &nbsp;&nbsp;&nbsp;
+            <input type="text"
+                   style="width:300px;height:20px"
+                   placeholder="ما الذي تبحث عنه ؟"
+                   name="search" [(ngModel)]="filter" *ngIf="pres" />
+          </div>
+
+          <div>
+            الترتيب
+            <a (click)="sort('id')" class="px-2 ml-2">
+              <i class="fa fa-sort"></i>
+            </a>
+     
+          </div>
+        </div>
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active py-3"
+               id="general"
+               role="tabpanel"
+               aria-labelledby="general-tab">
+            <h3 class="head1">التعاميم</h3>
+            <div class="table-responsive">
+              <table class="table text-center table-bordered theme-table">
+                <thead>
+                  <tr>
+
+                    <th scope="col" (click)="sort('id')">
+                      #
+                      <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+
+                    <th scope="col" (click)="sort('titre')">
+                      التعميم
+                      <span class="glyphicon sort-icon" *ngIf="key =='titre'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+
+                    <th scope="col">التفاصيل</th>
+
+
+                    <th scope="col" (click)="sort('org')">
+                      الجهة
+                      <span class="glyphicon sort-icon" *ngIf="key =='org'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of de1 | orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+                    <th scope="row" >{{item.id}}</th>
+                    <td >{{item.titre}}</td>
+                    <td>
+                      <a class="btn show-details-btn text-info" (click)="populateForm(item)" data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-eye fa-lg"></i>
+                      </a>
+                    </td>
+                    <td>{{item.org}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <pagination-controls previousLabel="السابق"
+                                       nextLabel="التالي"
+                                       (pageChange)="p = $event"></pagination-controls>
+                </ul>
+              </nav>
+            </div>
+            <!-- End Table Responsive -->
+          </div>
+          <div class="tab-pane py-3 fade"
+               id="decisions"
+               role="tabpanel"
+               aria-labelledby="decisions-tab">
+            <h3 class="head1">القرارات</h3>
+            <div class="table-responsive">
+              <table class="table text-center table-bordered theme-table">
+                <thead>
+                  <tr>
+
+                    <th scope="col" (click)="sort('id')">
+                      #
+                      <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+
+                    <th scope="col" (click)="sort('titre')">
+                      القرار
+                      <span class="glyphicon sort-icon" *ngIf="key =='titre'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+
+                    <th scope="col">التفاصيل</th>
+
+
+                    <th scope="col" (click)="sort('org')">
+                      الجهة
+                      <span class="glyphicon sort-icon" *ngIf="key =='org'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of de2 | orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+                    <th scope="row">{{item.id}}</th>
+                    <td>{{item.titre}}</td>
+                    <td>
+                      <a class="btn show-details-btn text-info" (click)="populateForm(item)" data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-eye fa-lg"></i>
+                      </a>
+                    </td>
+                    <td>{{item.org}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <pagination-controls previousLabel="السابق"
+                                       nextLabel="التالي"
+                                       (pageChange)="p = $event"></pagination-controls>
+                </ul>
+              </nav>
+            </div>
+            <!-- End Table Responsive -->
+          </div>
+          <div class="tab-pane py-3 fade"
+               id="rules"
+               role="tabpanel"
+               aria-labelledby="rules-tab">
+            <h3 class="head1">اللوائح</h3>
+            <div class="table-responsive">
+              <table class="table text-center table-bordered theme-table">
+                <thead>
+                  <tr>
+
+                    <th scope="col" (click)="sort('id')">
+                      #
+                      <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+
+                    <th scope="col" (click)="sort('titre')">
+                      اللائحة
+                      <span class="glyphicon sort-icon" *ngIf="key =='titre'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+
+                    <th scope="col">التفاصيل</th>
+
+
+                    <th scope="col" (click)="sort('org')">
+                      الجهة
+                      <span class="glyphicon sort-icon" *ngIf="key =='org'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of de3 | orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+                    <th scope="row">{{item.id}}</th>
+                    <td>{{item.titre}}</td>
+                    <td>
+                      <a class="btn show-details-btn text-info" (click)="populateForm(item)" data-toggle="modal" data-target="#myModal">
+                        <i class="fa fa-eye fa-lg"></i>
+                      </a>
+                    </td>
+                    <td>{{item.org}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <pagination-controls previousLabel="السابق"
+                                       nextLabel="التالي"
+                                       (pageChange)="p = $event"></pagination-controls>
+                </ul>
+              </nav>
+            </div>
+            <!-- End Table Responsive -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+<div id="myModal" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تفاصيل القرار/ التعميم </h2>
+          <div class="form-row task-form service-form text-center">
+
+            <div class="col-md-6">
+
+              <div>
+                <label>الرقم </label>
+                <p>{{fact.id}}</p>
+              </div>
+
+              <div>
+                <label>
+                  داخلي/خارجي
+                </label>
+                <p>{{fact.decision}}</p>
+              </div>
+
+              <div>
+                <label>العنوان</label>
+                <p>{{fact.titre}}</p>
+              </div>
+
+            </div>
+            <div class="col-md-6">
+
+              <div>
+                <label>قرار/تعميم</label>
+                <p>{{fact.type}}</p>
+              </div>
+
+
+              <div *ngIf="bb">
+                <label>
+                  الجهة
+                </label>
+                <p>{{fact.org}}</p>
+              </div>
+
+
+              <div>
+                <label>
+                  التفاصيل
+                </label>
+                <p>{{fact.detail}}</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

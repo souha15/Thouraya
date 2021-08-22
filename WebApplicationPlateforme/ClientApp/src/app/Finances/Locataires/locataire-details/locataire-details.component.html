@@ -1,0 +1,242 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+      <app-menu-finance></app-menu-finance>
+      <!-- Tasks Page Content -->
+      <section class="page-content">
+        <h4 class="my-2 task-head">  قائمة الوحدات المستأجرة</h4>
+        <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
+        <div class="tabel-cont">
+          <table class="table table-striped table-hover sortable">
+            <thead>
+              <tr>
+                <th scope="col" (click)="sort('id')">
+                  <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th scope="col" (click)="sort('iddotation')">
+                  الوقف
+                  <span class="glyphicon sort-icon" *ngIf="key =='iddotation'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th scope="col" (click)="sort('date')">
+                  العقار المؤجر
+                  <span class="glyphicon sort-icon" *ngIf="key =='date'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th scope="col" (click)="sort('type')">
+                  رقم العقد
+                  <span class="glyphicon sort-icon" *ngIf="key =='type'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th scope="col" (click)="sort('type')">
+                  تاريخ بداية العقد
+                  <span class="glyphicon sort-icon" *ngIf="key =='type'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </th>
+                <th scope="col" (click)="sort('etat')">
+                  <p style="color:white">
+                    <span class="glyphicon sort-icon" *ngIf="key =='etat'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                  </p>
+                  الايجار الشهري
+                </th>
+
+                <th></th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let dot of list |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; let i = index">
+                <th (click)="populateForm(dot)" scope="row" data-toggle="modal" data-target="#myModal1">{{(p-1) * count + i + 1}}</th>
+                <td (click)="populateForm(dot)" data-toggle="modal" data-target="#myModal1">{{dot.nomdotation}}</td>
+                <td (click)="populateForm(dot)" data-toggle="modal" data-target="#myModal1">{{dot.nomunite}}</td>
+                <td (click)="populateForm(dot)" data-toggle="modal" data-target="#myModal1">{{dot.numcontrat}}</td>
+                <td (click)="populateForm(dot)" data-toggle="modal" data-target="#myModal1">{{dot.datedebutcontrat}}</td>
+                <td (click)="populateForm(dot)" data-toggle="modal" data-target="#myModal1">{{dot.prixlocationmois}}</td>
+
+                <td><a class="btn btn-primary" [routerLink]="['/enregistrer-revenus', dot.id]"><i class="fa fa-euro-sign"></i>إيداع</a></td>
+                <td><a class="btn btn-success" (click)="populateForm(dot)" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i>تعديل</a></td>
+                <td><a (click)="onDelete(dot.id)" class="btn btn-danger"><i class="fa fa-trash"></i>حذف</a></td>
+              </tr>
+
+            </tbody>
+
+
+          </table>
+        </div>
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+
+      </section>
+    </div><!-- End col-9 -->
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+<div id="myModal" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">تحديث الإيجار</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <input type="hidden" name="id" [value]="locationService.formData.id" />
+          <div class="col-md-6">
+            <label for="rent-stop-name"><span><i class="fa fa-pen-square fa-lg"></i></span>اسم الوقف</label>
+            <select id="building" (change)="selectInput($event)" name="iddotation" #iddotation="ngModel" [(ngModel)]="locationService.formData.iddotation" required>
+              <option [ngValue]="undefined" selected disabled>-اسم الوقف-</option>
+              <option *ngFor="let item of dotationList" value="{{item.id}}">{{item.nom}}</option>
+            </select>
+            <div *ngIf="iddotation.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب اسم الوقف.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="contract-num"><span><i class="fa fa-sort-numeric-down fa-lg"></i></span>العقد الالكتروني</label>
+            <input type="text" id="contract-num" name="numcontrat" #numcontrat="ngModel" [(ngModel)]="locationService.formData.numcontrat">
+          </div>
+
+          <div class="col-md-6">
+            <label for="building"><span><i class="fa fa-building fa-lg"></i></span>العقار المؤجر</label>
+            <select id="building" name="idunite" #idunite="ngModel" [(ngModel)]="locationService.formData.idunite" required>
+              <option [ngValue]="undefined" selected disabled>-العقار المؤجر-</option>
+              <option *ngFor="let item of uniteList" value="{{item.id}}">{{item.numRevenus}}</option>
+            </select>
+            <div *ngIf="idunite.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب العقار المؤجر.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="rent-cost"><span><i class="fa fa-coins fa-lg"></i></span>الايجار الشهري</label>
+            <input type="text" id="rent-cost" name="prixlocationmois" #prixlocationmois="ngModel" [(ngModel)]="locationService.formData.prixlocationmois">
+          </div>
+          <div class="col-md-6">
+            <label for="rent-start"><span><i class="fa fa-calendar fa-lg"></i></span>تاريخ بداية العقد</label>
+            <input type="date" id="rent-start" name="datedebutcontrat" #datedebutcontrat="ngModel" [(ngModel)]="locationService.formData.datedebutcontrat" required>
+
+            <div *ngIf="datedebutcontrat.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب تاريخ بداية العقد.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="rent-time"><span><i class="fa fa-clock fa-lg"></i></span>مدة العقد </label>
+            <input type="text" id="rent-time" name="delaicontrat" #delaicontrat="ngModel" [(ngModel)]="locationService.formData.delaicontrat" required>
+
+            <div *ngIf="delaicontrat.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب مدة العقد بالشهر.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div>
+              <label for="renter"><span><i class="fa fa-user fa-lg"></i></span>المستأجر</label>
+              <select id="building" name="idlocataire" #idlocataire="ngModel" [(ngModel)]="locationService.formData.idlocataire" required>
+                <option [ngValue]="undefined" selected disabled>-المستأجر-</option>
+                <option *ngFor="let item of Locataire" value="{{item.id}}">{{item.nom}}</option>
+              </select>
+              <div *ngIf="idunite.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب المستأجر.
+              </div>
+            </div>
+          </div>
+          <div class="mx-auto my-3">
+            <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save"></i></span> حفظ</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">خروج</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="myModal1" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">بيانات الإيجار</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">  
+          <div class="task-form form-row stop-form">
+
+            <div class="col-sm-6">
+              <label><span></span>اسم الوقف</label>
+              <span>{{dotationname}}</span>
+            </div>
+            <div class="col-sm-6">
+              <label><span></span>رقم العقد الالكتروني </label>
+              <span>{{details.numcontrat}}</span>
+            </div>
+
+            <div class="col-sm-6">
+              <label><span></span>العقار المؤجر</label>
+              <span>{{unitename}}</span>
+            </div>
+            <div class="col-sm-6">
+              <label><span></span>الايجار الشهري</label>
+              <span>{{details.prixlocationmois}}</span>
+            </div>
+
+            <div class="col-sm-6">
+              <label><span></span>تاريخ بداية العقد</label>
+              <span>{{details.datedebutcontrat}}</span>
+            </div>
+
+            <div class="col-sm-6">
+              <label><span></span>مدة العقد بالشهر</label>
+              <span>{{details.delaicontrat}}</span>
+            </div>
+
+            <div class="col-sm-6">
+              <label><span></span>المستأجر</label>
+              <span>{{locaname}}</span>
+            </div>
+
+
+          <div class="col-12">
+            <label><span></span>نسخة من العقد</label>
+            <div class="file-links">
+              <ul *ngFor="let pd of listPjFiltred;">
+                <li>
+
+                  <a (click)="download(pd.path)"><i class="fa fa-download  fa-2x"></i></a>
+                  {{pd.path}}
+
+
+                </li>
+              </ul>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>

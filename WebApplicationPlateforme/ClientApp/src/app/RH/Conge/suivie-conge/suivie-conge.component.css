@@ -1,0 +1,412 @@
+
+
+progress[value] {
+  /* Reset the default appearance */
+  -webkit-appearance: none;
+  appearance: none;
+  width: 1000px;
+  height: 20px;
+}
+
+  progress[value]::-webkit-progress-bar {
+    background-color: #eee;
+    border-radius: 2px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.25) inset;
+  }
+
+  progress[value]::-webkit-progress-value {
+  
+    background-image: -webkit-linear-gradient(-45deg, transparent 33%, rgba(0, 0, 0, .1) 33%, rgba(0,0, 0, .1) 66%, transparent 66%), -webkit-linear-gradient(top, rgba(255, 255, 255, .25), rgba(0, 0, 0, .25)), -webkit-linear-gradient(left, #09c, #f44);
+    border-radius: 2px;
+    background-size: 35px 20px, 100% 100%, 100% 100%;
+  }
+
+@-webkit-keyframes animate-stripes {
+  100% {
+    background-position: -100px 0px;
+  }
+}
+
+@keyframes animate-stripes {
+  100% {
+    background-position: -100px 0px;
+  }
+}
+
+/*-- Electronic Sevices Forms --*/
+.task-form input:focus:not([type="submit"]):not([type="reset"]),
+.task-form select:focus {
+  outline-color: #999;
+}
+
+.task-form option:hover {
+  border: none !important;
+}
+
+.service-form label {
+  background-color: #91c3d8;
+  color: #333;
+}
+
+.service-form select {
+  width: 50%;
+}
+
+.service-form input[type="submit"] {
+  width: 140px;
+  font-size: 18px;
+}
+
+.service-form input[type="reset"] {
+  width: 140px;
+  font-size: 18px;
+}
+
+/*-- leave-request-list --*/
+.leave-request-list table thead {
+  background-color: #91c3d8;
+}
+
+.leave-request-list .ok,
+.leave-request-list .refused {
+  display: block;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.leave-request-list .ok {
+  background-color: #28a745 !important;
+}
+
+.leave-request-list .refused {
+  background-color: #dc3545 !important;
+}
+
+/* Journal-file Page */
+.radio-label {
+  text-align: center;
+  min-width: 0 !important;
+  background-color: transparent !important;
+}
+
+/*
+** New Style Added By Front End Developer In 23/7/2020
+** Employee Pages
+** Start With New-Requests Page
+*/
+.new-requests .nav-tabs .nav-link {
+  color: #276985;
+}
+
+.new-requests .nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  color: #ffffff;
+  background-color: #276985;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.new-requests .tab-pane a {
+  color: #276985;
+  display: flex;
+  overflow: hidden;
+  padding: 0 10px 0 0;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  background-color: #dee2e6;
+  align-items: center;
+}
+
+  .new-requests .tab-pane a:hover {
+    background-color: #bbbec1;
+  }
+
+  .new-requests .tab-pane a:hover {
+    text-decoration: none;
+  }
+
+  .new-requests .tab-pane a .num {
+    padding: 5px 20px;
+    background-color: #276985;
+    color: #fff;
+  }
+
+.new-table th {
+  color: #276985;
+}
+
+/* -- General format for table -- */
+.theme-table thead {
+  background-color: #276985;
+  color: #fff;
+}
+
+.theme-table .stat {
+  padding: 5px 10px;
+  background-color: #276985;
+  color: #fff;
+}
+
+.theme-table .link {
+  color: #276985;
+  padding: 5px;
+  background-color: #d1d1d1;
+  text-decoration: none;
+}
+
+  .theme-table .link:hover {
+    opacity: 0.9;
+  }
+
+/* -- News-Page -- */
+.news {
+}
+
+  .news .news-box {
+    padding: 15px 0;
+    margin-bottom: 20px;
+    border-radius: 5px;
+  }
+
+    .news .news-box:nth-of-type(odd) {
+      background-color: #b8c0c3;
+    }
+
+    .news .news-box:nth-of-type(even) {
+      background-color: #eceeef;
+    }
+
+.news-box .journalist-img {
+  padding: 5px;
+  border: 2px solid #276985;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+  .news-box .journalist-img img {
+    width: 100%;
+    border-radius: 5px;
+  }
+
+.news-box .news-content {
+  position: relative;
+}
+
+  .news-box .news-content h4 {
+    color: #276985;
+    width: 85%;
+  }
+
+  .news-box .news-content .news-date {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px 10px;
+    background-color: #d1d1d1;
+  }
+
+@media (max-width: 767px) {
+  .news-box .journalist-img {
+    width: 80%;
+    margin: 0 auto 15px;
+  }
+
+  .news-box .news-content .news-date {
+    bottom: 0;
+    top: unset;
+  }
+
+  .news-box .news-content h4 {
+    text-align: center;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .news-box .news-content h4 {
+    width: 80%;
+  }
+
+  .news-box .news-content .news-date {
+    bottom: 0;
+    top: unset;
+  }
+}
+/*news-add page*/
+.task-form {
+  padding: 10px 0;
+}
+
+
+.lables {
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  background-color: white;
+  padding: 10px 0;
+  border-top: 2px solid #666;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+  .lables > div {
+    background-color: white;
+    border-color: dimgray;
+    text-align: center;
+    padding: 10px;
+    /*margin: 12px;*/
+    margin: 12px 0;
+    border-radius: 6px;
+    text-decoration: none;
+    color: #202324;
+    border: 1px solid #202324;
+    padding: 5px 15px;
+    border-radius: 8px;
+    transition: 0.3s;
+  }
+.new-links {
+  padding: 10px 0;
+  border-top: 2px solid #666;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+  .new-links a {
+    text-decoration: none;
+    color: #276985;
+    border: 1px solid #276985;
+    padding: 5px 15px;
+    border-radius: 8px;
+    transition: 0.3s;
+  }
+
+    .new-links a:hover {
+      background-color: #276985;
+      color: #fff;
+    }
+/*-- Courses Page --*/
+.courses .accord {
+  padding: 8px 8px;
+  border: 1px solid #d1d1d1;
+  display: block;
+  text-decoration: none;
+  border-radius: 5px;
+  color: #276985;
+  font-size: 18px;
+  transition: 0.3s ease-in-out;
+  margin-top: 15px;
+}
+
+  .courses .accord:first-of-type {
+    margin-top: 0;
+  }
+
+.accord:after {
+  content: "\02795"; /* Unicode character for "plus" sign (+) */
+  font-size: 15px;
+  color: #276985;
+  float: left;
+  margin-right: 5px;
+  margin-top: 3px;
+  transition: 0.3s ease-in-out;
+}
+
+.accord.active {
+  background-color: #276985;
+  color: #fff;
+}
+
+  .accord.active:after {
+    content: "\2796"; /* Unicode character for "minus" sign (-) */
+    color: #fff;
+  }
+
+.courses .accord:hover,
+.accord:hover:after {
+  background-color: #276985;
+  color: #fff;
+}
+
+.courses .panel {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid;
+  border-color: transparent #276985 #276985 #276985;
+  border-radius: 0 0 5px 5px;
+  display: none;
+  color: #276985;
+}
+/* -- Emp-Card-Request Page -- */
+.emp-photo-label {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  text-align: center;
+}
+
+.avatar {
+  display: flex;
+  background: rgba(0, 0, 0, 0.4);
+  font-size: 25px;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+}
+
+.service-form p {
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 8px 10px;
+  width: 50%;
+  color: #276985;
+  background-color: #d1d1d1;
+}
+/* -- Decission Page -- */
+.custum-tabs {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #276985;
+}
+
+  .custum-tabs .nav-item {
+    margin-left: 10px;
+  }
+
+    .custum-tabs .nav-item:last-child {
+      margin-left: 0;
+    }
+
+  .custum-tabs .nav-link {
+    border-radius: 6px;
+    border: 1px solid #276985;
+    color: #276985;
+  }
+
+    .custum-tabs .nav-link:hover {
+      border-radius: 6px;
+      background: #276985;
+      color: #fff;
+    }
+
+.filtering {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #276985;
+  padding: 5px 0;
+}
+
+  .filtering a {
+    color: #276985;
+    text-decoration: none;
+  }
+
+  .filtering div:first-child a {
+    border-left: 1px solid #888;
+    padding-left: 10px;
+  }

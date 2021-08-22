@@ -1,0 +1,54 @@
+
+label.radio-lab {
+  display: inline-block;
+  min-width: 50px;
+  border-radius: 0;
+  padding-right: 4px;
+  background: none;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.pay-method1,
+.pay-method2,
+.pay-method3,
+.programs,
+.other-input {
+  background: #f1f1f1;
+  padding: 15px 0 5px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  text-align: center;
+  display: none;
+}
+/* Tabs in Popup Page */
+.popup-page .radio-lab {
+  background: #344760;
+  color: #fff;
+  width: 100px;
+  margin-left: 0px;
+}
+
+  .popup-page .radio-lab.active {
+    background: #276985;
+  }
+
+.popup-page input[type="radio"] {
+  display: none;
+}
+
+.content1,
+.content2 {
+  display: none;
+}
+
+.choise1:checked ~ .content1,
+.choise2:checked ~ .content2 {
+  display: block;
+}
+
+/* Receipt Copy Style in popup page*/
+.receipt-copy {
+  width: 75%;
+  margin: auto;
+}

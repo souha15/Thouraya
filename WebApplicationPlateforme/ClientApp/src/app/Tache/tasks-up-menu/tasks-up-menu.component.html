@@ -1,0 +1,39 @@
+<nav class="d-flex p-0 bd-highlight tasks-nav mt-2">
+  <a [routerLink]="['/main-tasks']" href="" class="p-2 flex-fill bd-highlight">
+    <span><i class="fa fa-home"></i></span>
+    الرئيسية
+  </a>
+
+
+  <a [routerLink]="['/new-task']" href="" class="p-2 flex-fill bd-highlight">
+    <span><i class="fa fa-calendar-plus"></i></span>
+    إضافة مهمة
+  </a>
+
+
+  <a [routerLink]="['/tasks-list-received']" href="" class="p-2 flex-fill bd-highlight">
+
+    <span><i class="fa fa-tasks"></i></span>
+    مهامي
+    <span class="badge badge-danger">{{nb}}</span>
+  </a>
+
+  <a [routerLink]="['/tasks-list']" href="" class="p-2 flex-fill bd-highlight">
+    <span><i class="fa fa-list-ol"></i></span>
+    قائمة المهام
+  </a>
+  <!--
+  <a [routerLink]="['/tasks-list-delayed']" href="" class="p-2 flex-fill bd-highlight">
+    <span><i class="fa fa-clock"></i></span>
+    المهام المتأخرة
+  </a>
+  <a href="" [routerLink]="['/tasks-reports']" class="p-2 flex-fill bd-highlight">
+    <span><i class="fa fa-file"></i></span>
+    تقارير المهام المرسلة
+  </a>
+  <a href="" [routerLink]="['/tasks-reports-received']" class="p-2 flex-fill bd-highlight">
+    <span><i class="fa fa-file"></i></span>
+    تقارير المهام الواردة
+  </a>
+    -->
+</nav>

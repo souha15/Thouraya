@@ -1,0 +1,60 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+  
+      <header>
+        <h3 class="task-head">قائمة تسجيل الحضور و الإنصراف</h3>
+      </header>
+      <div class="row">
+        <input type="text"
+               class="search form-control"
+               placeholder="ما الذي تبحث عنه ؟" [(ngModel)]="filter" />
+        <div class="col-md-12">
+          <br />
+        </div>
+
+        <table class="table table-striped table-hover">
+          <thead class="">
+            <tr>
+              <th scope="col">	# </th>
+              <th scope="col">	التاريخ </th>
+              <th scope="col">	الموظف </th>
+              <th scope="col">	 عنوان IP  </th>
+              <th scope="col">وقت الحضور</th>
+              <th scope="col"> وقت الإنصراف </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr *ngFor="let point of pointList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p } ; let i = index">
+              <th scope="row">{{i+1}}</th>
+              <td>{{point.datePresence}}</td>
+              <td>{{point.userNameCreator}}</td>
+              <td>{{point.adresseIP}}</td>
+              <td>{{point.timePresence}}</td>
+              <td>{{point.timeQuitter}}</td>
+
+
+            </tr>
+          </tbody>
+
+
+
+        </table>
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

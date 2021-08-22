@@ -1,0 +1,65 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+
+      <header>
+        <h3 class="task-head">قائمة الموظفين</h3>
+      </header>
+
+
+      <div class="form-group pull-right">
+        <input type="text" class="search form-control" placeholder="ما الذي تبحث عنه ؟" name="search" [(ngModel)]="filter">
+      </div>
+      <span class="counter pull-right"></span>
+      <table class="table results sortable">
+        <thead>
+          <tr>
+            <th scope="col">الإسم </th>
+            <th scope="col">الجنسية </th>
+            <th scope="col">الهوية </th>
+            <th scope="col">الوظيفة</th>
+            <th scope="col">الراتب</th>
+            <th scope="col"> نوع الدوام</th>
+            <th scope="col"> إشتراك التأمينات</th>
+            <th scope="col">تاريخ التعيين</th>
+            <th scope="col">الجوال</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of allUser | async| orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+            <td [routerLink]="['/user-detail-data', user.id]">{{user.fullName}}</td>
+            <td [routerLink]="['/user-detail-data', user.id]">{{user.nationalite}}</td>
+            <td [routerLink]="['/user-detail-data', user.id]">{{user.registreCivil}}</td>
+            <td [routerLink]="['/user-detail-data', user.id]">{{user.emploi}}</td>
+            <td [routerLink]="['/user-detail-data', user.id]">{{user.salaire}}</td>
+            <td [routerLink]="['/user-detail-data', user.id]">{{user.heureArrive}}</td>
+            <td [routerLink]="['/user-detail-data', user.id]">{{user.classement}}</td>
+            <td [routerLink]="['/user-detail-data', user.id]">{{user.daterectrutement}}</td>
+            <td [routerLink]="['/user-detail-data', user.id]">{{user.tel}}</td>
+          </tr>
+
+        </tbody>
+      </table>
+
+      <!-- Pagination -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                               nextLabel="التالي"></pagination-controls>
+        </ul>
+      </nav>
+
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

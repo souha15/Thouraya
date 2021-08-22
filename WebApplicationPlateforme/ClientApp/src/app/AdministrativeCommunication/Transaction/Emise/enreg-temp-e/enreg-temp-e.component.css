@@ -1,0 +1,446 @@
+/********************/
+
+
+.tr-print,
+.revesion-print,
+.tr-follow-report {
+  padding: 30px;
+  direction: rtl
+}
+
+header.printed-header {
+  padding: 15px 0;
+  border-bottom: 2px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+
+  header.printed-header .date {
+    padding: 10px 15px;
+    border: 1px solid #333;
+    border-radius: 10px;
+    display: inline-block
+  }
+
+  header.printed-header h2 {
+    text-align: center;
+    width: 30%;
+    font-size: 1.8rem
+  }
+
+  header.printed-header h2,
+  header.printed-header span,
+  header.printed-header div {
+    width: 30%;
+    text-align: center
+  }
+
+  header.printed-header div {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+main {
+  padding-top: 20px;
+  position: relative
+}
+
+  main p {
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+
+    main p .label {
+      color: #00047f;
+      margin-left: 15px;
+      font-weight: bold
+    }
+
+  .printed-header h1,
+  main h1,
+  main h2,
+  .printed-header h2,
+  .printed-header .date {
+    text-align: center;
+    color: #00047f;
+    font-weight: bold
+  }
+
+/*-- revesion-print --*/
+.table1 {
+  margin-top: 50px;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  color: #000;
+}
+
+table {
+  margin: 20px auto
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: right;
+  font-size: 16px;
+}
+
+th {
+  font-weight: bold;
+  font-size: 18px;
+  background: #d1d1d1;
+}
+
+.table2 th {
+  width: 30%
+}
+
+.revesion-print h3 {
+  background: #d1d1d1;
+  padding: 10px;
+  margin-top: 40px;
+  text-align: center
+}
+
+.parcode {
+  font-size: 35px
+}
+
+.underline::after {
+  content: '';
+  display: block;
+  width: 200px;
+  height: 2px;
+  background: #00047f;
+  margin: 20px auto
+}
+
+main section {
+  padding: 30px 0;
+  border-top: 2px solid #333;
+}
+
+/*-- Recieve Alert Start --*/
+.par-code {
+  position: absolute;
+  display: inline-block;
+  top: 20px;
+  left: 0;
+  font-size: 30px;
+}
+
+.marking {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+  .marking div {
+    color: #00047f;
+    font-size: 20px;
+    display: inline-block
+  }
+
+    .marking div span {
+      color: #000;
+    }
+
+.dotted {
+  border-bottom: 2px dotted #00047f;
+  padding-bottom: 20px
+}
+
+/********************/
+
+.saved-nav ul {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-wrap: wrap;
+  font-size: 1.1rem;
+  margin: auto
+}
+
+@media(max-width:500px) {
+  .saved-nav ul {
+    width: 100%
+  }
+}
+
+.transaction-back {
+  display: none
+}
+
+.isred {
+  background: #ff6666;
+}
+
+.isgreen {
+  background: #33ff77;
+}
+
+.isblue {
+  background: #8db1eb;
+}
+
+.sortable tr {
+  cursor: pointer;
+}
+
+.hilite {
+  background-color: #FF0;
+}
+
+.fa-download {
+  color: dodgerblue;
+}
+
+ul {
+  list-style: none
+}
+/*-- Transaction-main Page Style --*/
+.page-content {
+  direction: rtl
+}
+
+.transaction-nav {
+  padding: 20px 10px;
+  border-bottom: 2px solid #107F98;
+  text-align: center
+}
+
+  .transaction-nav ul {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+    font-size: 1.1rem;
+  }
+
+    .transaction-nav ul li {
+      display: inline-block;
+      padding: 8px 15px;
+      margin-left: 15px;
+      color: #107F98;
+      border: 1px solid #107F98;
+      border-radius: 5px;
+      margin-bottom: 5px;
+      flex: 1;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+      .transaction-nav ul li:last-of-type {
+        margin-left: 0;
+      }
+
+      .transaction-nav ul li span {
+        display: block
+      }
+
+      .transaction-nav ul li a {
+        text-decoration: none;
+        display: block;
+        color: #107F98;
+        transition: all 0.3s
+      }
+
+      .transaction-nav ul li:hover {
+        background: #107F98;
+      }
+
+        .transaction-nav ul li:hover a {
+          color: #fff
+        }
+
+/*-- Start Popup --*/
+.popup-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99999;
+  padding: 50px;
+  display: none;
+  overflow-y: scroll
+}
+
+.close-popup {
+  padding: 10px 15px;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block
+}
+
+.popup-content {
+  background: #fff;
+  padding: 20px;
+}
+
+  .popup-content .task-form {
+    padding: 10px;
+  }
+
+.page-wrapper {
+  margin-top: 20px;
+  border: 1px solid #333;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: right;
+  direction: rtl;
+}
+
+body.noscroll {
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
+.buttons a,
+.buttons button {
+  display: inline-block;
+  text-decoration: none;
+  padding: 8px 15px;
+  margin-bottom: 5px;
+  border: 1px solid #107F98;
+  background: #107F98;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.3s
+}
+
+  .buttons a:hover,
+  .buttons button:hover {
+    color: #107F98;
+    background: #fff;
+    border-width: 2px;
+  }
+
+.transaction-show,
+.transaction-follow,
+.transaction-refer,
+.transaction-link,
+.transaction-storage,
+.transaction-save {
+  display: none
+}
+
+.popup-head {
+  text-align: center;
+  color: #107F98;
+}
+
+  .popup-head::after {
+    content: "";
+    display: block;
+    width: 80px;
+    border-bottom: 2px dashed #107F98;
+    margin: 10px auto 0;
+  }
+
+.papers {
+  list-style: none;
+  display: inline-block
+}
+
+  .papers li {
+    display: inline-block;
+    padding: 6px 10px;
+    border: 1px solid #c3c8c7;
+    border-radius: 6px;
+  }
+
+/*-- Transaction Refer --*/
+.refer-nav {
+  border-bottom: 2px solid #107F98;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+
+  .refer-nav a {
+    text-decoration: none;
+    color: #107F98;
+    border: 1px solid #107F98;
+    padding: 8px 10px;
+    transition: all 0.3s
+  }
+
+    .refer-nav a:hover,
+    .refer-nav a.active {
+      background: #107F98;
+      color: #FFF;
+    }
+
+.to-employee-form {
+  display: none
+}
+
+/*-- Transaction Link --*/
+.transaction-link .task-form .tra-link-btn {
+  padding: 8px 15px !important;
+  color: #fff;
+  background: #107F98;
+  border: 0;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.confirm {
+  font-size: 1.3rem;
+  text-align: center;
+  color: #777;
+}
+
+.task-form label {
+  min-width: 126px;
+  background: #91c3d8;
+  color: #444;
+}
+/**************/
+.tr-print,
+.revesion-print,
+.tr-follow-report {
+  padding: 30px;
+  direction: rtl
+}
+
+header .date1 {
+  padding: 10px 15px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  display: inline-block
+}
+
+h1,
+h2,
+.date1 {
+  text-align: center;
+  color: #00047f;
+  font-weight: bold
+}
+
+.hea {
+  padding: 15px 0;
+  border-bottom: 2px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+
+p .label1 {
+  color: #00047f;
+  margin-left: 15px;
+  font-weight: bold
+}

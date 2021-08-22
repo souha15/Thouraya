@@ -1,0 +1,178 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+
+      <header>
+        <h3 class="task-head">كشف طلبات الاجازات</h3>
+      </header>
+      <div class="leave-request-list">
+        <div class="table-responsive">
+          <table class="table table-bordered text-center table-striped">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">نوع الاجازة</th>
+
+                <th scope="col">المدة</th>
+                <th scope="col">تاريخ بدء الاجازة</th>
+                <th scope="col">تاريخ نهاية الاجازة</th>
+
+                <th scope="col">الحالة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
+                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{(p-1) * count + i + 1}}</th>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.type}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.duree}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.datedebut}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.datefin}}</td>
+
+
+                <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
+                    [ngClass]="{
+
+ 'success': cg.etatd === 'موافق',
+  'denied': cg.etatd === 'رفض',
+  'wait': cg.etatd === 'في الانتظار'
+}">
+                  {{cg.etatd}}
+                </td>
+            </tbody>
+          </table>
+        </div>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+
+      </div>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+        <h3 class="popup-head"> طلب الإجازة</h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="task-form form-row stop-form">
+            <form class="task-form form-row service-form">
+
+              <div class="col-md-4">
+                <label for="permision-hours">الرقم الطلب</label>
+                {{per.id}}
+
+              </div>
+
+              <div class="col-md-4">
+                <label for="permision-hours">الموظف</label>
+                {{per.userNameCreator}}
+
+              </div>
+
+              <div class="col-md-4">
+                <label for="permision-hours">المدة</label>
+                {{per.duree}}
+
+              </div>
+
+
+              <div class="col-md-4">
+                <label for="permision-hours">نوع الاجازة</label>
+                {{per.type}}
+
+              </div>
+              <div class="col-md-4">
+                <label for="permision-hours">تاريخ بداية الاجازة</label>
+                {{per.datedebut}}
+
+              </div>
+
+
+              <div class="col-md-4">
+                <label for="permision-hours">تاريخ نهاية الاجازة</label>
+                {{per.datefin}}
+
+              </div>
+
+
+              <div class="col-md-4">
+                <label for="permision-hours"> سبب الإجازة</label>
+                {{per.tel}}
+
+              </div>
+
+              <div class="col-md-4">
+                <label for="permision-hours">الحالة</label>
+                {{per.etatd}}
+
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="myModal2" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">تعديل حالة الإجازة</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <label for="user"><span><i class="fa fa-check"></i></span>حالة الطلب</label>
+          <select id="user" class="" name="etatd" #etatd="ngModel" [(ngModel)]="congeService.formData.etatd" (change)="etattest($event)">
+            <option [ngValue]="undefined" selected disabled>-حالة الطلب-</option>
+            <option value="موافق">موافق</option>
+            <option value="رفض">رفض</option>
+
+          </select>
+
+          <div class="save">
+            <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

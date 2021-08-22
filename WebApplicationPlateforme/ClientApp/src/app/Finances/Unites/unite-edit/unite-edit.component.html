@@ -1,0 +1,125 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+      <app-menu-finance></app-menu-finance>
+      <!-- Tasks Page Content -->
+      <section class="page-content">
+        <h4 class="my-2 task-head">تعديل وقف</h4>
+        <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <input type="hidden" name="id" [value]="dotationService.formData.id" />
+          <div class="col-sm-6">
+            <label for="stop-name"><span><i class="fa fa-sort-numeric-down"></i></span>اسم الوقف</label>
+            <input type="text" id="stop-name" name="nom" #nom="ngModel" [(ngModel)]="dotation.nom" required />
+
+            <div *ngIf="nom.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+
+
+              مطلوب اسم.
+
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <label for="stop-date"><span><i class="fa fa-calendar-alt"></i></span>تاريخ الانشاء </label>
+            <input type="date" id="stop-date" name="date" #date="ngModel" [(ngModel)]="dotation.date" required>
+            <div *ngIf="date.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+
+
+              مطلوب تاريخ الانشاء.
+
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="stop-sort"><span><i class="fa fa-list-ol"></i></span>نوع الوقف</label>
+            <select id="stop-sort" name="type" #type="ngModel" [(ngModel)]="dotation.type" required>
+              <option [ngValue]="undefined" selected disabled>-نوع الوقف-</option>
+              <option *ngFor="let item of types" value="{{item.nom}}">{{item.nom}}</option>
+            </select>
+            <div *ngIf="type.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب نوع الوقف.
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <label for="stop-status"><span><i class="fa fa-list-ol"></i></span>حالة الوقف</label>
+            <select id="stop-status" name="etat" #etat="ngModel" [(ngModel)]="dotation.etat">
+              <option [ngValue]="undefined" selected disabled>-حالة الوقف-</option>
+              <option *ngFor="let item of etats" value="{{item.nom}}">{{item.nom}}</option>
+            </select>
+          </div>
+          <div class="col-sm-6">
+            <label for="stop-address"><span><i class="fa fa-map-marker-alt"></i></span>عنوان الوقف</label>
+            <input type="text" id="stop-address" class="" name="adresse" #adresse="ngModel" [(ngModel)]="dotation.adresse">
+          </div>
+          <div class="col-sm-6">
+            <label for="stop-units"><span><i class="fa fa-home"></i></span>عدد الوحدات</label>
+            <input type="text" id="stop-units" class="" name="nbunite" #nbunite="ngModel" [(ngModel)]="dotation.nbunite">
+          </div>
+          <div class="form-box w-100">
+
+
+            <label for="unit-num"><span><i class="fa fa-sort-numeric-down"></i></span>رقم الوحدة </label>
+            <input type="text" id="unit-num" name="numRevenus" #numRevenus="ngModel" [(ngModel)]="pay.numRevenus" style="width: 130px">
+
+            &nbsp;&nbsp;
+            <label for="rent-cost2"><span><i class="fa fa-coins"></i></span>قيمة الايجار</label>
+            <input name="prix" #prix="ngModel" [(ngModel)]="pay.prix" type="text" id="rent-cost2" class="" style="width: 130px">
+
+
+            &nbsp;&nbsp;
+            <label for="counter-num2"><span><i class="fa fa-bolt"></i></span>عداد الكهرباء</label>
+            <input name="compteurElc" #compteurElc="ngModel" [(ngModel)]="pay.compteurElc" type="text" id="counter-num2" class="" style="width: 130px">
+
+            <div class="text-left">
+              <button class="btn add-inputs0" (click)="addActivite()" type="button">اضافة</button>
+            </div>
+            <div class="table-responsive my-3" *ngIf="paytest">
+              <table class="table table-bordered table-striped theme-table">
+                <thead>
+                  <tr>
+                    <th scope="col">	رقم الوحدة</th>
+                    <th scope="col">قيمة الايجار</th>
+                    <th scope="col">عداد الكهرباء</th>
+                    <th scope="col">حذف</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of payList">
+                    <td>{{dp.numRevenus}}</td>
+                    <td>{{dp.prix}}</td>
+                    <td>{{dp.compteurElc}}</td>
+                    <td><a (click)="del11(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+
+                  <tr *ngFor="let dp of payList3">
+                    <td>{{dp.numRevenus}}</td>
+                    <td>{{dp.prix}}</td>
+                    <td>{{dp.compteurElc}}</td>
+                    <td><a (click)="del1(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+          <div class="mx-auto my-3">
+            <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save"></i></span> حفظ</button>
+          </div>
+        </form>
+      </section>
+    </div><!-- End col-9 -->
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

@@ -1,0 +1,139 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">كشف طلبات الإنتدابات</h3>
+      </header>
+      <div class="leave-request-list">
+        <div class="table-responsive">
+          <table class="table table-bordered text-center table-striped">
+            <thead class="thead-primary">
+              <tr>
+                <th scope="col">الرقم التسلسلي</th>
+                <th scope="col">نوع الإنتداب</th>
+                <th scope="col">تاريخ بدء الإنتداب</th>
+                <th scope="col">مدة الانتداب</th>
+                <th scope="col">الموظف المعوض</th>
+                <th scope="col">الحالة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.id}}</th>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.type}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.datedebut}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.dure}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.nomremplacant}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1"
+                    [ngClass]="{
+
+  'ok': cg.attribut2 === 'موافق',
+  'refused': cg.attribut2 === 'رفض',
+  'wait': cg.attribut2 === 'في الانتظار'
+}">
+                  {{cg.attribut2}}
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+
+      </div>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+        <h3 class="popup-head">تعديل طلب الإنتداب</h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="task-form form-row stop-form">
+            <form class="form-row task-form service-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+              <div class="col-md-6">
+                <label for="mandate-type">نوع الانتداب</label>
+                <select id="mandate-type" name="type" #type="ngModel" [(ngModel)]="congeService.formData.type" required>
+                  <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                  <option value="نوع 1">-نوع 1 -</option>
+                  <option value="2 نوع">نوع 2 </option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="mandate-date">تاريخ الانتداب</label>
+                <input type="date" id="mandate-date" name="datedebut" #datedebut="ngModel" [(ngModel)]="congeService.formData.datedebut" required>
+              </div>
+              <div *ngIf="datedebut.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+
+
+                مطلوب تاريخ الانتداب.
+
+              </div>
+              <div class="col-md-6">
+                <label for="mandate-time">مدة الانتداب</label>
+                <input type="text" id="mandate-time" name="dure" #dure="ngModel" [(ngModel)]="congeService.formData.dure" required>
+              </div>
+              <div *ngIf="dure.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+
+
+                مطلوب مدة الانتداب.
+
+              </div>
+              <div class="col-md-6">
+                <label for="mandate-place">جهة الانتداب</label>
+                <input type="text" id="mandate-place" name="organisme" #organisme="ngModel" [(ngModel)]="congeService.formData.organisme" required>
+              </div>
+              <div class="col-md-6">
+                <label for="replace-emp">الموظف المعوض</label>
+                <select id="replace-emp" name="idremplacant" #idremplacant="ngModel" [(ngModel)]="congeService.formData.idremplacant" required (change)="getRemplacant($event)">
+                  <option [ngValue]="undefined" selected disabled>-الموظف المعوض-</option>
+                  <option *ngFor="let item of user" value="{{item.id}}">{{item.fullName}}</option>
+                </select>
+              </div>
+              <div class="col-md-8">
+                <label for="mandate-task">المهمة المنتدب لها</label>
+                <textarea class="form-control" id="mandate-task"
+                          placeholder="اكتب بايجاز المهمة المنتدب لها"
+                          name="tache" #tache="ngModel" [(ngModel)]="congeService.formData.tache" required></textarea>
+              </div>
+              <input type="text" name="attribut3" #attribut3="ngModel" [(ngModel)]="congeService.formData.attribut3" hidden />
+              <input type="text" name="nomremplacant" #nomremplacant="ngModel" [(ngModel)]="congeService.formData.nomremplacant" hidden />
+
+              <div class="col-12 text-left">
+                <input class="btn btn-primary px-4" type="submit" value="ارسال">
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+

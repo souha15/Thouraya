@@ -1,0 +1,140 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <app-menu-pointage-emp></app-menu-pointage-emp>
+      <header>
+        <h3 class="task-head">قائمة تسجيل الحضورو الإنصراف</h3>
+      </header>
+      <div class="events1">
+
+        <div class="form-row events-form mb-3">
+          <div class="col-md-12 col-sm-12">
+
+            <div class="ml-3">
+              <label class="target">
+                قيم المتغيرات
+              </label>
+
+              &nbsp; &nbsp; <input type="radio" name="date" value="day" (click)="setradio('day')" [checked]='true' ngModel>&nbsp; &nbsp; باليوم
+              &nbsp; &nbsp; <input type="radio" name="date" value="month" (click)="setradio('month')" ngModel>&nbsp; &nbsp;بالشهر
+              &nbsp; &nbsp; <input type="radio" name="date" value="ben" (click)="setradio('ben')" ngModel>&nbsp; &nbsp;بالموظف
+
+
+            </div>
+
+            <div class="d-flex w-100 justify-content-start flex-wrap" *ngIf="isSelected('month')">
+              <div class="ml-3">
+                <label for="month"><span><i class="fa fa-calendar-alt fa-lg"></i></span> &nbsp; &nbsp;الشهر</label>
+                <select id="month" (change)="getMonth($event)">
+                  <option [ngValue]="undefined" selected disabled>-الشهر-</option>
+                  <option value="1">يناير</option>
+                  <option value="2">فبراير</option>
+                  <option value="3">مارس</option>
+                  <option value="4">أبريل</option>
+                  <option value="5">مايو</option>
+                  <option value="6">يونيو</option>
+                  <option value="7">يوليو</option>
+                  <option value="8">أغسطس</option>
+                  <option value="9">سبتمبر</option>
+                  <option value="10">أكتوبر</option>
+                  <option value="11">نوفمبر</option>
+                  <option value="12">ديسمبر</option>
+                </select>
+
+              </div>
+
+              <div class="ml-3">
+                <button class="btn add-inputs0" id="" (click)="SarchByMonth()" type="button">بحث</button>
+              </div>
+            </div>
+
+
+            <div class="d-flex w-100 justify-content-start flex-wrap" *ngIf="isSelected('day')">
+              <div class="ml-3">
+
+                <label for="month"><span><i class="fa fa-calendar-alt fa-lg"></i></span> &nbsp; &nbsp;	تاريخ اليوم </label>
+                <input type="date" (change)="getDay($event)" />&nbsp; &nbsp;
+
+              </div>
+
+              <div class="ml-3">
+                <button class="btn add-inputs0" id="" (click)="SearchByDay()" type="button">بحث</button>
+              </div>
+            </div>
+
+            <div class="d-flex w-100 justify-content-start flex-wrap" *ngIf="isSelected('ben')">
+              <div class="ml-3">
+                <label for="target">	الموظف </label>
+                <select (change)="cinSearch($event)">
+                  <option [ngValue]="undefined" selected disabled>-الموظف-</option>
+                  <option *ngFor="let item of UserList" value="{{item.num}}">{{item.fullName}}</option>
+                </select>
+
+              </div>
+
+              <div class="ml-3">
+                <button class="btn add-inputs0" id="" (click)="Chercher()" type="button">بحث</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="row w-100 d-flex form-box">
+          <div class="col-md-12 col-sm-12">
+
+            <label class="main">
+              <span><i class="fa fa-search"></i></span>
+              نتيجة البحث
+            </label>
+            <div class="d-flex w-100 justify-content-start flex-wrap">
+              <div class="table-responsive new-table2">
+                <table class="table table-bordered text-center table-striped">
+                  <thead class="thead-gestimary">
+                    <tr>
+                      <th scope="col">	# </th>
+                      <th scope="col">	رقم الموظف </th>
+                      <th scope="col">	التاريخ </th>
+                      <th scope="col">وقت الحضور</th>
+                      <th scope="col"> وقت الإنصراف </th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr *ngFor="let point of pointList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p } ; let i = index">
+                      <th scope="row">{{i+1}}</th>
+                      <td>{{point.numEmp}}</td>
+                      <td>{{point.date}}</td>
+                      <td>{{point.heureAssister}}</td>
+                      <td>{{point.heurePartir}}</td>
+
+
+
+
+                    </tr>
+                  </tbody>
+
+
+
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

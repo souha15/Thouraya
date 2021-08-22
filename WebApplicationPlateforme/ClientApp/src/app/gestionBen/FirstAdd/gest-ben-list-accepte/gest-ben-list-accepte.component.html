@@ -1,0 +1,88 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <app-menu-gest-ben-add></app-menu-gest-ben-add>
+      <header>
+        <h3 class="task-head">قائمة المستفيدين النشطة</h3>
+      </header>
+
+      <div class="table-responsive">
+        <table class="table table-bordered theme-table text-center">
+          <thead>
+            <tr>
+              <th scope="col" [routerLink]="['/gest-ben-menu-chercheur']"> قائمة المستفيدين المنشأة </th>
+              <th scope="col" [routerLink]="['/gest-ben-list-chercheur']"> قائمة المستفيدين المسندة </th>
+              <th scope="col" [routerLink]="['/gest-ben-list-accepte']"> قائمة المستفيدين النشطة </th>
+              <th scope="col" [routerLink]="['/gest-ben-list-refuse']"> قائمة المستفيدين الغير نشطة</th>
+
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="table-primary">{{nb1}}</td>
+              <td class="table-active">{{nb2}}</td>
+              <td class="table-success">{{nb3}}</td>
+              <td class="table-danger">{{nb4}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="pro-list">
+        <div class="form-group pull-right">
+          <input type="text"
+                 class="search form-control"
+                 placeholder="ما الذي تبحث عنه ؟" [(ngModel)]="filter" />
+        </div>
+        <span class="counter pull-right"></span>
+        <div class="tabel-cont table-responsive">
+          <table class="table table-striped theme-table table-bordered results">
+            <thead class="">
+              <tr>
+                <th scope="col">م</th>
+                <th scope="col">نوع التسجيل</th>
+                <th scope="col">الاسم كامل</th>
+                <th scope="col">رقم الهوية</th>
+                <th scope="col"> الجنسية </th>
+                <th scope="col">رقم الجوال</th>
+                <th scope="col">الحالة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let ev of BenListAccepte |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p } ; let i = index">
+                <th scope="row" [routerLink]="['/gest-ben-detail', ev.id]">{{(p-1) * count + i + 1}}</th>
+
+                <td [routerLink]="['/gest-ben-detail', ev.id]">{{ev.typeEnreg}}</td>
+                <td [routerLink]="['/gest-ben-detail', ev.id]">{{ev.nomprenom}}</td>
+                <td [routerLink]="['/gest-ben-detail', ev.id]">{{ev.numCin}}</td>
+                <td [routerLink]="['/gest-ben-detail', ev.id]">{{ev.natio}}</td>
+                <td [routerLink]="['/gest-ben-detail', ev.id]">{{ev.tel}}</td>
+                <td [routerLink]="['/gest-ben-detail', ev.id]">{{ev.etat}}</td>
+            
+              </tr>
+            </tbody>
+          </table>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                   nextLabel="التالي"></pagination-controls>
+            </ul>
+          </nav>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

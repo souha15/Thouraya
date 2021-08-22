@@ -1,0 +1,11 @@
+.task-form input[type="date"],
+.task-form input[type="number"],
+.task-form input[type="month"],
+.task-form input[type="email"],
+.task-form input[type="tel"],
+.task-form select {
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  width: 50%;
+}

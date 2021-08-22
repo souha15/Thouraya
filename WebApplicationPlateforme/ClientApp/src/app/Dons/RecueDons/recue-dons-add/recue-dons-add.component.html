@@ -1,0 +1,81 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">إضافة إيصال تبرع</h3>
+      </header>
+      <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="col-md-6">
+          <label for="reg-emp-0">الموظف</label>
+          <select id="pro-name" name="attribut2" #attribut2="ngModel" [(ngModel)]="rd.attribut2">
+            <option [ngValue]="undefined" selected disabled>اسم الموظف</option>
+            <option *ngFor="let item of usersList" value="{{item.fullName}}">{{item.fullName}}</option>
+          </select>
+        </div>
+
+        <div class="col-md-6">
+          <label for="machine-num">رقم المكينة</label>
+          <input type="number" min="0" id="machine-num" name="numMachine" #numMachine="ngModel" [(ngModel)]="rd.numMachine" />
+        </div>
+        <div class="col-md-6">
+          <label for="amount-in-receipt">المبلغ بالايصال</label>
+          <input type="number" min="0" id="amount-in-receipt" name="prix" #prix="ngModel" [(ngModel)]="rd.prix" />
+          <div *ngIf="prix.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب المبلغ بالايصال .
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="action-num">رقم العملية</label>
+          <input type="number" min="0" id="action-num" name="numOperation" #numOperation="ngModel" [(ngModel)]="rd.numOperation" (change)="testnumOp($event)" />
+          <div *ngIf="numOperation.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب رقم العملية .
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="receipt-date">تاريخ العملية </label>
+          <input type="date" id="receipt-date" name="dateOperation" #dateOperation="ngModel" [(ngModel)]="rd.dateOperation" />
+        </div>
+        <div class="col-md-6">
+          <label for="pro-name">المشروع</label>
+          <select id="pro-name" name="projet" #projet="ngModel" [(ngModel)]="rd.projet">
+            <option [ngValue]="undefined" selected disabled>اسم المشروع</option>
+            <option *ngFor="let item of pd" value="{{item.nom}}">{{item.nom}}</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="">ارفاق صورة الايصال</label>
+          <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+            <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
+        </div>
+        <div class="col-md-6">
+          <label for="">ملاحظات</label>
+          <textarea class="form-control" name="req" #req="ngModel" [(ngModel)]="rd.req"></textarea>
+        </div>
+
+        <div class="col-md-12 text-left">
+          <input type="submit"
+                 style="width: 130px;"
+                 class="btn btn-info"
+                 value="إضافة" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

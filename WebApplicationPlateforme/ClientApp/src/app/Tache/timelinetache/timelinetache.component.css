@@ -1,0 +1,82 @@
+
+.pp {
+  text-align: right;
+  padding: 15px 10px;
+  background: #F2F2F2;
+  border: 1px solid #999;
+}
+
+.date {
+  color: #999;
+  margin-right: 10px;
+}
+
+.scrolbar {
+  height: 200px;
+  overflow-y: scroll;
+}
+
+/* Scrollbar styles */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  border: 1px solid #8ab9d0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #8ab9d0;
+  border-radius: 10px;
+}
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #8ab9d0
+  }
+
+ul {
+  list-style: none;
+}
+
+.pp .head {
+  color: #222;
+  padding: 8px 0;
+  text-align: center;
+  background: #8ab9d0
+}
+
+.task-details-box ul {
+  list-style: none
+}
+
+  .task-details-box ul li {
+    border-bottom: 1px solid #999
+  }
+
+    .task-details-box ul li .date {
+      color: #999;
+      margin-right: 10px
+    }
+
+.task-details-box a {
+  text-decoration: none;
+  color: #f00;
+}
+
+.comment {
+  padding: 5px;
+  background: #d1d1d1;
+  margin-right: 40px;
+  border-radius: 5px;
+}
+
+.comment-form {
+  width: 90%;
+  margin: auto;
+}
+
+  .comment-form input[type='text'] {
+    width: 80%
+  }

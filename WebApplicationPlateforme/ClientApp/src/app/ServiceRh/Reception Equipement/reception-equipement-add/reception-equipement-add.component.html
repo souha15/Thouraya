@@ -1,0 +1,76 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">استلام عهدة</h3>
+      </header>
+      <form class="form-row task-form text-center" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="col-md-6">
+          <label for="">الموظف</label>
+          <select name="userId" #userId="ngModel" [(ngModel)]="re.userId" (change)="getUserNom($event)" required>
+            <option [ngValue]="undefined" selected disabled>اسم الموظف</option>
+            <option *ngFor="let item of UserList" value="{{item.id}}">{{item.fullName}}</option>
+          </select>
+
+          <div *ngIf="userId.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب  الموظف .
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="">القسم/الادارة</label>
+          <input type="text" value="{{admin}}" disabled/>
+
+        </div>
+        <div class="col-md-6">
+          <label for="">تاريخ الاستلام</label>
+          <input type="date" name="daterecep" #daterecep="ngModel" [(ngModel)]="re.daterecep" required />
+          <div *ngIf="daterecep.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب تاريخ الاستلام .
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="">العهدة</label>
+          <input type="text" name="equi" #equi="ngModel" [(ngModel)]="re.equi" required />
+          <div *ngIf="equi.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب العهدة .
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="">الكمية</label>
+          <input type="number" min="0" name="quantite" #quantite="ngModel" [(ngModel)]="re.quantite" />
+        </div>
+        <div class="col-md-6">
+          <label for="">وصف العهدة</label>
+          <input type="text" name="typeEqui" #typeEqui="ngModel" [(ngModel)]="re.typeEqui" />
+        </div>
+        <div class="col-md-6">
+          <label for="">حالة العهدة</label>
+          <input type="text" name="etatEqui" #etatEqui="ngModel" [(ngModel)]="re.etatEqui" required />
+          <div *ngIf="etatEqui.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب حالة العهدة .
+          </div>
+
+        </div>
+
+        <div class="col-12 text-center text-md-left mt-3">
+          <input class="btn btn-info"
+                 style="width: 130px;"
+                 type="submit"
+                 value="استلام" />
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

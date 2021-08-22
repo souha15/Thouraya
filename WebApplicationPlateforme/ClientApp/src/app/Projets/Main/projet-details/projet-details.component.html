@@ -1,0 +1,304 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <div class="events-data">
+        <header>
+          <h3 class="task-head">{{ev.titre}}</h3>
+        </header>
+        <div class="col-12 print-link text-right">
+          <a (click)="print()" class="print">
+            <span><i class="fa fa-print fa-2x"></i></span>
+          </a>
+        </div>
+        <div class="staus-box">
+          <div class="sts mr-auto">{{ev.etat}}<span>{{ev.evaluation}}</span></div>
+        </div>
+        <div class="events-form row">
+          <div class="col-md-6">
+            <label>القسم</label>
+            <span class="data">{{ev.classe}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>مدير المشروع</label>
+            <span class="data">{{ev.dirnom}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>مبلغ الدعم</label>
+            <span class="data">{{ev.prix}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>المؤسسة الداعمة</label>
+            <span class="data">{{ev.orgnom}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>تاريخ الدعم</label>
+            <span class="data">{{ev.datesupport}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>مدة المشروع</label>
+            <span class="data">{{ev.duree}} {{ev.moisjours}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>تاريخ البداية</label>
+            <span class="data">{{ev.date}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>تاريخ النهاية</label>
+            <span class="data">{{ev.dateFin}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>إسم الحساب</label>
+            <span class="data">{{ev.compte}}</span>
+          </div>
+
+          <div class="col-md-8 d-flex flex-column flex-wrap">
+
+            <div>
+              <label style="width: 200px">الأهداف وبنود الصرف</label>
+            </div>
+
+            <div *ngFor="let bt of butList2; let i = index;">
+              <div>
+                <span class="data text-primary"
+                      style="border: 2px solid #2196f3">
+                  الهدف {{i+1}} : {{bt.but}}
+
+                </span>
+              </div>
+              <div class="small-boxes">
+                <div>
+                  <label>العدد</label>
+                  <span class="data">{{bt.nbbut}}</span>
+                </div>
+                <div>
+                  <label>التكلفة</label>
+                  <span class="data">{{bt.prix}}</span>
+                </div>
+                <div>
+                  <label>الإجمالي</label>
+                  <span class="data">{{bt.prix*bt.nbbut}}</span>
+                </div>
+                <div>
+                  <label>الفئة المستفيدة</label>
+                  <span class="data">{{bt.benef}}</span>
+                </div>
+                <div>
+                  <label>العدد</label>
+                  <span class="data">{{bt.nbbenef}}</span>
+                </div>
+              </div>
+
+              <div>
+                <table class="table table-striped table-bordered theme-table">
+                  <thead>
+                    <tr>
+
+                      <th scope="col">النشاط</th>
+                      <th scope="col">العدد</th>
+                      <th scope="col">التكلفة</th>
+                      <th scope="col">المجموع</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let dp of payList ; let i = index">
+
+                      <td *ngIf="dp.but === bt.but">{{dp.activite}}</td>
+                      <td *ngIf="dp.but === bt.but">{{dp.nb}}</td>
+                      <td *ngIf="dp.but === bt.but">{{dp.prix}}</td>
+                      <td *ngIf="dp.but === bt.but">{{dp.totprix}}</td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td></td>
+                      <td>الإجمالي </td>
+                      <td>{{tot2}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- Results -->
+            <div class="d-flex flex-row align-items-center justify-content-between flex-wrap">
+              <div class="d-flex flex-column align-items-center flex-wrap">
+                <label> التوصیات والملاحظات</label>
+                <div class="data">
+                  <ul class="list-unstyled">
+                    <li>{{ev.remarque}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <br />
+            <div style="width: 250px">
+              <br />
+              <canvas id="canvas" width="250" height="250"></canvas>
+            </div>
+            <!-- Attachments -->
+            <div class="">
+              <label>المرفقات</label>
+              <span class="data social-links">
+                <a (click)="download1()" class="facebook ml-3"><i class="ml-2 fa fa-arrow-down"></i>دراسة المشروع</a>
+                <a (click)="download2()" class="facebook ml-3"><i class="ml-2 fa fa-arrow-down"></i>الإتفاقية</a>
+                <a (click)="download3()" class="facebook ml-3"><i class="ml-2 fa fa-arrow-down"></i>صورة الشيك</a>
+                <a (click)="download4()" class="facebook ml-3"><i class="ml-2 fa fa-arrow-down"></i>سند القبض</a>
+                <a (click)="download5()" class="facebook ml-3"><i class="ml-2 fa fa-arrow-down"></i>كشف الحساب</a>
+              </span>
+            </div>
+
+            <div>
+              <label>التقاریر</label>
+              <div class="data social-links">
+                <a (click)="download6()" class="facebook ml-3">
+                  <span><i class="fa fa-file fa-lg"></i>&nbsp;{{typef}}</span>
+                  <span>&nbsp;&nbsp;{{dtamar}}</span>
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+
+
+
+<div class="printed-report-page" id="htmlData" style="text-align:center;display: none;">
+  <div class="events-data"   >
+    <div class="container">
+      <h3 class="my-2 task-head">{{ev.titre}}</h3>
+      <div class="events-data">
+        <div class="staus-box">
+          <div class="sts mr-auto">{{ev.etat}}<span>{{ev.evaluation}}</span></div>
+        </div>
+        <div class="events-form row">
+          <div class="col-md-6">
+            <label>القسم</label>
+            <span class="data">{{ev.classe}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>مدير المشروع</label>
+            <span class="data">{{ev.dirnom}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>مبلغ الدعم</label>
+            <span class="data">{{ev.prix}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>المؤسسة الداعمة</label>
+            <span class="data">{{ev.orgnom}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>تاريخ الدعم</label>
+            <span class="data">{{ev.datesupport}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>مدة المشروع</label>
+            <span class="data">{{ev.duree}} {{ev.moisjours}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>تاريخ البداية</label>
+            <span class="data">{{ev.date}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>تاريخ النهاية</label>
+            <span class="data">{{ev.dateFin}}</span>
+          </div>
+
+          <div class="col-md-8 d-flex flex-column flex-wrap">
+
+            <div>
+              <label style="width: 200px">الأهداف وبنود الصرف</label>
+            </div>
+
+            <div *ngFor="let bt of butList2; let i = index;">
+              <div>
+                <span class="data text-primary"
+                      style="border: 2px solid #2196f3">
+                  الهدف {{i+1}} : {{bt.but}}
+
+                </span>
+              </div>
+              <div class="small-boxes">
+                <div>
+                  <label>العدد</label>
+                  <span class="data">{{bt.nbbut}}</span>
+                </div>
+                <div>
+                  <label>التكلفة</label>
+                  <span class="data">{{bt.prix}}</span>
+                </div>
+                <div>
+                  <label>الإجمالي</label>
+                  <span class="data">{{bt.prix*bt.nbbut}}</span>
+                </div>
+                <div>
+                  <label>الفئة المستفيدة</label>
+                  <span class="data">{{bt.benef}}</span>
+                </div>
+                <div>
+                  <label>العدد</label>
+                  <span class="data">{{bt.nbbenef}}</span>
+                </div>
+              </div>
+
+              <div>
+                <table class="table table-striped table-bordered theme-table">
+                  <thead>
+                    <tr>
+
+                      <th scope="col">النشاط</th>
+                      <th scope="col">العدد</th>
+                      <th scope="col">التكلفة</th>
+                      <th scope="col">المجموع</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let dp of payList ; let i = index">
+
+                      <td *ngIf="dp.but === bt.but">{{dp.activite}}</td>
+                      <td *ngIf="dp.but === bt.but">{{dp.nb}}</td>
+                      <td *ngIf="dp.but === bt.but">{{dp.prix}}</td>
+                      <td *ngIf="dp.but === bt.but">{{dp.totprix}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- Results  -->
+            <div class="d-flex flex-row align-items-center justify-content-between flex-wrap">
+              <div class="d-flex flex-column align-items-center flex-wrap">
+                <label> التوصیات والملاحظات</label>
+                <div class="data">
+                  <ul class="list-unstyled">
+                    <li>{{ev.remarque}}</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

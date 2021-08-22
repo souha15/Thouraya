@@ -1,0 +1,202 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <app-tasks-up-menu></app-tasks-up-menu>
+
+      <h2 class="task-head">قائمة المهام المتأخرة</h2>
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
+      <div class="tabel-cont">
+        <table class="table table-striped table-hover sortable">
+          <thead>
+            <tr>
+              <th scope="col" (click)="sort('id')">
+                <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('tacheNom')">
+                عنوان المهمة
+                <span class="glyphicon sort-icon" *ngIf="key =='tacheNom'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+
+              <th scope="col" (click)="sort('creatorName')">
+                المحرر
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('creatorName')">
+                مسندة إلى
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('creatorName')">
+                الوصف
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+              <th scope="col" (click)="sort('tacheNom')">
+                تاریخ التحریر
+                <span class="glyphicon sort-icon" *ngIf="key =='tacheNom'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+              <th scope="col" (click)="sort('description')">
+                الاولوية
+                <span class="glyphicon sort-icon" *ngIf="key =='description'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('etat')">
+                <p style="color:white">
+                  <span class="glyphicon sort-icon" *ngIf="key =='etat'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </p>
+                الحالة
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tache of tacheliste|  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: c }; let i = index">
+              <th (click)="populateForm(tache)" scope="row" data-toggle="modal" data-target="#myModal1">{{(c-1) * count + i + 1}}</th>
+              <td (click)="populateForm(tache)" data-toggle="modal" data-target="#myModal1">{{tache.tacheNom}}</td>
+              <td (click)="populateForm(tache)" data-toggle="modal" data-target="#myModal1">{{tache.creatorName}}</td>
+              <td (click)="populateForm(tache)" data-toggle="modal" data-target="#myModal1" *ngIf="tache.createur!=null">{{tache.createur}}</td>
+              <td (click)="populateForm(tache)" data-toggle="modal" data-target="#myModal1" *ngIf="tache.createur===null">الجميع</td>
+              <td (click)="populateForm(tache)" data-toggle="modal" data-target="#myModal1">{{tache.description}}</td>
+              <td (click)="populateForm(tache)" data-toggle="modal" data-target="#myModal1">{{tache.date}}</td>
+              <td data-toggle="modal" data-target="#myModal1">{{tache.priorite}}</td>
+              <td [ngClass]="{
+
+    'work': tache.etat === 'تحت الإجراء',
+    'done': tache.etat === 'منجزة',
+    'notdone': tache.etat === 'غير منجزة',
+    'closed': tache.etat === 'مغلقة',
+    'wait': tache.etat === 'في الإنتظار',
+      'finished': tache.etat === 'للتقييم',
+    'retarde': tache.etat === 'متاخرة'
+}">
+                <a (click)="populateForm(tache)" data-toggle="modal" data-target="#myModal">{{tache.etat}} </a>
+              </td>
+            </tr>
+
+          </tbody>
+
+
+        </table>
+      </div>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <pagination-controls (pageChange)="c = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+        </ul>
+      </nav>
+
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">تحديث حالة المهمة</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <label for="user"><span><i class="fa fa-check"></i></span>حالة المهمة</label>
+          <select id="user" class="" name="etat" #etat="ngModel" [(ngModel)]="TacheService.formData.etat">
+            <option [ngValue]="undefined" selected disabled>-حالة المهمة-</option>
+            <option value="تحت الإجراء">تحت الإجراء</option>
+            <option value="منجزة">منجزة</option>
+            <option value="غير منجزة">غير منجزة</option>
+
+          </select>
+
+          <div class="save">
+            <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="myModal1" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">بيانات المهمة</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <form class="task-form form-row">
+
+          <div class="col-sm-6">
+            <label><span><i class="fa fa-sort-numeric-down"></i></span>رقم المهمة</label>
+            <span class="task-num">{{details.id}}</span>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="date"><span><i class="fa fa-calendar-alt"></i></span>التاريخ </label>
+            <span>{{details.date}}</span>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="sort"><span><i class="fa fa-list-ol"></i></span>الاولوية</label>
+            <span>{{details.priorite}}</span>
+
+          </div>
+          <div class="col-sm-6">
+            <label for="task"><span><i class="fa fa-calendar-check"></i></span>المهمة</label>
+            <span>{{details.tacheNom}}</span>
+          </div>
+          <div class="col-12">
+            <label for="task-details"><span><i class="fa fa-list"></i></span>وصف المهمة</label>
+            <span>{{details.description}}</span>
+
+          </div>
+          <div class="col-sm-4">
+            <label for="days"><span><i class="fa fa-calendar-day"></i></span>المدة باليوم</label>
+            <span>{{details.delai}}</span>
+
+          </div>
+          <div class="col-sm-8">
+            <label for="user"><span><i class="fa fa-user"></i></span>المسند إليه</label>
+            <span *ngIf="details.atous=='all'">للجميع</span>
+
+            <span *ngIf="details.atous=='employee'">{{details.createur}}</span>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

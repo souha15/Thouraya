@@ -1,0 +1,399 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <nav class="d-flex p-0 bd-highlight tasks-nav mt-2 finance-nav">
+
+        <a [routerLink]="['/event-register']" class="p-2 flex-fill bd-highlight stop-btn">
+          <span><i class="fa fa-plus"></i></span>
+          تسجيل فعاليات
+        </a>
+
+        <a [routerLink]="['/event-list']" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-list"></i></span>
+          قائمة الفعاليات
+        </a>
+      </nav>
+
+      <header>
+        <h3 class="task-head"> {{ev.typeAct}} : {{ev.attribut2}}</h3>
+      </header>
+
+      <div class="events-data">
+        <div class="events-form row">
+          <div class="col-md-11">
+
+          </div>
+          <div class="col-md-1">
+            <a (click)="print()"><i class="fa fa-print" style="color:cornflowerblue;font-size:35px;"></i></a>
+          </div>
+          <div class="col-md-6">
+            <label>القسم</label>
+            <span class="data">{{ev.classe}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>التاريخ والوقت</label>
+            <span class="data">{{ev.datetime}}<span class="time mr-2">13:00</span></span>
+          </div>
+          <div class="col-md-6">
+            <label>المشروع</label>
+            <span class="data">{{ev.projet}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>المكان</label>
+            <span class="data" *ngIf="bo">{{ev.localisation}}</span>
+          </div>
+
+        </div>
+
+        <div class="events-form row">
+          <div class="col-md-12">
+            <label>الوصف</label>
+            <span class="data">{{ev.attribut3}}</span>
+          </div>
+
+        </div>
+
+
+        <div class="row events-form">
+          <div class="col-md-8 d-flex flex-column flex-wrap">
+            <label>المشاركون</label>
+            <div class="data">
+              <div id="table_container">
+                <table class="table1 table-striped table-bordered theme-table">
+                  <tr>
+                    <th scope="col">م</th>
+                    <th scope="col">الاسم</th>
+                    <th scope="col">المهمة</th>
+                  </tr>
+                  <tr *ngFor="let dp of ParList1;let i = index">
+                    <td>{{i+t+1}}</td>
+                    <td>{{dp.nom}}</td>
+                    <td>{{dp.tache}}</td>
+                  </tr>
+                </table>
+                <table class="table1 table-striped table-bordered theme-table">
+                  <tr>
+                    <th scope="col">م</th>
+                    <th scope="col">الاسم</th>
+                    <th scope="col">المهمة</th>
+                  </tr>
+                  <tr *ngFor="let dp of ParList2;let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{dp.nom}}</td>
+                    <td>{{dp.tache}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="col-md-4">
+            <canvas id="canvas" width="250" height="250"></canvas>
+
+          </div>
+        </div>
+
+        <div class="row events-form">
+          <div class="col-md-8 d-flex flex-column flex-wrap">
+            <label>الداخلين في الإسلام</label>
+            <div class="data">
+
+              <table class="table table-striped table-bordered theme-table">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">الجنسية</th>
+                    <th scope="col">اللغة</th>
+                    <th scope="col">العدد</th>
+                
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of entrerlis">
+
+                    <td>{{dp.nat}}</td>
+                    <td>{{dp.langue}}</td>
+                    <td>{{dp.nb}}</td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+          <div class="col-md-4">
+   
+          </div>
+        </div>
+
+
+        <div class="row events-form">
+          <div class="col-md-8 d-flex flex-column flex-wrap">
+            <label>الفئة المستفيدة</label>
+            <div class="data">
+
+              <table class="table table-striped table-bordered theme-table">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">الفئة</th>
+                    <th scope="col">اللغة</th>
+                    <th scope="col">العدد</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of benList">
+
+                    <td>{{dp.categ}}</td>
+                    <td>{{dp.langue}}</td>
+                    <td>{{dp.nombre}}</td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+          <div class="col-md-4">
+            <youtube-player videoId="{{id}}"
+                            suggestedQuality="highres"
+                            [height]="250"
+                            [width]="300">
+            </youtube-player>
+          </div>
+        </div>
+
+
+        <div class="row events-form">
+          <!-- Here we ar-->
+          <div class="col-md-8 d-flex flex-column flex-wrap">
+
+
+            <!-- Methods -->
+            <div class="">
+              <label> الوسائل الدعوية</label>
+              <span class="data">
+                <p *ngFor="let pr of otiList">
+                  <span class="ml-2">{{pr.nombre}}</span>{{pr.categ}} &nbsp;&nbsp;
+                </p>
+              </span>
+            </div>
+            <!-- Attachments -->
+            <div class="">
+              <label>المرفقات</label>
+              <span class="data">
+                <span *ngFor="let pr of FilesImg">
+                  <i class="ml-2 fa fa-arrow-down" style="color:dodgerblue"></i>
+                  <a (click)="download(pr.path)" class="ml-3" style="color:dodgerblue">{{pr.path}}</a>
+
+                </span>
+              </span>
+            </div>
+            <!-- Advertisment -->
+            <div>
+              <label>الاعلام</label>
+              <div class="data social-links">
+                <a href="{{mediafb}}" class="facebook ml-3" target="_blank" *ngIf="mediafb!=null">
+                  <span><i class="fab fa-facebook fa-lg"></i></span>
+                </a>
+                <a href="{{mediatwit}}" class="twitter ml-3" target="_blank" *ngIf="mediatwit!=null">
+                  <span><i class="fab fa-twitter fa-lg"></i></span>
+                </a>
+                <a href="{{mediay}}" class="youtube ml-3" target="_blank" *ngIf="mediay!=null">
+                  <span><i class="fab fa-youtube fa-lg"></i></span>
+                </a>
+                <a href="{{mediainsta}}" class="instagram" target="_blank" *ngIf="mediainsta!=null">
+                  <span><i class="fab fa-instagram fa-lg"></i></span>
+                </a>
+              </div>
+            </div>
+            <!-- Results -->
+            <div class="d-flex flex-row align-items-center justify-content-between flex-wrap">
+              <div class="d-flex flex-column align-items-center flex-wrap">
+                <label>الثمرات</label>
+                <div class="data">
+                  <ul class="list-unstyled">
+                    <li>{{ev.stat}}</li>
+
+                  </ul>
+                </div>
+              </div>
+              <div class="d-flex flex-column align-items-center flex-wrap">
+                <label>التوصيات</label>
+                <div class="data">
+                  <ul class="list-unstyled">
+                    <li>{{ev.recommandation}}</li>
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+
+          </div>
+
+        </div>
+      </div>
+        </div>
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+<!--style="text-align:center;display: none;"-->
+
+  <div class="printed-report-page" id="htmlData" style="text-align:center;display: none;">
+    <div class="container">
+      <h2 class="text-center">{{ev.attribut2}} &nbsp; {{ev.typeAct}}</h2>
+      <div class="printed-content">
+        <div class="row">
+          <div class="col-md-4">
+            <div class="data-line">
+              <span class="label ml-2">القسم&nbsp;</span><span class="text">{{ev.classe}}</span>
+            </div>
+            <div class="data-line">
+              <span class="label ml-2">المشروع&nbsp;</span><span class="text">{{ev.projet}}</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="result">
+              <h4>النتائج</h4>
+              <p>
+                {{ev.stat}}
+              </p>
+            </div>
+            <div class="recoms">
+              <h4>التوصيات</h4>
+              <p>
+                {{ev.recommandation}}
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="data-line">
+              <span class="label ml-2">التاريخ</span><span class="text">{{ev.datetime}}</span>
+            </div>
+            <div class="data-line">
+              <span class="label ml-2" *ngIf="bo">المكان</span><span class="text">{{ev.localisation}}</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="part">
+              <h4>الفئة  &nbsp; المستفيدة</h4>
+              <table class="table text-center table-bordered">
+                <thead class="thead-primary">
+                  <tr>
+                    <th scope="col">الفئة</th>
+                    <th scope="col">اللغة</th>
+                    <th scope="col">العدد</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of benList">
+                    <td>{{dp.categ}}</td>
+                    <td>{{dp.langue}}</td>
+                    <td>{{dp.nombre}}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="part">
+              <h4>الوسائل &nbsp; الدعوية</h4>
+              <table class="table text-center table-bordered">
+                <thead class="thead-primary">
+                  <tr>
+                    <th scope="col">الصنف</th>
+                    <th scope="col">العدد</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pr of otiList">
+                    <td>{{pr.categ}}</td>
+                    <td>{{pr.nombre}}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="part">
+              <h4>
+                لجنة  &nbsp;
+                التنفيذ
+              </h4>
+              <table class="table text-center table-bordered">
+                <thead class="thead-primary">
+                  <tr>
+                    <th scope="col">الاسم</th>
+                    <th scope="col">المهمة</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let pr of parlis2">
+                    <td>{{pr.nom}}</td>
+                    <td>{{pr.tache}}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="part">
+              <h4>المصروفات</h4>
+              <table class="table text-center table-bordered">
+                <thead class="thead-primary">
+                  <tr>
+                    <th scope="col">الصنف</th>
+                    <th scope="col">التكلفة</th>
+                    <th scope="col">العدد</th>
+                    <td> الإجمالي</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of deplis2">
+                    <td>{{dp.type}}</td>
+                    <td>{{dp.nombre}}</td>
+                    <td>{{dp.prix}}</td>
+                    <td>{{+dp.prix * +dp.nombre}}</td>
+                  </tr>
+
+                  <tr>
+                    <td></td>
+                    <td></td>
+                    <td> الإجمالي</td>
+                    <td>{{somme}}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

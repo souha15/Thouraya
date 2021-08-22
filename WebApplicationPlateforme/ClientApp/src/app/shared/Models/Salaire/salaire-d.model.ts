@@ -1,0 +1,35 @@
+export class SalaireD {
+  id: number;
+  mois :string;
+  annee :string;
+  salaire :string;
+  assurance :string;
+  indemnite :string;
+  autreIndemnite :string;
+  totIndemnite :string;
+  retrait :string;
+  raisonRetrait :string;
+  leplus :string;
+  reisonPlus :string;
+  tot :string;
+  sailairenet :string;
+  totUser :string;
+  totG :string;
+  salaireG :string;
+  moisG :string;
+  anneeG :string;
+  assuranceG :string;
+  retraitG :string;
+  indemniteG :string;
+  attribut1: number;
+  attribut2 :string;
+  attribut3 :string;
+  attribut4 :string;
+  attribut5 :string;
+  attribut6 :string;
+  dateenreg :string;
+  userName :string;
+  userNameCreator :string;
+  idUserCreator :string;
+  idUser :string;
+}

@@ -1,0 +1,53 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">تقديم طلب بطاقة موظف</h3>
+      </header>
+      <form class="form-row task-form service-form">
+        <div class="col-md-6">
+          <input type="file" id="emp-photo" (change)="upload($event)" #inputFile />
+          <label for="emp-photo" class="emp-photo-label">
+            <img src="{{pathurl}}" *ngIf="photoexit" />
+            <span class="avatar" *ngIf="!photoexit"><i class="fa fa-user fa-5x"></i></span>
+          </label>
+        </div>
+        <div class="col-md-6">
+          <div>
+            <label>الاسم الكامل</label>
+            <p>{{conge.nom}}</p>
+          </div>
+          <div>
+            <label>المسمى الوظيفي</label>
+            <p>{{conge.titre}}</p>
+          </div>
+          <div>
+            <label>السجل المدني</label>
+            <p>{{conge.regcivil}}</p>
+          </div>
+          <div>
+            <label>الرقم الوظيفي</label>
+            <p>{{conge.num}}</p>
+          </div>
+          <div>
+            <label>المرتبة الوظيفية</label>
+            <p>{{conge.place}}</p>
+          </div>
+        </div>
+        <div class="col-12 text-center text-md-left mt-3">
+          <input class="btn btn-primary" type="submit" value="تقديم" (click)="onSubmit()" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>مؤسسة مواهب الخليج لتقنية نظم المعلومات</p>
+</footer>

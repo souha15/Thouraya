@@ -1,0 +1,60 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <app-menu-compte></app-menu-compte>
+      <header>
+        <h3 class="task-head">حالة الحسابات</h3>
+      </header>
+      <div class="tabel-cont table-responsive">
+        <input type="text" class="search form-control" placeholder="ما الذي تبحث عنه ؟" [(ngModel)]="filter">
+        <div>
+          <p><br /></p>
+        </div>
+        <table class="table table-striped theme-table table-bordered results table-hover cur">
+          <thead class="">
+            <tr>
+              <th scope="col">م</th>
+              <th scope="col">رقم الحساب</th>
+              <th scope="col">الحساب</th>
+      
+              <th scope="col">الرصيد</th>
+              <th scope="col">التاريخ</th>
+              <th scope="col" *ngIf="testrole">تعديل</th>
+              <th scope="col" *ngIf="testrole">حذف</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cpt of cptLis |  orderBy: key : reverse | filter:filter ; let i = index; let even=even"
+    [style.background-color]="cpt.rowClicked ? '#c3c6eb' : (even ? '' : '')"
+    (click)="cpt.rowClicked = !cpt.rowClicked">
+              <th scope="row" (click)="populateForm(cpt)">{{(p-1) * count + i + 1}}</th>
+              <td (click)="populateForm(cpt)">{{cpt.numCompte}}</td>
+              <td (click)="populateForm(cpt)">{{cpt.banque}}</td>
+              <td (click)="populateForm(cpt)">{{cpt.solde}}</td>
+              <td (click)="populateForm(cpt)">{{cpt.date}}</td>
+              <td *ngIf="testrole"><a class="btn btn-success" [routerLink]="['/menu-settings-compte', cpt.id]"><i class="fa fa-edit"></i>تعديل</a></td>
+              <td *ngIf="testrole"><a (click)="onDelete(cpt.id)" class="btn btn-danger"><i class="fa fa-trash"></i>حذف</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="print-link text-left mt-2">
+        <a (click)="downloadVoc()" class="print" style="color:dodgerblue">
+          <i class="fa fa-file"></i>
+          كشف الحساب
+          <i class="fa fa-arrow-down"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

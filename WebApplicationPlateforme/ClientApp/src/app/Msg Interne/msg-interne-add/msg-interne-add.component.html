@@ -1,0 +1,80 @@
+<link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+<app-nav-menu></app-nav-menu>
+
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+
+
+      <nav class="d-flex p-0 bd-highlight tasks-nav mt-2">
+        <a [routerLink]="['/msg-interne-list']" href="" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-envelope"></i></span>
+          الرسائل الداخلية
+        </a>
+
+        <a [routerLink]="['/msg-interne-add']" href="" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-reply"></i></span>
+          مراسلة
+        </a>
+
+      </nav>
+      <header>
+        <h3 class="task-head">مراسلة</h3>
+      </header>
+      <div class="container">
+        <div class="contact-section">
+          <div class="row contact-fields">
+            <div class="col-md-8 left-form">
+              <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+                <div class="form-group">
+                  <label class="sr-only" for="lname">العنوان</label>
+                  <input class="required form-control" id="lname" name="titre" #titre="ngModel" [(ngModel)]="msgInterne.titre" placeholder="العنوان" type="text" required>
+                  <div *ngIf="titre.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                    مطلوب العنوان .
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="sr-only" for="fname">الموظف </label>
+                  <select class="required form-control" name="userIdReceiver" #userIdReceiver="ngModel" [(ngModel)]="msgInterne.userIdReceiver" (change)="getUserNom($event)" required>
+                    <option [ngValue]="undefined" selected disabled>اسم الموظف</option>
+                    <option *ngFor="let item of UserList" value="{{item.id}}">{{item.fullName}}</option>
+                  </select>
+                  <div *ngIf="userIdReceiver.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                    مطلوب الموظف .
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="sr-only" for="comment">أكتب رسالتك هنا</label>
+                  <textarea class="required form-control" id="comment" name="message" #message="ngModel" [(ngModel)]="msgInterne.message" placeholder="أكتب رسالتك هنا*" rows="6"></textarea>
+                </div>
+                <div class="form-group">
+                  <label class="sr-only" for="comment">مرفقات</label>
+                  <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+                    <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                    <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+                      <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                    </ngx-dropzone-preview>
+                  </ngx-dropzone>
+                </div>
+                <button class="btn btn-accent" type="submit">إرسال</button>
+                <br /><br />
+              </form>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+      </div>
+      </div>
+
+      <footer class="text-center">
+        <p>جمعية الدعوة والإرشاد وتوعية الجاليات في محافظة أبوعريش  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+      </footer>

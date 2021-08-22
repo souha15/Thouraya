@@ -1,0 +1,509 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h2 class="task-head">تسجيل بيانات موظف</h2>
+      </header>
+      <div class="emp-data-reg">
+        <ul class="nav nav-pills d-flex mb-3" id="pills-tab" role="tablist">
+
+          <li class="nav-item flex-fill">
+            <a class="nav-link active"
+               id="personal-tab"
+               data-toggle="pill"
+               href="#personal-data"
+               role="tab"
+               aria-controls="pills-home"
+               aria-selected="true" style="font-weight:bold">البيانات الشخصية</a>
+          </li>
+
+          <li class="nav-item flex-fill">
+            <a class="nav-link"
+               id="job-tab"
+               data-toggle="pill"
+               href="#job-data"
+               role="tab"
+               aria-controls="job-data"
+               aria-selected="false" style="font-weight:bold">البيانات الوظيفية</a>
+          </li>
+          <li class="nav-item flex-fill">
+            <a class="nav-link"
+               id="quali-tab"
+               data-toggle="pill"
+               href="#qualification"
+               role="tab"
+               aria-controls="pills-contact"
+               aria-selected="false" style="font-weight:bold">المؤهلات العلمية</a>
+          </li>
+          <li class="nav-item flex-fill">
+            <a class="nav-link"
+               id="salary-tab"
+               data-toggle="pill"
+               href="#salary"
+               role="tab"
+               aria-controls="pills-contact"
+               aria-selected="false" style="font-weight:bold">بيانات المرتب</a>
+          </li>
+
+          <li class="nav-item flex-fill">
+            <a class="nav-link"
+               id="account-tab"
+               data-toggle="pill"
+               href="#account-data"
+               role="tab"
+               aria-controls="account-data"
+               aria-selected="false" style="font-weight:bold">بيانات الحساب</a>
+          </li>
+        </ul>
+        <div class="tab-content" id="pills-tabContent">
+
+          <div class="tab-pane fade show active"
+               id="personal-data"
+               role="tabpanel"
+               aria-labelledby="personal-tab">
+
+            <form class="task-form form-row" [formGroup]="UserService.formModel" autocomplete="off" (submit)="onSubmit()">
+              <div class="col-md-6">
+                <label for="arabic" style="width:25%;font-weight:bold">الاسم بالعربي </label>
+                <input type="text" id="arabic" formControlName="fullName" />
+                <div class="alert alert-danger" *ngIf="UserService.formModel.get('fullName').touched && UserService.formModel.get('fullName').errors?.required">
+                  <p *ngIf="UserService.formModel.get('fullName').errors?.required">هذا الحقل إجباري</p>
+
+                </div>
+              </div>
+
+
+              <div class="col-md-6">
+                <label for="latin" style="width:25%;font-weight:bold">الاسم باللاتيني </label>
+                <input type="text" id="latin" formControlName="fullNameEnglish" />
+              </div>
+              <div class="col-md-6">
+                <label for="a" style="width:25%;font-weight:bold">السجل المدني </label>
+                <input type="text" id="a" formControlName="registreCivil" required />
+
+                <div class="alert alert-danger" *ngIf="UserService.formModel.get('registreCivil').touched && UserService.formModel.get('registreCivil').errors?.required">
+                  <p *ngIf="UserService.formModel.get('registreCivil').errors?.required">هذا الحقل إجباري</p>
+
+                </div>
+              </div>
+
+
+
+
+
+              <div class="col-md-6">
+                <label for="b" style="width:25%;font-weight:bold">الجنسية </label>
+                <input type="text" id="b" formControlName="nationalite" />
+              </div>
+              <div class="col-md-6">
+                <label for="d" style="width:25%;font-weight:bold">الديانة </label>
+                <input type="text" id="d" formControlName="religion" />
+              </div>
+
+
+              <div class="col-md-6">
+                <label for="f" style="width:25%;font-weight:bold">النوع </label>
+                <select class="" formControlName="sexe" style="width:50%">
+                  <option [ngValue]="undefined" selected disabled>-النوع-</option>
+                  <option value="مرأة">مرأة</option>
+                  <option value="رجل">رجل</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="g" style="width:25%;font-weight:bold">العنوان </label>
+                <input type="text" id="g" formControlName="adresse" />
+              </div>
+              <div class="col-md-6">
+                <label for="h" style="width:25%;font-weight:bold">تاريخ الميلاد </label>
+                <input type="date" id="h" formControlName="dateNaissance" style="width:50%" />
+              </div>
+              <div class="col-md-6">
+                <label for="i" style="width:25%;font-weight:bold">الهاتف </label>
+                <input type="text" id="i" formControlName="PhoneNumber" />
+              </div>
+              <div class="col-md-6">
+                <label for="j" style="width:25%;font-weight:bold">مكان الميلاد </label>
+                <input type="text" id="j" formControlName="lieuNaissance" />
+              </div>
+              <div class="col-md-6">
+                <label for="k" style="width:25%;font-weight:bold">الجوال </label>
+                <input type="text" id="k" formControlName="tel" />
+              </div>
+              <div class="col-md-6">
+                <label for="l" style="width:25%;font-weight:bold">جواز السفر </label>
+                <input type="text" id="l" formControlName="passeport" />
+              </div>
+              <div class="col-md-6">
+                <label for="m" style="width:25%;font-weight:bold">الحالة الاجتماعية </label>
+
+                <select class="" formControlName="statut" style="width:50%">
+                  <option [ngValue]="undefined" selected disabled>-الحالة الاجتماعية-</option>
+                  <option value="أعزب">أعزب</option>
+                  <option value="متزوج">متزوج</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="n" style="width:25%;font-weight:bold">فصيلة الدم </label>
+                <input type="text" id="n" formControlName="typeSang" />
+              </div>
+
+
+              <div class="col-md-6">
+                <label for="files2" class="files-label">
+                  <ul class="d-flex list-unstyled">
+                    <li class="upload-symbol">
+                      <i class="fa fa-user fa-5x"></i>
+                    </li>
+                    <li class="flex-fill">
+                      <p>اسحب هنا لتحميل الصورة الشخصية</p>
+                      <span>أو انقر للاختيار يدويا</span>
+                    </li>
+                  </ul>
+                </label>
+                <input type="file" id="files2" class="" (change)="upload($event)" #inputFile />
+              </div>
+
+
+            </form>
+            <div class="col-md-12 text-left">
+              <input type="submit"
+                     style="width: 130px;"
+                     class="btn btn-primary next"
+                     value="التالي &#8811;"
+                     data-toggle="pill"
+                     href="#job-data"
+                     role="tab"
+                     aria-controls="job-data" />
+            </div>
+
+          </div>
+
+          <div class="tab-pane fade"
+               id="salary"
+               role="tabpanel"
+               aria-labelledby="salary-tab">
+
+            <form class="task-form form-row" [formGroup]="UserService.formModel" autocomplete="off" (submit)="onSubmit()">
+              <div class="col-md-6 mb-2">
+                <label for="rank" style="width:25%;font-weight:bold">المرتبة</label>
+                <input type="text" id="rank" formControlName="rang" />
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="degree" style="width:25%;font-weight:bold"> الدرجة </label>
+                <input type="text" id="degree" formControlName="degre" />
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="salary" style="width:25%;font-weight:bold">الراتب </label>
+                <input type="text" id="salary" formControlName="salaire" />
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="plus" style="width:25%;font-weight:bold">البدلات</label>
+                <input type="text" id="plus" formControlName="indemnite" />
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="other-plus" style="width:25%;font-weight:bold">البدلات الاضافية</label>
+                <input type="text" id="other-plus" formControlName="autreIndemnite" />
+              </div>
+
+            </form>
+
+
+            <div class="col-md-12 text-left">
+              <input type="submit"
+                     style="width: 130px;"
+                     class="btn btn-primary next"
+                     value="التالي &#8811;"
+                     data-toggle="pill"
+                     href="#account-data"
+                     role="tab"
+                     aria-controls="account-data" />
+            </div>
+          </div>
+
+
+
+          <div class="tab-pane fade"
+               id="job-data"
+               role="tabpanel"
+               aria-labelledby="job-tab">
+            <style>
+              label {
+                cursor: pointer;
+              }
+            </style>
+            <form class="task-form form-row" [formGroup]="UserService.formModel" autocomplete="off" (submit)="onSubmit()">
+              <label for="emp-id" style="width:10%;height:10%; font-weight:bold">صفة الموظف</label>
+              <div>
+
+                <div class="form-check-inline" *ngIf="roles">
+
+                  <ul id="menu">
+
+                    <li *ngFor="let item of roles;let i = index">
+
+                      <input type="checkbox" [id]="'roles-'+i" value="{{item.id}}"
+                             [checked]="item.selected" (change)="updateSelectedRoles(i)" name="contacts" id="contacts">
+                      <label [for]="'roles-'+i" *ngIf="item.name=='EMPLOYEE'">موظف</label>
+                      <label [for]="'roles-'+i" *ngIf="item.name=='DIRECTORE'">مدير قسم</label>
+                      <label [for]="'roles-'+i" *ngIf="item.name=='DIRECTORA'">مدير إدارة</label>
+                      <label [for]="'roles-'+i" *ngIf="item.name=='DIRECTORG'">مدير عام</label>
+
+
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col-md-6 mb-2"><p></p></div>
+              <div class="col-md-6 mb-2">
+                <label for="emp-id" style="width:25%;font-weight:bold"> ٱلي</label>
+                <input type="radio"
+                       name="contacts" id="contacts" (change)="numrandom($event)">
+
+              </div>
+
+              <div class="col-md-6 mb-2">
+                <label for="emp-id" style="width:25%;font-weight:bold">الترقيم الوظيفي</label>
+                <input class="" type="text" name="new-user-password" placeholder="الرقم الوظيفي" id="new-user-password2" formControlName="num" required *ngIf="notrandom" (change)="changenum($event)" maxlength="4">
+                <input class="" type="text" name="new-user-password" placeholder="الرقم الوظيفي" id="new-user-password2" formControlName="num" required *ngIf="randomnumbertest" [(ngModel)]="randomnumber">
+              </div>
+
+              <div class="col-md-6 mb-2" *ngIf="employeeSelectedRole || directoretabSelectedRole ||directoreadSelectedRole">
+                <label for="manage" style="width:25%;font-weight:bold"> الادارة </label>
+                <select class="" name="idAdministration" formControlName="idAdministration" (change)="admintest($event)" style="width:50%">
+                  <option [ngValue]="undefined" selected disabled>-الإدارة-</option>
+                  <option *ngFor="let item of AdministrationList" value="{{item.id}}">{{item.nom}}</option>
+                </select>
+              </div>
+
+              <div class="col-md-6 mb-2" *ngIf="employeeSelectedRole || directoretabSelectedRole">
+                <label for="job-section" style="width:25%;font-weight:bold">القسم </label>
+                <select class="" name="idDepartement" formControlName="idDepartement" (change)="etabtest($event)" style="width:50%">
+                  <option [ngValue]="undefined" selected disabled>-القسم-</option>
+                  <option *ngFor="let item of etabListAd" value="{{item.id}}">{{item.nom}}</option>
+                </select>
+              </div>
+
+              <div class="col-md-6 mb-2" *ngIf="employeeSelectedRole">
+                <label for="job-place" style="width:25%;font-weight:bold">الرئيس المباشر</label>
+                <input class="" type="text" name="full-name" id="full-name" formControlName="directeur" [(ngModel)]="etabName" required readonly (change)="findid($event)">
+              </div>
+
+              <div class="col-md-6 mb-2" *ngIf="directoretabSelectedRole">
+                <label for="job-place" style="width:25%;font-weight:bold">الرئيس المباشر</label>
+                <input class="" type="text" name="full-name" placeholder="الرئيس المباشر" id="full-name" formControlName="directeur" [(ngModel)]="directoretab" required readonly (change)="findid($event)">
+              </div>
+
+              <div class="col-md-6 mb-2" *ngIf="directoreadSelectedRole ">
+                <label for="job-place" style="width:25%;font-weight:bold">الرئيس المباشر</label>
+                <input class="" type="text" name="full-name" placeholder="الرئيس المباشر" id="full-name" formControlName="directeur" [(ngModel)]="dir" required readonly (change)="findid($event)">
+              </div>
+
+              <input class="" type="text" name="full-name" placeholder="الرئيس المباشر" id="full-name" formControlName="nomDepartement" [(ngModel)]="nomDepartement" hidden>
+
+              <input class="" type="text" name="full-name" placeholder="الرئيس المباشر" id="full-name" formControlName="nomAdministration" [(ngModel)]="nomAdministration" hidden>
+              <input class="" type="text" name="full-name" placeholder="الرئيس المباشر" id="full-name" formControlName="position" [(ngModel)]="position" hidden>
+              <input class="" type="text" name="full-name" placeholder="الرئيس المباشر" id="full-name" formControlName="attribut1" [(ngModel)]="usernameid" hidden>
+              <input class="" type="text" name="full-name" placeholder="الرئيس المباشر" id="full-name" formControlName="attribut2" [(ngModel)]="activiation" hidden>
+              <input class="" type="text" name="full-name" placeholder="الرئيس المباشر" id="full-name" formControlName="photo" [(ngModel)]="path" hidden>
+
+
+              <div class="col-md-6 mb-2">
+                <label for="job-place" style="width:25%;font-weight:bold">جهة الوظيفة </label>
+                <input type="text" id="job-place" formControlName="emploi" />
+              </div>
+
+              <div class="col-md-6 mb-2">
+                <label for="job-rank" style="width:25%;font-weight:bold">المرتبة </label>
+                <input type="text" id="job-rank" formControlName="classement" />
+              </div>
+
+              <div class="col-md-6 mb-2">
+                <label for="job-unit" style="width:25%;font-weight:bold">الوحدة </label>
+                <input type="text" id="job-unit" formControlName="unite" />
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="job-type" style="width:25%;font-weight:bold">نوع التعيين </label>
+                <input type="text" id="job-type" formControlName="typeEmploi" />
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="job-type" style="width:25%;font-weight:bold">تاريخ التوظيف</label>
+                <input type="date" id="date" formControlName="daterectrutement" style="width:50%" />
+              </div>
+
+              <div class="col-md-6 mb-2">
+                <label for="job-type" style="width:15%;font-weight:bold">الحضور</label>
+                <input type="time" id="date" formControlName="heureArrive" style="width:20%" class="without_ampm" />&nbsp;&nbsp;&nbsp;
+                <label for="job-type" style="width:15%;font-weight:bold">الإنصراف</label>
+                <input type="time" id="date" formControlName="heureDepart" style="width:20%" class="without_ampm" />
+              </div>
+            </form>
+
+            <div class="col-md-12 text-left">
+              <input type="submit"
+                     style="width: 130px;"
+                     class="btn btn-primary next"
+                     value="التالي &#8811;"
+                     data-toggle="pill"
+                     href="#qualification"
+                     role="tab"
+                     aria-controls="pills-contact" />
+            </div>
+
+          </div>
+
+          <div class="tab-pane fade"
+               id="qualification"
+               role="tabpanel"
+               aria-labelledby="quali-tab">
+
+            <form class="task-form form-row" [formGroup]="UserService.formModel" autocomplete="off" (submit)="onSubmit()">
+              <div class="col-md-6 mb-2">
+                <label for="qualifi" style="width:25%;font-weight:bold">المؤهل</label>
+                <input type="text" id="qualifi" formControlName="qualification" />
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="university" style="width:25%;font-weight:bold"> الجامعة/المعهد </label>
+                <input type="text" id="university" formControlName="faculteEcole" />
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="quali-type" style="width:25%;font-weight:bold">نوع المؤهل </label>
+                <input type="text" id="quali-type" formControlName="typeQualification" />
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="quali-date" style="width:25%;font-weight:bold">تاريخ المؤهل</label>
+                <input type="date" id="quali-date" formControlName="dateQualification" style="width:50%" />
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="spec" style="width:25%;font-weight:bold">التخصص</label>
+                <input type="text" id="spec" formControlName="specialite" />
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="cer-value" style="width:25%;font-weight:bold">التقدير</label>
+                <input type="text" id="cer-value" formControlName="mention" />
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="study-place" style="width:25%;font-weight:bold">دولة الدراسة</label>
+                <input type="text" id="study-place" formControlName="paysetude" />
+              </div>
+
+            </form>
+            <div class="col-md-12 text-left">
+              <input type="submit"
+                     style="width: 130px;"
+                     class="btn btn-primary next"
+                     value="التالي &#8811;"
+                     data-toggle="pill"
+                     href="#salary"
+                     role="tab"
+                     aria-controls="pills-contact" />
+
+            </div>
+
+          </div>
+
+          <div class="tab-pane fade"
+               id="account-data"
+               role="tabpanel"
+               aria-labelledby="account-tab">
+
+            <form class="task-form form-row" [formGroup]="UserService.formModel" autocomplete="off" (submit)="onSubmit()">
+
+              <div class="col-md-1">
+                <div class="terms text-right">
+                  <div class="form-check-inline" *ngIf="roles">
+                    <ul id="menu">
+                      <li *ngFor="let item of roles;let i = index">
+                        <input type="checkbox" [id]="'roles-'+i" value="{{item.id}}"
+                               [checked]="item.selected" (change)="updateSelectedRoles(i)" name="contacts" id="contacts">
+
+                        <label [for]="'roles-'+i" *ngIf="item.name=='ADMINISTRATEUR'">مسؤول النظام</label>
+
+                      </li>
+                    </ul>
+
+                  </div>
+
+                </div>
+              </div>
+              <div class="col-md-11">
+                <p></p>
+              </div>
+              <div class="col-md-6">
+                <label for="e" style="width:25%;font-weight:bold">البريد الالكتروني </label>
+                <input type="text" id="e" formControlName="email" />
+
+                <div class="alert alert-danger" *ngIf="UserService.formModel.get('email').touched && UserService.formModel.get('email').errors?.required">
+                  <p *ngIf="UserService.formModel.get('email').touched && UserService.formModel.get('email').errors?.required">هذا الحقل إجباري</p>
+                </div>
+                <div class="alert alert-danger" *ngIf="UserService.formModel.get('email').touched && UserService.formModel.get('email').errors?.email">
+                  <p *ngIf="UserService.formModel.get('email').touched && UserService.formModel.get('email').errors?.email">عنوان البريد الإلكتروني غير صالح<p>
+
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="n" style="width:25%;font-weight:bold">اسم المستخدم </label>
+                <input type="text" id="n" formControlName="UserName" required [(ngModel)]="usernameg" />
+                <div class="alert alert-danger" *ngIf="UserService.formModel.get('UserName').touched && UserService.formModel.get('UserName').errors?.minlength">
+                  <p *ngIf="UserService.formModel.get('UserName').touched && UserService.formModel.get('UserName').errors?.minlength">الحد الأدنى 6 أحرف</p>
+
+                </div>
+                <div class="alert alert-danger" *ngIf="UserService.formModel.get('UserName').touched && UserService.formModel.get('UserName').errors?.required">
+                  <p *ngIf="UserService.formModel.get('UserName').touched && UserService.formModel.get('UserName').errors?.required">هذا الحقل إجباري</p>
+
+                </div>
+
+              </div>
+
+
+
+              <div class="col-md-6" formGroupName="Passwords">
+                <label for="n" style="width:25%;font-weight:bold">كلمة المرور </label>
+                <input type="password" id="n" formControlName="Password" required style="width:230px" [(ngModel)]="password" />
+                <div class="alert alert-danger" *ngIf="UserService.formModel.get('Passwords.Password').touched && UserService.formModel.get('Passwords.Password').errors?.required">
+                  <p *ngIf="UserService.formModel.get('Passwords.Password').touched && UserService.formModel.get('Passwords.Password').errors?.required">هذا الحقل إجباري</p>
+
+                </div>
+              </div>
+
+              <div class="col-md-6" formGroupName="Passwords">
+                <label for="n" style="width:25%;font-weight:bold">تأكيد كلمة المرور </label>
+                <input type="password" id="n" formControlName="ConfirmPassword" required style="width:230px;" [(ngModel)]="password" />
+                <div class="alert alert-danger" *ngIf="UserService.formModel.get('Passwords.ConfirmPassword').touched && UserService.formModel.get('Passwords.ConfirmPassword').errors?.required">
+                  <p *ngIf="UserService.formModel.get('Passwords.ConfirmPassword').touched && UserService.formModel.get('Passwords.ConfirmPassword').errors?.required">هذا الحقل إجباري</p>
+
+                </div>
+
+                <div class="alert alert-danger" *ngIf="UserService.formModel.get('Passwords.ConfirmPassword').touched && UserService.formModel.get('Passwords.ConfirmPassword').errors?.passwordMismatch">
+                  <p *ngIf="UserService.formModel.get('Passwords.ConfirmPassword').touched && UserService.formModel.get('Passwords.ConfirmPassword').errors?.passwordMismatch">كلمة المرور غير متطابقة</p>
+
+                </div>
+              </div>
+
+              <div class="col-md-12 text-left">
+                <input type="submit"
+                       style="width: 130px;"
+                       class="btn btn-success"
+                       value="حفظ" />
+              </div>
+            </form>
+
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

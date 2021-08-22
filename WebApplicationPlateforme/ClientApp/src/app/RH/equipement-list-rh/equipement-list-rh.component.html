@@ -1,0 +1,186 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">كشف طلبات العهد</h3>
+      </header>
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
+      <div class="col-md-12">
+        <p></p>
+      </div> <br />
+      <div class="leave-request-list">
+        <div class="table-responsive">
+          <table class="table table-bordered text-center table-striped" id="MyTable">
+            <thead class="thead-primary">
+              <tr>
+                <th scope="col">الرقم التسلسلي</th>
+                <th scope="col">العهدة</th>
+                <th scope="col">نوع العهدة</th>
+                <th scope="col">جوال</th>
+                <th scope="col">الايميل الرسمي</th>
+                <th scope="col">تحويله</th>
+                <th scope="col">الحالة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.id}}</th>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.nom}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.type}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.tel}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.email}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.transfert}}</td>
+                <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
+                    [ngClass]="{
+
+  'ok': cg.attribut4 === 'موافق',
+  'refused': cg.attribut4 === 'رفض',
+  'wait': cg.attribut4 === 'في الانتظار'
+}">
+                  {{cg.attribut4}}
+                </td>
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+
+      </div>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+
+
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+        <h3 class="popup-head"> طلب عهدة</h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="task-form form-row stop-form">
+            <form class="task-form form-row service-form">
+
+              <div class="col-md-4">
+                <label for="permision-hours">الرقم التسلسلي</label>
+                {{per.id}}
+
+              </div>
+
+              <div class="col-md-4">
+                <label for="permision-hours">الموظف</label>
+                {{per.userNameCreator}}
+
+              </div>
+              <div class="col-md-4">
+                <label for="permision-hours">التاريخ</label>
+                {{per.date}}
+
+              </div>
+
+
+              <div class="col-md-4">
+                <label for="permision-hours">العهدة</label>
+                {{per.nom}}
+
+              </div>
+
+
+
+              <div class="col-md-4">
+                <label for="permision-hours">نوع العهدة</label>
+                {{per.type}}
+
+              </div>
+
+              <div class="col-md-4">
+                <label for="permision-hours">جوال</label>
+                {{per.tel}}
+
+              </div>
+              <div class="col-md-4">
+                <label for="permision-hours">الايميل الرسمي</label>
+                {{per.email}}
+
+              </div>
+              <div class="col-md-4">
+                <label for="permision-hours">تحويله</label>
+                {{per.transfert}}
+
+              </div>
+
+              <div class="col-md-4">
+                <label for="permision-hours">الحالة</label>
+                {{per.etatdir}}
+
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="myModal2" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">تعديل حالة العهدة</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <label for="user"><span><i class="fa fa-check"></i></span>حالة العهدة</label>
+          <select id="user" class="" name="attribut4" #attribut4="ngModel" [(ngModel)]="congeService.formData.attribut4" (change)="etattest($event)">
+            <option [ngValue]="undefined" selected disabled>-حالة العهدة-</option>
+            <option value="موافق">موافق</option>
+            <option value="رفض">رفض</option>
+
+          </select>
+
+          <div class="save">
+            <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

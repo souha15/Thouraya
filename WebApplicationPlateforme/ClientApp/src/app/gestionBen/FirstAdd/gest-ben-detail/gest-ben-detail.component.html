@@ -1,0 +1,265 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <div class="events-data">
+        <header>
+          <h3 class="task-head">تفاصيل  المستفيد {{ben.nomprenom}}</h3>
+        </header>
+
+        <div class="staus-box">
+          <div class="sts mr-auto">{{ben.etat}}</div>
+        </div>
+       
+        <div class="events-form row">
+          <div class="col-md-6"  *ngIf="ben.typeEnreg!=null">
+            <label>      نوع التسجيل</label>
+            <span class="data">{{ben.typeEnreg}}</span>
+          </div>
+          <div class="col-md-6" *ngIf="ben.nomprenom!=null">
+            <label>الاسم كامل</label>
+            <span class="data">{{ben.nomprenom}}</span>
+          </div>
+          <div class="col-md-6" *ngIf="ben.dateNais!=null">
+            <label>تاريخ الميلاد</label>
+            <span class="data">{{ben.dateNais}}</span>
+          </div>
+          <div class="col-md-6" *ngIf="ben.typeCin!=null">
+            <label>نوع الهوية</label>
+            <span class="data">{{ben.typeCin}}</span>
+          </div>
+          <div class="col-md-6" *ngIf="ben.numCin!=null">
+            <label>رقم الهوية</label>
+            <span class="data">{{ben.numCin}}</span>
+          </div>
+          <div class="col-md-6" *ngIf="ben.natio!=null">
+            <label>الجنسية</label>
+            <span class="data">{{ben.natio}}</span>
+          </div>
+          <div class="col-md-6" *ngIf="ben.tel!=null">
+            <label>	رقم الجوال</label>
+            <span class="data">{{ben.tel}}</span>
+          </div>
+          <div class="col-md-6" *ngIf="ben.sexe!=null">
+            <label>الجنس</label>
+            <span class="data">{{ben.sexe}}</span>
+          </div>
+          <div class="col-md-6" *ngIf="ben.adr!=null">
+            <label>العنوان</label>
+            <span class="data">{{ben.adr}}</span>
+          </div>
+
+          <div class="col-md-6" *ngIf="ben.nbfamille!=null">
+            <label>افراد الاسرة</label>
+            <span class="data">{{ben.nbfamille}}</span>
+          </div>
+
+          <div class="col-md-6" *ngIf="ben.datechercheur!=null">
+            <label>الفئة</label>
+            <span class="data">{{ben.datechercheur}}</span>
+          </div>
+
+          <div class="col-md-6" *ngIf="ben.etatdir!=null">
+            <label>نوع  الاستحقاق</label>
+            <span class="data">{{ben.etatdir}}</span>
+          </div>
+
+          <div class="col-md-8 d-flex flex-column flex-wrap" *ngIf="famille">
+
+            <div>
+              <label style="width: 200px">  افراد الاسرة</label>
+            </div>
+
+            <div>
+              <table class="table table-striped table-bordered theme-table">
+                <thead>
+                  <tr>
+
+                    <th scope="col">الاسم</th>
+                    <th scope="col">	الهوية </th>
+                    <th scope="col">	تاريخ الميلاد</th>
+                    <th scope="col">	الجنس</th>
+                    <th scope="col">	صلة القرابة </th>
+                    <th scope="col">	ملاحظات  </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of FamilleBen">
+
+                    <td>{{dp.nom}}</td>
+                    <td>{{dp.cin}}</td>
+                    <td>{{dp.dateNais}}</td>
+                    <td>{{dp.sexe}}</td>
+                    <td>{{dp.relation}}</td>
+                    <td>{{dp.req}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="d-flex flex-row align-items-center justify-content-between flex-wrap" *ngIf="ben.remarque!=''">
+                <div class="d-flex flex-column align-items-center flex-wrap">
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Results -->
+
+          </div>
+
+
+          <div class="col-md-8 d-flex flex-column flex-wrap" *ngIf="residance">
+
+            <div>
+              <label style="width: 200px">  السكن</label>
+            </div>
+
+            <div>
+              <table class="table table-striped table-bordered theme-table">
+                <thead>
+                  <tr>
+
+                    <th scope="col">السكن</th>
+                    <th scope="col">	نوع المسكن </th>
+                    <th scope="col">	حالة المسكن</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of ResiList">
+
+                    <td>{{dp.typeResi}}</td>
+                    <td>{{dp.typeMaison}}</td>
+                    <td>{{dp.etat}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="d-flex flex-row align-items-center justify-content-between flex-wrap" *ngIf="ben.remarque!=''">
+                <div class="d-flex flex-column align-items-center flex-wrap">
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Results -->
+
+          </div>
+
+
+
+
+          <div class="col-md-8 d-flex flex-column flex-wrap" *ngIf="revenus">
+
+            <div>
+              <label style="width: 200px">  الدخل المادي</label>
+            </div>
+
+            <div>
+              <table class="table table-striped table-bordered theme-table">
+                <thead>
+                  <tr>
+                    <th scope="col">نوع الدخل</th>
+                    <th scope="col">	الدخل</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of RevBen">
+
+                    <td>{{dp.typeRev}}</td>
+                    <td>{{dp.prix}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="d-flex flex-row align-items-center justify-content-between flex-wrap" *ngIf="ben.remarque!=''">
+                <div class="d-flex flex-column align-items-center flex-wrap">
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Results -->
+
+          </div>
+
+
+
+
+          <div class="col-md-8 d-flex flex-column flex-wrap" *ngIf="compte">
+
+            <div>
+              <label style="width: 200px">  الحسابات البنكية</label>
+            </div>
+
+            <div>
+              <table class="table table-striped table-bordered theme-table">
+                <thead>
+                  <tr>
+                    <th scope="col">اسم البنك </th>
+                    <th scope="col"> رقم الايبان	</th>
+                    <th scope="col"> خاص بالمستفيد 	</th>
+                    <th scope="col">صاحب الحساب 	</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of CompteBen">
+
+                    <td>{{dp.nomBanque}}</td>
+                    <td>{{dp.rib}}</td>
+                    <td>{{dp.compteBen}}</td>
+                    <td>{{dp.nomProp}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="d-flex flex-row align-items-center justify-content-between flex-wrap" *ngIf="ben.remarque!=''">
+                <div class="d-flex flex-column align-items-center flex-wrap">
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Results -->
+
+          </div>
+
+
+
+          <!-- Attachments -->
+
+
+          <div class="col-md-8 d-flex flex-column flex-wrap" *ngIf="ben.remarque!=null">
+            <div class="" *ngIf="file">
+              <label>المرفقات</label>
+              <span class="data social-links" *ngFor="let dp of FilesBen">
+                <a (click)="download(dp.path)" class="facebook ml-3"><i class="ml-2 fa fa-arrow-down"></i>{{dp.path}}</a>
+              </span>
+            </div>
+
+
+          </div>
+
+          <div class="d-flex flex-column align-items-center flex-wrap" *ngIf="ben.remarque!=null">
+            <label>  الملاحظات</label>
+            <div class="data">
+              <ul class="list-unstyled">
+                <li>{{ben.remarque}}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+          
+        </div>
+      </div>
+  </div>
+
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

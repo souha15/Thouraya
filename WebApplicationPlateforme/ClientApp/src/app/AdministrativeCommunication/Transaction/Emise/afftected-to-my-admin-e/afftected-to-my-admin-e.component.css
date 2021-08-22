@@ -1,0 +1,164 @@
+/********************/
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.tr-print,
+.revesion-print,
+.tr-follow-report {
+  padding: 30px;
+  direction: rtl
+}
+
+header.printed-header {
+  padding: 15px 0;
+  border-bottom: 2px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+
+  header.printed-header .date {
+    padding: 10px 15px;
+    border: 1px solid #333;
+    border-radius: 10px;
+    display: inline-block
+  }
+
+  header.printed-header h2 {
+    text-align: center;
+    width: 30%;
+    font-size: 1.8rem
+  }
+
+  header.printed-header h2,
+  header.printed-header span,
+  header.printed-header div {
+    width: 30%;
+    text-align: center
+  }
+
+  header.printed-header div {
+    font-size: 20px;
+    font-weight: bold;
+  }
+
+main {
+  padding-top: 20px;
+  position: relative
+}
+
+  main p {
+    font-size: 1.3em;
+    font-weight: bold;
+  }
+
+    main p .label {
+      color: #00047f;
+      margin-left: 15px;
+      font-weight: bold
+    }
+
+  .printed-header h1,
+  main h1,
+  main h2,
+  .printed-header h2,
+  .printed-header .date {
+    text-align: center;
+    color: #00047f;
+    font-weight: bold
+  }
+
+/*-- revesion-print --*/
+.table1 {
+  margin-top: 50px;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  color: #000;
+}
+
+table {
+  margin: 20px auto
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: right;
+  font-size: 16px;
+}
+
+th {
+  font-weight: bold;
+  font-size: 18px;
+  background: #d1d1d1;
+}
+
+.table2 th {
+  width: 30%
+}
+
+.revesion-print h3 {
+  background: #d1d1d1;
+  padding: 10px;
+  margin-top: 40px;
+  text-align: center
+}
+
+.parcode {
+  font-size: 35px
+}
+
+.underline::after {
+  content: '';
+  display: block;
+  width: 200px;
+  height: 2px;
+  background: #00047f;
+  margin: 20px auto
+}
+
+main section {
+  padding: 30px 0;
+  border-top: 2px solid #333;
+}
+
+/*-- Recieve Alert Start --*/
+.par-code {
+  position: absolute;
+  display: inline-block;
+  top: 20px;
+  left: 0;
+  font-size: 30px;
+}
+
+.marking {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+  .marking div {
+    color: #00047f;
+    font-size: 20px;
+    display: inline-block
+  }
+
+    .marking div span {
+      color: #000;
+    }
+
+.dotted {
+  border-bottom: 2px dotted #00047f;
+  padding-bottom: 20px
+}
+
+/********************/

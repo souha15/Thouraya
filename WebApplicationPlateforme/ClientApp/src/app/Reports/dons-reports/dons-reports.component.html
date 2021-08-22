@@ -1,0 +1,72 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">قائمة التقارير</h3>
+      </header>
+      <div class="task-form form-row text-center">
+        <div class="col-md-12">
+          <label for="reports">اختر التقرير</label>
+          <select id="reports" (change)="show($event)">
+            <option value="0" selected>
+              اختر التقرير
+            </option>
+            <option value="1">
+              قائمة الايصالات لموظف معين (مندوب) ليوم معين
+            </option>
+            <option value="2">قائمة الايصالات ليوم معين</option>
+            <option value="3">قائمة الايصالات لموظف معين لفترة معينة</option>
+            <option value="4">
+              قائمة الايصالات لمشروع معين بتاريخ معين
+            </option>
+            <option value="5">
+              قائمة الايصالات لمشروع معين لفترة معينة
+            </option>
+            <option value="6">
+              قائمة بعدد المتبرعين واجمالي التبرعات ليوم معين
+            </option>
+            <option value="7">
+              قائمة بعدد المتبرعين واجمالي التبرعات لفترة معينة
+            </option>
+            <option value="8">تقرير شهري لإيراد كل مندوب</option>
+            <option value="9">قائمة الإيرادات لشهر معين</option>
+            <option value="10">قائمة الإيرادات لفترة معينة</option>
+            <option value="11">قائمة الإيرادات لموظف معين لفترة معينة</option>
+            <option value="12">قائمة الإيرادات لموظف معين ليوم معين</option>
+            <option value="13">قائمة الإيرادات لموظف معين /شهري</option>
+          </select>
+        </div>
+
+
+      </div>
+      <hr />
+
+      <div class="col-md-12">
+
+        <app-recu-emp-date *ngIf="r1"></app-recu-emp-date>
+        <app-recu-date *ngIf="r2"></app-recu-date>
+        <app-recu-emp-periode *ngIf="r3"></app-recu-emp-periode>
+        <app-recu-proj-date *ngIf="r4"></app-recu-proj-date>
+        <app-recu-proj-priod *ngIf="r5"></app-recu-proj-priod>
+        <app-recu-nb-date *ngIf="r6"></app-recu-nb-date>
+        <app-recu-nb-period *ngIf="r7"></app-recu-nb-period>
+        <app-revenus-month *ngIf="r9"></app-revenus-month>
+        <app-revenus-period *ngIf="r10"></app-revenus-period>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+<!-- Footer -->
+
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

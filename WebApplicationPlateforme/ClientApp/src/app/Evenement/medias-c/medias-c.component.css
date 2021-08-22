@@ -1,0 +1,167 @@
+ul {
+  list-style: none
+}
+/*-- Electronic Sevices Forms --*/
+.task-form input:focus:not([type="submit"]):not([type="reset"]),
+.task-form select:focus {
+  outline-color: #999;
+}
+
+.task-form option:hover {
+  border: none !important;
+}
+
+.service-form label {
+  background-color: #91c3d8;
+  color: #333;
+}
+
+.service-form select {
+  width: 50%;
+}
+
+.service-form input[type="submit"] {
+  width: 140px;
+  font-size: 18px;
+}
+
+.service-form input[type="reset"] {
+  width: 140px;
+  font-size: 18px;
+}
+
+/*-- leave-request-list --*/
+.leave-request-list table thead {
+  background-color: #91c3d8;
+}
+
+.leave-request-list .ok,
+.leave-request-list .refused {
+  display: block;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.leave-request-list .ok {
+  background-color: #28a745 !important;
+}
+
+.leave-request-list .refused {
+  background-color: #dc3545 !important;
+}
+
+/*-- Events Pages --*/
+.events-form label {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #91c3d8;
+  color: #333;
+  margin-left: 10px;
+  min-width: 60px;
+}
+
+  .events-form label.main {
+    background-color: #276985;
+    color: #fff;
+    padding: 5px 15px;
+    width: 145px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+  }
+
+    .events-form label.main:first-of-type {
+      margin-top: 20px;
+    }
+
+.events-form input[type="text"],
+.events-form input[type="password"] {
+  width: 120px;
+}
+
+.events-form input[type="text"],
+.events-form input[type="password"],
+.events-form input[type="date"],
+.events-form input[type="number"],
+.events-form select {
+  border-radius: 5px;
+  padding: 5px 10px;
+  width: 115px;
+}
+
+  .events-form input[type="text"].last {
+    width: 400px;
+  }
+
+.events-form input[type="file"] {
+  display: none;
+}
+
+.events-form input[type="submit"] {
+  width: 140px;
+  text-align: center;
+}
+
+.events-form .file-label {
+  background-color: #91c3d8 !important;
+}
+
+/*-- Start Events-List Page --*/
+.events-list .table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgb(132, 192, 199);
+}
+
+.print-link a {
+  color: #185877;
+}
+
+/*-- Start events-data Page --*/
+.events-data .events-form label {
+  width: 135px;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.events-data .events-form .data {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #999;
+  min-width: 250px;
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+  .events-data .events-form .data .table {
+    max-width: 95%;
+  }
+
+.social-links a {
+  text-decoration: none;
+  color: #276985;
+}
+
+.facebook:hover {
+  color: #3b5998;
+}
+
+.twitter:hover {
+  color: #1da1f2;
+}
+
+.instagram:hover {
+  color: #f56040;
+}
+
+.youtube:hover {
+  color: #ff0000;
+}
+
+.add-inputs,
+.add-inputs2 {
+  background: #344760;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+}

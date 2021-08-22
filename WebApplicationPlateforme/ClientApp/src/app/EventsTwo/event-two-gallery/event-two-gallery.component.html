@@ -1,0 +1,32 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">
+          الفعالية
+        </h3>
+      </header>
+      <div class="items">
+        <a class="item" *ngFor="let ne of FphotosList" href="/uploads/{{ne.path}}" data-lightbox="roadtrip">
+          <img src="/uploads/{{ne.path}}" alt="" />
+        </a>
+      </div>
+      <div class="selectedItem"></div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+<div class="popup-page close">
+  <div class="content">
+    <span class="close-btn">X</span>
+  </div>
+</div>

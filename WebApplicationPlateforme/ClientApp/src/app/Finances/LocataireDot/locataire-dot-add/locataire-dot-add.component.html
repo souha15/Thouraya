@@ -1,0 +1,137 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+      <app-menu-finance></app-menu-finance>
+      <!-- Tasks Page Content -->
+      <section class="page-content">
+        <h4 class="my-2 task-head">  تسجيل مستأجر</h4>
+        <form action="" class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)" (keydown.enter)="$event.target.tagName == 'TEXTAREA'">
+          <div class="col-sm-12">
+            <label for="reg-date"><span><i class="fa fa-user-check"></i></span>نوع المستأجر  </label>
+            &nbsp; &nbsp; <input type="radio" name="date" value="newone" (click)="setradio('newone')" ngModel>&nbsp; &nbsp; جديد
+            &nbsp; &nbsp; <input type="radio" name="date" value="oldone" (click)="setradio('oldone')" [checked]='true' ngModel>&nbsp; &nbsp;قديم
+          </div>
+          <div class="col-md-6">
+            <label for="rent-stop-name"><span><i class="fa fa-pen-square fa-lg"></i></span>اسم الوقف</label>
+            <select id="building" (change)="selectInput($event)" name="idDotation" #idDotation="ngModel" [(ngModel)]="location.idDotation" required>
+              <option [ngValue]="undefined" selected disabled>-اسم الوقف-</option>
+              <option *ngFor="let item of dotationList" value="{{item.id}}">{{item.nom}}</option>
+            </select>
+            <div *ngIf="idDotation.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب اسم الوقف.
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <label for="building"><span><i class="fa fa-building fa-lg"></i></span>العقار المؤجر</label>
+            <select id="building" name="idUnite" #idUnite="ngModel" [(ngModel)]="location.idUnite" required (change)="selectInput2($event)">
+              <option [ngValue]="undefined" selected disabled>-العقار المؤجر-</option>
+              <option *ngFor="let item of uniteList" value="{{item.id}}">{{item.numRevenus}}</option>
+            </select>
+            <!-- <div *ngIf="idUnite.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+     مطلوب العقار المؤجر.
+   </div>-->
+          </div>
+
+          <div class="col-md-6">
+            <label for="rent-cost"><span><i class="fa fa-coins fa-lg"></i></span>اسم المستأجر</label>
+            <input type="text" id="rent-cost" name="nom" #nom="ngModel" [(ngModel)]="location.nom">
+          </div>
+
+          <div class="col-md-6">
+            <label for="rent-cost"><span><i class="fa fa-globe fa-lg"></i></span>الجنسیة</label>
+            <input type="text" id="rent-cost" name="nat" #nat="ngModel" [(ngModel)]="location.nat">
+          </div>
+
+          <div class="col-md-6">
+            <label for="rent-cost"><span><i class="fa fa-id-card fa-lg"></i></span>الھویة</label>
+            <input type="text" id="rent-cost" name="cin" #cin="ngModel" [(ngModel)]="location.cin">
+          </div>
+
+          <div class="col-md-6">
+            <label for="rent-cost"><span><i class="fa fa-briefcase fa-lg"></i></span>العمل</label>
+            <input type="text" id="rent-cost" name="work" #work="ngModel" [(ngModel)]="location.work">
+          </div>
+
+          <div class="col-md-6">
+            <label for="rent-cost"><span><i class="fa fa-home fa-lg"></i></span>العنوان</label>
+            <input type="text" id="rent-cost" name="adr" #adr="ngModel" [(ngModel)]="location.adr">
+          </div>
+
+          <div class="col-md-6">
+            <label for="rent-cost"><span><i class="fa fa-mobile fa-lg"></i></span>الجوال</label>
+            <input type="text" id="rent-cost" name="tel" #tel="ngModel" [(ngModel)]="location.tel">
+          </div>
+
+          <div class="col-md-6">
+            <label for="rent-start"><span><i class="fa fa-calendar fa-lg"></i></span>تاريخ بداية العقد</label>
+            <input type="date" id="rent-start" name="datedebutcontrat" #datedebutcontrat="ngModel" [(ngModel)]="location.datedebutcontrat" required style="width:200px">
+
+            <div *ngIf="datedebutcontrat.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب تاريخ بداية العقد.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="rent-time"><span><i class="fa fa-clock fa-lg"></i></span>مدة العقد بالشهر</label>
+            <input type="text" id="rent-time" name="duree" #duree="ngModel" [(ngModel)]="location.duree" required>
+
+            <div *ngIf="duree.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب مدة العقد بالشهر.
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label for="contract-num"><span><i class="fa fa-sort-numeric-down fa-lg"></i></span>رقم العقد </label>
+            <input type="text" id="contract-num" name="nomcontrat" #nomcontrat="ngModel" [(ngModel)]="location.nomcontrat">
+          </div>
+
+          <div class="col-md-6" *ngIf="isSelected('oldone')">
+            <label for="contract-num"><span><i class="fa fa-coins fa-lg"></i></span>المتأخرات</label>
+            <input type="text" id="contract-num" name="attribut5" #attribut5="ngModel" [(ngModel)]="location.attribut5">
+          </div>
+
+          <div class="col-md-6" *ngIf="isSelected('oldone')">
+            <label for="contract-num"><span><i class="fa fa-coins fa-lg"></i></span>التاريخ</label>
+            <input type="date" id="contract-num" name="attribut1" #attribut1="ngModel" [(ngModel)]="location.attribut1">
+          </div>
+
+          <div class="col-12">
+            <label for=""><span><i class="fa fa-file-invoice fa-lg"></i></span>الوثائق</label>
+            <input type="file" id="contract" (change)="upload1($event)" #inputFile>
+            <label for="contract" class="file-label"><span><i class="fa fa-id-card fa-lg"></i></span> الھویة <span class="mr-4"><i class="fa fa-upload"></i></span></label>
+
+
+
+            <input type="file" id="contract" (change)="upload($event)" #inputFile>
+            <label for="contract" class="file-label"><span><i class="fa fa-file-alt fa-lg"></i></span> العقد <span class="mr-4"><i class="fa fa-upload"></i></span></label>
+            <ul *ngFor="let pd of fileslist1 ; let i = index">
+              <li>
+                <a (click)="onDelete2(pd,i)" class="aaa"><i class="fa fa-trash"></i>  </a>
+                <a>
+                  {{pd}}
+                </a>
+              </li>
+            </ul>
+
+
+          </div>
+          <div class="mx-auto my-3">
+            <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
+          </div>
+        </form>
+      </section>
+    </div><!-- End col-9 -->
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

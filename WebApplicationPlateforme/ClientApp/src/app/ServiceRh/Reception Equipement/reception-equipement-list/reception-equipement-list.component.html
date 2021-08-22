@@ -1,0 +1,220 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+
+      <header>
+        <h3 class="task-head">  قائمة العهد المستلمة  </h3>
+      </header>
+      <div class="form-group pull-right">
+        <input type="text"
+               class="search form-control"
+               placeholder="ما الذي تبحث عنه ؟"
+               name="search" [(ngModel)]="filter" />
+      </div>
+      <span class="counter pull-right"></span>
+      <div class="table-responsive">
+        <table class="table results text-center table-bordered theme-table">
+          <thead>
+            <tr>
+              <th scope="col">الرقم</th>
+              <th scope="col">الموظف</th>
+              <th scope="col">الإدارة</th>
+              <th scope="col">تاريخ الاستلام</th>
+              <th scope="col">العهدة</th>
+              <th scope="col">عرض التفاصيل</th>
+              <th scope="col">تعديل</th>
+              <th scope="col">حذف</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+              <th>{{cg.id}}</th>
+              <td (click)="populateForm(cg)">{{cg.username}}</td>
+              <td (click)="populateForm(cg)">{{cg.admin}}</td>
+              <td (click)="populateForm(cg)">{{cg.daterecep}}</td>
+              <td (click)="populateForm(cg)">{{cg.equi}}</td>
+              <td>
+                <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-eye fa-lg"></i>
+                </a>
+              </td>
+              <td (click)="populateForm(cg)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1">تعديل</a></td>
+              <td (click)="populateForm(cg)"><a class="btn btn-danger" (click)="onDelete(cg.id)">حذف</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+
+<div id="myModal" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تفاصيل إستلام عهدة</h2>
+          <div class="form-row task-form service-form text-center">
+
+            <div class="col-md-6">
+
+              <div>
+                <label>الرقم </label>
+                <p>{{fact.id}}</p>
+              </div>
+
+              <div>
+                <label>الإدارة</label>
+                <p>{{fact.admin}}</p>
+              </div>
+
+              <div>
+                <label>تاريخ الاستلام</label>
+                <p>{{fact.daterecep}}</p>
+              </div>
+
+              <div>
+                <label>الكمية</label>
+                <p>{{fact.quantite}}</p>
+              </div>
+
+    
+
+            </div>
+            <div class="col-md-6">
+
+              <div>
+                <label>اسم الموظف</label>
+                <p>{{fact.username}}</p>
+              </div>
+              <div>
+                <label>العهدة </label>
+                <p>{{fact.equi}}</p>
+              </div>
+
+              <div>
+                <label>حالة العهدة</label>
+                <p>{{fact.etatEqui}}</p>
+              </div>
+
+              <div>
+                <label>وصف العهدة </label>
+                <p>{{fact.typeEqui}}</p>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تعديل إستلام عهدة</h2>
+
+          <form class="form-row task-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <div class="col-md-6">
+              <label for="">الموظف</label>
+              <select name="userId" #userId="ngModel" [(ngModel)]="trinService.formData.userId" (change)="getUserNom($event)" required>
+                <option [ngValue]="undefined" selected disabled>اسم الموظف</option>
+                <option *ngFor="let item of UserList" value="{{item.id}}">{{item.fullName}}</option>
+              </select>
+
+              <div *ngIf="userId.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب  الموظف .
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="">القسم/الادارة</label>
+              <input type="text" name="admin" #admin="ngModel" [(ngModel)]="trinService.formData.admin"  disabled />
+
+            </div>
+            <div class="col-md-6">
+              <label for="">تاريخ الاستلام</label>
+              <input type="date" name="daterecep" #daterecep="ngModel" [(ngModel)]="trinService.formData.daterecep" required />
+              <div *ngIf="daterecep.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب تاريخ الاستلام .
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="">العهدة</label>
+              <input type="text" name="equi" #equi="ngModel" [(ngModel)]="trinService.formData.equi" required />
+              <div *ngIf="equi.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب العهدة .
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="">الكمية</label>
+              <input type="number" min="0" name="quantite" #quantite="ngModel" [(ngModel)]="trinService.formData.quantite" />
+            </div>
+            <div class="col-md-6">
+              <label for="">وصف العهدة</label>
+              <input type="text" name="typeEqui" #typeEqui="ngModel" [(ngModel)]="trinService.formData.typeEqui" />
+            </div>
+            <div class="col-md-6">
+              <label for="">حالة العهدة</label>
+              <input type="text" name="etatEqui" #etatEqui="ngModel" [(ngModel)]="trinService.formData.etatEqui" required />
+              <div *ngIf="etatEqui.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب حالة العهدة .
+              </div>
+
+            </div>
+
+            <div class="col-12 text-center text-md-left mt-3">
+              <input class="btn btn-info"
+                     style="width: 130px;"
+                     type="submit"
+                     value="استلام" />
+            </div>
+
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

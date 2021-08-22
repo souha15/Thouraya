@@ -1,0 +1,345 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <!-- End Sidebar -->
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">قائمة السندات</h3>
+      </header>
+
+
+      <div class="form-group pull-right">
+        <input type="text"
+               class="search form-control"
+               placeholder="ما الذي تبحث عنه ؟" name="search" [(ngModel)]="filter" />
+      </div>
+      <span class="counter pull-right"></span>
+      <div class="table-responsive">
+        <table class="table results text-center table-bordered theme-table">
+          <thead>
+            <tr>
+              <th scope="col">رقم السند</th>
+              <th scope="col">تاريخ السند</th>
+              <th scope="col">اسم الموظف</th>
+              <th scope="col">المبلغ</th>
+              <th scope="col">اسم المشروع</th>
+              <th scope="col">طريقة الدفع</th>
+              <th scope="col">التفاصيل</th>
+              <th scope="col">تعديل</th>
+              <th scope="col">حذف</th>
+            </tr>
+
+          </thead>
+          <tbody>
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+              <td (click)="populateForm(cg)">{{cg.id}}</td>
+              <td (click)="populateForm(cg)">{{cg.dateDons}}</td>
+              <td (click)="populateForm(cg)">{{cg.userNameCreator}}</td>
+              <td (click)="populateForm(cg)">{{cg.prixDons}}</td>
+              <td (click)="populateForm(cg)">{{cg.projet}}</td>
+              <td (click)="populateForm(cg)">{{cg.typeDons}}</td>
+
+
+              <td (click)="populateForm(cg)">
+                <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-eye fa-lg"></i>
+                </a>
+              </td>
+              <td (click)="populateForm(cg)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1">تعديل</a></td>
+              <td (click)="populateForm(cg)"><a class="btn btn-danger" (click)="onDelete(cg.id)">حذف</a></td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <br />
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls previousLabel="السابق"
+                                 nextLabel="التالي"
+                                 (pageChange)="p = $event"></pagination-controls>
+          </ul>
+        </nav>
+
+
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+<div id="myModal" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تفاصيل  إيصال التبرع</h2>
+          <div class="form-row task-form service-form text-center">
+
+            <div class="col-md-6">
+              <div>
+                <label>رقم السند</label>
+                <p>{{fact.id}}</p>
+              </div>
+              <div>
+                <label>اسم الموظف</label>
+                <p>{{fact.userNameCreator}}</p>
+              </div>
+              <div>
+                <label>المبلغ</label>
+                <p>{{fact.prixDons}}</p>
+              </div>
+              <div>
+                <label>تاريخ العملية</label>
+                <p>{{fact.dateDons}}</p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div>
+                <label>اسم المشروع</label>
+                <p>{{fact.projet}}</p>
+              </div>
+
+              <div>
+                <label>تاريخ التسجيل</label>
+                <p>{{fact.dateenreg}}</p>
+              </div>
+              <div>
+                <label>ملاحظات</label>
+                <p style="width: 100%;">
+                  {{fact.req}}
+                </p>
+              </div>
+            </div>
+            <div class="col-md-12 text-center">
+              <label for="">صورة الايصال</label> <br />
+              <img src="{{pathurl}}" alt="" class="receipt-copy" />
+            </div>
+            <div class="col-12 text-left">
+              <a  (click)="openPDF()" class="btn" style="width: 70px;">
+                <img style="width: 100%;" src="/assets/images/printer2.png" alt="" />
+              </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تعديل  إيصال التبرع</h2>
+
+          <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <div class="col-md-6">
+              <label>نوع التبرع</label><br />
+              <p class="radio-lab" for="pay-method1" *ngIf="b">تحويل بنكي</p>
+
+              <p class="radio-lab" for="pay-method2" *ngIf="c">شيك</p>
+
+              <p class="radio-lab" for="pay-method3" *ngIf="m">جهاز سحب</p>
+
+              <p class="radio-lab" for="pay-method4" *ngIf="e">نقدي</p>
+
+              <div class="pay-method1" *ngIf="b">
+                <label for="">تاريخ التحويل</label>
+                <input type="date" id="" name="dateTransfert" #dateTransfert="ngModel" [(ngModel)]="factureService.formData.dateTransfert" />
+                <label for="">البنك المسحوب منه</label>
+                <input type="text" id="" name="banqueEmis" #banqueEmis="ngModel" [(ngModel)]="factureService.formData.banqueEmis" />
+                <label for="">البنك المسحوب عليه</label>
+                <input type="text" id="" name="banqueRecep" #banqueRecep="ngModel" [(ngModel)]="factureService.formData.banqueRecep" />
+                <label for="">رقم العملية</label>
+                <input type="number" min="0" id="" name="numOperation" #numOperation="ngModel" [(ngModel)]="factureService.formData.numOperation" (change)="testnumOp($event)" />
+
+                <label for="">ارفاق صورة الفاتورة</label>
+                <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+                  <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                  <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                  </ngx-dropzone-preview>
+                </ngx-dropzone>
+              </div>
+              <div class="pay-method2" *ngIf="c">
+                <label for="">تاريخ الشيك</label>
+                <input type="date" id="" name="dateCheque" #dateCheque="ngModel" [(ngModel)]="factureService.formData.dateCheque" />
+                <label for="">رقم الشيك</label>
+                <input type="number" min="0" id="" name="numCheque" #numCheque="ngModel" [(ngModel)]="factureService.formData.numCheque" />
+                <label for="">اسم البنك</label>
+                <input type="text" id="" name="nomBanqueCheque" #nomBanqueCheque="ngModel" [(ngModel)]="factureService.formData.nomBanqueCheque" />
+                <label for="">صاحب الشيك</label>
+                <input type="text" id="" name="propCheque" #propCheque="ngModel" [(ngModel)]="factureService.formData.propCheque" />
+                <label for="">ارفاق صورة الشيك</label>
+                <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+                  <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                  <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                  </ngx-dropzone-preview>
+                </ngx-dropzone>
+              </div>
+              <div class="pay-method3" *ngIf="m">
+                <label for="">تاريخ العملية</label>
+                <input type="date" id="" name="dateOperation" #dateOperation="ngModel" [(ngModel)]="factureService.formData.dateOperation" />
+                <label for="">رقم المكينة</label>
+                <input type="number" min="0" id="" name="numMachine" #numMachine="ngModel" [(ngModel)]="factureService.formData.numMachine" />
+                <label for="">رقم العملية</label>
+                <input type="text" id="" name="numOperation" #numOperation="ngModel" [(ngModel)]="factureService.formData.numOperation" (change)="testnumOp($event)" />
+                <label for="">ارفاق صورة الايصال</label>
+                <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+                  <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                  <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                  </ngx-dropzone-preview>
+                </ngx-dropzone>
+              </div>
+
+              <div>
+                <label for="amount1">قيمة التبرع</label>
+                <input type="number" min="0" id="amount1" name="prixDons" #prixDons="ngModel" [(ngModel)]="factureService.formData.prixDons" />
+              </div>
+              <div>
+                <label for="amount3">قيمة التبرع كتابة</label>
+                <input type="text" id="amount3" name="prixDonsEcriture" #prixDonsEcriture="ngModel" [(ngModel)]="factureService.formData.prixDonsEcriture" />
+              </div>
+              <div>
+                <label for="donate-date">تاريخ التبرع </label>
+                <input type="date" id="donate-date" name="dateDons" #dateDons="ngModel" [(ngModel)]="factureService.formData.dateDons" />
+              </div>
+              <div>
+                <label for="notes">ملاحظات</label>
+                <textarea id="notes" class="form-control" name="req" #req="ngModel" [(ngModel)]="factureService.formData.req"></textarea>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label>المشروع/البرنامج</label><br />
+  
+              <div class="programs">
+                <label>المشروع/البرنامج</label>
+                <select id="prog" name="projet" #projet="ngModel" [(ngModel)]="factureService.formData.projet">
+                  <option [ngValue]="undefined" selected disabled>المشروع</option>
+                  <option *ngFor="let item of pd" value="{{item.nom}}">{{item.nom}}</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="emp-name">اسم المندوب</label>
+                <select id="emp-name" name="delegueNom" #delegueNom="ngModel" [(ngModel)]="factureService.formData.delegueNom">
+                  <option [ngValue]="undefined" selected disabled>اسم المندوب</option>
+                  <option *ngFor="let item of usersList" value="{{item.fullName}}">{{item.fullName}}</option>
+                </select>
+              </div>
+              <div>
+                <label for="payee-name">اسم المتبرع</label>
+                <select id="payee-name" name="idDonneur" #idDonneur="ngModel" [(ngModel)]="factureService.formData.idDonneur" (change)="donNom($event)">
+                  <option [ngValue]="undefined" selected disabled>اسم المتبرع</option>
+                  <option *ngFor="let item of del" value="{{item.id}}">{{item.nom}}{{item.prenom}}</option>
+                </select>
+
+              </div>
+    
+              <div>
+                <label for="mob-num">رقم الجوال</label>
+                <input type="text" id="mob-num" name="tel" #tel="ngModel" [(ngModel)]="factureService.formData.tel" />
+              </div>
+              <div>
+                <label for="id-num">رقم الهوية</label>
+                <input type="text" id="id-num" name="cin" #cin="ngModel" [(ngModel)]="factureService.formData.cin" />
+              </div>
+              <div>
+                <label for="writer">الموظف المسجل</label>
+                <input type="text" id="writer" value="{{UserNameConnected}}" disabled />
+              </div>
+              <div>
+                <label for="write-date">تاريخ التسجيل </label>
+                <input type="text" id="write-date" value="{{date}}" disabled />
+              </div>
+            </div>
+
+            <div class="col-md-12 text-left">
+              <a (click)="openPDF()" class="btn" style="width: 70px;">
+                <img style="width: 100%;" src="/assets/images/printer2.png" alt="" />
+              </a>
+              <input type="submit"
+                     style="width: 130px;"
+                     class="btn btn-info next"
+                     value="تعديل" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<div class="container" id="htmlData" style="display: none;">
+  <div class="receipt-page">
+    <nav class="receipt-header">
+      <div class="date">
+        تاريخ السند: <span>{{fact.dateDons}}</span>
+        <p>رقم السند: <span>{{fact.id}}</span></p>
+      </div>
+      <h2>سند قبض</h2>
+      <div class="print-date">تاريخ الطباعة : <span>{{date}}</span></div>
+    </nav>
+    <main class="receipt-body">
+      <div class="row">
+        <div class="col-4">
+          <p>استلمت من السيد :</p>
+          <p>المبلغ :</p>
+          <p>طريقة الدفع :</p>
+          <p>وذلك لأجل :</p>
+          <p>ملاحظات :</p>
+        </div>
+        <div class="col-8">
+          <p>{{fact.doneurNom}}</p>
+          <p>  {{fact.prixDonsEcriture}} ( {{fact.prixDons}} )</p>
+          <p>{{fact.typeDons}}</p>
+          <p>{{fact.projet}}</p>
+          <p>{{fact.req}}</p>
+        </div>
+      </div>
+    </main>
+    <div class="footer">
+      <p>
+        <span class="lbl">اسم المستلم :</span><span> --------------- </span>
+      </p>
+      <p>
+        <span class="lbl">توقيع المستلم :</span><span> -------------- </span>
+      </p>
+    </div>
+  </div>
+</div>

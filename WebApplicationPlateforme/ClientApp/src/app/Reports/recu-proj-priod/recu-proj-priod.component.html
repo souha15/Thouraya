@@ -1,0 +1,103 @@
+
+<h3 style="text-align: center; color: #107F98;">قائمة الايصالات لمشروع معين لفترة معينة</h3>
+<form class="task-form form-row">
+
+  <div class="col-md-6">
+    <label for="pro-name">اختر المشروع</label>
+    <select id="pro-name" (change)="testEmp($event)">
+      <option [ngValue]="undefined" selected disabled>اسم المشروع</option>
+      <option *ngFor="let item of UsersList" value="{{item.nom}}">{{item.nom}}</option>
+    </select>
+  </div>
+  <div class="col-md-6">
+    <label for="date-start">تاريخ البداية</label>
+    <input type="date" id="date-start" (change)="testDayD($event)" />
+  </div>
+  <div class="col-md-6">
+    <label for="date-end">تاريخ النهاية</label>
+    <input type="date" id="date-end" (change)="testDayF($event)" />
+  </div>
+
+  <div class="col-md-12 text-left">
+    <input type="submit"
+           style="width: 130px;"
+           class="btn btn-info"
+           value="عرض"
+           (click)="generatePdf()" />
+  </div>
+</form>
+
+<div class="table-responsive">
+  <div class="text-right">
+    <a (click)="openPDF()" class="btn" style="width: 70px;">
+      <img style="width: 100%;" src="/assets/images/printer2.png" alt="" />
+    </a>
+  </div>
+  <table class="table text-center table-bordered theme-table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">رقم الايصال</th>
+        <th scope="col">
+          رقم العملية
+        </th>
+        <th scope="col">المبلغ</th>
+        <th scope="col">اسم المشروع</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of FDonsList2; let index = index">
+        <th scope="row">{{index}}</th>
+        <td>{{item.id}}</td>
+        <td>{{item.numOperation}}</td>
+        <td>{{item.prix}}</td>
+
+        <td>{{item.projet}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="container" id="htmlData" style="display: none;">
+  <div class="receipt-page">
+    <nav class="receipt-header">
+      <div class="date">
+        <p>تاريخ البداية: <span>{{dayD}}</span></p>
+        <p>تاريخ النهاية: <span>{{dayF}}</span></p>
+      </div>
+      <h3>قائمة الايصالات لمشروع معين لفترة معينة</h3>
+
+      <div class="print-date">
+        <p>اسم المشروع: <span> {{emp}}</span></p>
+        <p>تاريخ الطباعة : <span>{{date}}</span></p>
+      </div>
+    </nav>
+    <main class="receipt-body">
+      <table class="table text-center table-bordered mt-4">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">رقم الايصال</th>
+            <th scope="col">اسم الموظف</th>
+            <th scope="col">المبلغ</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of FDonsList2; let index = index">
+            <th scope="row">{{index}}</th>
+            <td>{{item.id}}</td>
+            <td>{{item.userNameCreator}}</td>
+            <td>{{item.prix}}</td>
+
+          </tr>
+          <tr>
+            <th scope="row">الاجمالي</th>
+            <td></td>
+            <td></td>
+            <td>{{somme}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+</div>

@@ -1,0 +1,59 @@
+<app-nav-menu> </app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu> </app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">المصروفات التشغيلية</h3>
+      </header>
+      <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="col-md-6">
+          <label for="expense-type">نوع المصروفات</label>
+          <select id="expense-type" name="type" #type="ngModel" [(ngModel)]="dep.type" required>
+            <option [ngValue]="undefined" selected disabled>-نوع المصروفات-</option>
+            <option *ngFor="let item of typedepense" value="{{item.nom}}">{{item.nom}}</option>
+          </select>
+          <div *ngIf="type.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب نوع المصروفات .
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="amount0">المبلغ</label>
+          <input type="number" min="0" id="amount0" name="prix" #prix="ngModel" [(ngModel)]="dep.prix" required />
+          <div *ngIf="prix.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب المبلغ .
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="exp-details">التفاصيل</label>
+          <textarea id="exp-details" class="form-control" name="details" #details="ngModel" [(ngModel)]="dep.details" required></textarea>
+        </div>
+        <div class="col-md-6">
+          <label for="payee-type">نوع المستفيد</label>
+          <select id="payee-type" name="typeB" #typeB="ngModel" [(ngModel)]="dep.typeB">
+            <option [ngValue]="undefined" selected disabled>-نوع المستفيد-</option>
+            <option *ngFor="let item of TypeB" value="{{item.nom}}">{{item.nom}}</option>
+          </select>
+        </div>
+
+        <div class="col-md-12 text-left">
+          <input type="submit"
+                 style="width: 130px;"
+                 class="btn btn-info next"
+                 value="إضافة" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p> جمعية الدعوة والإرشاد وتوعية الجاليات في محافظة أبوعريش</p>
+</footer>

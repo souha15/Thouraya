@@ -1,0 +1,560 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+      <nav class="d-flex p-0 bd-highlight tasks-nav mt-2">
+        <a [routerLink]="['/enreg-e']" class="p-2 flex-fill bd-highlight stop-btn">
+          <span><i class="fa fa-arrow-alt-circle-right"></i></span>
+          صادر
+        </a>
+        <a [routerLink]="['/enreg-r']" class="p-2 flex-fill bd-highlight stop-btn">
+          <span><i class="fa fa-arrow-circle-left"></i></span>
+          وارد
+        </a>
+
+        <a [routerLink]="['/enreg-i']" class="p-2 flex-fill bd-highlight stop-btn">
+          <span><i class="fa fa-arrows-alt"></i></span>
+          داخلي
+        </a>
+      </nav>
+      <!-- Tasks Page Content -->
+      <section class="page-content">
+        <h4 class="my-2 task-head">قائمة المعاملات الداخلية المسجلة</h4>
+        <nav class="d-flex mt-2 transaction-nav saved-nav">
+          <ul>
+            <li class="show-btn">
+              <a href="" data-toggle="modal" data-target="#myModal1">
+                <span><i class="fa fa-eye"></i></span>
+                عرض
+              </a>
+            </li>
+            <!-- <li class="follow-btn">
+     <a href="" data-toggle="modal" data-target="#myModal3">
+       <span><i class="fa fa-undo"></i></span>
+       إحالة
+     </a>
+   </li>-->
+            <li class="undo-btn">
+              <a href="" data-toggle="modal" data-target="#myModal2">
+                <span><i class="fa fa-edit"></i></span>
+                تعديل
+              </a>
+            </li>
+            <li class="undo-btn">
+              <a (click)="onDeleteTr()">
+                <span><i class="fa fa-trash"></i></span>
+                حذف
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <!-- Transaction1 Page Content -->
+        <section class="page-content text-right">
+
+          <div class="form-group pull-right">
+
+            <input class="search form-control" type="text" name="search" [(ngModel)]="filter" placeholder="ما الذي تبحث عنه ؟">
+          </div>
+          <span class="counter pull-right"></span>
+          <div class="tabel-cont table-responsive">
+            <table class="table table-striped results table-bordered sortable" id="myTable">
+              <thead>
+                <tr>
+
+                  <th scope="col">#</th>
+                  <th scope="col">رقم المعاملة</th>
+                  <th scope="col">نوع المعاملة</th>
+                  <th scope="col">تاريخ التسجيل</th>
+                  <th scope="col">الجهة المسجلة للمعاملة</th>
+                  <th scope="col">الأولوية</th>
+                  <th scope="col">درجة السرية</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let tr of FiltredList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+
+                  <td (click)="populateForm(tr)"><input type="radio" name="modelGroup" value="modelGroup"></td>
+                  <td (click)="populateForm(tr)">{{tr.id}}</td>
+                  <td (click)="populateForm(tr)">{{tr.typeInterne}}</td>
+                  <td (click)="populateForm(tr)">{{tr.date}}</td>
+                  <td (click)="populateForm(tr)">{{tr.orgEnregTr}}</td>
+                  <td (click)="populateForm(tr)">{{tr.priorite}}</td>
+                  <td (click)="populateForm(tr)">{{tr.securite}}</td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination -->
+
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                   nextLabel="التالي"></pagination-controls>
+            </ul>
+          </nav>
+        </section>
+      </section>
+    </div><!-- End col-9 -->
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+
+<!-- show -->
+<div id="myModal1" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+
+  <div class="modal-dialog modal-lg">
+
+    <div class="modal-content">
+
+
+      <div class="modal-content">
+        <div class="modal-header">
+
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+          <h4 class="modal-title">داخلية</h4>
+
+        </div>
+        <div class="modal-body" style="direction:rtl; text-align:right">
+          <div class="modal-body" style="direction:rtl; text-align:right;">
+            <div class="task-form form-row stop-form">
+              <div class="col-md-6 mb-3">
+                <label>الرقم الموحد</label>
+                <span>{{tr.id}}</span>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label>تاريخ تسجيل المعاملة</label>
+                <span>{{tr.date}}</span>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label>الإجراء</label>
+                <span>{{tr.action}}</span>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label>تاريخ إنهاء الإجراء </label>
+                <span>{{tr.dateFinisAction}}</span>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label>موظف تسجيل المعاملة</label>
+                <span>{{tr.userNameCreator}}</span>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label>الأولوية</label>
+                <span>{{tr.priorite}}</span>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label>درجة السرية</label>
+                <span>{{tr.securite}}</span>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label>الجهة المرسلة</label>
+                <span>{{tr.orgEnregTr}}</span>
+              </div>
+
+
+              <div class="col-md-6 mb-3">
+                <label>الموضوع</label>
+                <span>{{tr.sujet}}</span>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label>ملاحظات</label>
+                <span>{{tr.remarque}}</span>
+              </div>
+
+              <div class="col-12 mb-3">
+                <label>قائمة المرفقات</label>
+                <ul class="papers" *ngFor="let pd of listPjFiltred;">
+                  <li>
+                    <a (click)="download(pd.path)"><i class="fa fa-download  fa-2x"></i></a>
+                    {{pd.path}}
+                  </li>
+
+                </ul>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!--Impression Tr
+<div class="tr-print" id="htmlData" style="display: none;">
+  <header class="printed-header">
+    <div></div>
+    <h2>معاملة داخلية </h2>
+    <span class="date">التاريخ {{date}}</span>
+
+  </header>
+  <main class="text-right">
+    <div class="row">
+      <div class="col-6">
+        <p>
+          <span class="label">الرقم الموحد </span>
+          <span class="data">
+            {{tr.id}}
+          </span>
+        </p>
+        <p>
+          <span class="label">موظف تسجيل المعاملة </span>
+          <span class="data">
+            {{tr.userNameCreator}}
+          </span>
+        </p>
+        <p>
+          <span class="label">الجهة المرسلة </span>
+          <span class="data">
+            {{tr.orgEnregTr}}
+          </span>
+        </p>
+      </div>
+      <div class="col-6">
+        <p>
+          <span class="label">نوع المعاملة </span>
+          <span class="data">
+            داخلية
+          </span>
+        </p>
+        <p>
+          <span class="label">تاريخ التسجيل </span>
+          <span class="data">
+            {{tr.date}}
+          </span>
+        </p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <p>
+          <span class="label">نسخة إلى  </span>
+          <span class="data">
+            {{tr.copieA}}
+          </span>
+        </p>
+        <p>
+          <span class="label">الملاحظات </span>
+          <span class="data">
+            {{tr.remarque}}
+          </span>
+        </p>
+      </div>
+      <div class="col-6">
+        <p *ngIf="trLiaisonId=='true'">
+          <span class="label">ضم </span>
+          <span class="data">
+            نعم
+          </span>
+        </p>
+        <p *ngIf="trLiaisonId=='false'">
+          <span class="label">ضم </span>
+          <span class="data">
+            لا
+          </span>
+        </p>
+      </div>
+      <p>
+        <span class="label">الموضوع </span>
+        <span class="data">
+          {{tr.sujet}}
+        </span>
+      </p>
+    </div>
+  </main>
+</div>
+  -->
+<!-- edit-->
+<div id="myModal2" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+        <h3 class="popup-head">رقم المعاملة {{tr.id}}</h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="task-form form-row stop-form">
+
+            <form #form="ngForm" autocomplete="off" (submit)="editTr(form)" class="task-form form-row stop-form" #formP="ngForm">
+
+
+              <div class="col-sm-6">
+                <label for="reg-date"><span><i class="fa fa-calendar-alt"></i></span>تاريخ التسجيل </label>
+                <input type="date" id="reg-date" name="date" #date="ngModel" [(ngModel)]="tr.date" required>
+              </div>
+
+              <div *ngIf="date.invalid && form.submitted && !isValidFormSubmittedTR" class="alert alert-danger">
+                مطلوب تاريخ التسجيل .
+              </div>
+
+              <div class="col-sm-6">
+                <label for="priority"><span><i class="fa fa-list-ol"></i></span>الإجراء</label>
+                <select id="priority" name="action" #action="ngModel" [(ngModel)]="tr.action">
+                  <option [ngValue]="undefined" selected disabled>-الإجراء-</option>
+                  <option value="الإجراء 1" selected="selected">الإجراء 1</option>
+                  <option value="الإجراء 2">الإجراء 2</option>
+                  <option value=" 3 الإجراء">الإجراء 3</option>
+                  <option value="الإجراء 4">الإجراء 4</option>
+                </select>
+              </div>
+
+              <div class="col-sm-6">
+                <label for="reg-date"><span><i class="fa fa-calendar-alt"></i></span>تاريخ إنهاء الإجراء </label>
+                <input type="date" id="reg-date" name="dateFinisAction" #dateFinisAction="ngModel" [(ngModel)]="tr.dateFinisAction" required>
+              </div>
+
+              <div *ngIf="dateFinisAction.invalid && form.submitted && !isValidFormSubmittedTR" class="alert alert-danger">
+                مطلوب تاريخ إنهاء الإجراء .
+              </div>
+
+              <div class="col-sm-6">
+                <label for="priority"><span><i class="fa fa-list-ol"></i></span>الأولوية</label>
+                <select id="priority" name="priorite" #priorite="ngModel" [(ngModel)]="tr.priorite">
+                  <option [ngValue]="undefined" selected disabled>-الأولوية-</option>
+                  <option value="عادي" selected="selected">عادي</option>
+                  <option value="عاجل">عاجل</option>
+                  <option value="عاجل جد">عاجل جدا</option>
+                  <option value="فوري">فوري</option>
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <label for="secret"><span><i class="fa fa-mask"></i></span>درجة السرية</label>
+                <select id="secret" name="securite" #securite="ngModel" [(ngModel)]="tr.securite">
+                  <option [ngValue]="undefined" selected disabled>-درجة السرية-</option>
+                  <option value="سري">سري</option>
+                  <option value="سري للغاية">سري للغاية</option>
+                  <option value="عادي">عادي</option>
+                </select>
+              </div>
+
+              <div class="col-sm-6">
+                <label for="from"><span><i class="fa fa-building"></i></span>الجهة المرسلة</label>
+                <select id="from" name="orgEnregTr" #orgEnregTr="ngModel" [(ngModel)]="tr.orgEnregTr" required>
+                  <option [ngValue]="undefined" selected disabled>-الجهة المرسلة-</option>
+                  <option *ngFor="let item of AdministrationList" value="{{item.nom}}">{{item.nom}}</option>
+                </select>
+              </div>
+
+              <div class="col-sm-6">
+                <label for="user"><span><i class="fa fa-user"></i></span>نسخة إلى</label>
+                <select id="from" name="copieA" #copieA="ngModel" [(ngModel)]="tr.copieA" required>
+                  <option [ngValue]="undefined" selected disabled>-نسخة إلى-</option>
+                  <option *ngFor="let item of UsersList" value="{{item.fullName}}">{{item.fullName}}</option>
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <label for="topic">الموضوع</label>
+                <textarea class="form-control" id="topic" cols="30" rows="2" placeholder="الموضوع" name="sujet" #sujet="ngModel" [(ngModel)]="tr.sujet"></textarea>
+              </div>
+
+              <div class="col-sm-6">
+                <label for="topic">ملاحظات</label>
+                <textarea class="form-control" id="topic" cols="30" rows="2" placeholder="ملاحظات" name="remarque" #remarque="ngModel" [(ngModel)]="tr.remarque"></textarea>
+              </div>
+
+              <div class="col-sm-6">
+                <label for="files2" class="files-label">
+                  <ul class="d-flex list-unstyled">
+                    <li class="upload-symbol">
+                      <i class="fa fa-cloud-upload-alt fa-3x"></i>
+                    </li>
+                    <li class="flex-fill">
+                      <p>اسحب الملفات هنا</p>
+                      <span>أو انقر للاختيار يدويا</span>
+                    </li>
+                  </ul>
+                </label>
+                <input type="file" id="files2" class="" (change)="upload($event)" #inputFile>
+              </div>
+              <div class="col-sm-6">
+
+                <ul *ngFor="let pd of serviceupload.listTr;" style="list-style: none">
+                  <li *ngIf="Idtransaction == pd.idtransaction">
+                    <a *ngIf="Idtransaction == pd.idtransaction" (click)="onDelete(pd.id)" class="aaa"><i class="fa fa-trash"></i>  </a>
+                    <a>
+                      {{pd.path}}
+
+                    </a>
+                  </li>
+                </ul>
+              </div>
+
+              <div class="col-12 my-3 text-left">
+                <button class="btn btn-success px-2 ml-3" type="submit"><span class="ml-2"><i class="fa fa-save"></i></span> تسجيل</button>
+                <button type="reset" class="btn btn-danger px-2"><span class="ml-2"><i class="fa fa-eraser"></i></span> افراغ الحقول</button>
+              </div>
+            </form>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!--Affectation-->
+<div id="myModal3" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+        <h3 class="popup-head">رقم المعاملة {{tr.id}}</h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="task-form form-row stop-form">
+            <div class="tabs">
+              <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+
+                      <div class="input-group-text">
+
+                        <label for="rad2" class="mr-2 mb-0">إحالة إلى موظف</label>
+                      </div>
+                    </div>
+                  </div>
+
+                </li>
+
+
+
+              </ul>
+              <!-- Refer to place -->
+              <div class="tab-content">
+                <div class="tab-pane active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                  <div class="reg text-right">
+
+
+
+
+                    <!--Employee-->
+                    <form class="task-form form-row stop-form to-place-form" #form="ngForm" autocomplete="off" (submit)="onSubmitE(form)">
+                      <div class="col-sm-6">
+                        <label for="from2">الإدارة</label>
+                        <select id="from2" name="attribut1" #attribut1="ngModel" [(ngModel)]="affectation.attribut1" (change)="testorg($event)">
+                          <option [ngValue]="undefined" selected disabled>-الإدارة-</option>
+                          <option *ngFor="let item of AdministrationList" value="{{item.id}}">{{item.nom}}</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-6">
+                        <label for="emp-to"><span><i class="fa fa-user"></i></span>الموظف المحال إليه</label>
+                        <select id="emp-to" name="iduserAffected" #iduserAffected="ngModel" [(ngModel)]="affectation.iduserAffected">
+                          <option [ngValue]="undefined" selected disabled>-الموظف المحال إليه-</option>
+                          <option *ngFor="let item of list2User" value="{{item.id}}">{{item.fullName}}</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-6">
+                        <label for="action"><span><i class="fa fa-list-ol"></i></span>الإجراء</label>
+                        <select id="action" name="action" #action="ngModel" [(ngModel)]="affectation.action">
+                          <option [ngValue]="undefined" selected disabled>-الاجراء-</option>
+                          <option value="الاجراء 1">الاجراء 1</option>
+                          <option value="الاجراء 2">الاجراء 2</option>
+                          <option value="الاجراء 3">الاجراء 3</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-6">
+                        <label for="sender"><span><i class="fa fa-user"></i></span>المرسل</label>
+                        <select id="sender" name="attribut3" #attribut3="ngModel" [(ngModel)]="affectation.attribut3">
+                          <option [ngValue]="undefined" selected disabled>-المرسل-</option>
+                          <option *ngFor="let item of UsersList" value="{{item.fullName}}">{{item.fullName}}</option>
+                        </select>
+                      </div>
+                      <div class="col-sm-6">
+                        <label for="end-date"><span><i class="fa fa-calendar-alt"></i></span>تاريخ لانهاء </label>
+                        <input type="date" id="end-date" name="dateFin" #dateFin="ngModel" [(ngModel)]="affectation.dateFin">
+                      </div>
+                      <div class="col-sm-6">
+                        <label for="stop-address"><span><i class="fa fa-paperclip"></i></span>عدد المرفقات</label>
+                        <input type="text" id="stop-address" class="" name="nbPj" #nbPj="ngModel" [(ngModel)]="affectation.nbPj">
+                      </div>
+                      <div class="col-sm-6">
+                        <label for="explain"><span><i class="fa fa-file"></i></span>الشرح</label>
+                        <textarea class="form-control" id="explain" cols="30" rows="2" name="details" #details="ngModel" [(ngModel)]="affectation.details"></textarea>
+                      </div>
+                      <div class="col-sm-6">
+                        <label for="files2" class="files-label">
+                          <ul class="d-flex list-unstyled">
+                            <li class="upload-symbol">
+                              <i class="fa fa-cloud-upload-alt fa-3x"></i>
+                            </li>
+                            <li class="flex-fill">
+                              <p>اسحب الملفات هنا</p>
+                              <span>أو انقر للاختيار يدويا</span>
+                            </li>
+                          </ul>
+                        </label>
+                        <input type="file" id="files2" class="" (change)="upload($event)" #inputFile>
+
+                      </div>
+                      <div class="col-sm-6">
+
+                        <ul *ngFor="let pd of serviceupload.listTr;" style="list-style: none">
+                          <li *ngIf="tr.id == pd.idtransaction">
+                            <a *ngIf="tr.id == pd.idtransaction" (click)="onDelete(pd.id)" class="aaa"><i class="fa fa-trash"></i>  </a>
+                            <a>
+                              {{pd.path}}
+
+                            </a>
+                          </li>
+                        </ul>
+                      </div>
+                      <div class="mx-auto my-3">
+                        <button class="btn btn-success px-2 ml-3" type="submit"><span class="ml-2"><i class="fa fa-save"></i></span> حفظ</button>
+                        <button class="btn btn-danger px-2 ml-3" type="reset"><span class="ml-2"><i class="fa fa-times"></i></span> حذف</button>
+                      </div>
+                    </form>
+
+
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+

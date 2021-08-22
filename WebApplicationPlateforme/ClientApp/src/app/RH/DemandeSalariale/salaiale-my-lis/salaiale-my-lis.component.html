@@ -1,0 +1,119 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">كشف طلبات  مشهد براتب</h3>
+      </header>
+      <div class="leave-request-list">
+        <div class="table-responsive">
+          <table class="table table-bordered text-center table-striped">
+            <thead class="thead-primary">
+              <tr>
+                <th scope="col">الرقم التسلسلي</th>
+                <th scope="col">التاريخ </th>
+                <th scope="col">نوع المشهد</th>
+                <th scope="col">
+                  لغة المشهد
+                </th>
+
+                <th scope="col">جهة المشهد</th>
+                <th scope="col">الحالة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.id}}</th>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.date}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.type}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.langue}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.organisme}}</td>
+
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1"
+                    [ngClass]="{
+
+  'ok': cg.etat === 'موافق',
+  'refused': cg.etat === 'رفض',
+  'wait': cg.etat === 'في الانتظار'
+}">
+                  {{cg.etat}}
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+
+      </div>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+        <h3 class="popup-head">تعديل طلب مشهد براتب</h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="task-form form-row stop-form">
+            <form class="task-form form-row service-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+              <div class="col-md-6">
+                <label for="show-type">نوع المشهد</label>
+                <select name="show-type" id="show-type" #type="ngModel" [(ngModel)]="congeService.formData.type" required>
+                  <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                  <option value="مشهد براتب أساسي">مشهد براتب أساسي</option>
+                  <option value="مشهد براتب أساسي وبدلات">مشهد براتب أساسي وبدلات</option>
+                  <option value="مشهد للجهات الاجنبية">مشهد للجهات الاجنبية</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="show-lang">لغة المشهد</label>
+                <select name="langue" id="show-lang" #langue="ngModel" [(ngModel)]="congeService.formData.langue" required>
+                  <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                  <option value="عربى">عربى</option>
+                  <option value="انجليزى">انجليزى</option>
+                  <option value="فرنسي">فرنسي</option>
+                </select>
+              </div>
+              <div class="col-md-6">
+                <label for="show-place">جهة المشهد</label>
+                <input type="text" id="show-place" name="organisme" #organisme="ngModel" [(ngModel)]="congeService.formData.organisme" required>
+              </div>
+              <input type="text" id="show-place" name="etat" #etat="ngModel" [(ngModel)]="congeService.formData.etat" hidden>
+              <div class="col-12 text-left">
+                <input class="btn btn-primary px-4" type="submit" value=" تقديم">
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+/*-- Electronic Sevices Forms --*/
+.task-form input:focus:not([type="submit"]):not([type="reset"]),
+.task-form select:focus {
+  outline-color: #999;
+}
+
+.task-form option:hover {
+  border: none !important;
+}
+
+.service-form label {
+  background-color: #91c3d8;
+  color: #333;
+}
+
+.service-form select {
+  width: 50%;
+}
+
+.service-form input[type="submit"] {
+  width: 140px;
+  font-size: 18px;
+}
+
+.service-form input[type="reset"] {
+  width: 140px;
+  font-size: 18px;
+}
+

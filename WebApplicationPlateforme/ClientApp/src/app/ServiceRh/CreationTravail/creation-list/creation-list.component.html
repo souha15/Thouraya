@@ -1,0 +1,189 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">قائمة طلبات استحداث وظيفة</h3>
+      </header>
+      <div class="form-group pull-right">
+        <input type="text"
+               class="search form-control"
+               placeholder="ما الذي تبحث عنه ؟"
+               name="search" [(ngModel)]="filter" />
+      </div>
+      <div class="table-responsive">
+        <table class="table text-center table-bordered theme-table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">آلية اختيار المرشح</th>
+              <th scope="col">المهام الوظيفية</th>
+              <th scope="col">الخبرات المطلوبة</th>
+              <th scope="col">تاريخ بداية العمل</th>
+              <th scope="col">الحالة</th>
+              <th scope="col">تفاصيل الدورة</th>
+              <th scope="col">تعديل</th>
+              <th scope="col">حذف</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+              <th scope="row">{{cg.id}}</th>
+              <td (click)="populateForm(cg)">{{cg.selection}}</td>
+              <td (click)="populateForm(cg)">{{cg.tacheTravail}}</td>
+              <td (click)="populateForm(cg)">{{cg.competence}}</td>
+              <td (click)="populateForm(cg)">{{cg.datedebut}}</td>
+              <td (click)="populateForm(cg)">{{cg.etat}}</td>
+
+              <td>
+                <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-eye fa-lg"></i>
+                </a>
+              </td>
+
+              <td (click)="populateForm(cg)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1">تعديل</a></td>
+              <td (click)="populateForm(cg)"><a class="btn btn-danger" (click)="onDelete(cg.id)">حذف</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- End Table Responsive -->
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+<div id="myModal" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تفاصيل طلب استحداث وظيفة</h2>
+          <div class="form-row task-form service-form text-center">
+
+            <div class="col-md-6">
+
+              <div>
+                <label>رقم </label>
+                <p>{{fact.id}}</p>
+              </div>
+              <div>
+                <label>آلية اختيار المرشح </label>
+                <p>{{fact.selection}}</p>
+              </div>
+
+              <div>
+                <label>الخبرات المطلوبة</label>
+                <p>{{fact.competence}}</p>
+              </div>
+
+              <div>
+                <label>تاريخ بداية العمل</label>
+                <p>{{fact.datedebut}}</p>
+              </div>
+
+            </div>
+            <div class="col-md-6">
+
+              <div>
+                <label>المسمى الوظيفي</label>
+                <p>{{fact.titreposte}}</p>
+              </div>
+              <div>
+                <label>المهام الوظيفية</label>
+                <p>{{fact.tacheTravail}}</p>
+              </div>
+
+              <div>
+                <label>الشهادات والدورات المطلوبة</label>
+                <p>{{fact.diplome}}</p>
+              </div>
+
+            </div>
+
+      
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تعديل طلب استحداث وظيفة</h2>
+
+          <form class="form-row task-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <div class="col-md-6">
+              <label for="job-title">المسمى الوظيفي</label>
+              <input type="text" id="job-title" value="{{position}}" disabled />
+            </div>
+            <div class="col-md-6">
+              <label for="">آلية اختيار المرشح</label>
+              <select name="selection" #selection="ngModel" [(ngModel)]="ctService.formData.selection">
+                <option [ngValue]="undefined" selected disabled>آلية اختيار المرشح</option>
+                <option value="تكليف">تكليف</option>
+                <option value="ترقية">ترقية</option>
+                <option value="نقل">نقل</option>
+                <option value="اعلان خارجي">اعلان خارجي</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="">المهام الوظيفية</label>
+              <input type="text" name="tacheTravail" #tacheTravail="ngModel" [(ngModel)]="ctService.formData.tacheTravail" />
+            </div>
+            <div class="col-md-6">
+              <label for="">الخبرات المطلوبة</label>
+              <input type="text" name="competence" #competence="ngModel" [(ngModel)]="ctService.formData.competence" />
+            </div>
+            <div class="col-md-6">
+              <label for="">الشهادات والدورات المطلوبة</label>
+              <input type="text" name="diplome" #diplome="ngModel" [(ngModel)]="ctService.formData.diplome" />
+            </div>
+
+            <div class="col-md-6">
+              <label for="">تاريخ بداية العمل</label>
+              <input type="date" name="datedebut" #datedebut="ngModel" [(ngModel)]="ctService.formData.datedebut" />
+            </div>
+            <div class="col-12 text-center text-md-left mt-3">
+              <input class="btn btn-info"
+                     style="width: 130px;"
+                     type="submit"
+                     value="طلب" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

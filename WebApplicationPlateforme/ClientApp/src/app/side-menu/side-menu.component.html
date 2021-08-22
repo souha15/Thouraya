@@ -1,0 +1,333 @@
+
+  <div class="side-menu" id="parent">
+
+
+    <div *ngIf="admin">
+      <h5 id="headinghan" class="collapsed" data-toggle="collapse" data-target="#collapsehan" aria-expanded="false" aria-controls="collapsehan">
+        <span><i class="fa fa-bell"></i></span> المركز الإعلامي
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <div id="collapsehan" class="collapse" aria-labelledby="headinghan" data-parent="#parent">
+        <a [routerLink]="['/news-list-viewer']">الاخبار </a>
+        <a [routerLink]="['/event-two-list']">  الفعاليات </a>
+
+      </div>
+    </div>
+
+    <div>
+      <h5 id="headingtweleve" class="collapsed" data-toggle="collapse" data-target="#collapsetweleve" aria-expanded="false" aria-controls="collapsetweleve">
+        <span><i class="fa fa-user-cog"></i></span>الخدمات الذاتية
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <div id="collapsetweleve" class="collapse" aria-labelledby="headingtweleve" data-parent="#parent">
+        <a [routerLink]="['/filesorg-menu']">خدماتي</a>
+        <a [routerLink]="['/main-services-page']"> استعلاماتي</a>
+      </div>
+    </div>
+
+    <!-- card 1 -->
+
+    <div *ngIf="admin">
+      <h5 id="headingOne" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+        <span><i class="fa fa-tasks"></i></span>
+        ادارة المهام
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#parent">
+        <a [routerLink]="['/main-tasks']">الصفحة الرئيسية لإدارة المهام</a>
+        <a [routerLink]="['/new-task']">إضافة مهمة</a>
+        <a [routerLink]="['/tasks-list-received']">مهامي  </a>
+        <a [routerLink]="['/tasks-list']">قائمة المهام</a>
+      </div>
+    </div>
+
+    <div *ngIf="admin">
+      <h5 id="headingteni" class="collapsed" data-toggle="collapse" data-target="#collapseteni" aria-expanded="false" aria-controls="collapseteni">
+        <span><i class="fa fa-clipboard-list"></i></span>  الفعاليات
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <div id="collapseteni" class="collapse" aria-labelledby="headingteni" data-parent="#parent">
+        <a [routerLink]="['/event-register']">تسجيل فعالية </a>
+        <a [routerLink]="['/event-list']"> قائمة الفعاليات </a>
+      </div>
+    </div>
+
+
+    <!-- <div>
+       <h5 id="headingsexi" class="collapsed" data-toggle="collapse" data-target="#collapsesexi" aria-expanded="false" aria-controls="collapsesexi">
+         <span><i class="fa fa-project-diagram"></i></span>  المشاريع
+         <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+       </h5>
+       <div id="collapsesexi" class="collapse" aria-labelledby="headingsexi" data-parent="#parent">
+         <a [routerLink]="['/menu-projet-org2']">الصفحة الرئيسية للمشاريع</a>
+         <a [routerLink]="['/list-projet-org']">قائمة المشاريع</a>
+         <a [routerLink]="['/add-projet-org']">إضافة مشروع</a>
+       </div>
+     </div>-->
+    <div *ngIf="admin">
+      <h5 id="headingeight" class="collapsed" data-toggle="collapse" data-target="#collapseeight" aria-expanded="false" aria-controls="collapseeight">
+        <span><i class="fa fa-project-diagram"></i></span>المشاريع
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <div id="collapseeight" class="collapse" aria-labelledby="headingeight" data-parent="#parent">
+        <a [routerLink]="['/projet-list']">قائمة المشاريع</a>
+        <a [routerLink]="['/projet-add2']">إضافة مشروع</a>
+      </div>
+    </div>
+
+    <div *ngIf="admin">
+      <h5 *ngIf="!testrole" [routerLink]="['/mailing']" id="headingfive" class="collapsed" data-toggle="collapse" data-target="#collapsefive" aria-expanded="false" aria-controls="collapsefive">
+        <span><i class="fa fa-arrow-right"></i></span>
+        الإتصالات الإدارية
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <h5 *ngIf="testrole" [routerLink]="['/menutr']" id="headingfive" class="collapsed" data-toggle="collapse" data-target="#collapsefive" aria-expanded="false" aria-controls="collapsefive">
+        <span><i class="fa fa-arrow-right"></i></span>
+        الإتصالات الإدارية
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+    </div>
+
+    <div class="collapsed" *ngIf="admin">
+      <h5 [routerLink]="['/formation-show']" id="headingFour" class="collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+        <span><i class="fa fa-clipboard-list"></i></span>  الدورات التدريبية المتاحة
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+
+    </div>
+
+    <div *ngIf="admin">
+      <h5 [routerLink]="['/my-equipement']" id="headingThree" class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        <span><i class="fa fa-briefcase"></i></span> العهد الخاصة بي
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+
+    </div>
+    <div *ngIf="admin">
+      <h5 id="headingnine" class="collapsed" data-toggle="collapse" data-target="#collapsenine" aria-expanded="false" aria-controls="collapseFive">
+        <span><i class="fa fa-building"></i></span>
+        إدارة الأوقاف
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <div id="collapsenine" class="collapse" aria-labelledby="headingnine" data-parent="#parent">
+
+        <a [routerLink]="['/liste-dotation']">قائمة الأوقاف</a>
+        <a [routerLink]="['/locataire-dot-add']">تسجيل مستاجر</a>
+        <a [routerLink]="['/enregistrer-revenus']">    سداد الإجارات</a>
+        <a [routerLink]="['/edit-revenus']">قائمة السداد</a>
+        <a [routerLink]="['/revenus-list']">قائمة المستاجرين</a>
+
+      </div>
+    </div>
+    <div *ngIf="admin">
+      <h5 id="headingten1" class="collapsed" data-toggle="collapse" data-target="#collapseten1" aria-expanded="false" aria-controls="collapseten1">
+        <span><i class="fa fa-money-bill-wave"></i></span>المالية
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <div id="collapseten1" class="collapse" aria-labelledby="headingten1" data-parent="#parent">
+        <a [routerLink]="['/main-finance-page']">الصفحة الرئيسية للمالية</a>
+        <a [routerLink]="['/chequec-lis']">الشيكات</a>
+        <a [routerLink]="['/supplies-list']">العهدة</a>
+        <a [routerLink]="['/comptes-list']">الحسابات</a>
+        <a [routerLink]="['/salaire-list-global']">مسيرات الرواتب</a>
+        <a [routerLink]="['/avance-list-c']"> طلبات السلفة</a>
+      </div>
+    </div>
+    <div *ngIf="admin">
+      <h5 [routerLink]="['/decision-list']" id="headingTwo" class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        <span><i class="fa fa-mail-bulk"></i></span>
+        التعاميم والقرارات
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+
+    </div>
+
+    <div *ngIf="admin">
+      <h5 [routerLink]="['/transfert-interne-show']" id="headingTran" class="collapsed" data-toggle="collapse" data-target="#headingTran" aria-expanded="false" aria-controls="headingTran">
+        <span><i class="fa fa-arrow-alt-circle-down"></i></span>
+        التحويلات الداخلية
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+    </div>
+    <!-- card 2
+
+          <div>
+      <h5 id="headingThree" class="collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+        <span><i class="fa fa-users"></i></span> الموظفين
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#parent">
+        <a [routerLink]="['/user-registration']"> قائمة الموظفين </a>
+
+      </div>
+    </div>
+
+
+  <div>
+    <h5 id="headingFour" class="collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+      <span><i class="fa fa-clipboard-list"></i></span>  الفعاليات
+      <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+    </h5>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#parent">
+      <a [routerLink]="['/event-register']">تسجيل فعالية </a>
+      <a [routerLink]="['/event-list']"> قائمة الفعاليات </a>
+    </div>
+  </div>
+    -->
+    <!-- card 3 -->
+
+
+
+    <div *ngIf="admin">
+      <h5 [routerLink]="['/alertsrh']" id="headingsixteen" class="collapsed" data-toggle="collapse" data-target="#collapsesixteen" aria-expanded="false" aria-controls="collapsesixteen">
+        <span><i class="fa fa-user-secret"></i></span>
+        شؤون الموظفين
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <!--<div id="collapsesixteen" class="collapse" aria-labelledby="headingsixteen" data-parent="#parent">
+      <a > الرئيسية</a>
+      <a [routerLink]="['/attestation-travail-rh-list']"> قائمة طلبات شهادة عمل</a>
+    <a [routerLink]="['/reception-equipement-add']">استلام عهدة</a>
+    <a [routerLink]="['/reception-equipement-list']">قائمة العهد المستلمة</a>
+    <a [routerLink]="['/supp-equipement']">إخلاء طرف عهدة</a>
+    <a [routerLink]="['/creation-list-rh']">قائمة طلبات استحداث وظيفة</a>
+    <a [routerLink]="['/demande-supp-heure-listcreator']">طلبات ساعات إضافية</a>
+    <a [routerLink]="['/supp-heure-add']">إدارة الساعات الإضافية</a>
+     -->
+
+    </div>
+
+    <div *ngIf="admin">
+      <h5 id="headingFive" class="collapsed" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+        <span><i class="fa fa-wrench"></i></span>
+        إدارة النظام
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#parent">
+
+        <a [routerLink]="['/task-list-admin']">إدارة المهام </a>
+        <a [routerLink]="['/administration-list']">الإدارات و الأقسام </a>
+        <a [routerLink]="['/employee-add']">إضافة موظف </a>
+        <a [routerLink]="['/filesorg-lis']">وثائق جهة </a>
+        <a [routerLink]="['/beneficiaire-c']">إدارة الفعاليات</a>
+        <a [routerLink]="['/enregistrer-dotation']">إدارة العقارات</a>
+        <a [routerLink]="['/projet-compte']"> إدارة نظام المالية</a>
+        <a [routerLink]="['/solde-conge']">	 إدارة الاجازات</a>
+        <a [routerLink]="['/transfert-interne-add']">إدارة التحويلات الداخلية</a>
+        <a [routerLink]="['/ticket-add']">الدعم الفني</a>
+        <a [routerLink]="['/news-add']"> إدارة المركز الإعلامي</a>
+        <a [routerLink]="['/beneficiaire-c']">إدارة الفعاليات</a>
+        <a [routerLink]="['/type-voiture']">إدارة وسائل النقل</a>
+        <a [routerLink]="['/org-part-list']">إدارة الجهات المانحة</a>
+        <a [routerLink]="['/panne']">الصيانة و الدعم الفني</a>
+        <a [routerLink]="['/supp-heure-add']">إدارة الساعات الإضافية</a>
+        <a [routerLink]="['/chequeclasse']">إدارةالأقسام</a>
+        <a [routerLink]="['/type-ben-crud']">ادارة المستفيدين </a>
+        <a [routerLink]="['/add-type-stock']">ادارة المستودعات  </a>
+        <a [routerLink]="['/lives-with-orphelin']">ادارة كفالة الايتام   </a>
+        <a [routerLink]="['/add-projet-client']">إدارة المشاريع  </a>
+        <!--
+              <a [routerLink]="['/organisme']">إدارة المعاملات</a>
+              <a [routerLink]="['/beneficiaire-c']">إدارة الفعاليات</a>
+              <a [routerLink]="['/projet-class']">إدارة المشاريع</a>
+
+              <a [routerLink]="['/projet-compte']"> إدارة نظام المالية</a>
+              <a [routerLink]="['/formation-add']">إدارة الدورات التدريبية</a>
+      -->
+
+
+
+
+      </div>
+    </div>
+    <!-- card 2
+  <div>
+    <h5 id="headingFour" class="collapsed" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+      <span><i class="fa fa-clipboard-list"></i></span> إدارة الفعاليات
+      <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+    </h5>
+    <div id="collapseFour" class="collapse" aria-labelledby="headingFour" data-parent="#parent">
+      <a [routerLink]="['/event-register']">تسجيل فعالية </a>
+      <a [routerLink]="['/event-list']"> قائمة الفعاليات </a>
+    </div>
+  </div>
+
+
+    -->
+    <!-- card 3
+  <div>
+    <h5 id="headingTwo" class="collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+      <span><i class="fa fa-mail-bulk"></i></span>
+      الإتصالات الإدارية
+      <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+    </h5>
+    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#parent">
+
+      <a href="" *ngIf="!testrole" [routerLink]="['/mailing']">  الصفحة الرئيسية للإتصالات الإدارية</a>
+      <a href="" *ngIf="testrole" [routerLink]="['/menutr']">  الصفحة الرئيسية للإتصالات الإدارية</a>
+
+    </div>
+  </div>
+    -->
+    <!--  Card 4
+
+  <div>
+    <h5 id="headingnine" class="collapsed" data-toggle="collapse" data-target="#collapsenine" aria-expanded="false" aria-controls="collapseFive">
+      <span><i class="fa fa-building"></i></span>
+      إدارة العقارات
+      <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+    </h5>
+    <div id="collapsenine" class="collapse" aria-labelledby="headingnine" data-parent="#parent">
+
+      <a [routerLink]="['/liste-dotation']">قائمة العقارات</a>
+      <a [routerLink]="['/locataire-dot-add']">تسجيل مستاجر</a>
+      <a [routerLink]="['/enregistrer-revenus']">    سداد الإجارات</a>
+      <a [routerLink]="['/edit-revenus']">قائمة السداد</a>
+      <a [routerLink]="['/revenus-list']">قائمة المستاجرين</a>
+
+    </div>
+  </div>
+    -->
+    <!-- Card 5
+  <div>
+    <h5 id="headingeight" class="collapsed" data-toggle="collapse" data-target="#collapseeight" aria-expanded="false" aria-controls="collapseeight">
+      <span><i class="fa fa-project-diagram"></i></span>المشاريع
+      <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+    </h5>
+    <div id="collapseeight" class="collapse" aria-labelledby="headingeight" data-parent="#parent">
+      <a [routerLink]="['/projet-list']">قائمة المشاريع</a>
+      <a [routerLink]="['/projet-add2']">إضافة مشروع</a>
+    </div>
+  </div>
+    -->
+    <!-- Card 6
+  <div>
+    <h5 id="headingten1" class="collapsed" data-toggle="collapse" data-target="#collapseten1" aria-expanded="false" aria-controls="collapseten1">
+      <span><i class="fa fa-money-bill-wave"></i></span>المالية
+      <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+    </h5>
+    <div id="collapseten1" class="collapse" aria-labelledby="headingten1" data-parent="#parent">
+      <a [routerLink]="['/main-finance-page']">الصفحة الرئيسية للمالية</a>
+      <a [routerLink]="['/chequec-lis']">الشيكات</a>
+      <a [routerLink]="['/supplies-list']">العهدة</a>
+      <a [routerLink]="['/comptes-list']">الحسابات</a>
+      <a [routerLink]="['/salaire-list-global']">مسيرات الرواتب</a>
+    </div>
+  </div>-->
+    <!-- card 7 -->
+    <!-- Card 8
+  <div>
+    <h5 id="headingten" class="collapsed" data-toggle="collapse" data-target="#collapseten" aria-expanded="false" aria-controls="collapseten">
+      <span><i class="fa fa-graduation-cap"></i></span>التدريب
+      <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+    </h5>
+    <div id="collapseten" class="collapse" aria-labelledby="headingten" data-parent="#parent">
+      <a [routerLink]="['/formation-show']">الدورات التدريبية المتاحة </a>
+
+    </div>
+  </div>
+    -->
+    <!-- card 9 -->
+
+  </div>
+ 

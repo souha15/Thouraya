@@ -1,0 +1,23 @@
+.task-form {
+  padding: 10px 0;
+}
+
+  .task-form label {
+    min-width: 126px;
+    background: #91c3d8;
+    color: #444;
+  }
+
+  .task-form input[type="date"],
+  .task-form input[type="month"],
+  .task-form input[type="number"],
+  .task-form select {
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 50%;
+  }
+
+.file-label {
+  cursor: pointer;
+}

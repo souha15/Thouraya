@@ -1,0 +1,106 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+      <app-list-projet-client></app-list-projet-client>
+      <!-- Tasks Page Content -->
+      <br />
+
+      <section class="page-content">
+
+        <!-- Navbar 3-->
+        <div class="d-flex flex-wrap p-2 bd-highlight nav-2">
+
+          <div class="p-2 flex-fill bd-highlight item">
+            <br />
+            <div class="sympol">
+              <span style="font-size:33px;color:#687be3;text-align:center"><i class="fa fa-check-circle"></i></span>
+            </div>
+            <div class="text">
+              <a [routerLink]="['/list-projet-org-activated']" style="font-size:18px;text-align:center">مشاريع مفعلة</a>
+              <br />
+              <br />
+              &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+              
+              <span style="color:#687be3;font-size:30px;">{{activated}}</span>
+            </div>
+          </div>
+
+          <div class="p-2 flex-fill bd-highlight item">
+            <br />
+            <div class="sympol">
+              <span style="font-size:33px;color:#687be3;text-align:center"><i class="fa fa-ban"></i></span>
+            </div>
+            <div class="text">
+              <a [routerLink]="['/list-projet-org-not-activated']" style="font-size:18px;text-align:center">مشاريع غير مفعلة</a>
+              <br />
+              <br />
+
+              &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+              <span style="color:#687be3;font-size:30px;">{{notactivated}}</span>
+            </div>
+          </div>
+          <div class="p-2 flex-fill bd-highlight item">
+            <br />
+            <div class="sympol">
+              <span style="font-size:33px;color:#687be3;text-align:center"><i class="fa fa-times"></i></span>
+            </div>
+            <div class="text">
+              <a [routerLink]="['/list-projet-org-closed']" style="font-size:18px;text-align:center">مشاريع مغلقة</a>
+              <br />
+              <br />
+
+              &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+              <span style="color:#687be3;font-size:30px;">{{colsed}}</span>
+            </div>
+          </div>
+          <div class="p-2 flex-fill bd-highlight item">
+            <br />
+            <div class="sympol">
+              <span style="font-size:33px;color:#687be3;text-align:center"><i class="fa fa-pencil-alt"></i></span>
+            </div>
+            <div class="text">
+              <a [routerLink]="['/list-projet-org-opened']" style="font-size:18px;text-align:center">مشاريع مفتوحة</a>
+              <br />
+              <br />
+
+              &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+              <span style="color:#687be3;font-size:30px;">{{opened}}</span>
+            </div>
+          </div>
+
+          <div class="p-2 flex-fill bd-highlight item">
+            <br />
+            <div class="sympol">
+          
+              <span style="font-size:33px;color:#687be3;text-align:center"><i class="fa fa-stopwatch"></i></span>
+            </div>
+            <div class="text">
+              <a [routerLink]="['/list-projet-org-worked']" style="font-size:18px;text-align:center">مشاريع تحت الإنجاز</a>
+              <br />
+              <br />
+
+              &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+              <span style="color:#687be3;font-size:30px;">{{worked}}</span>
+            </div>
+          </div>
+
+        </div>
+
+
+      </section>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:33px;height:33px;"> </p>
+</footer>
+

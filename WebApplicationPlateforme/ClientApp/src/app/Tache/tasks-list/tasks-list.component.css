@@ -1,0 +1,27 @@
+.notdonee {
+  background: #dc3545;
+}
+
+.donee {
+  background: #28a745;
+}
+
+.worke {
+  background: #007bff;
+}
+
+.receive {
+  background: #28a745;
+}
+
+.wait {
+  background: #faec2f;
+}
+
+.finished {
+  background: #7fdb90;
+}
+
+.retarde {
+  background: #dc3545
+}

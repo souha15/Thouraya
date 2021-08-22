@@ -1,0 +1,78 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">تحديث طلب تجديد إقامة</h3>
+      </header>
+      <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+        <div class="col-md-6">
+          <label for="keys">الموظف </label>
+          <input type="text" id="keys" name="creatorName" #creatorName="ngModel" [(ngModel)]="rs.creatorName" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="keys"> رقم الاقامة </label>
+          <input type="text" id="keys" name="num" #num="ngModel" [(ngModel)]="rs.num" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="keys">رقم مكتب العمل </label>
+          <input type="text" id="keys" name="numBureau" #numBureau="ngModel" [(ngModel)]="rs.numBureau" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="keys"> رقم الحدود </label>
+          <input type="text" id="keys" name="numfrontiere" #numfrontiere="ngModel" [(ngModel)]="rs.numfrontiere" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="keys">تاریخ الانتھاء </label>
+          <input type="date" id="keys" name="datefin" #datefin="ngModel" [(ngModel)]="rs.datefin"  />
+        </div>
+
+        <div class="col-md-6">
+          <label for="keys">رسوم رخصة العمل </label>
+          <input type="text" id="keys" name="permistravail" #permistravail="ngModel" [(ngModel)]="rs.permistravail" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="keys">رسوم التجدید </label>
+          <input type="text" id="keys" name="renouvler" #renouvler="ngModel" [(ngModel)]="rs.renouvler" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="keys"> التامین الصحي</label>
+          <input type="text" id="keys" name="assurance" #assurance="ngModel" [(ngModel)]="rs.assurance" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="keys"> غرامات </label>
+          <input type="text" id="keys" name="payer" #payer="ngModel" [(ngModel)]="rs.payer" />
+        </div>
+
+        <div class="col-md-6">
+          <label for="keys"> السبب </label>
+          <input type="text" id="keys" name="raison" #raison="ngModel" [(ngModel)]="rs.raison" />
+        </div>
+        <div class="col-md-12 text-left">
+          <input type="submit"
+                 style="width: 130px;"
+                 class="btn btn-primary next"
+                 value="تسجيل" />
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

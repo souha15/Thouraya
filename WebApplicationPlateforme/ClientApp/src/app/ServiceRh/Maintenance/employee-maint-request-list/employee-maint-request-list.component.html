@@ -1,0 +1,217 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">قائمة طلبات الصيانة والدعم الفني</h3>
+      </header>
+      <div class="form-group pull-right">
+        <input type="text"
+               class="search form-control"
+               placeholder="ما الذي تبحث عنه ؟"
+               name="search" [(ngModel)]="filter" />
+      </div>
+      <span class="counter pull-right"></span>
+      <div class="table-responsive">
+        <table class="table results text-center table-bordered theme-table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">العطل</th>
+              <th scope="col">صنف العطل</th>
+              <th scope="col">نوع الطلب</th>
+              <th scope="col">تاريخ الطلب</th>
+              <th scope="col">الموظف المحيل</th>
+              <th scope="col">الحالة</th>
+              <th scope="col">التفاصيل</th>
+              <th scope="col">استلام الطلب</th>
+              <th scope="col">منجزة  / غير منجزة</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+              <th scope="row">{{cg.id}}</th>
+              <td (click)="populateForm(cg)">{{cg.panne}}</td>
+              <td (click)="populateForm(cg)">{{cg.categoriePanne}}</td>
+              <td (click)="populateForm(cg)">{{cg.typePanne}}</td>
+              <td (click)="populateForm(cg)">{{cg.dateenreg}}</td>
+              <td (click)="populateForm(cg)">{{cg.attribut4}}</td>
+              <td (click)="populateForm(cg)">{{cg.etat}}</td>
+              <td>
+                <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-eye fa-lg"></i>
+                </a>
+              </td>
+            <td (click)="populateForm(cg)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1">استلام الطلب</a></td>
+              <td (click)="populateForm(cg)"><a class="btn btn-success" data-toggle="modal" data-target="#myModal2">منجزة / غير منجزة</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+<div id="myModal" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تفاصيل الفاتورة</h2>
+          <div class="form-row task-form service-form text-center">
+
+            <div class="col-md-12">
+              <span class="completed" *ngIf="etatok">الحالة :{{fact.attribut2}}</span>
+              <span class="notcompleted" *ngIf="!etatok">الحالة :{{fact.attribut2}}</span>
+              <br />
+              <br />
+            </div>
+
+            <div class="col-md-6">
+
+              <div>
+                <label>رقم </label>
+                <p>{{fact.id}}</p>
+              </div>
+              <div>
+                <label>صنف العطل</label>
+                <p>{{fact.typePanne}}</p>
+              </div>
+
+              <div>
+                <label>العطل</label>
+                <p>{{fact.panne}}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div>
+                <label>نوع العطل </label>
+                <p>{{fact.categoriePanne}}</p>
+              </div>
+
+              <div>
+                <label>نوع الطلب</label>
+                <p>{{fact.typedemande}}</p>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div>
+                <label>صورة العطب</label>
+                <a (click)="download(fact.photoPanne)"><i class="fa fa-download  fa-2x"></i></a>
+                {{fact.photoPanne}}
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div>
+                <label>التفاصيل</label>
+                <p>
+                  {{fact.detail}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- refuse-->
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+        <h3 class="popup-head">استلام الطلب</h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="task-form form-row stop-form">
+
+
+            <p class="text-center" style="text-align:center">هل أنت متأكد من استلام الطلب  ؟</p>
+
+
+
+            <div class="mx-auto my-3 text-center">
+              <button class="btn btn-success px-2 ml-3" (click)="refuse()"><span class="ml-2"><i class="fa fa-save"></i></span> موافق</button>
+              <button class="btn btn-danger px-2 ml-3"><span class="ml-2"><i class="fa fa-times"></i></span> إلغاء</button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- accept-->
+<div id="myModal2" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+        <h3 class="popup-head">حالة الطلب</h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="task-form form-row stop-form">
+
+
+            <p class="text-center" style="text-align:center">هل أنت متأكد من تغيير حالة الطلب  إلى  ؟</p>
+            <select (change)="userselected($event)">
+              <option [ngValue]="undefined" selected disabled>الحالة</option>
+              <option value="تحت الإجراء">تحت الإجراء</option>
+              <option value="منجزة">منجزة</option>
+            </select>
+
+
+
+            <div class="mx-auto my-3 text-center">
+              <button class="btn btn-success px-2 ml-3" (click)="accept()"><span class="ml-2"><i class="fa fa-save"></i></span> موافق</button>
+              <button class="btn btn-danger px-2 ml-3"><span class="ml-2"><i class="fa fa-times"></i></span> إلغاء</button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

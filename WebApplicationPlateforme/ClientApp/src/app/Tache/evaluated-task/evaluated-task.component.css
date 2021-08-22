@@ -1,0 +1,25 @@
+.complete-btn {
+  text-decoration: none;
+  color: #fff;
+  background: #0df;
+  padding: 5px 30px;
+  font-size: 20px;
+  border-radius: 15px;
+}
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 3rem;
+  color: #d3d3d3;
+}
+
+.full {
+  color: #FFDF00;
+}
+
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: #FFDF00;
+}

@@ -1,0 +1,101 @@
+<app-nav-menu></app-nav-menu>
+
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+
+
+      <nav class="d-flex p-0 bd-highlight tasks-nav mt-2">
+        <a [routerLink]="['/msg-interne-list']" href="" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-envelope"></i></span>
+          الرسائل الداخلية
+        </a>
+
+        <a [routerLink]="['/msg-interne-add']" href="" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-reply"></i></span>
+          مراسلة
+        </a>
+
+      </nav>
+      <header>
+        <h3 class="task-head"> الرسائل الداخلية</h3>
+      </header>
+
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
+      <div class="tabel-cont">
+        <table class="table table-striped table-hover">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col" (click)="sort('id')">
+                <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+
+              <th scope="col" (click)="sort('creatorName')">
+                المرسل
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('creatorName')">
+                إلى
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('tacheNom')">
+                العنوان
+                <span class="glyphicon sort-icon" *ngIf="key =='tacheNom'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+              <th scope="col" (click)="sort('tacheNom')">
+                تاریخ
+                <span class="glyphicon sort-icon" *ngIf="key =='tacheNom'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+              <th scope="col" (click)="sort('description')">
+                الحالة
+                <span class="glyphicon sort-icon" *ngIf="key =='description'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let msg of msgInterneList | orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: c }; let i = index" [routerLink]="['/msg-interne-details', msg.id]">
+              <th  scope="row">{{(c-1) * count + i + 1}}</th>
+              <td >{{msg.userNameSender}}</td>
+              <td>{{msg.userNameReceiver}}</td>
+              <td >{{msg.titre}}</td>
+              <td >{{msg.date}}</td>
+              <td>
+                <span class="text-success" *ngIf="msg.seen==1">
+                  <i class="fa fa-check fa-lg"></i>
+                </span>
+                <span class="text-danger" *ngIf="msg.seen==0">
+                  <i class="fa fa-times fa-lg"></i>
+                </span>
+              </td>
+
+            </tr>
+
+          </tbody>
+
+
+        </table>
+      </div>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+
+          <pagination-controls (pageChange)="c = $event" previousLabel="السابق"
+                               nextLabel="التالي"></pagination-controls>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</div>
+
+
+<footer class="text-center">
+  <p>جمعية الدعوة والإرشاد وتوعية الجاليات في محافظة أبوعريش  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

@@ -1,0 +1,98 @@
+/*.inventory-body {
+  position: fixed;
+  min-width: 100%;
+  background: url("/assets/images/login2.png");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  background-position: center;
+  background-size: cover;
+  height:100%
+}*/
+/*--- login-page ---*/
+.login-page {
+  background-image: url("/assets/images/login2.png");
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}
+
+  .login-page .form {
+    width: 50%;
+    margin: auto;
+    background: rgba(29, 64, 78, 0.8);
+    border-radius: 40px;
+    text-align: center;
+    color: #fff;
+    font-family: "El Messiri", sans-serif;
+  }
+
+    .login-page .form .form-header {
+      padding: 5px;
+      text-align: center;
+      margin-bottom: 10px;
+      background: rgba(38, 193, 255, 0.7);
+      border-radius: 40px 40px 0 0;
+      color: #fff;
+      font-size: 40px;
+    }
+
+    .login-page .form .form-image p {
+      font-size: 1.2rem;
+    }
+
+    .login-page .form .form-group {
+      border-radius: 10px;
+      width: 70%;
+      margin: 10px auto 15px;
+      position: relative;
+      text-align: center;
+      color: #fff;
+    }
+
+    .login-page .form input {
+      border-radius: 20px;
+      padding-right: 80px;
+    }
+
+      .login-page .form input:focus {
+        outline: none;
+      }
+
+    .login-page .form .form-group .lab {
+      position: absolute;
+      height: 100%;
+      width: 70px;
+      background: #dbe1ee;
+      color: #219ec6;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      right: 0;
+      border-radius: 20px;
+    }
+
+    .login-page .form .log {
+      border: none;
+      padding: 4px;
+      width: 200px;
+      border-radius: 20px;
+      color: #fff;
+      background: #219ec6;
+      margin: 0 auto 20px;
+      font-size: 25px;
+    }
+
+      .login-page .form .log:focus {
+        outline: none;
+      }
+/*GE SS Two Medium*/
+body {
+  direction: rtl;
+}

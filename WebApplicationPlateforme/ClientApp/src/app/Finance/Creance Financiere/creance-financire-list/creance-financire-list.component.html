@@ -1,0 +1,201 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <!-- End Sidebar -->
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">قائمة المصروفات التشغيلية</h3>
+      </header>
+
+
+      <div class="form-group pull-right">
+        <input type="text"
+               class="search form-control"
+               placeholder="ما الذي تبحث عنه ؟" name="search" [(ngModel)]="filter" />
+      </div>
+      <span class="counter pull-right"></span>
+      <div class="table-responsive">
+        <table class="table results text-center table-bordered theme-table">
+          <thead>
+            <tr>
+
+              <th scope="col">رقم </th>
+              <th scope="col">نوع المصروفات</th>
+              <th scope="col">المبلغ</th>
+              <th scope="col">
+                نوع المستفيد
+              </th>
+              <th scope="col">عرض التفاصيل</th>
+              <th scope="col">تعديل</th>
+              <th scope="col">حذف</th>
+            </tr>
+
+          </thead>
+          <tbody>
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+              <td (click)="populateForm(cg)">{{cg.id}}</td>
+              <td (click)="populateForm(cg)">{{cg.type}}</td>
+              <td (click)="populateForm(cg)">{{cg.prix}}</td>
+              <td (click)="populateForm(cg)">{{cg.typeB}}</td>
+
+              <td (click)="populateForm(cg)">
+                <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-eye fa-lg"></i>
+                </a>
+              </td>
+              <td (click)="populateForm(cg)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1">تعديل</a></td>
+              <td (click)="populateForm(cg)"><a class="btn btn-danger" (click)="onDelete(cg.id)">حذف</a></td>
+            </tr>
+
+          </tbody>
+        </table>
+
+        <br />
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+
+
+        <a [routerLink]="['/recep-cheque-add']" style="font-weight:bold"> <i class="fa fa-address-card"></i> إضافة سند قبض شيك</a>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+<div id="myModal" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تفاصيل المصروف</h2>
+          <div class="form-row task-form service-form text-center">
+
+            <div class="col-md-6">
+
+              <div>
+                <label>رقم </label>
+                <p>{{fact.id}}</p>
+              </div>
+              <div>
+                <label>الموظف المسجل </label>
+                <p>{{fact.userNameCreator}}</p>
+              </div>
+              <div>
+                <label>نوع المصروفات</label>
+                <p>{{fact.type}}</p>
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <div>
+                <label>المبلغ</label>
+                <p>{{fact.prix}}</p>
+              </div>
+              <div>
+                <label>نوع المستفيد</label>
+                <p>{{fact.typeB}}</p>
+              </div>
+              <div>
+                <label>تاريخ الاضافة </label>
+                <p>{{fact.dateenreg}}</p>
+              </div>
+            </div>
+
+
+            <div class="col-md-12">
+              <div>
+                <label>التفاصيل</label>
+                <p>
+                  {{fact.details}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تعديل المصروف</h2>
+
+          <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <div class="col-md-6">
+              <label for="expense-type">نوع المصروفات</label>
+              <select id="expense-type" name="type" #type="ngModel" [(ngModel)]="depService.formData.type" required>
+                <option [ngValue]="undefined" selected disabled>-نوع المصروفات-</option>
+                <option *ngFor="let item of typedepense" value="{{item.nom}}">{{item.nom}}</option>
+              </select>
+              <div *ngIf="type.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب نوع المصروفات .
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="amount0">المبلغ</label>
+              <input type="number" min="0" id="amount0" name="prix" #prix="ngModel" [(ngModel)]="depService.formData.prix" required />
+              <div *ngIf="prix.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب المبلغ .
+
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="exp-details">التفاصيل</label>
+              <textarea id="exp-details" class="form-control" name="details" #details="ngModel" [(ngModel)]="depService.formData.details" required></textarea>
+            </div>
+            <div class="col-md-6">
+              <label for="payee-type">نوع المستفيد</label>
+              <select id="payee-type" name="typeB" #typeB="ngModel" [(ngModel)]="depService.formData.typeB">
+                <option [ngValue]="undefined" selected disabled>-نوع المستفيد-</option>
+                <option *ngFor="let item of TypeB" value="{{item.nom}}">{{item.nom}}</option>
+              </select>
+            </div>
+
+            <div class="col-md-12 text-left">
+              <input type="submit"
+                     style="width: 130px;"
+                     class="btn btn-info next"
+                     value="إضافة" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

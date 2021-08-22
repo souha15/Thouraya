@@ -1,0 +1,49 @@
+/*-- Electronic Sevices Forms --*/
+.task-form input:focus:not([type="submit"]):not([type="reset"]),
+.task-form select:focus {
+  outline-color: #999;
+}
+
+.task-form option:hover {
+  border: none !important;
+}
+
+.service-form label {
+  background-color: #91c3d8;
+  color: #333;
+}
+
+.service-form select {
+  width: 50%;
+}
+
+.service-form input[type="submit"] {
+  width: 140px;
+  font-size: 18px;
+}
+
+.service-form input[type="reset"] {
+  width: 140px;
+  font-size: 18px;
+}
+
+/*-- leave-request-list --*/
+.leave-request-list table thead {
+  background-color: #91c3d8;
+}
+
+.leave-request-list .ok,
+.leave-request-list .refused {
+  display: block;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.leave-request-list .ok {
+  background-color: #28a745 !important;
+}
+
+.leave-request-list .refused {
+  background-color: #dc3545 !important;
+}

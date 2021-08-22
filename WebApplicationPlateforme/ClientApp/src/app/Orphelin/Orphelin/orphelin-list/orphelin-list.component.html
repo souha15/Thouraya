@@ -1,0 +1,93 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <app-menu-settings-orphelin></app-menu-settings-orphelin>
+      <h2 class="task-head">قائمة الأيتام</h2>
+
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
+      <div class="tabel-cont">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col" (click)="sort('id')">
+                <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('tacheNom')">
+                الاسم
+                <span class="glyphicon sort-icon" *ngIf="key =='tacheNom'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+
+              <th scope="col" (click)="sort('creatorName')">
+                تاريخ الميلاد
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('creatorName')">
+                الجنسية
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('creatorName')">
+                رقم الهوية
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+              <th scope="col" (click)="sort('tacheNom')">
+                رقم الجوال
+                <span class="glyphicon sort-icon" *ngIf="key =='tacheNom'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+              <th scope="col" (click)="sort('description')">
+                اليتيم فقد
+                <span class="glyphicon sort-icon" *ngIf="key =='description'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+             <th scope="col">تعديل</th>
+              <th scope="col">حذف</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tache of orph | orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: c }; let i = index" [routerLink]="['/task-details', tache.id]">
+
+              <th [routerLink]="['/orphelin-details', tache.id]">{{(c-1) * count + i + 1}}</th>
+              <td [routerLink]="['/orphelin-details', tache.id]">{{tache.nom}}</td>
+              <td [routerLink]="['/orphelin-details', tache.id]">{{tache.dateNais}}</td>
+              <td [routerLink]="['/orphelin-details', tache.id]">{{tache.nat}}</td>
+              <td [routerLink]="['/orphelin-details', tache.id]">{{tache.cin}}</td>
+              <td [routerLink]="['/orphelin-details', tache.id]">{{tache.tel}}</td>
+              <td [routerLink]="['/orphelin-details', tache.id]">{{tache.lose}}</td>
+               <td><a class="btn btn-success" [routerLink]="['/orphelin-edit', tache.id]"><i class="fa fa-edit"></i></a></td>
+              <td><a (click)="onDelete(tache.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+            </tr>
+
+        </tbody>
+
+
+      </table>
+    </div>
+
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+
+        <pagination-controls (pageChange)="c = $event" previousLabel="السابق"
+                             nextLabel="التالي"></pagination-controls>
+      </ul>
+    </nav>
+
+
+
+
+
+  </div><!-- End col-9 -->
+</div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

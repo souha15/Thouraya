@@ -1,0 +1,100 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+      <!-- Tasks Page Content -->
+      <section class="page-content">
+
+        <nav class="d-flex p-0 bd-highlight tasks-nav mt-2 finance-nav">
+
+          <a [routerLink]="['/transaction-global-r']" class="p-2 flex-fill bd-highlight stop-btn">
+            <span><i class="fa fa-arrow-alt-circle-left"></i></span>
+            الواردة
+          </a>
+
+          <a [routerLink]="['/transaction-global-e']" class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-arrow-alt-circle-right"></i></span>
+            الصادرة
+          </a>
+
+          <a [routerLink]="['/transaction-global-i']" class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-arrows-alt"></i></span>
+            الداخلية
+          </a>
+
+        </nav>
+        <h4 class="my-2 task-head">قائمة المعاملات الداخلية</h4>
+        <!-- Transaction1 Page Content -->
+        <section class="page-content text-right">
+
+          <div class="form-group pull-right">
+
+            <input class="search form-control" type="text" name="search" [(ngModel)]="filter" placeholder="ما الذي تبحث عنه ؟">
+          </div>
+          <span class="counter pull-right"></span>
+          <div class="tabel-cont table-responsive">
+            <table class="table table-striped results table-bordered sortable" id="myTable">
+              <thead>
+                <tr>
+
+
+                  <th scope="col">رقم المعاملة</th>
+                  <th scope="col">الإجراء</th>
+                  <th scope="col">الموضوع</th>
+                  <th scope="col"> التاريخ</th>
+                  <th scope="col">الأولوية</th>
+                  <th scope="col">درجة السرية</th>
+                  <th scope="col">الاستلام</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let tr of FiltredList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; let i = index">
+
+
+                  <td>{{(p-1) * count + i + 1}}</td>
+                  <td (click)="populateForm(tr)">{{tr.action}}</td>
+                  <td (click)="populateForm(tr)">{{tr.sujet}}</td>
+                  <td (click)="populateForm(tr)">{{tr.date}}</td>
+                  <td (click)="populateForm(tr)">{{tr.priorite}}</td>
+                  <td (click)="populateForm(tr)">{{tr.securite}}</td>
+                  <td [ngClass]="{
+
+  'isgreen': tr.etat === 'مستلمة',
+  'isred': tr.etat === 'غير مستلمة',
+  'isblue': tr.etat === 'مرفوضة'
+}">
+                    <a>{{tr.etat}} </a>
+                  </td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <!-- Pagination -->
+
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <pagination-controls (pageChange)="p = $event"
+                                   previousLabel="السابق"
+                                   nextLabel="التالي"></pagination-controls>
+            </ul>
+          </nav>
+        </section>
+      </section>
+    </div><!-- End col-9 -->
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+
+

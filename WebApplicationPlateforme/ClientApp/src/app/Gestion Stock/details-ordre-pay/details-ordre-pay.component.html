@@ -1,0 +1,108 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <app-menu-stockage1></app-menu-stockage1>
+      <div class="events-data">
+        <header>
+          <h3 class="task-head">  امر الصرف</h3>
+        </header>
+
+        <div class="events-form row">
+
+          <div class="col-md-6">
+            <label> 	   اسم امر الصرف</label>
+            <span class="data">{{st.nomOrdre}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>        امر الصرف</label>
+            <span class="data">{{st.typeOrdre}}</span>
+          </div>
+
+          <div class="col-md-6">
+            <label> 	   اسم المستودع</label>
+            <span class="data">{{st.nomStock}}</span>
+          </div>
+
+          <div class="col-md-6">
+            <label> 	   مسؤول المتودع</label>
+            <span class="data">{{st.respNom}}</span>
+          </div>
+
+          <div class="col-md-6">
+            <label> 	             نوع الصرف</label>
+            <span class="data">{{st.typePay}}</span>
+          </div>
+
+          <div class="col-md-6" *ngIf="st.typeBen!=null">
+            <label> 	            الفئة</label>
+            <span class="data">{{st.typeBen}}</span>
+          </div>
+
+          <div class="col-md-6" *ngIf="st.nbFamille!=null">
+            <label>عدد افراد الاسرة </label>
+            <span class="data">{{st.nbFamille}}</span>
+          </div>
+
+
+
+          <div class="col-md-6">
+            <label> 	            	تاريخ الانتهاء</label>
+            <span class="data">{{st.dateFin}}</span>
+          </div>
+
+          <div class="col-md-8 d-flex flex-column flex-wrap">
+
+            <div>
+              <label style="width: 200px">   المستفيدين</label>
+            </div>
+          </div>
+
+          <div class="table-responsive new-table2">
+            <table class="table table-bordered text-center table-striped">
+              <thead class="thead-gestimary">
+                <tr>
+
+                  <th scope="col">الاسم</th>
+                  <th scope="col">	الهوية </th>
+                  <th scope="col">	اسم المستودع </th>
+                  <th scope="col">	الصنف</th>
+                  <th scope="col">	الكمية</th>
+
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let dp of odreListBen">
+                  <td>{{dp.nomBen}}</td>
+                  <td>{{dp.cin}}</td>
+                  <td>{{dp.nomStock}}</td>
+                  <td>{{dp.typeStock}}</td>
+                  <td>{{dp.quatite}}</td>
+
+
+                </tr>
+
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

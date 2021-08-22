@@ -1,0 +1,56 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">الدورات التدريبية المتاحة</h3>
+      </header>
+      <!-- <div class="courses">
+    <a class="accord" data-target="#course1"  *ngFor="let item of formList">{{item.titre}}</a>
+    <div class="panel" id="course1">
+       {{item.detail}}
+      <div class="text-left">
+        <a class="btn btn-info">تقديم طلب</a>
+      </div>
+    </div>
+
+
+  </div>    -->
+      <div id="accordion">
+        <div class="card" *ngFor="let item of formList;let i = index ">
+          <div class="courses" id="headingThree">
+
+            <a class="accord" [attr.data-target]="'#collapse'+i" data-toggle="collapse" aria-expanded="false" aria-controls="collapse">
+              {{item.titre}}
+            </a>
+
+          </div>
+          <div [attr.id]="'collapse'+i" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+            <div class="card-body">
+              {{item.detail}}
+            </div>
+
+            <div class="text-left">
+              <a class="btn btn-info" [routerLink]="['/demande-formation-add', item.id]">تقديم طلب</a>
+            </div>
+
+          </div>
+
+        </div>
+        <br />
+      </div>
+      <br />
+      <!-- End News -->
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

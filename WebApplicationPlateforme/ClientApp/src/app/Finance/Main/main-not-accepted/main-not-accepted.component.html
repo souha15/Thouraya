@@ -1,0 +1,66 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">قوائم غير معتمدة</h3>
+      </header>
+
+      <div class="new-requests">
+        <div class="tab-content" id="myTabContent">
+          <div class="tab-pane fade show active" id="in-check" role="tabpanel"
+               aria-labelledby="in-check-tab">
+            <div class="col-md-6">
+              <a [routerLink]="['/main-not-accepted']">
+                <span class="ml-2"><i class="fa fa-file-alt"></i></span>
+                العدد الجملي
+                <span class="num mr-auto">{{nbtot}}</span>
+              </a>
+              <a [routerLink]="['/facture-list-comptable']">
+                <span class="ml-2"><i class="fa fa-globe-asia"></i></span>
+                قائمة الفواتير
+                <span class="num mr-auto">{{nbfacture}}</span>
+              </a>
+              <a [routerLink]="['/cre-finan-list-comptable']">
+                <span class="ml-2"><i class="fa fa-calendar-alt"></i></span>
+                قائمة طلبات المستحقات
+                <span class="num mr-auto">{{nbcr}}</span>
+              </a>
+
+              <a [routerLink]="['/avance-list-c']">
+                <span class="ml-2"><i class="fa fa-calendar-alt"></i></span>
+                قائمة طلبات سلفة
+                <span class="num mr-auto">{{nbav}}</span>
+              </a>
+
+              <a [routerLink]="['/director-list-cars']">
+                <span class="ml-2"><i class="fa fa-calendar-alt"></i></span>
+                قائمة طلبات صيانة السيارات
+                <span class="num mr-auto">{{nbcars}}</span>
+              </a>
+
+              <a [routerLink]="['/pay-chequec-lis']">
+                <span class="ml-2"><i class="fa fa-calendar-alt"></i></span>
+                قائمة طلبات صرف الشيكات
+                <span class="num mr-auto">{{nbcheque}}</span>
+              </a>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

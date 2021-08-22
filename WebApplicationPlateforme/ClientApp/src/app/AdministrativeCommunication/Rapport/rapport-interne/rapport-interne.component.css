@@ -1,0 +1,206 @@
+.task-form {
+  padding: 10px
+}
+/*-- Transaction-main Page Style --*/
+.page-content {
+  direction: rtl
+}
+
+.transaction-nav {
+  padding: 20px 10px;
+  border-bottom: 2px solid #107F98;
+  text-align: center
+}
+
+  .transaction-nav ul {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+    font-size: 1.1rem;
+  }
+
+    .transaction-nav ul li {
+      display: inline-block;
+      padding: 8px 15px;
+      margin-left: 15px;
+      color: #107F98;
+      border: 1px solid #107F98;
+      border-radius: 5px;
+      margin-bottom: 5px;
+      flex: 1;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+      .transaction-nav ul li:last-of-type {
+        margin-left: 0;
+      }
+
+      .transaction-nav ul li span {
+        display: block
+      }
+
+      .transaction-nav ul li a {
+        text-decoration: none;
+        display: block;
+        color: #107F98;
+        transition: all 0.3s
+      }
+
+      .transaction-nav ul li:hover {
+        background: #107F98;
+      }
+
+        .transaction-nav ul li:hover a {
+          color: #fff
+        }
+
+/*-- Start Popup --*/
+.popup-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99999;
+  padding: 50px;
+  display: none;
+  overflow-y: scroll
+}
+
+.close-popup {
+  padding: 10px 15px;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block
+}
+
+.popup-content {
+  background: #fff;
+  padding: 20px;
+}
+
+  .popup-content .task-form {
+    padding: 10px;
+  }
+
+.page-wrapper {
+  margin-top: 20px;
+  border: 1px solid #333;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: right;
+  direction: rtl;
+}
+
+body.noscroll {
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
+.buttons a,
+.buttons button {
+  display: inline-block;
+  text-decoration: none;
+  padding: 8px 15px;
+  margin-bottom: 5px;
+  border: 1px solid #107F98;
+  background: #107F98;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.3s
+}
+
+  .buttons a:hover,
+  .buttons button:hover {
+    color: #107F98;
+    background: #fff;
+    border-width: 2px;
+  }
+
+.transaction-show,
+.transaction-follow,
+.transaction-refer,
+.transaction-link,
+.transaction-storage,
+.transaction-save {
+  display: none
+}
+
+.popup-head {
+  text-align: center;
+  color: #107F98;
+}
+
+  .popup-head::after {
+    content: "";
+    display: block;
+    width: 80px;
+    border-bottom: 2px dashed #107F98;
+    margin: 10px auto 0;
+  }
+
+.papers {
+  list-style: none;
+  display: inline-block
+}
+
+  .papers li {
+    display: inline-block;
+    padding: 6px 10px;
+    border: 1px solid #c3c8c7;
+    border-radius: 6px;
+  }
+
+/*-- Transaction Refer --*/
+.refer-nav {
+  border-bottom: 2px solid #107F98;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+
+  .refer-nav a {
+    text-decoration: none;
+    color: #107F98;
+    border: 1px solid #107F98;
+    padding: 8px 10px;
+    transition: all 0.3s
+  }
+
+    .refer-nav a:hover,
+    .refer-nav a.active {
+      background: #107F98;
+      color: #FFF;
+    }
+
+.to-employee-form {
+  display: none
+}
+
+/*-- Transaction Link --*/
+.transaction-link .task-form .tra-link-btn {
+  padding: 8px 15px !important;
+  color: #fff;
+  background: #107F98;
+  border: 0;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.confirm {
+  font-size: 1.3rem;
+  text-align: center;
+  color: #777;
+}
+
+.task-form label {
+  min-width: 126px;
+  background: #91c3d8;
+  color: #444;
+}

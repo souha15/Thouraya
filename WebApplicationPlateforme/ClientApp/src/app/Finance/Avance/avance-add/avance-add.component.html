@@ -1,0 +1,54 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">طلب سلفة موظف</h3>
+      </header>
+      <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="col-md-6">
+          <label for="amount3">المبلغ</label>
+          <input type="number" min="0" id="amount3" name="prix" #prix="ngModel" [(ngModel)]="av.prix" required />
+          <div *ngIf="prix.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب  المبلغ.
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="req-stat">الحالة</label>
+          <select id="req-stat" name="etatAvance" #etatAvance="ngModel" [(ngModel)]="av.etatAvance">
+            <option [ngValue]="undefined" selected disabled>-الحالة-</option>
+            <option value="مستعجل">مستعجل</option>
+            <option value="غير مستعجل">غير مستعجل</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="">التفاصيل</label>
+          <textarea class="form-control mb-3" name="detail" #detail="ngModel" [(ngModel)]="av.detail"></textarea>
+        </div>
+        <div class="col-md-6">
+          <label for="months">عدد أشهر الاستقطاع</label>
+          <input type="number" min="0" id="months" name="nbMoisDeduire" #nbMoisDeduire="ngModel" [(ngModel)]="av.nbMoisDeduire" />
+          <label for="first-month"> أول شهر استقطاع</label>
+          <input type="month" id="first-month" name="dateDeduire" #dateDeduire="ngModel" [(ngModel)]="av.dateDeduire" />
+        </div>
+
+        <div class="col-md-12 text-left">
+          <input type="submit"
+                 style="width: 130px;"
+                 class="btn btn-info next"
+                 value="تقديم" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

@@ -1,0 +1,80 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">طلب صيانة/دعم فني</h3>
+      </header>
+      <form class="form-row task-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="col-md-6">
+          <label for="">صنف العطل</label>
+          <select name="typePanne" #typePanne="ngModel" [(ngModel)]="mnr.typePanne" required>
+            <option [ngValue]="undefined" selected disabled>اختر العطل</option>
+            <option *ngFor="let item of panneList" value="{{item.nom}}">{{item.nom}}</option>
+
+          </select>
+
+          <div *ngIf="typePanne.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب صنف العطل .
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="">نوع العطل</label>
+          <input type="text" name="categoriePanne" #categoriePanne="ngModel" [(ngModel)]="mnr.categoriePanne" />
+        </div>
+        <div class="col-md-6">
+          <label for="">العطل</label>
+          <input type="text" name="panne" #panne="ngModel" [(ngModel)]="mnr.panne" required />
+          <div *ngIf="panne.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب العطل .
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="">نوع الطلب</label>
+          <select name="typedemande" #typedemande="ngModel" [(ngModel)]="mnr.typedemande" required>
+            <option [ngValue]="undefined" selected disabled>نوع الطلب</option>
+            <option>مستعجل جدا</option>
+            <option>مستعجل</option>
+            <option>غير مستعجل</option>
+
+          </select>
+          <div *ngIf="typedemande.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب نوع الطلب .
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="req-det">التفاصيل</label>
+          <textarea 
+                    id="req-det"
+                    class="form-control" name="detail" #detail="ngModel" [(ngModel)]="mnr.detail"></textarea>
+        </div>
+        <div class="col-md-6">
+          <label for="">إرفاق مرفق</label>
+          <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+            <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
+        </div>
+        <div class="col-12 text-center text-md-left mt-3">
+          <input class="btn btn-info"
+                 style="width: 130px;"
+                 type="submit"
+                 value="ارسال الطلب" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

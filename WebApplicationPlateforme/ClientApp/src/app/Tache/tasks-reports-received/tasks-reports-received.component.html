@@ -1,0 +1,136 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <app-tasks-up-menu></app-tasks-up-menu>
+      <h2 class="task-head">تقرير المهام الواردة</h2>
+      <form class=" mt-4">
+        <div class="form-group form-inline  mb-3 ml-4">
+          <label class="" for="start-date">تاريخ البداية</label>
+          <input type="date" id="start-date" class="form-control mr-2" (change)="dateDepart($event)">
+        </div>
+        <div class="form-group form-inline  mb-3 ml-4">
+          <label class="" for="end-date">تاريخ النهاية</label>
+          <input type="date" id="end-date" class="form-control mr-2" (change)="dateFin($event)">
+        </div>
+        <div class="form-group form-inline ml-4">
+
+
+          <label for="user">الإدارة/الموظف</label>
+          <select name="department" id="department" class="form-control  mr-2 ml-3" (change)="selectInput($event)">
+            <option [ngValue]="undefined" selected disabled>-الإدارة/الموظف-</option>
+            <option value="all">من الإدارة</option>
+            <option value="employee">إلى الموظف</option>
+          </select>
+
+
+
+          <select name="department" id="department" class="form-control  mr-2 ml-3" (change)="selectAdmin($event)" *ngIf="isAdminSelected">
+            <option [ngValue]="undefined" selected disabled>-من الإدارة-</option>
+            <option *ngFor="let item of administrationList" value="{{item.id}}">{{item.nom}}</option>
+          </select>
+
+
+
+          <select name="to-employee" id="to-employee" class="form-control mr-2" (change)="selectEmployee($event)" *ngIf="isEmployeeSelected">
+            <option [ngValue]="undefined" selected disabled>- إلى الموظف-</option>
+            <option *ngFor="let item of UsersList" value="{{item.id}}">{{item.fullName}}</option>
+          </select>
+        </div>
+        <hr>
+        <div class="form-group text-center">
+          <input type="submit" value="إنشاء" class="btn btn-primary form-inline ml-2 mb-3" (click)="formRapport()">
+          <input type="reset" value="حذف الحقول" class="btn btn-danger form-inline mb-3" (click)="clear()">
+
+        </div>
+      </form>
+
+
+      <div class="report-page" *ngIf="show">
+        <div class="save">
+          <a (click)="openPDF()" class="btn"><span><i class="fa fa-print fa-2x"></i></span></a>
+        </div>
+        <table class="table table-striped text-center table-bordered">
+          <thead class="bg-secondary">
+            <tr>
+
+              <th scope="col">رقم المهمة</th>
+              <th scope="col">عنوان المهمة</th>
+              <th scope="col">تاريخ الانشاء</th>
+              <th scope="col">المسند</th>
+              <th scope="col">المسند إليه</th>
+              <th scope="col">الحالة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tache of Genarallist">
+              <th>{{tache.id}}</th>
+              <td>{{tache.tacheNom}}</td>
+              <td>{{tache.date}}</td>
+              <td>{{tache.creatorName}}</td>
+              <td>{{tache.attribut1}}</td>
+              <td>{{tache.etat}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div> <!-- End Page Content -->
+    </div>
+
+  </div>
+
+</div>
+
+
+
+<div class="container" id="htmlData" style="display: none;">
+  <div class="report-page">
+    <h1 class="text-center">تقرير المهام المرسلة</h1>
+    <div class="text-right">
+      <p class="lead"><span> تاريخ البداية </span>{{dated}}</p>
+      <p class="lead"><span> تاريخ النهاية </span>{{datef}}</p>
+      <p class="lead"> <span>  من إدارة </span>{{adminname}}</p>
+      <p class="lead"><span> إلى الموظف </span>{{username}}</p>
+    </div>
+    <table class="table table-striped text-center table-bordered">
+      <thead class="bg-secondary">
+        <tr>
+          <th scope="col">الحالة</th>
+          <th scope="col">تاريخ الانشاء</th>
+          <th scope="col">وصف المهمة</th>
+          <th scope="col">عنوان المهمة</th>
+          <th scope="col">رقم المهمة</th>
+
+
+
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let tache of Genarallist">
+          <td>{{tache.etat}}</td>
+          <td>{{tache.date}}</td>
+          <td>{{tache.description}}</td>
+          <td>{{tache.tacheNom}}</td>
+          <th>{{tache.id}}</th>
+
+
+
+
+        </tr>
+      </tbody>
+    </table>
+  </div> <!-- End Page Content -->
+</div> <!-- End Container -->
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.1/jspdf.debug.js"></script>
+
+<!-- This file was created by /fontconverter/fontconverter.html in the jsPDF GitHub repo.
+This provides to work with custom fonts (in this case Traditional Arabic Font) with setFont() function (see js) -->
+<script src="https://jspdf.netlify.com/trado-normal.js"></script>

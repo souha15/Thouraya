@@ -1,0 +1,101 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <app-salaire-menu1></app-salaire-menu1>
+      <header>
+        <h3 class="task-head">تعديل مسير</h3>
+      </header>
+      <form action="" class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="col-md-6">
+          <div>
+            <label for="month">الشهر</label>
+            <input type="month" id="month" name="mois" #mois="ngModel" [(ngModel)]="salaire.mois" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <p></p>
+        </div>
+        <div class="col-md-6">
+          <div>
+            <label for="emp">الموظف</label>
+            <select name="idUser" #idUser="ngModel" [(ngModel)]="salaire.idUser" id="emp" (change)="getSalaireDetail($event) ">
+              <option [ngValue]="undefined" selected disabled>اسم الموظف</option>
+              <option *ngFor="let item of usersList" value="{{item.id}}">{{item.fullName}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div>
+            <label for="salary">الراتب</label>
+            <input type="text" id="salary" value="{{salairev}}" disabled />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div>
+            <label for="sal-cut">خصم التأمينات</label>
+            <input type="text" value="{{assurance}}" id="sal-cut" disabled />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div>
+            <label for="sal-add">البدلات</label>
+            <input type="text" name="" id="sal-add" value="{{indemnite}}" disabled />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div>
+            <label for="other-cuts">خصميات أخرى</label>
+            <input type="text" id="other-cuts" name="retrait" #retrait="ngModel" [(ngModel)]="salaire.retrait"  required />
+            <div *ngIf="retrait.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب  خصميات أخرى .
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div>
+            <label for="reason">السبب</label>
+            <input type="text" id="reason" name="raisonRetrait" #raisonRetrait="ngModel" [(ngModel)]="salaire.raisonRetrait" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div>
+            <label for="other-add">إضافي</label>
+            <input type="text" name="leplus" value="0" #leplus="ngModel" [(ngModel)]="salaire.leplus" id="other-add" required />
+            <div *ngIf="leplus.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب  الإضافي .
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div>
+            <label for="reason2">السبب</label>
+            <input type="text" name="reisonPlus" #reisonPlus="ngModel" [(ngModel)]="salaire.reisonPlus" id="reason2" />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div>
+            <label for="net-sal">صافي الدخل</label>
+            <input type="text" id="net-sal" name="tot" #tot="ngModel" [(ngModel)]="salaire.tot"/>
+          </div>
+        </div>
+        <div class="col-12 text-left">
+          <input type="submit"
+                 value="حفظ"
+                 class="btn btn-info"
+                 style="width: 130px" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

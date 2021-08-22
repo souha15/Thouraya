@@ -1,0 +1,184 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">مهمة {{ev.etat}}</h3>
+        <span class="completed" *ngIf="!redorgreen">الحالة : {{retarde}}</span>
+        <span class="completed" *ngIf="!redorgreen && dayslefttest">الوقت المتبقي : {{daysleft}}</span>
+        <span class="retardet" *ngIf="redorgreen">الحالة : {{retarde}}</span>
+        <br />
+      </header>
+
+      <div class="events-data">
+        <div class="events-form row">
+          <div class="col-md-12">
+            <p></p>
+          </div>
+          <div class="col-md-6">
+            <label>رقم المهمة</label>
+            <span class="data">{{ev.id}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>التاريخ والوقت</label>
+            <span class="data">{{ev.date}}<span class="time mr-2">13:00</span></span>
+          </div>
+          <div class="col-md-6">
+            <label>الموضوع</label>
+            <span class="data">{{ev.tacheNom}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>مدة التنفيذ</label>
+            <span class="data">{{ev.delai}} أيام</span>
+          </div>
+
+          <div class="col-md-6">
+            <label>جهة الطلب</label>
+            <span class="data">{{ev.creatorName}}</span>
+          </div>
+
+
+          <div class="col-md-6">
+            <label>الموظف</label>
+            <span class="data">{{UserNameConnected}}</span>
+          </div>
+
+        </div>
+
+        <div class="row events-form">
+          <div class="col-md-8 d-flex flex-column flex-wrap">
+            <label style="display:inline">التفاصيل</label>
+            <span class="data">
+              {{ev.description}}
+            </span>
+
+          </div>
+
+          <div class="col-md-4">
+            <circle-progress [percent]="daysleftn"
+                             [radius]="50"
+                             [outerStrokeWidth]="6"
+                             [innerStrokeWidth]="3"
+                             [outerStrokeColor]="'#78C000'"
+                             [innerStrokeColor]="'#C7E596'"
+                             [animation]="true"
+                             [animationDuration]="300"></circle-progress>
+
+          </div>
+        </div>
+
+
+        <div class="row events-form">
+          <!-- Here we ar-->
+          <div class="col-md-8 d-flex flex-column flex-wrap">
+            <!-- Attachments -->
+            <div class="">
+              <label>المرفقات</label>
+              <span class="data">
+                <span *ngFor="let pr of FilesImg">
+                  <i class="ml-2 fa fa-arrow-down" style="color:dodgerblue"></i>
+                  <a (click)="download(pr.path)" class="ml-3" style="color:dodgerblue">{{pr.path}}</a>
+
+                </span>
+              </span>
+            </div>
+
+            <!-- Results -->
+
+          </div>
+
+          <div class="col-md-4">
+
+          </div>
+
+        </div>
+        <div *ngIf="test">
+          <div class="row events-form">
+            <!-- Here we ar-->
+            <div class="col-md-12 d-flex flex-column flex-wrap">
+              <!-- Attachments -->
+              <div class="">
+                <label>الحالة</label>
+                <select (change)="getetatdata($event)" style="width:150px;">
+                  <option [ngValue]="undefined" selected disabled>-الحالة-</option>
+                  <option value="قبول">قبول</option>
+                  <option value="رفض">رفض </option>
+                  <option value="إعادة">إعادة </option>
+                </select>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input class="btn btn-success" type="button" value="إغلاق" (click)="acceptorrefuse()" style="width:100px;" />
+              </div>
+
+            </div>
+
+
+          </div>
+
+          <div class="row events-form" *ngIf="ret">
+            <!-- Here we ar-->
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+              <label>الرد</label>
+              <input (change)="getretourdata($event)" style="width:300px;" type="text" />
+
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <input class="btn btn-success" type="button" value="إعادة" (click)="retour()" style="width:100px;" />
+            </div>
+
+
+
+          </div>
+
+          <div class="row events-form" *ngIf="dec">
+            <!-- Here we ar-->
+            <div class="col-md-2"></div>
+            <div class="col-md-10">
+              <label>سبب</label>
+              <input (change)="getnotfinished($event)" style="width:300px;" type="text" />
+
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <input class="btn btn-success" type="button" value="إغلاق" (click)="notfinished()" style="width:100px;" />
+            </div>
+
+
+
+          </div>
+
+        </div>
+
+        <div class="pp">
+          <h5 class="head">التعليقات</h5>
+          <div class="scrolbar">
+            <ul *ngFor="let msg of messages">
+              <li>
+                <img src="assets/images/avatar.png" class="user-img" alt="">
+                <b><span class="name">{{msg.nomUser}}</span></b>
+                <span class="date">&nbsp;&nbsp;&nbsp;{{msg.dateTime | date:'short'}}</span>
+                <p class="comment">{{msg.textCommentaire}}  </p>
+              </li>
+
+            </ul>
+          </div>
+          <div class="comment-form">
+            <input type="text" placeholder="أضف تعليق . ." class="write_msg" [value]="txtMessage"
+                   (input)="txtMessage=$event.target.value" (keydown.enter)="sendMessage()" />
+
+          </div>
+          <br />
+        </div>
+        <br />
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

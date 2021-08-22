@@ -1,0 +1,384 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <style>
+      .item {
+        position: relative;
+        padding-top: 20px;
+        display: inline-block;
+      }
+
+      .notify-badge {
+        position: absolute;
+        left: 5px;
+        top: -20px;
+        background: red;
+        text-align: center;
+        border-radius: 30px 30px 30px 30px;
+        color: white;
+        padding: 5px 10px;
+        font-size: 15px;
+
+      }
+    </style>
+    <div class="col-md-9 col-sm-8">
+      <section class="main-content text-center">
+        <div class="container">
+          <div class="row">
+
+
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+                <a [routerLink]="['/pointage-presence-add']">       
+                  <span class="d-block">
+                    <i class="fa fa-user-check fa-3x"></i>
+                  </span>
+                  <h4>الحضور و الإنصراف </h4>
+                </a>
+
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 my-4">
+              <div class="link-box">
+                <a [routerLink]="['/filesorg-menu']">
+                  <span class="d-block">
+                    <i class="fa fa-users-cog fa-3x"></i>
+                  </span>
+                  <h4>خدماتي </h4>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 my-4">
+              <div class="link-box">
+                <a [routerLink]="['/main-services-page']">
+                  <span class="d-block">
+                    <i class="fa fa-user-secret fa-3x"></i>
+                  </span>
+                  <h4>استعلاماتي </h4>
+                </a>
+              </div>
+            </div>
+
+
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+
+                <a [routerLink]="['/main-tasks']">
+                  <span class="notify-badge" *ngIf="shownb">{{nb}}</span>
+                  <span class="d-block">
+                    <i class="fa fa-tasks fa-3x"></i>
+                  </span>
+
+                  <h4>
+                    ادارة المهام
+
+                  </h4>
+
+                </a>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+
+                <a [routerLink]="['/news-list-viewer']">
+
+                  <span class="d-block">
+                    <i class="fa fa-bell fa-3x"></i>
+                  </span>
+
+                  <h4>
+                    الاخبار
+
+                  </h4>
+
+                </a>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+
+                <a [routerLink]="['/decision-list']">
+
+                  <span class="d-block">
+                    <i class="fa fa-mail-bulk fa-3x"></i>
+                  </span>
+
+                  <h4>
+                    التعاميم والقرارات
+                  </h4>
+
+                </a>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+                <a [routerLink]="['/alertsrh']">
+                  <span class="d-block">
+                    <i class="fa fa-user-secret fa-3x"></i>
+                  </span>
+                  <h4> شؤون الموظفين</h4>
+                </a>
+              </div>
+            </div>
+
+
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+                <a [routerLink]="['/transfert-interne-show']">
+                  <span class="d-block">
+                    <i class="fa fa-arrow-alt-circle-down fa-3x"></i>
+                  </span>
+                  <h4> 	التحويلات الداخلية</h4>
+                </a>
+              </div>
+            </div>
+
+
+
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+                <a [routerLink]="['/ticket2-my-list']">
+
+                  <span class="notify-badge" *ngIf="testnbtic">{{nbtic}}</span>
+                  <span class="d-block">
+                    <i class="fa fa-cog fa-3x"></i>
+                  </span>
+                  <h4>الدعم الفني</h4>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+                <a [routerLink]="['/mailing']">
+                  <span class="d-block">
+                    <i class="fa fa-arrow-right fa-3x"></i>
+                  </span>
+                  <h4>الإتصالات الإدارية</h4>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+                <a [routerLink]="['/msg-interne-list']">
+                  <span class="notify-badge" *ngIf="testnotifnb">{{notifnb}}</span>
+                  <span class="d-block">
+                    <i class="fa fa-comments fa-3x"></i>
+                  </span>
+                  <h4>الرسائل الداخلية</h4>
+                </a>
+              </div>
+            </div>
+
+
+
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+                <a [routerLink]="['/cars-add']">
+                  <span class="d-block">
+                    <i class="fa fa-car fa-3x"></i>
+                  </span>
+                  <h4>إدارة وسائل النقل</h4>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+                <a [routerLink]="['/event-list']">
+                  <span class="d-block">
+                    <i class="fa fa-clipboard-list fa-3x"></i>
+                  </span>
+                  <h4>الفعاليات</h4>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+                <a [routerLink]="['/liste-dotation']">
+                  <span class="d-block">
+                    <i class="fa fa-building fa-3x"></i>
+                  </span>
+                  <h4> إدارة الأوقاف</h4>
+                </a>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+                <a [routerLink]="['/main-finance-page']">
+                  <span class="d-block">
+                    <i class="fa fa-money-bill-wave fa-3x"></i>
+                  </span>
+                  <h4>المالية</h4>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+                <a [routerLink]="['/gest-ben-list-accepte']">
+                  <span class="d-block">
+                    <i class="fa fa-user-circle fa-3x"></i>
+                  </span>
+                  <h4>ادارة المستفيدين </h4>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+                <a [routerLink]="['/list-stockage']">
+                  <span class="d-block">
+                    <i class="fa fa fa-archive fa-3x"></i>
+                  </span>
+                  <h4>المستودع </h4>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+                <a [routerLink]="['/orphelin-list']">
+                  <span class="d-block">
+                    <i class="fa fa fa-users fa-3x"></i>
+                  </span>
+                  <h4>كفالة الايتام  </h4>
+                </a>
+              </div>
+            </div>
+
+
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+                <a [routerLink]="['/list-tuteur']">
+                  <span class="d-block">
+                    <i class="fa fa fa-users-cog fa-3x"></i>
+                  </span>
+                  <h4>إدارة الكفالات </h4>
+                </a>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+                <a [routerLink]="['/projet-list']">
+                  <span class="d-block">
+                    <i class="fa fa-project-diagram fa-3x"></i>
+                  </span>
+                  <h4>إدارة المشاريع</h4>
+                </a>
+              </div>
+            </div>
+            <!--
+
+              <div class="col-sm-6 col-md-3 my-4">
+                <div class="link-box">
+                  <a *ngIf="!testrole" [routerLink]="['/mailing']">
+                    <span class="notify-badge" *ngIf="shownbtr">{{nbtr}}</span>
+                    <span class="d-block">
+                      <i class="fa fa-mail-bulk fa-3x"></i>
+                    </span>
+                    <h4>الإتصالات الإدارية</h4>
+                  </a>
+
+                  <a *ngIf="testrole" [routerLink]="['/menutr']">
+                    <span class="d-block">
+                      <i class="fa fa-mail-bulk fa-3x"></i>
+                    </span>
+                    <h4>الإتصالات الإدارية</h4>
+                  </a>
+                </div>
+              </div>
+              <div class="col-sm-6 col-md-3 my-4">
+                <div class="link-box">
+                  <a [routerLink]="['/event-list']">
+                    <span class="d-block">
+                      <i class="fa fa-clipboard-list fa-3x"></i>
+                    </span>
+                    <h4>الفعاليات</h4>
+                  </a>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-md-3 my-4">
+                <div class="link-box">
+                  <a [routerLink]="['/projet-list']">
+                    <span class="d-block">
+                      <i class="fa fa-project-diagram fa-3x"></i>
+                    </span>
+                    <h4>إدارة المشاريع</h4>
+                  </a>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-md-3 my-4">
+                <div class="link-box">
+                  <a [routerLink]="['/liste-dotation']">
+                    <span class="d-block">
+                      <i class="fa fa-building fa-3x"></i>
+                    </span>
+                    <h4> إدارة العقارات</h4>
+                  </a>
+                </div>
+              </div>
+
+              <div class="col-sm-6 col-md-3 my-4">
+                <div class="link-box">
+                  <a [routerLink]="['/main-finance-page']">
+                    <span class="d-block">
+                      <i class="fa fa-money-bill-wave fa-3x"></i>
+                    </span>
+                    <h4>المالية</h4>
+                  </a>
+                </div>
+              </div>
+
+  -->
+            <!--
+
+              <div class="col-sm-6 col-md-3 my-4">
+                <div class="link-box">
+                  <a [routerLink]="['/formation-show']">
+                    <span class="d-block">
+                      <i class="fa fa-graduation-cap fa-3x"></i>
+                    </span>
+                    <h4>التدريب</h4>
+                  </a>
+                </div>
+              </div>
+
+
+  -->
+            <!--
+  <div class="col-sm-6 col-md-3 my-4">
+    <div class="link-box">
+      <a [routerLink]="['/cars-add']">
+        <span class="d-block">
+          <i class="fa fa-car fa-3x"></i>
+        </span>
+        <h4>إدارة وسائل النقل</h4>
+      </a>
+    </div>
+  </div>
+  -->
+          </div>
+        </div>
+      </section>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

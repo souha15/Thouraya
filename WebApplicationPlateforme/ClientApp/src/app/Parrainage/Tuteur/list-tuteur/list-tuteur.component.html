@@ -1,0 +1,111 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <app-menu-tuteur></app-menu-tuteur>
+
+      <h4 class="my-2 task-head">قائمة الكفلاء</h4>
+
+      <nav class="d-flex mt-2 transaction-nav"  *ngIf="Id!=0">
+        <ul>
+
+          <li class="save-btn">
+            <a [routerLink]="['/details-tuteur' , Id]">
+              <span><i class="fa fa-eye"></i></span>
+              بيانات الكفيل
+            </a>
+          </li>
+
+
+          <li class="save-btn">
+            <a [routerLink]="['/add-parrainage' ,Id]">
+              <span><i class="fa fa-user-check"></i></span>
+              الربط  بمكفول
+            </a>
+          </li>
+
+
+          <li class="storage-btn">
+            <a [routerLink]="['/add-solde' ,Id]">
+              <span><i class="fa fa-database"></i></span>
+              اضافة رصيد
+            </a>
+          </li>
+        </ul>
+      </nav>
+    <br />
+      <!-- Transaction1 Page Content -->
+
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
+      <div class="tabel-cont">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col" (click)="sort('id')">
+                رقم الكفيل
+                <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+
+              </th>
+              <th scope="col" (click)="sort('tacheNom')">
+                الاسم
+                <span class="glyphicon sort-icon" *ngIf="key =='tacheNom'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+
+              <th scope="col" (click)="sort('creatorName')">
+                رقم الهوية
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('creatorName')">
+                رقم الجوال
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('creatorName')">
+                الدولة
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+              <th scope="col">تعديل</th>
+              <th scope="col">حذف</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tache of orph | orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: c }; let i = index">
+
+              <th (click)="populateForm(tache)" >{{tache.numTut}}</th>
+              <td (click)="populateForm(tache)">{{tache.nom}}</td>
+              <td (click)="populateForm(tache)">{{tache.cin}}</td>
+              <td (click)="populateForm(tache)">{{tache.tel}}</td>
+              <td (click)="populateForm(tache)">{{tache.pays}}</td>
+              <td><a class="btn btn-success" [routerLink]="['/edit-tuteur', tache.id]"><i class="fa fa-edit"></i></a></td>
+              <td><a (click)="onDelete(tache.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+            </tr>
+
+          </tbody>
+
+
+        </table>
+      </div>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+
+          <pagination-controls (pageChange)="c = $event" previousLabel="السابق"
+                               nextLabel="التالي"></pagination-controls>
+        </ul>
+      </nav>
+
+    </div><!-- End col-9 -->
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

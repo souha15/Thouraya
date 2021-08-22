@@ -1,0 +1,132 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">تفاصيل المهمة</h3>
+      </header>
+      <div class="task-details">
+        <div class="container">
+          <div class="task-info d-flex flex-wrap">
+            <div class="flex-fill">
+              <ul class="d-flex list-unstyled">
+                <li class="flex-fill item-logo">
+                  <img src="assets/images/artboard.png" width="35" alt="image">
+                </li>
+                <li class="flex-fill item-text">
+                  <p>رقم المهمة</p>
+                  <span class="num-task">{{tache.id}}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="flex-fill">
+              <ul class="d-flex list-unstyled">
+                <li class="flex-fill item-logo">
+                  <i class="fa fa-pen-nib fa-2x"></i>
+                </li>
+                <li class="flex-fill item-text">
+                  <p>محرر المهمة</p>
+                  <span>{{tache.creatorName}}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="flex-fill">
+              <ul class="d-flex list-unstyled">
+                <li class="flex-fill item-logo">
+                  <i class="fa fa-user-tie fa-2x"></i>
+                </li>
+                <li class="flex-fill item-text">
+                  <p>المسند إليه</p>
+                  <span>{{tache.createur}}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="flex-fill">
+              <ul class="d-flex list-unstyled">
+                <li class="flex-fill item-logo">
+                  <i class="fa fa-clock fa-2x"></i>
+                </li>
+                <li class="flex-fill item-text">
+                  <p>الحالة</p>
+                  <span>{{tache.etat}}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Table -->
+          <div class="table-responsive">
+            <table class="table table-bordered ">
+              <thead>
+                <tr>
+                  <th scope="col">رقم المهمة</th>
+                  <th scope="col">اسم المهمة</th>
+                  <th scope="col">أولوية</th>
+                  <th scope="col">تاريخ البداية</th>
+                  <th scope="col">المدة باليوم</th>
+                  <th scope="col">وصف المهمة</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">{{tache.id}}</th>
+                  <td>{{tache.tacheNom}}</td>
+                  <td>{{tache.priorite}}</td>
+                  <td>{{tache.date}}</td>
+                  <td>{{tache.delai}}</td>
+                  <td>{{tache.description}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <br />
+
+          <div class="pp">
+            <h5 class="head">التعليقات</h5>
+            <div class="scrolbar">
+              <ul *ngFor="let msg of messages">
+                <li>
+                  <img src="assets/images/avatar.png" class="user-img" alt="">
+                  <b><span class="name">{{msg.nomUser}}</span></b>
+                  <span class="date">&nbsp;&nbsp;&nbsp;{{msg.dateTime | date:'short'}}</span>
+                  <p class="comment">{{msg.textCommentaire}}  </p>
+                </li>
+
+              </ul>
+            </div>
+            <div class="comment-form">
+              <input type="text" placeholder="أضف تعليق . ." class="write_msg" [value]="txtMessage"
+                     (input)="txtMessage=$event.target.value" (keydown.enter)="sendMessage()" />
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <!-- Chart for task time
+      <div class="time-chart">
+        <div class="container">
+          <div class="row">
+            <div class="col-12">
+              <div class="chart text-center py-4 px-3">
+                <h5>ما مضى وما تبقى من وقت المهمة</h5>
+                <p></p>
+                <canvas id="canvas"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>-->
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>المكتب التعاوني للدعوة والإرشاد وتوعية الجاليات في أبو عريش</p>
+</footer>
+

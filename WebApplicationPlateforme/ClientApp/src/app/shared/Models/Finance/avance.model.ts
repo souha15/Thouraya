@@ -1,0 +1,29 @@
+export class Avance {
+   id: number;
+prix :string;
+etatAvance :string;
+detail :string;
+nbMoisDeduire :string;
+mois :string;
+annee :string;
+dateDeduire :string;
+etatC :string;
+idC :string;
+nomC :string;
+dateC :string;
+raisonRefusC :string;
+idD :string;
+etatD :string;
+nomD :string;
+dateD :string;
+raisonRefusD :string;
+attribut1: number;
+attribut2 :string;
+attribut3 :string;
+attribut4 :string;
+attribut5 :string;
+attribut6 :string;
+dateenreg :string;
+userNameCreator :string;
+idUserCreator :string;
+}

@@ -1,0 +1,158 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+      <app-menu-finance></app-menu-finance>
+      <!-- Tasks Page Content -->
+      <section class="page-content">
+        <h4 class="my-2 task-head">تسجيل وحدة</h4>
+        <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+          <div class="col-sm-6">
+            <label for="stop-name2"><span><i class="fa fa-archway"></i></span>الوقف</label>
+            <select id="stop-name2" name="idDotation" #idDotation="ngModel" [(ngModel)]="unite.idDotation" required>
+              <option [ngValue]="undefined" selected disabled>-الوقف-</option>
+              <option *ngFor="let item of dotations" value="{{item.id}}">{{item.nom}}</option>
+            </select>
+            <div *ngIf="idDotation.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+
+
+              مطلوب الوقف.
+
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <label for="unit-num"><span><i class="fa fa-sort-numeric-down"></i></span>رقم الوحدة </label>
+            <input type="text" id="unit-num" name="numRevenus" #numRevenus="ngModel" [(ngModel)]="unite.numRevenus" required>
+            <div *ngIf="numRevenus.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+
+
+              مطلوب رقم الوحدة.
+
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="unit-sort"><span><i class="fa fa-building"></i></span>نوع الوحدة</label>
+            <select id="unit-sort" name="type" #type="ngModel" [(ngModel)]="unite.type" required (change)="typeUnite($event)">
+              <option [ngValue]="undefined" selected disabled>-نوع الوحدة-</option>
+              <option *ngFor="let item of types" value="{{item.nom}}">{{item.nom}}</option>
+            </select>
+            <div *ngIf="type.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب نوع الوحدة.
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="unit-status"><span><i class="fa fa-edit"></i></span>حالة الوحدة</label>
+            <select id="unit-status" name="etat" #etat="ngModel" [(ngModel)]="unite.etat">
+              <option [ngValue]="undefined" selected disabled>-حالة الوحدة-</option>
+              <option *ngFor="let item of etats" value="{{item.nom}}">{{item.nom}}</option>
+
+            </select>
+          </div>
+          <div class="col-sm-12 unit-details mb-3" *ngIf="homeisSelected">
+            <label for="rooms">غرفة</label>
+            <input name="etat" #chambre="ngModel" [(ngModel)]="unite.chambre" type="text" id="rooms" style="width: 60px">&nbsp;&nbsp;&nbsp;&nbsp;
+            <label for="rooms">حمام</label>
+            <input name="wc" #wc="ngModel" [(ngModel)]="unite.wc" type="text" id="rooms" style="width: 60px">&nbsp;&nbsp;&nbsp;&nbsp;
+            <label for="rooms">مطبخ</label>
+            <input name="cuisine" #cuisine="ngModel" [(ngModel)]="unite.cuisine" type="text" id="rooms" style="width: 60px">&nbsp;&nbsp;&nbsp;&nbsp;
+            <label for="rooms">صالة</label>
+            <input name="bureau" #bureau="ngModel" [(ngModel)]="unite.bureau" type="text" id="rooms" style="width: 60px">&nbsp;&nbsp;&nbsp;&nbsp;
+            <label for="rooms">مجلس</label>
+            <input name="salon" #salon="ngModel" [(ngModel)]="unite.salon" type="text" id="rooms" style="width: 60px">
+          </div>
+
+
+
+          <div class="col-sm-4 counters">
+            <label for="counter-num2"><span><i class="fa fa-bolt"></i></span>عداد الكهرباء</label>
+            <input name="compteurElc" #compteurElc="ngModel" [(ngModel)]="unite.compteurElc" type="text" id="counter-num2" class="" style="width: 150px">
+          </div>
+          <div class="col-sm-4 counters">
+            <label for="water-counter"><span><i class="fa fa-tint"></i></span>عداد المياه</label>
+            <input name="compteureau" #compteureau="ngModel" [(ngModel)]="unite.compteureau" type="text" id="water-counter" class="" style="width: 150px">
+          </div>
+          <div class="col-sm-4 counters">
+            <label for="rent-cost2"><span><i class="fa fa-coins"></i></span>قيمة الايجار</label>
+            <input name="prix" #prix="ngModel" [(ngModel)]="unite.prix" type="text" id="rent-cost2" class="" style="width: 150px">
+          </div>
+
+
+          <div class="mx-auto my-3">
+            <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save"></i></span> حفظ</button>
+            <button class="btn btn-danger px-2 ml-3" type="reset"><span class="ml-4"><i class="fa fa-trash"></i></span>حذف الحقول</button>
+            <button class="btn btn-secondary px-2" (click)="openPDF()" type="button"><span class="ml-4"><i class="fa fa-print"></i></span> طباعة</button>
+          </div>
+        </form>
+      </section>
+    </div><!-- End col-9 -->
+
+  </div>
+
+</div>
+
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+<!-- Footer style="display: none;" -->
+<div class="content" id="htmlData" style="display: none;">
+  <section class="page-content">
+    <h4 class="my-2 task-head">بيانات وحدة مسجلة</h4>
+
+    <div class="task-form form-row stop-form">
+
+      <div class="col-sm-6">
+        <label><span></span>الوقف</label>
+        <span>{{uniteI.idDotation}}</span>
+      </div>
+      <div class="col-sm-6">
+        <label><span></span>رقم الوحدة </label>
+        <span>{{uniteI.numRevenus}}</span>
+      </div>
+
+      <div class="col-sm-6">
+        <label><span></span>نوع الوحدة</label>
+        <span>{{uniteI.type}}</span>
+      </div>
+      <div class="col-sm-6">
+        <label><span></span>حالة الوحدة</label>
+        <span>{{uniteI.etat}}</span>
+      </div>
+      <div class="col-sm-12 unit-details mb-3" *ngIf="impressionTest">
+        <label>غرفة</label>
+        <span class="px-2 ml-2">{{uniteI.chambre}}</span>
+        <label>حمام</label>
+        <span class="px-2 ml-2">{{uniteI.wc}}</span>
+        <label>مطبخ</label>
+        <span class="px-2 ml-2">{{uniteI.cuisine}}</span>
+        <label>مكتب</label>
+        <span class="px-2 ml-2">{{uniteI.bureau}}</span>
+        <label>مجلس</label>
+        <span class="px-2">{{uniteI.salon}}</span>
+      </div>
+
+
+
+      <div class="col-sm-4 counters">
+        <label><span></span>عداد الكهرباء</label>
+        <span>{{uniteI.compteurElc}}</span>
+      </div>
+      <div class="col-sm-4 counters">
+        <label><span></span>عداد المياه</label>
+        <span>{{uniteI.compteureau}}</span>
+      </div>
+      <div class="col-sm-4 counters">
+        <label><span></span>قيمة الايجار</label>
+        <span>{{uniteI.prix}}</span>
+      </div>
+    </div>
+
+  </section>
+</div>

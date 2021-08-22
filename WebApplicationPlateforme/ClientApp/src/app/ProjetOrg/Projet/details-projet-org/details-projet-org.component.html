@@ -1,0 +1,105 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+
+      <header>
+        <h3 class="task-head"> {{ev.nom}}</h3>
+      </header>
+
+      <div class="events-data">
+        <div class="events-form row">
+          <div class="col-md-11">
+
+          </div>
+
+          <div class="col-md-6">
+            <label>
+              اسم
+              المشروع
+            </label>
+            <span class="data">{{ev.nom}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>رقم المشروع</label>
+            <span class="data">{{ev.num}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>العميل</label>
+            <span class="data">{{ev.nomClient}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>   مدة المشروع</label>
+            <span class="data">{{ev.duree}} -- {{ev.dureePar}}</span>
+          </div>
+
+          <div class="col-md-6">
+            <label>  تاريخ الاستلام</label>
+            <span class="data">{{ev.dateReception}}</span>
+          </div>
+
+          <div class="col-md-6">
+            <label>                     تاريخ البداية</label>
+            <span class="data">{{ev.dateDebut}}</span>
+          </div>
+
+
+          <div class="col-md-6">
+            <label> 	تاريخ النهاية</label>
+            <span class="data">{{ev.dateFin}}</span>
+          </div>
+
+          <div class="col-md-6">
+            <label>	مدير المشروع </label>
+            <span class="data">{{ev.nomDir}}</span>
+          </div>
+
+        </div>
+
+        <div class="row events-form">
+          <div class="col-md-8 d-flex flex-column flex-wrap">
+            <label> فريق المشروع</label>
+            <div class="data">
+              <div id="table_container">
+                <table class="table table-striped table-bordered theme-table">
+                  <tr>
+                    <th scope="col">م</th>
+                    <th scope="col">الاسم</th>
+                  </tr>
+                  <tr *ngFor="let dp of OuvList;let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{dp.nomUser}}</td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <div class="row events-form">
+          <div class="col-md-8 d-flex flex-column flex-wrap">
+            <label> المرفقات</label>
+            <div class="col-md-4">
+              <span class="data social-links" *ngFor="let dp of filesList">
+                <a (click)="download(dp.pathc)" class="facebook ml-3"><i class="ml-2 fa fa-arrow-down"></i>{{dp.typec}}</a>
+              </span>
+            </div>
+            </div>
+          </div>
+
+          </div>
+        </div>
+
+      </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

@@ -1,0 +1,87 @@
+
+
+<h3 style="text-align: center; color: #107F98;">قائمة الإيرادات لشهر معين</h3>
+<form class="task-form form-row">
+  <div class="col-md-6">
+    <label for="day">اختر الشهر</label>
+    <input type="month" id="day" (change)="testDay($event)" />
+  </div>
+
+  <div class="col-md-12 text-left">
+    <input type="submit"
+           style="width: 130px;"
+           class="btn btn-info"
+           value="عرض"
+           (click)="generatePdf()" />
+  </div>
+</form>
+
+<div class="table-responsive">
+  <div class="text-right">
+    <a (click)="openPDF()" class="btn" style="width: 70px;">
+      <img style="width: 100%;" src="/assets/images/printer2.png" alt="" />
+    </a>
+  </div>
+  <table class="table text-center table-bordered theme-table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">رقم الايصال</th>
+        <th scope="col">المبلغ</th>
+        <th scope="col">طريقة الدفع</th>
+        <th scope="col">اسم الموظف</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of FDonsList; let index = index">
+        <th scope="row">{{index}}</th>
+        <td>{{item.id}}</td>
+        <td>{{item.prixDons}}</td>
+        <td>{{item.typeDons}}</td>
+        <td>{{item.userNameCreator}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="container" id="htmlData" style="display: none;">
+  <div class="receipt-page">
+    <nav class="receipt-header">
+      <div class="date">
+        تاريخ الايصالات <span>{{day}}</span>
+      </div>
+      <h3>قائمة الإيرادات لشهر معين</h3>
+      <div class="print-date">الشهر المحدد <span>{{date}}</span></div>
+    </nav>
+    <main class="receipt-body">
+      <table class="table text-center table-bordered mt-4">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">رقم الايصال</th>
+            <th scope="col">طريقة الدفع</th>
+            <th scope="col">اسم الموظف</th>
+            <th scope="col">المبلغ</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of FDonsList; let index = index">
+            <th scope="row">{{index}}</th>
+            <td>{{item.id}}</td>
+
+            <td>{{item.typeDons}}</td>
+            <td>{{item.userNameCreator}}</td>
+            <td>{{item.prixDons}}</td>
+          </tr>
+
+          <tr>
+            <th scope="row">الاجمالي</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>{{somme}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+  </div>
+</div>

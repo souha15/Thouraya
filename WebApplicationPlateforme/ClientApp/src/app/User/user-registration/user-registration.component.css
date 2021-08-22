@@ -1,0 +1,137 @@
+/****/
+/* Styles go here */
+
+.validation {
+  position: relative;
+}
+
+.input-help {
+  position: absolute;
+
+  right: 100px;
+  width: 200px;
+  padding: 10px;
+  background: #fefefe;
+  font-size: .875em;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px #aaa;
+  border: 1px solid red;
+  opacity: 0.9;
+}
+
+.input-helpe {
+  position: absolute;
+  right: 560px;
+  width: 200px;
+  padding: 10px;
+  background: #fefefe;
+  font-size: .875em;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px #aaa;
+  border: 1px solid red;
+  opacity: 0.9;
+}
+.input-helpe::before {
+  content: "\25b2";
+  position: absolute;
+  top: -12px;
+  left: 90px;
+  right: 0;
+  font-size: 16px;
+  line-height: 16px;
+  color: red;
+  text-shadow: none;
+}
+  .input-help::before {
+    content: "\25b2";
+    position: absolute;
+    top: -12px;
+    left: 90px;
+    right: 0;
+    font-size: 16px;
+    line-height: 16px;
+    color: red;
+    text-shadow: none;
+  }
+
+  .input-help p {
+    margin-bottom: 0;
+  }
+
+  .input-help ul {
+    margin-top: 10px;
+  }
+
+/*Show red border if kept the input empty after touching*/
+.ng-touched.ng-invalid-required {
+  border-color: red;
+}
+/* Show red border when stuff has been typed in, but its invalid */
+.ng-dirty.ng-invalid {
+  border-color: red;
+}
+/*Show normal border color when typed in for the first time*/
+.ng-untouched.ng-invalid {
+  border-color: #ccc;
+}
+
+.ng-submitted input.ng-invalid {
+  border-color: red;
+}
+/****/
+
+.pointer-link {
+  cursor: pointer;
+} 
+
+div.form-group label {
+  color: black;
+  font-weight: bold;
+}
+
+
+label {
+  position: relative;
+  padding: 0 0 0 2rem;
+}
+
+
+/**
+    CheckBox
+
+*/
+input[type=checkbox] {
+  position: absolute;
+  opacity: 0;
+  vertical-align: middle;
+}
+
+  input[type=checkbox] + label::before,
+  input[type=checkbox] + label::after {
+    content: '';
+    position: absolute;
+    display: inline-block;
+    display: block;
+  }
+ul#menu li {
+  display: inline;
+}
+  input[type=checkbox] + label::before {
+    left: 0.5rem;
+    top: 0.15rem;
+    width: 0.9rem;
+    height: 0.9rem;
+    border: 0.05rem solid black;
+    background: white;
+  }
+
+  input[type=checkbox]:checked + label::after {
+    left: 0.6rem;
+    top: 0.28rem;
+    height: 0.8rem;
+    border-left: 0.8rem solid #81a0e3;
+  }
+
+  input[type=checkbox]:focus + label::before {
+    outline: 0.05rem dotted;
+  }

@@ -1,0 +1,818 @@
+.payed {
+  background: #28a745;
+}
+
+.notpayed {
+  background: #dc3545;
+}
+
+
+
+:host ::ng-deep .multiselect-dropdown .dropdown-btn {
+  display: inline-block;
+  border: 1px solid #adadad;
+  width: 100%;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.1;
+  text-align: left;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border-radius: 4px;
+}
+
+/*-- Electronic Sevices Forms --*/
+.task-form input:focus:not([type="submit"]):not([type="reset"]),
+.task-form select:focus {
+  outline-color: #999;
+}
+
+.task-form option:hover {
+  border: none !important;
+}
+
+.service-form label {
+  background-color: #91c3d8;
+  color: #333;
+}
+
+.service-form select {
+  width: 50%;
+}
+
+.service-form input[type="submit"] {
+  width: 140px;
+  font-size: 18px;
+}
+
+.service-form input[type="reset"] {
+  width: 140px;
+  font-size: 18px;
+}
+
+/*-- leave-request-list --*/
+.leave-request-list table thead {
+  background-color: #91c3d8;
+}
+
+.leave-request-list .ok,
+.leave-request-list .refused {
+  display: block;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.leave-request-list .ok {
+  background-color: #28a745 !important;
+}
+
+.leave-request-list .refused {
+  background-color: #dc3545 !important;
+}
+/*-- Events Pages --*/
+.events-form label {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #91c3d8;
+  color: #333;
+  margin-left: 10px;
+  min-width: 60px;
+}
+
+  .events-form label.main {
+    background-color: #276985;
+    color: #fff;
+    padding: 5px 15px;
+    width: 145px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+  }
+
+    .events-form label.main:first-of-type {
+      margin-top: 20px;
+    }
+
+.events-form input[type="text"],
+.events-form input[type="password"] {
+  width: 120px;
+}
+
+.events-form input[type="text"],
+.events-form input[type="password"],
+.events-form input[type="date"],
+.events-form input[type="number"],
+.events-form select {
+  border-radius: 5px;
+  padding: 5px 10px;
+  width: 120px;
+  border: 1px solid #ccc;
+}
+
+  .events-form input[type="text"]:focus,
+  .events-form input[type="password"]:focus,
+  .events-form input[type="date"]:focus,
+  .events-form input[type="number"]:focus,
+  .events-form select:focus {
+    outline: none;
+    border: 1px solid #1da1f2;
+  }
+
+  .events-form input[type="text"].last {
+    width: 400px;
+  }
+
+.events-form input[type="file"] {
+  display: none;
+}
+
+.events-form input[type="submit"] {
+  width: 140px;
+  text-align: center;
+}
+
+.events-form .file-label {
+  background-color: #91c3d8 !important;
+}
+
+/*-- Start Events-List Page --*/
+.events-list .table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgb(132, 192, 199);
+}
+
+.print-link a {
+  color: #185877;
+}
+
+/*-- Start events-data Page --*/
+.events-data .events-form label {
+  width: 135px;
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 15px;
+}
+
+.events-data .events-form .data {
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #999;
+  min-width: 300px;
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+  .events-data .events-form .data .table {
+    max-width: 95%;
+  }
+
+.social-links a {
+  text-decoration: none;
+  color: #276985;
+}
+
+.facebook:hover {
+  color: #3b5998;
+}
+
+.twitter:hover {
+  color: #1da1f2;
+}
+
+.instagram:hover {
+  color: #f56040;
+}
+
+.youtube:hover {
+  color: #ff0000;
+}
+
+.add-inputs,
+.add-inputs2 {
+  background: #344760;
+  color: #fff;
+  border: none;
+  padding: 4px 8px;
+}
+
+/* Journal-file Page */
+.radio-label {
+  text-align: center;
+  min-width: 0 !important;
+  background-color: transparent !important;
+}
+
+/*
+** New Style Added By Front End Developer In 23/7/2020
+** Employee Pages
+** Start With New-Requests Page
+*/
+.new-requests .nav-tabs .nav-link {
+  color: #276985;
+}
+
+.new-requests .nav-tabs .nav-item.show .nav-link,
+.nav-tabs .nav-link.active {
+  color: #ffffff;
+  background-color: #276985;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.new-requests .tab-pane a {
+  color: #276985;
+  display: flex;
+  overflow: hidden;
+  padding: 0 10px 0 0;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  background-color: #dee2e6;
+  align-items: center;
+}
+
+  .new-requests .tab-pane a:hover {
+    background-color: #bbbec1;
+  }
+
+  .new-requests .tab-pane a:hover {
+    text-decoration: none;
+  }
+
+  .new-requests .tab-pane a .num {
+    padding: 5px 20px;
+    background-color: #276985;
+    color: #fff;
+  }
+
+.new-table th {
+  color: #276985;
+}
+
+/* -- General format for table -- */
+.theme-table thead {
+  background-color: #276985;
+  color: #fff;
+}
+
+.theme-table .stat {
+  padding: 5px 10px;
+  background-color: #276985;
+  color: #fff;
+}
+
+.theme-table .link {
+  color: #276985;
+  padding: 5px;
+  background-color: #d1d1d1;
+  text-decoration: none;
+}
+
+  .theme-table .link:hover {
+    opacity: 0.9;
+  }
+
+/* -- News-Page -- */
+
+.news .news-box {
+  padding: 15px 0;
+  margin-bottom: 20px;
+  border-radius: 5px;
+}
+
+  .news .news-box:nth-of-type(odd) {
+    background-color: #eceeef;
+  }
+
+  .news .news-box:nth-of-type(even) {
+    background-color: #f9f9f9;
+  }
+
+.news-box .journalist-img {
+  padding: 5px;
+  border: 2px solid #276985;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+  .news-box .journalist-img img {
+    width: 100%;
+    border-radius: 5px;
+  }
+
+.news-box .news-content {
+  position: relative;
+}
+
+  .news-box .news-content h4 {
+    color: #276985;
+    width: 85%;
+  }
+
+  .news-box .news-content .news-date {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 5px 10px;
+    background-color: #d1d1d1;
+  }
+
+@media (max-width: 767px) {
+  .news-box .journalist-img {
+    width: 80%;
+    margin: 0 auto 15px;
+  }
+
+  .news-box .news-content .news-date {
+    bottom: 0;
+    top: unset;
+  }
+
+  .news-box .news-content h4 {
+    text-align: center;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 992px) {
+  .news-box .news-content h4 {
+    width: 80%;
+  }
+
+  .news-box .news-content .news-date {
+    bottom: 0;
+    top: unset;
+  }
+}
+
+/*news-add page*/
+.task-form {
+  padding: 10px 0;
+}
+
+.new-links {
+  padding: 10px 0;
+  border-top: 2px solid #666;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+  .new-links a {
+    text-decoration: none;
+    color: #276985;
+    border: 1px solid #276985;
+    padding: 5px 15px;
+    border-radius: 8px;
+    transition: 0.3s;
+  }
+
+    .new-links a:hover {
+      background-color: #276985;
+      color: #fff;
+    }
+
+/*-- Courses Page --*/
+.courses .accord {
+  padding: 8px 8px;
+  border: 1px solid #d1d1d1;
+  display: block;
+  text-decoration: none;
+  border-radius: 5px;
+  color: #276985;
+  font-size: 18px;
+  transition: 0.3s ease-in-out;
+  margin-top: 15px;
+}
+
+  .courses .accord:first-of-type {
+    margin-top: 0;
+  }
+
+.accord:after {
+  content: "\02795";
+  /* Unicode character for "plus" sign (+) */
+  font-size: 15px;
+  color: #276985;
+  float: left;
+  margin-right: 5px;
+  margin-top: 3px;
+  transition: 0.3s ease-in-out;
+}
+
+.accord.active {
+  background-color: #276985;
+  color: #fff;
+}
+
+  .accord.active:after {
+    content: "\2796";
+    /* Unicode character for "minus" sign (-) */
+    color: #fff;
+  }
+
+.courses .accord:hover,
+.accord:hover:after {
+  background-color: #276985;
+  color: #fff;
+}
+
+.courses .panel {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid;
+  border-color: transparent #276985 #276985 #276985;
+  border-radius: 0 0 5px 5px;
+  display: none;
+  color: #276985;
+}
+
+/* -- Emp-Card-Request Page -- */
+.emp-photo-label {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+  .emp-photo-label img {
+    max-width: 70%;
+    border-radius: 50%;
+  }
+
+.service-form p {
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 8px 10px;
+  width: 50%;
+  color: #276985;
+  background-color: #d1d1d1;
+}
+
+/* -- Decission Page -- */
+.custum-tabs {
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #276985;
+}
+
+  .custum-tabs .nav-item {
+    margin-left: 10px;
+  }
+
+    .custum-tabs .nav-item:last-child {
+      margin-left: 0;
+    }
+
+  .custum-tabs .nav-link {
+    border-radius: 6px;
+    border: 1px solid #276985;
+    color: #276985;
+  }
+
+    .custum-tabs .nav-link:hover {
+      border-radius: 6px;
+      background: #276985;
+      color: #fff;
+    }
+
+.filtering {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 2px solid #276985;
+  padding: 5px 0;
+}
+
+  .filtering a {
+    color: #276985;
+    text-decoration: none;
+  }
+
+  .filtering div:first-child a {
+    border-left: 1px solid #888;
+    padding-left: 10px;
+  }
+
+/*New Style in this file Added in 4/9/2020 */
+/* Popup Page */
+.popup-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  overflow-y: scroll;
+}
+
+  .popup-page.close {
+    display: none;
+  }
+
+  .popup-page .content {
+    width: 60%;
+    position: relative;
+    background: #fff;
+    color: #333;
+    padding: 30px 20px;
+    border-radius: 10px;
+    margin: 80px auto 30px;
+  }
+
+    .popup-page .content h2 {
+      color: #276985;
+    }
+
+@media (max-width: 991px) {
+  .popup-page {
+    display: grid;
+    place-items: center;
+  }
+
+    .popup-page .content {
+      width: 90%;
+      margin: 50px 0;
+    }
+
+      .popup-page .content .close-btn {
+        top: 10px !important;
+        left: 10px !important;
+      }
+}
+
+.popup-page .content .close-btn {
+  position: absolute;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  left: -40px;
+  top: -40px;
+  background: #ffffff;
+  color: #000;
+  border: 1px solid #999;
+  font-weight: bold;
+}
+
+
+
+/* Tabs in Popup Page */
+.popup-page .radio-lab {
+  background: #344760;
+  color: #fff;
+  width: 100px;
+  margin-left: 0px;
+}
+
+  .popup-page .radio-lab.active {
+    background: #276985;
+  }
+
+.popup-page input[type="radio"] {
+  display: none;
+}
+
+.content1,
+.content2 {
+  display: none;
+}
+
+.choise1:checked ~ .content1,
+.choise2:checked ~ .content2 {
+  display: block;
+}
+
+/* Add This To Service Form Style */
+.service-form p {
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 8px 10px;
+  width: 50%;
+  color: #276985;
+  background-color: #d1d1d1;
+}
+
+/*Task form Editing*/
+.task-form {
+  padding: 10px 0;
+}
+
+  .task-form label {
+    min-width: 126px;
+    background: #91c3d8;
+    color: #444;
+  }
+
+  .task-form input[type="date"],
+  .task-form input[type="number"],
+  .task-form input[type="month"],
+  .task-form input[type="email"],
+  .task-form input[type="tel"],
+  .task-form select {
+    padding: 8px 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    width: 50%;
+  }
+
+.file-label {
+  cursor: pointer;
+}
+
+label.radio-lab {
+  display: inline-block;
+  min-width: 50px;
+  border-radius: 0;
+  padding-right: 4px;
+  background: none;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.pay-method1,
+.pay-method2,
+.pay-method3,
+.programs,
+.other-input {
+  background: #f1f1f1;
+  padding: 15px 0 5px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  text-align: center;
+  display: none;
+}
+
+#pay-method1:checked ~ .pay-method1 {
+  display: block;
+}
+
+#pay-method2:checked ~ .pay-method2 {
+  display: block;
+}
+
+#pay-method3:checked ~ .pay-method3 {
+  display: block;
+}
+
+#programs:checked ~ .programs {
+  display: block;
+}
+
+#other-input:checked ~ .other-input {
+  display: block;
+}
+
+/* Receipt Copy Style in popup page*/
+.receipt-copy {
+  width: 75%;
+  margin: auto;
+}
+
+/*Dropzone Format*/
+.dropzone {
+  font-size: 18px;
+  color: #2196f3;
+  border: 2px dashed #2196f3;
+}
+
+  .dropzone input[type="file"] {
+    display: none;
+  }
+
+/* Receipt-Print Page*/
+.receipt-page {
+  margin-top: 30px;
+  direction: rtl;
+  text-align: right;
+  padding: 10px;
+  border: 1px solid #d1d1d1;
+}
+
+.receipt-header {
+  height: 80px;
+  width: 100%;
+  border-bottom: 2px dashed #d1d1d1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.receipt-body {
+  padding: 15px 0;
+}
+
+.receipt-page .footer {
+  margin-top: 15px;
+  padding-top: 15px;
+  border-top: 2px dashed #d1d1d1;
+}
+
+/* New Style Add in 9/10/2020 
+* Events-form
+*/
+.events-form input[type="text"],
+.events-form input[type="password"],
+.events-form input[type="date"],
+.events-form input[type="number"],
+.events-form input[type="month"],
+.events-form select {
+  border-radius: 5px;
+  padding: 5px 10px;
+  width: 160px;
+  border: 1px solid #ccc;
+}
+
+  .events-form input[type="text"]:focus,
+  .events-form input[type="password"]:focus,
+  .events-form input[type="date"]:focus,
+  .events-form input[type="number"]:focus,
+  .events-form input[type="month"]:focus,
+  .events-form select:focus {
+    outline: none;
+    border: 1px solid #1da1f2;
+  }
+
+.events-form label {
+  min-width: 120px;
+}
+/*--- Status label ---*/
+.staus-box {
+  padding: 10px 20px;
+  margin-bottom: 10px;
+}
+
+  .staus-box .sts {
+    width: 90px;
+    background: #28a745;
+    color: #fff;
+    padding: 8px 10px;
+    position: relative;
+  }
+
+    .staus-box .sts span {
+      position: absolute;
+      left: -29%;
+      border-radius: 50%;
+      top: -10px;
+      width: 60px;
+      height: 60px;
+      background: #28a745;
+      display: block;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+/*Add Project Page*/
+.main1 {
+  margin-top: 0 !important;
+  margin-bottom: 8px !important;
+}
+
+.form-box {
+  border: 2px solid #107f98;
+  padding: 10px;
+  margin: 20px 0;
+  border-radius: 10px;
+}
+
+.add-inputs0 {
+  width: 130px;
+  padding: 10px;
+  background: #344760;
+  color: #fff;
+  border-radius: 5px;
+}
+
+.events-form label.main.big {
+  min-width: 172px;
+}
+
+.small-boxes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+  .small-boxes div {
+    margin-left: 25px;
+  }
+
+  .small-boxes label,
+  .small-boxes .data {
+    min-width: 50px !important;
+    max-width: 120px !important;
+  }

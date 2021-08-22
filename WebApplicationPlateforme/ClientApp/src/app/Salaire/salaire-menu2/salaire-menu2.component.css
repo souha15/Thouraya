@@ -1,0 +1,51 @@
+
+/*printed-request*/
+#htmlData {
+  text-align: left;
+}
+
+.printed-request {
+  direction: rtl;
+  padding: 20px;
+}
+
+  .printed-request header {
+    text-align: right;
+    min-height: 100px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #888;
+    position: relative;
+  }
+
+  .printed-request .logo {
+    width: 20%;
+    position: absolute;
+    right: 10px;
+    bottom: 30px;
+  }
+
+  .printed-request .head-text {
+    text-align: center;
+  }
+
+    .printed-request .head-text h3,
+    .printed-request .head-text p {
+      padding: 0;
+      margin: 0;
+    }
+
+  .printed-request .content {
+    padding-top: 20px;
+  }
+
+    .printed-request .content h3 {
+      background: #185877;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    .printed-request .content table {
+      margin-bottom: 30px;
+    }

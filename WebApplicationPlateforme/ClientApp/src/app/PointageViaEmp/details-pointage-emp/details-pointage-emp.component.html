@@ -1,0 +1,69 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+
+      <header>
+        <h3 class="task-head"> قائمة الحضور و الإنصراف</h3>
+      </header>
+      <div class="events1">
+
+        <div class="row w-100 d-flex form-box">
+          <div class="col-md-12 col-sm-12">
+
+            <label class="main">
+         
+            </label>
+            <div class="d-flex w-100 justify-content-start flex-wrap">
+              <div class="table-responsive new-table2">
+                <table class="table table-bordered text-center table-striped">
+                  <thead class="thead-gestimary">
+                    <tr>
+                      <th scope="col">	# </th>
+                      <th scope="col">	رقم الموظف </th>
+                      <th scope="col">	إسم الموظف </th>
+                      <th scope="col">	التاريخ </th>
+                      <th scope="col">وقت الحضور</th>
+                      <th scope="col"> وقت الإنصراف </th>
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr *ngFor="let point of pointList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p } ; let i = index">
+                      <th scope="row">{{i+1}}</th>
+                      <td>{{point.numEmp}}</td>
+                      <td>{{point.attribut1}}</td>
+                      <td>{{point.date}}</td>
+                      <td>{{point.heureAssister}}</td>
+                      <td>{{point.heurePartir}}</td>
+
+
+
+
+                    </tr>
+                  </tbody>
+
+
+
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

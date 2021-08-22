@@ -1,0 +1,11 @@
+/*-- Start Events-List Page --*/
+.events-list .table-striped tbody tr:nth-of-type(odd) {
+  background-color: rgb(132, 192, 199);
+}
+
+.print-link a {
+  color: #185877;
+}
+.sortable tr {
+  cursor: pointer;
+}

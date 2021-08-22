@@ -1,0 +1,78 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">تقديم طلب دورة تدريبية</h3>
+      </header>
+      <form class="form-row task-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="col-md-6">
+          <label for="">عنوان الدورة</label>
+          <input type="text" name="titre" #titre="ngModel" [(ngModel)]="fm.titre" required />
+          <div *ngIf="titre.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب عنوان الدورة .
+
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label for="">الاختصاص</label>
+          <select name="specialite" #specialite="ngModel" [(ngModel)]="fm.specialite">
+            <option [ngValue]="undefined" selected disabled>اختر تخصص</option>
+            <option *ngFor="let item of SpecList" value="{{item.nom}}">{{item.nom}}</option>
+          </select>
+
+        </div>
+        <div class="col-md-6">
+          <label for="">تخصص آخر</label>
+          <input type="text" name="autreSpec" #autreSpec="ngModel" [(ngModel)]="fm.autreSpec" />
+        </div>
+        <div class="col-md-6">
+          <label for="">الجهة المقدمة</label>
+          <input type="text" name="org" #org="ngModel" [(ngModel)]="fm.org" />
+        </div>
+        <div class="col-md-6">
+          <label for="">المدة بالأيام </label>
+          <input type="number" min="0" name="duree" #duree="ngModel" [(ngModel)]="fm.duree" />
+        </div>
+        <div class="col-md-6">
+          <label for="">المدة بالساعات</label>
+          <input type="number" min="0" name="attribut3" #attribut3="ngModel" [(ngModel)]="fm.attribut3" />
+        </div>
+
+        <div class="col-md-6">
+          <label for=""> مكان الدورة</label>
+          <input type="text" name="attribut2" #attribut2="ngModel" [(ngModel)]="fm.attribut2" />
+        </div>
+        <div class="col-md-6">
+          <label for="">تكلفة الدورة</label>
+          <input type="number" min="0" name="prix" #prix="ngModel" [(ngModel)]="fm.prix" />
+        </div>
+        <div class="col-md-6">
+          <label for="">رابط الدورة</label>
+          <input type="text" name="lien" #lien="ngModel" [(ngModel)]="fm.lien" />
+        </div>
+        <div class="col-md-6">
+          <label for="">التفاصيل</label>
+          <textarea class="form-control" name="detail" #detail="ngModel" [(ngModel)]="fm.detail"></textarea>
+        </div>
+        <div class="col-12 text-center text-md-left mt-3">
+          <input class="btn btn-info"
+                 style="width: 130px;"
+                 type="submit"
+                 value="تقديم" />
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

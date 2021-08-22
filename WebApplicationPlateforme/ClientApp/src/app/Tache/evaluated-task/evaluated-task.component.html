@@ -1,0 +1,224 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h2 class="task-head">تفاصيل المهمة</h2>
+        <a href="#" class="btn print-btn"><i class="fa fa-print fa-2x"></i></a>
+      </header>
+      <div class="task-details">
+        <div class="container">
+          <div class="task-info d-flex flex-wrap">
+            <div class="flex-fill">
+              <ul class="d-flex list-unstyled">
+                <li class="flex-fill item-logo">
+                  <img src="assets/images/artboard.png" width="35" alt="image">
+                </li>
+                <li class="flex-fill item-text">
+                  <p>رقم المهمة</p>
+                  <span class="num-task">{{tache.id}}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="flex-fill">
+              <ul class="d-flex list-unstyled">
+                <li class="flex-fill item-logo">
+                  <i class="fa fa-pen-nib fa-2x"></i>
+                </li>
+                <li class="flex-fill item-text">
+                  <p>محرر المهمة</p>
+                  <span>{{tache.creatorName}}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="flex-fill">
+              <ul class="d-flex list-unstyled">
+                <li class="flex-fill item-logo">
+                  <i class="fa fa-user-tie fa-2x"></i>
+                </li>
+                <li class="flex-fill item-text">
+                  <p> المسند إليه</p>
+                  <span>{{tache.createur}}</span>
+                </li>
+              </ul>
+            </div>
+            <div class="flex-fill">
+              <ul class="d-flex list-unstyled">
+                <li class="flex-fill item-logo">
+                  <i class="fa fa-clock fa-2x"></i>
+                </li>
+                <li class="flex-fill item-text">
+                  <p>الحالة</p>
+                  <span>{{tache.etat}}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- Table -->
+          <div class="table-responsive">
+            <table class="table table-bordered">
+              <thead>
+                <tr>
+                  <th scope="col">رقم المهمة</th>
+                  <th scope="col">اسم المهمة</th>
+                  <th scope="col">أولوية</th>
+                  <th scope="col">تاريخ البداية</th>
+                  <th scope="col">المدة باليوم</th>
+                  <th scope="col">وصف المهمة</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row" (click)="populateForm(tache)" data-toggle="modal" data-target="#myModal1">{{tache.id}}</th>
+                  <td>{{tache.tacheNom}}</td>
+                  <td>{{tache.priorite}}</td>
+                  <td>{{tache.date}}</td>
+                  <td>{{tache.delai}}</td>
+                  <td><a (click)="populateForm(tache)" data-toggle="modal" data-target="#myModal1"><span class="show-details">اظهار التفاصيل</span></a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="task-details-box mb-3">
+            <h5 class="head">حجز على العالي</h5>
+            <p class="text-danger"> مراحل المهمة <span><i class="fa fa-chevron-down"></i></span></p>
+            <ul>
+              <li>
+                <span class="name">جابر دوشي</span>
+                <span class="date">منذ يوم واحد</span>
+                <p>
+                  تم الانشاء <span>
+                    <i class="fa fa-edit
+"></i>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <span class="name">جابر دوشي</span>
+                <span class="date">منذ يوم واحد</span>
+                <p>
+                  مكتملة<span>
+                    <i class="fa fa-edit
+"></i>
+                  </span>
+                </p>
+              </li>
+              <li>
+                <span class="name">جابر دوشي</span>
+                <span class="date">منذ يوم واحد</span>
+                <p>
+                  تم اعادة الفتح <span>
+                    <i class="fa fa-edit
+"></i>
+                  </span>
+                </p>
+              </li>
+            </ul>
+            <a href="#">اضف تعليق</a>
+          </div>
+          <div class="col-12 text-center" *ngIf="rated">
+            <a href="#" class="btn complete-btn mb-3" style="background: #072">
+              <i class="fa fa-check"></i>
+              تم التقييم
+            </a>
+
+            <div class="stars">
+
+              <ng-template #t let-fill="fill">
+                <span class="star" [class.full]="fill === 100">
+                  <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                </span>
+              </ng-template>
+
+              <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+
+              <hr>
+              <pre>التقييم: <b>{{currentRate}}</b></pre>
+            </div>
+            <!--- <div class="stars">
+              <span class="star"><i class="far fa-star fa-lg"></i></span>
+              <span class="star"><i class="fa fa-star fa-lg"></i></span>
+              <span class="star"><i class="fa fa-star fa-lg"></i></span>
+              <span class="star"><i class="fa fa-star fa-lg"></i></span>
+              <span class="star"><i class="fa fa-star fa-lg"></i></span>
+            </div>-->
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Modal -->
+<div id="myModal1" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">بيانات المهمة</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <form class="task-form form-row">
+
+          <div class="col-sm-6">
+            <label><span><i class="fa fa-sort-numeric-down"></i></span>رقم المهمة</label>
+            <span class="task-num">{{details.id}}</span>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="date"><span><i class="fa fa-calendar-alt"></i></span>التاريخ </label>
+            <span>{{details.date}}</span>
+          </div>
+
+          <div class="col-sm-6">
+            <label for="sort"><span><i class="fa fa-list-ol"></i></span>الاولوية</label>
+            <span>{{details.priorite}}</span>
+
+          </div>
+          <div class="col-sm-6">
+            <label for="task"><span><i class="fa fa-calendar-check"></i></span>المهمة</label>
+            <span>{{details.tacheNom}}</span>
+          </div>
+          <div class="col-12">
+            <label for="task-details"><span><i class="fa fa-list"></i></span>وصف المهمة</label>
+            <span>{{details.description}}</span>
+
+          </div>
+          <div class="col-sm-4">
+            <label for="days"><span><i class="fa fa-calendar-day"></i></span>المدة باليوم</label>
+            <span>{{details.delai}}</span>
+
+          </div>
+          <div class="col-sm-8">
+            <label for="user"><span><i class="fa fa-user"></i></span>المسند إليه</label>
+            <span *ngIf="details.atous=='all'">للجميع</span>
+
+            <span *ngIf="details.atous=='employee'">{{details.createur}}</span>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

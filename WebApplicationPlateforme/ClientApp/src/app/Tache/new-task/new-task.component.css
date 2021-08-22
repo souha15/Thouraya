@@ -1,0 +1,56 @@
+:host ::ng-deep .multiselect-dropdown .dropdown-btn {
+  display: inline-block;
+  border: 1px solid #adadad;
+  width: 100%;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.1;
+  text-align: left;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border-radius: 4px;
+}
+
+
+  .task-num {
+  color: #ed685e;
+  font-weight: bold;
+  font-size: 18px;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: hidden;
+}
+
+.task-det {
+  color: cadetblue;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.aaa {
+  background-color: #eb4034;
+  color: #fff;
+  padding: 5px;
+  border-radius: 10px 10px 10px 10px;
+  border: 0;
+  height: auto;
+  width: auto;
+}
+ul {
+  list-style:none
+}
+
+.file-label {
+  cursor: pointer;
+}
+
+.dropzone {
+  font-size: 18px;
+  color: #2196f3;
+  border: 2px dashed #2196f3;
+  width: 500px;
+}

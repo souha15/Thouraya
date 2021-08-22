@@ -1,0 +1,221 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">قائمة طلبات الصيانة والدعم الفني</h3>
+      </header>
+      <div class="form-group pull-right">
+        <input type="text"
+               class="search form-control"
+               placeholder="ما الذي تبحث عنه ؟"
+               name="search" [(ngModel)]="filter" />
+      </div>
+      <span class="counter pull-right"></span>
+      <div class="table-responsive">
+        <table class="table results text-center table-bordered theme-table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">العطل</th>
+              <th scope="col">صنف العطل</th>
+              <th scope="col">نوع الطلب</th>
+              <th scope="col">تاريخ الطلب</th>
+              <th scope="col">الحالة</th>
+              <th scope="col">التفاصيل</th>
+              <th scope="col">تعديل</th>
+              <th scope="col">حذف</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+              <th scope="row">{{cg.id}}</th>
+              <td (click)="populateForm(cg)">{{cg.panne}}</td>
+              <td (click)="populateForm(cg)">{{cg.categoriePanne}}</td>
+              <td (click)="populateForm(cg)">{{cg.typePanne}}</td>
+              <td (click)="populateForm(cg)">{{cg.dateenreg}}</td>
+              <td (click)="populateForm(cg)">{{cg.etat}}</td>
+              <td>
+                <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-eye fa-lg"></i>
+                </a>
+              </td>
+              <td (click)="populateForm(cg)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1">تعديل</a></td>
+              <td (click)="populateForm(cg)"><a class="btn btn-danger" (click)="onDelete(cg.id)">حذف</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+<div id="myModal" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تفاصيل الفاتورة</h2>
+          <div class="form-row task-form service-form text-center">
+
+            <div class="col-md-12">
+              <span class="completed" *ngIf="etatok">الحالة :{{fact.etat}}</span>
+              <span class="notcompleted" *ngIf="!etatok">الحالة :{{fact.etat}}</span>
+              <br />
+              <br />
+            </div>
+
+            <div class="col-md-6">
+
+              <div>
+                <label>رقم </label>
+                <p>{{fact.id}}</p>
+              </div>
+              <div>
+                <label>صنف العطل</label>
+                <p>{{fact.typePanne}}</p>
+              </div>
+
+              <div>
+                <label>العطل</label>
+                <p>{{fact.panne}}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div>
+                <label>نوع العطل </label>
+                <p>{{fact.categoriePanne}}</p>
+              </div>
+
+              <div>
+                <label>نوع الطلب</label>
+                <p>{{fact.typedemande}}</p>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div>
+                <label>التفاصيل</label>
+                <p>
+                  {{fact.detail}}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تعديل طلب الصيانة</h2>
+          <div class="col-md-12">
+            <span class="completed" *ngIf="etatok">الحالة :{{fact.etat}}</span>
+            <span class="notcompleted" *ngIf="!etatok">الحالة :{{fact.etat}}</span>
+            <br />
+            <br />
+          </div>
+          <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <div class="col-md-6">
+              <label for="">صنف العطل</label>
+              <select name="typePanne" #typePanne="ngModel" [(ngModel)]="mnService.formData.typePanne" required>
+                <option [ngValue]="undefined" selected disabled>اختر العطل</option>
+                <option *ngFor="let item of panneList" value="{{item.nom}}">{{item.nom}}</option>
+
+              </select>
+
+              <div *ngIf="typePanne.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب صنف العطل .
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="">نوع العطل</label>
+              <input type="text" name="categoriePanne" #categoriePanne="ngModel" [(ngModel)]="mnService.formData.categoriePanne" />
+            </div>
+            <div class="col-md-6">
+              <label for="">العطل</label>
+              <input type="text" name="panne" #panne="ngModel" [(ngModel)]="mnService.formData.panne" required />
+              <div *ngIf="panne.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب العطل .
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="">نوع الطلب</label>
+              <select name="typedemande" #typedemande="ngModel" [(ngModel)]="mnService.formData.typedemande" required>
+                <option [ngValue]="undefined" selected disabled>نوع الطلب</option>
+                <option>مستعجل جدا</option>
+                <option>مستعجل</option>
+                <option>غير مستعجل</option>
+
+              </select>
+              <div *ngIf="typedemande.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب نوع الطلب .
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label for="req-det">التفاصيل</label>
+              <textarea id="req-det"
+                        class="form-control" name="detail" #detail="ngModel" [(ngModel)]="mnService.formData.detail"></textarea>
+            </div>
+            <div class="col-md-6">
+              <label for="">إرفاق مرفق</label>
+              <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+                <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+            </div>
+            <div class="col-12 text-center text-md-left mt-3">
+              <input class="btn btn-info"
+                     style="width: 130px;"
+                     type="submit"
+                     value="ارسال الطلب" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -1,0 +1,102 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <div class="events-data">
+        <header>
+          <h3 class="task-head"> بيانات الكفيل</h3>
+        </header>
+
+
+        <div class="events-form row">
+          <div class="col-md-6" *ngIf="tut.nom!=null">
+            <label>    لاسم الثلاثي</label>
+            <span class="data">{{tut.nom}}</span>
+          </div>
+          <div class="col-md-6" *ngIf="tut.cin!=null">
+            <label>رقم الهوية</label>
+            <span class="data">{{tut.cin}}</span>
+          </div>
+          <div class="col-md-6" *ngIf="tut.tel!=null">
+            <label>	رقم الجوال </label>
+            <span class="data">{{tut.tel}}</span>
+          </div>
+          <div class="col-md-6" *ngIf="tut.email!=null">
+            <label>الايميل</label>
+            <span class="data">{{tut.email}}</span>
+          </div>
+          <div class="col-md-6" *ngIf="tut.pays!=null">
+            <label>المدينة </label>
+            <span class="data">{{tut.pays}}</span>
+          </div>
+          <div class="col-md-6" *ngIf="tut.ville!=null">
+            <label>الدولة</label>
+            <span class="data">{{tut.ville}}</span>
+          </div>
+          <div class="col-md-6" *ngIf="tut.nat!=null">
+            <label>	الجنسية</label>
+            <span class="data">{{tut.nat}}</span>
+          </div>
+          <div class="col-md-6" *ngIf="tut.nbParrainage!=null">
+            <label>عدد المعالين </label>
+            <span class="data">{{tut.nbParrainage}}</span>
+          </div>
+
+          <div class="col-md-12" *ngIf="tut.otherDetails!=null">
+            <label>	تفاصيل اخرى  </label>
+            <span class="data">{{tut.otherDetails}}</span>
+          </div>
+
+          <div class="col-md-12">
+            <label> بيانات الكفالة</label>
+          </div>
+        </div>
+      
+          <div class="events-form row">
+            <div class="table-responsive new-table2">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-gestimary">
+                  <tr>
+
+                    <th scope="col">رقم الكفيل</th>
+                    <th scope="col">	اسم الكفيل </th>
+                    <th scope="col">	نوع المكفول</th>
+                    <th scope="col">	لإسم المكفول</th>
+                    <th scope="col">قيمة الكفالة</th>
+
+                    <th scope="col">حذف</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of parList">
+                    <td (click)="populateForm1(dp)">{{dp.numTuteur}}</td>
+                    <td (click)="populateForm1(dp)">{{dp.nomTuteur}}</td>
+                    <td (click)="populateForm1(dp)">{{dp.type}}</td>
+                    <td (click)="populateForm1(dp)" *ngIf="dp.nomOrph!=null">{{dp.nomOrph}}</td>
+                    <td (click)="populateForm1(dp)" *ngIf="dp.nomBen!=null">{{dp.nomBen}}</td>
+                    <td (click)="populateForm1(dp)">{{dp.solde}}</td>
+                    <td><a (click)="onDelete(dp.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+      </div>
+  </div>
+
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

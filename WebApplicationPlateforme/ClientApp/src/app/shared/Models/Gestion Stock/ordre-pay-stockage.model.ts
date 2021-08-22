@@ -1,0 +1,33 @@
+export class OrdrePayStockage {
+  id :number;
+respId:string;
+respNom:string;
+respEtat:string;
+respDate:string;
+nomStock:string;
+typeOrdre:string;
+etatDir:string;
+idDir:string;
+nomDir:string;
+dateDir:string;
+nomOrdre:string;
+typePay:string;
+typeBen:string;
+nbFamille:string;
+dateFin:string;
+etatBen:string;
+etatOrdre:string;
+quantite:string;
+attribut1: number;
+attribut7: number;
+attribut2:string;
+attribut3:string;
+attribut4:string;
+attribut5:string;
+attribut6:string;
+dateenreg:string;
+userNameCreator:string;
+idUserCreator:string;
+idstock: number;
+idBen: number;
+}

@@ -1,0 +1,120 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h2 class="task-head">إضافة  الصلاحيات</h2>
+      </header>
+
+            <div class="col-xl-12 col-md-12">
+              <div class="card user-card-full">
+                <div class="row m-l-0 m-r-0">
+                  <div class="col-sm-4 bg-c-lite-green user-profile">
+                    <div class="card-block text-center text-white">
+                      <div class="m-b-25" *ngIf="user.photo==null"> <img src="assets/images/avatar.png" style="border-radius:10px;width:100px;" alt="User-Profile-Image"> </div>
+                      <div class="m-b-25" *ngIf="user.photo!=null"> <img src="/uploads/{{user.photo}}" style="border-radius:10px;width:100px;" alt="User-Profile-Image"> </div>
+                      <h6 class="f-w-600">{{user.fullName}}</h6>
+
+                      <p>{{user.emploi}}</p> <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                    </div>
+                  </div>
+                  <div class="col-sm-8">
+                    <div class="card-block">
+                      <h6 class="m-b-20 p-b-5 b-b-default f-w-600">صلاحيات المستخدم</h6>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div *ngFor="let user of roleslist" style="display:inline-block">
+
+                            <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='EMPLOYEE'">
+                              موظف
+                              <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                            </p>
+
+                            <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='DIRECTORGENERAL'">
+                              المدير التنفيذي
+                              <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                            </p>
+
+                            <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='ADMINISTRATEUR'">
+                              مسؤول النظام
+                              <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                            </p>
+
+                            <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='DIRECTORETAB'">
+                              مدير قسم
+                              <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                            </p>
+
+                            <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='RESSOURCEHUMAINE'">
+                              مسؤول شؤون الموظفين
+                              <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                            </p>
+
+                            <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='RESPFINANCE'">
+                              مسؤول مالية
+                              <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                            </p>
+
+                            <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='DIRECTORADMN'">
+                              مدير ادارة
+                              <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                            </p>
+
+                          </div>
+                        </div>
+
+                      </div>
+                      <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">إضافة صلاحيات</h6>
+                      <div class="row">
+                        <div class="col-sm-12">
+                          <div style="display:inline-block">
+                            <button id="rcorners2" class="m-b-10 f-w-600" #btn1 (click)="add1();btn1.disabled = true;">موظف</button>
+                            <button id="rcorners2" class="m-b-10 f-w-600" #btn2 (click)="add2();btn2.disabled = true;">المدير التنفيذي</button>
+                            <button id="rcorners2" class="m-b-10 f-w-600" #btn3 (click)="add3();btn3.disabled = true;">مسؤول النظام</button>
+                            <button id="rcorners2" class="m-b-10 f-w-600" #btn4 (click)="add4();btn4.disabled = true;">مدير قسم</button>
+                            <button id="rcorners2" class="m-b-10 f-w-600" #btn5 (click)="add5();btn5.disabled = true;">مسؤول شؤون الموظفين</button>
+                            <button id="rcorners2" class="m-b-10 f-w-600" #btn6 (click)="add6();btn6.disabled = true;">مسؤول مالية</button>
+                            <button id="rcorners2" class="m-b-10 f-w-600" #btn7 (click)="add7();btn7.disabled = true;">مدير ادارة </button>
+
+
+                          </div>
+                        </div>
+
+                      </div>
+
+                      <h1 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">&nbsp;&nbsp;</h1>
+                      <div class="row">
+                        <div class="col-sm-12 text-left">
+                          <div style="display:inline-block">
+                            <button id="rcornersenreg" class="m-b-10 f-w-600" (click)="enreg()">تسجيل </button>
+                            &nbsp;&nbsp;
+                            <button id="rcornersout" class="m-b-10 f-w-600" [routerLink]="['/users-list']">خروج</button>
+
+
+                          </div>
+                        </div>
+
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+         
+  
+
+
+    </div>
+    </div>
+
+  </div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

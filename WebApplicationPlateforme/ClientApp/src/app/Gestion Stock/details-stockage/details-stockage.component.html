@@ -1,0 +1,81 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <div class="events-data">
+        <header>
+          <h3 class="task-head">المستودع</h3>
+        </header>
+
+        <div class="events-form row">
+          <div class="col-md-6">
+            <label>  اسم المخزن</label>
+            <span class="data">{{st.nomstock}}</span>
+          </div>
+
+          <div class="col-md-6">
+            <label> 	مسؤول المخزن</label>
+            <span class="data">{{st.respnom}}</span>
+          </div>
+
+          <div class="col-md-8 d-flex flex-column flex-wrap" *ngIf="exist">
+
+            <div>
+              <label style="width: 200px">   الصنف</label>
+            </div>
+
+            <div>
+              <table class="table table-striped table-bordered theme-table">
+                <thead>
+                  <tr>
+
+                    <th scope="col">	اسم المستودع </th>
+                    <th scope="col">	الصنف </th>
+                    <th scope="col">	الكمية </th>
+                    <th scope="col">الوحدة  </th>
+                    <th scope="col">	سعر الوحدة  </th>
+                    <th scope="col">	الاجمالي   </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of tyStockst">
+                    <td>{{dp.nomstock}}</td>
+                    <td>{{dp.type}}</td>
+                    <td>{{dp.quantite}}</td>
+                    <td>{{dp.unite}}</td>
+                    <td>{{dp.prix}}</td>
+                    <td>{{dp.tot}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div class="d-flex flex-row align-items-center justify-content-between flex-wrap" *ngIf="st.remarque!=''">
+                <div class="d-flex flex-column align-items-center flex-wrap">
+
+                </div>
+              </div>
+            </div>
+
+            <!-- Results -->
+
+          </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

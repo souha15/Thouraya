@@ -1,0 +1,466 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <app-nav-user-menu></app-nav-user-menu>
+      <header>
+        <h3 class="task-head">إضافة وثائق موظف</h3>
+      </header>
+      <div class="form-group pull-right">
+        <input type="text"
+               class="search form-control"
+               placeholder="ما الذي تبحث عنه ؟"
+               name="search" [(ngModel)]="filter" />
+      </div>
+      <span class="counter pull-right"></span>
+      <div class="table-responsive">
+        <table class="table results text-center table-bordered theme-table">
+          <thead>
+            <tr>
+              <th scope="col">الإسم</th>
+              <th scope="col">الهوية</th>
+              <th scope="col">جواز السفر</th>
+              <th scope="col">عقد العمل</th>
+              <th scope="col">الشهادة</th>
+              <th scope="col">قرار التعيين</th>
+              <th scope="col"> المباشرة</th>
+              <th scope="col">الدورات و الخبرات</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cg of UsersList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+              <td (click)="populateForm(cg)">{{cg.fullName}}</td>
+
+
+              <td (click)="populateForm(cg)">
+                <a *ngIf="!getcin(cg.id)" class="btn show-details-btn btn-info" data-toggle="modal" data-target="#myModal2">ارفاق نسخة</a>
+                <p *ngIf="getcin(cg.id)">
+                  <span class="text-success">
+                    <i class="fa fa-check fa-lg"></i>
+                  </span>
+                  تم الارفاق
+
+                  <span class="text-danger">
+                    <a (click)="getdata(cg.id)"><i class="fa fa-times fa-lg"></i></a>
+                  </span>
+                </p>
+              </td>
+
+              <td (click)="populateForm(cg)">
+                <a *ngIf="!getpass(cg.id)" class="btn show-details-btn btn-info" data-toggle="modal" data-target="#myModal3">ارفاق نسخة</a>
+                <p *ngIf="getpass(cg.id)">
+                  <span class="text-success">
+                    <i class="fa fa-check fa-lg"></i>
+                  </span>
+                  تم الارفاق
+                  <span class="text-danger">
+                    <a (click)="getdata1(cg.id)"><i class="fa fa-times fa-lg"></i></a>
+                  </span>
+                </p>
+              </td>
+
+              <td (click)="populateForm(cg)">
+                <a *ngIf="!getcontrat(cg.id)" class="btn show-details-btn btn-info" data-toggle="modal" data-target="#myModal1">ارفاق نسخة</a>
+                <p *ngIf="getcontrat(cg.id)">
+                  <span class="text-success">
+                    <i class="fa fa-check fa-lg"></i>
+                  </span>
+                  تم الارفاق
+                  <span class="text-danger">
+                    <a (click)="getdata2(cg.id)"><i class="fa fa-times fa-lg"></i></a>
+                  </span>
+                </p>
+              </td>
+
+
+              <td (click)="populateForm(cg)">
+                <a *ngIf="!getDiplome(cg.id)" class="btn show-details-btn btn-info" data-toggle="modal" data-target="#myModal4">ارفاق نسخة</a>
+                <p *ngIf="getDiplome(cg.id)">
+                  <span class="text-success">
+                    <i class="fa fa-check fa-lg"></i>
+                  </span>
+                  تم الارفاق
+                  <span class="text-danger">
+                    <a (click)="getdata3(cg.id)"><i class="fa fa-times fa-lg"></i></a>
+                  </span>
+                </p>
+              </td>
+
+              <td (click)="populateForm(cg)">
+                <a *ngIf="!getEmploi(cg.id)" class="btn show-details-btn btn-info" data-toggle="modal" data-target="#myModal5">ارفاق نسخة</a>
+                <p *ngIf="getEmploi(cg.id)">
+                  <span class="text-success">
+                    <i class="fa fa-check fa-lg"></i>
+                  </span>
+                  تم الارفاق
+                  <span class="text-danger">
+                    <a (click)="getdata4(cg.id)"><i class="fa fa-times fa-lg"></i></a>
+                  </span>
+                </p>
+              </td>
+
+              <td (click)="populateForm(cg)">
+                <a *ngIf="!getDebut(cg.id)" class="btn show-details-btn btn-info" data-toggle="modal" data-target="#myModal6">ارفاق نسخة</a>
+                <p *ngIf="getDebut(cg.id)">
+                  <span class="text-success">
+                    <i class="fa fa-check fa-lg"></i>
+                  </span>
+                  تم الارفاق
+                  <span class="text-danger">
+                    <a (click)="getdata5(cg.id)"><i class="fa fa-times fa-lg"></i></a>
+                  </span>
+                </p>
+              </td>
+
+              <td (click)="populateForm(cg)">
+                <a *ngIf="!getFormation(cg.id)" class="btn show-details-btn btn-info" data-toggle="modal" data-target="#myModal7">ارفاق نسخة</a>
+                <p *ngIf="getFormation(cg.id)">
+                  <span class="text-success">
+                    <i class="fa fa-check fa-lg"></i>
+                  </span>
+                  تم الارفاق
+                  <span class="text-danger">
+                    <a (click)="getdata6(cg.id)"><i class="fa fa-times fa-lg"></i></a>
+                  </span>
+                </p>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+<!-- Delete 1 --->
+<!----Contrat-->
+<div id="myModala" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">حذف الهوية</h2>
+
+          <form class="task-form form-row">
+            <div class="col-md-12">
+              <p style="font-weight:bold;font-size:20px;">هل انت متأكد من حذف الهوية ؟ </p>
+            </div>
+            <div class="col-12 text-center text-md-left mt-3">
+              <input class="btn btn-danger"
+                     style="width: 130px;"
+                     type="submit"
+                     value="حذف " (click)="delete1()" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!----Contrat-->
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">ارفاق  عقد العمل</h2>
+
+          <form class="task-form form-row">
+            <div class="col-md-12">
+              <label for="">إرفاق تعهد</label>
+              <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+                <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+            </div>
+            <div class="col-12 text-center text-md-left mt-3">
+              <input class="btn btn-info"
+                     style="width: 130px;"
+                     type="submit"
+                     value="إرفاق" (click)="onSubmit1()" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-----Cin-->
+<div id="myModal2" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2"> ارفاق الهوية</h2>
+
+          <form class="task-form form-row">
+            <div class="col-md-12">
+
+              <ngx-dropzone (change)="upload2($event);onSelect2($event)" class="dropzone" #inputFile>
+                <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files2" [removable]="true" (removed)="onRemove2(f)">
+                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+            </div>
+            <div class="col-12 text-center text-md-left mt-3">
+              <input class="btn btn-info"
+                     style="width: 130px;"
+                     type="submit"
+                     value="إرفاق" (click)="onSubmit2()" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-------Passeport-->
+
+<div id="myModal3" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">ارفاق جواز السفر</h2>
+
+          <form class="task-form form-row">
+            <div class="col-md-12">
+
+              <ngx-dropzone (change)="upload3($event);onSelect3($event)" class="dropzone" #inputFile>
+                <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files3" [removable]="true" (removed)="onRemove3(f)">
+                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+            </div>
+            <div class="col-12 text-center text-md-left mt-3">
+              <input class="btn btn-info"
+                     style="width: 130px;"
+                     type="submit"
+                     value="إرفاق" (click)="onSubmit3()" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-----4-->
+<div id="myModal4" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2"> ارفاق الشهادة </h2>
+
+          <form class="task-form form-row">
+            <div class="col-md-12">
+
+              <ngx-dropzone (change)="upload4($event);onSelect4($event)" class="dropzone" #inputFile>
+                <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files4" [removable]="true" (removed)="onRemove4(f)">
+                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+            </div>
+            <div class="col-12 text-center text-md-left mt-3">
+              <input class="btn btn-info"
+                     style="width: 130px;"
+                     type="submit"
+                     value="إرفاق" (click)="onSubmit4()" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+<!-----4-->
+<div id="myModal5" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2"> ارفاق قرار التعيين </h2>
+
+          <form class="task-form form-row">
+            <div class="col-md-12">
+
+              <ngx-dropzone (change)="upload5($event);onSelect5($event)" class="dropzone" #inputFile>
+                <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files5" [removable]="true" (removed)="onRemove5(f)">
+                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+            </div>
+            <div class="col-12 text-center text-md-left mt-3">
+              <input class="btn btn-info"
+                     style="width: 130px;"
+                     type="submit"
+                     value="إرفاق" (click)="onSubmit5()" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-----6-->
+<div id="myModal6" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2"> ارفاق المباشرة  </h2>
+
+          <form class="task-form form-row">
+            <div class="col-md-12">
+
+              <ngx-dropzone (change)="upload6($event);onSelect6($event)" class="dropzone" #inputFile>
+                <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files6" [removable]="true" (removed)="onRemove6(f)">
+                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+            </div>
+            <div class="col-12 text-center text-md-left mt-3">
+              <input class="btn btn-info"
+                     style="width: 130px;"
+                     type="submit"
+                     value="إرفاق" (click)="onSubmit6()" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<!-----7-->
+<div id="myModal7" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2"> ارفاق الدورات و الخبرات </h2>
+
+          <form class="task-form form-row">
+            <div class="col-md-12">
+
+              <ngx-dropzone (change)="upload7($event);onSelect7($event)" class="dropzone" #inputFile>
+                <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files7" [removable]="true" (removed)="onRemove7(f)">
+                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+            </div>
+            <div class="col-12 text-center text-md-left mt-3">
+              <input class="btn btn-info"
+                     style="width: 130px;"
+                     type="submit"
+                     value="إرفاق" (click)="onSubmit7()" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

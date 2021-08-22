@@ -1,0 +1,104 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">تذكرة رقم {{ev.etat}}</h3>
+     
+      </header>
+
+      <div class="events-data">
+        <div class="events-form row">
+          <div class="col-md-12">
+            <p></p>
+          </div>
+          <div class="col-md-6">
+            <label>رقم التذكرة</label>
+            <span class="data">{{ev.id}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>التاريخ </label>
+            <span class="data">{{ev.date}}<span class="time mr-2">13:00</span></span>
+          </div>
+          <div class="col-md-6">
+            <label>العنوان</label>
+            <span class="data">{{ev.titre}}</span>
+          </div>
+
+          <div class="col-md-6" *ngIf="ToUser">
+            <label>الموظف</label>
+            <span class="data">{{ev.nomuser}}</span>
+          </div>
+
+          <div class="col-md-6" *ngIf="ToAdmin">
+            <label>الإدارة</label>
+            <span class="data">{{ev.nomadmin}}</span>
+          </div>
+
+          <div class="col-md-6" *ngIf="ToEtab">
+            <label>القسم</label>
+            <span class="data">{{ev.nometab}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>الحالة</label>
+            <span class="data">{{ev.etat}}</span>
+          </div>
+
+        </div>
+        <div class="row events-form">
+          <!-- Here we ar-->
+          <div class="col-md-8 d-flex flex-column flex-wrap">
+            <!-- Attachments -->
+            <div class="">
+              <label>المرفقات</label>
+              <span class="data">
+                <span *ngFor="let pr of FilesList">
+                  <i class="ml-2 fa fa-arrow-down" style="color:dodgerblue"></i>
+                  <a (click)="download(pr.path)" class="ml-3" style="color:dodgerblue">{{pr.path}}</a>
+
+                </span>
+              </span>
+            </div>
+
+            <!-- Results -->
+
+          </div>
+
+          <div class="col-md-4">
+
+          </div>
+
+        </div>
+        <div class="row events-form">
+          <div class="col-md-8 d-flex flex-column flex-wrap">
+            <label style="display:inline">التفاصيل</label>
+            <span class="data">
+              {{ev.detail}}
+            </span>
+
+          </div>
+
+        </div>
+
+
+
+
+
+
+        <br />
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

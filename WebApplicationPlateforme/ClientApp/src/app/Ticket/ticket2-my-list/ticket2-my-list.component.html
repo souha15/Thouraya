@@ -1,0 +1,109 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <app-ticket2-menu></app-ticket2-menu>
+      <h2 class="task-head">قائمة التذاكر المنشأة</h2>
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
+      <div class="tabel-cont">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col" (click)="sort('id')">
+                <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('tacheNom')">
+                العنوان
+                <span class="glyphicon sort-icon" *ngIf="key =='tacheNom'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('creatorName')">
+                إلى
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('creatorName')">
+                التاريخ
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('creatorName')">
+                التفاصیل
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('etat')">
+                <p style="color:white">
+                  <span class="glyphicon sort-icon" *ngIf="key =='etat'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </p>
+                الحالة
+              </th>
+
+              <th scope="col" (click)="sort('etat')">
+                <p style="color:white">
+                  <span class="glyphicon sort-icon" *ngIf="key =='etat'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </p>
+                تعديل
+              </th>
+
+              <th scope="col" (click)="sort('etat')">
+                <p style="color:white">
+                  <span class="glyphicon sort-icon" *ngIf="key =='etat'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </p>
+                حذف
+              </th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tache of TicList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; let i = index">
+              <th scope="row" [routerLink]="['/ticket2-details', tache.id]">{{(p-1) * count + i + 1}}</th>
+              <td [routerLink]="['/ticket2-details', tache.id]">{{tache.titre}}</td>
+              <td [routerLink]="['/ticket2-details', tache.id]" *ngIf="tache.attribut1=='user'">{{tache.nomuser}}</td>
+              <td [routerLink]="['/ticket2-details', tache.id]" *ngIf="tache.attribut1=='admin'">{{tache.nomadmin}}</td>
+              <td [routerLink]="['/ticket2-details', tache.id]" *ngIf="tache.attribut1=='etab'">{{tache.nometab}}</td>
+              <td [routerLink]="['/ticket2-details', tache.id]">{{tache.date}}</td>
+              <td [routerLink]="['/ticket2-details', tache.id]">{{tache.detail}}</td>
+
+              <td [ngClass]="{
+
+    'work': tache.etat === 'مرسلة',
+    'done': tache.etat === 'تم الإستلام',
+    'notdone': tache.etat === 'مغلقة'
+}">
+                <a [routerLink]="['/ticket2-details', tache.id]" style="color:white">{{tache.etat}}</a>
+
+
+
+              </td>
+              <td><a class="btn btn-success" [routerLink]="['/ticket2-edit', tache.id]"><i class="fa fa-edit"></i></a></td>
+              <td *ngIf="tache.etat=='مرسلة'"><a (click)="onDelete(tache.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+
+
+
+            </tr>
+
+          </tbody>
+
+
+        </table>
+      </div>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                               nextLabel="التالي"></pagination-controls>
+        </ul>
+      </nav>
+
+      --
+
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

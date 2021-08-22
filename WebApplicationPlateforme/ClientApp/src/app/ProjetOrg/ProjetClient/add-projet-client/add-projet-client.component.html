@@ -1,0 +1,100 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+      <!-- Tasks Page Content -->
+      <section class="page-content">
+        <h4 class="my-2 task-head">  إضافة عميل</h4>
+        <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <input type="hidden" name="id" [value]="projetcltService.formData.id" />
+          <div class="col-3">
+            <label for="renter"><span><i class="fa fa-home"></i></span>العميل </label>
+          </div>
+          <div class="col-9 renter">
+            <input type="text" id="renter" class="mb-2" placeholder="الإسم " name="nom" #nom="ngModel" [(ngModel)]="projetcltService.formData.nom" required />
+            <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="alert alert-danger">
+
+              <div *ngIf="nom.errors.required">
+                مطلوب الإسم.
+              </div>
+            </div>
+            <input type="text" class="mb-2" placeholder=" رقم الهوية" name="cin" #cin="ngModel" [(ngModel)]="projetcltService.formData.cin" />
+            <input type="text" class="mb-2" placeholder="الهاتف" name="tel" #tel="ngModel" [(ngModel)]="projetcltService.formData.tel" />
+            <input type="text" class="mb-2" placeholder="العنوان" name="pays" #pays="ngModel" [(ngModel)]="projetcltService.formData.pays" />
+            <input type="text" class="mb-2" placeholder="البريد الإلكتروني" name="email" #email="ngModel" [(ngModel)]="projetcltService.formData.email" />
+          </div>
+
+          <div class="mx-auto my-3">
+            <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
+          </div>
+        </form>
+      </section>
+
+
+      <section class="page-content">
+        <h4 class="my-2 task-head">  قائمة العملاء</h4>
+        <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
+        <div class="tabel-cont">
+          <table class="table table-striped table-hover">
+            <thead>
+              <tr>
+                <th scope="col">
+
+                  #
+                </th>
+
+                <th scope="col">
+                  الإسم
+
+                </th>
+                <th>رقم الهوية</th>
+                <th>الهاتف</th>
+                <th>البريد الإلكتروني</th>
+                <th>العنوان</th>
+                <th></th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let dotation of allDotation | async| orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+
+                <td>{{dotation.id}}</td>
+                <td>{{dotation.nom}}</td>
+                <td>{{dotation.cin}}</td>
+                <td>{{dotation.tel}}</td>
+                <td>{{dotation.email}}</td>
+                <td>{{dotation.pays}}</td>
+                <td><a class="btn btn-success" (click)="populateForm(dotation)"><i class="fa fa-edit"></i>تعديل</a></td>
+                <td><a (click)="onDelete(dotation.id)" class="btn btn-danger"><i class="fa fa-trash"></i>حذف</a></td>
+
+
+              </tr>
+
+            </tbody>
+
+
+          </table>
+
+        </div>
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+      </section>
+    </div><!-- End col-9 -->
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

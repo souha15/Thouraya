@@ -1,0 +1,61 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">الانتدابات والاجازات</h3>
+      </header>
+      <form class="form-row task-form service-form">
+        <div class="col-md-4">
+          <label for="">نوع الطلب</label>
+          <select name="" id="" (change)="test($event)">
+            <option value="0">نوع الطلب</option>
+            <option value="1">اجازة</option>
+            <option value="2">انتداب</option>
+          </select>
+        </div>
+        <div class="col-md-4">
+          <label for="">تاريخ البداية</label>
+          <input type="date" name="" id="" (change)="testdate($event)">
+        </div>
+        <div class="col-md-2 text-center">
+          <input class="btn btn-primary"  value="استعلام" (click)="getdata()">
+        </div>
+      </form>
+
+      <div class="lables">
+        <div style="color:#db5a60; font-weight:bold"> تقديم الطلب</div>
+        <div style="color:#276985;font-weight:bold"> المدير المباشر</div>
+        <div style="color:green;font-weight:bold"> شؤون الموظفين</div>
+
+      </div>
+      <div class="w3-light-grey w3-round" *ngIf="test1">
+        <div id="myBar" class="w3-container w3-round w3-red" style="height:24px;width:{{val}}">5%</div>
+      </div>
+
+      <div class="w3-light-grey w3-round" *ngIf="test2">
+        <div id="myBar" class="w3-container w3-round w3-blue" style="height:24px;width:{{val}}">50%</div>
+      </div>
+
+      <div class="w3-light-grey w3-round" *ngIf="test3">
+        <div id="myBar" class="w3-container w3-round w3-green" style="height:24px;width:{{val}}">100%</div>
+      </div>
+
+
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

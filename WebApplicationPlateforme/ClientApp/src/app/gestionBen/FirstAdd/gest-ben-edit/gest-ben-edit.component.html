@@ -1,0 +1,481 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <app-menu-gest-ben-add></app-menu-gest-ben-add>
+      <header>
+        <h3 class="task-head">إضافة مستفيد</h3>
+      </header>
+      <div class="events1">
+        <form class="form-row events-form mb-3" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <div>
+            <label class="main main1" for="gestoject">
+              <span><i class="fa fa-spinner"></i></span>
+              نوع التسجيل
+            </label>
+            <label for="start-date">  {{gest.typeEnreg}}</label>
+            &nbsp; &nbsp; <input type="radio" name="date" value="directe" (click)="setradio('directe')" ngModel>&nbsp; &nbsp; مباشر
+            &nbsp; &nbsp; <input type="radio" name="date" value="chercheur" (click)="setradio('chercheur')" [checked]='true' ngModel>&nbsp; &nbsp;ارسال الى الباحث
+            &nbsp; &nbsp; <input type="radio" name="date" value="accept" (click)="setradio('accept')" [checked]='true' ngModel>&nbsp; &nbsp;طلب اعتماد التسجيل
+
+          </div>
+
+          <div class="col-md-12 d-flex flex-wrap w-100 justify-content-between">
+
+            <div>
+              <label for="start-date">	الاسم كامل </label>
+              <input type="text" id="start-date" name="nomprenom" #nomprenom="ngModel" [(ngModel)]="gest.nomprenom" required />
+              <div *ngIf="nomprenom.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب تاريخ البداية .
+              </div>
+            </div>
+            <div>
+              <label for="gesto-time">	تاريخ الميلاد</label>
+              <input type="date" id="start-date" name="dateNais" #dateNais="ngModel" [(ngModel)]="gest.dateNais" />
+
+            </div>
+            <div>
+              <label for="gesto-time">نوع الهوية </label>
+              <select id="devision" name="typeCin" #typeCin="ngModel" [(ngModel)]="gest.typeCin">
+
+                <option [ngValue]="undefined" selected disabled>-	نوع الهوية -</option>
+                <option value="هوية وطنية"> هوية وطنية </option>
+                <option value="هوية مقيم">هوية مقيم</option>
+              </select>
+
+            </div>
+
+            <div>
+              <label for="gesto-time">رقم الهوية</label>
+              <input type="number" maxlength="10" name="numCin" #numCin="ngModel" [(ngModel)]="gest.numCin" (change)="cintest($event)" required />
+              <div *ngIf="numCin.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب رقم الهوية .
+              </div>
+
+              <div *ngIf="exist" class="alert alert-danger">
+                رقم الهوية مسجل من قبل .
+              </div>
+            </div>
+
+            <div>
+              <label for="start-date">	الجنسية </label>
+              <input type="text" id="start-date" name="natio" #natio="ngModel" [(ngModel)]="gest.natio" />
+
+            </div>
+
+            <div>
+              <label for="start-date">		رقم الجوال  </label>
+              <input type="text" id="start-date" name="tel" #tel="ngModel" [(ngModel)]="gest.tel" />
+
+            </div>
+
+
+          </div>
+          <div class="col-md-12 d-flex flex-wrap w-100 justify-content-between">
+            <div>
+              <label for="start-date"> 	الجنس</label>
+              <select id="devision" name="sexe" #sexe="ngModel" [(ngModel)]="gest.sexe">
+                <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                <option value="ذكر ">ذكر </option>
+                <option value="انثى">انثى</option>
+              </select>
+            </div>
+            <div>
+              <label for="start-date">	العنوان  </label>
+              <input type="text" id="start-date" name="adr" #adr="ngModel" [(ngModel)]="gest.adr" />
+
+            </div>
+
+            <div *ngIf="isSelected('chercheur')">
+              <label for="account">الباحث</label>
+              <select id="account" name="idchercheur" #idchercheur="ngModel" [(ngModel)]="gest.idchercheur" (change)="cherName($event)">
+                <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                <option *ngFor="let item of UserList" value="{{item.id}}">{{item.fullName}}</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="row w-100 d-flex form-box" *ngIf="!isSelected('chercheur')">
+            <div class="col-md-8 col-sm-12">
+              <label class="main">
+                <span><i class="fa fa-users"></i></span>
+                افراد الاسرة
+              </label>
+              <div class="d-flex w-100 justify-content-start flex-wrap">
+                <div class="ml-5">
+                  <label>افراد الاسرة</label>
+                  <input type="number" id="target"
+                         name="nbfamille" #nbfamille="ngModel" [(ngModel)]="gest.nbfamille" />
+                </div>
+                <div class="ml-3">
+                  <label for="target">الاسم</label>
+                  <input type="text" id="target"
+                         name="nom" #nom="ngModel" [(ngModel)]="fm.nom" />
+                </div>
+                <div>
+                  <label for="number">	الهوية</label>
+                  <input type="number" maxlength="10" id="number"
+                         name="cin" #cin="ngModel" [(ngModel)]="fm.cin" />
+                </div>
+                <div class="ml-3">
+                  <label for="cost">	تاريخ الميلاد</label>
+                  <input type="date" id="cost"
+                         (change)="getdateNais($event)" />
+                </div>
+                <div>
+                  <label for="start-date"> 	الجنس</label>
+                  <select id="devision" name="sexe" #sexe="ngModel" [(ngModel)]="fm.sexe">
+                    <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                    <option value="ذكر ">ذكر </option>
+                    <option value="انثى">انثى</option>
+                  </select>
+                </div>
+
+                <div class="ml-3">
+                  <label for="part">	صلة القرابة </label>
+                  <input type="text" id="category" class="ml-4" name="relation" #relation="ngModel" [(ngModel)]="fm.relation">
+
+                </div>
+                <div class="ml-3">
+                  <label for="number3">	ملاحظات     </label>
+                  <input type="text" name="req" #req="ngModel" [(ngModel)]="fm.req"
+                         id="number3" style="width:300px" />
+                </div>
+
+                <button class="btn add-inputs0" id="" (click)="addfm()" type="button">اضافة</button>
+              </div>
+
+              <div class="d-flex w-100 justify-content-start flex-wrap">
+
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <p>  </p>
+              <br />
+            </div>
+
+            <div class="table-responsive new-table2"  *ngIf="fmtest || famille">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-gestimary">
+                  <tr>
+
+                    <th scope="col">الاسم</th>
+                    <th scope="col">	الهوية </th>
+                    <th scope="col">	تاريخ الميلاد</th>
+                    <th scope="col">	الجنس</th>
+                    <th scope="col">	صلة القرابة </th>
+                    <th scope="col">	ملاحظات  </th>
+                    <th scope="col">حذف</th>
+                  </tr>
+                </thead>
+                <tbody>
+
+                  <tr *ngFor="let dp of FamilleBen">
+                    <td>{{dp.nom}}</td>
+                    <td>{{dp.cin}}</td>
+                    <td>{{dp.dateNais}}</td>
+                    <td>{{dp.sexe}}</td>
+                    <td>{{dp.relation}}</td>
+                    <td>{{dp.req}}</td>
+                    <td><a (click)="del11(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+
+                  <tr *ngFor="let dp of fmList">
+                    <td>{{dp.nom}}</td>
+                    <td>{{dp.cin}}</td>
+                    <td>{{dp.dateNais}}</td>
+                    <td>{{dp.sexe}}</td>
+                    <td>{{dp.relation}}</td>
+                    <td>{{dp.req}}</td>
+                    <td><a (click)="del1(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="form-box w-100" *ngIf="!isSelected('chercheur')">
+            <div class="col-md-12">
+              <div class="">
+                <label class="main">
+                  <span><i class="fa fa-user-check"></i></span>	فئة المستفيد
+                </label>
+              </div>
+
+              <div>
+                <label for="work">الفئة </label>
+                <select id="work" class="ml-4" name="datechercheur" #datechercheur="ngModel" [(ngModel)]="gest.datechercheur">
+                  <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                  <option *ngFor="let item of typeben" value="{{item.nom}}">{{item.nom}}</option>
+                </select>
+                <label for="cost2">نوع  الاستحقاق </label>
+                <select id="work" class="ml-4" name="etatdir" #etatdir="ngModel" [(ngModel)]="gest.etatdir">
+                  <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                  <option value="عيني">عيني</option>
+                  <option value="نقدي">نقدي</option>
+                  <option value="عيني ونقدي">عيني ونقدي</option>
+                </select>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-box w-100" *ngIf="!isSelected('chercheur')">
+            <div class="col-md-8 col-sm-12">
+              <label class="main">
+                <span><i class="fa fa-home"></i></span>
+                السكن
+              </label>
+              <div class="d-flex w-100 justify-content-start flex-wrap">
+                <div>
+                  <label>	نوع السكن  </label>
+                  <select id="work" class="ml-4" name="typeResi" #typeResi="ngModel" [(ngModel)]="resi.typeResi" (change)="location($event)">
+                    <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                    <option value="ايجار">ايجار </option>
+                    <option value="ملك ">ملك </option>
+                  </select>
+                </div>
+                <div *ngIf="loc">
+                  <label>المبلغ</label>
+                  <input type="number" class="ml-4" name="dateenreg" #dateenreg="ngModel" [(ngModel)]="resi.dateenreg" />
+                </div>
+                <div>
+                  <label for="target">	نوع المسكن </label>
+                  <select id="work" class="ml-4" name="typeMaison" #typeMaison="ngModel" [(ngModel)]="resi.typeMaison">
+                    <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                    <option *ngFor="let item of maisonList" value="{{item.nom}}">{{item.nom}}</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="number">حالة المسكن </label>
+                  <select id="work" class="ml-4" name="etat" #etat="ngModel" [(ngModel)]="resi.etat">
+                    <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                    <option value="جيد ">جيد </option>
+                    <option value="غير جيد ">غير جيد </option>
+                    <option value="متوسط">متوسط</option>
+                  </select>
+                </div>
+
+
+                <button class="btn add-inputs0" id="" (click)="addResi()" type="button">اضافة</button>
+              </div>
+
+              <div class="d-flex w-100 justify-content-start flex-wrap">
+
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-12">
+              <p>  </p>
+              <br />
+            </div>
+
+            <div class="table-responsive new-table2" >
+              <table class="table table-bordered text-center table-striped" *ngIf="resitest || residance">
+                <thead class="thead-gestimary">
+                  <tr>
+
+                    <th scope="col">السكن</th>
+                    <th scope="col">	نوع المسكن </th>
+                    <th scope="col">	حالة المسكن</th>
+                    <th scope="col">حذف</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of ResiList">
+                    <td>{{dp.typeResi}}</td>
+                    <td>{{dp.typeMaison}}</td>
+                    <td>{{dp.etat}}</td>
+                    <td><a (click)="del22(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+                  <tr *ngFor="let dp of resiList">
+                    <td>{{dp.typeResi}}</td>
+                    <td>{{dp.typeMaison}}</td>
+                    <td>{{dp.etat}}</td>
+                    <td><a (click)="del2(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+          <div class="form-box w-100" *ngIf="!isSelected('chercheur')">
+            <div class="col-md-12">
+              <div class="">
+                <label class="main">
+                  <span><i class="fa fa-dollar-sign"></i></span>		الدخل المادي
+                </label>
+              </div>
+
+              <div>
+                <label for="work">	نوع الدخل </label>
+                <select id="work" class="ml-4" name="typeRev" #typeRev="ngModel" [(ngModel)]="rev.typeRev">
+                  <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                  <option *ngFor="let item of revbenList" value="{{item.nom}}">{{item.nom}}</option>
+                </select>
+                <label for="cost2">  الدخل </label>
+                <input type="number" class="ml-4" name="prix" #prix="ngModel" [(ngModel)]="rev.prix" />
+                <button class="btn add-inputs0" id="" (click)="addRev()" type="button">اضافة</button>
+
+              </div>
+            </div>
+
+            <div class="table-responsive new-table2" *ngIf="revtest || revenus">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-gestimary">
+                  <tr>
+
+                    <th scope="col">نوع الدخل</th>
+                    <th scope="col">	الدخل</th>
+                    <th scope="col">حذف</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of RevBen">
+                    <td>{{dp.typeRev}}</td>
+                    <td>{{dp.prix}}</td>
+                    <td><a (click)="del33(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+                  <tr *ngFor="let dp of revList">
+                    <td>{{dp.typeRev}}</td>
+                    <td>{{dp.prix}}</td>
+                    <td><a (click)="del3(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+
+
+          <div class="form-box w-100" *ngIf="!isSelected('chercheur')">
+            <div class="col-md-12">
+              <div class="">
+                <label class="main">
+                  <span><i class="fa fa-piggy-bank"></i></span>	الحسابات البنكية
+                </label>
+              </div>
+
+              <div>
+                <label for="work">اسم البنك  </label>
+                <select id="work" class="ml-4" name="nomBanque" #nomBanque="ngModel" [(ngModel)]="cp.nomBanque">
+                  <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                  <option *ngFor="let item of bankList" value="{{item.nom}}">{{item.nom}}</option>
+                </select>
+                <label for="cost2"> رقم الايبان </label>
+                <input type="number" class="ml-4" name="rib" #rib="ngModel" [(ngModel)]="cp.rib" />
+
+
+
+
+              </div>
+
+              <div>
+                <label for="number">	الحساب خاص بالمستفيد  </label>
+                <select id="work" class="ml-4" name="compteBen" #compteBen="ngModel" [(ngModel)]="cp.compteBen">
+                  <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                  <option value="نعم">نعم  </option>
+                  <option value="لا">لا</option>
+                </select>
+
+                <label for="cost2">اسم صاحب الحساب  </label>
+                <input type="text" class="ml-4" name="nomProp" #nomProp="ngModel" [(ngModel)]="cp.nomProp" />
+
+
+                <button class="btn add-inputs0" id="" (click)="addCp()" type="button">اضافة</button>
+              </div>
+            </div>
+
+            <div class="table-responsive new-table2" *ngIf="cptest || compte">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-gestimary">
+                  <tr>
+
+                    <th scope="col">اسم البنك </th>
+                    <th scope="col"> رقم الايبان	</th>
+                    <th scope="col"> خاص بالمستفيد 	</th>
+                    <th scope="col">صاحب الحساب 	</th>
+                    <th scope="col">حذف</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of CompteBen">
+                    <td>{{dp.nomBanque}}</td>
+                    <td>{{dp.rib}}</td>
+                    <td>{{dp.compteBen}}</td>
+                    <td>{{dp.nomProp}}</td>
+                    <td><a (click)="del44(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+                  <tr *ngFor="let dp of cpList">
+                    <td>{{dp.nomBanque}}</td>
+                    <td>{{dp.rib}}</td>
+                    <td>{{dp.compteBen}}</td>
+                    <td>{{dp.nomProp}}</td>
+                    <td><a (click)="del4(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="form-box w-100" *ngIf="!isSelected('chercheur')">
+            <div class="col-md-12">
+              <label class="main">
+                <span><i class="fa fa-file-upload"></i></span>  المرفقات
+              </label>
+              <input type="file" id="pro-check" (change)="upload1($event)" #inputFile />
+              <label for="pro-check" class="file-label">
+                <span><i class="fa fa-file-alt fa-lg"></i></span> المرفقات
+                <span class="mr-2"><i class="fa fa-upload"></i></span>
+              </label>
+              <div class="table-responsive my-3" *ngIf="filetest ||file ">
+                <table class="table table-bordered table-striped theme-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">الإسم</th>
+
+                      <th scope="col">حذف</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let dp of FilesBen">
+                      <td>{{dp.path}}</td>
+
+                      <td><a (click)="del99(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                    </tr>
+
+                    <tr *ngFor="let dp of filelist">
+                      <td>{{dp}}</td>
+
+                      <td><a (click)="del9(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 text-left">
+            <input class="btn btn-info px-4" type="submit" value="حفظ" />
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

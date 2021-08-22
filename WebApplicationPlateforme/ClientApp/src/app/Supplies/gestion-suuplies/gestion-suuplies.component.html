@@ -1,0 +1,154 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+
+
+      <nav class="d-flex p-0 bd-highlight tasks-nav mt-2 finance-nav">
+
+        <a [routerLink]="['/nom-equipement']" class="p-2 flex-fill bd-highlight stop-btn">
+          <span><i class="fa fa-list"></i></span>
+          اسم العهد
+        </a>
+
+        <a [routerLink]="['/type-equipement']" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-list"></i></span>
+          نوع العهد
+        </a>
+
+        <a [routerLink]="['/gestion-suuplies']" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-cogs"></i></span>
+          إدارة العهد
+        </a>
+
+      </nav>
+      <!-- Tasks Page Content -->
+      <section class="page-content">
+
+
+        <h4 class="my-2 task-head">العهد</h4>
+
+
+        <div class="row">
+          <div class="col-sm-6">
+            <div>
+              <p>&nbsp;</p>
+            </div>
+
+            <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+              <input type="hidden" name="id" [value]="tblService.formData.id" />
+              <div>
+                <label for="stop-name"><span><i class="fa fa-genderless"></i></span>إسم العهدة</label>
+                <select type="text" id="stop-name" name="sup" #sup="ngModel" [(ngModel)]="tblService.formData.sup" required >
+                <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                <option *ngFor="let item of tbnom" value="{{item.nom}}">{{item.nom}}</option>
+
+                </select>
+                <div *ngIf="sup.invalid && (sup.dirty || sup.touched)" class="alert alert-danger">
+
+                  <div *ngIf="sup.errors.required">
+                    مطلوب إسم العهدة.
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label for="stop-name"><span><i class="fa fa-genderless"></i></span>نوع العهدة</label>
+                <select type="text" id="stop-name" name="type" #type="ngModel" [(ngModel)]="tblService.formData.type" required>
+                <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                <option *ngFor="let item of tbtype" value="{{item.nom}}">{{item.nom}}</option>
+                </select>
+                <div *ngIf="type.invalid && (type.dirty || type.touched)" class="alert alert-danger">
+
+                  <div *ngIf="type.errors.required">
+                    مطلوب نوع العهدة.
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label for="stop-name"><span><i class="fa fa-genderless"></i></span>رقم العهدة</label>
+                <input type="text" id="stop-name" name="reference" #reference="ngModel" [(ngModel)]="tblService.formData.reference" required />
+
+              </div>
+
+              <div>
+                <label for="stop-name"><span><i class="fa fa-genderless"></i></span>الكمية</label>
+                <input type="text" id="stop-name" name="quanitite" #quanitite="ngModel" [(ngModel)]="tblService.formData.quanitite" required />
+
+                <div *ngIf="quanitite.invalid && (quanitite.dirty || quanitite.touched)" class="alert alert-danger">
+
+                  <div *ngIf="quanitite.errors.required">
+                    مطلوب الكمية.
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <div class="col-sm-12">
+                  <button type="submit" class="btn btn-primary" [disabled]="quanitite.invalid"><span><i class="fa fa-save"></i></span> حفظ</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="col-sm-6">
+            <div>
+              <p>&nbsp;</p>
+            </div>
+            <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
+            <div class="tabel-cont">
+              <table class="table table-striped table-hover">
+                <thead>
+                  <tr>
+
+                    <th scope="col">
+                      إسم العهدة
+
+                    </th>
+                    <th>الكمية</th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dotation of allDotation | async| orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+                    <td>{{dotation.sup}}</td>
+                    <td>{{dotation.quanitite}}</td>
+                    <td><a class="btn btn-success" (click)="populateForm(dotation)"><i class="fa fa-edit"></i>تعديل</a></td>
+                    <td><a (click)="onDelete(dotation.id)" class="btn btn-danger"><i class="fa fa-trash"></i>حذف</a></td>
+
+
+                  </tr>
+
+                </tbody>
+
+
+              </table>
+
+            </div>
+
+            <nav aria-label="Page navigation example">
+              <ul class="pagination justify-content-center">
+                <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                     nextLabel="التالي"></pagination-controls>
+              </ul>
+            </nav>
+
+          </div>
+        </div>
+      </section>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

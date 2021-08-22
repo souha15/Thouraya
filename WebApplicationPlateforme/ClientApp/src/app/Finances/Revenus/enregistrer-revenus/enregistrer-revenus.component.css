@@ -1,0 +1,33 @@
+.label
+{
+    width:2px;
+}
+.task-num {
+  color: #ed685e;
+  font-weight: bold;
+  font-size: 18px;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style: hidden;
+}
+
+.task-det {
+  color: cadetblue;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.aaa {
+  background-color: #eb4034;
+  color: #fff;
+  padding: 5px;
+  border-radius: 10px 10px 10px 10px;
+  border: 0;
+  height: auto;
+  width: auto;
+}
+
+ul {
+  list-style: none
+}

@@ -1,0 +1,55 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+      <app-org-part-menu></app-org-part-menu>
+      <!-- Tasks Page Content -->
+      <section class="page-content">
+        <h4 class="my-2 task-head">  إضافة جهة</h4>
+        <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <div class="col-12 renter">
+            <label for="renter"><span><i class="fa fa-swatchbook"></i></span>جهة / فرد</label>
+            <select (change)="PartorOrg($event)" name="attribut2" #attribut2="ngModel" [(ngModel)]="organisme.attribut2" required>
+              <option value="جهة / فرد">جهة / فرد</option>
+              <option value="جهة">جهة</option>
+              <option value="فرد">فرد</option>
+            </select>
+          </div>
+            <div class="col-3" >
+              <label for="renter" *ngIf="org"><span><i class="fa fa-home"></i></span>جهة</label>
+              <label for="renter" *ngIf="part"><span><i class="fa fa-user"></i></span>فرد</label>
+            </div>
+            <div class="col-9 renter" *ngIf="orgpart||org">
+              <input type="text" id="renter" class="mb-2" placeholder="الإسم المختصر " name="shortnom" #shortnom="ngModel" [(ngModel)]="organisme.shortnom"  *ngIf="org" />
+              <input type="text" class="mb-2" placeholder="الإسم الكامل" name="nomcomplet" #nomcomplet="ngModel" [(ngModel)]="organisme.nomcomplet" *ngIf="org" />
+              <input type="text" id="renter" class="mb-2" placeholder="الإسم  " name="shortnom" #shortnom="ngModel" [(ngModel)]="organisme.shortnom"  *ngIf="part" />         
+              <input type="text" class="mb-2" placeholder="االلقب" name="nomcomplet" #nomcomplet="ngModel" [(ngModel)]="organisme.nomcomplet" *ngIf="part" />
+
+              <input type="text" class="mb-2" placeholder="الهوية" name="cin" #cin="ngModel" [(ngModel)]="organisme.cin" *ngIf="part" />
+              <input type="text" class="mb-2" placeholder="الهاتف" name="tel" #tel="ngModel" [(ngModel)]="organisme.tel" />
+              <input type="text" class="mb-2" placeholder="العنوان" name="addresse" #addresse="ngModel" [(ngModel)]="organisme.addresse" />
+              <input type="text" class="mb-2" placeholder="الفاكس" name="fax" #fax="ngModel" [(ngModel)]="organisme.fax" />
+              <input type="text" class="mb-2" placeholder="البريد الإلكتروني" name="email" #email="ngModel" [(ngModel)]="organisme.email" />
+            </div>
+
+            <div class="mx-auto my-3">
+              <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
+              <button class="btn btn-danger px-2 ml-3" type="reset"><span class="ml-4"><i class="fa fa-trash"></i></span>حذف الحقول</button>
+
+            </div>
+        </form>
+      </section>
+    </div><!-- End col-9 -->
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

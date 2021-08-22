@@ -1,0 +1,119 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <nav class="d-flex p-0 bd-highlight tasks-nav mt-2 finance-nav">
+        <a [routerLink]="['/news-add']" class="p-2 flex-fill bd-highlight stop-btn">
+          <span><i class="fa fa-newspaper"></i></span>
+          إضافة خبر
+        </a>
+
+        <a [routerLink]="['/news-list-creator']" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-list"></i></span>
+          قائمة الأخبار
+        </a>
+
+        <a class="p-2 flex-fill bd-highlight" [routerLink]="['/event-two-add']">
+          <span><i class="fa fa-plus "></i></span>
+          إضافة فعالية
+        </a>
+
+
+        <!--
+        <a class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-paper-plane"></i></span>
+          إضافة إعلان
+        </a>
+
+        <a class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-list"></i></span>
+          قائمة الإعلانات
+        </a>
+  -->
+
+      </nav>
+      <header>
+        <h3 class="task-head"> قائمة الأخبار</h3>
+      </header>
+      <div class="table-responsive mandate">
+        <table class="table text-center table-bordered table-striped theme-table">
+          <thead>
+            <tr>
+              <th scope="col">عنوان الخبر</th>
+              <th scope="col">اسم الصحيفة</th>
+              <th scope="col">تاريخ الخبر</th>
+
+              <th scope="col">التفاصيل</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ne of newsList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+              <td [routerLink]="['/news-detail', ne.id]">{{ne.titre}}</td>
+              <td [routerLink]="['/news-detail', ne.id]">{{ne.journal}}</td>
+              <td [routerLink]="['/news-detail', ne.id]">{{ne.date}}</td>
+
+              <td><button data-toggle="modal" data-target="#myModal1" (click)="populateForm(ne)" class="btn btn-primary">التفاصيل</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div> <!-- End Table Responsive -->
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+        </ul>
+      </nav>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+        <h3 class="popup-head">تفاصيل الخبر</h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="task-form form-row stop-form">
+            <form class="task-form form-row service-form">
+
+              <div class="col-md-12">
+                <label for="permision-hours">عنوان الخبر</label>
+                {{per.titre}}
+
+              </div>
+              <div class="col-md-12">
+                <label for="permision-hours">نبذة عن الخبر</label>
+                {{per.description}}
+
+              </div>
+
+
+              <div class="col-md-8">
+                <label for="permision-hours">تفاصيل الخبر</label>
+                {{per.contenu}}
+
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

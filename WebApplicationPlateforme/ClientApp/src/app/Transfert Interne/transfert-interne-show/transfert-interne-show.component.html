@@ -1,0 +1,129 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">قائمة التحويلات الداخلية</h3>
+      </header>
+
+        <div class="row" id="accordion">
+          <div class="col-md-6 mb-3" *ngFor="let item of list;let i = index ">
+          <div class="card">
+            <div class="courses" id="headingThree">
+
+              <a class="accord" [attr.data-target]="'#collapse'+i" data-toggle="collapse" aria-expanded="false" aria-controls="collapse">
+                {{item.administration}}
+              </a>
+
+            </div>
+            <div [attr.id]="'collapse'+i" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table text-center table-bordered table-striped theme-table">
+                    <thead>
+                      <tr>
+                        <th scope="col">الرقم</th>
+                 
+                        <th scope="col">المكتب</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>{{item.numtransafert}}</td>
+                      
+                        <td>{{item.bureau}}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </div>
+          </div>
+          <br />
+        </div>
+        <!--  <div class="card col-md-6 mb-3" *ngFor="let item of list">
+        <div class="courses" id="headingThree">
+
+          <a class="accord" [attr.data-target]="'#collapse'+i" data-toggle="collapse" aria-expanded="false" aria-controls="collapse">
+            {{item.administration}}
+          </a>
+
+        </div>
+        <div [attr.id]="'collapse'+i" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table text-center table-bordered table-striped theme-table">
+                <thead>
+                  <tr>
+                    <th scope="col">الرقم</th>
+                    <th scope="col">اسم الموظف</th>
+                    <th scope="col">المكتب</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>{{item.numtransafert}}</td>
+                    <td>{{item.employe}}</td>
+                    <td>{{item.bureau}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+        <div  *ngFor="let item of list">
+    <div class="col-md-6 mb-3">
+      <div class="card">
+        <div class="courses" id="headingThree">
+
+          <a class="accord" [attr.data-target]="'#collapse'+i" data-toggle="collapse" aria-expanded="false" aria-controls="collapse">
+            {{item.administration}}
+          </a>
+
+        </div>
+        <div [attr.id]="'collapse'+i" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+          <div class="card-body">
+            <table class="table text-center table-bordered table-striped theme-table">
+              <thead>
+                <tr>
+                  <th scope="col">الرقم</th>
+                  <th scope="col">اسم الموظف</th>
+                  <th scope="col">المكتب</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>{{item.numtransafert}}</td>
+                  <td>{{item.employe}}</td>
+                  <td>{{item.bureau}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </div>-->
+        <!-- End Row -->
+      </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

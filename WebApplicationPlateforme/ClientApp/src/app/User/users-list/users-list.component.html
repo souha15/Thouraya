@@ -1,0 +1,105 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <app-nav-user-menu></app-nav-user-menu>
+      <header>
+        <h3 class="task-head">قائمة الموظفين</h3>
+      </header>
+
+
+      <div class="form-group pull-right">
+        <input type="text" class="search form-control" placeholder="ما الذي تبحث عنه ؟" name="search" [(ngModel)]="filter">
+      </div>
+      <span class="counter pull-right"></span>
+      <table class="table results sortable">
+        <thead>
+          <tr>
+            <th scope="col">الإسم </th>
+            <th scope="col">الجنسية </th>
+            <th scope="col">الرقم الوظيفي </th>
+            <th scope="col">الوظيفة</th>
+            <th scope="col">الجوال</th>
+            <th scope="col">الصورة</th>
+            <th scope="col">تفعيل</th>
+            <th scope="col">تعديل</th>
+            <th scope="col">حذف </th>
+            <th scope="col">صلاحيات </th>
+
+          </tr>
+          <tr class="warning no-result">
+            <td colspan="4"><i class="fa fa-exclamation-triangle"></i> لا يوجد نتائج</td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of allUser | async| orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 8, currentPage: p }">
+            <td [routerLink]="['/user-detail-data', user.id]">{{user.fullName}}</td>
+            <td [routerLink]="['/user-detail-data', user.id]">{{user.nationalite}}</td>
+            <td [routerLink]="['/user-detail-data', user.id]">{{user.num}}</td>
+            <td [routerLink]="['/user-detail-data', user.id]">{{user.emploi}}</td>
+            <td [routerLink]="['/user-detail-data', user.id]">{{user.tel}}</td>
+            <td *ngIf="user.photo!=null"><a class="btn btn-link" (click)="download(user.photo)" style="color:dodgerblue"><i class="fa fa-download"></i></a></td>
+            <td *ngIf="user.photo==null"></td>
+            <td>
+              <button type="button" *ngIf="user.attribut2 == '1'" class="btn btn-success" disabled><i class="fa fa-check-circle"></i></button>
+              <a *ngIf="user.attribut2 == '0'" class="btn btn-warning" (click)="populateForm(user)" data-toggle="modal" data-target="#myModal"><i class="fa fa-arrow-alt-circle-down"></i></a>
+            </td>
+            <td><a [routerLink]="['/user-updating', user.id]" class="btn btn-success"><i class="fa fa-edit"></i></a></td>
+            <td><a (click)="deleteUser(user.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+            <td><a class="btn btn-primary" (click)="populateForm(user)" [routerLink]="['/employee-privileges-add', user.id]"><i class="fa fa-user-check"></i></a></td>
+            <!--<td><a (click)="deleteUser(user.id)" class="btn btn-danger"><i class="fa fa-trash"></i>حذف</a></td>
+   -->
+          </tr>
+
+        </tbody>
+      </table>
+
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+
+      </div><!-- End col-9 -->
+    </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+<!-- Modal -->
+<div id="myModal" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">تفعيل الحساب</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <form #form="ngForm" autocomplete="off" (submit)="onsubmit(form)">
+
+          <p>هل تريد حقا تفعيل الحساب</p>
+          <input class="" type="text" name="attribut2" placeholder="الاسم بالكامل" id="full-name" #attribut2="ngModel" [(ngModel)]="UserService.formData.attribut2" hidden>
+          <input type="submit" value="نعم" class="btn btn-success">
+          <input type="submit" value="لا" class="btn btn-danger">
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
