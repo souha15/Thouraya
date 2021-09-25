@@ -92,6 +92,7 @@ export class HomeComponent implements OnInit {
   idadmin: number;
   idetab: number;
   admin: boolean;
+  mediadir: boolean = false;
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
@@ -99,7 +100,11 @@ export class HomeComponent implements OnInit {
       this.UserNameConnected = res.fullName;
       this.idadmin = res.idAdministration;
       this.idetab = res.idDepartement;
-
+      if (res.emploi == "مدير إدارة العلاقات والاعلام ") {
+        this.mediadir=true
+      } else {
+        this.mediadir = false;
+      }
       this.UserService.getUserRoles(this.UserIdConnected).subscribe(res => {
         this.roleslist = res;
         this.roleslist.forEach(item => {
@@ -111,6 +116,7 @@ export class HomeComponent implements OnInit {
           } else {
             this.admin = false;
           }
+       
         })
         console.log(this.testrole)
       })

@@ -41,7 +41,7 @@ export class DemandeFormationListRhComponent implements OnInit {
     this.formationService.Get().subscribe(res => {
       this.GfactList = res;
 
-      this.factList = this.GfactList.filter(item => item.etatdir == "موافقة" && item.etatrh == "في الإنتظار")
+      this.factList = this.GfactList.filter(item => item.etatc == "موافقة" && item.etatrh == "في الإنتظار")
 
     })
 

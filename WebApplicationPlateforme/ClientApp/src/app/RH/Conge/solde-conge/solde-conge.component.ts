@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { SoldeCongeService } from '../../../shared/Services/Rh/solde-conge.service';
 import { NgForm } from '@angular/forms';
 import { UserServiceService } from '../../../shared/Services/User/user-service.service';
+import { UserDetail } from '../../../shared/Models/User/user-detail.model';
 
 @Component({
   selector: 'app-solde-conge',
@@ -14,13 +15,17 @@ import { UserServiceService } from '../../../shared/Services/User/user-service.s
 export class SoldeCongeComponent implements OnInit {
 
 
+
   constructor(private tblService: SoldeCongeService,
     private toastr: ToastrService,
     private UserService: UserServiceService) { }
 
   ngOnInit(): void {
+    this.getUserConnected();
     this.ShowDotations();
     this.resetForm();
+    this.UserList();
+  
   }
 
   UserIdConnected: string;
@@ -28,53 +33,91 @@ export class SoldeCongeComponent implements OnInit {
   adminisgtrationName: any;
 
 
+  //get User Connected
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
-    
+
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-
+    
 
     })
 
   }
+
   // Type Dotation List
 
-  private _allDotations: Observable<SoldeConge[]>;
-  public get allDotation(): Observable<SoldeConge[]> {
-    return this._allDotations;
-  }
-
-  public set allDotation(value: Observable<SoldeConge[]>) {
-    this._allDotations = value;
-
-
-  }
-
+  allDotation: SoldeConge[] = [];
   ShowDotations() {
-    this.allDotation = this.tblService.Get();
+    this.tblService.Get().subscribe(res => {
+      this.allDotation = res;
+    })
+
   }
 
-  //Delete Dotation
-  onDelete(Id) {
-    if (confirm('Are you sure to delete this record ?')) {
-      this.tblService.Delete(Id)
-        .subscribe(res => {
-          this.ShowDotations();
-          this.resetForm();
-          this.toastr.success("تم الحذف  بنجاح", "نجاح");
-        },
+  //Get Users List
+  user: UserDetail[] = [];
+  UserList() {
+    this.UserService.GetUsersList().subscribe(res => {
+      this.user = res;
+    })
+  }
 
-          err => {
-            console.log(err);
-            this.toastr.warning('لم يتم الحذف  ', ' فشل');
+  //Get UserName
+  add: boolean = false;
+  getUser(event) {
+    this.UserService.GetUserById(event.target.value).subscribe(res => {
+      this.tblService.formData.userNameCreator = res.fullName;
+      if (this.allDotation.filter(item => item.idUserCreator == res.id).length == 0) {
+        this.add = true;
+      } else {
+        this.add = false;
+      }
+     
+    })
+  }
 
-          }
-        )
+
+  
+
+
+  //OnSubmit
+  conge: SoldeConge = new SoldeConge();
+  isValidFormSubmitted = false;
+  date = new Date().toLocaleDateString();
+
+  Insert(form: NgForm) {
+    if (form.invalid) {
+      this.isValidFormSubmitted = false;
 
     }
+    else {
+
+      this.isValidFormSubmitted = true;
+      this.tblService.formData.dateenreg = this.date
+      this.tblService.formData.normal = "إجازة سنوية"
+      this.tblService.formData.urgent = "إجازة إضطرارية"
+      this.tblService.formData.maladie = "إجازة إستثنائية"
+      this.tblService.formData.mois = "شهري"
+      this.tblService.formData.annee = "سنوي"
+      this.tblService.formData.dateurgent = new Date().toString();
+      this.tblService.formData.datenormal = new Date().toString();
+      this.tblService.formData.datemaladie = new Date().toString();
+      this.tblService.Post().subscribe(res => {
+
+        this.resetForm(form);
+        this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+        this.ShowDotations();
+      },
+        err => {
+          console.log(err);
+          this.toastr.warning('لم تتم الإضافة', ' فشل');
+        }
+      )
+    }
   }
+
 
   //Reset Form
   resetForm(form?: NgForm) {
@@ -90,16 +133,30 @@ export class SoldeCongeComponent implements OnInit {
       dateenreg: '',
       userNameCreator: '',
       idUserCreator: '',
+      normal: '',
+      numbernormal: '',
+      soldenormal: '',
+      datenormal: '',
+      urgent: '',
+      numberurgent: '',
+      dateurgent: '',
+      soldeurgent: '',
+      maladie: '',
+      soldemaladie: '',
+      numbermaladie: '',
+      datemaladie: '',
 
     }
   }
 
-  //PopulateForm
 
+  //PopulateForm
+  solde: boolean = false;
   populateForm(dotation: SoldeConge) {
     this.tblService.formData = Object.assign({}, dotation);
-
   }
+
+
 
   //Edit
 
@@ -119,33 +176,38 @@ export class SoldeCongeComponent implements OnInit {
     )
   }
 
-  // Insert
-
-  dotation: SoldeConge = new SoldeConge();
-  date = new Date().toLocaleDateString();
-  insertRecord(form: NgForm) {
-    this.tblService.formData.userNameCreator = this.UserNameConnected;
-    this.tblService.formData.idUserCreator = this.UserIdConnected;
-    this.tblService.formData.dateenreg = this.date;
-
-    this.tblService.Post().subscribe(
-      res => {
-        this.resetForm(form);
-        this.toastr.success("تمت الإضافة بنجاح", "نجاح");
-        this.ShowDotations();
-      },
-      err => {
-        console.log(err);
-        this.toastr.warning('لم تتم الإضافة', ' فشل');
-      }
-    )
-  }
 
   // Add and Update
   onSubmit(form: NgForm) {
-    if (this.tblService.formData.id == 0)
-      this.insertRecord(form);
-    else  //update
+    if (this.tblService.formData.id == 0) {
+      if (this.add)
+        this.Insert(form);
+      else
+        this.toastr.warning('لقد تمت إضافة رصيد الموظف مسبقا', ' فشل');
+    }else  //update
       this.updateRecord(form);
+
+  }
+
+  c: Number = 1;
+  count: Number = 5;
+  //Delete Dotation
+  onDelete(Id) {
+    if (confirm('Are you sure to delete this record ?')) {
+      this.tblService.Delete(Id)
+        .subscribe(res => {
+          this.ShowDotations();
+          this.resetForm();
+          this.toastr.success("تم الحذف  بنجاح", "نجاح");
+        },
+
+          err => {
+            console.log(err);
+            this.toastr.warning('لم يتم الحذف  ', ' فشل');
+
+          }
+        )
+
+    }
   }
 }

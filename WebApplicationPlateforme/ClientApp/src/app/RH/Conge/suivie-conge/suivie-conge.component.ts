@@ -66,14 +66,13 @@ export class SuivieCongeComponent implements OnInit {
  
     if (this.type != undefined) {
       
-      if (this.type == "1") {
         if (this.date == undefined) {
           this.toastr.warning("يجب عليك تحديد تاريخ")
         } else {
           this.CongeService.Get().subscribe(res => {
             this.CgList = res
         
-            this.FCgList = this.CgList.filter(item => item.idUserCreator == this.UserIdConnected && this.date == item.datedebut)
+            this.FCgList = this.CgList.filter(item => item.idUserCreator == this.UserIdConnected && this.date == item.datedebut && item.type == this.type)
             this.FCgList.forEach(item => {
               if (item.etat =="5%") {
                 this.test1 = true;
@@ -91,34 +90,9 @@ export class SuivieCongeComponent implements OnInit {
               } 
             })
           })
-        }
-      } else {
+        
+    
 
-        if (this.date == undefined) {
-          this.toastr.warning("يجب عليك تحديد تاريخ")
-        } else {
-          this.RecrutementService.Get().subscribe(res => {
-            this.RcList = res
-
-            this.FrcList = this.RcList.filter(item => item.idUserCreator == this.UserIdConnected && this.date == item.datedebut)
-            this.FrcList.forEach(item => {
-              if (item.attribut3 == "5%") {
-                this.test1 = true;
-                this.val = "5%";
-              }
-
-              else if (item.attribut3 == "50%") {
-                this.test2 = true;
-                this.val = "50%";
-              }
-
-              else {
-                this.test3 = true;
-                this.val = "100%";
-              }
-            })
-          })
-        }
 
 
       }

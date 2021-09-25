@@ -146,7 +146,6 @@ export class PayChequecAddComponent implements OnInit {
       this.demandeService.Add(this.ch).subscribe(res => {
         this.chId = res.id
 
-        //Create article
         if (this.artest) {
           for (let i = 0; i < this.arlis.length; i++) {
             this.ar = this.arlis[i]

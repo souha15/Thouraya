@@ -21,7 +21,8 @@
           <thead>
             <tr>
 
-              <th scope="col">رقم الطلب</th>
+              <th scope="col">#</th>
+              <th scope="col">الموظف</th>
               <th scope="col">الحالة</th>
               <th scope="col">المبلغ</th>
               <th scope="col">عدد أشهر الاستقطاع</th>
@@ -32,9 +33,10 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
 
-              <td (click)="populateForm(cg)">{{cg.id}}</td>
+              <td (click)="populateForm(cg)">{{(p-1) * count + i + 1}}</td>
+              <td (click)="populateForm(cg)">{{cg.userNameCreator}}</td>
               <td (click)="populateForm(cg)">{{cg.etatAvance}}</td>
               <td (click)="populateForm(cg)">{{cg.prix}}</td>
               <td (click)="populateForm(cg)">{{cg.nbMoisDeduire}}</td>

@@ -1,0 +1,179 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head"> 	قائمة انتاج فيلم</h3>
+      </header>
+      <div class="form-group pull-right">
+        <input type="text"
+               class="search form-control"
+               placeholder="ما الذي تبحث عنه ؟"
+               name="search" [(ngModel)]="filter" />
+      </div>
+      <span class="counter pull-right"></span>
+      <div class="table-responsive">
+        <table class="table results text-center table-bordered theme-table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">نوع الفيلم  </th>
+              <th scope="col">الميزانية </th>
+              <th scope="col">مدة الفيلم</th>
+              <th scope="col">الوقت</th>
+              <th scope="col">الهدف</th>
+              <th scope="col">الحالة</th>
+              <th scope="col">تعديل</th>
+              <th scope="col">حذف</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let cg of DemandList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p };let i = index">
+              <th scope="row">{{(p-1) * count + i + 1}}</th>
+              <td (click)="populateForm(cg)">{{cg.typefilm}}</td>
+              <td (click)="populateForm(cg)">{{cg.budget}}</td>
+              <td (click)="populateForm(cg)">{{cg.duree}}</td>
+              <td (click)="populateForm(cg)">{{cg.attribut1}}</td>
+              <td (click)="populateForm(cg)">{{cg.but}}</td>
+              <td (click)="populateForm(cg)"
+                  [ngClass]="{
+
+ 'success': cg.diretat === 'موافقة',
+  'denied': cg.diretat === 'رفض',
+  'wait': cg.diretat === 'في الانتظار'
+}">
+                {{cg.diretat}}
+              </td>
+              <td (click)="populateForm(cg)" *ngIf="cg.diretat == 'في الانتظار'"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1">تعديل</a></td>
+              <td (click)="populateForm(cg)" *ngIf="cg.diretat == 'في الانتظار'"><a class="btn btn-danger" (click)="onDelete(cg.id)">حذف</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تعديل لهدايا التذكارية و التكريم</h2>
+
+          <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+            <div class="col-md-6">
+              <label for="demm-type">		نوع الفيلم  </label>
+              <select id="demm-type" name="typefilm" #typefilm="ngModel" [(ngModel)]="dem.typefilm" (change)="getOccasion($event)">
+                <option [ngValue]="undefined" selected disabled>-النوع-</option>
+                <option value="وثائقي">	وثائقي</option>
+                <option value="ترويجي">ترويجي</option>
+                <option value="دعوي">دعوي</option>
+                <option value="أخرى">أخرى</option>
+              </select>
+            </div>
+
+            <div class="col-md-6" *ngIf="occ">
+              <label for="date">	أخرى </label>
+              <input type="text" id="date" name="autretype" #autretype="ngModel" [(ngModel)]="dem.autretype" />
+            </div>
+
+
+            <div class="col-md-6">
+              <label for="time2">الميزانية  </label>
+              <input type="number" id="time2" name="budget" #budget="ngModel" [(ngModel)]="dem.budget" />
+            </div>
+
+            <div class="col-md-6">
+              <label for="other-type">مدة الفيلم </label>
+              <input type="text" id="other-type" name="duree" #duree="ngModel" [(ngModel)]="dem.duree" />
+            </div>
+
+            <div class="col-md-6">
+              <label for="time1">الوقت</label>
+              <input type="datetime-local" id="time1" name="attribut1" #attribut1="ngModel" [(ngModel)]="dem.attribut1" />
+            </div>
+
+            <div class="col-md-6">
+              <label for="time2">	الهدف </label>
+              <input type="text" id="time2" name="but" #but="ngModel" [(ngModel)]="dem.but" />
+            </div>
+
+            <div class="col-md-12">
+              <label for="time2">	الرابط  </label>
+              <input type="text" id="time2" name="url" #url="ngModel" [(ngModel)]="dem.url" style="width:400px;" />
+            </div>
+
+            <div class="col-md-6">
+              <label for="">إضافة الملفات</label>
+              <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+                <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+            </div>
+
+            <div class="col-md-6">
+              <label for=""> الملفات</label>
+              <div class="table-responsive new-table2" *ngIf="TestListFiles">
+                <table class="table table-bordered text-center table-striped">
+                  <thead class="thead-primary">
+                    <tr>
+
+                      <th scope="col">	إسم الملف</th>
+                      <th scope="col">حذف</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let dp of listfiles">
+                      <td>{{dp.path}}</td>
+
+                      <td><a (click)="del(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                    </tr>
+                  </tbody>
+
+                </table>
+              </div>
+            </div>
+
+            <div class="col-md-12 text-left">
+              <input type="submit"
+                     style="width: 130px;"
+                     class="btn btn-info next"
+                     value="تحديث" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

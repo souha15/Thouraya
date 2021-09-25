@@ -38,6 +38,9 @@ export class MenurequestsComponent implements OnInit {
       this.userc = res
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
+      this.congeService.GetUsersDemands(this.UserIdConnected).subscribe(res => {
+        this.filtredCongeList = res
+      })
     })
 
   }
@@ -45,9 +48,8 @@ export class MenurequestsComponent implements OnInit {
   congeList: Conge[] = [];
   filtredCongeList: Conge[] = [];
   CongeList() {
-    this.congeService.Get().subscribe(res => {
-      this.congeList = res
-      this.filtredCongeList = this.congeList.filter(item => item.etatd == "في الانتظار" && item.directeurid == this.UserIdConnected)
+    this.congeService.GetUsersDemands(this.UserIdConnected).subscribe(res => {
+      this.filtredCongeList =res
     })
   }
 
@@ -73,10 +75,11 @@ export class MenurequestsComponent implements OnInit {
     if (this.etat == "رفض") {
       this.congeService.formData.attribut2 ="رفض"
     }
+    this.congeService.formData.etat = "50%";
     this.congeService.Edit().subscribe(res => {
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
       this.resetForm();
-      this.CongeList();
+      this.getUserConnected();
     },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');
@@ -98,6 +101,23 @@ export class MenurequestsComponent implements OnInit {
       form.resetForm();
     this.congeService.formData = {
       id: null,
+      transferera: '',
+      transfertetab: '',
+      transfertrh: '',
+      transfertdeux: '',
+      datetransfert: '',
+      idtrh: '',
+      idtetab: '',
+      nomtrh: '',
+      nomtetab: '',
+      etatetab: '',
+      dateetab: '',
+      tran1: '',
+      tran2: '',
+      tran3: '',
+      tran4: '',
+      tran5: '',
+      tran6: '',
       datedebut: '',
       datefin: '',
       duree: '',

@@ -11,6 +11,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./creation-list-dir-g.component.css']
 })
 export class CreationListDirGComponent implements OnInit {
+
   constructor(private UserService: UserServiceService,
     private toastr: ToastrService,
     private ctService: CreationTravailDemandeService
@@ -43,7 +44,7 @@ export class CreationListDirGComponent implements OnInit {
     this.ctService.Get().subscribe(res => {
       this.GfactList = res;
 
-      this.factList = this.GfactList.filter(item => item.etatrh == "موافقة" && item.etatdg == "في الإنتظار")
+      this.factList = this.GfactList.filter(item => item.iddir == this.UserIdConnected && item.etatdir == "في الإنتظار")
 
     })
 
@@ -51,11 +52,9 @@ export class CreationListDirGComponent implements OnInit {
 
   date = new Date().toLocaleDateString();
   accept() {
-    this.fact.etat = "موافقة"
-    this.fact.daterh = this.date;
-    this.fact.etatrh = "موافقة"
-    this.fact.idrh = this.UserIdConnected;
-    this.fact.nomrh = this.UserNameConnected;
+    //this.fact.etat = "موافقة"
+    this.fact.datedir = this.date;
+    this.fact.etatdir = "موافقة"
     this.ctService.PutObservableE(this.fact).subscribe(res => {
       this.getCreance();
       this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
@@ -78,11 +77,8 @@ export class CreationListDirGComponent implements OnInit {
 
   refuse() {
     this.fact.etat = "رفض"
-    this.fact.daterh = this.date;
-    this.fact.etatrh = "رفض"
-    this.fact.idrh = this.UserIdConnected;
-    this.fact.nomrh = this.UserNameConnected;
-
+    this.fact.datedir = this.date;
+    this.fact.etatdir = "رفض"
     this.ctService.PutObservableE(this.fact).subscribe(res => {
       this.getCreance();
       this.toastr.success("تم  رفض الطلب بنجاح", "نجاح");

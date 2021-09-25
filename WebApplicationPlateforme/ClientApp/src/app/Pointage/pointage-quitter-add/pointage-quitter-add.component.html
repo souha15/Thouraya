@@ -6,71 +6,83 @@
       <app-side-menu></app-side-menu>
     </div>
     <div class="col-md-9 col-sm-8">
+      <nav class="d-flex p-0 bd-highlight tasks-nav mt-2 finance-nav">
 
+        <a [routerLink]="['/pointage-presence-add']" class="p-2 flex-fill bd-highlight stop-btn">
+          <span><i class="fa fa-door-open"></i></span>
+          الحضور
+        </a>
+
+        <a [routerLink]="['/pointage-quitter-add']" class="p-2 flex-fill bd-highlight stop-btn">
+          <span><i class="fa fa-door-closed"></i></span>
+          الإنصراف
+        </a>
+
+      </nav>
       <header>
         <h3 class="task-head">تسجيل الإنصراف</h3>
       </header>
       <div class="row">
-      <div class="col-md-6">
-      <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-        <!-- START CAPTCHA -->
-        <br>
-        <div class="capbox">
+        <div class="col-md-6">
+          <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <!-- START CAPTCHA -->
+            <br>
+            <div class="capbox">
 
 
 
-          <div class="capbox-inner">
-            اكتب الرمز<br>
+              <div class="capbox-inner">
+                اكتب الرمز<br>
 
-            <input type="hidden" id="txtCaptcha">
-            <input type="text" name="CaptchaInput" id="CaptchaInput" size="5" (change)="captchacode($event)"><br>
+                <input type="hidden" id="txtCaptcha">
+                <input type="text" name="CaptchaInput" id="CaptchaInput" size="5" (change)="captchacode($event)"><br>
 
+              </div>
+
+              <div id="CaptchaDiv">{{code}}</div>
+            </div>
+            <br><br>
+            <!-- END CAPTCHA -->
+
+
+            <div class="col-10 text-left mt-3">
+              <input class="btn btn-primary px-4" type="submit" value="ارسال" *ngIf="btnshow">
+
+            </div>
+          </form>
+        </div>
+        <div class="col-md-6">
+          <div>
+            <br />
           </div>
+          <div class="tabel-cont">
+            <table class="table table-striped table-hover" *ngIf="tableshow">
+              <thead class="">
+                <tr>
+                  <th scope="col">	# </th>
+                  <th scope="col">	التاريخ </th>
+                  <th scope="col">وقت الحضور</th>
+                  <th scope="col"> وقت الإنصراف </th>
+                </tr>
+              </thead>
 
-          <div id="CaptchaDiv">{{code}}</div>
+              <tbody>
+                <tr>
+                  <th scope="row">1</th>
+                  <td>{{point.datePresence}}</td>
+                  <td>{{point.timePresence}}</td>
+                  <td>{{point.timeQuitter}}</td>
+
+
+                </tr>
+              </tbody>
+
+
+
+            </table>
+          </div>
         </div>
-        <br><br>
-        <!-- END CAPTCHA -->
-
-
-        <div class="col-10 text-left mt-3">
-          <input class="btn btn-primary px-4" type="submit" value="ارسال" *ngIf="btnshow">
-
-        </div>
-      </form>
-    </div>
-    <div class="col-md-6">
-      <div>
-        <br />
       </div>
-      <div class="tabel-cont">
-        <table class="table table-striped table-hover" *ngIf="tableshow">
-          <thead class="">
-            <tr>
-              <th scope="col">	# </th>
-              <th scope="col">	التاريخ </th>
-              <th scope="col">وقت الحضور</th>
-              <th scope="col"> وقت الإنصراف </th>
-            </tr>
-          </thead>
-
-          <tbody>
-            <tr>
-              <th scope="row">1</th>
-              <td>{{point.datePresence}}</td>
-              <td>{{point.timePresence}}</td>
-              <td>{{point.timeQuitter}}</td>
-
-
-            </tr>
-          </tbody>
-
-
-
-        </table>
-      </div>
-    </div>
-  </div>
     </div>
 
   </div>

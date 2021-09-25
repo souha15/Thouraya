@@ -1,0 +1,562 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head"> 	تقديم طلب تصميم وطباعة  </h3>
+      </header>
+      <div class="demmision">
+
+        <form class="form-row events-form mb-6" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+          <div class="col-md-6">
+            <label for="demm-type">نوع التصميم </label>
+            <select id="demm-type" name="type" #type="ngModel" [(ngModel)]="dem.type" (change)="getTypeSelected($event)">
+              <option [ngValue]="undefined" selected disabled>-النوع-</option>
+              <option value="0">تصميم للنشر الإلكتروني فقط</option>
+              <option value="1">تصميم وطباعة بروشور</option>
+              <option value="2">تصميم وطباعة استندات</option>
+              <option value="3">تصميم وطباعة تقرير</option>
+              <option value="4">تصميم وطباعة بنر واللوحات</option>
+              <option value="5">تصميم وطباعة الشهادات</option>
+              <option value="6">تصميم وطباعة الدروع </option>
+              <option value="7">أخرى</option>
+            </select>
+          </div>
+
+          <div class="row w-100 d-flex form-box" *ngIf="autre">
+            <div class="col-md-8 col-sm-12">
+              <label class="main">
+                <span><i class="fa fa-gift"></i></span>
+                أخرى
+              </label>
+              <div class="d-flex w-100 justify-content-start flex-wrap">
+
+                <div class="ml-3">
+                  <label for="target">أخرى </label>
+                  <input type="text" id="target"
+                         name="nom" #nom="ngModel" [(ngModel)]="TypeImp.nom" />
+                </div>
+
+                <div class="ml-3">
+                  <label for="target">الحجم </label>
+                  <input type="number" id="target"
+                         name="taille" #taille="ngModel" [(ngModel)]="TypeImp.taille" />
+                </div>
+                <div class="ml-3">
+                  <label for="target">العدد  </label>
+                  <input type="number" id="target"
+                         name="quantite" #quantite="ngModel" [(ngModel)]="TypeImp.quantite" />
+                </div>
+                <div class="ml-3">
+                  <label for="target">الميزانية  </label>
+                  <input type="number" id="target"
+                         name="budget" #budget="ngModel" [(ngModel)]="TypeImp.budget" />
+                </div>
+
+                <div class="ml-3">
+                  <a (click)="add()"
+                     class="btn mt-md-4"
+                     style="
+											width: 120px;
+											height: 40px;
+											color: #fff;
+											background: #344760;
+										">إضافة</a>
+
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="table-responsive new-table2" *ngIf="TypeImpTest">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-primary">
+                  <tr>
+
+
+                    <th scope="col">الحجم</th>
+                    <th scope="col">الكمية</th>
+                    <th scope="col">الميزانية</th>
+
+                    <th scope="col">حذف</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of TypeImpList">
+
+                    <td>{{dp.taille}}</td>
+                    <td>{{dp.quantite}}</td>
+                    <td>{{dp.budget}}</td>
+
+                    <td><a (click)="del(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="row w-100 d-flex form-box" *ngIf="drou">
+            <div class="col-md-8 col-sm-12">
+              <label class="main">
+                <span><i class="fa fa-gift"></i></span>
+                تصميم وطباعة الدروع
+
+              </label>
+              <div class="d-flex w-100 justify-content-start flex-wrap">
+
+
+                <div class="ml-3">
+                  <label for="target">عدد الدروع    </label>
+                  <input type="number" id="target"
+                         name="nbBouclier" #nbBouclier="ngModel" [(ngModel)]="TypeImp.nbBouclier" />
+                </div>
+                <div class="ml-3">
+                  <label for="target">الحجم    </label>
+                  <input type="number" id="target"
+                         name="taille" #taille="ngModel" [(ngModel)]="TypeImp.taille" />
+                </div>
+
+                <div class="ml-3">
+                  <label for="target">ميزانية     </label>
+                  <input type="number" id="target"
+                         name="budget" #budget="ngModel" [(ngModel)]="TypeImp.budget" />
+                </div>
+
+                <div class="ml-3">
+                  <label for="target">تاريخ التوزيع    </label>
+                  <input type="date" id="target"
+                         name="datediffusion" #datediffusion="ngModel" [(ngModel)]="TypeImp.datediffusion" />
+                </div>
+
+                <div class="ml-3">
+                  <a (click)="add()"
+                     class="btn mt-md-4"
+                     style="
+											width: 120px;
+											height: 40px;
+											color: #fff;
+											background: #344760;
+										">إضافة</a>
+
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="table-responsive new-table2" *ngIf="TypeImpTest">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-primary">
+                  <tr>
+
+
+                    <th scope="col">عدد الدروع  </th>
+                    <th scope="col">الحجم   </th>
+                    <th scope="col">الميزانية  </th>
+                    <th scope="col">تاريخ التوزيع   </th>
+
+
+                    <th scope="col">حذف</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of TypeImpList">
+
+                    <td>{{dp.nbBouclier}}</td>
+                    <td>{{dp.taille}}</td>
+                    <td>{{dp.budget}}</td>
+                    <td>{{dp.datediffusion}}</td>
+
+
+                    <td><a (click)="del(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+
+          <div class="row w-100 d-flex form-box" *ngIf="dip">
+            <div class="col-md-8 col-sm-12">
+              <label class="main">
+                <span><i class="fa fa-gift"></i></span>
+                تصميم وطباعة الشهادات
+
+              </label>
+              <div class="d-flex w-100 justify-content-start flex-wrap">
+
+
+                <div class="ml-3">
+                  <label for="target">عدد الشهادات   </label>
+                  <input type="number" id="target"
+                         name="nbdiplome" #nbdiplome="ngModel" [(ngModel)]="TypeImp.nbdiplome" />
+                </div>
+                <div class="ml-3">
+                  <label for="target">الميزانية   </label>
+                  <input type="number" id="target"
+                         name="budget" #budget="ngModel" [(ngModel)]="TypeImp.budget" />
+                </div>
+
+                <div class="ml-3">
+                  <label for="target">تاريخ التوزيع    </label>
+                  <input type="date" id="target"
+                         name="datediffusion" #datediffusion="ngModel" [(ngModel)]="TypeImp.datediffusion" />
+                </div>
+
+                <div class="ml-3">
+                  <a (click)="add()"
+                     class="btn mt-md-4"
+                     style="
+											width: 120px;
+											height: 40px;
+											color: #fff;
+											background: #344760;
+										">إضافة</a>
+
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="table-responsive new-table2" *ngIf="TypeImpTest">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-primary">
+                  <tr>
+
+
+                    <th scope="col">عدد الشهادات  </th>
+                    <th scope="col">الميزانية  </th>
+                    <th scope="col">تاريخ التوزيع   </th>
+
+
+                    <th scope="col">حذف</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of TypeImpList">
+
+                    <td>{{dp.nbdiplome}}</td>
+                    <td>{{dp.budget}}</td>
+                    <td>{{dp.datediffusion}}</td>
+
+
+                    <td><a (click)="del(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+
+          <div class="row w-100 d-flex form-box" *ngIf="ban">
+            <div class="col-md-8 col-sm-12">
+              <label class="main">
+                <span><i class="fa fa-gift"></i></span>
+                تصميم وطباعة بنر واللوحات
+
+              </label>
+              <div class="d-flex w-100 justify-content-start flex-wrap">
+
+
+                <div class="ml-3">
+                  <label for="target">طول وارتفاع البنر  </label>
+                  <input type="number" id="target"
+                         name="longueurtaille" #longueurtaille="ngModel" [(ngModel)]="TypeImp.longueurtaille" />
+                </div>
+                <div class="ml-3">
+                  <label for="target">موقع التركيب  </label>
+                  <input type="text" id="target"
+                         name="placement" #placement="ngModel" [(ngModel)]="TypeImp.placement" />
+                </div>
+
+
+                <div class="ml-3">
+                  <a (click)="add()"
+                     class="btn mt-md-4"
+                     style="
+											width: 120px;
+											height: 40px;
+											color: #fff;
+											background: #344760;
+										">إضافة</a>
+
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="table-responsive new-table2" *ngIf="TypeImpTest">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-primary">
+                  <tr>
+
+
+                    <th scope="col">طول وارتفاع البنر </th>
+                    <th scope="col">موقع التركيب</th>
+
+
+                    <th scope="col">حذف</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of TypeImpList">
+
+                    <td>{{dp.longueurtaille}}</td>
+                    <td>{{dp.placement}}</td>
+
+
+                    <td><a (click)="del(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+          <div class="row w-100 d-flex form-box" *ngIf="rap">
+            <div class="col-md-8 col-sm-12">
+              <label class="main">
+                <span><i class="fa fa-gift"></i></span>
+                تصميم وطباعة تقرير
+
+              </label>
+              <div class="d-flex w-100 justify-content-start flex-wrap">
+
+
+                <div class="ml-3">
+                  <label for="target">الحجم </label>
+                  <input type="number" id="target"
+                         name="taille" #taille="ngModel" [(ngModel)]="TypeImp.taille" />
+                </div>
+                <div class="ml-3">
+                  <label for="target">الكمية </label>
+                  <input type="number" id="target"
+                         name="quantite" #quantite="ngModel" [(ngModel)]="TypeImp.quantite" />
+                </div>
+                <div class="ml-3">
+                  <label for="target">عدد الصفحات  </label>
+                  <input type="number" id="target"
+                         name="nbpage" #nbpage="ngModel" [(ngModel)]="TypeImp.nbpage" />
+                </div>
+                <div class="ml-3">
+                  <label for="target">الميزانية  </label>
+                  <input type="number" id="target"
+                         name="budget" #budget="ngModel" [(ngModel)]="TypeImp.budget" />
+                </div>
+
+                <div class="ml-3">
+                  <a (click)="add()"
+                     class="btn mt-md-4"
+                     style="
+											width: 120px;
+											height: 40px;
+											color: #fff;
+											background: #344760;
+										">إضافة</a>
+
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="table-responsive new-table2" *ngIf="TypeImpTest">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-primary">
+                  <tr>
+
+
+                    <th scope="col">الحجم</th>
+                    <th scope="col">الكمية</th>
+                    <th scope="col">عدد الصفحات</th>
+                    <th scope="col">الميزانية</th>
+
+                    <th scope="col">حذف</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of TypeImpList">
+
+                    <td>{{dp.taille}}</td>
+                    <td>{{dp.quantite}}</td>
+                    <td>{{dp.nbpage}}</td>
+                    <td>{{dp.budget}}</td>
+
+                    <td><a (click)="del(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="row w-100 d-flex form-box" *ngIf="imp">
+            <div class="col-md-8 col-sm-12">
+              <label class="main">
+                <span><i class="fa fa-gift"></i></span>
+                تصميم وطباعة استندات
+              </label>
+              <div class="d-flex w-100 justify-content-start flex-wrap">
+
+
+                <div class="ml-3">
+                  <label for="target">الحجم </label>
+                  <input type="number" id="target"
+                         name="taille" #taille="ngModel" [(ngModel)]="TypeImp.taille" />
+                </div>
+                <div class="ml-3">
+                  <label for="target">العدد  </label>
+                  <input type="number" id="target"
+                         name="quantite" #quantite="ngModel" [(ngModel)]="TypeImp.quantite" />
+                </div>
+                <div class="ml-3">
+                  <label for="target">الميزانية  </label>
+                  <input type="number" id="target"
+                         name="budget" #budget="ngModel" [(ngModel)]="TypeImp.budget" />
+                </div>
+
+                <div class="ml-3">
+                  <a (click)="add()"
+                     class="btn mt-md-4"
+                     style="
+											width: 120px;
+											height: 40px;
+											color: #fff;
+											background: #344760;
+										">إضافة</a>
+
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="table-responsive new-table2" *ngIf="TypeImpTest">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-primary">
+                  <tr>
+
+
+                    <th scope="col">الحجم</th>
+                    <th scope="col">الكمية</th>
+                    <th scope="col">الميزانية</th>
+
+                    <th scope="col">حذف</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of TypeImpList">
+
+                    <td>{{dp.taille}}</td>
+                    <td>{{dp.quantite}}</td>
+                    <td>{{dp.budget}}</td>
+
+                    <td><a (click)="del(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="row w-100 d-flex form-box" *ngIf="bruch">
+            <div class="col-md-8 col-sm-12">
+              <label class="main">
+                <span><i class="fa fa-gift"></i></span>
+                تصميم وطباعة بروشور
+              </label>
+              <div class="d-flex w-100 justify-content-start flex-wrap">
+
+
+                <div class="ml-3">
+                  <label for="target">الحجم </label>
+                  <input type="number" id="target"
+                         name="taille" #taille="ngModel" [(ngModel)]="TypeImp.taille" />
+                </div>
+                <div class="ml-3">
+                  <label for="target">الكمية </label>
+                  <input type="number" id="target"
+                         name="quantite" #quantite="ngModel" [(ngModel)]="TypeImp.quantite" />
+                </div>
+                <div class="ml-3">
+                  <label for="target">الميزانية  </label>
+                  <input type="number" id="target"
+                         name="budget" #budget="ngModel" [(ngModel)]="TypeImp.budget" />
+                </div>
+
+                <div class="ml-3">
+                  <a (click)="add()"
+                     class="btn mt-md-4"
+                     style="
+											width: 120px;
+											height: 40px;
+											color: #fff;
+											background: #344760;
+										">إضافة</a>
+
+                </div>
+              </div>
+
+
+            </div>
+
+            <div class="table-responsive new-table2" *ngIf="TypeImpTest">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-primary">
+                  <tr>
+
+
+                    <th scope="col">الحجم</th>
+                    <th scope="col">الكمية</th>
+                    <th scope="col">الميزانية</th>
+
+                    <th scope="col">حذف</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of TypeImpList">
+
+                    <td>{{dp.taille}}</td>
+                    <td>{{dp.quantite}}</td>
+                    <td>{{dp.budget}}</td>
+
+                    <td><a (click)="del(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+          <div class="col-12 text-center text-md-left mt-3">
+            <input class="btn btn-info"
+                   style="width: 130px"
+                   type="submit"
+                   value="ارسال" />
+          </div>
+        </form>
+  </div>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

@@ -1,0 +1,301 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <div class="events-data">
+        <header>
+          <h3 class="task-head">{{dem.nomdesign}}</h3>
+        </header>
+
+        <div class="staus-box">
+          <div class="sts mr-auto">{{dem.etat}}</div>
+        </div>
+        <div class="events-form row">
+
+
+          <div class="col-md-12 d-flex flex-column flex-wrap" *ngIf="elec">
+
+            <div>
+              <label style="width: 200px">   {{dem.nomdesign}}</label>
+            </div>
+
+
+          </div>
+
+          <div class="col-md-12 d-flex flex-column flex-wrap" *ngIf="bruch">
+
+            <div>
+              <label style="width: 200px">  {{dem.nomdesign}}</label>
+            </div>
+
+            <div class="table-responsive new-table2" *ngIf="TypeImpTest">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-primary">
+                  <tr>
+
+
+                    <th scope="col">الحجم</th>
+                    <th scope="col">الكمية</th>
+                    <th scope="col">الميزانية</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of TypeImpList">
+
+                    <td>{{dp.taille}}</td>
+                    <td>{{dp.quantite}}</td>
+                    <td>{{dp.budget}}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+          <div class="col-md-12 d-flex flex-column flex-wrap" *ngIf="imp">
+
+            <div>
+              <label style="width: 200px">   {{dem.nomdesign}}</label>
+            </div>
+
+            <div class="table-responsive new-table2" *ngIf="TypeImpTest">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-primary">
+                  <tr>
+
+
+                    <th scope="col">الحجم</th>
+                    <th scope="col">الكمية</th>
+                    <th scope="col">الميزانية</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of TypeImpList">
+
+                    <td>{{dp.taille}}</td>
+                    <td>{{dp.quantite}}</td>
+                    <td>{{dp.budget}}</td>
+
+          
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+          <div class="col-md-12 d-flex flex-column flex-wrap" *ngIf="rap">
+
+            <div>
+              <label style="width: 200px">   {{dem.nomdesign}}</label>
+            </div>
+
+
+            <div class="table-responsive new-table2" *ngIf="TypeImpTest">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-primary">
+                  <tr>
+
+
+                    <th scope="col">الحجم</th>
+                    <th scope="col">الكمية</th>
+                    <th scope="col">عدد الصفحات</th>
+                    <th scope="col">الميزانية</th>
+
+                
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of TypeImpList">
+
+                    <td>{{dp.taille}}</td>
+                    <td>{{dp.quantite}}</td>
+                    <td>{{dp.nbpage}}</td>
+                    <td>{{dp.budget}}</td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="col-md-12 d-flex flex-column flex-wrap" *ngIf="dip">
+
+            <div>
+              <label style="width: 200px">   {{dem.nomdesign}}</label>
+            </div>
+
+
+            <div class="table-responsive new-table2" *ngIf="TypeImpTest">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-primary">
+                  <tr>
+
+
+                    <th scope="col">عدد الشهادات  </th>
+                    <th scope="col">الميزانية  </th>
+                    <th scope="col">تاريخ التوزيع   </th>
+
+
+                  
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of TypeImpList">
+
+                    <td>{{dp.nbdiplome}}</td>
+                    <td>{{dp.budget}}</td>
+                    <td>{{dp.datediffusion}}</td>
+
+
+                   
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+          <div class="col-md-12 d-flex flex-column flex-wrap" *ngIf="drou">
+
+            <div>
+              <label style="width: 200px">   {{dem.nomdesign}}</label>
+            </div>
+
+            <div class="table-responsive new-table2" *ngIf="TypeImpTest">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-primary">
+                  <tr>
+
+
+                    <th scope="col">عدد الدروع  </th>
+                    <th scope="col">الحجم   </th>
+                    <th scope="col">الميزانية  </th>
+                    <th scope="col">تاريخ التوزيع   </th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of TypeImpList">
+
+                    <td>{{dp.nbBouclier}}</td>
+                    <td>{{dp.taille}}</td>
+                    <td>{{dp.budget}}</td>
+                    <td>{{dp.datediffusion}}</td>
+
+
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+          <div class="col-md-12 d-flex flex-column flex-wrap" *ngIf="autre">
+
+            <div>
+              <label style="width: 200px">   {{dem.nomdesign}}</label>
+            </div>
+
+            <div class="table-responsive new-table2" *ngIf="TypeImpTest">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-primary">
+                  <tr>
+
+
+                    <th scope="col">الحجم</th>
+                    <th scope="col">الكمية</th>
+                    <th scope="col">الميزانية</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of TypeImpList">
+
+                    <td>{{dp.taille}}</td>
+                    <td>{{dp.quantite}}</td>
+                    <td>{{dp.budget}}</td>
+
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+          <div class="col-md-12 d-flex flex-column flex-wrap" *ngIf="ban">
+
+            <div>
+              <label style="width: 200px">   {{dem.nomdesign}}</label>
+            </div>
+
+            <div class="table-responsive new-table2" *ngIf="TypeImpTest">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-primary">
+                  <tr>
+
+
+                    <th scope="col">طول وارتفاع البنر </th>
+                    <th scope="col">موقع التركيب</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of TypeImpList">
+
+                    <td>{{dp.longueurtaille}}</td>
+                    <td>{{dp.placement}}</td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+
+          <div class="col-md-6 d-flex flex-column flex-wrap" *ngIf="testFiles">
+
+            <div>
+              <label style="width: 200px">   الملفات</label>
+            </div>
+
+            <div class="">
+
+              <span class="data">
+                <span *ngFor="let pr of listFiles">
+                  <i class="ml-2 fa fa-arrow-down" style="color:dodgerblue"></i>
+                  <a (click)="download(pr.path)" class="ml-3" style="color:dodgerblue">{{pr.path}}</a>
+
+                </span>
+              </span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+
+

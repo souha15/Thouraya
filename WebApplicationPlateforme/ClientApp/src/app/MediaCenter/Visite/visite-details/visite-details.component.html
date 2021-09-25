@@ -1,0 +1,89 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <div class="events-data">
+        <header>
+          <h3 class="task-head">الزيارات</h3>
+        </header>
+
+        <div class="staus-box">
+          <div class="sts mr-auto">{{dem.diretat}}</div>
+        </div>
+        <div class="events-form row">
+          <div class="col-md-6" *ngIf="!autre">
+            <label>نوع الزيارة  </label>
+            <span class="data">{{dem.type}}</span>
+          </div>
+          <div class="col-md-6" *ngIf="autre">
+            <label>نوع الزيارة </label>
+            <span class="data">{{dem.autre}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>هدف الزيارة</label>
+            <span class="data">{{dem.but}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>العدد</label>
+            <span class="data">{{dem.nb}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>الميزانية</label>
+            <span class="data">{{dem.budget}}</span>
+          </div>
+
+
+          <div class="col-md-12">
+            <label>التوصيات</label>
+            <span class="data" style="width:500px;">{{dem.detail}}</span>
+          </div>
+
+          <div class="col-md-6 d-flex flex-column flex-wrap">
+
+            <div>
+              <label style="width: 200px">  العروض والمطبوعات</label>
+            </div>
+
+            <div>
+              <table class="table table-striped table-bordered theme-table">
+                <thead>
+                  <tr>
+
+                    <th scope="col">#</th>
+                    <th scope="col">العرض</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let dp of guestList ; let i = index">
+
+                    <td>{{i+1}}</td>
+                    <td>{{dp.nom}}</td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+
+

@@ -23,7 +23,8 @@ export class RhRecrutmentListComponent implements OnInit {
     this.resetForm();
   }
 
-
+  p: Number = 1;
+  count: Number = 5;
   //Get UserConnected
 
   UserIdConnected: string;

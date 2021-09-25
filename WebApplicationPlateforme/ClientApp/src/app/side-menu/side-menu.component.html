@@ -14,6 +14,18 @@
       </div>
     </div>
 
+
+
+    <div *ngIf="admin">
+      <h5 id="headinghantwo" class="collapsed" data-toggle="collapse" data-target="#collapsehantwo" aria-expanded="false" aria-controls="collapsehantwo">
+        <span><i class="fa fa-mail-bulk"></i></span>	العلاقات العامة والاعلام
+        <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+      </h5>
+      <div id="collapsehantwo" class="collapse" aria-labelledby="headinghantwo" data-parent="#parent">
+        <a [routerLink]="['/meadia-center-demands-add-user']">الطلبات  </a>
+        <a [routerLink]="['/meadia-center-demands-list-user']">  الإستعلامات </a>
+      </div>
+    </div>
     <div>
       <h5 id="headingtweleve" class="collapsed" data-toggle="collapse" data-target="#collapsetweleve" aria-expanded="false" aria-controls="collapsetweleve">
         <span><i class="fa fa-user-cog"></i></span>الخدمات الذاتية
@@ -54,16 +66,16 @@
 
 
     <!-- <div>
-       <h5 id="headingsexi" class="collapsed" data-toggle="collapse" data-target="#collapsesexi" aria-expanded="false" aria-controls="collapsesexi">
-         <span><i class="fa fa-project-diagram"></i></span>  المشاريع
-         <span class="arrow"><i class="fa fa-chevron-left"></i></span>
-       </h5>
-       <div id="collapsesexi" class="collapse" aria-labelledby="headingsexi" data-parent="#parent">
-         <a [routerLink]="['/menu-projet-org2']">الصفحة الرئيسية للمشاريع</a>
-         <a [routerLink]="['/list-projet-org']">قائمة المشاريع</a>
-         <a [routerLink]="['/add-projet-org']">إضافة مشروع</a>
-       </div>
-     </div>-->
+     <h5 id="headingsexi" class="collapsed" data-toggle="collapse" data-target="#collapsesexi" aria-expanded="false" aria-controls="collapsesexi">
+       <span><i class="fa fa-project-diagram"></i></span>  المشاريع
+       <span class="arrow"><i class="fa fa-chevron-left"></i></span>
+     </h5>
+     <div id="collapsesexi" class="collapse" aria-labelledby="headingsexi" data-parent="#parent">
+       <a [routerLink]="['/menu-projet-org2']">الصفحة الرئيسية للمشاريع</a>
+       <a [routerLink]="['/list-projet-org']">قائمة المشاريع</a>
+       <a [routerLink]="['/add-projet-org']">إضافة مشروع</a>
+     </div>
+   </div>-->
     <div *ngIf="admin">
       <h5 id="headingeight" class="collapsed" data-toggle="collapse" data-target="#collapseeight" aria-expanded="false" aria-controls="collapseeight">
         <span><i class="fa fa-project-diagram"></i></span>المشاريع
@@ -129,8 +141,7 @@
         <a [routerLink]="['/chequec-lis']">الشيكات</a>
         <a [routerLink]="['/supplies-list']">العهدة</a>
         <a [routerLink]="['/comptes-list']">الحسابات</a>
-        <a [routerLink]="['/salaire-list-global']">مسيرات الرواتب</a>
-        <a [routerLink]="['/avance-list-c']"> طلبات السلفة</a>
+        <a [routerLink]="['/priv-add']"> طلبات الموظفين </a>
       </div>
     </div>
     <div *ngIf="admin">
@@ -215,7 +226,7 @@
         <a [routerLink]="['/solde-conge']">	 إدارة الاجازات</a>
         <a [routerLink]="['/transfert-interne-add']">إدارة التحويلات الداخلية</a>
         <a [routerLink]="['/ticket-add']">الدعم الفني</a>
-        <a [routerLink]="['/news-add']"> إدارة المركز الإعلامي</a>
+        <a [routerLink]="['/interview-menu-settings']"> إدارة المركز الإعلامي</a>
         <a [routerLink]="['/beneficiaire-c']">إدارة الفعاليات</a>
         <a [routerLink]="['/type-voiture']">إدارة وسائل النقل</a>
         <a [routerLink]="['/org-part-list']">إدارة الجهات المانحة</a>
@@ -226,14 +237,15 @@
         <a [routerLink]="['/add-type-stock']">ادارة المستودعات  </a>
         <a [routerLink]="['/lives-with-orphelin']">ادارة كفالة الايتام   </a>
         <a [routerLink]="['/add-projet-client']">إدارة المشاريع  </a>
+        <a [routerLink]="['/type-interview']">إدارةالعلاقات العامة والاعلام   </a>
         <!--
-              <a [routerLink]="['/organisme']">إدارة المعاملات</a>
-              <a [routerLink]="['/beneficiaire-c']">إدارة الفعاليات</a>
-              <a [routerLink]="['/projet-class']">إدارة المشاريع</a>
+          <a [routerLink]="['/organisme']">إدارة المعاملات</a>
+          <a [routerLink]="['/beneficiaire-c']">إدارة الفعاليات</a>
+          <a [routerLink]="['/projet-class']">إدارة المشاريع</a>
 
-              <a [routerLink]="['/projet-compte']"> إدارة نظام المالية</a>
-              <a [routerLink]="['/formation-add']">إدارة الدورات التدريبية</a>
-      -->
+          <a [routerLink]="['/projet-compte']"> إدارة نظام المالية</a>
+          <a [routerLink]="['/formation-add']">إدارة الدورات التدريبية</a>
+  -->
 
 
 

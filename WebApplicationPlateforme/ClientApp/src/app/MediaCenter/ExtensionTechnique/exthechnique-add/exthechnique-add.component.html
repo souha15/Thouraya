@@ -1,0 +1,60 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">تقديم طلب تمديدات فنية</h3>
+      </header>
+      <div class="exthmision">
+
+        <form class="form-row events-form mb-6" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+          <div class="col-md-6">
+            <label for="exthm-type">النوع</label>
+            <select id="exthm-type" name="type" #type="ngModel" [(ngModel)]="exth.type">
+              <option [ngValue]="undefined" selected disabled>-النوع-</option>
+              <option *ngFor="let item of settingList" value="{{item.nom}}">{{item.nom}}</option>
+            </select>
+          </div>
+          <div class="col-md-6">
+            <label for="date">	الهدف</label>
+            <input type="text" id="date" name="but" #but="ngModel" [(ngModel)]="exth.but" />
+          </div>
+          <div class="col-md-6">
+            <label for="other-type">	المكان</label>
+            <input type="text" id="other-type" name="localisation" #localisation="ngModel" [(ngModel)]="exth.localisation" />
+          </div>
+          <div class="col-md-6">
+            <label for="time1">الوقت</label>
+            <input type="datetime-local" id="time1" name="dateTime" #dateTime="ngModel" [(ngModel)]="exth.dateTime" />
+          </div>
+          <div class="col-md-6">
+            <label for="time2">الميزانية</label>
+            <input type="number" id="time2" name="budget" #budget="ngModel" [(ngModel)]="exth.budget" />
+          </div>
+          <div class="col-md-6">
+            <label for="reason">وصف تفصيلي </label>
+            <textarea class="form-control" id="reason" name="detail" #detail="ngModel" [(ngModel)]="exth.detail"></textarea>
+          </div>
+
+          <div class="col-12 text-center text-md-left mt-3">
+            <input class="btn btn-info"
+                   style="width: 130px"
+                   type="submit"
+                   value="ارسال" />
+          </div>
+        </form>
+      </div>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

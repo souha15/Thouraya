@@ -18,23 +18,25 @@
           <table class="table table-bordered text-center table-striped" id="MyTable">
             <thead class="thead-primary">
               <tr>
-                <th scope="col">الرقم التسلسلي</th>
+                <th scope="col">#</th>
+                <th scope="col">الموظف</th>
                 <th scope="col">العهدة</th>
                 <th scope="col">نوع العهدة</th>
                 <th scope="col">جوال</th>
                 <th scope="col">الايميل الرسمي</th>
-                <th scope="col">تحويله</th>
+
                 <th scope="col">الحالة</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
-                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.id}}</th>
+              <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
+                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{(p-1) * count + i + 1}}</th>
+                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.userNameCreator}}</th>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.nom}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.type}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.tel}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.email}}</td>
-                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.transfert}}</td>
+
                 <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
                     [ngClass]="{
 

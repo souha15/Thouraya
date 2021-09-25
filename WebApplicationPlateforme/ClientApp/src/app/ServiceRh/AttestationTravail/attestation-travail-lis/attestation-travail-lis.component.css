@@ -1,3 +1,5 @@
+
+
 .task-form {
   padding: 10px 0;
 }
@@ -269,4 +271,17 @@ ul {
 
 .file-label {
   cursor: pointer;
+}
+
+
+.wait {
+  background: #fcfc17;
+}
+
+.ok {
+  background: #2aa830;
+}
+
+.refused {
+  background: #ed4b1a;
 }

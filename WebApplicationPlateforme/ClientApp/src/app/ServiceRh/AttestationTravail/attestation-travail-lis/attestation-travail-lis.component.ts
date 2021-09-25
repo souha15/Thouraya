@@ -22,6 +22,10 @@ export class AttestationTravailLisComponent implements OnInit {
     this.resetForm();
   }
 
+
+  p: Number = 1;
+  count: Number = 5;
+
   UserIdConnected: string;
   UserNameConnected: string;
 

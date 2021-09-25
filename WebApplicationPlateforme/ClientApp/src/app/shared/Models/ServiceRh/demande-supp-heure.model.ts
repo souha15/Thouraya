@@ -1,5 +1,24 @@
 export class DemandeSuppHeure {
   id: number;
+  transferera :string;
+  transfertetab :string;
+  transfertrh :string;
+  transfertdeux :string;
+  datetransfert :string;
+  idtrh :string;
+  idtetab :string;
+  nomtrh :string;
+  nomtetab :string;
+  etatrh :string;
+  etatetab :string;
+  daterh :string;
+  dateetab :string;
+  tran1 :string;
+  tran2 :string;
+  tran3 :string;
+  tran4 :string;
+  tran5 :string;
+  tran6 :string;
   date: string;
   detail: string;
   nbheure: string;

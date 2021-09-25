@@ -21,50 +21,51 @@ export class DemandeCongeComponent implements OnInit {
     private toastr: ToastrService,) { }
 
   ngOnInit(): void {
-    this.getUserConnected();
+    this.getUserConnected();  
     this.UserList();
-    this.resetForm();
     this.getSoldeConge();
-    this.CalculateSoldeCongé();
   }
 
 
 
   soldecl: SoldeConge[] = [];
-
+  soldecongeList: SoldeConge[] = [];
   nbdays: number = 0;
+  soldedays: number = 0;
+  dateEnreg: string;
+  soldece: SoldeConge = new SoldeConge();
+  soldecle: SoldeConge[] = [];
+  soldeconge: number=0;
   getSoldeConge() {
     this.soldeCongeService.Get().subscribe(res => {
       this.soldecl = res
-      this.soldecl.filter(item => item.type == "اجازة عادية");
-      this.nbdays = +this.soldecl[0].number;
-    })
-  }
-  soldece: SoldeConge = new SoldeConge();
-  soldecle: SoldeConge[] = [];
-  soldeconge: number = 0;
-  globalsoldeConge: number = 0;
-  CalculateSoldeCongé() {
-    this.soldeCongeService.GetE().subscribe(res => {
-      this.soldecle = res
-      this.soldecle.filter(item => item.idUserCreator == this.UserIdConnected);
-    // Conge for the first Time
+      this.soldecongeList = this.soldecl.filter(item => item.idUserCreator == this.UserIdConnected);
+       
+        this.nbdays = +this.soldecongeList[0].numbernormal;
+        this.soldedays = +this.soldecongeList[0].soldenormal;
+        this.dateEnreg = this.soldecongeList[0].datenormal;
 
-      let d2 = new Date(this.datecontrat);
-      let d1 = new Date();
-      var months;
-      months = (d1.getFullYear() - d2.getFullYear()) * 12;
-      months -= d2.getMonth();
-      months += d1.getMonth();
-      this.globalsoldeConge = months * this.nbdays;
-      if (this.soldecle.length == 0) {
-        this.soldeconge = this.globalsoldeConge;
-      } else {
-        this.soldece = this.soldecle[this.soldecle.length - 1]
-        this.soldeconge = +this.soldece.number
-      }
+        let d2 = new Date(this.dateEnreg);
+        let d1 = new Date();
+       if (d1.getMonth() + 1 == d2.getMonth() + 1) {
+          this.soldeconge = this.soldedays;
+
+        } else {
+         
+          var months;
+          months = (d2.getFullYear() - d1.getFullYear()) * 12;
+          months -= d1.getMonth();
+          months += d2.getMonth();
+          console.log(months)
+          this.soldeconge = this.soldedays + (months * this.nbdays);
+        }
+   
+    
     })
   }
+
+
+
   // Get User Connected
 
   UserIdConnected: string;
@@ -185,6 +186,8 @@ export class DemandeCongeComponent implements OnInit {
     this.conge.etatd = "في الانتظار";
     this.conge.etatrh = "في الانتظار";
     this.conge.attribut2 = "في الانتظار";
+    this.conge.attribut6 = "في الانتظار";
+    this.conge.type ="إجازة سنوية"
     this.conge.adr = this.soldeconge.toString();
 
     if (form.invalid) {
@@ -219,74 +222,7 @@ export class DemandeCongeComponent implements OnInit {
 
     }
 
-
-
   }
 
-  resetForm(form?: NgForm) {
-
-    if (form != null)
-      form.resetForm();
-    this.UserService.formData = {
-      id: '',
-      userName: '',
-      email: '',
-      Password: '',
-      registreCivil: '',
-      FullNameEnglish: '',
-      fullName: '',
-      adresse: '',
-      PhoneNumber: '',
-      tel: '',
-      statut: '',
-      nationalite: '',
-      religion: '',
-      sexe: '',
-      dateNaissance: '',
-      lieuNaissance: '',
-      passeport: '',
-      typeSang: '',
-      num: '',
-      emploi: '',
-      rang: '',
-      typeEmploi: '',
-      nomAdministration: '',
-      nomDepartement: '',
-      unite: '',
-      qualification: '',
-      typeQualification: '',
-      faculteEcole: '',
-      dateQualification: '',
-      specialite: '',
-      paysetude: '',
-      mention: '',
-      classement: '',
-      degre: '',
-      salaire: '',
-      indemnite: '',
-      autreIndemnite: '',
-      heureArrive: '',
-      heureDepart: '',
-      photo: '',
-      idAdministration: null,
-      idDepartement: null,
-      directeur: '',
-      position: '',
-      attribut1: '',
-      attribut6: '',
-      attribut5: '',
-      attribut4: '',
-      attribut3: '',
-      attribut2: '',
-      soldeconge: '',
-      daterectrutement: '',
-      etatuser: '',
-      dateenreg: '',
-      userNameCreator: '',
-      idUserCreator: '',
-
-
-    }
-  }
 
 }

@@ -15,7 +15,7 @@
           <table class="table table-bordered text-center table-striped">
             <thead class="thead-primary">
               <tr>
-                <th scope="col">الرقم التسلسلي</th>
+                <th scope="col">#</th>
                 <th scope="col">التاريخ </th>
                 <th scope="col">نوع المشهد</th>
                 <th scope="col">
@@ -24,11 +24,14 @@
 
                 <th scope="col">جهة المشهد</th>
                 <th scope="col">الحالة</th>
+                <th scope="col">طباعة</th>
+                <th scope="col">تعديل</th>
+                <th scope="col">حذف</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
-                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.id}}</th>
+              <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }; let i = index">
+                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{(p-1) * count + i + 1}}</th>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.date}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.type}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.langue}}</td>
@@ -43,6 +46,14 @@
 }">
                   {{cg.etat}}
                 </td>
+                <td >
+                  <a *ngIf="cg.etat == 'موافق'" class="btn show-details-btn text-info" [routerLink]="['/partage-media-detail']" >
+                    <i class="fa fa-print fa-lg"></i>
+                  </a>
+                </td>
+
+                <td (click)="populateForm(cg)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal2" *ngIf="cg.etat == 'في الانتظار'">تعديل</a></td>
+                <td (click)="populateForm(cg)"><a class="btn btn-danger" (click)="onDelete(cg.id)" *ngIf="cg.etat == 'في الانتظار'">حذف</a></td>
               </tr>
 
             </tbody>
@@ -63,11 +74,59 @@
 </div>
 <!-- Footer -->
 <footer class="text-center">
- <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
 </footer>
 
 
-<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+<div id="myModal" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تفاصيل طلب مشهد براتب</h2>
+          <div class="form-row task-form service-form text-center">
+
+            <div class="col-md-6">
+
+              <div>
+                <label>نوع المشهد </label>
+                <p>{{fact.type}}</p>
+              </div>
+              <div>
+                <label>اللغة</label>
+                <p>{{fact.langue}}</p>
+              </div>
+
+            </div>
+            <div class="col-md-6">
+
+              <div>
+                <label>جهة المشهد</label>
+                <p>{{fact.organisme}}</p>
+              </div>
+              <div>
+                <label>الحالة </label>
+                <p>{{fact.etat}}</p>
+              </div>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="myModal2" class="popup-page" role="dialog" style="direction:ltr;">
   <div class="">
 
     <div class="popup-content">

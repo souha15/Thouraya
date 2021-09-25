@@ -50,6 +50,18 @@ namespace WebApplicationPlateforme.Model.Finance
         public string attribut5 { get; set; }
         public string attribut6 { get; set; }
         public string dateenreg { get; set; }
+        public string etatdirproj { get; set; }
+        public string datedirproj { get; set; }
+        public string iddirproj { get; set; }
+        public string nomdirproj { get; set; }
+        public string etatdirg { get; set; }
+        public string datedirg { get; set; }
+        public string iddirg { get; set; }
+        public string nomdirg { get; set; }
+        public string etatrh { get; set; }
+        public string daterh { get; set; }
+        public string idrh { get; set; }
+        public string nomrh { get; set; }
         public string userNameCreator { get; set; }
 
         [ForeignKey("ApplicationUser")]

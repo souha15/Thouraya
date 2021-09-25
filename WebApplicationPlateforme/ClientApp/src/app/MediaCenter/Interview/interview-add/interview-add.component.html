@@ -1,0 +1,160 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">إضافة  لقاء</h3>
+      </header>
+      <div class="events1">
+        <form class="form-row events-form mb-3" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <div class="col-md-12 d-flex flex-wrap w-100 justify-content-between">
+
+            <div class="col-md-4">
+              <label for="intero-time">طبيعة اللقاء</label>
+              <select id="devision" name="type" #type="ngModel" [(ngModel)]="inter.type" (change)="testType($event)">
+                <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                <option *ngFor="let item of typeInterList" value="{{item.nom}}">{{item.nom}}</option>
+              </select>
+              <div *ngIf="type.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب طبيعة اللقاء .
+              </div>
+            </div>
+
+            <div class="col-md-8" *ngIf="autre">
+              <label>	أخرى </label>
+              <input type="text" style="width:300px;" id="devision" name="Autre" #Autre="ngModel" [(ngModel)]="inter.Autre" />
+              <div *ngIf="type.invalid && form.submitted && !isValidFormSubmitted && autre" class="alert alert-danger">
+                مطلوب طبيعة اللقاء .
+              </div>
+            </div>
+
+
+          </div>
+
+          <div class="col-md-12" >
+            <div class="form-box p-4">
+              <div class="w-100 text-right">
+                <label class="main">
+                  <span><i class="fa fa-hand-holding-usd"></i></span>
+                  الأهداف و الميزانية
+                </label>
+              </div>
+
+              <div class="w-100 d-flex justify-content-start flex-wrap">
+                <div class="ml-3">
+
+                  <label for="amount">الهدف </label>
+                  <input type="text" id="amount" name="but" #but="ngModel" [(ngModel)]="inter.but" />
+
+                </div>
+                <div class="ml-3">
+                  <label for="amount">	الفئة المستهدفة  </label>
+                  <input type="text" id="amount" name="BenefBut" #BenefBut="ngModel" [(ngModel)]="inter.BenefBut" />
+
+                </div>
+             
+                <div class="ml-3">
+                  <label for="account">   الميزانية المعتمدة </label>
+
+                  <input type="text"  id="amount" name="Budget" #Budget="ngModel" [(ngModel)]="inter.Budget" />
+
+                </div>
+              </div>
+             
+            </div>
+          </div>
+
+          <div class="col-md-12" *ngIf="media">
+            <div class="form-box p-4">
+              <div class="w-100 text-right">
+                <label class="main">
+                  <span><i class="fa fa-bell"></i></span>
+                  حملة إعلامية لبرنامج محدد
+                </label>
+              </div>
+
+              <div class="w-100 d-flex justify-content-start flex-wrap">
+                <div class="ml-3">
+
+                  <label for="amount">اسم البرنامج </label>
+                  <input type="text" id="amount" name="nomProg" #nomProg="ngModel" [(ngModel)]="inter.nomProg" />
+
+                </div>
+                <div class="ml-3">
+                  <label for="amount">فكرته  </label>
+                  <input type="text" id="amount" name="ideeProg" #ideeProg="ngModel" [(ngModel)]="inter.ideeProg" />
+
+                </div>
+
+                <div class="ml-3">
+                  <label for="account">أهدافه </label>
+
+                  <input type="text" id="amount" name="butProg" #butProg="ngModel" [(ngModel)]="inter.butProg" />
+
+                </div>
+
+
+                <div class="ml-3">
+                  <label for="pay-num">مدة تنفيذه </label>
+                  <input type="number" min="0" id="pay-num" name="dureeProg" #dureeProg="ngModel" [(ngModel)]="inter.dureeProg" />
+                </div>
+
+              </div>
+        
+            </div>
+          </div>
+
+          <div class="col-md-12" *ngIf="presse">
+            <div class="form-box p-4">
+              <div class="w-100 text-right">
+                <label class="main">
+                  <span><i class="fa fa-bell"></i></span>
+                  	تغطية صحفية
+                </label>
+              </div>
+
+              <div class="w-100 d-flex justify-content-start flex-wrap">
+                <div class="ml-3">
+
+                  <label for="amount">اسم الفعالية  </label>
+                  <input type="text" id="amount" name="nomEvent" #nomEvent="ngModel" [(ngModel)]="inter.nomEvent" />
+
+                </div>
+                <div class="ml-3">
+                  <label for="amount">وقت إقامتها   </label>
+                  <input type="datetime-local" id="amount" name="dateEvent" #dateEvent="ngModel" [(ngModel)]="inter.dateEvent" />
+
+                </div>
+                <div class="ml-3">
+                  <label for="amount">القسم المنفذ    </label>
+                  <input type="text" id="amount" name="etabEvent" #etabEvent="ngModel" [(ngModel)]="inter.etabEvent" />
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+
+
+
+          <div class="col-12 text-left">
+            <input class="btn btn-info px-4" type="submit" value="حفظ" />
+
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

@@ -1,3 +1,15 @@
+
+.wait {
+  background: #fcfc17;
+}
+
+.ok {
+  background: #2aa830;
+}
+
+.refused {
+  background: #ed4b1a;
+}
 /*-- Electronic Sevices Forms --*/
 .task-form input:focus:not([type="submit"]):not([type="reset"]),
 .task-form select:focus {

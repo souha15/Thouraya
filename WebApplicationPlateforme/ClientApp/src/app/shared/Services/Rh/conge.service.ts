@@ -39,6 +39,11 @@ export class CongeService {
     return this.http.get<Conge[]>(this.rootURL + '/Conges');
   }
 
+  PutObservableE(Transaction: Conge) {
+    return this.http.put<Conge>(this.rootURL + '/Conges/' + Transaction.id, Transaction, this.headers);
+  }
+
+
   Get() {
     return this.http.get<Conge[]>(this.rootURL + '/Conges');
   }
@@ -47,6 +52,11 @@ export class CongeService {
   GetById(Id) {
     return this.http.get<Conge>(this.rootURL + '/Conges/' + Id);
   }
+
+  GetUsersDemands(Id) {
+    return this.http.get<Conge[]>(this.rootURL + '/CongeByUser/' + Id);
+  }
+
 
   //Edit Type Dotation
 

@@ -95,20 +95,23 @@ export class DemandeSuppHeureListComponent implements OnInit {
 
   //Delete Dotation
   onDelete(Id) {
-    if (confirm('Are you sure to delete this record ?')) {
-      this.suppheureService.Delete(Id)
-        .subscribe(res => {
-          this.getCreance();
-          this.toastr.success("تم الحذف  بنجاح", "نجاح");
-        },
 
-          err => {
-            console.log(err);
-            this.toastr.warning('لم يتم الحذف  ', ' فشل');
+    if (this.suppheureService.formData.etatdir == "في الإنتظار") {
+      if (confirm('Are you sure to delete this record ?')) {
+        this.suppheureService.Delete(Id)
+          .subscribe(res => {
+            this.getCreance();
+            this.toastr.success("تم الحذف  بنجاح", "نجاح");
+          },
 
-          }
-        )
+            err => {
+              console.log(err);
+              this.toastr.warning('لم يتم الحذف  ', ' فشل');
 
+            }
+          )
+
+      }
     }
   }
   resetForm(form?: NgForm) {
@@ -117,6 +120,25 @@ export class DemandeSuppHeureListComponent implements OnInit {
       form.resetForm();
     this.suppheureService.formData = {
       id: null,
+      transferera: '',
+      transfertetab: '',
+      transfertrh: '',
+      transfertdeux: '',
+      datetransfert: '',
+      idtrh: '',
+      idtetab: '',
+      nomtrh: '',
+      nomtetab: '',
+      etatrh: '',
+      etatetab: '',
+      daterh: '',
+      dateetab: '',
+      tran1: '',
+      tran2: '',
+      tran3: '',
+      tran4: '',
+      tran5: '',
+      tran6: '',
       date: '',
       detail: '',
       nbheure: '',

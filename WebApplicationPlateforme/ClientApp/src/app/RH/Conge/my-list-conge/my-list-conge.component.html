@@ -9,6 +9,47 @@
       <header>
         <h3 class="task-head">كشف طلبات الاجازات</h3>
       </header>
+      <section class="page-content">
+
+        <!-- Navbar 3-->
+        <div class="d-flex flex-wrap p-2 bd-highlight nav-2">
+
+          <div class="p-2 flex-fill bd-highlight item" style="height:150px;text-align:center">
+            <div class="sympol">
+              <span style="font-size:40px;color:#687be3;text-align:center"><i class="fa fa-calendar-check"></i></span>
+            </div>
+            <div class="text">
+              <p style="font-size:20px"> رصيد الإجازة السنوية</p>
+              <span style="color:#687be3;font-size:40px;">{{solde.soldenormal}}</span>
+            </div>
+          </div>
+          <div class="p-2 flex-fill bd-highlight item">
+            <div class="sympol">
+              <span style="font-size:40px;color:#687be3;text-align:center"><i class="fa fa-toolbox"></i></span>
+            </div>
+            <div class="text">
+              <p style="font-size:20px;text-align:center">رصيد الإجازة إستثنائية</p>
+              &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;   &nbsp;
+              <span style="color:#687be3;font-size:40px;">{{solde.soldemaladie}}</span>
+            </div>
+          </div>
+          <div class="p-2 flex-fill bd-highlight item">
+            <div class="sympol">
+              <span style="font-size:40px;color:#687be3;text-align:center"><i class="fa fa-walking"></i></span>
+            </div>
+            <div class="text">
+              <p style="font-size:20px;text-align:center">رصيد الإجازة الإضطرارية</p>
+              &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;  &nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;   &nbsp;
+              <span style="color:#687be3;font-size:40px;">{{solde.soldeurgent}}</span>
+            </div>
+          </div>
+
+        </div>
+      </section>
       <div class="leave-request-list">
         <div class="table-responsive">
           <table class="table table-bordered text-center table-striped">
@@ -41,8 +82,8 @@
 }">
                   {{cg.attribut2}}
                 </td>
-                <td (click)="populateForm(cg)"><a class="btn btn-success" data-toggle="modal" data-target="#myModal1" *ngIf="cg.attribut2 === 'في الانتظار'"><i class="fa fa-edit"></i> تعديل </a></td>
-                <td (click)="populateForm(cg)"><a (click)="populateForm(cg);onDelete(cg.id)" class="btn btn-danger" *ngIf="cg.attribut2 === 'في الانتظار'"><i class="fa fa-trash"></i>حذف</a></td>
+                <td (click)="populateForm(cg)"><a class="btn btn-success" data-toggle="modal" data-target="#myModal1" *ngIf="cg.etat === '5%'"><i class="fa fa-edit"></i> تعديل </a></td>
+                <td (click)="populateForm(cg)"><a (click)="populateForm(cg);onDelete(cg.id)" class="btn btn-danger" *ngIf="cg.etat === '5%'"><i class="fa fa-trash"></i>حذف</a></td>
               </tr>
 
             </tbody>
@@ -82,23 +123,10 @@
           <div class="task-form form-row stop-form">
             <form class="form-row task-form service-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
 
-              <div class="col-md-6">
-                <label for="leave-type">نوع الاجازة</label>
-                <select id="leave-type" name="type" #type="ngModel" [(ngModel)]="congeService.formData.type" required>
-                  <option [ngValue]="undefined" selected disabled>-اختر-</option>
-                  <option value="عادية">عادية </option>
-                </select>
-              </div>
-              <div *ngIf="type.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
-                مطلوب نوع الاجازة.
-
-              </div>
-              <div class="col-md-6">
-              </div>
-
+             
               <div class="col-md-6">
                 <label for="leave-date-start">تاريخ بداية الاجازة</label>
-                <input type="date" id="leave-date-start" name="datedebut" #datedebut="ngModel" [(ngModel)]="congeService.formData.datedebut" (change)="tdatedebut($event)" required>
+                <input type="date" id="leave-date-start" name="datedebut" #datedebut="ngModel" [(ngModel)]="conge.datedebut" (change)="tdatedebut($event)" required>
               </div>
 
               <div *ngIf="datedebut.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
@@ -110,9 +138,9 @@
 
               <div class="col-md-6">
                 <label for="leave-date-end">تاريخ نهاية الاجازة</label>
-                <input type="date" id="leave-date-end" name="datefin" #datefin="ngModel" [(ngModel)]="congeService.formData.datefin" (change)="tdatefin($event)" required>
+                <input type="date" id="leave-date-end" name="datefin" #datefin="ngModel" [(ngModel)]="conge.datefin" (change)="tdatefin($event)" required>
               </div>
-              <input type="text" name="nomremplacant" #nomremplacant="ngModel" [(ngModel)]="congeService.formData.nomremplacant" hidden />
+              <input type="text" name="nomremplacant" #nomremplacant="ngModel" [(ngModel)]="conge.nomremplacant" hidden />
               <div *ngIf="datefin.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
 
 
@@ -122,13 +150,13 @@
 
               <div class="col-md-6">
                 <label for="time">مدة الإجازة</label>
-                <input type="number" min="0" name="duree" #duree="ngModel" [(ngModel)]="congeService.formData.duree" id="time" />
+                <input type="number" min="0" name="duree" #duree="ngModel" [(ngModel)]="conge.duree" id="time" />
               </div>
 
 
               <div class="col-sm-6">
                 <label for="replace-emp">الموظف المعوض</label>
-                <select id="stop-status" name="idremplacant" #idremplacant="ngModel" [(ngModel)]="congeService.formData.idremplacant" (change)="getRemplacant($event)">
+                <select id="stop-status" name="idremplacant" #idremplacant="ngModel" [(ngModel)]="conge.idremplacant" (change)="getRemplacant($event)">
                   <option [ngValue]="undefined" selected disabled>-الموظف المعوض-</option>
                   <option *ngFor="let item of user" value="{{item.id}}">{{item.fullName}}</option>
                 </select>
@@ -136,10 +164,10 @@
 
               <div class="col-md-6">
                 <label for="emp-mobile">سبب الإجازة</label>
-                <input type="text" id="emp-mobile" name="tel" #tel="ngModel" [(ngModel)]="congeService.formData.tel">
+                <input type="text" id="emp-mobile" name="tel" #tel="ngModel" [(ngModel)]="conge.tel">
               </div>
 
-              <input type="text" id="emp-address" name="etat" #etat="ngModel" [(ngModel)]="congeService.formData.etat" hidden />
+              <input type="text" id="emp-address" name="etat" #etat="ngModel" [(ngModel)]="conge.etat" hidden />
               <div class="col-12 text-left">
                 <input class="btn btn-primary px-4" type="submit" value="تقديم">
               </div>

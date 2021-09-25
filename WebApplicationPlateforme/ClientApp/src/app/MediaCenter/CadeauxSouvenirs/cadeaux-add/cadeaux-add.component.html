@@ -1,0 +1,91 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head"> 	تقديم طلب الهدايا التذكارية و التكريم </h3>
+      </header>
+      <div class="demmision">
+
+        <form class="form-row events-form mb-6" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+          <div class="col-md-6">
+            <label for="demm-type">	نوع المناسبة  </label>
+            <select id="demm-type" name="occasion" #occasion="ngModel" [(ngModel)]="dem.occasion" (change)="getOccasion($event)">
+              <option [ngValue]="undefined" selected disabled>-النوع-</option>
+              <option *ngFor="let item of settingList2" value="{{item.nom}}">{{item.nom}}</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="demm-type">جهة التكريم  </label>
+            <select id="demm-type" name="PartieHonor" #PartieHonor="ngModel" [(ngModel)]="dem.PartieHonor" (change)="getHonor($event)">
+              <option [ngValue]="undefined" selected disabled>-	جهة التكريم -</option>
+              <option *ngFor="let item of settingList" value="{{item.nom}}">{{item.nom}}</option>
+            </select>
+          </div>
+          <div class="col-md-12">
+            <p></p>
+          </div>
+
+          <div class="col-md-6" *ngIf="occ">
+            <label for="date">	أخرى </label>
+            <input type="text" id="date" name="autre" #autre="ngModel" [(ngModel)]="dem.autre" />
+          </div>
+
+          <div class="col-md-6" *ngIf="honor">
+            <label for="date">	أخرى</label>
+            <input type="text" id="date" name="attribut1" #attribut1="ngModel" [(ngModel)]="dem.attribut1" />
+          </div>
+
+          <div class="col-md-6">
+            <label for="other-type">	المكان</label>
+            <input type="text" id="other-type" name="localisation" #localisation="ngModel" [(ngModel)]="dem.localisation" />
+          </div>
+
+          <div class="col-md-6">
+            <label for="time1">الوقت</label>
+            <input type="datetime-local" id="time1" name="dateTime" #dateTime="ngModel" [(ngModel)]="dem.dateTime" />
+          </div>
+
+          <div class="col-md-6">
+            <label for="time2">الاسم </label>
+            <input type="text" id="time2" name="nom" #nom="ngModel" [(ngModel)]="dem.nom" />
+          </div>
+
+          <div class="col-md-6">
+            <label for="time2">		المسمى الوظيفي </label>
+            <input type="text" id="time2" name="emploi" #emploi="ngModel" [(ngModel)]="dem.emploi" />
+          </div>
+
+          <div class="col-md-6">
+            <label for="time2">الميزانية  </label>
+            <input type="number" id="time2" name="budget" #budget="ngModel" [(ngModel)]="dem.budget" />
+          </div>
+
+          <div class="col-md-6">
+            <label for="reason">التوصيات </label>
+            <textarea class="form-control" id="reason" name="detail" #detail="ngModel" [(ngModel)]="dem.detail"></textarea>
+          </div>
+
+          <div class="col-12 text-center text-md-left mt-3">
+            <input class="btn btn-info"
+                   style="width: 130px"
+                   type="submit"
+                   value="ارسال" />
+          </div>
+        </form>
+      </div>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

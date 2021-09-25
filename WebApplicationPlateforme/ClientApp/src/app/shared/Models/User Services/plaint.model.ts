@@ -20,7 +20,6 @@ export class Plaint {
   etatrh:string;
   daterh:string;
   decision:string;
-
   creatorName:string;
   datenereg:string;
   attibut1:string;

@@ -17,6 +17,7 @@
             <thead>
               <tr>
                 <th scope="col">#</th>
+                <th scope="col">الموظف</th>
                 <th scope="col">نوع الاجازة</th>
 
                 <th scope="col">المدة</th>
@@ -29,6 +30,7 @@
             <tbody>
               <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
                 <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{(p-1) * count + i + 1}}</th>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.userNameCreator}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.type}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.duree}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.datedebut}}</td>
@@ -158,12 +160,11 @@
           <label for="user"><span><i class="fa fa-check"></i></span>حالة الطلب</label>
           <select id="user" class="" name="etatrh" #etatrh="ngModel" [(ngModel)]="congeService.formData.etatrh" (change)="etattest($event)">
             <option [ngValue]="undefined" selected disabled>-حالة الطلب-</option>
-            <option value="إعتماد بخصم">إعتماد بخصم</option>
-            <option value="إعتماد بغير خصم">إعتماد بغير خصم</option>
+            <option value="موافق">موافق</option>
             <option value="رفض">رفض</option>
 
           </select>
-
+          <input type="text" name="etat" #etat="ngModel" [(ngModel)]="congeService.formData.etat" hidden />
           <div class="save">
             <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
 

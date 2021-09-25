@@ -19,6 +19,7 @@
                 <th scope="col">تاريخ المشكلة</th>
                 <th scope="col">تاريخ التظلم</th>
                 <th scope="col">الطرف الثاني للتظلم</th>
+                <th scope="col">الطرف الأول للتظلم</th>
                 <th scope="col">سبب التظلم</th>
               </tr>
             </thead>
@@ -27,6 +28,7 @@
                 <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{(p-1) * count + i + 1}}</th>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.dateprob}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.dateplaint}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.creatorName}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.partieB}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.raison}}</td>
               </tr>

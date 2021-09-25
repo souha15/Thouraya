@@ -4,6 +4,8 @@ import { UserServiceService } from '../../../shared/Services/User/user-service.s
 import { ToastrService } from 'ngx-toastr';
 import { CrationTravailDemande } from '../../../shared/Models/ServiceRh/cration-travail-demande.model';
 import { NgForm } from '@angular/forms';
+import { AdministrationService } from '../../../shared/Services/Administration/administration.service';
+import { Administration } from '../../../shared/Models/Administration/administration.model';
 
 @Component({
   selector: 'app-creation-add',
@@ -15,7 +17,8 @@ export class CreationAddComponent implements OnInit {
   constructor(
     private ctService: CreationTravailDemandeService,
     private UserService: UserServiceService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private adminService: AdministrationService) { }
 
   ngOnInit(): void {
     this.getUserConnected();
@@ -28,14 +31,24 @@ export class CreationAddComponent implements OnInit {
   dir: string;
   dirid: string;
   position: string;
+  admindir: string;
+  nom: string;
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-      this.dir = res.directeur;
-      this.dirid = res.attribut1;
       this.position = res.position;
+      this.nom = res.nomAdministration
+ 
+      this.adminService.GetAdminData(this.nom).subscribe(resp => {
+        
+        this.UserService.GetUserByUserName2(resp.nomDirecteur).subscribe(res => {
+          this.ct.iddir = res.id;
+          this.ct.nomdir = res.fullName;
+        })
+      })
+
     })
   }
 
@@ -55,8 +68,6 @@ export class CreationAddComponent implements OnInit {
       this.ct.etatdg = "في الإنتظار";
       this.ct.etatdir = "في الإنتظار";
       this.ct.etatrh = "في الإنتظار";
-      this.ct.iddir = this.dirid;
-      this.ct.nomdir = this.dir;
       this.ct.titreposte = this.position;
       this.ct.idUserCreator = this.UserIdConnected;
       this.ct.userNameCreator = this.UserNameConnected;

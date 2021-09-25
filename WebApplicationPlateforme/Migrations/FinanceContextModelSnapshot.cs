@@ -3156,6 +3156,12 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("datePayEspece")
                         .HasColumnType("text");
 
+                    b.Property<string>("datedirg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datedirproj")
+                        .HasColumnType("text");
+
                     b.Property<string>("dateenreg")
                         .HasColumnType("text");
 
@@ -3163,6 +3169,9 @@ namespace WebApplicationPlateforme.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("datepaysalaire")
+                        .HasColumnType("text");
+
+                    b.Property<string>("daterh")
                         .HasColumnType("text");
 
                     b.Property<string>("datesalaire")
@@ -3204,6 +3213,15 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("etatdirectornom")
                         .HasColumnType("text");
 
+                    b.Property<string>("etatdirg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatdirproj")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatrh")
+                        .HasColumnType("text");
+
                     b.Property<string>("etatuserId")
                         .HasColumnType("text");
 
@@ -3213,10 +3231,28 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("idUserCreator")
                         .HasColumnType("text");
 
+                    b.Property<string>("iddirg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("iddirproj")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idrh")
+                        .HasColumnType("text");
+
                     b.Property<string>("nomBanque")
                         .HasColumnType("text");
 
                     b.Property<string>("nomBeneficiaire")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomdirg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomdirproj")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomrh")
                         .HasColumnType("text");
 
                     b.Property<string>("numCheque")
@@ -3296,6 +3332,15 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("dateDeduire")
                         .HasColumnType("text");
 
+                    b.Property<string>("dateEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateRh")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateTransfert")
+                        .HasColumnType("text");
+
                     b.Property<string>("dateenreg")
                         .HasColumnType("text");
 
@@ -3311,6 +3356,12 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("etatD")
                         .HasColumnType("text");
 
+                    b.Property<string>("etatEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatRh")
+                        .HasColumnType("text");
+
                     b.Property<string>("idC")
                         .HasColumnType("text");
 
@@ -3318,6 +3369,12 @@ namespace WebApplicationPlateforme.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idtEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idtRh")
                         .HasColumnType("text");
 
                     b.Property<string>("mois")
@@ -3332,6 +3389,12 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("nomD")
                         .HasColumnType("text");
 
+                    b.Property<string>("nomtEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomtRh")
+                        .HasColumnType("text");
+
                     b.Property<string>("prix")
                         .HasColumnType("text");
 
@@ -3339,6 +3402,36 @@ namespace WebApplicationPlateforme.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("raisonRefusD")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfererA")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertDeux")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertRh")
                         .HasColumnType("text");
 
                     b.Property<string>("userNameCreator")
@@ -4776,6 +4869,1680 @@ namespace WebApplicationPlateforme.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("tickets");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.CadeauxSouvenirs.Cadeaux", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("PartieHonor")
+                        .HasColumnType("text");
+
+                    b.Property<string>("admidate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("admietat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("autre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("budget")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateTime")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("detail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("diretat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("emploi")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabetat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("localisation")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("occasion")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("Cadeaux");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.CadeauxSouvenirs.Honor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Honor");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.CadeauxSouvenirs.Occasion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Occasion");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.ExtensionTechnique.Exthechnique", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("admidate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("admietat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("budget")
+                        .HasColumnType("text");
+
+                    b.Property<string>("but")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateTime")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("detail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("diretat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabetat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("localisation")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("Exthechnique");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.ExtensionTechnique.ExthechniqueType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ExthechniqueType");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.FilmPart.Film", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("admidate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("admietat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("autretype")
+                        .HasColumnType("text");
+
+                    b.Property<string>("budget")
+                        .HasColumnType("text");
+
+                    b.Property<string>("but")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("diretat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("duree")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabetat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("typefilm")
+                        .HasColumnType("text");
+
+                    b.Property<string>("url")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("Film");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.FilmPart.FilmsFiles", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("idFilm")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("path")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idFilm");
+
+                    b.ToTable("FilmsFiles");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.FilmPart.FilmsType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FilmsType");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.ImpressionDesign.DesignFiles", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("idImpression")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("path")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idImpression");
+
+                    b.ToTable("DesignFiles");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.ImpressionDesign.DesignImpression", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("admidate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("admietat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateDebadminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateDebutEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateDoneadminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateFinEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateFinadminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateRecepadminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateReceptiondateEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateTransfertEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateadminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datedir")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datetransfertAdmin")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dattransfertEmployee")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabetat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatidadminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idadminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("iddir")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomadminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomdesign")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomdir")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tavailfait")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tranfertEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertA")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertAdmin")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertEmployee")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertdminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("DesignImpression");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.ImpressionDesign.TypeImpression", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("autre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("budget")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datediffusion")
+                        .HasColumnType("text");
+
+                    b.Property<int>("idImpression")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("longueurtaille")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nbBouclier")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nbdiplome")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nbpage")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("placement")
+                        .HasColumnType("text");
+
+                    b.Property<string>("quantite")
+                        .HasColumnType("text");
+
+                    b.Property<string>("taille")
+                        .HasColumnType("text");
+
+                    b.Property<string>("typeDesign")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idImpression");
+
+                    b.ToTable("TypeImpression");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.Montage.montage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("admidate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("admietat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("budget")
+                        .HasColumnType("text");
+
+                    b.Property<string>("but")
+                        .HasColumnType("text");
+
+                    b.Property<string>("commentaireUrl")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateDebadminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateDebutEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateDoneadminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateFinEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateFinadminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateRecepadminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateReceptiondateEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateTransfertEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateadminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datedir")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datetransfertAdmin")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dattransfertEmployee")
+                        .HasColumnType("text");
+
+                    b.Property<string>("detail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabetat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatidadminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idadminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("iddir")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomadminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomdir")
+                        .HasColumnType("text");
+
+                    b.Property<string>("scenario")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tavailfait")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tranfertEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertA")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertAdmin")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertEmployee")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertdminEmp")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("Montages");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.Montage.montageFiles", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("idmontage")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("path")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idmontage");
+
+                    b.ToTable("montageFiles");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.PartageMedia.PartageFiles", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("idPartageMedia")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("path")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idPartageMedia");
+
+                    b.ToTable("PartageFiles");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.PartageMedia.PartageMedia", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("admidate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("admietat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("autre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("autresoc")
+                        .HasColumnType("text");
+
+                    b.Property<string>("benef")
+                        .HasColumnType("text");
+
+                    b.Property<string>("budget")
+                        .HasColumnType("text");
+
+                    b.Property<string>("but")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("detail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("diretat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabetat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("path")
+                        .HasColumnType("text");
+
+                    b.Property<string>("socialMedia")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("PartageMedia");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.PartageMedia.PartageMediaType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PartageMediaType");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.ReceptionHebergement.RecepCadeaux", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("idReceptionHeber")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idReceptionHeber");
+
+                    b.ToTable("RecepCadeaux");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.ReceptionHebergement.RecepImpression", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("idReceptionHeber")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idReceptionHeber");
+
+                    b.ToTable("RecepImpression");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.ReceptionHebergement.ReceptionHeber", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("admidate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("admietat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("autre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("budget")
+                        .HasColumnType("text");
+
+                    b.Property<string>("cadeaux")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("diretat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabetat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("impression")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nb")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("ReceptionHeber");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.RecordingArchive.RecordingArchive", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("admidate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("admietat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("budget")
+                        .HasColumnType("text");
+
+                    b.Property<string>("but")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateTime")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("diretat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabetat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("localisation")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("RecordingArchive");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.RecordingArchive.TypeRecording", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TypeRecording");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.Rondonnee.RendoneType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RendoneType");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.Rondonnee.Rendonee", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("admidate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("admietat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("autre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("budget")
+                        .HasColumnType("text");
+
+                    b.Property<string>("but")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateTime")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("detail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("diretat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabetat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("localisation")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nb")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("Rendonee");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.SoireeOccasion.GuestSoiree", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("idSoiree")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idSoiree");
+
+                    b.ToTable("GuestSoiree");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.SoireeOccasion.OccasionSoiree", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("admidate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("admietat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("autre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("budget")
+                        .HasColumnType("text");
+
+                    b.Property<string>("but")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateTime")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("detail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("diretat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabetat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("localisation")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nb")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("OccasionSoiree");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.SoireeOccasion.SoireeType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("SoireeType");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.Visite.offreImpression", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("idvisite")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idvisite");
+
+                    b.ToTable("offreImpression");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.Visite.visite", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("admidate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("admietat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("budget")
+                        .HasColumnType("text");
+
+                    b.Property<string>("but")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("detail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("diretat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabetat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nb")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("visite");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Media_Center.InterviewPart.Interview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Autre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("BenefBut")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Budget")
+                        .HasColumnType("text");
+
+                    b.Property<string>("admidate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("admietat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("adminom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("but")
+                        .HasColumnType("text");
+
+                    b.Property<string>("butProg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateEvent")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("diretat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dirnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dureeProg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabEvent")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabetat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etabnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ideeProg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomEvent")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomProg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("Interviews");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Media_Center.InterviewPart.TypeInterview", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TypeInterviews");
                 });
 
             modelBuilder.Entity("WebApplicationPlateforme.Model.Msg_Interne.FilesMsgInterne", b =>
@@ -6953,6 +8720,15 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("attribut6")
                         .HasColumnType("text");
 
+                    b.Property<string>("dateEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateRh")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateTransfert")
+                        .HasColumnType("text");
+
                     b.Property<string>("dated")
                         .HasColumnType("text");
 
@@ -6980,6 +8756,12 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("etat")
                         .HasColumnType("text");
 
+                    b.Property<string>("etatEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatRh")
+                        .HasColumnType("text");
+
                     b.Property<string>("etatd")
                         .HasColumnType("text");
 
@@ -6992,7 +8774,19 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("idremplacant")
                         .HasColumnType("text");
 
+                    b.Property<string>("idtEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idtRh")
+                        .HasColumnType("text");
+
                     b.Property<string>("nomremplacant")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomtEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomtRh")
                         .HasColumnType("text");
 
                     b.Property<string>("rhid")
@@ -7002,6 +8796,36 @@ namespace WebApplicationPlateforme.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("tel")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfererA")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertDeux")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertRh")
                         .HasColumnType("text");
 
                     b.Property<string>("type")
@@ -7518,16 +9342,52 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("dateenreg")
                         .HasColumnType("text");
 
+                    b.Property<string>("datemaladie")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datenormal")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateurgent")
+                        .HasColumnType("text");
+
                     b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("maladie")
                         .HasColumnType("text");
 
                     b.Property<string>("mois")
                         .HasColumnType("text");
 
+                    b.Property<string>("normal")
+                        .HasColumnType("text");
+
                     b.Property<string>("number")
                         .HasColumnType("text");
 
+                    b.Property<string>("numbermaladie")
+                        .HasColumnType("text");
+
+                    b.Property<string>("numbernormal")
+                        .HasColumnType("text");
+
+                    b.Property<string>("numberurgent")
+                        .HasColumnType("text");
+
+                    b.Property<string>("soldemaladie")
+                        .HasColumnType("text");
+
+                    b.Property<string>("soldenormal")
+                        .HasColumnType("text");
+
+                    b.Property<string>("soldeurgent")
+                        .HasColumnType("text");
+
                     b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.Property<string>("urgent")
                         .HasColumnType("text");
 
                     b.Property<string>("userNameCreator")
@@ -7744,6 +9604,116 @@ namespace WebApplicationPlateforme.Migrations
                     b.ToTable("salaires");
                 });
 
+            modelBuilder.Entity("WebApplicationPlateforme.Model.ServiceRh.Assistance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("attribut1")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateTime")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datedir")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datefin")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datefinetab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("daterh")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatdir")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatfin")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatfinetab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatrh")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("iddir")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idfin")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idfinetab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idrh")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomdir")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomfin")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomfinetab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomrh")
+                        .HasColumnType("text");
+
+                    b.Property<string>("position")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfert")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfert1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfert2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("username")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("assistances");
+                });
+
             modelBuilder.Entity("WebApplicationPlateforme.Model.ServiceRh.CreationTravailDemande", b =>
                 {
                     b.Property<int>("Id")
@@ -7772,6 +9742,15 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("competence")
                         .HasColumnType("text");
 
+                    b.Property<string>("dateEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateRh")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateTransfert")
+                        .HasColumnType("text");
+
                     b.Property<string>("datedebut")
                         .HasColumnType("text");
 
@@ -7791,6 +9770,12 @@ namespace WebApplicationPlateforme.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("etat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatRh")
                         .HasColumnType("text");
 
                     b.Property<string>("etatdg")
@@ -7814,6 +9799,12 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("idrh")
                         .HasColumnType("text");
 
+                    b.Property<string>("idtEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idtRh")
+                        .HasColumnType("text");
+
                     b.Property<string>("nomdg")
                         .HasColumnType("text");
 
@@ -7823,6 +9814,12 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("nomrh")
                         .HasColumnType("text");
 
+                    b.Property<string>("nomtEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomtRh")
+                        .HasColumnType("text");
+
                     b.Property<string>("selection")
                         .HasColumnType("text");
 
@@ -7830,6 +9827,36 @@ namespace WebApplicationPlateforme.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("titreposte")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfererA")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertDeux")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertRh")
                         .HasColumnType("text");
 
                     b.Property<string>("userNameCreator")
@@ -8103,6 +10130,15 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("date")
                         .HasColumnType("text");
 
+                    b.Property<string>("dateEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateRh")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateTransfert")
+                        .HasColumnType("text");
+
                     b.Property<string>("datedir")
                         .HasColumnType("text");
 
@@ -8115,6 +10151,12 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("etat")
                         .HasColumnType("text");
 
+                    b.Property<string>("etatEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatRh")
+                        .HasColumnType("text");
+
                     b.Property<string>("etatdir")
                         .HasColumnType("text");
 
@@ -8124,6 +10166,12 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("iddir")
                         .HasColumnType("text");
 
+                    b.Property<string>("idtEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idtRh")
+                        .HasColumnType("text");
+
                     b.Property<string>("idusername")
                         .HasColumnType("text");
 
@@ -8131,6 +10179,42 @@ namespace WebApplicationPlateforme.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("nomdir")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomtEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomtRh")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfererA")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertDeux")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertRh")
                         .HasColumnType("text");
 
                     b.Property<string>("userNameCreator")
@@ -8658,6 +10742,15 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("autreSpec")
                         .HasColumnType("text");
 
+                    b.Property<string>("dateEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateRh")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateTransfert")
+                        .HasColumnType("text");
+
                     b.Property<string>("datec")
                         .HasColumnType("text");
 
@@ -8677,6 +10770,12 @@ namespace WebApplicationPlateforme.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("etat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatRh")
                         .HasColumnType("text");
 
                     b.Property<string>("etatc")
@@ -8700,6 +10799,12 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("idrh")
                         .HasColumnType("text");
 
+                    b.Property<string>("idtEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idtRh")
+                        .HasColumnType("text");
+
                     b.Property<string>("lien")
                         .HasColumnType("text");
 
@@ -8712,6 +10817,12 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("nomrh")
                         .HasColumnType("text");
 
+                    b.Property<string>("nomtEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomtRh")
+                        .HasColumnType("text");
+
                     b.Property<string>("org")
                         .HasColumnType("text");
 
@@ -8722,6 +10833,36 @@ namespace WebApplicationPlateforme.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("titre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("tran6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfererA")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertDeux")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertEtab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("transfertRh")
                         .HasColumnType("text");
 
                     b.Property<string>("userNameCreator")
@@ -11482,6 +13623,171 @@ namespace WebApplicationPlateforme.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.CadeauxSouvenirs.Cadeaux", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.ExtensionTechnique.Exthechnique", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.FilmPart.Film", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.FilmPart.FilmsFiles", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.MediaCenter.FilmPart.Film", "Film")
+                        .WithMany()
+                        .HasForeignKey("idFilm")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.ImpressionDesign.DesignFiles", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.MediaCenter.ImpressionDesign.DesignImpression", "DesignImpression")
+                        .WithMany()
+                        .HasForeignKey("idImpression")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.ImpressionDesign.DesignImpression", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.ImpressionDesign.TypeImpression", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.MediaCenter.ImpressionDesign.DesignImpression", "DesignImpression")
+                        .WithMany()
+                        .HasForeignKey("idImpression")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.Montage.montage", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.Montage.montageFiles", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.MediaCenter.Montage.montage", "montage")
+                        .WithMany()
+                        .HasForeignKey("idmontage")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.PartageMedia.PartageFiles", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.MediaCenter.PartageMedia.PartageMedia", "PartageMedia")
+                        .WithMany()
+                        .HasForeignKey("idPartageMedia")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.PartageMedia.PartageMedia", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.ReceptionHebergement.RecepCadeaux", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.MediaCenter.ReceptionHebergement.ReceptionHeber", "ReceptionHeber")
+                        .WithMany()
+                        .HasForeignKey("idReceptionHeber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.ReceptionHebergement.RecepImpression", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.MediaCenter.ReceptionHebergement.ReceptionHeber", "ReceptionHeber")
+                        .WithMany()
+                        .HasForeignKey("idReceptionHeber")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.ReceptionHebergement.ReceptionHeber", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.RecordingArchive.RecordingArchive", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.Rondonnee.Rendonee", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.SoireeOccasion.GuestSoiree", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.MediaCenter.SoireeOccasion.OccasionSoiree", "OccasionSoiree")
+                        .WithMany()
+                        .HasForeignKey("idSoiree")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.SoireeOccasion.OccasionSoiree", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.Visite.offreImpression", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.MediaCenter.Visite.visite", "visite")
+                        .WithMany()
+                        .HasForeignKey("idvisite")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.MediaCenter.Visite.visite", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Media_Center.InterviewPart.Interview", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
             modelBuilder.Entity("WebApplicationPlateforme.Model.Msg_Interne.FilesMsgInterne", b =>
                 {
                     b.HasOne("WebApplicationPlateforme.Model.Msg_Interne.MsgInterne", "MsgInterne")
@@ -11864,6 +14170,13 @@ namespace WebApplicationPlateforme.Migrations
                     b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("idUser");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.ServiceRh.Assistance", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
                 });
 
             modelBuilder.Entity("WebApplicationPlateforme.Model.ServiceRh.CreationTravailDemande", b =>

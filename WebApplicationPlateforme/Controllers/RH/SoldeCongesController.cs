@@ -106,5 +106,15 @@ namespace WebApplicationPlateforme.Controllers.RH
         {
             return _context.soldeConges.Any(e => e.Id == id);
         }
+
+        [HttpGet("{idUserCreator}")]
+        [Route("Solde")]
+        public string GetSolde(string idUserCreator)
+        {
+            var soldeConge =  _context.soldeConges.FirstOrDefault(u => u.idUserCreator == idUserCreator);
+                        
+            return soldeConge.soldenormal;
+        }
+
     }
 }

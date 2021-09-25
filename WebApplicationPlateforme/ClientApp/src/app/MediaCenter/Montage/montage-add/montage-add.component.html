@@ -1,0 +1,74 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head"> 	تقديم طلب مونتاج  </h3>
+      </header>
+      <div class="demmision">
+
+        <form class="form-row events-form mb-6" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+          <div class="col-md-6">
+            <label for="demm-type">	نوع المادة </label>
+            <select id="demm-type" name="type" #type="ngModel" [(ngModel)]="dem.type">
+              <option [ngValue]="undefined" selected disabled>-النوع-</option>
+              <option value="فيديو">فيديو</option>
+              <option value="صوتي">صوتي</option>
+            </select>
+          </div>
+
+
+          <div class="col-md-6">
+            <label for="other-type">		الهدف</label>
+            <input type="text" id="other-type" name="but" #but="ngModel" [(ngModel)]="dem.but" />
+          </div>
+
+
+          <div class="col-md-6">
+            <label for="time2">الميزانية  </label>
+            <input type="number" id="time2" name="budget" #budget="ngModel" [(ngModel)]="dem.budget" />
+          </div>
+
+
+          <div class="col-md-6">
+            <p></p>
+            </div>
+
+            <div class="col-md-6">
+              <label for="time1">	السيناريو</label>
+              <textarea class="form-control" id="reason" name="scenario" #scenario="ngModel" [(ngModel)]="dem.scenario" style="width:400px;"></textarea>
+            </div>
+
+            <div class="col-md-6">
+              <label for="reason">التوصيات </label>
+              <textarea class="form-control" id="reason" name="detail" #detail="ngModel" [(ngModel)]="dem.detail" style="width:400px;"></textarea>
+            </div>
+
+            <div class="col-md-12">
+              <label for="reason">	التعليق  </label>
+              <input type="text" id="other-type" name="commentaireUrl" #commentaireUrl="ngModel" [(ngModel)]="dem.commentaireUrl" style="width:400px;" />
+
+            </div>
+
+            <div class="col-12 text-center text-md-left mt-3">
+              <input class="btn btn-info"
+                     style="width: 130px"
+                     type="submit"
+                     value="ارسال" />
+            </div>
+        </form>
+      </div>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>

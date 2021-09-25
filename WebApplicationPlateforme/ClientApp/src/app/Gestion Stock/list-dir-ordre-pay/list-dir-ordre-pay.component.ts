@@ -31,7 +31,8 @@ export class ListDirOrdrePayComponent implements OnInit {
   }
 
 
-
+  p: Number = 1;
+  count: Number = 5;
   //Get User Connected
   UserIdConnected: string;
   UserNameConnected: string;

@@ -50,8 +50,7 @@ export class PlaintAddComponent implements OnInit {
   UsersList() {
     this.UserService.GetUsersList().subscribe(res => {
       this.userg = res
-      this.user = this.userg.filter(item => item.position == "مسؤول شؤون توظيف")
-      this.user3 = this.userg.filter(item => item.position == "المدير التنفيذي")
+      this.user = this.userg.filter(item => item.position == "مدير ادارة" || item.position =="المدير التنفيذي")
     })
   }
 

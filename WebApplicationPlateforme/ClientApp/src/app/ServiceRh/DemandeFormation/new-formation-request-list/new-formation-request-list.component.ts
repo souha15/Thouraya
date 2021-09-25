@@ -202,6 +202,7 @@ export class NewFormationRequestListComponent implements OnInit {
       form.resetForm();
     this.atService.formData = {
       id: null,
+
       titre: '',
       specialite: '',
       autreSpec: '',
@@ -241,6 +242,25 @@ export class NewFormationRequestListComponent implements OnInit {
       formP.resetForm();
     this.atforService.formData = {
       id: null,
+      transferera:  '',
+      transfertetab:  '',
+      transfertrh:  '',
+      transfertdeux:  '',
+      datetransfert:  '',
+      idtrh:  '',
+      idtetab:  '',
+      nomtrh:  '',
+      nomtetab:  '',
+      etattrh:  '',
+      etatetab:  '',
+      datetrh:  '',
+      dateetab:  '',
+      tran1:  '',
+      tran2:  '',
+      tran3:  '',
+      tran4:  '',
+      tran5:  '',
+      tran6:  '',
       titre: '',
       specialite: '',
       autreSpec: '',

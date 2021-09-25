@@ -1,5 +1,24 @@
 export class Conge {
   id: number;
+ transferera :string;
+       transfertetab :string;
+       transfertrh :string;
+       transfertdeux :string;
+       datetransfert :string;
+       idtrh :string;
+       idtetab :string;
+       nomtrh :string;
+       nomtetab :string;
+       etatrh :string;
+       etatetab :string;
+       daterh :string;
+       dateetab :string;
+       tran1 :string;
+       tran2 :string;
+       tran3 :string;
+       tran4 :string;
+       tran5 :string;
+       tran6 :string;
   datedebut :string;
   datefin :string;
   duree :string;
@@ -10,13 +29,11 @@ export class Conge {
   nomremplacant:string;
   etat :string;
   etatd :string;
-  etatrh :string;
   directeurid:string;
   directeurnom:string;
   rhid:string;
   rhnom :string;
   dated:string;
-  daterh:string;
   attribut1: number;
   attribut2 :string;
   attribut3 :string;

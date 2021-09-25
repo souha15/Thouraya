@@ -1,0 +1,198 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">قائمة التمديدات الفنية</h3>
+      </header>
+      <div class="form-group pull-right">
+        <input type="text"
+               class="search form-control"
+               placeholder="ما الذي تبحث عنه ؟"
+               name="search" [(ngModel)]="filter" />
+      </div>
+      <span class="counter pull-right"></span>
+      <div class="table-responsive">
+        <table class="table results text-center table-bordered theme-table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">النوع </th>
+              <th scope="col">الهدف</th>
+              <th scope="col">المكان</th>
+              <th scope="col">الوقت</th>
+              <th scope="col">الميزانية</th>
+
+              <th scope="col">الحالة</th>
+
+              <th scope="col">تعديل</th>
+              <th scope="col">حذف</th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <tr *ngFor="let cg of DemandList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p };let i = index">
+              <th scope="row">{{(p-1) * count + i + 1}}</th>
+              <td (click)="populateForm(cg)">{{cg.type}}</td>
+              <td (click)="populateForm(cg)">{{cg.but}}</td>
+              <td (click)="populateForm(cg)">{{cg.localisation}}</td>
+              <td (click)="populateForm(cg)">{{cg.dateTime}}</td>
+              <td (click)="populateForm(cg)">{{cg.budget}}</td>
+              <td (click)="populateForm(cg)"
+                  [ngClass]="{
+
+ 'success': cg.diretat === 'موافقة',
+  'denied': cg.diretat === 'رفض',
+  'wait': cg.diretat === 'في الانتظار'
+}">
+                {{cg.diretat}}
+              </td>
+              <td (click)="populateForm(cg)" *ngIf="cg.diretat == 'في الانتظار'"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1">تعديل</a></td>
+              <td (click)="populateForm(cg)" *ngIf="cg.diretat == 'في الانتظار'"><a class="btn btn-danger" (click)="onDelete(cg.id)">حذف</a></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+<div id="myModal" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">طلب تمديدات فنية</h2>
+          <div class="form-row task-form service-form text-center">
+
+
+            <div class="col-md-6">
+
+              <div>
+                <label>رقم </label>
+                <p>{{dem.id}}</p>
+              </div>
+              <div>
+                <label>النوع</label>
+                <p>{{dem.type}}</p>
+              </div>
+
+              <div>
+                <label>الهدف</label>
+                <p>{{dem.but}}</p>
+              </div>
+
+              <div>
+                <label>المكان</label>
+                <p>{{dem.localisation}}</p>
+              </div>
+
+
+              <div>
+                <label>الوقت</label>
+                <p>{{dem.dateTime}}</p>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div>
+                <label>الميزانية </label>
+                <p>{{dem.budget}}</p>
+              </div>
+
+              <div>
+                <label>وصف تفصيلي</label>
+                <p>{{dem.detail}}</p>
+              </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</div>
+
+
+
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تعديل التمديدات الفنية</h2>
+
+          <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+
+            <div class="col-md-6">
+              <label for="demm-type">النوع</label>
+              <select id="demm-type" name="type" #type="ngModel" [(ngModel)]="dem.type">
+                <option [ngValue]="undefined" selected disabled>-النوع-</option>
+                <option *ngFor="let item of settingList" value="{{item.nom}}">{{item.nom}}</option>
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="date">	الهدف</label>
+              <input type="text" id="date" name="but" #but="ngModel" [(ngModel)]="dem.but" />
+            </div>
+            <div class="col-md-6">
+              <label for="other-type">	المكان</label>
+              <input type="text" id="other-type" name="localisation" #localisation="ngModel" [(ngModel)]="dem.localisation" />
+            </div>
+            <div class="col-md-6">
+              <label for="time1">الوقت</label>
+              <input type="datetime-local" id="time1" name="dateTime" #dateTime="ngModel" [(ngModel)]="dem.dateTime" />
+            </div>
+            <div class="col-md-6">
+              <label for="time2">الميزانية</label>
+              <input type="number" id="time2" name="budget" #budget="ngModel" [(ngModel)]="dem.budget" />
+            </div>
+            <div class="col-md-6">
+              <label for="reason">وصف تفصيلي </label>
+              <textarea class="form-control" id="reason" name="detail" #detail="ngModel" [(ngModel)]="dem.detail"></textarea>
+            </div>
+
+            <div class="col-md-12 text-left">
+              <input type="submit"
+                     style="width: 130px;"
+                     class="btn btn-info next"
+                     value="تحديث" />
+            </div>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

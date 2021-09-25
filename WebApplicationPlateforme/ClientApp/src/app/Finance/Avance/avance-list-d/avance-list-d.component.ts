@@ -22,7 +22,8 @@ export class AvanceListDComponent implements OnInit {
     this.getDep();
 
   }
-
+  p: Number = 1;
+  count: Number = 5;
   UserIdConnected: string;
   UserNameConnected: string;
   getUserConnected() {
@@ -38,7 +39,7 @@ export class AvanceListDComponent implements OnInit {
   getDep() {
     this.avanceService.Get().subscribe(res => {
       this.GfactList = res;
-      this.factList = this.GfactList.filter(item => item.etatC == "موافقة" && item.etatD == "في الإنتظار")
+      this.factList = this.GfactList.filter(item => item.etatD == "في الإنتظار")
     })
   }
 
@@ -59,9 +60,12 @@ export class AvanceListDComponent implements OnInit {
 
   date = new Date().toLocaleDateString();
   accept() {
-    this.fact.attribut2 = "موافقة"
+    //this.fact.attribut2 = "موافقة"
     this.fact.etatD = "موافقة"
     this.fact.dateD = this.date;
+    this.fact.idD = this.UserIdConnected
+    this.fact.idC = this.UserNameConnected;
+
 
     this.fact.idD = this.UserIdConnected;
     this.fact.nomD = this.UserNameConnected;
@@ -78,13 +82,13 @@ export class AvanceListDComponent implements OnInit {
 
 
     if (this.raisonRefus != null) {
-      this.fact.attribut4 = this.raisonRefus;
       this.fact.raisonRefusD = this.raisonRefus;
-      this.fact.attribut2 = "موافقة"
-      this.fact.etatD = "موافقة"
+      this.fact.attribut2 = "رفض"
+      this.fact.etatD = "رفض"
       this.fact.dateD = this.date;
-      this.fact.nomD = this.UserNameConnected;
-      this.fact.idD = this.UserIdConnected;
+      this.fact.idD = this.UserIdConnected
+      this.fact.idC = this.UserNameConnected;
+
 
       this.avanceService.PutObservableE(this.fact).subscribe(res => {
         this.getDep();

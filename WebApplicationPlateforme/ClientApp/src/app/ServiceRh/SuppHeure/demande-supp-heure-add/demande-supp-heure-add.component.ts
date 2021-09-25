@@ -55,6 +55,7 @@ export class DemandeSuppHeureAddComponent implements OnInit {
       this.sup.etat = "في الإنتظار";
       this.sup.etatdir = "في الإنتظار";
       this.sup.attribut2 = "في الإنتظار";
+      this.sup.attribut3 = "في الإنتظار";
       this.suppheureService.Add(this.sup).subscribe(res => {
         form.resetForm();
         this.toastr.success("تم تسجيل  الطلب بنجاح", " تسجيل ");

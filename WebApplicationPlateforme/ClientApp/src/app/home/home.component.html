@@ -33,7 +33,7 @@
 
             <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
               <div class="link-box">
-                <a [routerLink]="['/pointage-presence-add']">       
+                <a [routerLink]="['/pointage-presence-add']">
                   <span class="d-block">
                     <i class="fa fa-user-check fa-3x"></i>
                   </span>
@@ -253,7 +253,7 @@
                   <span class="d-block">
                     <i class="fa fa fa-users fa-3x"></i>
                   </span>
-                  <h4>كفالة الايتام  </h4>
+                  <h4>ملف المسلم الجديد</h4>
                 </a>
               </div>
             </div>
@@ -265,7 +265,8 @@
                   <span class="d-block">
                     <i class="fa fa fa-users-cog fa-3x"></i>
                   </span>
-                  <h4>إدارة الكفالات </h4>
+                  <h4>الإستقطاعات</h4>
+                 
                 </a>
               </div>
             </div>
@@ -276,6 +277,28 @@
                     <i class="fa fa-project-diagram fa-3x"></i>
                   </span>
                   <h4>إدارة المشاريع</h4>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="admin">
+              <div class="link-box">
+                <a [routerLink]="['/org-part-details']">
+                  <span class="d-block">
+                    <i class="fa fa-cogs fa-3x"></i>
+                  </span>
+                  <h4>الاوقاف والخدمات</h4>
+                </a>
+              </div>
+            </div>
+            <!--*ngIf="mediadir"-->
+            <div class="col-sm-6 col-md-3 my-4">
+              <div class="link-box">
+                <a [routerLink]="['/meadia-center-demands-list-dir']">
+                  <span class="d-block">
+                    <i class="fa fa-users-cog fa-3x"></i>
+                  </span>
+                  <h4>العلاقات العامة و الإعلام</h4>
                 </a>
               </div>
             </div>

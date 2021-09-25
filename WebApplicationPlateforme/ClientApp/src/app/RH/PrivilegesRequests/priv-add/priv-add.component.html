@@ -1,1 +1,77 @@
-<p>priv-add works!</p>
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">طلبات الموظفين</h3>
+      </header>
+      <div class="row que-serv">
+
+        <div class="que-serv">
+          <a *ngIf="dirfin" href="" [routerLink]="['/validate-conge']">
+            <span class="icon"><i class="fa fa-sign-out-alt"></i></span>
+            طلبات إجازة
+          </a>
+          <a *ngIf="employeefin" href="" [routerLink]="['/salaire-report-print']">
+            <span class="icon"><i class="fa fa-sign-out-alt"></i></span>
+            طلبات إجازة
+          </a>
+
+          <a *ngIf="dirfin" href="" [routerLink]="['/my-priv-list']">
+            <span class="icon"><i class="fa fa-graduation-cap"></i></span>
+            دورة تدريبية
+          </a>
+
+          <a *ngIf="dirfin" href="" [routerLink]="['/priv-list-dir']">
+            <span class="icon"><i class="fa fa-clock"></i></span>
+            طلبات ساعات إضافية
+          </a>
+
+          <a *ngIf="dirfin" href="" [routerLink]="['/priv-list-rh']">
+            <span class="icon"><i class="fa fa-briefcase"></i></span>
+            طلبات استحداث وظيفة
+          </a>
+
+          <a *ngIf="employeefin" href="" [routerLink]="['/avance-list-c']">
+            <span class="icon"><i class="fa fa-funnel-dollar"></i></span>
+            طلبات السلفة
+          </a>
+
+          <a *ngIf="dirfin" href="" [routerLink]="['/main-ready-avance']">
+            <span class="icon"><i class="fa fa-funnel-dollar"></i></span>
+            طلبات السلفة
+          </a>
+
+          <a *ngIf="employeefin" href="" [routerLink]="['/dem-assistance-listetabfin']">
+            <span class="icon"><i class="fa fa-address-book"></i></span>
+            تقديم طلب إشراف
+          </a>
+
+          <a *ngIf="dirfin" href="" [routerLink]="['/dem-assistance-listdirfin']">
+            <span class="icon"><i class="fa fa-address-book"></i></span>
+            تقديم طلب إشراف
+          </a>
+
+
+          <!--   <a href="" [routerLink]="['/demission-edit']">
+    <span class="icon"><i class="fa fa-user-friends"></i></span>
+    طلبات الإستقالة
+  </a>
+    -->
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

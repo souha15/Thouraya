@@ -1,0 +1,125 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+
+      <header>
+        <h3 class="task-head">  تفاصيل اللقاء</h3>
+      </header>
+
+      <div class="events-data">
+        <div class="events-form row">
+
+          <div class="col-md-6">
+            <label>طبيعة اللقاء</label>
+            <span class="data">{{ev.type}}</span>
+          </div>
+
+          <div class="col-md-6">
+            <label>الهدف</label>
+            <span class="data">{{ev.but}}</span>
+          </div>
+          <div class="col-md-6">
+            <label>الفئة المستهدفة</label>
+            <span class="data">{{ev.benefBut}}</span>
+          </div>
+
+          <div class="col-md-6">
+            <label> الميزانية المعتمدة</label>
+            <span class="data">{{ev.budget}}</span>
+          </div>
+
+        </div>
+
+        <div class="events-form row" *ngIf="autre">
+          <div class="col-md-12">
+            <label>الوصف</label>
+            <span class="data">{{ev.autre}}</span>
+          </div>
+
+        </div>
+
+        <div class="row events-form" *ngIf="media">
+          <div class="col-md-8 d-flex flex-column flex-wrap">
+            <label> حملة إعلامية لبرنامج محدد</label>
+            <div class="data">
+
+              <table class="table table-striped table-bordered theme-table">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">اسم البرنامج</th>
+                    <th scope="col">فكرته</th>
+                    <th scope="col">أهدافه</th>
+                    <th scope="col">أهدافه</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+
+                    <td>{{ev.nomProg}}</td>
+                    <td>{{ev.ideeProg}}</td>
+                    <td>{{ev.butProg}}</td>
+                    <td>{{ev.dureeProg}}</td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+          <div class="col-md-4">
+
+          </div>
+        </div>
+
+
+        <div class="row events-form" *ngIf="presse">
+          <div class="col-md-8 d-flex flex-column flex-wrap">
+            <label>	تغطية صحفية</label>
+            <div class="data">
+
+              <table class="table table-striped table-bordered theme-table">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col">اسم الفعالية</th>
+                    <th scope="col">وقت إقامتها </th>
+                    <th scope="col">القسم المنفذ  </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+
+                    <td>{{ev.nomEvent}}</td>
+                    <td>{{ev.dateEvent}}</td>
+                    <td>{{ev.etabEvent}}</td>
+
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+
+          </div>
+          <div class="col-md-4">
+      
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+</footer>
+

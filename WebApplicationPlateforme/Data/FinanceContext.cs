@@ -38,6 +38,18 @@ using WebApplicationPlateforme.Model.Orphelin;
 using WebApplicationPlateforme.Model.Pointage;
 using WebApplicationPlateforme.Model.Parrainage;
 using WebApplicationPlateforme.Model.ProjetOrg;
+using WebApplicationPlateforme.Model.Media_Center.InterviewPart;
+using WebApplicationPlateforme.Model.MediaCenter.CadeauxSouvenirs;
+using WebApplicationPlateforme.Model.MediaCenter.ExtensionTechnique;
+using WebApplicationPlateforme.Model.MediaCenter.FilmPart;
+using WebApplicationPlateforme.Model.MediaCenter.ImpressionDesign;
+using WebApplicationPlateforme.Model.MediaCenter.Montage;
+using WebApplicationPlateforme.Model.MediaCenter.PartageMedia;
+using WebApplicationPlateforme.Model.MediaCenter.ReceptionHebergement;
+using WebApplicationPlateforme.Model.MediaCenter.RecordingArchive;
+using WebApplicationPlateforme.Model.MediaCenter.Rondonnee;
+using WebApplicationPlateforme.Model.MediaCenter.SoireeOccasion;
+using WebApplicationPlateforme.Model.MediaCenter.Visite;
 
 namespace WebApplicationPlateforme.Data
 {
@@ -346,5 +358,44 @@ namespace WebApplicationPlateforme.Data
 
         /**************Pointage Via Empreinte */
         public DbSet<PointageEmpreinte> PointageEmpreintes { get; set; }
-    }
+
+        /**** Assistance Service Rh *****/
+        public DbSet<Assistance> assistances { get; set; }
+        /********** Centre Media **********/
+        public DbSet<Interview> Interviews { get; set; }
+        public DbSet<TypeInterview> TypeInterviews { get; set; }
+        public DbSet<Cadeaux> Cadeaux { get; set; }
+        public DbSet<Occasion> Occasion { get; set; }
+        public DbSet<Honor> Honor { get; set; }
+        public DbSet<Exthechnique> Exthechnique { get; set; }
+        public DbSet<ExthechniqueType> ExthechniqueType { get; set; }
+        
+        public DbSet<Film> Film { get; set; }
+        public DbSet<FilmsType> FilmsType { get; set; }
+        public DbSet<FilmsFiles> FilmsFiles { get; set; }
+        public DbSet<DesignImpression> DesignImpression { get; set; }
+
+        public DbSet<DesignFiles> DesignFiles { get; set; }
+        public DbSet<TypeImpression> TypeImpression { get; set; }
+  
+        public DbSet<montage>Montages{ get; set; }
+        public DbSet<montageFiles> montageFiles { get; set; }
+        public DbSet<PartageMedia> PartageMedia { get; set; }
+        public DbSet<PartageMediaType> PartageMediaType { get; set; }
+        public DbSet<PartageFiles> PartageFiles { get; set; }
+        public DbSet<ReceptionHeber> ReceptionHeber { get; set; }
+        public DbSet<RecepImpression> RecepImpression { get; set; }
+  
+        public DbSet<RecepCadeaux> RecepCadeaux { get; set; }
+        public DbSet<RecordingArchive> RecordingArchive { get; set; }
+        public DbSet<TypeRecording> TypeRecording { get; set; }
+        public DbSet<Rendonee> Rendonee { get; set; }
+        public DbSet<RendoneType> RendoneType { get; set; }
+        public DbSet<SoireeType> SoireeType { get; set; }
+        public DbSet<GuestSoiree> GuestSoiree { get; set; }
+        public DbSet<OccasionSoiree> OccasionSoiree { get; set; }
+        public DbSet<visite> visite { get; set; }
+        public DbSet<offreImpression> offreImpression { get; set; }
+
+}
 }

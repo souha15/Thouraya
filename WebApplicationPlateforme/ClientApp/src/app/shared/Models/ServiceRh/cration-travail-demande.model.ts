@@ -1,5 +1,24 @@
 export class CrationTravailDemande {
   id: number;
+  transferera : string;
+     transfertetab : string;
+     transfertrh : string;
+     transfertdeux : string;
+     datetransfert : string;
+     idtrh : string;
+     idtetab : string;
+     nomtrh : string;
+     nomtetab : string;
+     etattrh : string;
+     etatetab : string;
+     datetrh : string;
+     dateetab : string;
+     tran1 : string;
+     tran2 : string;
+     tran3 : string;
+     tran4 : string;
+     tran5 : string;
+     tran6 : string;
   username:string;
   titreposte:string;
   selection:string;
@@ -20,7 +39,7 @@ export class CrationTravailDemande {
   etatdg :string;
   iddg:string;
   nomdg:string;
-attribut1: number;
+  attribut1: number;
   attribut2 :string;
   attribut3 :string;
   attribut4 :string;

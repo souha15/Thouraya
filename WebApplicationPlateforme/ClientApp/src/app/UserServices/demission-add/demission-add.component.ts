@@ -44,6 +44,7 @@ export class DemissionAddComponent implements OnInit {
     this.dem.etat = "في الانتظار";
     this.dem.etatdir = "في الانتظار";
     this.dem.etatrh = "في الانتظار";
+    this.dem.attribut3 = "في الانتظار";
     this.demService.Add(this.dem).subscribe(
       res => {
         this.toastr.success('تم التحديث بنجاح', 'نجاح')

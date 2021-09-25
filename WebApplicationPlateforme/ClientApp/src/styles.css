@@ -2,6 +2,7 @@ input[type=text],
 input[type="password"],
 input[type="date"],
 input[type="number"],
+input[type="datetime-local"],
 select,
 textarea {
   -webkit-transition: all 0.30s ease-in-out;
@@ -17,6 +18,7 @@ textarea {
   input[type="password"]:focus,
   input[type="date"]:focus,
   input[type="number"]:focus,
+  input[type="datetime-local"],
   select:focus,
   textarea:focus {
     box-shadow: 0 0 5px rgba(81, 203, 238, 1);
@@ -50,6 +52,7 @@ textarea {
 .task-form input[type="month"],
 .task-form input[type="email"],
 .task-form input[type="tel"],
+.task-form input[type="datetime-local"],
 .task-form select {
   padding: 8px 10px;
   border-radius: 10px;

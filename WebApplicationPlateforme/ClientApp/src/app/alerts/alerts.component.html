@@ -11,41 +11,41 @@
         <h3 class="task-head">طلبات الموظفين</h3>
       </header>
       <div class="que-serv">
-        <a *ngIf="testroledir || testroleadmin" href="" [routerLink]="['/details-pointage-emp']">
+        <a *ngIf="testroledir || testroleadmin || testrole" href="" [routerLink]="['/details-pointage-emp']">
           <span class="icon"><i class="fa fa-calendar-alt"></i></span>
           الحضور و الإنصراف
         </a>
 
-        <a *ngIf="testroledir || testroleadmin" href="" [routerLink]="['/menurequests']">
+        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/menurequests']">
           <span class="icon"><i class="fa fa-sign-out-alt"></i></span>طلبات
           الإجازات
         </a>
 
-        <a *ngIf="testroledir || testroleadmin" href="" [routerLink]="['/permission-list-dir']">
+        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/permission-list-dir']">
           <span class="icon"><i class="fa fa-walking"></i></span>
           طلبات الإذن
         </a>
-        <a *ngIf="testroledir || testroleadmin" href="" [routerLink]="['/recrutmenet-dir-list']">
+        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/recrutmenet-dir-list']">
           <span class="icon"><i class="fa fa-list"></i></span>
           طلبات الانتدابات
         </a>
 
-        <a *ngIf="testroledir || testroleadmin" href="" [routerLink]="['/equipement-list-dir']">
+        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/equipement-list-dir']">
           <span class="icon"><i class="fa fa-toolbox"></i></span>
           طلبات العهد
         </a>
 
-        <a *ngIf="testroledir || testroleadmin" href="" [routerLink]="['/cre-finan-list-director']">
+        <a *ngIf="testrole || testroleadmin " href="" [routerLink]="['/cre-finan-list-director']">
           <span class="icon"><i class="fa fa-funnel-dollar"></i></span>
           طلبات المستحقات المالية
         </a>
 
-        <a *ngIf="testroledir || testroleadmin" href="" [routerLink]="['/demande-formation-listdir']">
+        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/demande-formation-listdir']">
           <span class="icon"><i class="fa fa-graduation-cap"></i></span>
           طلبات الدورات التدريبية
         </a>
 
-        <a *ngIf="testroledir || testroleadmin" href="" [routerLink]="['/plaint-listdir']">
+        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/plaint-listdir']">
           <span class="icon"><i class="fa fa-user-times"></i></span>
           شكوى
         </a>
@@ -60,34 +60,43 @@
           طلبات سلفة
         </a>
 
-        <a *ngIf="testroledir || testroleadmin" href="" [routerLink]="['/creation-list-dir']">
+        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/creation-list-dir-g']">
           <span class="icon"><i class="fa fa-briefcase"></i></span>
           طلبات استحداث وظيفة
         </a>
 
-        <a *ngIf="testrole || testroleadmin" href="" [routerLink]="['/creation-list-dir-g']">
+        <a *ngIf="testrole || testroleadmin" href="" [routerLink]="['/creation-list-dir']">
           <span class="icon"><i class="fa fa-briefcase"></i></span>
           طلبات استحداث وظيفة
         </a>
 
-        <a *ngIf="testroledir || testroleadmin" href="" [routerLink]="['/demande-supp-heure-list-director']">
+        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/demande-supp-heure-list-director']">
           <span class="icon"><i class="fa fa-clock"></i></span>
           طلبات ساعات إضافية
         </a>
 
-        <a *ngIf="testroledir || testroleadmin" href="" [routerLink]="['/gest-ben-list-dir']">
+        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/gest-ben-list-dir']">
           <span class="icon"><i class="fa fa-users"></i></span>
           المستفيدين
         </a>
 
-        <a *ngIf="testroledir || testroleadmin" [routerLink]="['/pointage-director-list']">
+        <a *ngIf="testroledir || testroleadmin|| testrole" [routerLink]="['/pointage-director-list']">
           <span class="icon"><i class="fa fa-clock"></i></span>
           الحضور و الإنصراف
         </a>
 
-        <a *ngIf="testroledir || testroleadmin" [routerLink]="['/list-dir-ordre-pay']">
+        <a *ngIf="testroledir || testroleadmin|| testrole" [routerLink]="['/list-dir-ordre-pay']">
           <span class="icon"><i class="fa fa-money-bill"></i></span>
           أوامر الصرف
+        </a>
+
+        <a *ngIf="testroleadmin|| testrole" href="" [routerLink]="['/demissio-listdir']">
+          <span class="icon"><i class="fa fa-times-circle"></i></span>
+          طلبات إستقالة
+        </a>
+        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/dem-assistance-listdir']">
+          <span class="icon"><i class="fa fa-address-book"></i></span>
+          طلبات إشراف
         </a>
 
       </div>

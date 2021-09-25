@@ -7,6 +7,7 @@ import { TbListening } from '../../../shared/Models/Evenements/tb-listening.mode
 import { UserDetail } from '../../../shared/Models/User/user-detail.model';
 import { Equipement } from '../../../shared/Models/RH/equipement.model';
 import { NgForm } from '@angular/forms';
+import { AdministrationService } from '../../../shared/Services/Administration/administration.service';
 
 @Component({
   selector: 'app-equipement-add',
@@ -18,7 +19,8 @@ export class EquipementAddComponent implements OnInit {
   constructor(private tblService: TbListeningService,
     private toastr: ToastrService,
     private UserService: UserServiceService,
-    private equipementService: EquipementService) { }
+    private equipementService: EquipementService,
+    private adminService: AdministrationService,) { }
 
   ngOnInit(): void {
     this.getNomEquipementList();
@@ -28,7 +30,7 @@ export class EquipementAddComponent implements OnInit {
 
   // Get User Connected
 
-
+  nom: string;     
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
@@ -36,6 +38,14 @@ export class EquipementAddComponent implements OnInit {
       this.equ.iddir = res.attribut1;
       this.equ.userNameCreator = res.fullName;
       this.equ.idUserCreator = res.id;
+      this.nom = "الأوقاف والخدمات";
+      this.adminService.GetAdminData(this.nom).subscribe(resp => {
+
+        this.UserService.GetUserByUserName2(resp.nomDirecteur).subscribe(res => {
+          this.equ.attribut3 = res.id;
+          this.equ.attribut5 = res.fullName;
+        })
+      })
 
     })
 

@@ -27,6 +27,8 @@ export class EquipementListDirComponent implements OnInit {
 
     
   }
+  p: Number = 1;
+  count: Number = 5;
   onSubmit(form: NgForm) {
     this.updateRecord(form)
   }
@@ -72,7 +74,7 @@ export class EquipementListDirComponent implements OnInit {
   updateRecord(form: NgForm) {
     this.conge = Object.assign(this.conge, form.value);
     this.congeService.formData.datedir = this.date;
-    this.congeService.formData.attribut2 = this.etat;
+    //this.congeService.formData.attribut2 = this.etat;
       this.congeService.Edit().subscribe(res => {
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
         this.resetForm();

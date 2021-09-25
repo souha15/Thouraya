@@ -20,6 +20,9 @@ export class ResidenceListDirComponent implements OnInit {
     this.CongeList();
   }
 
+  openInNewTab(url) {
+    window.open(url, '_blank').focus();
+  }
   p: Number = 1;
   count: Number = 5;
   UserIdConnected: string;

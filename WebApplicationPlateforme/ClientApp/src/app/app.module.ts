@@ -516,6 +516,116 @@ import { EditPointageEmpComponent } from './PointageViaEmp/edit-pointage-emp/edi
 import { ListPointageEmpComponent } from './PointageViaEmp/list-pointage-emp/list-pointage-emp.component';
 import { UserListPointageEmpComponent } from './PointageViaEmp/user-list-pointage-emp/user-list-pointage-emp.component';
 import { MenuPointageEmpComponent } from './PointageViaEmp/menu-pointage-emp/menu-pointage-emp.component';
+import { DemCongeNormalComponent } from './Conges/dem-conge-normal/dem-conge-normal.component';
+import { DemCongeUrgentComponent } from './Conges/dem-conge-urgent/dem-conge-urgent.component';
+import { DemCongeExceptionnelComponent } from './Conges/dem-conge-exceptionnel/dem-conge-exceptionnel.component';
+import { DemCongeTravailComponent } from './Conges/dem-conge-travail/dem-conge-travail.component';
+import { DemCongeMaladieComponent } from './Conges/dem-conge-maladie/dem-conge-maladie.component';
+import { DemCongeHajComponent } from './Conges/dem-conge-haj/dem-conge-haj.component';
+import { DemCongeDevoirComponent } from './Conges/dem-conge-devoir/dem-conge-devoir.component';
+import { DemCongeMaterniteComponent } from './Conges/dem-conge-maternite/dem-conge-maternite.component';
+import { DemCongeMarriageComponent } from './Conges/dem-conge-marriage/dem-conge-marriage.component';
+import { DemCongeNouveauNeComponent } from './Conges/dem-conge-nouveau-ne/dem-conge-nouveau-ne.component';
+import { DemCongeDecesComponent } from './Conges/dem-conge-deces/dem-conge-deces.component';
+import { DemCongeForgeronComponent } from './Conges/dem-conge-forgeron/dem-conge-forgeron.component';
+import { DemCongeMenuComponent } from './Conges/dem-conge-menu/dem-conge-menu.component';
+import { InterviewAddComponent } from './MediaCenter/Interview/interview-add/interview-add.component';
+import { InterviewEditComponent } from './MediaCenter/Interview/interview-edit/interview-edit.component';
+import { InterviewDetailsComponent } from './MediaCenter/Interview/interview-details/interview-details.component';
+import { InterviewListComponent } from './MediaCenter/Interview/interview-list/interview-list.component';
+import { InterviewListCreatorComponent } from './MediaCenter/Interview/interview-list-creator/interview-list-creator.component';
+import { InterviewListUsersComponent } from './MediaCenter/Interview/interview-list-users/interview-list-users.component';
+import { InterviewMenuSettingsComponent } from './MediaCenter/Interview/interview-menu-settings/interview-menu-settings.component';
+import { InterviewMenuUsersComponent } from './MediaCenter/Interview/interview-menu-users/interview-menu-users.component';
+import { TypeInterviewComponent } from './MediaCenter/Interview/type-interview/type-interview.component';
+import { DemAssistanceAddComponent } from './ServiceRh/Assistance/dem-assistance-add/dem-assistance-add.component';
+import { DemAssistanceListUserComponent } from './ServiceRh/Assistance/dem-assistance-list-user/dem-assistance-list-user.component';
+import { DemAssistanceListdirComponent } from './ServiceRh/Assistance/dem-assistance-listdir/dem-assistance-listdir.component';
+import { DemAssistanceListdirfinComponent } from './ServiceRh/Assistance/dem-assistance-listdirfin/dem-assistance-listdirfin.component';
+import { DemAssistanceListetabfinComponent } from './ServiceRh/Assistance/dem-assistance-listetabfin/dem-assistance-listetabfin.component';
+import { DemAssistanceListerhComponent } from './ServiceRh/Assistance/dem-assistance-listerh/dem-assistance-listerh.component';
+
+import { MeadiaCenterDemandsAddUserComponent } from './MediaCenter/Menus/meadia-center-demands-add-user/meadia-center-demands-add-user.component';
+import { MeadiaCenterDemandsListUserComponent } from './MediaCenter/Menus/meadia-center-demands-list-user/meadia-center-demands-list-user.component';
+import { MeadiaCenterDemandsListDirComponent } from './MediaCenter/Menus/meadia-center-demands-list-dir/meadia-center-demands-list-dir.component';
+import { MeadiaCenterDemandsAddDirComponent } from './MediaCenter/Menus/meadia-center-demands-add-dir/meadia-center-demands-add-dir.component';
+import { CadeauxAddComponent } from './MediaCenter/CadeauxSouvenirs/cadeaux-add/cadeaux-add.component';
+import { CadeauxListComponent } from './MediaCenter/CadeauxSouvenirs/cadeaux-list/cadeaux-list.component';
+import { CadeauxListDirComponent } from './MediaCenter/CadeauxSouvenirs/cadeaux-list-dir/cadeaux-list-dir.component';
+import { CadeauxListUserComponent } from './MediaCenter/CadeauxSouvenirs/cadeaux-list-user/cadeaux-list-user.component';
+import { CadeauxListEtabComponent } from './MediaCenter/CadeauxSouvenirs/cadeaux-list-etab/cadeaux-list-etab.component';
+import { CadeauxOccasionCrudComponent } from './MediaCenter/CadeauxSouvenirs/cadeaux-occasion-crud/cadeaux-occasion-crud.component';
+import { CadeauxHonorCrudComponent } from './MediaCenter/CadeauxSouvenirs/cadeaux-honor-crud/cadeaux-honor-crud.component';
+import { ExthechniqueAddComponent } from './MediaCenter/ExtensionTechnique/exthechnique-add/exthechnique-add.component';
+import { ExthechniqueListUserComponent } from './MediaCenter/ExtensionTechnique/exthechnique-list-user/exthechnique-list-user.component';
+import { ExthechniqueListDirComponent } from './MediaCenter/ExtensionTechnique/exthechnique-list-dir/exthechnique-list-dir.component';
+import { ExthechniqueListEtabComponent } from './MediaCenter/ExtensionTechnique/exthechnique-list-etab/exthechnique-list-etab.component';
+import { TypeExthechniqueCrudComponent } from './MediaCenter/ExtensionTechnique/type-exthechnique-crud/type-exthechnique-crud.component';
+import { RecordingArchiveAddComponent } from './MediaCenter/RecordingArchive/recording-archive-add/recording-archive-add.component';
+import { RecordingArchiveListUserComponent } from './MediaCenter/RecordingArchive/recording-archive-list-user/recording-archive-list-user.component';
+import { RecordingArchiveListDirComponent } from './MediaCenter/RecordingArchive/recording-archive-list-dir/recording-archive-list-dir.component';
+import { RecordingArchiveListEtabComponent } from './MediaCenter/RecordingArchive/recording-archive-list-etab/recording-archive-list-etab.component';
+import { TypeRecordingArchiveCrudComponent } from './MediaCenter/RecordingArchive/type-recording-archive-crud/type-recording-archive-crud.component';
+import { RendonneAddComponent } from './MediaCenter/Rendonee/rendonne-add/rendonne-add.component';
+import { RendonneListDirComponent } from './MediaCenter/Rendonee/rendonne-list-dir/rendonne-list-dir.component';
+import { RendonneListUserComponent } from './MediaCenter/Rendonee/rendonne-list-user/rendonne-list-user.component';
+import { RendonneListEtabComponent } from './MediaCenter/Rendonee/rendonne-list-etab/rendonne-list-etab.component';
+import { TypeRendonneCrudComponent } from './MediaCenter/Rendonee/type-rendonne-crud/type-rendonne-crud.component';
+import { FilmAddComponent } from './MediaCenter/film/film-add/film-add.component';
+import { FilmEdityComponent } from './MediaCenter/film/film-edity/film-edity.component';
+import { FilmDetailsComponent } from './MediaCenter/film/film-details/film-details.component';
+import { FilmListUserComponent } from './MediaCenter/film/film-list-user/film-list-user.component';
+import { FilmListDirComponent } from './MediaCenter/film/film-list-dir/film-list-dir.component';
+import { FilmListEtabComponent } from './MediaCenter/film/film-list-etab/film-list-etab.component';
+import { FilmTypeCrudComponent } from './MediaCenter/film/film-type-crud/film-type-crud.component';
+import { OccasionSoireeAddComponent } from './MediaCenter/OccaSoiree/occasion-soiree-add/occasion-soiree-add.component';
+import { OccasionSoireeEditComponent } from './MediaCenter/OccaSoiree/occasion-soiree-edit/occasion-soiree-edit.component';
+import { OccasionSoireeDetailsComponent } from './MediaCenter/OccaSoiree/occasion-soiree-details/occasion-soiree-details.component';
+import { OccasionSoireeListUserComponent } from './MediaCenter/OccaSoiree/occasion-soiree-list-user/occasion-soiree-list-user.component';
+import { OccasionSoireeListDirComponent } from './MediaCenter/OccaSoiree/occasion-soiree-list-dir/occasion-soiree-list-dir.component';
+import { OccasionSoireeListEtabComponent } from './MediaCenter/OccaSoiree/occasion-soiree-list-etab/occasion-soiree-list-etab.component';
+import { OccasionSoireeTypeCrudComponent } from './MediaCenter/OccaSoiree/occasion-soiree-type-crud/occasion-soiree-type-crud.component';
+import { PartageMediaAddComponent } from './MediaCenter/PartageMedia/partage-media-add/partage-media-add.component';
+import { PartageMediaEditComponent } from './MediaCenter/PartageMedia/partage-media-edit/partage-media-edit.component';
+import { PartageMediaDetailComponent } from './MediaCenter/PartageMedia/partage-media-detail/partage-media-detail.component';
+import { PartageMediaListUserComponent } from './MediaCenter/PartageMedia/partage-media-list-user/partage-media-list-user.component';
+import { PartageMediaListDirComponent } from './MediaCenter/PartageMedia/partage-media-list-dir/partage-media-list-dir.component';
+import { PartageMediaListEtabComponent } from './MediaCenter/PartageMedia/partage-media-list-etab/partage-media-list-etab.component';
+import { PartageMediaTypeCrudComponent } from './MediaCenter/PartageMedia/partage-media-type-crud/partage-media-type-crud.component';
+import { VisiteAddComponent } from './MediaCenter/Visite/visite-add/visite-add.component';
+import { VisiteListComponent } from './MediaCenter/Visite/visite-list/visite-list.component';
+import { VisiteListUserComponent } from './MediaCenter/Visite/visite-list-user/visite-list-user.component';
+import { VisiteListDirComponent } from './MediaCenter/Visite/visite-list-dir/visite-list-dir.component';
+import { VisiteListEtabComponent } from './MediaCenter/Visite/visite-list-etab/visite-list-etab.component';
+import { VisiteEditComponent } from './MediaCenter/Visite/visite-edit/visite-edit.component';
+import { VisiteDetailsComponent } from './MediaCenter/Visite/visite-details/visite-details.component';
+import { VisiteTypeCrudComponent } from './MediaCenter/Visite/visite-type-crud/visite-type-crud.component';
+import { MontageAddComponent } from './MediaCenter/Montage/montage-add/montage-add.component';
+import { MontageListUserComponent } from './MediaCenter/Montage/montage-list-user/montage-list-user.component';
+import { MontageListDirComponent } from './MediaCenter/Montage/montage-list-dir/montage-list-dir.component';
+import { MontageListEmployeeComponent } from './MediaCenter/Montage/montage-list-employee/montage-list-employee.component';
+import { MontageListEtabComponent } from './MediaCenter/Montage/montage-list-etab/montage-list-etab.component';
+import { MontageEditComponent } from './MediaCenter/Montage/montage-edit/montage-edit.component';
+import { MontageDetailsComponent } from './MediaCenter/Montage/montage-details/montage-details.component';
+import { MontageEmployeeRecepComponent } from './MediaCenter/Montage/montage-employee-recep/montage-employee-recep.component';
+import { MontageEmployeeAddFilesComponent } from './MediaCenter/Montage/montage-employee-add-files/montage-employee-add-files.component';
+import { DesignAddComponent } from './MediaCenter/ImpressionDesign/design-add/design-add.component';
+import { DesignDetailsComponent } from './MediaCenter/ImpressionDesign/design-details/design-details.component';
+import { DesignEditComponent } from './MediaCenter/ImpressionDesign/design-edit/design-edit.component';
+import { DesignListRecepComponent } from './MediaCenter/ImpressionDesign/design-list-recep/design-list-recep.component';
+import { DesignListCreatorComponent } from './MediaCenter/ImpressionDesign/design-list-creator/design-list-creator.component';
+import { DesignListEmployeeComponent } from './MediaCenter/ImpressionDesign/design-list-employee/design-list-employee.component';
+import { DesignListEtabComponent } from './MediaCenter/ImpressionDesign/design-list-etab/design-list-etab.component';
+import { CongesEtabListComponent } from './TransferetServices/conges-etab-list/conges-etab-list.component';
+import { CongesRHListComponent } from './TransferetServices/conges-rhlist/conges-rhlist.component';
+import { FormationEtabListComponent } from './TransferetServices/formation-etab-list/formation-etab-list.component';
+import { FormationRHListComponent } from './TransferetServices/formation-rhlist/formation-rhlist.component';
+import { SupHeureRHListComponent } from './TransferetServices/sup-heure-rhlist/sup-heure-rhlist.component';
+import { SupHeureEtabListComponent } from './TransferetServices/sup-heure-etab-list/sup-heure-etab-list.component';
+import { TravailEtabListComponent } from './TransferetServices/travail-etab-list/travail-etab-list.component';
+import { TravailRHListComponent } from './TransferetServices/travail-rhlist/travail-rhlist.component';
+import { AvanceRHListComponent } from './TransferetServices/avance-rhlist/avance-rhlist.component';
+import { AvanceEtabListComponent } from './TransferetServices/avance-etab-list/avance-etab-list.component';
 
 @NgModule({
   declarations: [
@@ -1000,6 +1110,115 @@ import { MenuPointageEmpComponent } from './PointageViaEmp/menu-pointage-emp/men
     ListPointageEmpComponent,
     UserListPointageEmpComponent,
     MenuPointageEmpComponent,
+    DemCongeNormalComponent,
+    DemCongeUrgentComponent,
+    DemCongeExceptionnelComponent,
+    DemCongeTravailComponent,
+    DemCongeMaladieComponent,
+    DemCongeHajComponent,
+    DemCongeDevoirComponent,
+    DemCongeMaterniteComponent,
+    DemCongeMarriageComponent,
+    DemCongeNouveauNeComponent,
+    DemCongeDecesComponent,
+    DemCongeForgeronComponent,
+    DemCongeMenuComponent,
+    InterviewAddComponent,
+    InterviewEditComponent,
+    InterviewDetailsComponent,
+    InterviewListComponent,
+    InterviewListCreatorComponent,
+    InterviewListUsersComponent,
+    InterviewMenuSettingsComponent,
+    InterviewMenuUsersComponent,
+    TypeInterviewComponent,
+    DemAssistanceAddComponent,
+    DemAssistanceListUserComponent,
+    DemAssistanceListdirComponent,
+    DemAssistanceListdirfinComponent,
+    DemAssistanceListetabfinComponent,
+    DemAssistanceListerhComponent,
+    MeadiaCenterDemandsAddUserComponent,
+    MeadiaCenterDemandsListUserComponent,
+    MeadiaCenterDemandsListDirComponent,
+    MeadiaCenterDemandsAddDirComponent,
+    CadeauxAddComponent,
+    CadeauxListComponent,
+    CadeauxListDirComponent,
+    CadeauxListUserComponent,
+    CadeauxListEtabComponent,
+    CadeauxOccasionCrudComponent,
+    CadeauxHonorCrudComponent,
+    ExthechniqueAddComponent,
+    ExthechniqueListUserComponent,
+    ExthechniqueListDirComponent,
+    ExthechniqueListEtabComponent,
+    TypeExthechniqueCrudComponent,
+    RecordingArchiveAddComponent,
+    RecordingArchiveListUserComponent,
+    RecordingArchiveListDirComponent,
+    RecordingArchiveListEtabComponent,
+    TypeRecordingArchiveCrudComponent,
+    RendonneAddComponent,
+    RendonneListDirComponent,
+    RendonneListUserComponent,
+    RendonneListEtabComponent,
+    TypeRendonneCrudComponent,
+    FilmAddComponent,
+    FilmEdityComponent,
+    FilmDetailsComponent,
+    FilmListUserComponent,
+    FilmListDirComponent,
+    FilmListEtabComponent,
+    FilmTypeCrudComponent,
+    OccasionSoireeAddComponent,
+    OccasionSoireeEditComponent,
+    OccasionSoireeDetailsComponent,
+    OccasionSoireeListUserComponent,
+    OccasionSoireeListDirComponent,
+    OccasionSoireeListEtabComponent,
+    OccasionSoireeTypeCrudComponent,
+    PartageMediaAddComponent,
+    PartageMediaEditComponent,
+    PartageMediaDetailComponent,
+    PartageMediaListUserComponent,
+    PartageMediaListDirComponent,
+    PartageMediaListEtabComponent,
+    PartageMediaTypeCrudComponent,
+    VisiteAddComponent,
+    VisiteListComponent,
+    VisiteListUserComponent,
+    VisiteListDirComponent,
+    VisiteListEtabComponent,
+    VisiteEditComponent,
+    VisiteDetailsComponent,
+    VisiteTypeCrudComponent,
+    MontageAddComponent,
+    MontageListUserComponent,
+    MontageListDirComponent,
+    MontageListEmployeeComponent,
+    MontageListEtabComponent,
+    MontageEditComponent,
+    MontageDetailsComponent,
+    MontageEmployeeRecepComponent,
+    MontageEmployeeAddFilesComponent,
+    DesignAddComponent,
+    DesignDetailsComponent,
+    DesignEditComponent,
+    DesignListRecepComponent,
+    DesignListCreatorComponent,
+    DesignListEmployeeComponent,
+    DesignListEtabComponent,
+    CongesEtabListComponent,
+    CongesRHListComponent,
+    FormationEtabListComponent,
+    FormationRHListComponent,
+    SupHeureRHListComponent,
+    SupHeureEtabListComponent,
+    TravailEtabListComponent,
+    TravailRHListComponent,
+    AvanceRHListComponent,
+    AvanceEtabListComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -1053,7 +1272,7 @@ import { MenuPointageEmpComponent } from './PointageViaEmp/menu-pointage-emp/men
       { path: 'side-menu', component: SideMenuComponent, canActivate: [AuthGuard] },
       { path: 'nav-menu', component: NavMenuComponent, canActivate: [AuthGuard] },
       { path: 'mailing', component: MailingComponent, canActivate: [AuthGuard] },
-      { path: 'alerts', component: AlertsComponent, canActivate: [AuthGuard] },
+      { path: 'alerts', component: AlertsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL'] }},
       { path: 'alertsrh', component: AlertsrhComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE'] } },
       { path: 'completed-task', component: CompletedTaskComponent, canActivate: [AuthGuard] },
       { path: 'completed-task/:id', component: CompletedTaskComponent, canActivate: [AuthGuard] },
@@ -1608,7 +1827,7 @@ import { MenuPointageEmpComponent } from './PointageViaEmp/menu-pointage-emp/men
 
       { path: 'chequec-details/:id', component: ChequecDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] }},
 
-      { path: 'pay-chequec-add', component: PayChequecAddComponent, canActivate: [AuthGuard] },
+      { path: 'pay-chequec-add', component: PayChequecAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN'] } },
 
       { path: 'pay-chequec-lis', component: PayChequecLisComponent, canActivate: [AuthGuard] },
 
@@ -1768,19 +1987,19 @@ import { MenuPointageEmpComponent } from './PointageViaEmp/menu-pointage-emp/men
 
       /********** ,Demands Pages *************** */
 
-      { path: 'demands-director', component: DemandsDirectorComponent, canActivate: [AuthGuard],},
+      { path: 'demands-director', component: DemandsDirectorComponent, canActivate: [AuthGuard]},
 
-      { path: 'demands-rh', component: DemandsRHComponent, canActivate: [AuthGuard], },
+      { path: 'demands-rh', component: DemandsRHComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE'] } },
 
-      { path: 'demands-finance', component: DemandsFinanceComponent, canActivate: [AuthGuard], },
+      { path: 'demands-finance', component: DemandsFinanceComponent, canActivate: [AuthGuard] },
 
-      { path: 'permession-list-rh', component: PermessionListRHComponent, canActivate: [AuthGuard],},
+      { path: 'permession-list-rh', component: PermessionListRHComponent, canActivate: [AuthGuard]},
 
-      { path: 'equipement-list-rh', component: EquipementListRHComponent , canActivate: [AuthGuard],},
+      { path: 'equipement-list-rh', component: EquipementListRHComponent , canActivate: [AuthGuard]},
 
-      { path: 'plaint-list-rh', component: PlaintListRHComponent, canActivate: [AuthGuard], },
+      { path: 'plaint-list-rh', component: PlaintListRHComponent, canActivate: [AuthGuard] },
 
-      { path: 'plaint-list-dir-g', component: PlaintListDirGComponent , canActivate: [AuthGuard],},
+      { path: 'plaint-list-dir-g', component: PlaintListDirGComponent , canActivate: [AuthGuard]},
 
 
       /******* Msg Interne **********/
@@ -2078,6 +2297,235 @@ import { MenuPointageEmpComponent } from './PointageViaEmp/menu-pointage-emp/men
       { path: 'user-list-pointage-emp', component: UserListPointageEmpComponent, canActivate: [AuthGuard] },
 
       { path: 'menu-pointage-emp', component: MenuPointageEmpComponent, canActivate: [AuthGuard] },
+
+      //Conge
+
+
+      { path: 'dem-conge-normal', component: DemCongeNormalComponent, canActivate: [AuthGuard] },
+
+      { path: 'dem-conge-urgent', component: DemCongeUrgentComponent, canActivate: [AuthGuard] },
+
+      { path: 'dem-conge-exceptionnel', component: DemCongeExceptionnelComponent, canActivate: [AuthGuard] },
+
+      { path: 'dem-conge-travail', component: DemCongeTravailComponent, canActivate: [AuthGuard] },
+
+      { path: 'dem-conge-maladie', component: DemCongeMaladieComponent, canActivate: [AuthGuard] },
+
+      { path: 'dem-conge-haj', component: DemCongeHajComponent, canActivate: [AuthGuard] },
+
+      { path: 'dem-conge-devoir', component: DemCongeDevoirComponent, canActivate: [AuthGuard] },
+
+      { path: 'dem-conge-maternite', component: DemCongeMaterniteComponent, canActivate: [AuthGuard] },
+
+      { path: 'dem-conge-marriage', component: DemCongeMarriageComponent, canActivate: [AuthGuard] },
+
+      { path: 'dem-conge-nouveau-ne', component: DemCongeNouveauNeComponent, canActivate: [AuthGuard] },
+
+      { path: 'dem-conge-deces', component: DemCongeDecesComponent, canActivate: [AuthGuard] },
+
+      { path: 'dem-conge-forgeron', component: DemCongeForgeronComponent, canActivate: [AuthGuard] },
+
+      { path: 'dem-conge-menu', component: DemCongeMenuComponent, canActivate: [AuthGuard] },
+
+      { path: 'main-ready-avance', component: MainReadyAvanceComponent, canActivate: [AuthGuard] },
+
+    /**** Assistance ***/
+      { path: 'dem-assistance-add', component: DemAssistanceAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'dem-assistance-list-user', component: DemAssistanceListUserComponent, canActivate: [AuthGuard] },
+
+      { path: 'dem-assistance-listdir', component: DemAssistanceListdirComponent, canActivate: [AuthGuard] },
+
+      { path: 'dem-assistance-listdirfin', component: DemAssistanceListdirfinComponent, canActivate: [AuthGuard] },
+
+      { path: 'dem-assistance-listetabfin', component: DemAssistanceListetabfinComponent, canActivate: [AuthGuard] },
+
+      { path: 'dem-assistance-listerh', component: DemAssistanceListerhComponent, canActivate: [AuthGuard] },
+
+
+
+      /****** Media Center ***********/
+
+      //Interview
+
+
+      { path: 'interview-add', component: InterviewAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'interview-edit', component: InterviewEditComponent, canActivate: [AuthGuard] },
+      { path: 'interview-edit/:id', component: InterviewEditComponent, canActivate: [AuthGuard] },
+
+      { path: 'interview-details', component: InterviewDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'interview-details/:id', component: InterviewDetailsComponent, canActivate: [AuthGuard] },
+
+      { path: 'interview-list', component: InterviewListComponent, canActivate: [AuthGuard] },
+
+      { path: 'interview-list-creator', component: InterviewListCreatorComponent, canActivate: [AuthGuard] },
+
+      { path: 'interview-list-users', component: InterviewListUsersComponent, canActivate: [AuthGuard] },
+
+      { path: 'interview-menu-settings', component: InterviewMenuSettingsComponent, canActivate: [AuthGuard] },
+
+      { path: 'interview-menu-users', component: InterviewMenuUsersComponent, canActivate: [AuthGuard] },
+
+      { path: 'type-interview', component: TypeInterviewComponent, canActivate: [AuthGuard] },
+
+      { path: 'meadia-center-demands-add-user', component: MeadiaCenterDemandsAddUserComponent, canActivate: [AuthGuard] },
+
+      { path: 'meadia-center-demands-list-user', component: MeadiaCenterDemandsListUserComponent, canActivate: [AuthGuard] },
+
+      { path: 'meadia-center-demands-list-dir', component: MeadiaCenterDemandsListDirComponent, canActivate: [AuthGuard] },
+
+      { path: 'meadia-center-demands-add-dir', component: MeadiaCenterDemandsAddDirComponent, canActivate: [AuthGuard] },
+
+      { path: 'cadeaux-add', component: CadeauxAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'cadeaux-list', component: CadeauxListComponent, canActivate: [AuthGuard] },
+
+      { path: 'cadeaux-list-dir', component: CadeauxListDirComponent , canActivate: [AuthGuard] },
+
+      { path: 'cadeaux-list-user', component: CadeauxListUserComponent, canActivate: [AuthGuard] },
+
+      { path: 'cadeaux-list-etab', component: CadeauxListEtabComponent, canActivate: [AuthGuard] },
+
+      { path: 'cadeaux-occasion-crud', component: CadeauxOccasionCrudComponent, canActivate: [AuthGuard] },
+
+      { path: 'cadeaux-honor-crud', component: CadeauxHonorCrudComponent, canActivate: [AuthGuard] },
+
+      { path: 'exthechnique-add', component: ExthechniqueAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'exthechnique-list-user', component: ExthechniqueListUserComponent, canActivate: [AuthGuard] },
+
+      { path: 'exthechnique-list-dir', component: ExthechniqueListDirComponent, canActivate: [AuthGuard] },
+
+      { path: 'exthechnique-list-etab', component: ExthechniqueListEtabComponent, canActivate: [AuthGuard] },
+
+      { path: 'type-exthechnique-crud', component: TypeExthechniqueCrudComponent, canActivate: [AuthGuard] },
+
+      { path: 'recording-archive-add', component: RecordingArchiveAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'recording-archive-list-user', component: RecordingArchiveListUserComponent, canActivate: [AuthGuard] },
+
+      { path: 'recording-archive-list-dir', component: RecordingArchiveListDirComponent, canActivate: [AuthGuard] },
+
+      { path: 'recording-archive-list-etab', component: RecordingArchiveListEtabComponent, canActivate: [AuthGuard] },
+
+      { path: 'type-recording-archive-crud', component: TypeRecordingArchiveCrudComponent, canActivate: [AuthGuard] },
+
+      { path: 'rendonne-add', component: RendonneAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'rendonne-list-dir', component: RendonneListDirComponent, canActivate: [AuthGuard] },
+
+      { path: 'rendonne-list-user', component: RendonneListUserComponent, canActivate: [AuthGuard] },
+
+      { path: 'rendonne-list-etab', component: RendonneListEtabComponent, canActivate: [AuthGuard] },
+
+      { path: 'type-rendonne-crud', component: TypeRendonneCrudComponent, canActivate: [AuthGuard] },
+
+      { path: 'film-add', component: FilmAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'film-edity', component: FilmEdityComponent, canActivate: [AuthGuard] },
+      { path: 'film-edity/:id', component: FilmEdityComponent, canActivate: [AuthGuard] },
+
+      { path: 'film-details', component: FilmDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'film-details/:id', component: FilmDetailsComponent, canActivate: [AuthGuard] },
+
+      { path: 'film-list-user', component: FilmListUserComponent, canActivate: [AuthGuard] },
+
+      { path: 'film-list-dir', component: FilmListDirComponent, canActivate: [AuthGuard] },
+
+      { path: 'film-list-etab', component: FilmListEtabComponent, canActivate: [AuthGuard] },
+
+      { path: 'film-type-crud', component: FilmTypeCrudComponent, canActivate: [AuthGuard] },
+
+      { path: 'occasion-soiree-add', component: OccasionSoireeAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'occasion-soiree-edit', component: OccasionSoireeEditComponent, canActivate: [AuthGuard] },
+      { path: 'occasion-soiree-edit/:id', component: OccasionSoireeEditComponent, canActivate: [AuthGuard] },
+
+      { path: 'occasion-soiree-details', component: OccasionSoireeDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'occasion-soiree-details/:id', component: OccasionSoireeDetailsComponent, canActivate: [AuthGuard] },
+
+      { path: 'occasion-soiree-list-user', component: OccasionSoireeListUserComponent, canActivate: [AuthGuard] },
+
+      { path: 'occasion-soiree-list-dir', component: OccasionSoireeListDirComponent, canActivate: [AuthGuard] },
+
+      { path: 'occasion-soiree-list-etab', component: OccasionSoireeListEtabComponent, canActivate: [AuthGuard] },
+
+      { path: 'occasion-soiree-type-crud', component: OccasionSoireeTypeCrudComponent, canActivate: [AuthGuard] },
+
+      { path: 'partage-media-add', component: PartageMediaAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'partage-media-edit', component: PartageMediaEditComponent, canActivate: [AuthGuard] },
+      { path: 'partage-media-edit/:id', component: PartageMediaEditComponent, canActivate: [AuthGuard] },
+
+      { path: 'partage-media-detail', component: PartageMediaDetailComponent, canActivate: [AuthGuard] },
+      { path: 'partage-media-detail/:id', component: PartageMediaDetailComponent, canActivate: [AuthGuard] },
+
+      { path: 'partage-media-list-user', component: PartageMediaListUserComponent, canActivate: [AuthGuard] },
+
+      { path: 'partage-media-list-dir', component: PartageMediaListDirComponent, canActivate: [AuthGuard] },
+
+      { path: 'partage-media-list-etab', component: PartageMediaListEtabComponent, canActivate: [AuthGuard] },
+
+      { path: 'partage-media-type-crud', component: PartageMediaTypeCrudComponent, canActivate: [AuthGuard] },
+
+      { path: 'visite-add', component: VisiteAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'visite-list', component: VisiteListComponent, canActivate: [AuthGuard] },
+
+      { path: 'visite-list-user', component: VisiteListUserComponent, canActivate: [AuthGuard] },
+
+      { path: 'visite-list-dir', component: VisiteListDirComponent, canActivate: [AuthGuard] },
+
+      { path: 'visite-list-etab', component: VisiteListEtabComponent, canActivate: [AuthGuard] },
+
+      { path: 'visite-edit', component: VisiteEditComponent, canActivate: [AuthGuard] },
+      { path: 'visite-edit/:id', component: VisiteEditComponent, canActivate: [AuthGuard] },
+
+      { path: 'visite-details', component: VisiteDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'visite-details/:id', component: VisiteDetailsComponent, canActivate: [AuthGuard] },
+
+      { path: 'visite-type-crud', component: VisiteTypeCrudComponent, canActivate: [AuthGuard] },
+
+
+      { path: 'montage-add', component: MontageAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'montage-list-user', component: MontageListUserComponent, canActivate: [AuthGuard] },
+
+      { path: 'montage-list-dir', component: MontageListDirComponent, canActivate: [AuthGuard] },
+
+      { path: 'montage-list-employee', component: MontageListEmployeeComponent, canActivate: [AuthGuard] },
+
+      { path: 'montage-list-etab', component: MontageListEtabComponent, canActivate: [AuthGuard] },
+
+      { path: 'montage-edit', component: MontageEditComponent, canActivate: [AuthGuard] },
+      { path: 'montage-editt/:id', component: MontageEditComponent, canActivate: [AuthGuard] },
+
+      { path: 'montage-details', component: MontageDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'montage-details/:id', component: MontageDetailsComponent, canActivate: [AuthGuard] },
+
+      { path: 'montage-employee-recep', component: MontageEmployeeRecepComponent, canActivate: [AuthGuard] },
+      { path: 'montage-employee-recep/:id', component: MontageEmployeeRecepComponent, canActivate: [AuthGuard] },
+
+      { path: 'montage-employee-add-files', component: MontageEmployeeAddFilesComponent, canActivate: [AuthGuard] },
+      { path: 'montage-employee-add-files/:id', component: MontageEmployeeAddFilesComponent, canActivate: [AuthGuard] },
+
+      { path: 'design-add', component: DesignAddComponent, canActivate: [AuthGuard] },
+  
+      { path: 'design-details', component: DesignDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'design-details/:id', component: DesignDetailsComponent, canActivate: [AuthGuard] },
+
+      { path: 'design-edit', component: DesignEditComponent, canActivate: [AuthGuard] },
+      { path: 'design-edit/:id', component: DesignEditComponent , canActivate: [AuthGuard] },
+
+      { path: 'design-list-recep', component: DesignListRecepComponent, canActivate: [AuthGuard] },
+      { path: 'design-list-recep/:id', component: DesignListRecepComponent, canActivate: [AuthGuard] },
+
+      { path: 'design-list-creator', component: DesignListCreatorComponent, canActivate: [AuthGuard] },
+
+      { path: 'design-list-employee', component: DesignListEmployeeComponent, canActivate: [AuthGuard] },
+
+      { path: 'design-list-etab', component: DesignListEtabComponent, canActivate: [AuthGuard] },
 
 
     ])

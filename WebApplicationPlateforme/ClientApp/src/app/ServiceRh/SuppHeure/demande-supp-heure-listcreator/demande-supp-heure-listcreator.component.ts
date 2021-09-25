@@ -59,11 +59,9 @@ export class DemandeSuppHeureListcreatorComponent implements OnInit {
 
   date = new Date().toLocaleDateString();
   accept() {
-    this.fact.etat = "موافقة"
-    this.fact.attribut3 = this.date;
     this.fact.attribut2 = "موافقة"
-    this.fact.attribut4 = this.UserIdConnected;
-    this.fact.attribut5 = this.UserNameConnected;
+    this.fact.idusername = this.UserIdConnected;
+    this.fact.username = this.UserNameConnected;
     this.suppheureService.PutObservableE(this.fact).subscribe(res => {
       this.getCreance();
       this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
@@ -78,8 +76,8 @@ export class DemandeSuppHeureListcreatorComponent implements OnInit {
     this.fact.etat = "رفض"
     this.fact.attribut3 = this.date;
     this.fact.attribut2 = "رفض"
-    this.fact.attribut4 = this.UserIdConnected;
-    this.fact.attribut5 = this.UserNameConnected;
+    this.fact.idusername = this.UserIdConnected;
+    this.fact.username = this.UserNameConnected;
 
     this.suppheureService.PutObservableE(this.fact).subscribe(res => {
       this.getCreance();

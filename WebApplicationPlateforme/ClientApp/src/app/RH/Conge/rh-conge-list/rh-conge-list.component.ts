@@ -47,33 +47,21 @@ export class RhCongeListComponent implements OnInit {
 
   congeList: Conge[] = [];
   filtredCongeList: Conge[] = [];
+  filtredCongeList2: Conge[] = [];
   CongeList() {
     this.congeService.Get().subscribe(res => {
       this.congeList = res
-      this.filtredCongeList = this.congeList.filter(item => item.etatd == "موافق" && item.etatrh == "في الانتظار")
+      this.filtredCongeList = this.congeList.filter(item => item.etatd == "موافق" && item.etatrh == "في الانتظار" && item.attribut1 == 2 )
+      //this.filtredCongeList = this.filtredCongeList2.filter(item => item.attribut6 == "إعتماد بخصم" || item.attribut6 =="إعتماد بغير خصم")
     })
   }
 
 
   per: Conge = new Conge();
-  soldecongel: SoldeConge[] = [];
-  soldeconge: SoldeConge = new SoldeConge();
-  soldexist: boolean = false;
-  solde: string;
+
   populateForm(conge: Conge) {
     this.per = Object.assign({}, conge)
-    this.solde = this.per.adr
     this.congeService.formData = Object.assign({}, conge)
-    this.soldeCongeService.GetE().subscribe(res => {
-      this.soldecongel = res
-      this.soldecongel.filter(item => item.idUserCreator == this.per.idUserCreator);
-      if (this.soldecongel.length == 0) {
-        this.soldexist = false;
-      } else {
-        this.soldexist = true;
-        this.soldeconge = this.soldecongel[this.soldecongel.length - 1];
-      }
-    })
   }
 
   etat: string;
@@ -83,17 +71,19 @@ export class RhCongeListComponent implements OnInit {
   date = new Date().toLocaleDateString();
   conge: Conge = new Conge();
 
-  updateRecord1(form: NgForm) {
-  
+  updateRecord(form: NgForm) {
+
     this.conge = Object.assign(this.conge, form.value);
     this.congeService.formData.daterh = this.date;
+    this.congeService.formData.rhnom = this.UserIdConnected;
+    this.congeService.formData.rhid = this.UserNameConnected
+    this.congeService.formData.etatrh = this.etat
+    this.congeService.formData.attribut2 = this.etat
+
     if (this.etat == "رفض") {
-      this.congeService.formData.attribut2 ="رفض"
-    } else {
-
-
-      this.congeService.formData.attribut2 = "موافق"
+      this.congeService.formData.attribut2 = "رفض"
     }
+    this.congeService.formData.etat = "100%";
     this.congeService.Edit().subscribe(res => {
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
       this.resetForm();
@@ -107,57 +97,10 @@ export class RhCongeListComponent implements OnInit {
     )
 
   }
-  sc: SoldeConge = new SoldeConge()
-  updateRecord2(form: NgForm) {
-
-
-    this.conge = Object.assign(this.conge, form.value);
-    this.congeService.formData.daterh = this.date;
-    this.congeService.formData.attribut2 = "موافق"
-    this.congeService.Edit().subscribe(res => {
-
-      if (this.soldexist) {
-        this.sc.idUserCreator = this.per.idUserCreator;
-        this.sc.userNameCreator = this.per.userNameCreator;
-        this.sc.dateenreg = this.date;
-        let solde = +this.soldeconge.number - +this.per.duree
-        this.sc.number = solde.toString();
-        this.soldeCongeService.AddE(this.sc).subscribe(res => {
-          this.toastr.success('تم التحديث بنجاح', 'نجاح')
-          this.resetForm();
-          this.CongeList();
-        })
-      } else {
-        this.sc.idUserCreator = this.per.idUserCreator;
-        this.sc.userNameCreator = this.per.userNameCreator;
-        this.sc.dateenreg = this.date;
-        let solde = +this.per.adr - +this.per.duree
-        this.sc.number = solde.toString();
-        this.soldeCongeService.AddE(this.sc).subscribe(res => {
-          this.toastr.success('تم التحديث بنجاح', 'نجاح')
-          this.resetForm();
-          this.CongeList();
-        })
-      }
-   
-    },
-      err => {
-        this.toastr.error('لم يتم التحديث  ', ' فشل');
-      }
-
-
-    )
-
-  }
 
   onSubmit(form: NgForm) {
 
-    if (this.etat == "إعتماد بخصم") {
-      this.updateRecord2(form)
-    } else {
-      this.updateRecord1(form)
-    }
-
+    this.updateRecord(form)
   }
 
   resetForm(form?: NgForm) {
@@ -166,6 +109,25 @@ export class RhCongeListComponent implements OnInit {
       form.resetForm();
     this.congeService.formData = {
       id: null,
+      transferera: '',
+      transfertetab: '',
+      transfertrh: '',
+      transfertdeux: '',
+      datetransfert: '',
+      idtrh: '',
+      idtetab: '',
+      nomtrh: '',
+      nomtetab: '',
+      etatrh: '',
+      etatetab: '',
+      daterh: '',
+      dateetab: '',
+      tran1: '',
+      tran2: '',
+      tran3: '',
+      tran4: '',
+      tran5: '',
+      tran6: '',
       datedebut: '',
       datefin: '',
       duree: '',
@@ -176,13 +138,11 @@ export class RhCongeListComponent implements OnInit {
       nomremplacant: '',
       etat: '',
       etatd: '',
-      etatrh: '',
       directeurid: '',
       directeurnom: '',
       rhid: '',
       rhnom: '',
       dated: '',
-      daterh: '',
       attribut1: null,
       attribut2: '',
       attribut3: '',

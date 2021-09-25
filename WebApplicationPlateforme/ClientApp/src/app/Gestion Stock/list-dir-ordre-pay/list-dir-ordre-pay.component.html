@@ -43,7 +43,8 @@
           <table class="table table-striped theme-table table-bordered results">
             <thead class="">
               <tr>
-                <th scope="col">	رقم الصرف </th>
+                <th scope="col">#</th>
+                <th scope="col">الموظف </th>
                 <th scope="col">	الامر </th>
                 <th scope="col">تاريخ الانتهاء</th>
                 <th scope="col">طريقة الصرف </th>
@@ -52,9 +53,10 @@
             </thead>
 
             <tbody *ngIf="acceptedT">
-              <tr *ngFor="let ev of ListStockageAccepted |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p } ; let i = index">
-                <th scope="row" [routerLink]="['/details-ordre-pay', ev.id]">{{ev.id}}</th>
+              <tr *ngFor="let ev of ListStockageAccepted |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p } ; let i = index">
+                <th scope="row" [routerLink]="['/details-ordre-pay', ev.id]">{{(p-1) * count + i + 1}}</th>
 
+                <td [routerLink]="['/details-ordre-pay', ev.id]">{{ev.userNameCreator}}</td>
                 <td [routerLink]="['/details-ordre-pay', ev.id]">{{ev.nomOrdre}}</td>
                 <td [routerLink]="['/details-ordre-pay', ev.id]">{{ev.dateFin}}</td>
                 <td [routerLink]="['/details-ordre-pay', ev.id]">{{ev.typePay}}</td>

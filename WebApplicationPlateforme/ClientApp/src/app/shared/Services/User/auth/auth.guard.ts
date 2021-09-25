@@ -17,16 +17,18 @@ export class AuthGuard implements CanActivate {
       
     })
   }
-  canActivate(
+  async canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): boolean {
+    state: RouterStateSnapshot): Promise<boolean >{
     if (localStorage.getItem('token') != null) {
       let roles = next.data['permittedRoles'] as Array<string>;
   
       if (roles) {
-        if (this.servie.roleMatch(roles))
+       
+        if (await this.servie.roleMatch(roles)) {
+   
           return true
-        else {
+        } else {        
           this.router.navigate(['forbidden-page'])
           return false
         }

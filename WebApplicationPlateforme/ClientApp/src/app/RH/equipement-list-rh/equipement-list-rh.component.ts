@@ -6,6 +6,8 @@ import { UserServiceService } from '../../shared/Services/User/user-service.serv
 import { NgForm } from '@angular/forms';
 import { UserDetail } from '../../shared/Models/User/user-detail.model';
 import { Equipement } from '../../shared/Models/RH/equipement.model';
+import { EtablissementService } from '../../shared/Services/Etablissement/etablissement.service';
+import { Etablissement } from '../../shared/Models/Etablissement/etablissement.model';
 
 @Component({
   selector: 'app-equipement-list-rh',
@@ -18,20 +20,39 @@ export class EquipementListRHComponent implements OnInit {
   constructor(private congeService: EquipementService,
     private toastr: ToastrService,
     private UserService: UserServiceService,
-    private tblService: TbListeningService, ) { }
+    private tblService: TbListeningService,
+    private etabService: EtablissementService) { }
 
   ngOnInit(): void {
-    this.CongeList();
-    this.resetForm();
     this.getUserConnected();
+    this.CongeList();
+    this.Etablist();
+    this.resetForm();
+
 
   }
   onSubmit(form: NgForm) {
     this.updateRecord(form)
   }
-
+  p: Number = 1;
+  count: Number = 5;
   //Get UserConnected
+  //get Etba Etablist(){
 
+  etabList: Etablissement[] = [];
+  etabList1: Etablissement[] = [];
+  Etablist() {
+    this.etabService.ListEtablissement().subscribe(res => {
+      this.etabList1 = res
+      this.etabList = this.etabList1.filter(item => item.idAdministration == 29)
+
+    })
+  }
+
+  getEtab(event) {
+    this.etabService.GetById(+event.target.value).subscribe(res =>
+    { this.congeService.formData.transfert = res.nom })
+  }
   UserIdConnected: string;
   UserNameConnected: string;
   adminisgtrationName: any;
@@ -56,7 +77,7 @@ export class EquipementListRHComponent implements OnInit {
   CongeList() {
     this.congeService.Get().subscribe(res => {
       this.congeList = res
-      this.filtredCongeList = this.congeList.filter(item => item.etatdir == "موافق" && item.attribut4 == "في الانتظار")
+      this.filtredCongeList = this.congeList.filter(item => item.attribut4 == "في الانتظار" && item.etatdir == "موافق" && item.attribut3 == this.UserIdConnected)
     })
   }
 
@@ -71,8 +92,9 @@ export class EquipementListRHComponent implements OnInit {
   updateRecord(form: NgForm) {
     this.conge = Object.assign(this.conge, form.value);
     this.congeService.formData.datedir = this.date;
+    this.congeService.formData.attribut2 = this.etat;
     this.congeService.formData.attribut4 = this.etat;
-    this.congeService.formData.attribut5 = this.date;
+    this.congeService.formData.attribut5 = this.UserNameConnected;
     this.congeService.formData.attribut6 = this.UserIdConnected;
     this.congeService.Edit().subscribe(res => {
       this.toastr.success('تم التحديث بنجاح', 'نجاح')

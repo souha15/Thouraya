@@ -48,6 +48,10 @@ export class SoldeCongeService {
     return this.http.get<SoldeConge>(this.rootURL + '/SoldeConges/' + Id);
   }
 
+  GetSolde(idUserCreator) {
+    return this.http.get<SoldeConge>(this.rootURL + '/SoldeCongeGet/' + idUserCreator);
+  }
+
   //Edit Type Dotation
 
   Edit() {
@@ -58,7 +62,11 @@ export class SoldeCongeService {
   //Delete Type Dotation
 
   Delete(id) {
-    return this.http.delete(this.rootURL + '/SoldeConge/' + id);
+    return this.http.delete(this.rootURL + '/SoldeConges/' + id);
+  }
+
+  PutObservable(Ticket: SoldeConge) {
+    return this.http.put<SoldeConge>(this.rootURL + '/SoldeConges/' + Ticket.id, Ticket, this.headers);
   }
 
   //Create Type Dotation

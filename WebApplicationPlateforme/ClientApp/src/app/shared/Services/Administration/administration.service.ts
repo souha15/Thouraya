@@ -33,6 +33,12 @@ export class AdministrationService {
     return this.http.put(this.rootURL + '/Administrations/' + this.formData.id, this.formData, this.headers);
   }
 
+  //Get Name
+  GetAdminData(nom) {
+    return this.http.get<Administration>(this.rootURL + '/AdmnistrationByName/' + nom);
+  }
+
+
   //list of Administrations
 
   ListAdministration(): Observable<Administration[]> {

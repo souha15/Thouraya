@@ -44,7 +44,7 @@ export class CreationListDirComponent implements OnInit {
     this.ctService.Get().subscribe(res => {
       this.GfactList = res;
 
-      this.factList = this.GfactList.filter(item => item.iddir == this.UserIdConnected && item.etatdir == "في الإنتظار")
+      this.factList = this.GfactList.filter(item => item.etatdg == "في الإنتظار" && item.etatrh == "موافقة")
 
     })
 
@@ -52,11 +52,11 @@ export class CreationListDirComponent implements OnInit {
 
   date = new Date().toLocaleDateString();
   accept() {
-   // this.fact.etat = "موافقة"
-    this.fact.datedir = this.date;
-    this.fact.etatdir = "موافقة"
-    this.fact.iddir = this.UserIdConnected;
-    this.fact.nomdir = this.UserNameConnected;
+     this.fact.etat = "موافقة"
+    this.fact.datedg = this.date;
+    this.fact.etatdg = "موافقة"
+    this.fact.iddg = this.UserIdConnected;
+    this.fact.nomdg = this.UserNameConnected;
     this.ctService.PutObservableE(this.fact).subscribe(res => {
       this.getCreance();
       this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
@@ -79,10 +79,10 @@ export class CreationListDirComponent implements OnInit {
 
   refuse() {
     this.fact.etat = "رفض"
-    this.fact.datedir = this.date;
-    this.fact.etatdir = "رفض"
-    this.fact.iddir = this.UserIdConnected;
-    this.fact.nomdir = this.UserNameConnected;
+    this.fact.datedg = this.date;
+    this.fact.etatdg = "رفض"
+    this.fact.iddg = this.UserIdConnected;
+    this.fact.nomdg = this.UserNameConnected;
 
       this.ctService.PutObservableE(this.fact).subscribe(res => {
         this.getCreance();

@@ -23,6 +23,8 @@ export class AvanceListCComponent implements OnInit {
 
   }
 
+  p: Number = 1;
+  count: Number = 5;
   UserIdConnected: string;
   UserNameConnected: string;
   getUserConnected() {
@@ -38,7 +40,7 @@ export class AvanceListCComponent implements OnInit {
   getDep() {
     this.avanceService.Get().subscribe(res => {
       this.GfactList = res;
-      this.factList = this.GfactList.filter(item => item.etatC == "في الإنتظار")
+      this.factList = this.GfactList.filter(item => item.etatC == "في الإنتظار" && item.etatD =="موافقة")
     })
   }
 
@@ -79,7 +81,6 @@ export class AvanceListCComponent implements OnInit {
    
     if (this.raisonRefus != null) {
       this.fact.raisonRefusC = this.raisonRefus;
-      this.fact.attribut4 = this.raisonRefus;
       this.fact.attribut2 = "رفض"
       this.fact.etatC = "رفض"
       this.fact.dateC = this.date;

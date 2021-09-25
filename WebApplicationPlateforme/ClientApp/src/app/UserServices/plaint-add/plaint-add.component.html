@@ -31,8 +31,6 @@
           <select id="stop-status" name="attribut2" #attribut2="ngModel" [(ngModel)]="pl.attribut2">
             <option [ngValue]="undefined" selected disabled>-إلى-</option>
             <option *ngFor="let item of user" value="{{item.id}}">{{item.fullName}}</option>
-            <option *ngFor="let item of user1" value="{{item.id}}">{{item.fullName}}</option>
-            <option *ngFor="let item of user3" value="{{item.id}}">{{item.fullName}}</option>
           </select>
         </div>
 

@@ -65,6 +65,7 @@
     <Folder Include="ClientApp\src\app\Finances\Revenus\" />
     <Folder Include="ClientApp\src\app\Finances\Unites\" />
     <Folder Include="ClientApp\src\app\Evenement\" />
+    <Folder Include="ClientApp\src\app\MediaCenter\Menus\" />
     <Folder Include="ClientApp\src\app\ProjetOrg\" />
     <Folder Include="ClientApp\src\app\News\" />
     <Folder Include="ClientApp\src\app\RH\DemandeSalariale\" />
@@ -72,6 +73,7 @@
     <Folder Include="ClientApp\src\app\shared\Models\Dotations\" />
     <Folder Include="ClientApp\src\app\shared\Models\AdministrativeCommunication\" />
     <Folder Include="ClientApp\src\app\shared\Models\Evenements\" />
+    <Folder Include="ClientApp\src\app\shared\Models\MediaCenter\DesignImpression\" />
     <Folder Include="ClientApp\src\app\shared\Models\ProjetOrg\" />
     <Folder Include="ClientApp\src\app\shared\Models\Supplies\" />
     <Folder Include="ClientApp\src\app\shared\Models\User\" />
@@ -80,6 +82,7 @@
     <Folder Include="ClientApp\src\app\shared\Enum\" />
     <Folder Include="ClientApp\src\app\shared\Services\Dotations\" />
     <Folder Include="ClientApp\src\app\shared\Services\AdministrativeCommunication\" />
+    <Folder Include="ClientApp\src\app\shared\Services\MediaCenter\DesignImpression\" />
     <Folder Include="ClientApp\src\app\shared\Services\ProjetOrg\" />
     <Folder Include="ClientApp\src\app\shared\Services\Rh\" />
     <Folder Include="ClientApp\src\app\shared\Services\Taches\" />

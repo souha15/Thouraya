@@ -5,6 +5,8 @@ import { UserServiceService } from '../../../shared/Services/User/user-service.s
 import { UserDetail } from '../../../shared/Models/User/user-detail.model';
 import { Conge } from '../../../shared/Models/RH/conge.model';
 import { NgForm } from '@angular/forms';
+import { SoldeCongeService } from '../../../shared/Services/Rh/solde-conge.service';
+import { SoldeConge } from '../../../shared/Models/RH/solde-conge.model';
 
 @Component({
   selector: 'app-my-list-conge',
@@ -16,6 +18,7 @@ export class MyListCongeComponent implements OnInit {
   filter;
   constructor(private congeService: CongeService,
     private toastr: ToastrService,
+    private soldeService: SoldeCongeService,
     private UserService: UserServiceService,
     
 
@@ -24,8 +27,8 @@ export class MyListCongeComponent implements OnInit {
   count: Number = 5;
   ngOnInit(): void {
     this.getUserConnected();
-    this.CongeList();
     this.resetForm();
+    this.CongeList();
     this.UserList();
   }
 
@@ -43,13 +46,17 @@ export class MyListCongeComponent implements OnInit {
   UserNameConnected: string;
   adminisgtrationName: any;
   userc: UserDetail = new UserDetail();
-
+  solde: SoldeConge = new SoldeConge();
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.userc = res
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
+      this.soldeService.GetSolde(this.UserIdConnected).subscribe(res => {
+        this.solde = res;
+
+      })
     })
 
   }
@@ -64,11 +71,7 @@ export class MyListCongeComponent implements OnInit {
     this.congeService.Get().subscribe(res => {
       this.congeList = res
       this.filtredCongeList = this.congeList.filter(item => item.idUserCreator == this.UserIdConnected)
-      this.filtredCongeList.forEach(item => {
-        if (item.etat != "في الانتظار") {
-          this.test = false;
-        } else this.test = true;
-      })
+     
     })
   }
 
@@ -82,15 +85,18 @@ export class MyListCongeComponent implements OnInit {
     this.updateRecord(form)
   }
 
+  getRemplacant(event) {
+    this.UserService.GetUserById(event.target.value).subscribe(res => {
+      this.conge.nomremplacant = res.fullName
+
+    })
+  }
   conge: Conge = new Conge();
   updateRecord(form: NgForm) {
-    this.conge = Object.assign(this.conge, form.value);
-    this.congeId = this.conge.id;
-
-    if (this.conge.etat == "في الانتظار") {
-      this.congeService.Edit().subscribe(res => {
+  
+      this.congeService.PutObservableE(this.conge).subscribe(res => {
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
-        this.resetForm();
+        form.resetForm();
         this.CongeList();
       },
         err => {
@@ -99,18 +105,14 @@ export class MyListCongeComponent implements OnInit {
 
 
       )
-    } if (this.conge.etat == 'موافق') {
-      this.toastr.error('لقد تمت الموافقة على طلب الإجازة', ' لم يتم التحديث');
-    } if (this.conge.etat == 'رفض') {
-      this.toastr.error('لقد تم رفض طلب الإجازة', ' لم يتم التحديث');
-    }
+    
   }
 
-  test: boolean;
+
   populateForm(conge: Conge) {
     this.congeService.formData = Object.assign({}, conge)
     this.congeId = conge.id
- 
+    this.conge = Object.assign({}, conge);
   }
 
   resetForm(form?: NgForm) {
@@ -119,6 +121,25 @@ export class MyListCongeComponent implements OnInit {
       form.resetForm();
     this.congeService.formData = {
       id: null,
+      transferera: '',
+      transfertetab: '',
+      transfertrh: '',
+      transfertdeux: '',
+      datetransfert: '',
+      idtrh: '',
+      idtetab: '',
+      nomtrh: '',
+      nomtetab: '',
+      etatrh: '',
+      etatetab: '',
+      daterh: '',
+      dateetab: '',
+      tran1: '',
+      tran2: '',
+      tran3: '',
+      tran4: '',
+      tran5: '',
+      tran6: '',
       datedebut: '',
       datefin: '',
       duree: '',
@@ -129,13 +150,11 @@ export class MyListCongeComponent implements OnInit {
       nomremplacant: '',
       etat: '',
       etatd: '',
-      etatrh: '',
       directeurid: '',
       directeurnom: '',
       rhid: '',
       rhnom: '',
       dated: '',
-      daterh: '',
       attribut1: null,
       attribut2: '',
       attribut3: '',

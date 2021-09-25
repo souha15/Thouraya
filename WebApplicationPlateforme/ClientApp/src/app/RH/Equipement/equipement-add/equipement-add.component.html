@@ -47,10 +47,7 @@
             <label for="care-mail">الايميل الرسمي</label>
             <input type="text" id="care-mail" name="email" #email="ngModel" [(ngModel)]="equ.email">
           </div>
-          <div class="col-md-6">
-            <label for="trans">تحويله</label>
-            <input type="text" id="trans" name="transfert" #transfert="ngModel" [(ngModel)]="equ.transfert">
-          </div>
+
           <div class="col-md-6">
             <label for="care-notes">ملاحظات</label>
             <textarea id="care-notes" class="form-control" name="remarque" #remarque="ngModel" [(ngModel)]="equ.remarque"></textarea>
@@ -58,7 +55,6 @@
 
           <div class="col-12 text-left mt-3">
             <input class="btn btn-primary px-4" type="submit" value="تقديم">
-            <input class="btn btn-danger px-4" type="reset" value="إلغاء">
           </div>
         </form>
       </div>

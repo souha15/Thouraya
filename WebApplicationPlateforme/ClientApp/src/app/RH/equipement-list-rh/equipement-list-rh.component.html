@@ -19,23 +19,25 @@
           <table class="table table-bordered text-center table-striped" id="MyTable">
             <thead class="thead-primary">
               <tr>
-                <th scope="col">الرقم التسلسلي</th>
+                <th scope="col">#</th>
+                <th scope="col">الموظف</th>
                 <th scope="col">العهدة</th>
                 <th scope="col">نوع العهدة</th>
                 <th scope="col">جوال</th>
                 <th scope="col">الايميل الرسمي</th>
-                <th scope="col">تحويله</th>
+
                 <th scope="col">الحالة</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
-                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.id}}</th>
+              <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
+                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{(p-1) * count + i + 1}}</th>
+                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.userNameCreator}}</th>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.nom}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.type}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.tel}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.email}}</td>
-                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.transfert}}</td>
+              
                 <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
                     [ngClass]="{
 
@@ -163,14 +165,23 @@
       </div>
       <div class="modal-body" style="direction:rtl; text-align:right">
         <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-          <label for="user"><span><i class="fa fa-check"></i></span>حالة العهدة</label>
-          <select id="user" class="" name="attribut4" #attribut4="ngModel" [(ngModel)]="congeService.formData.attribut4" (change)="etattest($event)">
-            <option [ngValue]="undefined" selected disabled>-حالة العهدة-</option>
-            <option value="موافق">موافق</option>
-            <option value="رفض">رفض</option>
+          <div class="col-md-6">
+            <label for="user"><span><i class="fa fa-check"></i></span>حالة العهدة</label>
+            <select id="user" class="" name="attribut4" #attribut4="ngModel" [(ngModel)]="congeService.formData.attribut4" (change)="etattest($event)">
+              <option [ngValue]="undefined" selected disabled>-حالة العهدة-</option>
+              <option value="موافق">موافق</option>
+              <option value="رفض">رفض</option>
 
-          </select>
+            </select>
+          </div>
+          <div class="col-md-6" >
+            <label for="user"><span><i class="fa fa-check"></i></span>القسم</label>
+            <select id="user" class="" name="attribut1" #attribut1="ngModel" [(ngModel)]="congeService.formData.attribut1" (change)="getEtab($event)">
+              <option [ngValue]="undefined" selected disabled>-القسم-</option>
 
+              <option *ngFor="let item of etabList" value="{{item.id}}">{{item.nom}}</option>
+            </select>
+          </div>
           <div class="save">
             <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
 

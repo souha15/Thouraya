@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+  <!-- Main Style File -->
+
+</head>
+<body>
+  <a class="btn show-details-btn text-info" (click)="print()">
+    <i class="fa fa-print fa-lg"></i>
+  </a>
+  <br />
+  <br />
+
+  <div class="experience-page" id="htmlData">
+    <header>
+      <img class="img1" src="assets/images/taef.jpeg" alt="">
+      <div class="header-title">
+        جمعية الدعوة والإرشاد
+        <br />
+        وتوعية الجاليات بالطائف
+      </div>
+      <img class="img2" src="assets/images/vision-2030.png" alt="">
+    </header>
+    <div class="content">
+      <h2 class="header-title">شهادة خبرة</h2>
+      <h2 class="font-andalus text-center">
+        الحمد لله رب العالمين والصلاة والسلام على أشرف الأنبياء والمرسلين
+        <br />
+        سيدنا محمد وعلى آله وصحبه أجمعين ،  وبعد :
+      </h2>
+      <div class="centered">
+        <p>تشــــهد <span class="variable-text">جمعيـــة الــدعوة والإرشــاد وتوعيــة الجاليـــات بمحـــافظة الطـــائف </span><br /> بأن الموظف <span class="variable-text">{{user.fullName}}</span> ، <span class="variable-text">{{user.nationalite}}</span> الجنسية بموجب بطاقة الأحوال رقم  <span class="variable-text">{{user.registreCivil}}</span> قد عمل بالجمعية في إدارة <span class="variable-text">{{user.nomDepartement}}</span> على وظيفة <span class="variable-text">{{user.emploi}}</span> من   <span class="variable-text">{{user.daterectrutement}}</span> إلى  <span class="variable-text">{{date}}</span> وقد لمسنا منه خلال فترة عمله حسن الخلق والتميز والإبداع في أداء العمل وتطويره والتفاني في خدمة النشاط الدعوي بالجمعية .</p>
+        <p>متمنين له التوفيق والنجاح ، والله نسأل أن يوفقنا جميعاً لخدمة دينه والدعوة إليه إنه سميع مجيب .</p>
+        <div class="sign">
+          <span class="d-inline-block ps-3">المدير العام</span><br>
+          <!-- صورة التوقيع هنا -->
+          <img src="assets/images/sign.png" width="140" alt="">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</body>
+</html>

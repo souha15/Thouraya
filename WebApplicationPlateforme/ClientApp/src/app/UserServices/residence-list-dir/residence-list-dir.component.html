@@ -22,6 +22,7 @@
                 <th scope="col">رقم مكتب العمل</th>
                 <th scope="col"> رقم الحدود</th>
                 <th scope="col"> تاریخ الانتھاء</th>
+                <th scope="col">طلب شيك</th>
                 <th scope="col"> الحالة</th>
               </tr>
             </thead>
@@ -33,6 +34,7 @@
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.numBureau}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.numfrontiere}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.datefin}}</td>
+                <td (click)="openInNewTab('/pay-chequec-add')"><a class="btn show-details-btn text-info"><i class="fa fa-hand-holding-usd fa-lg"></i> </a></td>
                 <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
                     [ngClass]="{
 

@@ -22,6 +22,10 @@ export class SalaialeMyLisComponent implements OnInit {
     this.CongeList();
     this.resetForm();
   }
+
+
+  p: Number = 1;
+  count: Number = 5;
   //Get UserConnected
 
   UserIdConnected: string;
@@ -81,11 +85,11 @@ export class SalaialeMyLisComponent implements OnInit {
     }
   }
 
-
+  fact: DemandeSalariale = new DemandeSalariale();
   populateForm(conge: DemandeSalariale) {
     this.congeService.formData = Object.assign({}, conge)
     this.congeId = conge.id
-
+    this.fact = Object.assign({}, conge);
   }
 
   resetForm(form?: NgForm) {
@@ -107,6 +111,24 @@ export class SalaialeMyLisComponent implements OnInit {
       dirid: '',
       etat: '',
       etatdate: '',
+
+    }
+  }
+
+  onDelete(Id) {
+    if (confirm('Are you sure to delete this record ?')) {
+      this.congeService.Delete(Id)
+        .subscribe(res => {
+          this.CongeList();
+          this.toastr.success("تم الحذف  بنجاح", "نجاح");
+        },
+
+          err => {
+            console.log(err);
+            this.toastr.warning('لم يتم الحذف  ', ' فشل');
+
+          }
+        )
 
     }
   }

@@ -40,5 +40,17 @@ attribut5 :string;
 attribut6 :string;
 dateenreg :string;
 userNameCreator :string;
-idUserCreator :string;
+idUserCreator: string;
+etatdirproj :string;
+datedirproj :string;
+iddirproj :string;
+nomdirproj :string;
+etatdirg :string;
+datedirg :string;
+iddirg :string;
+nomdirg :string;
+etatrh :string;
+daterh :string;
+idrh :string;
+nomrh :string;
 }

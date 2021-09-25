@@ -276,47 +276,48 @@ export class UserServiceService {
 
 
   //Handling Roles
- /*checker(arr, arr2) {
-   return arr2.some(i => arr.includes(i));
+ checker(arr1, arr2) {
+   return arr1.some(elem => arr2.includes(elem));
   }
 
-  async getUserId(Id) {
-    const res = await this.http.get(this.BaseURI + '/UserByRole/' + Id).toPromise();
-    return res;
-    
+  async getUserId(Id){
+    return await this.http.get(this.BaseURI + '/UserByRole/' + Id).toPromise();
+   
   }
-  */
-  roleMatch(allowedRoles): boolean {
-    var isMatch = false;
-    var payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));
-    var userRole = payLoad.role;
-    allowedRoles.forEach(element => {
-      if (userRole == element) {
-        isMatch = true;
-        return false;
-      }
-    });
-    return isMatch;
-  }
-
-  /*
-roleMatch(allowedRoles):boolean{
+  
+async roleMatch(allowedRoles):Promise<boolean>{
      var isMatch = false;
      var payLoad = JSON.parse(window.atob(localStorage.getItem('token').split('.')[1]));   
      var userRoles: any;
 
-  userRoles =  this.getUserId(payLoad.UserID).then(rslt => {
-    return  rslt
-  });
-  console.log("getUserId Func ", userRoles)
-  if (this.checker(allowedRoles, userRoles)) {
-    console.log("in" + this.checker(allowedRoles, userRoles))
+
+    userRoles = await this.getUserId(payLoad.UserID);
+
+  if (this.checker(userRoles, allowedRoles)) {
     isMatch = true;
+
+  } else {
+    isMatch = false;
   }
-  return isMatch;
+ 
+   return isMatch;
 
-  }*/
+  }
 
+/* const arr1 = [1, 2, 3];
+ const arr2 = [3, 5, 4, 2, 7, 0, 1, 10];
+
+ console.log(arr1.every(elem => arr2.includes(elem)));
+
+ let hasAllElems = true;
+
+ for (let i = 0; i < arr1.length; i++) {
+   if (arr2.indexOf(arr1[i]) === -1) {
+     hasAllElems = false;
+     break;
+   }
+   }
+   console.log(hasAllElems)*/
 
   //Change Password
   ChangePassword(user: UserDetail) {
