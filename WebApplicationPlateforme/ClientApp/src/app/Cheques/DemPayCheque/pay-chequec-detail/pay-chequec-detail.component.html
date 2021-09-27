@@ -49,65 +49,62 @@
           </div>
 
         </div>
-        </section>
-        <div class="leave-request-list">
-          <div class="table-responsive">
-            <table class="table table-bordered text-center table-striped">
-              <thead class="thead-primary">
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">القسم</th>
-                  <th scope="col">تاريخ الادخال</th>
-                  <th scope="col">موضوع الطلب</th>
-                  <th scope="col">المبلغ</th>
-                  <th scope="col">الحالة</th>
-                  <th scope="col" *ngIf="testrole">تعديل</th>
-                  <th scope="col" *ngIf="testrole">حذف</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let cg of dem2 |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
-                  <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{(p-1) * count + i + 1}}</th>
-                  <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.calsse}}</td>
-                  <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.dateEntre}}</td>
-                  <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.sujet}}</td>
-                  <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.prixnb}}</td>
+      </section>
+      <div class="leave-request-list">
+        <div class="table-responsive">
+          <table class="table table-bordered text-center table-striped">
+            <thead class="thead-primary">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">مقدم الطلب</th>
+                <th scope="col">القسم</th>
+                <th scope="col">تاريخ الادخال</th>
+                <th scope="col">موضوع الطلب</th>
+                <th scope="col">المبلغ</th>
+                <th scope="col">الحالة</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let cg of dem2 |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
+                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{(p-1) * count + i + 1}}</th>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.demandeur}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.calsse}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.dateEntre}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.sujet}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.prixnb}}</td>
 
 
-                  <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
-                      [ngClass]="{
+                <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
+                    [ngClass]="{
 
-  'success': cg.etatgeneral === 'معتمدة',
-  'denied': cg.etatgeneral === 'مرفوضة',
-  'accord': cg.etatgeneral === 'موافقة',
-  'worke': cg.etatgeneral === 'تحت الإجراء',
-  'wait': cg.etatgeneral === 'في الإنتظار',
-  'towork': cg.etatgeneral === 'للإنجاز'
+  'success': cg.etatparfinancier === 'معتمدة',
+  'denied': cg.etatparfinancier === 'مرفوضة',
+  'accord': cg.etatparfinancier === 'موافقة',
+  'worke': cg.etatparfinancier === 'تحت الإجراء',
+  'wait': cg.etatparfinancier === 'في الإنتظار',
+  'towork': cg.etatparfinancier === 'للإنجاز'
 }">
-                    {{cg.etatgeneral}}
-                  </td>
-
-                  <td *ngIf="testrole"><a class="btn btn-success" [routerLink]="['/pay-chequec-edit', cg.id]"><i class="fa fa-edit"></i></a></td>
-                  <td *ngIf="testrole"><a (click)="onDelete(cg.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
-              </tbody>
-            </table>
-          </div>
-          <!-- Pagination -->
-          <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-              <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
-                                   nextLabel="التالي"></pagination-controls>
-            </ul>
-          </nav>
-
+                  {{cg.etatparfinancier}}
+                </td>
+</tbody>
+          </table>
         </div>
+        <!-- Pagination -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+
+      </div>
     </div><!-- End col-9 -->
   </div>
 
 </div>
 <!-- Footer -->
 <footer class="text-center">
- <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
 </footer>
 
 
@@ -219,3 +216,45 @@
     </div>
   </div>
 </div>
+<div id="myModal2" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title"> حالة صرف الشيك</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <form class="row events-form">
+
+          <div class="col-md-12 d-flex flex-column flex-wrap">
+            <!-- Attachments -->
+            <div class="">
+              <label>الحالة</label>
+              <select (change)="etattest($event)" style="width:150px;">
+                <option [ngValue]="undefined" selected disabled>-الحالة-</option>
+                <option value="معتمدة">إعتماد </option>
+                <option value="مرفوضة">رفض </option>
+
+
+              </select>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <input class="btn btn-success" type="button" value="إغلاق" (click)="accept()" style="width:100px;" />
+            </div>
+
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+

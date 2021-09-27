@@ -41,14 +41,17 @@
               <td (click)="populateForm(cg)">{{cg.prix}}</td>
               <td (click)="populateForm(cg)">{{cg.nbMoisDeduire}}</td>
               <td (click)="populateForm(cg)">{{cg.dateDeduire}}</td>
+
               <td (click)="populateForm(cg)"
                   [ngClass]="{
 
-  'ok': cg.attribut2 === 'موافق',
-  'refused': cg.attribut2 === 'رفض',
-  'wait': cg.attribut2 === 'في الانتظار'
-}">{{cg.attribut2}}</td>
-              <td  (click)="populateForm(cg)">
+  'success': cg.attribut2 === 'موافقة',
+  'denied': cg.attribut2 === 'رفض',
+  'wait': cg.attribut2 === 'في الإنتظار'
+}">
+                {{cg.attribut2}}
+              </td>
+              <td (click)="populateForm(cg)">
                 <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-eye fa-lg"></i>
                 </a>

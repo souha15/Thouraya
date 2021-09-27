@@ -42,7 +42,8 @@ export class MyPrivListComponent implements OnInit {
     this.formationService.Get().subscribe(res => {
       this.GfactList = res;
 
-      this.factList = this.GfactList.filter(item => item.etatdir == "موافقة" && item.etatc == "في الإنتظار")
+      this.factList = this.GfactList.filter(item => item.etatdir == "موافقة" && item.etatc == "في الإنتظار" && item.transferera == null)
+  
 
     })
 
@@ -85,6 +86,21 @@ export class MyPrivListComponent implements OnInit {
     },
       err => {
         this.toastr.warning('لم يتم رفض الطلب ', ' فشل');
+      })
+  }
+  transfererA: string;
+  transfertData(event) {
+    this.transfererA = event.target.value;
+  }
+
+  transferer() {
+    this.fact.transferera = this.transfererA;
+    this.formationService.PutObservableE(this.fact).subscribe(res => {
+      this.toastr.success("تم  تحويل  الطلب بنجاح", "نجاح");
+      this.getCreance();
+    },
+      err => {
+        this.toastr.warning('لم يتم  تحويل  الطلب بنجاح', ' فشل');
       })
   }
 }

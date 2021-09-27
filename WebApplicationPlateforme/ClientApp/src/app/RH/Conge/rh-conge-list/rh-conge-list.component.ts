@@ -51,7 +51,7 @@ export class RhCongeListComponent implements OnInit {
   CongeList() {
     this.congeService.Get().subscribe(res => {
       this.congeList = res
-      this.filtredCongeList = this.congeList.filter(item => item.etatd == "موافق" && item.etatrh == "في الانتظار" && item.attribut1 == 2 )
+      this.filtredCongeList = this.congeList.filter(item => (item.transferera == "2" || item.transferera == "3" || item.attribut6 == "إعتماد بخصم" || item.attribut6 == "إعتماد بغير خصم") && item.etatrh == "في الانتظار")
       //this.filtredCongeList = this.filtredCongeList2.filter(item => item.attribut6 == "إعتماد بخصم" || item.attribut6 =="إعتماد بغير خصم")
     })
   }
@@ -110,7 +110,7 @@ export class RhCongeListComponent implements OnInit {
     this.congeService.formData = {
       id: null,
       transferera: '',
-      transfertetab: '',
+      transfereretab: '',
       transfertrh: '',
       transfertdeux: '',
       datetransfert: '',

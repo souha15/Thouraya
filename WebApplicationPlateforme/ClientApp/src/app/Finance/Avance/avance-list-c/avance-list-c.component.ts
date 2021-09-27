@@ -40,7 +40,7 @@ export class AvanceListCComponent implements OnInit {
   getDep() {
     this.avanceService.Get().subscribe(res => {
       this.GfactList = res;
-      this.factList = this.GfactList.filter(item => item.etatC == "في الإنتظار" && item.etatD =="موافقة")
+      this.factList = this.GfactList.filter(item => (item.transferera == "1" || item.transferera == "3" || item.etatC == "موافقة") && item.etatetab == null )
     })
   }
 
@@ -62,11 +62,11 @@ export class AvanceListCComponent implements OnInit {
   date = new Date().toLocaleDateString();
   accept() {
 
-    this.fact.etatC = "موافقة"
-    this.fact.dateC = this.date;
+    this.fact.etatetab = "موافقة"
+    this.fact.dateetab = this.date;
 
-    this.fact.idC = this.UserIdConnected;
-    this.fact.nomC = this.UserNameConnected;
+    this.fact.idtetab = this.UserIdConnected;
+    this.fact.nomtetab = this.UserNameConnected;
     this.avanceService.PutObservableE(this.fact).subscribe(res => {
       this.getDep();
       this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
@@ -82,10 +82,12 @@ export class AvanceListCComponent implements OnInit {
     if (this.raisonRefus != null) {
       this.fact.raisonRefusC = this.raisonRefus;
       this.fact.attribut2 = "رفض"
-      this.fact.etatC = "رفض"
-      this.fact.dateC = this.date;
-      this.fact.nomC = this.UserNameConnected;
-      this.fact.idC = this.UserIdConnected;
+      this.fact.etatetab = "رفض"
+      this.fact.dateetab = this.date;
+
+      this.fact.idtetab = this.UserIdConnected;
+      this.fact.nomtetab = this.UserNameConnected;
+
 
       this.avanceService.PutObservableE(this.fact).subscribe(res => {
         this.getDep();

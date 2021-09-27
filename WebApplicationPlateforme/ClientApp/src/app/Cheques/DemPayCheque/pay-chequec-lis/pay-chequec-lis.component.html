@@ -39,12 +39,11 @@
                     [ngClass]="{
 
 
-  'success': cg.etatgeneral === 'معتمدة',
-  'denied': cg.etatgeneral === 'مرفوضة',
-  'accord': cg.etatgeneral === 'موافقة',
+  'success': cg.etatgeneral === 'معتمدة' || cg.etatgeneral === 'تم الصرف',
+  'denied': cg.etatgeneral === 'مرفوضة' ||cg.etatgeneral === 'لم يتم الصرف',
   'worke': cg.etatgeneral === 'تحت الإجراء',
-  'wait': cg.etatgeneral === 'في الإنتظار',
-  'towork': cg.etatgeneral === 'للإنجاز'
+  'wait': cg.etatgeneral === 'في الإنتظار'
+
 }">
                   {{cg.etatgeneral}}
                 </td>

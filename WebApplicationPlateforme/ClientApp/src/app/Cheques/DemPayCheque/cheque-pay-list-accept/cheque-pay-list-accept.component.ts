@@ -120,7 +120,7 @@ export class ChequePayListAcceptComponent implements OnInit {
   getDemPayList() {
     this.demandeService.Get().subscribe(res => {
       this.dem5 = res
-      this.dem6 = this.dem5.filter(item => item.etatfinacier == "في الإنتظار" && item.etatdirecteur == "معتمدة")
+      this.dem6 = this.dem5.filter(item => item.etatadmin == "في الإنتظار" && item.etatfinacier == "معتمدة")
 
     })
   }
@@ -146,19 +146,17 @@ export class ChequePayListAcceptComponent implements OnInit {
   date = new Date().toLocaleDateString();
   accept() {
     //if (this.per.etatdirecteur == "معتمدة" && this.per.idadmin == null) {
-    if (this.per.etatfinacier == "معتمدة") {
-      this.per.datefinancier = this.date;
-      this.per.etatfinacier = this.etat;
-      this.per.nomfinancier = this.UserNameConnected;
-      this.per.idfinancier = this.UserIdConnected;
-      this.per.etatgeneral = "معتمدة"
-      this.demandeService.PutObservableE(this.per).subscribe(res => {
+   
+    this.per.dateadmin = this.date;
+    this.per.etatadmin = this.etat;
+    this.per.nomadmin = this.UserNameConnected;
+    this.per.idadmin = this.UserIdConnected;
+    this.per.etatgeneral = this.etat
+     this.demandeService.PutObservableE(this.per).subscribe(res => {
         this.toastr.success('تم التحديث بنجاح', 'نجاح');
         this.getDemPayList();
         this.getUserConnected();
       })
-    } else {
-      this.toastr.warning('لقد  تم الإعتماد', 'فشل');
-    }
+   
   }
 }

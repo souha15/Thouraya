@@ -22,6 +22,8 @@ export class DemandeSuppHeureListcreatorComponent implements OnInit {
 
   }
 
+  p: Number = 1;
+  count: Number = 5;
   UserIdConnected: string;
   UserNameConnected: string;
 
@@ -51,17 +53,17 @@ export class DemandeSuppHeureListcreatorComponent implements OnInit {
     this.suppheureService.Get().subscribe(res => {
       this.GfactList = res;
 
-      this.factList = this.GfactList.filter(item => item.etatdir == "موافقة" && item.attribut2 == "في الإنتظار")
-
+      this.factList = this.GfactList.filter(item => (item.transferera == "2" || item.transferera == "3") && item.etatrh == "في الإنتظار")
     })
 
   }
 
   date = new Date().toLocaleDateString();
   accept() {
-    this.fact.attribut2 = "موافقة"
-    this.fact.idusername = this.UserIdConnected;
-    this.fact.username = this.UserNameConnected;
+    this.fact.etatrh = "موافقة"
+    this.fact.idtrh = this.UserIdConnected;
+    this.fact.nomtrh = this.UserNameConnected;
+    this.fact.daterh = this.date;
     this.suppheureService.PutObservableE(this.fact).subscribe(res => {
       this.getCreance();
       this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
@@ -75,9 +77,10 @@ export class DemandeSuppHeureListcreatorComponent implements OnInit {
   refuse() {
     this.fact.etat = "رفض"
     this.fact.attribut3 = this.date;
-    this.fact.attribut2 = "رفض"
-    this.fact.idusername = this.UserIdConnected;
-    this.fact.username = this.UserNameConnected;
+    this.fact.etatrh = "رفض"
+    this.fact.idtrh = this.UserIdConnected;
+    this.fact.nomtrh = this.UserNameConnected;
+    this.fact.daterh = this.date;
 
     this.suppheureService.PutObservableE(this.fact).subscribe(res => {
       this.getCreance();

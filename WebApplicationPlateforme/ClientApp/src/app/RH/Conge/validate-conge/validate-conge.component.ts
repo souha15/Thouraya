@@ -49,7 +49,7 @@ export class ValidateCongeComponent implements OnInit {
   CongeList() {
     this.congeService.Get().subscribe(res => {
       this.congeList = res
-      this.filtredCongeList = this.congeList.filter(item => item.etatd == "موافق" && item.attribut6 == "في الانتظار" && item.attribut1 == 0)
+      this.filtredCongeList = this.congeList.filter(item => item.etatd == "موافق" && item.attribut6 == "في الانتظار" && item.transferera == null)
     })
   }
 
@@ -197,7 +197,7 @@ export class ValidateCongeComponent implements OnInit {
     this.congeService.formData = {
       id: null,
       transferera: '',
-      transfertetab: '',
+      transfereretab: '',
       transfertrh: '',
       transfertdeux: '',
       datetransfert: '',
@@ -243,13 +243,13 @@ export class ValidateCongeComponent implements OnInit {
     }
   }
 
-  transfererA: number;
+  transfererA: string;
   transfertData(event) {
     this.transfererA = event.target.value;
   }
 
   transferer() {
-    this.per.attribut1 = +this.transfererA;
+    this.per.transferera = this.transfererA;
     this.congeService.PutObservableE(this.per).subscribe(res => {
       this.toastr.success("تم  تحويل  الطلب بنجاح", "نجاح");
       this.CongeList();

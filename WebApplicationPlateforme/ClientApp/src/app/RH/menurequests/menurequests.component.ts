@@ -102,7 +102,7 @@ export class MenurequestsComponent implements OnInit {
     this.congeService.formData = {
       id: null,
       transferera: '',
-      transfertetab: '',
+      transfereretab: '',
       transfertrh: '',
       transfertdeux: '',
       datetransfert: '',

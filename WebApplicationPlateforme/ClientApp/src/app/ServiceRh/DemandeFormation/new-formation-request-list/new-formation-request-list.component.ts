@@ -29,7 +29,8 @@ export class NewFormationRequestListComponent implements OnInit {
     this.GetSpecList();
     this.resetForm1();
   }
-
+  p: Number = 1;
+  count: Number = 5;
 
   // Get Specilite List
 
@@ -66,6 +67,27 @@ export class NewFormationRequestListComponent implements OnInit {
       this.GfactList = res;
 
       this.factList = this.GfactList.filter(item => item.idUserCreator == this.UserIdConnected && item.attribut2 == "غير منجزة")
+      this.factList.forEach(item => {
+        if (item.transferera != null) {
+
+          if (item.transferera == "1") {
+
+            item.etat = item.etatetab
+
+          } else if (item.transferera == "2") {
+            item.etat = item.etatrh
+          } else {
+            if (item.etatrh == "موافقة" && item.etatetab == "موافقة") {
+              item.etat = "موافقة"
+            } else if (item.etatrh == "رفض" || item.etatetab == "رفض") {
+              item.etat = "رفض"
+            } else if (item.etatrh == "في الإنتظار" || item.etatetab == null) {
+              item.etat = "في الإنتظار"
+            }
+          }
+        }
+
+      })
 
     })
 
@@ -202,7 +224,25 @@ export class NewFormationRequestListComponent implements OnInit {
       form.resetForm();
     this.atService.formData = {
       id: null,
-
+      transferera: '',
+      transfertetab: '',
+      transfertrh: '',
+      transfertdeux: '',
+      datetransfert: '',
+      idtrh: '',
+      idtetab: '',
+      nomtrh: '',
+      nomtetab: '',
+      etattrh: '',
+      etatetab: '',
+      datetrh: '',
+      dateetab: '',
+      tran1: '',
+      tran2: '',
+      tran3: '',
+      tran4: '',
+      tran5: '',
+      tran6: '',
       titre: '',
       specialite: '',
       autreSpec: '',

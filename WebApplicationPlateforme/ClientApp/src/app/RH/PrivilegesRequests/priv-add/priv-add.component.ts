@@ -15,12 +15,13 @@ export class PrivAddComponent implements OnInit {
   }
   
 
-  dirfin: boolean = true;
-  employeefin: boolean = true;
+  dirfin: boolean = false;
+  employeefin: boolean = false;
+  resp: boolean = false;
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
-      /*if (res.emploi == "محاسب") {
+      if (res.emploi == "محاسب") {
         this.employeefin = true;
       } else {
         this.employeefin = false
@@ -30,7 +31,12 @@ export class PrivAddComponent implements OnInit {
         this.dirfin = true;
       } else {
         this.dirfin = false
-      }*/
+      }
+      if (res.emploi == "أمين الصندوق ") {
+        this.resp = true;
+      } else {
+        this.resp = false
+      }
     })
 
   }

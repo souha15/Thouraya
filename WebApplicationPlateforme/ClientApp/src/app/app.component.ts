@@ -31,6 +31,9 @@ export class AppComponent {
 
   }
 
+  myfunction() {
+
+  }
 
   ngOnInit(): void {
    /* var connection = new signalR.HubConnectionBuilder()

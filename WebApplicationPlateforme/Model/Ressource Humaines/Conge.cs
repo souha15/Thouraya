@@ -11,7 +11,7 @@ namespace WebApplicationPlateforme.Model.Ressource_Humaines
     {
         public int Id { get; set; }
         public string transferera { get; set; }
-        public string transfertetab { get; set; }
+        public string transfereretab { get; set; }
         public string transfertrh { get; set; }
         public string transfertdeux { get; set; }
         public string datetransfert { get; set; }

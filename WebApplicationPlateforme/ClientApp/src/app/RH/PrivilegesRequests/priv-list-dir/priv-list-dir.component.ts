@@ -34,6 +34,8 @@ export class PrivListDirComponent implements OnInit {
     })
 
   }
+  p: Number = 1;
+  count: Number = 5;
 
   //Populate Form 
   factId: number
@@ -51,7 +53,7 @@ export class PrivListDirComponent implements OnInit {
     this.suppheureService.Get().subscribe(res => {
       this.GfactList = res;
 
-      this.factList = this.GfactList.filter(item => item.attribut3 == "في الإنتظار" && item.attribut2 == "موافقة")
+      this.factList = this.GfactList.filter(item => item.attribut3 == "في الإنتظار" && item.etatdir == "موافقة" && item.transferera == null)
 
     })
 
@@ -59,7 +61,6 @@ export class PrivListDirComponent implements OnInit {
 
   date = new Date().toLocaleDateString();
   accept() {
-    this.fact.etat = "موافقة"
     this.fact.attribut6 = this.date;
     this.fact.attribut3 = "موافقة"
     this.fact.attribut4 = this.UserIdConnected;
@@ -90,4 +91,20 @@ export class PrivListDirComponent implements OnInit {
       })
   }
 
+
+  transfererA: string;
+  transfertData(event) {
+    this.transfererA = event.target.value;
+  }
+
+  transferer() {
+    this.fact.transferera = this.transfererA;
+    this.suppheureService.PutObservableE(this.fact).subscribe(res => {
+      this.toastr.success("تم  تحويل  الطلب بنجاح", "نجاح");
+      this.getCreance();
+    },
+      err => {
+        this.toastr.warning('لم يتم  تحويل  الطلب بنجاح', ' فشل');
+      })
+  }
 }

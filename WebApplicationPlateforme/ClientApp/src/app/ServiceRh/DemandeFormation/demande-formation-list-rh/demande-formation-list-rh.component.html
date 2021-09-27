@@ -23,8 +23,8 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
-              <th scope="row">{{cg.id}}</th>
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p };let i = index">
+              <th scope="row">{{(p-1) * count + i + 1}}</th>
               <td>{{cg.userNameCreator}}</td>
               <td>{{cg.titre}}</td>
               <td>{{cg.org}}</td>

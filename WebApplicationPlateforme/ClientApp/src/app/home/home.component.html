@@ -253,7 +253,7 @@
                   <span class="d-block">
                     <i class="fa fa fa-users fa-3x"></i>
                   </span>
-                  <h4>ملف المسلم الجديد</h4>
+                  <h4>الأيتام</h4>
                 </a>
               </div>
             </div>
@@ -265,8 +265,8 @@
                   <span class="d-block">
                     <i class="fa fa fa-users-cog fa-3x"></i>
                   </span>
-                  <h4>الإستقطاعات</h4>
-                 
+                  <h4>الكفلاء</h4>
+
                 </a>
               </div>
             </div>
@@ -292,13 +292,24 @@
               </div>
             </div>
             <!--*ngIf="mediadir"-->
-            <div class="col-sm-6 col-md-3 my-4">
+            <div class="col-sm-6 col-md-3 my-4" *ngIf="mediadir">
               <div class="link-box">
                 <a [routerLink]="['/meadia-center-demands-list-dir']">
                   <span class="d-block">
                     <i class="fa fa-users-cog fa-3x"></i>
                   </span>
                   <h4>العلاقات العامة و الإعلام</h4>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 my-4">
+              <div class="link-box">
+                <a [routerLink]="['/list-musulman']">
+                  <span class="d-block">
+                    <i class="fa fa-user fa-3x"></i>
+                  </span>
+                  <h4>إدارة المسلمين الجدد </h4>
                 </a>
               </div>
             </div>

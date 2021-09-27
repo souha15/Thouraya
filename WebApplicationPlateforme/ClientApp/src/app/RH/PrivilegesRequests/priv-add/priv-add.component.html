@@ -23,15 +23,31 @@
 
           <a *ngIf="dirfin" href="" [routerLink]="['/my-priv-list']">
             <span class="icon"><i class="fa fa-graduation-cap"></i></span>
-            دورة تدريبية
+            طلبات الدورات التدريبية
           </a>
+
+          <a *ngIf="employeefin" href="" [routerLink]="['/formation-etab-list']">
+            <span class="icon"><i class="fa fa-graduation-cap"></i></span>
+            طلبات الدورات التدريبية
+          </a>
+
 
           <a *ngIf="dirfin" href="" [routerLink]="['/priv-list-dir']">
             <span class="icon"><i class="fa fa-clock"></i></span>
             طلبات ساعات إضافية
           </a>
 
+          <a *ngIf="employeefin" href="" [routerLink]="['/sup-heure-etab-list']">
+            <span class="icon"><i class="fa fa-clock"></i></span>
+            طلبات ساعات إضافية
+          </a>
+
           <a *ngIf="dirfin" href="" [routerLink]="['/priv-list-rh']">
+            <span class="icon"><i class="fa fa-briefcase"></i></span>
+            طلبات استحداث وظيفة
+          </a>
+
+          <a *ngIf="employeefin" href="" [routerLink]="['/travail-etab-list']">
             <span class="icon"><i class="fa fa-briefcase"></i></span>
             طلبات استحداث وظيفة
           </a>
@@ -48,14 +64,18 @@
 
           <a *ngIf="employeefin" href="" [routerLink]="['/dem-assistance-listetabfin']">
             <span class="icon"><i class="fa fa-address-book"></i></span>
-            تقديم طلب إشراف
+            طلبات إشراف
           </a>
 
           <a *ngIf="dirfin" href="" [routerLink]="['/dem-assistance-listdirfin']">
             <span class="icon"><i class="fa fa-address-book"></i></span>
-            تقديم طلب إشراف
+            طلبات إشراف
           </a>
 
+          <a *ngIf="resp" href="" [routerLink]="['/film-edity']">
+            <span class="icon"><i class="fa fa-address-book"></i></span>
+            طلبات صرف الشيكات
+          </a>
 
           <!--   <a href="" [routerLink]="['/demission-edit']">
     <span class="icon"><i class="fa fa-user-friends"></i></span>

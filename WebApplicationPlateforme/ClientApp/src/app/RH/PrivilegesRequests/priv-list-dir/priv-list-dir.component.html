@@ -30,13 +30,14 @@
               <th scope="col">عدد الساعات</th>
               <th scope="col">الحالة</th>
               <th scope="col">التفاصيل</th>
+              <th scope="col">تحويل</th>
               <th scope="col">رفض/موافقة</th>
             </tr>
           </thead>
           <tbody>
 
-            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
-              <th scope="row">{{cg.id}}</th>
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p };let i = index">
+              <th scope="row">{{(p-1) * count + i + 1}}</th>
               <th scope="row">{{cg.userNameCreator}}</th>
               <td (click)="populateForm(cg)">{{cg.date}}</td>
               <td (click)="populateForm(cg)">{{cg.nbheure}}</td>
@@ -46,6 +47,7 @@
                   <i class="fa fa-eye fa-lg"></i>
                 </a>
               </td>
+              <td (click)="populateForm(cg)"><a class="btn btn-primary" data-toggle="modal" data-target="#myModal3">تحويل الى</a></td>
               <td (click)="populateForm(cg)">
                 <a class="btn btn-danger ml-3" data-toggle="modal" data-target="#myModal1">رفض</a>
                 <a class="btn btn-success" data-toggle="modal" data-target="#myModal2">موافقة</a>
@@ -192,3 +194,40 @@
 </div>
 
 
+
+<div id="myModal3" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+        <h3 class="popup-head">تحويل الى</h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="task-form form-row stop-form">
+            <div class="col-md-6">
+              <label for="user"><span><i class="fa fa-check"></i></span>تحويل</label>
+              <select id="user" class="" name="transfert" (change)="transfertData($event)">
+                <option [ngValue]="undefined" selected disabled>-الى-</option>
+                <option value="1">قسم المحاسبة</option>
+                <option value="2">إدارة شؤون الموظفين</option>
+                <option value="3"> قسم المحاسبة و إدارة شؤون الموظفين</option>
+              </select>
+            </div>
+
+            <div class="mx-auto my-3 text-center">
+              <button class="btn btn-success px-2 ml-3" (click)="transferer()"><span class="ml-2"><i class="fa fa-save"></i></span> موافق</button>
+              <button class="btn btn-danger px-2 ml-3"><span class="ml-2"><i class="fa fa-times"></i></span> إلغاء</button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

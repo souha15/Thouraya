@@ -89,7 +89,7 @@ export class ChequePayListPayComponent implements OnInit {
   getDemPayList() {
     this.demandeService.Get().subscribe(res => {
       this.dem5 = res
-      this.dem6 = this.dem5.filter(item => item.etatdirecteur == "في الإنتظار")    
+      this.dem6 = this.dem5.filter(item => item.etatparfinancier == "في الإنتظار")    
 
     })
   }
@@ -115,11 +115,11 @@ export class ChequePayListPayComponent implements OnInit {
 
   date = new Date().toLocaleDateString();
   accept() {
-
-    this.per.datedir = this.date;
-    this.per.etatdirecteur = this.etat
-    this.per.nomdir = this.UserNameConnected;
-    this.per.iddir = this.UserIdConnected;
+    if (this.etat == "مرفوضة") { this.per.etatgeneral == "مرفوضة" }
+    this.per.dateparfinancier = this.date;
+    this.per.etatparfinancier = this.etat
+    this.per.nomparfinancier = this.UserNameConnected;
+    this.per.idparfinancier = this.UserIdConnected;
       this.demandeService.PutObservableE(this.per).subscribe(res => {
         this.toastr.success('تم التحديث بنجاح', 'نجاح');
         this.getUserConnected()

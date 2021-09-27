@@ -50,6 +50,7 @@ using WebApplicationPlateforme.Model.MediaCenter.RecordingArchive;
 using WebApplicationPlateforme.Model.MediaCenter.Rondonnee;
 using WebApplicationPlateforme.Model.MediaCenter.SoireeOccasion;
 using WebApplicationPlateforme.Model.MediaCenter.Visite;
+using WebApplicationPlateforme.Model.NouveauMusulman;
 
 namespace WebApplicationPlateforme.Data
 {
@@ -397,5 +398,8 @@ namespace WebApplicationPlateforme.Data
         public DbSet<visite> visite { get; set; }
         public DbSet<offreImpression> offreImpression { get; set; }
 
+        /** Nouveau Musulman Part **/  
+        public DbSet <musulman> musulmans { get; set; }
+        public DbSet <filesmusulman> filesmusulmans { get; set; }
 }
 }

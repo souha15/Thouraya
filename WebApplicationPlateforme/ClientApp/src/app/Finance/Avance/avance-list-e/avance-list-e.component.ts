@@ -39,6 +39,25 @@ export class AvanceListEComponent implements OnInit {
       this.GfactList = res;
       this.factList = this.GfactList.filter(item => item.idUserCreator == this.UserIdConnected)
       this.factList.forEach(item => {
+        if (item.transferera != null) {
+
+          if (item.transferera == "1") {
+
+            item.attribut2 = item.etatetab
+
+          } else if (item.transferera == "2") {
+            item.attribut2 = item.etattrh
+          } else {
+            if (item.etattrh == "موافقة" && item.etatetab == "موافقة") {
+              item.attribut2 = "موافقة"
+            } else if (item.etattrh == "رفض" || item.etatetab == "رفض") {
+              item.attribut2 = "رفض"
+            } else if (item.etattrh == "في الإنتظار" || item.etatetab == null) {
+              item.attribut2 = "في الإنتظار"
+            }
+          }
+        }
+
         if (item.etatC == "في الإنتظار") {
           this.etatok = true;
         } else this.etatok = false;
@@ -46,6 +65,8 @@ export class AvanceListEComponent implements OnInit {
     })
   }
 
+
+ 
   factId: number
   fact: Avance = new Avance();
   etatok: boolean;

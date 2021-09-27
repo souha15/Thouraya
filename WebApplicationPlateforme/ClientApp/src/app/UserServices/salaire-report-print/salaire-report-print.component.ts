@@ -51,7 +51,7 @@ export class SalaireReportPrintComponent implements OnInit {
   CongeList() {
     this.congeService.Get().subscribe(res => {
       this.congeList = res
-      this.filtredCongeList = this.congeList.filter(item => item.etatd == "موافق" && item.etatrh == "في الانتظار" && item.attribut1 == 1)
+      this.filtredCongeList = this.congeList.filter(item => (item.transferera == "1" || item.transferera == "3") && item.etatetab == null)
       //this.filtredCongeList = this.filtredCongeList2.filter(item => item.attribut6 == "إعتماد بخصم" || item.attribut6 =="إعتماد بغير خصم")
     })
   }
@@ -74,12 +74,10 @@ export class SalaireReportPrintComponent implements OnInit {
   updateRecord(form: NgForm) {
 
     this.conge = Object.assign(this.conge, form.value);
-    this.congeService.formData.daterh = this.date;
-    this.congeService.formData.attribut3 = this.UserIdConnected;
-    this.congeService.formData.attribut4 = this.UserNameConnected;
-    this.congeService.formData.attribut2 = this.etat
-    this.congeService.formData.attribut6 = this.etat
-
+    this.congeService.formData.datefin = this.date;
+    this.congeService.formData.idtetab = this.UserIdConnected;
+    this.congeService.formData.nomtetab = this.UserNameConnected;
+    this.congeService.formData.etatetab = this.etat
 
     if (this.etat == "رفض") {
       this.congeService.formData.attribut2 = "رفض"
@@ -111,7 +109,7 @@ export class SalaireReportPrintComponent implements OnInit {
     this.congeService.formData = {
       id: null,
       transferera: '',
-      transfertetab: '',
+      transfereretab: '',
       transfertrh: '',
       transfertdeux: '',
       datetransfert: '',

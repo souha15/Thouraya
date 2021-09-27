@@ -282,3 +282,15 @@ ul {
 .file-label {
   cursor: pointer;
 }
+
+.wait {
+  background: #dbcf46;
+}
+
+.success {
+  background: #2aa830;
+}
+
+.denied {
+  background: #ed4b1a;
+}

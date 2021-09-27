@@ -79,10 +79,11 @@ export class PayChequecDetailComponent implements OnInit {
   nbrefused: number = 0;
   getDemPayList() {
     this.demandeService.Get().subscribe(res => {
-      this.dem2 = res
-      this.nbwork = this.dem2.filter(item => item.etatgeneral == "تحت الإجراء").length;
-      this.nbdone = this.dem2.filter(item => item.etatgeneral == "معتمدة").length;
-      this.nbrefused = this.dem2.filter(item => item.etatgeneral == "مرفوضة").length;
+      this.dem1 = res
+      this.dem2 = this.dem1.filter(item => item.etatparfinancier == "معتمدة" && item.etatfinacier =="في الإنتظار")
+      this.nbwork = this.dem1.filter(item => item.etatgeneral == "تحت الإجراء").length;
+      this.nbdone = this.dem1.filter(item => item.etatgeneral == "معتمدة").length;
+      this.nbrefused = this.dem1.filter(item => item.etatgeneral == "مرفوضة").length;
       return this.dem2.sort((a, b) => new Date(a.dateEntre).getTime() - new Date(b.dateEntre).getTime())
 
     })
@@ -108,25 +109,26 @@ export class PayChequecDetailComponent implements OnInit {
   }
 
 
-  //Delete
-
-  onDelete(Id) {
- 
-        if (confirm('Are you sure to delete this record ?')) {
-          this.demandeService.Delete(Id)
-            .subscribe(res => {
-              this.getDemPayList();
-              this.toastr.success("تم الحذف  بنجاح", "نجاح");
-            },
-
-              err => {
-                console.log(err);
-                this.toastr.warning('لم يتم الحذف  ', ' فشل');
-
-              }
-            )
-
-        }
-     
+  etat: string;
+  etattest(event) {
+    this.etat = event.target.value;
   }
+  date = new Date().toLocaleDateString();
+  accept() {
+    if (this.etat == "مرفوضة") { this.per.etatgeneral =="مرفوضة" }
+      this.per.datefinancier = this.date;
+      this.per.etatfinacier = this.etat
+      this.per.nomfinancier = this.UserNameConnected;
+      this.per.idfinancier = this.UserIdConnected;
+      this.demandeService.PutObservableE(this.per).subscribe(res => {
+        this.toastr.success('تم التحديث بنجاح', 'نجاح');
+        this.getUserConnected()
+        this.getDemPayList();
+      })
+   
+
+  }
+
+
+
 }

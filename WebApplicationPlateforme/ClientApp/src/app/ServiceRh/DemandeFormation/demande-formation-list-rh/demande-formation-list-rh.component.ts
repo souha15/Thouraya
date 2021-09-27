@@ -19,7 +19,8 @@ export class DemandeFormationListRhComponent implements OnInit {
     this.getUserConnected();
     this.getCreance();
   }
-
+  p: Number = 1;
+  count: Number = 5;
 
   UserIdConnected: string;
   UserNameConnected: string;
@@ -41,7 +42,8 @@ export class DemandeFormationListRhComponent implements OnInit {
     this.formationService.Get().subscribe(res => {
       this.GfactList = res;
 
-      this.factList = this.GfactList.filter(item => item.etatc == "موافقة" && item.etatrh == "في الإنتظار")
+      this.factList = this.GfactList.filter(item => (item.transferera == "2" || item.transferera == "3" || item.etatc == "موافقة") && item.etatrh == "في الإنتظار")
+
 
     })
 
@@ -58,7 +60,6 @@ export class DemandeFormationListRhComponent implements OnInit {
 
   date = new Date().toLocaleDateString();
   accept() {
-     this.fact.etat = "موافقة"
     this.fact.daterh = this.date;
     this.fact.etatrh = "موافقة"
     this.fact.idrh = this.UserIdConnected;

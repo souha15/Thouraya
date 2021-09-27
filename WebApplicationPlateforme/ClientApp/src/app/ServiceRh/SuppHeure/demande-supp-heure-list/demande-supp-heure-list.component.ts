@@ -22,7 +22,8 @@ export class DemandeSuppHeureListComponent implements OnInit {
     this.resetForm();
   }
 
-
+  p: Number = 1;
+  count: Number = 5;
   UserIdConnected: string;
   UserNameConnected: string;
 
@@ -67,7 +68,27 @@ export class DemandeSuppHeureListComponent implements OnInit {
       this.GfactList = res;
 
       this.factList = this.GfactList.filter(item => item.idUserCreator == this.UserIdConnected)
-      
+      this.factList.forEach(item => {
+        if (item.transferera != null) {
+
+          if (item.transferera == "1") {
+
+            item.attribut3 = item.etatetab
+
+          } else if (item.transferera == "2") {
+            item.attribut3 = item.etatrh
+          } else {
+            if (item.etatrh == "موافقة" && item.etatetab == "موافقة") {
+              item.attribut3 = "موافقة"
+            } else if (item.etatrh == "رفض" || item.etatetab == "رفض") {
+              item.attribut3 = "رفض"
+            } else if (item.etatrh == "في الإنتظار" || item.etatetab == null) {
+              item.attribut3 = "في الإنتظار"
+            }
+          }
+        }
+
+      })
 
     })
 

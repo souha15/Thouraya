@@ -1,3 +1,25 @@
+.main-nav {
+  background: #276985 !important;
+}
+
+.notification {
+  background-color: none;
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  position: relative;
+  display: inline-block;
+}
+
+  .notification .badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+  }
 
 #MyTable td:hover {
   background-color: #ccc;
@@ -177,4 +199,58 @@ body.noscroll {
 
 .retarde {
   background: #dc3545
+}
+/*-- Events Pages --*/
+.events-form label {
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #91c3d8;
+  color: #333;
+  margin-left: 10px;
+  min-width: 60px;
+}
+
+  .events-form label.main {
+    background-color: #276985;
+    color: #fff;
+    padding: 5px 15px;
+    width: 145px;
+    margin-left: 15px;
+    margin-bottom: 15px;
+  }
+
+    .events-form label.main:first-of-type {
+      margin-top: 20px;
+    }
+
+.events-form input[type="text"],
+.events-form input[type="password"] {
+  width: 120px;
+}
+
+.events-form input[type="text"],
+.events-form input[type="password"],
+.events-form input[type="date"],
+.events-form input[type="number"],
+.events-form select {
+  border-radius: 5px;
+  padding: 5px 10px;
+  width: 115px;
+}
+
+  .events-form input[type="text"].last {
+    width: 400px;
+  }
+
+.events-form input[type="file"] {
+  display: none;
+}
+
+.events-form input[type="submit"] {
+  width: 140px;
+  text-align: center;
+}
+
+.events-form .file-label {
+  background-color: #91c3d8 !important;
 }

@@ -626,6 +626,11 @@ import { TravailEtabListComponent } from './TransferetServices/travail-etab-list
 import { TravailRHListComponent } from './TransferetServices/travail-rhlist/travail-rhlist.component';
 import { AvanceRHListComponent } from './TransferetServices/avance-rhlist/avance-rhlist.component';
 import { AvanceEtabListComponent } from './TransferetServices/avance-etab-list/avance-etab-list.component';
+import { AddMusulmanComponent } from './NvMusulman/add-musulman/add-musulman.component';
+import { EditMusulmanComponent } from './NvMusulman/edit-musulman/edit-musulman.component';
+import { DetailsMusulmanComponent } from './NvMusulman/details-musulman/details-musulman.component';
+import { MenuMusulmanComponent } from './NvMusulman/menu-musulman/menu-musulman.component';
+import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.component';
 
 @NgModule({
   declarations: [
@@ -1219,6 +1224,11 @@ import { AvanceEtabListComponent } from './TransferetServices/avance-etab-list/a
     TravailRHListComponent,
     AvanceRHListComponent,
     AvanceEtabListComponent,
+    AddMusulmanComponent,
+    EditMusulmanComponent,
+    DetailsMusulmanComponent,
+    MenuMusulmanComponent,
+    ListMusulmanComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -2526,6 +2536,41 @@ import { AvanceEtabListComponent } from './TransferetServices/avance-etab-list/a
       { path: 'design-list-employee', component: DesignListEmployeeComponent, canActivate: [AuthGuard] },
 
       { path: 'design-list-etab', component: DesignListEtabComponent, canActivate: [AuthGuard] },
+
+
+      /**** Transfert Service *****/
+
+      { path: 'formation-etab-list', component: FormationEtabListComponent , canActivate: [AuthGuard] },
+
+      { path: 'formation-rhlist', component: FormationRHListComponent, canActivate: [AuthGuard] },
+
+      { path: 'sup-heure-rhlist', component: SupHeureRHListComponent, canActivate: [AuthGuard] },
+
+      { path: 'sup-heure-etab-list', component: SupHeureEtabListComponent, canActivate: [AuthGuard] },
+
+      { path: 'travail-etab-list', component: TravailEtabListComponent, canActivate: [AuthGuard] },
+
+      { path: 'travail-rhlist', component: TravailRHListComponent, canActivate: [AuthGuard] },
+
+      { path: 'avance-rhlist', component: AvanceRHListComponent, canActivate: [AuthGuard] },
+
+      { path: 'avance-etab-list', component: AvanceEtabListComponent, canActivate: [AuthGuard] },
+
+/****** Musulman Part  *****/
+
+      { path: 'add-musulman', component: AddMusulmanComponent, canActivate: [AuthGuard] },
+
+      { path: 'edit-musulman', component: EditMusulmanComponent, canActivate: [AuthGuard] },
+      { path: 'edit-musulman/:id', component: EditMusulmanComponent, canActivate: [AuthGuard] },
+
+      { path: 'details-musulman', component: DetailsMusulmanComponent, canActivate: [AuthGuard] },
+      { path: 'details-musulman/:id', component: DetailsMusulmanComponent, canActivate: [AuthGuard] },
+
+      { path: 'menu-musulman', component: MenuMusulmanComponent, canActivate: [AuthGuard] },
+
+      { path: 'list-musulman', component: ListMusulmanComponent, canActivate: [AuthGuard] },
+
+
 
 
     ])

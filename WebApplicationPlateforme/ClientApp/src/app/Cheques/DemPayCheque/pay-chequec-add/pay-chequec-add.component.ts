@@ -21,6 +21,7 @@ import { ArticlePayChequeService } from '../../../shared/Services/Cheques/articl
 import { FilesPayChequesC } from '../../../shared/Models/Cheques/files-pay-cheques-c.model';
 import { ArticlePayCheque } from '../../../shared/Models/Cheques/article-pay-cheque.model';
 import { DemPayCheque } from '../../../shared/Models/Cheques/dem-pay-cheque.model';
+import { AdministrationService } from '../../../shared/Services/Administration/administration.service';
 
 @Component({
   selector: 'app-pay-chequec-add',
@@ -37,7 +38,8 @@ export class PayChequecAddComponent implements OnInit {
     public serviceupload: UploadDownloadService,
     private http: HttpClient,
     private toastr: ToastrService,
-    private rootUrl: PathSharedService, ) {}
+    private rootUrl: PathSharedService,
+    private adminService: AdministrationService) { }
 
   ngOnInit(): void {
     this.getUserConnected();
@@ -66,13 +68,13 @@ export class PayChequecAddComponent implements OnInit {
 
   UserIdConnected: string;
   UserNameConnected: string;
-
+  admindir: string;
+  ida: number;
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-
     })
 
   }

@@ -38,7 +38,7 @@ export class MainReadyAvanceComponent implements OnInit {
   getDep() {
     this.avanceService.Get().subscribe(res => {
       this.GfactList = res;
-      this.factList = this.GfactList.filter(item => item.attribut3 == this.UserIdConnected && item.attribut5 == "في الإنتظار" && item.etatC == "موافقة")
+      this.factList = this.GfactList.filter(item => item.etatC == "في الإنتظار" && item.etatD == "موافقة" && item.transferera == null)
     })
   }
 
@@ -59,15 +59,11 @@ export class MainReadyAvanceComponent implements OnInit {
 
   date = new Date().toLocaleDateString();
   accept() {
-    this.fact.attribut2 = "موافقة"
-    this.fact.attribut5 = "موافقة"
-    this.fact.attribut6 = this.date;
-    this.fact.attribut3 = this.UserIdConnected
-    this.fact.attribut4 = this.UserNameConnected;
 
-
-    this.fact.idD = this.UserIdConnected;
-    this.fact.nomD = this.UserNameConnected;
+    this.fact.etatC = "موافقة"
+    this.fact.dateC = this.date;
+    this.fact.idC = this.UserIdConnected
+    this.fact.nomC = this.UserNameConnected;
     this.avanceService.PutObservableE(this.fact).subscribe(res => {
       this.getDep();
       this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
@@ -83,10 +79,10 @@ export class MainReadyAvanceComponent implements OnInit {
     if (this.raisonRefus != null) {
       this.fact.raisonRefusD = this.raisonRefus;
       this.fact.attribut2 = "رفض"
-      this.fact.attribut5 = "رفض"
-      this.fact.attribut6 = this.date;
-      this.fact.attribut3 = this.UserIdConnected
-      this.fact.attribut4 = this.UserNameConnected;
+      this.fact.etatC = "رفض"
+      this.fact.dateC = this.date;
+      this.fact.idC = this.UserIdConnected
+      this.fact.nomC = this.UserNameConnected;
 
 
       this.avanceService.PutObservableE(this.fact).subscribe(res => {
@@ -99,5 +95,21 @@ export class MainReadyAvanceComponent implements OnInit {
     } else {
       this.toastr.error('اكتب سبب الرفض ', ' فشل');
     }
+  }
+
+  transfererA: string;
+  transfertData(event) {
+    this.transfererA = event.target.value;
+  }
+
+  transferer() {
+    this.fact.transferera = this.transfererA;
+    this.avanceService.PutObservableE(this.fact).subscribe(res => {
+      this.toastr.success("تم  تحويل  الطلب بنجاح", "نجاح");
+      this.getDep();
+    },
+      err => {
+        this.toastr.warning('لم يتم  تحويل  الطلب بنجاح', ' فشل');
+      })
   }
 }

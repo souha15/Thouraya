@@ -71,7 +71,28 @@ export class MyListCongeComponent implements OnInit {
     this.congeService.Get().subscribe(res => {
       this.congeList = res
       this.filtredCongeList = this.congeList.filter(item => item.idUserCreator == this.UserIdConnected)
-     
+
+      this.filtredCongeList.forEach(item => {
+        if (item.transferera != null) {
+
+          if (item.transferera == "1") {
+
+            item.attribut2 = item.etatetab
+
+          } else if (item.transferera == "2") {
+            item.attribut2 = item.etatrh
+          } else {
+            if (item.etatrh == "موافق" && item.etatetab == "موافق") {
+              item.attribut2 = "موافق"
+            } else if (item.etatrh == "رفض" || item.etatetab == "رفض") {
+              item.attribut2 = "رفض"
+            } else if (item.etatrh == "في الانتظار" || item.etatetab == null) {
+              item.attribut2 ="في الانتظار"
+            }
+          }
+        }
+
+      })
     })
   }
 
@@ -122,7 +143,7 @@ export class MyListCongeComponent implements OnInit {
     this.congeService.formData = {
       id: null,
       transferera: '',
-      transfertetab: '',
+      transfereretab: '',
       transfertrh: '',
       transfertdeux: '',
       datetransfert: '',

@@ -36,12 +36,21 @@
           </thead>
           <tbody>
 
-            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
-              <th scope="row">{{cg.id}}</th>
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p };let i = index">
+              <th scope="row">{{(p-1) * count + i + 1}}</th>
               <th scope="row">{{cg.userNameCreator}}</th>
               <td (click)="populateForm(cg)">{{cg.date}}</td>
               <td (click)="populateForm(cg)">{{cg.nbheure}}</td>
-              <td (click)="populateForm(cg)">{{cg.etat}}</td>
+
+              <td (click)="populateForm(cg)"
+                  [ngClass]="{
+
+  'success': cg.etat === 'موافقة',
+  'denied': cg.etat === 'رفض',
+  'wait': cg.etat === 'في الإنتظار'
+}">
+                {{cg.etat}}
+              </td>
               <td>
                 <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-eye fa-lg"></i>

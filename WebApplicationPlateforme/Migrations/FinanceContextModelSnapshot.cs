@@ -3332,16 +3332,16 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("dateDeduire")
                         .HasColumnType("text");
 
-                    b.Property<string>("dateEtab")
-                        .HasColumnType("text");
-
-                    b.Property<string>("dateRh")
-                        .HasColumnType("text");
-
-                    b.Property<string>("dateTransfert")
-                        .HasColumnType("text");
-
                     b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateetab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datetransfert")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datetrh")
                         .HasColumnType("text");
 
                     b.Property<string>("detail")
@@ -3356,10 +3356,10 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("etatD")
                         .HasColumnType("text");
 
-                    b.Property<string>("etatEtab")
+                    b.Property<string>("etatetab")
                         .HasColumnType("text");
 
-                    b.Property<string>("etatRh")
+                    b.Property<string>("etattrh")
                         .HasColumnType("text");
 
                     b.Property<string>("idC")
@@ -3371,10 +3371,10 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("idUserCreator")
                         .HasColumnType("text");
 
-                    b.Property<string>("idtEtab")
+                    b.Property<string>("idtetab")
                         .HasColumnType("text");
 
-                    b.Property<string>("idtRh")
+                    b.Property<string>("idtrh")
                         .HasColumnType("text");
 
                     b.Property<string>("mois")
@@ -3389,10 +3389,10 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("nomD")
                         .HasColumnType("text");
 
-                    b.Property<string>("nomtEtab")
+                    b.Property<string>("nomtetab")
                         .HasColumnType("text");
 
-                    b.Property<string>("nomtRh")
+                    b.Property<string>("nomtrh")
                         .HasColumnType("text");
 
                     b.Property<string>("prix")
@@ -3422,16 +3422,16 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("tran6")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfererA")
+                    b.Property<string>("transferera")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfertDeux")
+                    b.Property<string>("transfertdeux")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfertEtab")
+                    b.Property<string>("transfertetab")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfertRh")
+                    b.Property<string>("transfertrh")
                         .HasColumnType("text");
 
                     b.Property<string>("userNameCreator")
@@ -6731,6 +6731,199 @@ namespace WebApplicationPlateforme.Migrations
                     b.ToTable("newsi");
                 });
 
+            modelBuilder.Entity("WebApplicationPlateforme.Model.NouveauMusulman.filesmusulman", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("idmusulman")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("path")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idmusulman");
+
+                    b.ToTable("filesmusulmans");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.NouveauMusulman.musulman", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("adr")
+                        .HasColumnType("text");
+
+                    b.Property<int>("attribut1")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("cadeauxtest")
+                        .HasColumnType("text");
+
+                    b.Property<string>("change")
+                        .HasColumnType("text");
+
+                    b.Property<string>("chatdep")
+                        .HasColumnType("text");
+
+                    b.Property<string>("circonsion")
+                        .HasColumnType("text");
+
+                    b.Property<string>("cite")
+                        .HasColumnType("text");
+
+                    b.Property<string>("city")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datehij")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datemil")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datenais")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datepass")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateresidence")
+                        .HasColumnType("text");
+
+                    b.Property<string>("depart")
+                        .HasColumnType("text");
+
+                    b.Property<string>("engnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("file")
+                        .HasColumnType("text");
+
+                    b.Property<string>("garantnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("garanttype")
+                        .HasColumnType("text");
+
+                    b.Property<string>("haj")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("jours")
+                        .HasColumnType("text");
+
+                    b.Property<string>("langue")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("numdos")
+                        .HasColumnType("text");
+
+                    b.Property<string>("numpass")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nvnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("omra")
+                        .HasColumnType("text");
+
+                    b.Property<string>("predicateur")
+                        .HasColumnType("text");
+
+                    b.Property<string>("prevnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("pub")
+                        .HasColumnType("text");
+
+                    b.Property<string>("recep")
+                        .HasColumnType("text");
+
+                    b.Property<string>("registre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("religion")
+                        .HasColumnType("text");
+
+                    b.Property<string>("req")
+                        .HasColumnType("text");
+
+                    b.Property<string>("residence")
+                        .HasColumnType("text");
+
+                    b.Property<string>("scene")
+                        .HasColumnType("text");
+
+                    b.Property<string>("soiree")
+                        .HasColumnType("text");
+
+                    b.Property<string>("sourcepass")
+                        .HasColumnType("text");
+
+                    b.Property<string>("sourceres")
+                        .HasColumnType("text");
+
+                    b.Property<string>("telgarant")
+                        .HasColumnType("text");
+
+                    b.Property<string>("telmus")
+                        .HasColumnType("text");
+
+                    b.Property<string>("test")
+                        .HasColumnType("text");
+
+                    b.Property<string>("travail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("urlsm")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("walking")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("musulmans");
+                });
+
             modelBuilder.Entity("WebApplicationPlateforme.Model.OrgPart.OrgParti", b =>
                 {
                     b.Property<int>("Id")
@@ -8720,15 +8913,6 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("attribut6")
                         .HasColumnType("text");
 
-                    b.Property<string>("dateEtab")
-                        .HasColumnType("text");
-
-                    b.Property<string>("dateRh")
-                        .HasColumnType("text");
-
-                    b.Property<string>("dateTransfert")
-                        .HasColumnType("text");
-
                     b.Property<string>("dated")
                         .HasColumnType("text");
 
@@ -8738,10 +8922,16 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("dateenreg")
                         .HasColumnType("text");
 
+                    b.Property<string>("dateetab")
+                        .HasColumnType("text");
+
                     b.Property<string>("datefin")
                         .HasColumnType("text");
 
                     b.Property<string>("daterh")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datetransfert")
                         .HasColumnType("text");
 
                     b.Property<string>("directeurid")
@@ -8756,13 +8946,10 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("etat")
                         .HasColumnType("text");
 
-                    b.Property<string>("etatEtab")
-                        .HasColumnType("text");
-
-                    b.Property<string>("etatRh")
-                        .HasColumnType("text");
-
                     b.Property<string>("etatd")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatetab")
                         .HasColumnType("text");
 
                     b.Property<string>("etatrh")
@@ -8774,19 +8961,19 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("idremplacant")
                         .HasColumnType("text");
 
-                    b.Property<string>("idtEtab")
+                    b.Property<string>("idtetab")
                         .HasColumnType("text");
 
-                    b.Property<string>("idtRh")
+                    b.Property<string>("idtrh")
                         .HasColumnType("text");
 
                     b.Property<string>("nomremplacant")
                         .HasColumnType("text");
 
-                    b.Property<string>("nomtEtab")
+                    b.Property<string>("nomtetab")
                         .HasColumnType("text");
 
-                    b.Property<string>("nomtRh")
+                    b.Property<string>("nomtrh")
                         .HasColumnType("text");
 
                     b.Property<string>("rhid")
@@ -8816,16 +9003,16 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("tran6")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfererA")
+                    b.Property<string>("transferera")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfertDeux")
+                    b.Property<string>("transfereretab")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfertEtab")
+                    b.Property<string>("transfertdeux")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfertRh")
+                    b.Property<string>("transfertrh")
                         .HasColumnType("text");
 
                     b.Property<string>("type")
@@ -9742,15 +9929,6 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("competence")
                         .HasColumnType("text");
 
-                    b.Property<string>("dateEtab")
-                        .HasColumnType("text");
-
-                    b.Property<string>("dateRh")
-                        .HasColumnType("text");
-
-                    b.Property<string>("dateTransfert")
-                        .HasColumnType("text");
-
                     b.Property<string>("datedebut")
                         .HasColumnType("text");
 
@@ -9763,7 +9941,16 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("dateenreg")
                         .HasColumnType("text");
 
+                    b.Property<string>("dateetab")
+                        .HasColumnType("text");
+
                     b.Property<string>("daterh")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datetransfert")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datetrh")
                         .HasColumnType("text");
 
                     b.Property<string>("diplome")
@@ -9772,19 +9959,19 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("etat")
                         .HasColumnType("text");
 
-                    b.Property<string>("etatEtab")
-                        .HasColumnType("text");
-
-                    b.Property<string>("etatRh")
-                        .HasColumnType("text");
-
                     b.Property<string>("etatdg")
                         .HasColumnType("text");
 
                     b.Property<string>("etatdir")
                         .HasColumnType("text");
 
+                    b.Property<string>("etatetab")
+                        .HasColumnType("text");
+
                     b.Property<string>("etatrh")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etattrh")
                         .HasColumnType("text");
 
                     b.Property<string>("idUserCreator")
@@ -9799,10 +9986,10 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("idrh")
                         .HasColumnType("text");
 
-                    b.Property<string>("idtEtab")
+                    b.Property<string>("idtetab")
                         .HasColumnType("text");
 
-                    b.Property<string>("idtRh")
+                    b.Property<string>("idtrh")
                         .HasColumnType("text");
 
                     b.Property<string>("nomdg")
@@ -9814,10 +10001,10 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("nomrh")
                         .HasColumnType("text");
 
-                    b.Property<string>("nomtEtab")
+                    b.Property<string>("nomtetab")
                         .HasColumnType("text");
 
-                    b.Property<string>("nomtRh")
+                    b.Property<string>("nomtrh")
                         .HasColumnType("text");
 
                     b.Property<string>("selection")
@@ -9847,16 +10034,16 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("tran6")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfererA")
+                    b.Property<string>("transferera")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfertDeux")
+                    b.Property<string>("transfertdeux")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfertEtab")
+                    b.Property<string>("transfertetab")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfertRh")
+                    b.Property<string>("transfertrh")
                         .HasColumnType("text");
 
                     b.Property<string>("userNameCreator")
@@ -10130,19 +10317,19 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("date")
                         .HasColumnType("text");
 
-                    b.Property<string>("dateEtab")
-                        .HasColumnType("text");
-
-                    b.Property<string>("dateRh")
-                        .HasColumnType("text");
-
-                    b.Property<string>("dateTransfert")
-                        .HasColumnType("text");
-
                     b.Property<string>("datedir")
                         .HasColumnType("text");
 
                     b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateetab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("daterh")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datetransfert")
                         .HasColumnType("text");
 
                     b.Property<string>("detail")
@@ -10151,13 +10338,13 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("etat")
                         .HasColumnType("text");
 
-                    b.Property<string>("etatEtab")
-                        .HasColumnType("text");
-
-                    b.Property<string>("etatRh")
-                        .HasColumnType("text");
-
                     b.Property<string>("etatdir")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatetab")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatrh")
                         .HasColumnType("text");
 
                     b.Property<string>("idUserCreator")
@@ -10166,10 +10353,10 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("iddir")
                         .HasColumnType("text");
 
-                    b.Property<string>("idtEtab")
+                    b.Property<string>("idtetab")
                         .HasColumnType("text");
 
-                    b.Property<string>("idtRh")
+                    b.Property<string>("idtrh")
                         .HasColumnType("text");
 
                     b.Property<string>("idusername")
@@ -10181,10 +10368,10 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("nomdir")
                         .HasColumnType("text");
 
-                    b.Property<string>("nomtEtab")
+                    b.Property<string>("nomtetab")
                         .HasColumnType("text");
 
-                    b.Property<string>("nomtRh")
+                    b.Property<string>("nomtrh")
                         .HasColumnType("text");
 
                     b.Property<string>("tran1")
@@ -10205,16 +10392,16 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("tran6")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfererA")
+                    b.Property<string>("transferera")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfertDeux")
+                    b.Property<string>("transfertdeux")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfertEtab")
+                    b.Property<string>("transfertetab")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfertRh")
+                    b.Property<string>("transfertrh")
                         .HasColumnType("text");
 
                     b.Property<string>("userNameCreator")
@@ -10742,15 +10929,6 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("autreSpec")
                         .HasColumnType("text");
 
-                    b.Property<string>("dateEtab")
-                        .HasColumnType("text");
-
-                    b.Property<string>("dateRh")
-                        .HasColumnType("text");
-
-                    b.Property<string>("dateTransfert")
-                        .HasColumnType("text");
-
                     b.Property<string>("datec")
                         .HasColumnType("text");
 
@@ -10760,7 +10938,16 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("dateenreg")
                         .HasColumnType("text");
 
+                    b.Property<string>("dateetab")
+                        .HasColumnType("text");
+
                     b.Property<string>("daterh")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datetransfert")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datetrh")
                         .HasColumnType("text");
 
                     b.Property<string>("detail")
@@ -10772,19 +10959,19 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("etat")
                         .HasColumnType("text");
 
-                    b.Property<string>("etatEtab")
-                        .HasColumnType("text");
-
-                    b.Property<string>("etatRh")
-                        .HasColumnType("text");
-
                     b.Property<string>("etatc")
                         .HasColumnType("text");
 
                     b.Property<string>("etatdir")
                         .HasColumnType("text");
 
+                    b.Property<string>("etatetab")
+                        .HasColumnType("text");
+
                     b.Property<string>("etatrh")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etattrh")
                         .HasColumnType("text");
 
                     b.Property<string>("idUserCreator")
@@ -10799,10 +10986,10 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("idrh")
                         .HasColumnType("text");
 
-                    b.Property<string>("idtEtab")
+                    b.Property<string>("idtetab")
                         .HasColumnType("text");
 
-                    b.Property<string>("idtRh")
+                    b.Property<string>("idtrh")
                         .HasColumnType("text");
 
                     b.Property<string>("lien")
@@ -10817,10 +11004,10 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("nomrh")
                         .HasColumnType("text");
 
-                    b.Property<string>("nomtEtab")
+                    b.Property<string>("nomtetab")
                         .HasColumnType("text");
 
-                    b.Property<string>("nomtRh")
+                    b.Property<string>("nomtrh")
                         .HasColumnType("text");
 
                     b.Property<string>("org")
@@ -10853,16 +11040,16 @@ namespace WebApplicationPlateforme.Migrations
                     b.Property<string>("tran6")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfererA")
+                    b.Property<string>("transferera")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfertDeux")
+                    b.Property<string>("transfertdeux")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfertEtab")
+                    b.Property<string>("transfertetab")
                         .HasColumnType("text");
 
-                    b.Property<string>("transfertRh")
+                    b.Property<string>("transfertrh")
                         .HasColumnType("text");
 
                     b.Property<string>("userNameCreator")
@@ -13807,6 +13994,22 @@ namespace WebApplicationPlateforme.Migrations
                 });
 
             modelBuilder.Entity("WebApplicationPlateforme.Model.News.Newsi", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.NouveauMusulman.filesmusulman", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.NouveauMusulman.musulman", "musulman")
+                        .WithMany()
+                        .HasForeignKey("idmusulman")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.NouveauMusulman.musulman", b =>
                 {
                     b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
                         .WithMany()

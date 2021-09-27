@@ -1,7 +1,7 @@
 export class Conge {
   id: number;
  transferera :string;
-       transfertetab :string;
+  transfereretab :string;
        transfertrh :string;
        transfertdeux :string;
        datetransfert :string;
