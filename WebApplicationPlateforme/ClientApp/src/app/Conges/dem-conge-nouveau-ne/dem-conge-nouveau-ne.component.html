@@ -54,14 +54,22 @@
               </div>
 
 
+
               <div class="col-sm-6">
                 <label for="replace-emp">الموظف المعوض</label>
-                <select id="stop-status" name="idremplacant" #idremplacant="ngModel" [(ngModel)]="conge.idremplacant" (change)="getRemplacant($event)">
+                <select id="stop-status" name="idremplacant" #idremplacant="ngModel" [(ngModel)]="conge.idremplacant" (change)="getRemplacant($event)" required>
                   <option [ngValue]="undefined" selected disabled>-الموظف المعوض-</option>
                   <option *ngFor="let item of user" value="{{item.id}}">{{item.fullName}}</option>
                 </select>
-              </div>
+                <div *ngIf="idremplacant.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
 
+
+                  مطلوب
+                  الموظف المعوض.
+
+                </div>
+
+              </div>
               <div class="col-md-12">
                 <label for="emp-mobile">سبب الإجازة</label>
                 <input type="text" id="emp-mobile" name="tel" #tel="ngModel" [(ngModel)]="conge.tel">
@@ -81,5 +89,5 @@
 </div>
 <!-- Footer -->
 <footer class="text-center">
-  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
 </footer><p>dem-conge-nouveau-ne works!</p>

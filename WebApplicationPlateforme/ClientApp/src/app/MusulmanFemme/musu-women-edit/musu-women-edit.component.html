@@ -1,0 +1,593 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <app-menu-musulman></app-menu-musulman>
+      <header>
+        <h3 class="task-head"> تعديل المسلمة</h3>
+      </header>
+
+
+
+      <!-----Test The -->
+      <form class="form-row events-form mb-12" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="accordion" id="accordionExample">
+
+
+          <div class="card" style="width:1000px">
+
+            <div class="courses" id="headingOne">
+
+              <a class="accord" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                البيانات الأساسية
+              </a>
+
+            </div>
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body">
+
+
+                <div class="events1">
+
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+
+                        <div class="col-md-6">
+                          <label for="">رقم الملف</label>
+                          <input type="number" name="numdos" #numdos="ngModel" [(ngModel)]="mus.numdos" required>
+
+                          <div *ngIf="numdos.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                            مطلوب رقم الملف.
+                          </div>
+
+                        </div>
+                        <div class="col-md-6">
+                          <label for="">الداعية</label>
+                          <input type="text" name="predicateur" #predicateur="ngModel" [(ngModel)]="mus.predicateur" required>
+
+                          <div *ngIf="predicateur.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                            مطلوب الداعية.
+                          </div>
+
+                        </div>
+                        <div class="col-md-6">
+                          <label for="">الاسم القديم</label>
+                          <input type="text" name="prevnom" #prevnom="ngModel" [(ngModel)]="mus.prevnom" required>
+
+                          <div *ngIf="prevnom.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                            مطلوب الاسم القديم.
+                          </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                          <label for="">الاسم الجديد</label>
+                          <input type="text" name="nvnom" #nvnom="ngModel" [(ngModel)]="mus.nvnom">
+                        </div>
+
+                        <div class="col-md-6">
+                          <label for="">الاسم الانجليزي</label>
+                          <input type="text" name="engnom" #engnom="ngModel" [(ngModel)]="mus.engnom" required>
+
+                          <div *ngIf="engnom.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                            مطلوب الاسم الانجليزي.
+                          </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group form-inline">
+                            <label for="inputhijdate">تاريخ الإسلام هجري</label>
+
+                            <div id="input_container">
+                              <a (click)="d.toggle()"><i id="input_icon" class="fa fa-calendar-alt"></i></a>
+                              <input id="inputhijdate" class="form-control" style="width:160px;"
+                                     name="datehij" #datehij="ngModel"
+                                     [(ngModel)]="model" ngbDatepicker
+                                     #d="ngbDatepicker" (dateSelect)="onDateSelect($event)">
+
+                            </div>
+                            <div *ngIf="datehij.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                              مطلوب تاريخ الإسلام هجري.
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                          <label>تاريخ الإسلام ميلادي</label>
+                          <input type="date" name="datemil" #datemil="ngModel" [(ngModel)]="mus.datemil" class="gregorian-date-picker" required />
+
+                          <div *ngIf="datemil.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                            مطلوب تاريخ الإسلام ميلادي.
+                          </div>
+
+                        </div>
+                        <div class="col-md-6">
+                          <label for="">اليوم</label>
+                          <input type="text" name="jours" #jours="ngModel" [(ngModel)]="mus.jours" required>
+
+                          <div *ngIf="jours.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                            مطلوب اليوم.
+                          </div>
+
+                        </div>
+                        <div class="col-md-6">
+                          <label for="">الجنسية</label>
+                          <input type="text" name="nat" #nat="ngModel" [(ngModel)]="mus.nat" required>
+
+                          <div *ngIf="nat.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                            مطلوب الجنسية.
+                          </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                          <label for="">اللغة</label>
+                          <input type="text" name="langue" #langue="ngModel" [(ngModel)]="mus.langue" required>
+
+                          <div *ngIf="langue.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                            مطلوب اللغة.
+                          </div>
+
+                        </div>
+                        <div class="col-md-6">
+                          <label for="">رقم الإقامة</label>
+                          <input type="text" name="residence" #residence="ngModel" [(ngModel)]="mus.residence">
+
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="form-group form-inline">
+                            <label for="inputhijdate">تاريخها هجري</label>
+
+                            <div id="input_container">
+                              <a (click)="c.toggle()"><i id="input_icon" class="fa fa-calendar-alt"></i></a>
+                              <input id="inputhijdate2" class="form-control" style="width:160px;"
+                                     name="attribut2" #attribut2="ngModel"
+                                     [(ngModel)]="model1" ngbDatepicker
+                                     #c="ngbDatepicker" (dateSelect)="onDateSelect2($event)">
+                            </div>
+                            <div *ngIf="datehij.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                              مطلوب تاريخ الإسلام هجري.
+                            </div>
+                          </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                          <label>تاريخها ميلادي</label>
+                          <input type="date" name="dateresidence" #dateresidence="ngModel" [(ngModel)]="mus.dateresidence" class="gregorian-date-picker" />
+                        </div>
+
+
+
+                        <div class="col-md-6">
+                          <label for="">مصدرها</label>
+                          <input type="text" name="sourceres" #sourceres="ngModel" [(ngModel)]="mus.sourceres">
+                        </div>
+
+                        <div class="col-md-6">
+                          <label for="">الديانة</label>
+                          <input type="text" name="religion" #religion="ngModel" [(ngModel)]="mus.religion" required>
+
+                          <div *ngIf="religion.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                            مطلوب الديانة.
+                          </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                          <label for="">رقم الجواز</label>
+                          <input type="text" name="numpass" #numpass="ngModel" [(ngModel)]="mus.numpass">
+                        </div>
+
+                        <div class="col-md-6">
+                          <label for="">تاريخه</label>
+                          <input type="date" name="datepass" #datepass="ngModel" [(ngModel)]="mus.datepass">
+                        </div>
+
+                        <div class="col-md-6">
+                          <label for="">مصدره</label>
+                          <input type="text" name="sourcepass" #sourcepass="ngModel" [(ngModel)]="mus.sourcepass" required>
+
+                          <div *ngIf="sourcepass.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                            مطلوب مصدره.
+                          </div>
+
+                        </div>
+
+                        <div class="col-md-6">
+                          <label for="">تاريخ الميلاد</label>
+                          <input type="date" name="datenais" #datenais="ngModel" [(ngModel)]="mus.datenais" required>
+
+                          <div *ngIf="datenais.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                            مطلوب تاريخ الميلاد.
+                          </div>
+
+                        </div>
+                        <div class="col-md-6">
+                          <label for="">العمل</label>
+                          <input type="text" name="travail" #travail="ngModel" [(ngModel)]="mus.travail">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="">الحي</label>
+                          <input type="text" name="cite" #cite="ngModel" [(ngModel)]="mus.cite">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="">العنوان</label>
+                          <input type="text" name="adr" #adr="ngModel" [(ngModel)]="mus.adr">
+                        </div>
+                        <div class="col-md-6">
+                          <label for="">الجوال</label>
+                          <input type="text" name="telmus" #telmus="ngModel" [(ngModel)]="mus.telmus" required>
+
+                          <div *ngIf="telmus.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                            مطلوب الجوال.
+                          </div>
+
+                        </div>
+                        <div class="col-md-6">
+                          <label for="">حساب تواصل اجتماعي</label>
+                          <input type="text" name="urlsm" #urlsm="ngModel" [(ngModel)]="mus.urlsm" style="width:500px">
+                        </div>
+
+
+
+                        <br />
+                        <br />
+
+
+                      </div>
+
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!------------------------->
+          <div class="card">
+            <div class="courses" id="headingFive">
+
+              <a class="accord" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                بيانات الكفيل
+              </a>
+
+            </div>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+              <div class="card-body">
+
+                <div class="events1">
+
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+
+                        <div class="ml-3">
+                          <label for="">الاسم</label>
+                          <input type="text" name="garantnom" #garantnom="ngModel" [(ngModel)]="mus.garantnom" required>
+                          <div *ngIf="telmus.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                            مطلوب الاسم.
+                          </div>
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="">نوع الكفيل</label>
+                          <select name="garanttype" #garanttype="ngModel" [(ngModel)]="mus.garanttype">
+                            <option value="فرد">فرد</option>
+                            <option value="شركة">شركة</option>
+                          </select>
+                        </div>
+                        <div class="ml-3">
+                          <label for="">سجل الحاسب</label>
+                          <input type="text" name="registre" #registre="ngModel" [(ngModel)]="mus.registre">
+                        </div>
+                        <div class="ml-3">
+                          <label for="">الجوال</label>
+                          <input type="text" name="telgarant" #telgarant="ngModel" [(ngModel)]="mus.telgarant">
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!------------------------->
+
+          <div class="card">
+            <div class="courses" id="headingFive">
+
+              <a class="accord" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                المتابعة
+              </a>
+
+            </div>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+              <div class="card-body">
+
+                <div class="events1">
+
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+                        <div class="ml-3">
+                          <label for="">إكمال الملف</label>
+                          <select name="files" #files="ngModel" [(ngModel)]="mus.files">
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+                        <div class="ml-3">
+                          <label for="">هدية الإشهار</label>
+                          <select name="pub" #pub="ngModel" [(ngModel)]="mus.pub">
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+                        <div class="ml-3">
+                          <label for="">مشهد مؤقت</label>
+                          <select name="scene" #scene="ngModel" [(ngModel)]="mus.scene">
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+                        <div class="ml-3">
+                          <label for="">الدورة التأسيسية</label>
+                          <select name="attribut3" #attribut3="ngModel" [(ngModel)]="mus.attribut3">
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+                        <div class="ml-3">
+                          <label for="">اختبار الدورة</label>
+                          <select name="test" #test="ngModel" [(ngModel)]="mus.test">
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+                        <div class="ml-3">
+                          <label for="">هدية الدورة</label>
+                          <select name="cadeauxtest" #cadeauxtest="ngModel" [(ngModel)]="mus.cadeauxtest">
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+                        <div class="ml-3">
+                          <label for="">استلام الوثيقة</label>
+                          <select name="recep" #recep="ngModel" [(ngModel)]="mus.recep">
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+                        <div class="ml-3">
+                          <label for="">تغيير الديانة</label>
+                          <select name="change" #change="ngModel" [(ngModel)]="mus.change">
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+                        <div class="ml-3">
+                          <label for="">حفل التكريم</label>
+                          <select name="soiree" #soiree="ngModel" [(ngModel)]="mus.soiree">
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+                        <div class="ml-3">
+                          <label for="">الختان</label>
+                          <select name="circonsion" #circonsion="ngModel" [(ngModel)]="mus.circonsion">
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+                        <div class="ml-3">
+                          <label for="">العمرة</label>
+                          <select name="omra" #omra="ngModel" [(ngModel)]="mus.omra">
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+                        <div class="ml-3">
+                          <label for="">المدينة</label>
+                          <select name="city" #city="ngModel" [(ngModel)]="mus.city">
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+                        <div class="ml-3">
+                          <label for="">النزهة</label>
+                          <select name="walking" #walking="ngModel" [(ngModel)]="mus.walking">
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+                        <div class="ml-3">
+                          <label for="">الحج</label>
+                          <select name="haj" #haj="ngModel" [(ngModel)]="mus.haj">
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+                        <div class="ml-3">
+                          <label for="">غادر المملكة</label>
+                          <select name="depart" #depart="ngModel" [(ngModel)]="mus.depart">
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+                        <div class="ml-3">
+                          <label for="">مراسلة المغادرة</label>
+                          <select name="chatdep" #chatdep="ngModel" [(ngModel)]="mus.chatdep">
+                            <option value="نعم">نعم</option>
+                            <option value="لا">لا</option>
+                          </select>
+                        </div>
+                        <div class="form-group col-md-12">
+                          <label for="">ملاحظات</label>
+                          <textarea id="" class="form-control" rows="5" name="req" #req="ngModel" [(ngModel)]="mus.req"></textarea>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!------------------------->
+
+          <div class="card">
+            <div class="courses" id="headingFive">
+
+              <a class="accord" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                المرفقات
+              </a>
+
+            </div>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+              <div class="card-body">
+
+                <div class="events1">
+
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+                        <div class="ml-3">
+
+                          <label for="number">الجواز</label>
+                          <ngx-dropzone (change)="uploadPass($event);onSelect($event)" class="dropzone" #inputFile>
+                            <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                            <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+                              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                          </ngx-dropzone>
+
+
+                        </div>
+
+                        <div class="ml-3">
+
+                          <label for="number">الإقامة</label>
+                          <ngx-dropzone (change)="uploadResi($event);onSelect2($event)" class="dropzone" #inputFile>
+                            <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                            <ngx-dropzone-preview *ngFor="let f of files2" [removable]="true" (removed)="onRemove2(f)">
+                              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                          </ngx-dropzone>
+
+
+                        </div>
+
+                        <div class="ml-3">
+
+                          <label for="number">الصورة</label>
+                          <ngx-dropzone (change)="uploadPhoto($event);onSelect3($event)" class="dropzone" #inputFile>
+                            <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                            <ngx-dropzone-preview *ngFor="let f of files3" [removable]="true" (removed)="onRemove3(f)">
+                              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                          </ngx-dropzone>
+
+
+                        </div>
+                        <br /> <br />
+                        <div class="col-md-12">
+                          <div class="table-responsive new-table2">
+                            <table class="table table-bordered text-center table-striped">
+                              <thead class="thead-gestimary">
+                                <tr>
+
+
+                                  <th scope="col">النوع</th>
+                                  <th scope="col">	الاسم </th>
+
+                                  <th scope="col">حذف</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr *ngFor="let dp of listResi; let i = index;">
+
+                                  <td>{{dp.typefile}}</td>
+                                  <td>{{dp.paths}}</td>
+                                  <td><a (click)="delFiles(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                                </tr>
+
+                              </tbody>
+
+                              <tbody>
+                                <tr *ngFor="let dp of listPass; let i = index;">
+
+                                  <td>{{dp.typefile}}</td>
+                                  <td>{{dp.paths}}</td>
+                                  <td><a (click)="delFiles(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                                </tr>
+
+                              </tbody>
+
+                              <tbody>
+                                <tr *ngFor="let dp of listphoto; let i = index;">
+
+                                  <td>{{dp.typefile}}</td>
+                                  <td>{{dp.paths}}</td>
+                                  <td><a (click)="delFiles(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                                </tr>
+
+                              </tbody>
+                            </table>
+
+                            <br />
+
+                          </div>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 text-left">
+          <button class="btn btn-info px-4" type="submit">حفظ</button>
+        </div>
+      </form>
+    </div>
+
+  </div>
+
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+</footer>

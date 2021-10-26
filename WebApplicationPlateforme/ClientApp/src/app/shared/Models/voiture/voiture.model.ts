@@ -8,9 +8,12 @@ matricule:string;
   datefinforme:string;
   recepeteur:string;
   datefinassurance:string;
-  idrecepteur:string;
-
-    
+  idrecepteur: string;
+  kilometrage :string;
+ datehuile :string;
+ datevisite :string;
+ recepteurinterne :string;
+ recepteurexterne :string;
 attribut1: number;
 attribut2:string;
 attribut3:string;

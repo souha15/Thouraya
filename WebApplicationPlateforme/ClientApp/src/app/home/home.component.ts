@@ -12,8 +12,9 @@ import { NotifMsgInterneService } from '../shared/Services/Msg Interne/notif-msg
 import { NotifMsgInterne } from '../shared/Models/Msg Interne/notif-msg-interne.model';
 import { Ticket2Service } from '../shared/Services/Ticket2/ticket2.service';
 import { Ticket2 } from '../shared/Models/Ticket2/ticket2.model';
-import { PointageService } from '../shared/Services/Pointage/pointage.service';
+import { PointageService } from '../shared/Services/Pointage/pointage.service'; 
 import { Pointage } from '../shared/Models/Pointage/pointage.model';
+import { Tache } from '../shared/Models/Taches/tache.model';
 
 @Component({
   selector: 'app-home',
@@ -83,8 +84,8 @@ export class HomeComponent implements OnInit {
   // Get User Connected
   UserIdConnected: string;
   UserNameConnected: string;
-  task: TacheNotif[] = [];
-  task2: TacheNotif[] = [];
+  task: Tache[] = [];
+  task2: Tache[] = [];
   nb: number;
   roleslist: any = [];
   testrole: boolean = false;
@@ -120,9 +121,9 @@ export class HomeComponent implements OnInit {
         })
         console.log(this.testrole)
       })
-      this.notiftaskService.ListTache().subscribe(res => {
+      this.TacheService.ListTache().subscribe(res => {
         this.task = res
-        this.task2 = this.task.filter(item => item.idUserAff == this.UserIdConnected && item.nomCreator == "0");
+        this.task2 = this.task.filter(item => item.affectedName == this.UserIdConnected && item.etat == "في الإنتظار");
         this.nb = this.task2.length;
         if (this.nb != 0) {
           this.shownb = true

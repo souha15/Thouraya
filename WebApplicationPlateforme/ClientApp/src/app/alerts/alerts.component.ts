@@ -50,6 +50,12 @@ export class AlertsComponent implements OnInit {
   dem4: DemPayCheque[] = [];
   nbr: number = 0;
   nbd: number = 0;
+  testroleList = ["DIRECTORGENERAL"];
+  testroledirList = ["DIRECTORETAB", "DIRECTORADMN"];
+  testroleadminList = ["ADMINISTRATEUR"]
+  checker(arr1, arr2) {
+    return arr1.some(elem => arr2.includes(elem));
+  }
   getUserConnected() {
 
 
@@ -59,23 +65,27 @@ export class AlertsComponent implements OnInit {
       this.sexe = res.sexe;
       this.UserService.getUserRoles(this.UserIdConnected).subscribe(res => {
         this.roleslist = res;
-        this.roleslist.forEach(item => {
-          if (item == "DIRECTORGENERAL") {
-            this.testrole = true;
-          } else { this.testrole = false; }
-      
+        if (this.checker(this.roleslist, this.testroleList)) {
+          this.testrole = true;
 
-          if (item == "DIRECTORETAB" || item =="DIRECTORADMN") {
-            this.testroledir = true;
-          } else {
-            this.testroledir = false;
-          }
+        } else {
+          this.testrole = false;
+        }
 
-          if (item == "ADMINISTRATEUR") {
-            this.testroleadmin = true;
-          } else {
-            this.testroleadmin = false;
-          }
+        if (this.checker(this.roleslist, this.testroledirList)) {
+          this.testroledir = true;
+
+        } else {
+          this.testroledir = false;
+        }
+
+
+        if (this.checker(this.roleslist, this.testroleadminList)) {
+          this.testroleadmin = true;
+
+        } else {
+          this.testroleadmin = false;
+        }
 
           this.demandeService.Get().subscribe(res => {
             this.dem1 = res
@@ -94,7 +104,7 @@ export class AlertsComponent implements OnInit {
 
 
           })
-        })
+
 
       })
     })

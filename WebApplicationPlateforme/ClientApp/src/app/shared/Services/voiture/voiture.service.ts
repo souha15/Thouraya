@@ -27,6 +27,9 @@ export class VoitureService {
     return this.http.post<Voiture>(this.rootURL + '/voitures', dotation, this.headers);
   }
 
+  PutObservable(unite: Voiture) {
+    return this.http.put<Voiture>(this.rootURL + '/voitures/' + unite.id, unite, this.headers);
+  }
   //Save Type Dotation
   Post() {
     return this.http.post(this.rootURL + '/voitures', this.formData, this.headers);

@@ -26,7 +26,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   onSubmit(form: NgForm) {
-    if (this.activation == true) {
+
       this.UserService.login(form.value).subscribe(
         (res: any) => {
           localStorage.setItem('token', res.token);
@@ -40,11 +40,9 @@ export class LoginPageComponent implements OnInit {
         }
 
       );
-    } else {
-      this.tostr.error("حسابك غير مفعل", "فشل في تسجيل الدخول");
-    }
+  
   }
-  username: string;
+/*  username: string;
   activation: boolean;
   getUserName(event) {
     this.username = event.target.value;
@@ -55,5 +53,5 @@ export class LoginPageComponent implements OnInit {
         this.activation = false;
       }
     })
-  }
+  }*/
 }

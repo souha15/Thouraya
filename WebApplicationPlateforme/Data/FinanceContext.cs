@@ -401,5 +401,7 @@ namespace WebApplicationPlateforme.Data
         /** Nouveau Musulman Part **/  
         public DbSet <musulman> musulmans { get; set; }
         public DbSet <filesmusulman> filesmusulmans { get; set; }
+
+        
 }
 }

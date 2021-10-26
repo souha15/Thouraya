@@ -34,6 +34,7 @@
                 <th scope="col">البدلات</th>
                 <th scope="col">الحسميات</th>
                 <th scope="col">الإجمالي</th>
+                <th scope="col">الصافي</th>
                 <th scope="col" *ngIf="testrole">حذف</th>
               </tr>
             </thead>
@@ -45,6 +46,7 @@
                 <td>{{ev.indemnite}}</td>
                 <td>{{ev.retrait}}</td>
                 <td>{{ev.tot}}</td>
+                <td>{{ev.leplus}}</td>
                 <td *ngIf="testrole"><a (click)="onDelete(ev.mois)" class="btn btn-danger"><i class="fa fa-trash"></i>حذف</a></td>
               </tr>
             </tbody>
@@ -73,5 +75,5 @@
 </div>
 <!-- Footer -->
 <footer class="text-center">
- <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
 </footer>

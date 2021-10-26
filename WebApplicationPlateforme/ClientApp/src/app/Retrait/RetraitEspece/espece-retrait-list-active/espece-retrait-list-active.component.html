@@ -1,0 +1,186 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <app-menu-retrait-espece></app-menu-retrait-espece>
+      <h2 class="task-head">متابعة مستقطع مفعل </h2>
+
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
+      <div class="tabel-cont">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col" (click)="sort('id')">
+                <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col">الاسم</th>
+              <th scope="col">الجوال</th>
+              <th scope="col">بداية الإستقطاع</th>
+              <th scope="col">نوع التبرع</th>
+              <th scope="col">المبلغ</th>
+              <th scope="col">المندوب</th>
+              <th scope="col">الحالة</th>
+              <th scope="col">عرض التفاصيل</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cg of retList | orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: c }; let i = index">
+
+              <th (click)="populateForm(cg)">{{(c-1) * count + i + 1}}</th>
+              <td (click)="populateForm(cg)">{{cg.nom}}</td>
+              <td (click)="populateForm(cg)">{{cg.tel}}</td>
+              <td (click)="populateForm(cg)" *ngIf="cg.datedebuthij != null">{{cg.datedebuthij}}</td>
+              <td (click)="populateForm(cg)" *ngIf="cg.datedebutmiledi != null">{{cg.datedebutmiledi}}</td>
+              <td (click)="populateForm(cg)" *ngIf="cg.datedebutmiledi == null && cg.datedebuthij == null">{{cg.datedebutmiledi}}</td>
+              <td (click)="populateForm(cg)">{{cg.typedons}}</td>
+              <td (click)="populateForm(cg)">{{cg.prix}}</td>
+              <td (click)="populateForm(cg)">{{cg.delegues}}</td>
+              <td (click)="populateForm(cg)"
+                  [ngClass]="{
+
+ 'success': cg.etat === 'مفعل',
+  'denied': cg.etat === 'متعثر',
+  'wait': cg.etat === 'في الإنتظار'
+}">
+                {{cg.etat}}
+              </td>
+              <td>
+                <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-eye fa-lg"></i>
+                </a>
+              </td>
+
+
+            </tr>
+
+          </tbody>
+
+
+        </table>
+      </div>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+
+          <pagination-controls (pageChange)="c = $event" previousLabel="السابق"
+                               nextLabel="التالي"></pagination-controls>
+        </ul>
+      </nav>
+
+
+
+
+
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+<div id="myModal" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تفاصيل استقطاع</h2>
+          <div class="form-row task-form service-form text-center">
+            <div class="col-md-6">
+              <div>
+                <label> الاسم</label>
+                <p>{{retrait.nom}}</p>
+              </div>
+              <div>
+                <label>الجوال</label>
+                <p>{{retrait.tel}}</p>
+              </div>
+              <div>
+                <label>الجهة</label>
+                <p>{{retrait.organisme}}</p>
+              </div>
+              <div>
+                <label>رقم الحساب</label>
+                <p>{{retrait.rib}}</p>
+              </div>
+              <div>
+                <label>البنك</label>
+                <p>{{retrait.banque}}</p>
+              </div>
+              <div *ngIf="retrait.datedebuthij != null">
+                <label>بداية الاستقطاع</label>
+                <p>{{retrait.datedebuthij}}</p>
+              </div>
+              <div *ngIf="retrait.datedebutmiledi != null">
+                <label>بداية الاستقطاع</label>
+                <p>{{retrait.datedebutmiledi}}</p>
+              </div>
+
+              <div *ngIf="retrait.datefinhij != null">
+                <label>نهاية الاستقطاع</label>
+                <p>{{retrait.datefinhij}}</p>
+              </div>
+
+              <div *ngIf="retrait.datefinmiledi != null">
+                <label>نهاية الاستقطاع</label>
+                <p>{{retrait.datefinmiledi}}</p>
+              </div>
+
+            </div>
+            <div class="col-md-6">
+              <div>
+                <label>حساب المستفيد</label>
+                <p>{{retrait.ribben}}</p>
+              </div>
+              <div>
+                <label>نوع التبرع</label>
+                <p>{{retrait.typedons}}</p>
+              </div>
+              <div>
+                <label>المبلغ</label>
+                <p>{{retrait.prix}}</p>
+              </div>
+              <div>
+                <label>المندوب</label>
+                <p>{{retrait.delegues}}</p>
+              </div>
+
+              <div>
+                <label>أشهر الإستقطاع</label>
+                <p *ngIf="retrait.janvier != null" style="width:50px;">{{retrait.janvier}}</p>&nbsp;
+                <p *ngIf="retrait.fevrier != null" style="width:50px;">{{retrait.fevrier}}</p>&nbsp;
+                <p *ngIf="retrait.mars != null" style="width:50px;">{{retrait.mars}}</p>&nbsp;
+                <p *ngIf="retrait.avril != null" style="width:50px;">{{retrait.avril}}</p>&nbsp;
+                <p *ngIf="retrait.mai != null" style="width:50px;">{{retrait.mai}}</p>&nbsp;
+                <p *ngIf="retrait.juin != null" style="width:50px;">{{retrait.juin}}</p>&nbsp;
+                <p *ngIf="retrait.juillet != null" style="width:50px;">{{retrait.juillet}}</p>&nbsp;
+                <p *ngIf="retrait.aout != null" style="width:50px;">{{retrait.aout}}</p>&nbsp;
+                <p *ngIf="retrait.septembre != null" style="width:50px;">{{retrait.septembre}}</p>&nbsp;
+                <p *ngIf="retrait.octobre != null" style="width:50px;">{{retrait.octobre}}</p>&nbsp;
+                <p *ngIf="retrait.novembre != null" style="width:50px;">{{retrait.novembre}}</p>&nbsp;
+                <p *ngIf="retrait.decembre != null" style="width:50px;">{{retrait.decembre}}</p>&nbsp;
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+

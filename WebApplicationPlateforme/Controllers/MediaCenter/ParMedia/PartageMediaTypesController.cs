@@ -14,9 +14,9 @@ namespace WebApplicationPlateforme.Controllers.MediaCenter.ParMedia
     [ApiController]
     public class PartageMediaTypesController : ControllerBase
     {
-        private readonly FinanceContext _context;
+        private readonly DawaaContext _context;
 
-        public PartageMediaTypesController(FinanceContext context)
+        public PartageMediaTypesController(DawaaContext context)
         {
             _context = context;
         }

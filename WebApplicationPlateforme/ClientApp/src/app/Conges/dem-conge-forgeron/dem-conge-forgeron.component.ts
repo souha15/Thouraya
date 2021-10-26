@@ -111,7 +111,7 @@ export class DemCongeForgeronComponent implements OnInit {
     let newDated = new Date(this.dated)
     let newDatef = new Date(this.datef);
     var diff = Math.abs(newDated.getTime() - newDatef.getTime());
-    this.diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+    this.diffDays = Math.ceil(diff / (1000 * 3600 * 24)) + 1;
     this.conge.duree = this.diffDays.toString();
     if (this.diffDays <= 132) {
       this.testdays = true;

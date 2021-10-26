@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using WebApplicationPlateforme.Model.AdministrativeCommunication;
+
+using WebApplicationPlateforme.Model.NotificationSettings;
+using WebApplicationPlateforme.Model.Pointage;
+using WebApplicationPlateforme.Model.RetaraitPart;
 
 namespace WebApplicationPlateforme.Data
 {
@@ -12,6 +11,10 @@ namespace WebApplicationPlateforme.Data
     {
         public AdministrativeCommunicationContext(DbContextOptions<AdministrativeCommunicationContext> options) : base(options) { }
 
-     
+        public DbSet<RetraitPersonne> RetraitPersonnes { get; set; }
+        public DbSet<TypeDonsRetrait> TypeDonsRetraits { get; set; }
+        public DbSet<NotifText> NotifTexts { get; set; }
+        public DbSet<AddresseMac> AddresseMacs { get; set; }
+
     }
 }

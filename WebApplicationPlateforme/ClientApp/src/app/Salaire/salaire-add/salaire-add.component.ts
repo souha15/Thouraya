@@ -72,32 +72,33 @@ export class SalaireAddComponent implements OnInit {
   indemnite: string;
   user: string;
   tot: number;
+  resi: number = 0;
+  userData: UserDetail = new UserDetail();
   getSalaireDetail(event) {
     this.user = event.target.value;
     this.UserService.GetUserById(event.target.value).subscribe(res => {
+      this.userData = res;
       this.salaire.userName = res.fullName;
       this.salaire.salaire = res.salaire;
       this.salairev = res.salaire;
       this.salaire.indemnite = res.indemnite;
-      this.salaire.autreIndemnite = res.autreIndemnite;
-      this.salaire.assurance = res.typeEmploi;
-      this.assurance = res.typeEmploi;
-      this.totindemnite = +res.indemnite + +res.autreIndemnite
-      this.salaire.totIndemnite = this.totindemnite.toString();
-      this.indemnite = this.totindemnite.toString();
-
+      this.resi = +res.autreIndemnite;
+      this.salaire.assurance = res.autreIndemnite;
+      this.indemnite = res.indemnite;
+      this.tot = +this.resi + +this.salairev + +this.indemnite;
+      var totIndemnite = +this.resi + +this.indemnite;
+      this.salaire.totIndemnite = totIndemnite.toString();
     })
   }
 
-  retrait: string;
+
+  retrait: number = 0 ;
   test: boolean = false;
+  net: number = 0;
   retratittest(event) {
-    this.retrait = event.target.value;
-    if (this.retrait != null && this.leplus != null && this.user!=null) {
-      this.test = true;
-      this.tot = (+this.totindemnite + +this.salairev + +this.leplus) - +this.assurance - +this.retrait
-    } else {
-      this.test = false;
+    this.retrait = +event.target.value
+    if (this.retrait != null) {
+      this.net = this.tot - this.retrait
     }
   }
 
@@ -128,9 +129,14 @@ export class SalaireAddComponent implements OnInit {
       this.salaire.userNameCreator = this.UserNameConnected;
       this.salaire.dateenreg = this.date;
       this.salaire.tot = this.tot.toString();
+      this.salaire.leplus = this.net.toString(); 
       this.salaireService.Add(this.salaire).subscribe(res => {
-        form.resetForm();
+        
         this.toastr.success("تم تسجيل  بنجاح", " تسجيل ");
+        this.userData = new UserDetail()
+        this.net = 0;
+        this.tot = 0;
+        this.salaire.retrait = null;
         this.getSDetails();
         this.isValidFormSubmitted = false;
       },

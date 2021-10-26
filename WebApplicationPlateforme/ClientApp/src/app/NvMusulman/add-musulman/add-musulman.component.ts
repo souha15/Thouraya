@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, Injectable , EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { Musulman } from '../../shared/Models/NvMusulman/musulman.model';
 import { MusulmanService } from '../../shared/Services/NvMusulman/musulman.service';
 import { FilesmusulmanService } from '../../shared/Services/NvMusulman/filesmusulman.service';
@@ -10,19 +10,58 @@ import { ProgressStatusEnum } from '../../shared/Enum/progress-status-enum.enum'
 import { HttpEventType } from '@angular/common/http';
 import { FilesMusulman } from '../../shared/Models/NvMusulman/files-musulman.model';
 import { NgForm } from '@angular/forms';
+import {
+  NgbDateStruct, NgbCalendar, NgbCalendarIslamicUmalqura, NgbDatepickerI18n, NgbDate
+} from '@ng-bootstrap/ng-bootstrap';
+
+import { TranslationWidth } from '@angular/common';
+
+
+const WEEKDAYS = ['ن', 'ث', 'ر', 'خ', 'ج', 'س', 'ح'];
+const MONTHS = ['محرم', 'صفر', 'ربيع الأول', 'ربيع الآخر', 'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 'رمضان', 'شوال',
+  'ذو القعدة', 'ذو الحجة'];
+
+@Injectable()
+export class IslamicI18n extends NgbDatepickerI18n {
+
+  getWeekdayShortName(weekday: number): string {
+    return WEEKDAYS[weekday - 1];
+  }
+  getMonthShortName(month: number) {
+    return MONTHS[month - 1];
+  }
+
+  getMonthFullName(month: number) {
+    return MONTHS[month - 1];
+  }
+
+  getWeekdayLabel(weekday: number, width?: TranslationWidth) {
+    return WEEKDAYS[weekday - 1];
+  }
+
+  getDayAriaLabel(date: NgbDateStruct): string {
+    return `${date.day}-${date.month}-${date.year}`;
+  }
+}
 
 @Component({
   selector: 'app-add-musulman',
   templateUrl: './add-musulman.component.html',
-  styleUrls: ['./add-musulman.component.css']
+  styleUrls: ['./add-musulman.component.css'],
+  providers: [
+    { provide: NgbCalendar, useClass: NgbCalendarIslamicUmalqura },
+    { provide: NgbDatepickerI18n, useClass: IslamicI18n }
+  ]
 })
 export class AddMusulmanComponent implements OnInit {
-
+  model: NgbDateStruct;
+  model1: NgbDateStruct;
   @Input() public disabled: boolean;
   @Output() public uploadStatuss: EventEmitter<ProgressStatus>;
   @ViewChild('inputFile') inputFile: ElementRef;
 
-  constructor(private musService: MusulmanService,
+  constructor(private calendar: NgbCalendar,
+    private musService: MusulmanService,
     public serviceupload: UploadDownloadService,
     private toastr: ToastrService,
     private FilesService: FilesmusulmanService,
@@ -32,8 +71,24 @@ export class AddMusulmanComponent implements OnInit {
   ngOnInit(): void {
     this.getUserConnected();
     this.getFiles();
+  
   }
 
+  onDateSelect(date: NgbDate) {
+      
+    var day :string = date.day.toString()
+    var month: string  = date.month.toString()
+    var year: string = date.year.toString()
+    this.mus.datehij = year + "-" + month + "-" + day ;
+
+  }
+
+  onDateSelect2(date2: NgbDate) {
+    var day: string = date2.day.toString()
+    var month: string = date2.month.toString()
+    var year: string = date2.year.toString()
+    this.mus.attribut2 = year + "-" + month + "-" + day;
+  }
   /** Get User Connected **/
 
   UserId: string;

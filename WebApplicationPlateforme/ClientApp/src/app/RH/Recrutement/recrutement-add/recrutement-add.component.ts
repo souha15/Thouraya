@@ -101,12 +101,11 @@ export class RecrutementAddComponent implements OnInit {
             console.log(item)
             this.http.post(path + '/PiecesJointesRcs', this.pj)
               .subscribe(res => {
-                this.serviceupload.refreshListRc();
-                this.GetFileName();
+           
               });
           })
 
-
+          this.files1 = [];
           this.toastr.success("تمت الإضافة بنجاح", "نجاح");
           form.resetForm();
         },
@@ -117,6 +116,17 @@ export class RecrutementAddComponent implements OnInit {
     }
   }
   //Files
+  //Files
+  files1: File[] = [];
+  onSelect(event) {
+    //console.log(event);
+    this.files1.push(...event.addedFiles);
+  }
+
+  onRemove(event) {
+    this.files1.splice(this.files1.indexOf(event), 1);
+  }
+
 
   public response: { 'dbpathsasstring': '' };
   public isCreate: boolean;
@@ -165,8 +175,8 @@ export class RecrutementAddComponent implements OnInit {
   file: any;
   fileslist: string[] = [];
   public upload(event) {
-    if (event.target.files && event.target.files.length > 0) {
-      this.file = event.target.files[0];
+    if (event.addedFiles && event.addedFiles.length > 0) {
+      this.file = event.addedFiles[0];
       this.uploadStatuss.emit({ status: ProgressStatusEnum.START });
       this.serviceupload.uploadFile(this.file).subscribe(
         data => {
@@ -176,7 +186,7 @@ export class RecrutementAddComponent implements OnInit {
                 this.uploadStatuss.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
                 break;
               case HttpEventType.Response:
-                this.inputFile.nativeElement.value = '';
+                // this.inputFile.nativeElement.value = '';
                 this.uploadStatuss.emit({ status: ProgressStatusEnum.COMPLETE });
                 break;
             }
@@ -190,7 +200,7 @@ export class RecrutementAddComponent implements OnInit {
         },
 
         error => {
-          this.inputFile.nativeElement.value = '';
+          /// this.inputFile.nativeElement.value = '';
           this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
         }
       );
@@ -199,23 +209,6 @@ export class RecrutementAddComponent implements OnInit {
     }
   }
 
+
   //DeleteFile
-
-  onDelete(Id) {
-    if (confirm('هل أنت متأكد من حذف هذا الملف ?')) {
-      this.serviceupload.deletePjRc(Id)
-        .subscribe(res => {
-          this.serviceupload.refreshListRc();
-          this.toastr.success("تم الحذف  بنجاح", "نجاح");
-        },
-
-          err => {
-            console.log(err);
-            this.toastr.warning('لم يتم الحذف  ', ' فشل');
-
-          }
-        )
-
-    }
-  }
 }

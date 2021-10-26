@@ -23,6 +23,11 @@ export class PointageService {
     })
   }
 
+  //GetMacAdress
+
+  GetMac() {
+    return this.http.get<string>(this.rootURL + '/GetMacAdress');
+  }
   //Create Pointage
 
   Add(Pointage: Pointage) {

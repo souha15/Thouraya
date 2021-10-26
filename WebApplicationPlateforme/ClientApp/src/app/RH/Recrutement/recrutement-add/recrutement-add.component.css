@@ -25,3 +25,13 @@ ul {
   font-weight: bold;
   font-size: 18px;
 }
+.file-label {
+  cursor: pointer;
+}
+
+.dropzone {
+  font-size: 18px;
+  color: #2196f3;
+  border: 2px dashed #2196f3;
+  width: 500px;
+}

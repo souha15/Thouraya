@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, Input, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, Input, EventEmitter, ElementRef, Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ProprietaireService } from '../../../../shared/Services/AdministrativeCommunication/proprietaire.service';
 import { UserServiceService } from '../../../../shared/Services/User/user-service.service';
@@ -23,11 +23,47 @@ import { UserDetail } from '../../../../shared/Models/User/user-detail.model';
 import { Administration } from '../../../../shared/Models/Administration/administration.model';
 import { Liaison } from '../../../../shared/Models/AdministrativeCommunication/liaison.model';
 import { LiaisonService } from '../../../../shared/Services/AdministrativeCommunication/liaison.service';
+import {
+  NgbDateStruct, NgbCalendar, NgbCalendarIslamicUmalqura, NgbDatepickerI18n, NgbDate
+} from '@ng-bootstrap/ng-bootstrap';
 
+import { TranslationWidth } from '@angular/common';
+import { TypeTransactionService } from '../../../../shared/Services/NewServicesForDawa/type-transaction.service';
+import { TbListening } from '../../../../shared/Models/Evenements/tb-listening.model';
+const WEEKDAYS = ['ن', 'ث', 'ر', 'خ', 'ج', 'س', 'ح'];
+const MONTHS = ['محرم', 'صفر', 'ربيع الأول', 'ربيع الآخر', 'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 'رمضان', 'شوال',
+  'ذو القعدة', 'ذو الحجة'];
+
+@Injectable()
+export class IslamicI18n extends NgbDatepickerI18n {
+
+  getWeekdayShortName(weekday: number): string {
+    return WEEKDAYS[weekday - 1];
+  }
+  getMonthShortName(month: number) {
+    return MONTHS[month - 1];
+  }
+
+  getMonthFullName(month: number) {
+    return MONTHS[month - 1];
+  }
+
+  getWeekdayLabel(weekday: number, width?: TranslationWidth) {
+    return WEEKDAYS[weekday - 1];
+  }
+
+  getDayAriaLabel(date: NgbDateStruct): string {
+    return `${date.day}-${date.month}-${date.year}`;
+  }
+}
 @Component({
   selector: 'app-enregistrer-tre',
   templateUrl: './enregistrer-tre.component.html',
-  styleUrls: ['./enregistrer-tre.component.css']
+  styleUrls: ['./enregistrer-tre.component.css'],
+  providers: [
+    { provide: NgbCalendar, useClass: NgbCalendarIslamicUmalqura },
+    { provide: NgbDatepickerI18n, useClass: IslamicI18n }
+  ]
 })
 export class EnregistrerTREComponent implements OnInit {
 
@@ -42,12 +78,14 @@ export class EnregistrerTREComponent implements OnInit {
     private proprietaireService: ProprietaireService,
     private organismeService: OrganismeService,
     private UserService: UserServiceService,
+    private calendar: NgbCalendar,
     private administrationService: AdministrationService,
     private transactionRecueService: TransactionService,
     private affectationService: AffectationService,
     private http: HttpClient,
     private liaisonService: LiaisonService,
     public serviceupload: UploadDownloadService,
+    public typeService: TypeTransactionService,
     private rootUrl: PathSharedService) {
     this.uploadStatuss = new EventEmitter<ProgressStatus>();
   }
@@ -61,8 +99,51 @@ export class EnregistrerTREComponent implements OnInit {
     this.getAdministrationList();
     this.getUsersList();
     this.getTrId();
+    this.getType()
   }
 
+  typeTr: TbListening[] = [];
+  getType() {
+    this.typeService.GetTalent().subscribe(res => {
+      this.typeTr = res
+    })
+  }
+
+  onDateSelect(date: NgbDate) {
+
+    var day: string = date.day.toString()
+    var month: string = date.month.toString()
+    var year: string = date.year.toString()
+    this.tr.date = year + "-" + month + "-" + day;
+
+  }
+
+
+  hij: boolean = false;
+  mil: boolean = false;
+  getDate(event) {
+    if (event.target.value == "2") {
+      this.hij = false;
+      this.mil = true;
+
+    }
+    else {
+      this.hij = true
+      this.mil = true;
+    }
+
+    if (event.target.value == "1") {
+      this.hij = true;
+      this.mil = false;
+
+    }
+    else {
+      this.hij = false;
+      this.mil = true;
+    }
+
+
+  }
   id: string;
   trlist: Transaction[] = [];
   max: number = 0;
@@ -79,7 +160,7 @@ export class EnregistrerTREComponent implements OnInit {
       })
 
       this.max+1
-      this.id = "21/" + this.max
+      this.id = this.max.toString();
       this.tr.typeRecue = this.id;
     })
   }
@@ -355,10 +436,10 @@ export class EnregistrerTREComponent implements OnInit {
     this.tr.dateenreg = this.date;
     this.tr.idUserCreator = this.UserIdConnected;
     this.tr.nomOrg = this.OrgName;
-    this.tr.type ="صادر عام "
+   
     this.tr.etat = "غير مستلمة"
     this.tr.attribut6 = "الأصل"
-    this.tr.date = this.date
+
 
     if (form.invalid) {
       this.isValidFormSubmittedTR = false;

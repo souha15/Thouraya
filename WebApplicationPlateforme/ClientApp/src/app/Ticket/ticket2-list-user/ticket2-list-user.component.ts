@@ -93,6 +93,9 @@ export class Ticket2ListUserComponent implements OnInit {
     this.tic = Object.assign({}, conge)
   }
 
+  getDetails(event) {
+    this.tic.attribut8 = event.target.value;
+  }
 
   //Receive Record
 

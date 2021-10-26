@@ -12,6 +12,9 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import { UploadDownloadService } from '../../shared/Services/Taches/upload-download.service';
 import { ProgressStatusEnum } from '../../shared/Enum/progress-status-enum.enum';
 import { FilesCars } from '../../shared/Models/Supplies/files-cars.model';
+import { UserDetail } from '../../shared/Models/User/user-detail.model';
+import { NotifCars } from '../../shared/Models/voiture/notif-cars.model';
+import { NotifCarsService } from '../../shared/Services/voiture/notif-cars.service';
 
 @Component({
   selector: 'app-cars-add',
@@ -30,14 +33,38 @@ export class CarsAddComponent implements OnInit {
     private rootUrl: PathSharedService,
     private toastr: ToastrService,
     private http: HttpClient,
-    public serviceupload: UploadDownloadService, ) {
+    public serviceupload: UploadDownloadService,
+    private tabService: NotifCarsService) {
     this.uploadStatuss = new EventEmitter<ProgressStatus>();}
 
   ngOnInit(): void {
     this.getUserConnected();
-    this.getrecpList();
+    this.getEmpList();
+   // this.getrecpList();
   }
 
+
+  //tabmec
+  tabmec: NotifCars = new NotifCars();
+
+  tabList: NotifCars[] = [];
+  tabList2: NotifCars[] = [];
+  i = 0;
+  tabtest: boolean;
+
+  addtab() {
+    this.tabtest = true;
+    this.tabList[this.i] = this.tabmec
+    this.tabmec = new NotifCars();
+    this.i = this.i + 1;
+  }
+
+  del1(dp, i) {
+    //this.benList.splice(i, 1)
+    this.tabList.splice(this.tabList.indexOf(dp), 1);
+    this.i = this.i - 1
+    this.tabmec = new NotifCars();
+  }
   // voitureList
   factList: Voiture[] = [];
   getrecpList() {
@@ -46,6 +73,37 @@ export class CarsAddComponent implements OnInit {
     })
   }
 
+  //get Employee List
+  usersList: UserDetail[] = [];
+  getEmpList() {
+    this.UserService.GetUsersList().subscribe(res => {
+      this.usersList = res;
+    })
+  }
+
+  getUserName(event) {
+
+    this.UserService.GetUserById(event.target.value).subscribe(res => {
+      this.voiture.recepeteur = res.fullName;
+    })
+  }
+
+  int: boolean = false;
+  ext: boolean = false;
+  inteext(event){
+    if (event.target.value == "1") 
+    {
+      this.int =true
+    } else {
+      this.int = false;
+    }
+
+    if (event.target.value == "0") {
+      this.ext = true
+    } else {
+      this.ext = false;
+    }
+}
   // Get User Connected
 
   UserIdConnected: string;
@@ -80,6 +138,21 @@ export class CarsAddComponent implements OnInit {
       this.voitureService.Add(this.voiture).subscribe(
         res => {
           this.idvoiture = res.id
+
+          if (this.tabtest) {
+            for (let i = 0; i < this.tabList.length; i++) {
+
+              this.tabmec = this.tabList[i]
+              this.tabmec.idvoiture = this.idvoiture;
+              this.tabService.Add(this.tabmec).subscribe(res => {
+                this.tabList2[i] = res
+
+              },
+                err => {
+                  this.toastr.error("  فشل في تسجيل	 ", "فشل")
+                })
+            }
+          }
           //video
 
           this.pj1.idVoiture = this.idvoiture;
@@ -124,7 +197,7 @@ export class CarsAddComponent implements OnInit {
           let path3 = this.rootUrl.getPath();
           this.fileslist3.forEach(item => {
             this.pj3.path = item;
-            this.http.post(path2 + '/FilesVoitures', this.pj2)
+            this.http.post(path2 + '/FilesVoitures', this.pj3)
               .subscribe(res => {
           
                 this.GetFileName();
@@ -133,13 +206,29 @@ export class CarsAddComponent implements OnInit {
           })
 
 
+          this.pj4.idVoiture = this.idvoiture;
+
+          this.pj4.type = 'الفاتورة'
+          let path4 = this.rootUrl.getPath();
+          this.fileslist4.forEach(item => {
+            this.pj2.path = item;
+            this.http.post(path2 + '/FilesVoitures', this.pj4)
+              .subscribe(res => {
+
+                this.GetFileName();
+
+              })
+          })
+
           this.toastr.success("تم التسجيل بنجاح", "نجاح")
           form.resetForm();
           this.files1 = [];
           this.files2 = [];
           this.files3 = [];
+          this.files4 = [];
           this.getrecpList();
-
+          this.tabList.splice(0, this.tabList.length);
+          this.tabtest = false;
 
         },
         err => {
@@ -161,6 +250,7 @@ export class CarsAddComponent implements OnInit {
   public pj1: FilesCars = new FilesCars();
   public pjs1: FilesCars[];
   public pj2: FilesCars = new FilesCars();
+  public pj4: FilesCars = new FilesCars();
   public pjs2: FilesCars[];
 
   public pj3: FilesCars = new FilesCars();
@@ -172,6 +262,7 @@ export class CarsAddComponent implements OnInit {
   files1: File[] = [];
   files2: File[] = [];
   files3: File[] = [];
+  files4: File[] = [];
   onSelect1(event) {
     //console.log(event);
     this.files1.push(...event.addedFiles);
@@ -179,6 +270,15 @@ export class CarsAddComponent implements OnInit {
 
   onRemove1(event) {
     this.files1.splice(this.files1.indexOf(event), 1);
+  }
+
+  onSelect4(event) {
+    //console.log(event);
+    this.files4.push(...event.addedFiles);
+  }
+
+  onRemove4(event) {
+    this.files4.splice(this.files1.indexOf(event), 1);
   }
 
   onSelect2(event) {
@@ -346,6 +446,42 @@ export class CarsAddComponent implements OnInit {
         }
       );
       this.fileslist3.push(this.file3.name);
+    }
+  }
+
+  file4: any;
+  fileslist4: string[] = [];
+  public upload4(event) {
+    if (event.addedFiles && event.addedFiles.length > 0) {
+      this.file3 = event.addedFiles[0];
+      this.uploadStatuss.emit({ status: ProgressStatusEnum.START });
+      this.serviceupload.uploadFile(this.file3).subscribe(
+        data => {
+          if (data) {
+            switch (data.type) {
+              case HttpEventType.UploadProgress:
+                this.uploadStatuss.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
+                break;
+              case HttpEventType.Response:
+                // this.inputFile.nativeElement.value = '';
+                this.uploadStatuss.emit({ status: ProgressStatusEnum.COMPLETE });
+                break;
+            }
+            this.getFiles();
+            this.GetFileName();
+
+
+
+          }
+
+        },
+
+        error => {
+          /// this.inputFile.nativeElement.value = '';
+          this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
+        }
+      );
+      this.fileslist4.push(this.file3.name);
     }
   }
 }

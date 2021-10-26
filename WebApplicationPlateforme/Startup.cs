@@ -78,6 +78,14 @@ namespace WebApplicationPlateforme
             services.AddEntityFrameworkNpgsql()
                .AddDbContext<FinanceContext>(
                options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddEntityFrameworkNpgsql()
+   .AddDbContext<DawaaContext>(
+   options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddEntityFrameworkNpgsql()
+      .AddDbContext<AdministrativeCommunicationContext>(
+      options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             /* services.AddDefaultIdentity<ApplicationUser>()
                  .AddEntityFrameworkStores<ApplicationDbContext>();
                  */

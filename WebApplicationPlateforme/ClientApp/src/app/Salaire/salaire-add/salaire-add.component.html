@@ -29,58 +29,83 @@
             </select>
           </div>
         </div>
+
+        <div class="col-md-6">
+          <div>
+            <label for="emp">الرقم الوظيفي</label>
+            <input type="text" value="{{userData.num}}" id="sal-cut" disabled />
+          </div>
+        </div>
+
+
+        <div class="col-md-6">
+          <div>
+            <label for="emp">الدرجة </label>
+            <input type="text" value="{{userData.degre}}" id="sal-cut" disabled />
+          </div>
+        </div>
+
+
+        <div class="col-md-6">
+          <div>
+            <label for="emp">المرتبة  </label>
+            <input type="text" value="{{userData.rang}}" id="sal-cut" disabled />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div>
+            <label for="emp">فترةالدوام  </label>
+            <input type="text" value="{{userData.heureArrive}}" id="sal-cut" disabled />
+          </div>
+        </div>
+
+        <div class="col-md-6">
+          <div>
+            <label for="emp">      الجنسية</label>
+            <input type="text" value="{{userData.nationalite}}" id="sal-cut" disabled />
+          </div>
+        </div>
         <div class="col-md-6">
           <div>
             <label for="salary">الراتب</label>
-            <input type="text" id="salary" value="{{salairev}}" disabled />
+            <input type="text" id="salary" value="{{userData.salaire}}" disabled />
           </div>
         </div>
-        <div class="col-md-6">
-          <div>
-            <label for="sal-cut">خصم التأمينات</label>
-            <input type="text" value="{{assurance}}" id="sal-cut" disabled />
-          </div>
-        </div>
+
         <div class="col-md-6">
           <div>
             <label for="sal-add">البدلات</label>
-            <input type="text" name="" id="sal-add" value="{{indemnite}}" disabled />
+            <input type="text" name="" id="sal-add" value="{{userData.indemnite}}" disabled />
           </div>
         </div>
+
         <div class="col-md-6">
           <div>
-            <label for="other-cuts">خصميات أخرى</label>
-            <input type="text" id="other-cuts" name="retrait" #retrait="ngModel" [(ngModel)]="salaire.retrait" (change)="retratittest($event)" required />
-            <div *ngIf="retrait.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
-              مطلوب  خصميات أخرى .
-            </div>
+            <label for="reason">بدل السكن</label>
+            <input type="text" name="" id="sal-add" value="{{userData.autreIndemnite}}" disabled />
           </div>
         </div>
+
         <div class="col-md-6">
           <div>
-            <label for="reason">السبب</label>
-            <input type="text" id="reason" name="raisonRetrait" #raisonRetrait="ngModel" [(ngModel)]="salaire.raisonRetrait" />
+            <label for="sal-cut">الإجمالي</label>
+            <input type="text" value="{{tot}}" id="sal-cut" disabled />
           </div>
         </div>
+
         <div class="col-md-6">
           <div>
-            <label for="other-add">إضافي</label>
-            <input type="text" name="leplus" value="0" #leplus="ngModel" [(ngModel)]="salaire.leplus" id="other-add" (change)="leplusTest($event)" required />
-            <div *ngIf="leplus.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
-              مطلوب  الإضافي .
-            </div>
+            <label for="other-cuts">الحسميات </label>
+            <input type="number" id="other-cuts" name="retrait" #retrait="ngModel" [(ngModel)]="salaire.retrait" (change)="retratittest($event)" required />
+    
           </div>
         </div>
-        <div class="col-md-6">
-          <div>
-            <label for="reason2">السبب</label>
-            <input type="text" name="reisonPlus" #reisonPlus="ngModel" [(ngModel)]="salaire.reisonPlus" id="reason2" />
-          </div>
-        </div>
+
         <div class="col-md-6">
           <div>
             <label for="net-sal">صافي الدخل</label>
-            <input type="text" value="{{tot}}" id="net-sal" />
+            <input type="text" value="{{net}}" id="net-sal" />
           </div>
         </div>
         <div class="col-md-6">
@@ -105,6 +130,7 @@
               <th scope="col">البدلات</th>
               <th scope="col">الحسميات</th>
               <th scope="col">الإجمالي</th>
+              <th scope="col">الصافي</th>
               <th scope="col">حذف </th>
 
 
@@ -118,6 +144,7 @@
               <td>{{ev.totIndemnite}}</td>
               <td>{{ev.retrait}}</td>
               <td>{{ev.tot}}</td>
+              <td>{{ev.leplus}}</td>
              
               <td><a (click)="onDelete(ev.id)" class="btn btn-danger"><i class="fa fa-trash"></i>حذف</a></td>
             </tr>
@@ -138,5 +165,5 @@
 </div>
 <!-- Footer -->
 <footer class="text-center">
- <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
 </footer>

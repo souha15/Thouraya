@@ -18,7 +18,7 @@ export class SalaireListGlobalComponent implements OnInit {
 
   constructor(private salaireService: SalaireDService,
     private toastr: ToastrService,
-    private UserService: UserServiceService,) { }
+    private UserService: UserServiceService, ) { }
 
   filter;
   ngOnInit(): void {
@@ -92,11 +92,13 @@ export class SalaireListGlobalComponent implements OnInit {
           var totindemnite: number = 0;
           var totRetrait: number = 0;
           var tot: number = 0;
+          var leplus: number = 0;
           this.list1.forEach(item => {
             totsal = totsal + +item.salaire;
             totindemnite = totindemnite + +item.totIndemnite;
-            totRetrait = totRetrait + +item.retrait + +item.assurance;
-            tot = totsal + totindemnite - totRetrait
+            totRetrait = totRetrait + +item.retrait;
+            tot = tot + +item.tot
+            leplus = leplus + +item.leplus
 
           })
 
@@ -105,7 +107,7 @@ export class SalaireListGlobalComponent implements OnInit {
           this.obj1.indemnite = totindemnite.toString();
           this.obj1.retrait = totRetrait.toString();
           this.obj1.tot = tot.toString();
-
+          this.obj1.leplus = leplus.toString();
         }
 
 
@@ -115,11 +117,13 @@ export class SalaireListGlobalComponent implements OnInit {
           var totindemnite: number = 0;
           var totRetrait: number = 0;
           var tot: number = 0;
+          var leplus: number = 0;
           this.list12.forEach(item => {
             totsal = totsal + +item.salaire;
             totindemnite = totindemnite + +item.totIndemnite;
-            totRetrait = totRetrait + +item.retrait + +item.assurance;
-            tot = totsal + totindemnite - totRetrait
+            totRetrait = totRetrait + +item.retrait;
+            tot = tot + +item.tot
+            leplus = leplus + +item.leplus
 
           })
 
@@ -128,21 +132,23 @@ export class SalaireListGlobalComponent implements OnInit {
           this.obj2.indemnite = totindemnite.toString();
           this.obj2.retrait = totRetrait.toString();
           this.obj2.tot = tot.toString();
-
+          this.obj2.leplus = leplus.toString();
         }
 
 
-        if (mois ==3 ) {
+        if (mois == 3) {
           this.list3.push(item)
           var totsal: number = 0;
           var totindemnite: number = 0;
           var totRetrait: number = 0;
           var tot: number = 0;
+          var leplus: number = 0;
           this.list3.forEach(item => {
             totsal = totsal + +item.salaire;
             totindemnite = totindemnite + +item.totIndemnite;
-            totRetrait = totRetrait + +item.retrait + +item.assurance;
-            tot = totsal + totindemnite - totRetrait
+            totRetrait = totRetrait + +item.retrait;
+            tot = tot + +item.tot
+            leplus = leplus + +item.leplus
 
           })
 
@@ -151,20 +157,22 @@ export class SalaireListGlobalComponent implements OnInit {
           this.obj3.indemnite = totindemnite.toString();
           this.obj3.retrait = totRetrait.toString();
           this.obj3.tot = tot.toString();
-
+          this.obj3.leplus = leplus.toString();
         }
 
-        if (mois == 4 ) {
+        if (mois == 4) {
           this.list4.push(item)
           var totsal: number = 0;
           var totindemnite: number = 0;
           var totRetrait: number = 0;
           var tot: number = 0;
+          var leplus: number = 0;
           this.list4.forEach(item => {
             totsal = totsal + +item.salaire;
             totindemnite = totindemnite + +item.totIndemnite;
-            totRetrait = totRetrait + +item.retrait + +item.assurance;
-            tot = totsal + totindemnite - totRetrait
+            totRetrait = totRetrait + +item.retrait;
+            tot = tot + +item.tot
+            leplus = leplus + +item.leplus
 
           })
 
@@ -173,7 +181,7 @@ export class SalaireListGlobalComponent implements OnInit {
           this.obj4.indemnite = totindemnite.toString();
           this.obj4.retrait = totRetrait.toString();
           this.obj4.tot = tot.toString();
-
+          this.obj4.leplus = leplus.toString();
         }
 
 
@@ -183,11 +191,13 @@ export class SalaireListGlobalComponent implements OnInit {
           var totindemnite: number = 0;
           var totRetrait: number = 0;
           var tot: number = 0;
+          var leplus: number = 0;
           this.list5.forEach(item => {
             totsal = totsal + +item.salaire;
             totindemnite = totindemnite + +item.totIndemnite;
-            totRetrait = totRetrait + +item.retrait + +item.assurance;
-            tot = totsal + totindemnite - totRetrait
+            totRetrait = totRetrait + +item.retrait;
+            tot = tot + +item.tot
+            leplus = leplus + +item.leplus
 
           })
 
@@ -196,22 +206,24 @@ export class SalaireListGlobalComponent implements OnInit {
           this.obj5.indemnite = totindemnite.toString();
           this.obj5.retrait = totRetrait.toString();
           this.obj5.tot = tot.toString();
-
+          this.obj5.leplus = leplus.toString();
         }
 
 
 
-        if (mois == 6 ) {
+        if (mois == 6) {
           this.list6.push(item)
           var totsal: number = 0;
           var totindemnite: number = 0;
           var totRetrait: number = 0;
           var tot: number = 0;
+          var leplus: number = 0;
           this.list6.forEach(item => {
             totsal = totsal + +item.salaire;
             totindemnite = totindemnite + +item.totIndemnite;
-            totRetrait = totRetrait + +item.retrait + +item.assurance;
-            tot = totsal + totindemnite - totRetrait
+            totRetrait = totRetrait + +item.retrait;
+            tot = tot + +item.tot
+            leplus = leplus + +item.leplus
 
           })
 
@@ -220,22 +232,24 @@ export class SalaireListGlobalComponent implements OnInit {
           this.obj6.indemnite = totindemnite.toString();
           this.obj6.retrait = totRetrait.toString();
           this.obj6.tot = tot.toString();
-
+          this.obj6.leplus = leplus.toString();
         }
 
 
 
-        if (mois == 7 ) {
+        if (mois == 7) {
           this.list7.push(item)
           var totsal: number = 0;
           var totindemnite: number = 0;
           var totRetrait: number = 0;
           var tot: number = 0;
+          var leplus: number = 0;
           this.list7.forEach(item => {
             totsal = totsal + +item.salaire;
             totindemnite = totindemnite + +item.totIndemnite;
-            totRetrait = totRetrait + +item.retrait + +item.assurance;
-            tot = totsal + totindemnite - totRetrait
+            totRetrait = totRetrait + +item.retrait;
+            tot = tot + +item.tot
+            leplus = leplus + +item.leplus
 
           })
 
@@ -244,21 +258,23 @@ export class SalaireListGlobalComponent implements OnInit {
           this.obj7.indemnite = totindemnite.toString();
           this.obj7.retrait = totRetrait.toString();
           this.obj7.tot = tot.toString();
-
+          this.obj7.leplus = leplus.toString();
         }
 
 
-        if (mois == 8 ) {
+        if (mois == 8) {
           this.list8.push(item)
           var totsal: number = 0;
           var totindemnite: number = 0;
           var totRetrait: number = 0;
           var tot: number = 0;
+          var leplus: number = 0;
           this.list8.forEach(item => {
             totsal = totsal + +item.salaire;
             totindemnite = totindemnite + +item.totIndemnite;
-            totRetrait = totRetrait + +item.retrait + +item.assurance;
-            tot = totsal + totindemnite - totRetrait
+            totRetrait = totRetrait + +item.retrait;
+            tot = tot + +item.tot
+            leplus = leplus + +item.leplus
 
           })
 
@@ -267,21 +283,23 @@ export class SalaireListGlobalComponent implements OnInit {
           this.obj8.indemnite = totindemnite.toString();
           this.obj8.retrait = totRetrait.toString();
           this.obj8.tot = tot.toString();
-
+          this.obj8.leplus = leplus.toString();
         }
 
 
-        if (mois == 9 ) {
+        if (mois == 9) {
           this.list9.push(item)
           var totsal: number = 0;
           var totindemnite: number = 0;
           var totRetrait: number = 0;
           var tot: number = 0;
+          var leplus: number = 0;
           this.list9.forEach(item => {
             totsal = totsal + +item.salaire;
             totindemnite = totindemnite + +item.totIndemnite;
-            totRetrait = totRetrait + +item.retrait + +item.assurance;
-            tot = totsal + totindemnite - totRetrait
+            totRetrait = totRetrait + +item.retrait;
+            tot = tot + +item.tot
+            leplus = leplus + +item.leplus
 
           })
 
@@ -290,7 +308,7 @@ export class SalaireListGlobalComponent implements OnInit {
           this.obj9.indemnite = totindemnite.toString();
           this.obj9.retrait = totRetrait.toString();
           this.obj9.tot = tot.toString();
-
+          this.obj9.leplus = leplus.toString();
         }
 
 
@@ -300,11 +318,13 @@ export class SalaireListGlobalComponent implements OnInit {
           var totindemnite: number = 0;
           var totRetrait: number = 0;
           var tot: number = 0;
+          var leplus: number = 0;
           this.list10.forEach(item => {
             totsal = totsal + +item.salaire;
             totindemnite = totindemnite + +item.totIndemnite;
-            totRetrait = totRetrait + +item.retrait + +item.assurance;
-            tot = totsal + totindemnite - totRetrait
+            totRetrait = totRetrait + +item.retrait;
+            tot = tot + +item.tot
+            leplus = leplus + +item.leplus
 
           })
 
@@ -313,21 +333,23 @@ export class SalaireListGlobalComponent implements OnInit {
           this.obj10.indemnite = totindemnite.toString();
           this.obj10.retrait = totRetrait.toString();
           this.obj10.tot = tot.toString();
-
+          this.obj10.leplus = leplus.toString();
         }
 
 
-        if (mois == 11) {      
+        if (mois == 11) {
           this.list11.push(item)
           var totsal: number = 0;
           var totindemnite: number = 0;
           var totRetrait: number = 0;
           var tot: number = 0;
+          var leplus: number = 0;
           this.list11.forEach(item => {
             totsal = totsal + +item.salaire;
             totindemnite = totindemnite + +item.totIndemnite;
-            totRetrait = totRetrait + +item.retrait + +item.assurance;
-            tot = totsal + totindemnite - totRetrait
+            totRetrait = totRetrait + +item.retrait;
+            tot = tot + +item.tot
+            leplus = leplus + +item.leplus
 
           })
 
@@ -336,7 +358,7 @@ export class SalaireListGlobalComponent implements OnInit {
           this.obj11.indemnite = totindemnite.toString();
           this.obj11.retrait = totRetrait.toString();
           this.obj11.tot = tot.toString();
-       
+          this.obj11.leplus = leplus.toString();
         }
         if (mois == 12) {
           this.list12.push(item)
@@ -344,11 +366,13 @@ export class SalaireListGlobalComponent implements OnInit {
           var totindemnite: number = 0;
           var totRetrait: number = 0;
           var tot: number = 0;
+          var leplus: number = 0;
           this.list12.forEach(item => {
             totsal = totsal + +item.salaire;
             totindemnite = totindemnite + +item.totIndemnite;
-            totRetrait = totRetrait + +item.retrait + +item.assurance;
-            tot = totsal + totindemnite - totRetrait
+            totRetrait = totRetrait + +item.retrait;
+            tot = tot + +item.tot
+            leplus = leplus + +item.leplus
 
           })
 
@@ -357,12 +381,12 @@ export class SalaireListGlobalComponent implements OnInit {
           this.obj12.indemnite = totindemnite.toString();
           this.obj12.retrait = totRetrait.toString();
           this.obj12.tot = tot.toString();
+          this.obj12.leplus = leplus.toString();
         }
 
       })
 
-      if (this.list1.length != 0)
-      { this.listG.push(this.obj1) }
+      if (this.list1.length != 0) { this.listG.push(this.obj1) }
 
 
       if (this.list2.length != 0)
@@ -396,8 +420,8 @@ export class SalaireListGlobalComponent implements OnInit {
         this.listG.push(this.obj11)
 
       if (this.list12.length != 0)
-      this.listG.push(this.obj12)
-    
+        this.listG.push(this.obj12)
+
 
     })
   }
@@ -406,10 +430,10 @@ export class SalaireListGlobalComponent implements OnInit {
   public print() {
 
     var data = document.getElementById('htmlData');
-   // data.style.display = "block";
+    // data.style.display = "block";
     html2canvas(data).then(canvas => {
       // Few necessary setting options
-     // data.style.display = "none"
+      // data.style.display = "none"
       var imgWidth = 208;
       var pageHeight = 295;
       var imgHeight = canvas.height * imgWidth / canvas.width;
@@ -420,7 +444,7 @@ export class SalaireListGlobalComponent implements OnInit {
 
       var position = 0;
       pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-      this.path = "Salary"  + ".pdf"
+      this.path = "Salary" + ".pdf"
       pdf.save(this.path); // Generated PDF
 
     }
@@ -435,7 +459,7 @@ export class SalaireListGlobalComponent implements OnInit {
   onDelete(mois) {
     if (mois == "يناير") {
       this.m = '1'
-      
+
     }
     if (mois == "فبراير") {
       this.m = '2'
@@ -478,25 +502,25 @@ export class SalaireListGlobalComponent implements OnInit {
       this.saldelF = this.saldel.filter(item => new Date(item.mois).getMonth() + 1 == +this.m)
 
       if (confirm('Are you sure to delete this record ?')) {
-      this.saldelF.forEach(item => {    
-        this.onDelete1(item.id)
-        this.toastr.success("تم الحذف  بنجاح", "نجاح");
-      })
-    }
+        this.saldelF.forEach(item => {
+          this.onDelete1(item.id)
+          this.toastr.success("تم الحذف  بنجاح", "نجاح");
+        })
+      }
     })
   }
 
 
   onDelete1(Id) {
-       this.salaireService.Delete(Id)
-        .subscribe(res => {     
-        },
-          err => {
-            console.log(err);
-            this.toastr.warning('لم يتم الحذف  ', ' فشل');
-          }
-        )
+    this.salaireService.Delete(Id)
+      .subscribe(res => {
+      },
+        err => {
+          console.log(err);
+          this.toastr.warning('لم يتم الحذف  ', ' فشل');
+        }
+      )
 
-    }
-  
+  }
+
 }

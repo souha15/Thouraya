@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild, Injectable } from '@angular/core';
 import { Musulman } from '../../shared/Models/NvMusulman/musulman.model';
 import { MusulmanService } from '../../shared/Services/NvMusulman/musulman.service';
 import { FilesmusulmanService } from '../../shared/Services/NvMusulman/filesmusulman.service';
@@ -12,13 +12,53 @@ import { FilesMusulman } from '../../shared/Models/NvMusulman/files-musulman.mod
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import {
+  NgbDateStruct, NgbCalendar, NgbCalendarIslamicUmalqura, NgbDatepickerI18n, NgbDate
+} from '@ng-bootstrap/ng-bootstrap';
+
+import { TranslationWidth } from '@angular/common';
+
+
+const WEEKDAYS = ['ن', 'ث', 'ر', 'خ', 'ج', 'س', 'ح'];
+const MONTHS = ['محرم', 'صفر', 'ربيع الأول', 'ربيع الآخر', 'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 'رمضان', 'شوال',
+  'ذو القعدة', 'ذو الحجة'];
+
+@Injectable()
+export class IslamicI18n extends NgbDatepickerI18n {
+
+  getWeekdayShortName(weekday: number): string {
+    return WEEKDAYS[weekday - 1];
+  }
+  getMonthShortName(month: number) {
+    return MONTHS[month - 1];
+  }
+
+  getMonthFullName(month: number) {
+    return MONTHS[month - 1];
+  }
+
+  getWeekdayLabel(weekday: number, width?: TranslationWidth) {
+    return WEEKDAYS[weekday - 1];
+  }
+
+  getDayAriaLabel(date: NgbDateStruct): string {
+    return `${date.day}-${date.month}-${date.year}`;
+  }
+}
+
 
 @Component({
   selector: 'app-edit-musulman',
   templateUrl: './edit-musulman.component.html',
-  styleUrls: ['./edit-musulman.component.css']
+  styleUrls: ['./edit-musulman.component.css'],
+  providers: [
+    { provide: NgbCalendar, useClass: NgbCalendarIslamicUmalqura },
+    { provide: NgbDatepickerI18n, useClass: IslamicI18n }
+  ],
 })
 export class EditMusulmanComponent implements OnInit {
+  model: NgbDateStruct;
+  model1: NgbDateStruct;
   @Input() public disabled: boolean;
   @Output() public uploadStatuss: EventEmitter<ProgressStatus>;
   @ViewChild('inputFile') inputFile: ElementRef;
@@ -36,6 +76,22 @@ export class EditMusulmanComponent implements OnInit {
     this.getFiles();
   }
 
+
+  onDateSelect(date: NgbDate) {
+    var day: string = date.day.toString()
+    var month: string = date.month.toString()
+    var year: string = date.year.toString()
+    this.mus.datehij = year + "-" + month + "-" + day;
+   
+  }
+
+  onDateSelect2(date2: NgbDate) {
+
+    var day: string = date2.day.toString()
+    var month: string = date2.month.toString()
+    var year: string = date2.year.toString()
+    this.mus.attribut2 = year + "-" + month + "-" + day;
+  }
   /* Get Musulman */
   mus: Musulman = new Musulman();
   Id: number;
@@ -44,14 +100,19 @@ export class EditMusulmanComponent implements OnInit {
   listphoto: FilesMusulman[] = [];
   listResi: FilesMusulman[] = [];
   listPass: FilesMusulman[] = [];
-
+  dh: string;
+  dh2: string;
   getIdUrl() {
     this.routeSub = this.route.params.subscribe(params => {
       this.Id = params['id']
 
       this.musService.GetById(this.Id).subscribe(res => {
-        this.mus = res
-
+        this.mus = res;
+        this.dh = this.mus.datehij;
+        this.dh2 = this.mus.attribut2;
+        (<HTMLInputElement>document.getElementById("inputhijdate")).value = this.dh;
+        (<HTMLInputElement>document.getElementById("inputhijdate2")).value = this.dh2;
+     
         this.FilesService.List().subscribe(res => {
           this.list2 = res;
           this.list = this.list2.filter(item => item.idmusulman == this.Id)

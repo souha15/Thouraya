@@ -23,7 +23,7 @@ export class TasksListReceivedComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
-    this.filtredDataTache();
+   // this.filtredDataTache();
     //this.listtache();
     this.resetForm();
   }
@@ -63,17 +63,23 @@ export class TasksListReceivedComponent implements OnInit {
   // Get User Connected
 
   UserIdConnected: string;
-  task: TacheNotif[] = [];
-  task2: TacheNotif[] = [];
+  task: Tache[] = [];
+  task2: Tache[] = [];
   nb: number;
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;    
-      this.notiftaskService.ListTache().subscribe(res => {
+      this.TacheService.ListTache().subscribe(res => {
         this.task = res
-        this.task2 = this.task.filter(item => item.idUserAff == this.UserIdConnected && item.nomCreator == "0");
+        this.task2 = this.task.filter(item => item.affectedName == this.UserIdConnected && item.etat == "في الإنتظار");
         this.nb = this.task2.length;
+        this.tacheliste = res
+        this.filtredtachelist = this.tacheliste.filter(item => item.affectedName == this.UserIdConnected)
+        this.nbclose = this.filtredtachelist.filter(item => item.etat == "منجزة").length;
+        this.nbnew = this.filtredtachelist.filter(item => item.etat == "في الإنتظار").length;
+        this.nbcurrent = this.filtredtachelist.filter(item => item.etat == "تحت الإجراء").length;
+        return this.filtredtachelist.sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
       })
     })
   }

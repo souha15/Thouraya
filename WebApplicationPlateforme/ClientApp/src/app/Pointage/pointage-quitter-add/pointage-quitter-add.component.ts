@@ -116,6 +116,7 @@ export class PointageQuitterAddComponent implements OnInit {
       },
         err => {
           this.toastr.error("فشل في تسجيل الإنصراف")
+          console.log(err)
         })
     } else {
       this.toastr.error("تثبت من الرمز")

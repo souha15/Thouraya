@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { PrivilegesService } from '../shared/Services/User/privileges.service';
 import { UserServiceService } from '../shared/Services/User/user-service.service';
+import { Ticket2 } from '../shared/Models/Ticket2/ticket2.model';
+import { Ticket2Service } from '../shared/Services/Ticket2/ticket2.service';
 
 @Component({
   selector: 'app-side-menu',
@@ -10,10 +12,12 @@ import { UserServiceService } from '../shared/Services/User/user-service.service
 export class SideMenuComponent implements OnInit {
 
   constructor(private privilegesService: PrivilegesService,
-    private UserService: UserServiceService) { }
+    private UserService: UserServiceService,
+    private TicketService: Ticket2Service,) { }
 
   ngOnInit(): void {
     this.getUserConnected();
+    
  
   }
 
@@ -51,6 +55,7 @@ export class SideMenuComponent implements OnInit {
       })   
     })
   }
+  //get Ticket notif
 
 
 }

@@ -19,6 +19,11 @@ namespace WebApplicationPlateforme.Model.voitures
         public string datefinforme{get;set;}
         public string recepeteur{get;set;}
         public string datefinassurance{get;set;}
+        public string kilometrage { get;set;}
+        public string datehuile { get;set;}
+        public string datevisite { get;set;}
+        public string recepteurinterne { get;set;}
+        public string recepteurexterne { get;set;}
         public string idrecepteur{get;set;}
     
         public int attribut1 { get; set; }

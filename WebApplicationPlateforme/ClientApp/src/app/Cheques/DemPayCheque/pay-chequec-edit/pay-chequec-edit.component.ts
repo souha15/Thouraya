@@ -23,6 +23,8 @@ import { ArticlePayCheque } from '../../../shared/Models/Cheques/article-pay-che
 import { DemPayCheque } from '../../../shared/Models/Cheques/dem-pay-cheque.model';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { AdministrationService } from '../../../shared/Services/Administration/administration.service';
+import { Administration } from '../../../shared/Models/Administration/administration.model';
 
 @Component({
   selector: 'app-pay-chequec-edit',
@@ -40,14 +42,24 @@ export class PayChequecEditComponent implements OnInit {
     private http: HttpClient,
     private toastr: ToastrService,
     private rootUrl: PathSharedService,
-    private route: ActivatedRoute,) { }
+    private route: ActivatedRoute,
+    private adminService: AdministrationService) { }
   private routeSub: Subscription;
   ngOnInit(): void {
     this.getUserConnected();
+    this.getAdminList();
     this.getIdUrl();
     this.getArLis();
     this.getClasses();
     this.getComptes();
+  }
+  //getAdminList()
+
+  adminList: Administration[] = [];
+  getAdminList() {
+    this.adminService.ListAdministration().subscribe(res => {
+      this.adminList = res
+    })
   }
 
 

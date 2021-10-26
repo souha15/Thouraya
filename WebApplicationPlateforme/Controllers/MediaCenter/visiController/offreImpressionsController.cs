@@ -14,9 +14,9 @@ namespace WebApplicationPlateforme.Controllers.MediaCenter.visiController
     [ApiController]
     public class offreImpressionsController : ControllerBase
     {
-        private readonly FinanceContext _context;
+        private readonly DawaaContext _context;
 
-        public offreImpressionsController(FinanceContext context)
+        public offreImpressionsController(DawaaContext context)
         {
             _context = context;
         }

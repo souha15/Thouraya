@@ -41,7 +41,15 @@ export class ResidenceAddComponent implements OnInit {
   }
 
   date = new Date().toLocaleDateString();
+  isValidFormSubmitted = false;
   onSubmit(form: NgForm) {
+    if (form.invalid) {
+      this.isValidFormSubmitted = false;
+
+    } else {
+
+      this.isValidFormSubmitted = true
+   
     this.rs.datenereg = this.date;
     this.rs.numBureau = this.bureau;
     this.rs.idUserCreator = this.UserIdConnected;
@@ -60,5 +68,6 @@ export class ResidenceAddComponent implements OnInit {
         this.toastr.error('لم يتم التحديث  ', ' فشل');
       }
     )
+    }
   }
 }

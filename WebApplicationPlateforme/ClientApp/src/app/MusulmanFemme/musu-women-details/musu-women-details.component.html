@@ -1,0 +1,405 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">  التفاصيل</h3>
+      </header>
+
+
+
+      <!-----Test The -->
+      <form class="form-row events-form mb-12" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="accordion" id="accordionExample">
+
+
+          <div class="card" style="width:1000px">
+
+            <div class="courses" id="headingOne">
+
+              <a class="accord" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                البيانات الأساسية
+              </a>
+
+            </div>
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+              <div class="card-body">
+
+
+                <div class="events1">
+
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+
+                        <div class="ml-3">
+                          <label for="">رقم الملف</label>
+                          {{mus.numdos}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">الداعية</label>
+                          {{mus.predicateur}}
+
+                        </div>
+                        <div class="ml-3">
+                          <label for="">الاسم القديم</label>
+                          {{mus.prevnom}}
+
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="">الاسم الجديد</label>
+                          {{mus.nvnom}}
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="">الاسم الانجليزي</label>
+                          {{mus.engnom}}
+
+                        </div>
+
+                        <div class="ml-3">
+                          <label>تاريخ الإسلام هجري</label>
+                          {{mus.datehij}}
+                        </div>
+                        <div class="ml-3">
+                          <label>تاريخ الإسلام ميلادي</label>
+                          {{mus.datemil}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">اليوم</label>
+                          {{mus.jours}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">الجنسية</label>
+                          {{mus.nat}}
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="">اللغة</label>
+                          {{mus.langue}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">رقم الإقامة</label>
+                          {{mus.residence}}
+
+                        </div>
+                        <div class="ml-3">
+                          <label>تاريخها ميلادي</label>
+                          {{mus.dateresidence}}
+                        </div>
+
+                        <div class="ml-3">
+                          <label>تاريخها هجري</label>
+                          {{mus.attribut2}}
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="">مصدرها</label>
+                          {{mus.sourceres}}
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="">الديانة</label>
+                          {{mus.religion}}
+
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="">رقم الجواز</label>
+                          {{mus.numpass}}
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="">تاريخه</label>
+                          {{mus.datepass}}
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="">مصدره</label>
+                          {{mus.sourcepass}}
+
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="">تاريخ الميلاد</label>
+                          {{mus.datenais}}
+
+                        </div>
+                        <div class="ml-3">
+                          <label for="">العمل</label>
+                          {{mus.travail}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">الحي</label>
+                          {{mus.cite}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">العنوان</label>
+                          {{mus.adr}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">الجوال</label>
+                          {{mus.telmus}}
+
+                        </div>
+                        <div class="ml-3">
+                          <label for="">حساب تواصل اجتماعي</label>
+                          {{mus.urlsm}}
+                        </div>
+
+
+
+                        <br />
+                        <br />
+
+
+                      </div>
+
+                    </div>
+                  </div>
+
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!------------------------->
+          <div class="card">
+            <div class="courses" id="headingFive">
+
+              <a class="accord" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                بيانات الكفيل
+              </a>
+
+            </div>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+              <div class="card-body">
+
+                <div class="events1">
+
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+
+                        <div class="ml-3">
+                          <label for="">الاسم</label>
+                          {{mus.garantnom}}
+
+                        </div>
+
+                        <div class="ml-3">
+                          <label for="">نوع الكفيل</label>
+                          {{mus.garanttype}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">سجل الحاسب</label>
+                          {{mus.registre}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">الجوال</label>
+                          {{mus.telgarant}}
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!------------------------->
+
+          <div class="card">
+            <div class="courses" id="headingFive">
+
+              <a class="accord" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                المتابعة
+              </a>
+
+            </div>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+              <div class="card-body">
+
+                <div class="events1">
+
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+                        <div class="ml-3">
+                          <label for="">إكمال الملف</label>
+                          {{mus.files}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">هدية الإشهار</label>
+                          {{mus.pub}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">مشهد مؤقت</label>
+                          {{mus.scene}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">الدورة التأسيسية</label>
+                          {{mus.attribut3}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">اختبار الدورة</label>
+                          {{mus.test}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">هدية الدورة</label>
+                          {{mus.cadeauxtest}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">استلام الوثيقة</label>
+                          {{mus.recep}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">تغيير الديانة</label>
+                          {{mus.change}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">حفل التكريم</label>
+                          {{mus.soiree}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">الختان</label>
+                          {{mus.circonsion}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">العمرة</label>
+                          {{mus.omra}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">المدينة</label>
+                          {{mus.city}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">النزهة</label>
+                          {{mus.walking}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">الحج</label>
+                          {{mus.haj}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">غادر المملكة</label>
+                          {{mus.depart}}
+                        </div>
+                        <div class="ml-3">
+                          <label for="">مراسلة المغادرة</label>
+
+                          {{mus.chatdep}}
+                        </div>
+                        <div class="form-group col-md-12">
+                          <label for="">ملاحظات</label>
+                          {{mus.req}}
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <!------------------------->
+
+          <div class="card">
+            <div class="courses" id="headingFive">
+
+              <a class="accord" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                المرفقات
+              </a>
+
+            </div>
+            <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+              <div class="card-body">
+
+                <div class="events1">
+
+                  <div class="row w-100 d-flex form-box">
+                    <div class="col-md-12 col-sm-12">
+
+                      <div class="d-flex w-100 justify-content-start flex-wrap">
+
+                        <div class="ml-3">
+
+                          <label for="number">الجواز</label>
+
+                          <span class="data">
+                            <span *ngFor="let pr of listPass">
+                              <i class="ml-2 fa fa-arrow-down" style="color:dodgerblue"></i>
+                              <a (click)="download(pr.paths)" class="col-md-4" style="color:dodgerblue">{{pr.paths}}</a>
+
+                            </span>
+                          </span>
+
+                        </div>
+
+                        <div class="ml-3">
+
+                          <label for="number">الإقامة</label>
+                          <span class="data">
+                            <span *ngFor="let pr of listResi">
+                              <i class="ml-2 fa fa-arrow-down" style="color:dodgerblue"></i>
+                              <a (click)="download(pr.paths)" class="col-md-4" style="color:dodgerblue">{{pr.paths}}</a>
+
+                            </span>
+                          </span>
+                        </div>
+
+                        <div class="ml-3">
+
+                          <label for="number">الصورة</label>
+
+                          <span class="data">
+                            <span *ngFor="let pr of listphoto">
+                              <i class="ml-2 fa fa-arrow-down" style="color:dodgerblue"></i>
+                              <a (click)="download(pr.paths)" class="col-md-4" style="color:dodgerblue">{{pr.paths}}</a>
+
+                            </span>
+                          </span>
+
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+</footer>

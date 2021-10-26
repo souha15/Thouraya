@@ -21,6 +21,8 @@ import { ArticlePayChequeService } from '../../../shared/Services/Cheques/articl
 import { FilesPayChequesC } from '../../../shared/Models/Cheques/files-pay-cheques-c.model';
 import { ArticlePayCheque } from '../../../shared/Models/Cheques/article-pay-cheque.model';
 import { DemPayCheque } from '../../../shared/Models/Cheques/dem-pay-cheque.model';
+import { Administration } from '../../../shared/Models/Administration/administration.model';
+import { AdministrationService } from '../../../shared/Services/Administration/administration.service';
 
 @Component({
   selector: 'app-pay-chequec-lis',
@@ -34,13 +36,20 @@ export class PayChequecLisComponent implements OnInit {
     private tbLService: TbListeningService,
     private tbLProjetService: ListeningProjetService,
     private UserService: UserServiceService,
+    private adminService: AdministrationService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getUserConnected();
     this.getDemPayList();
+    this.getAdminList();
   }
-
+  adminList: Administration[] = [];
+  getAdminList() {
+    this.adminService.ListAdministration().subscribe(res => {
+      this.adminList = res
+    })
+  }
   // Get User Connected
   p: Number = 1;
   count: Number = 5;

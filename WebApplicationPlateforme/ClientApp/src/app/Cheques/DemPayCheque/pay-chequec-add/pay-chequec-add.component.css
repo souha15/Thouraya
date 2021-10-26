@@ -5,6 +5,7 @@
 .events-form input[type="password"],
 .events-form input[type="date"],
 .events-form input[type="number"],
+.events-form textarea,
 .events-form select {
   border-radius: 5px;
   padding: 5px 10px;
@@ -16,6 +17,7 @@
   .events-form input[type="password"]:focus,
   .events-form input[type="date"]:focus,
   .events-form input[type="number"]:focus,
+  .events-form textarea:focus,
   .events-form select:focus {
     outline: none;
     border: 1px solid #1da1f2;

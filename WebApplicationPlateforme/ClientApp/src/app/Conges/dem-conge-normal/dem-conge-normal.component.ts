@@ -174,7 +174,7 @@ export class DemCongeNormalComponent implements OnInit {
     this.conge.etatd = "في الانتظار";
     this.conge.etatrh = "في الانتظار";
     this.conge.attribut2 = "في الانتظار";
-    this.conge.type = "إجازة سنوية"
+    this.conge.type = "إجازة إعتيادية"
     this.conge.attribut6 = "في الانتظار";
     this.conge.adr = this.soldeconge.toString();
 

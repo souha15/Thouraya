@@ -5,4 +5,8 @@ export class ArticlePayCheque {
   prix: string;
   detail: string;
   idDem: number;
+  description : string;
+        idadmin : string;
+        nomadmin : string;
+        projet : string;
 }

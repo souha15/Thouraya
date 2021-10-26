@@ -3,6 +3,8 @@ import { PointageEmpEmpService } from '../../shared/Services/PointageViaEmp/poin
 import { UserServiceService } from '../../shared/Services/User/user-service.service';
 import { PointageEmp } from '../../shared/Models/VointageViaEmp/pointage-emp.model';
 import { UserDetail } from '../../shared/Models/User/user-detail.model';
+import { MacAddressTableService } from '../../shared/Services/Pointage/mac-address-table.service';
+import { MacAddressTable } from '../../shared/Models/Pointage/mac-address-table.model';
 
 @Component({
   selector: 'app-details-pointage-emp',
@@ -12,11 +14,13 @@ import { UserDetail } from '../../shared/Models/User/user-detail.model';
 export class DetailsPointageEmpComponent implements OnInit {
 
   constructor(private empService: PointageEmpEmpService,
-    private UserService: UserServiceService) { }
+    private UserService: UserServiceService,
+   ) { }
 
   ngOnInit(): void {
     this.getUserConnected();
     this.getEmpList();
+   
   }
 
   pointList: PointageEmp[] = [];
@@ -52,6 +56,7 @@ export class DetailsPointageEmpComponent implements OnInit {
    
     })
   }
+
 
   //Get UserConnected
 

@@ -48,7 +48,7 @@ export class TasksListComponent implements OnInit {
     this.TacheService.ListTache().subscribe(res => {
       this.filtredtachelist = res
 
-      this.filtredtachelist.forEach(item => {
+     /* this.filtredtachelist.forEach(item => {
       
         if (this.calculateDiff(item.date) > +item.delai && item.etat == "في الإنتظار") {
           item.etat ="مغلقة"
@@ -58,7 +58,7 @@ export class TasksListComponent implements OnInit {
             })
           })
         }
-      })
+      })*/
       this.nbclose = this.filtredtachelist.filter(item => item.Attribut1 == "منجزة").length;
       this.nbnew = this.filtredtachelist.filter(item => item.etat == "في الإنتظار").length;
       this.nbcurrent = this.filtredtachelist.filter(item => item.etat == "تحت الإجراء").length;

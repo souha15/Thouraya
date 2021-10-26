@@ -1,88 +1,154 @@
-/*--- login-page ---*/
-.login-page {
-  background-image: url("/assets/images/login2.png");
-  background-size: cover;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-  .login-page .form {
-    width: 50%;
-    margin: auto;
-    background: rgba(29, 64, 78, 0.8);
-    border-radius: 40px;
-    text-align: center;
-    color: #fff;
-    font-family: "El Messiri", sans-serif;
-  }
-
-    .login-page .form .form-header {
-      padding: 5px;
-      text-align: center;
-      margin-bottom: 10px;
-      background: rgba(38, 193, 255, 0.7);
-      border-radius: 40px 40px 0 0;
-      color: #fff;
-      font-size: 40px;
-    }
-
-    .login-page .form .form-image p {
-      font-size: 1.2rem;
-    }
-
-    .login-page .form .form-group {
-      border-radius: 10px;
-      width: 70%;
-      margin: 10px auto 15px;
-      position: relative;
-      text-align: center;
-      color: #fff;
-    }
-
-    .login-page .form input {
-      border-radius: 20px;
-      padding-right: 80px;
-    }
-
-      .login-page .form input:focus {
-        outline: none;
-      }
-
-    .login-page .form .form-group .lab {
-      position: absolute;
-      height: 100%;
-      width: 70px;
-      background: #dbe1ee;
-      color: #219ec6;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      top: 0;
-      right: 0;
-      border-radius: 20px;
-    }
-
-    .login-page .form .log {
-      border: none;
-      padding: 4px;
-      width: 200px;
-      border-radius: 20px;
-      color: #fff;
-      background: #219ec6;
-      margin: 0 auto 20px;
-      font-size: 25px;
-    }
-
-      .login-page .form .log:focus {
-        outline: none;
-      }
-/*GE SS Two Medium*/
 body {
   direction: rtl;
 }
+
+/*New Style for Awwal Login Page --> Put it in main css file*/
+.login-page-awal {
+  position: absolute;
+  padding: 35px;
+  top: 0;
+  left: 0;
+  width: 100%;
+  min-height: 100vh;
+  overflow-y: auto;
+  background-image: url("/assets/images/login-bg.png");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  font-family: 'Tajawal', sans-serif;
+}
+
+.main-logo {
+  position: absolute;
+  left: 10px;
+  top: 0;
+  width: 120px;
+}
+
+.login-page-awal form {
+  width: 40%;
+  height: 80%;
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 0 10px #333;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+}
+
+  .login-page-awal form img {
+    width: 150px;
+    margin-bottom: 0px;
+  }
+
+  .login-page-awal form h2 {
+    color: #a1d11c;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+
+  .login-page-awal form h3 {
+    margin-bottom: 10px;
+    color: rgb(64,98,183);
+    color: linear-gradient(45deg, rgba(64,98,183,1) 15%, rgba(44,56,131,1) 85%);
+  }
+
+.input-wraper {
+  width: 70%;
+  position: relative;
+  margin-bottom: 15px;
+}
+
+  .input-wraper input {
+    border-radius: 20px;
+    padding-right: 70px;
+    background: #ccc;
+    color: rgb(64,98,183);
+    font-size: 1.5rem;
+  }
+
+    .input-wraper input::placeholder {
+      color: #fff;
+    }
+
+  .input-wraper .icon {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+    font-size: 1.8rem;
+    color: #fff;
+  }
+
+.check-label {
+  font-size: 1.5rem;
+  color: rgb(64,98,183);
+  color: linear-gradient(45deg, rgba(64,98,183,1) 15%, rgba(44,56,131,1) 85%);
+}
+
+  .check-label span {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    line-height: 20px;
+    text-align: center;
+    border: 2px solid rgb(64,98,183);
+    font-size: 1rem;
+    color: #fff;
+  }
+
+.login-page-awal form input[type='submit'] {
+  background: rgb(89,129,40);
+  background: linear-gradient(45deg, rgba(89,129,40,1) 15%, rgba(166,215,28,1) 85%);
+  border: none;
+  outline: none;
+  border-radius: 20px;
+  font-size: 1.6rem;
+  width: 50%;
+  padding: 5px;
+  color: #fff;
+}
+
+@media (max-width:991px) {
+  .login-page-awal form {
+    width: 50%;
+  }
+
+  .input-wraper input {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width:767px) {
+  .login-page-awal form {
+    width: 70%;
+  }
+
+  .input-wraper input {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width:500px) {
+  .login-page-awal form {
+    width: 100%;
+  }
+}
+
+#save-check {
+  display: none;
+}
+
+  #save-check:checked ~ .check-label span {
+    color: rgb(64,98,183);
+  }
+/*End Login-page-awwal Style*/

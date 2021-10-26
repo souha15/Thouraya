@@ -57,7 +57,7 @@
 }
 
 .calendars-ctrl {
-  background-color: #600; /**/
+  background-color: #600;
   display: none;
 }
 
@@ -402,12 +402,7 @@ code {
   background-color: #1b6ec2;
   border-color: #1861ac;
 }
-/**.bg-imglogin {
-  background-image: url('assets/images/bg1.jpg');
-  background-position: center;
-  background-repeat: no-repeat;
-}
-*/
+
 .bg-imgreqister {
   background-image: url('assets/images/7.jpg');
   background-position: center;
@@ -585,6 +580,8 @@ code {
   box-sizing: border-box;
 
 }
+
+
 
 footer {
   background: #276985;
@@ -1820,7 +1817,6 @@ table .show-details {
   font-size: 18px;
   color: #276985;
 }
-
 
 
 /*html, body { height: 100%; }

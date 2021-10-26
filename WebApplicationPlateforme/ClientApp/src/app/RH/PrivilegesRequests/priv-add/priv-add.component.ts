@@ -21,7 +21,7 @@ export class PrivAddComponent implements OnInit {
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
-      if (res.emploi == "محاسب") {
+     if (res.emploi == "محاسب") {
         this.employeefin = true;
       } else {
         this.employeefin = false

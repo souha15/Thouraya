@@ -50,7 +50,12 @@
           شكوى
         </a>
 
-        <a *ngIf="testrole || testroleadmin" href="" [routerLink]="['/cheque-pay-list-accept']">
+        <a *ngIf="testrole || testroleadmin || testroledir" href="" [routerLink]="['/new-cheque-list-dir-directe']">
+          <span class="icon"><i class="fa fa-hand-holding-usd"></i></span>
+          طلبات صرف شيك
+        </a>
+
+        <a *ngIf="testrole || testroleadmin" href="" [routerLink]="['/new-cheque-list-dir-general']">
           <span class="icon"><i class="fa fa-hand-holding-usd"></i></span>
           طلبات صرف شيك
         </a>
@@ -96,7 +101,7 @@
         </a>
         <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/dem-assistance-listdir']">
           <span class="icon"><i class="fa fa-address-book"></i></span>
-          طلبات إشراف
+          طلبات  مباشرة عمل
         </a>
 
       </div>
@@ -107,7 +112,7 @@
 </div>
 <!-- Footer -->
 <footer class="text-center">
-  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
 </footer>
 
 <!---<app-nav-menu></app-nav-menu>
@@ -184,5 +189,5 @@
 </div>
 
 <footer class="text-center">
- <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+ <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
 </footer>-->

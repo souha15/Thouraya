@@ -1,6 +1,6 @@
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light main-nav">
-  <a class="navbar-brand" href="#"><img src="assets/images/logo000.png" alt=""></a>
+  <a class="navbar-brand" href="#"><img src="assets/images/awal.png" alt=""></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -12,29 +12,33 @@
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/filesorg-menu']">خدماتي</a>
+        <a class="nav-link" [routerLink]="['/maenu-accepted']">خدماتي</a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/main-services-page']">استعلاماتي</a>
+        <a class="nav-link" [routerLink]="['/list-admin-ordre-pay']">استعلاماتي</a>
       </li>
 
-      <li class="nav-item" *ngIf="admin">
+      <li class="nav-item">
         <a class="nav-link" [routerLink]="['/tasks-list-received']"> مهامي</a>
       </li>
 
-      <li class="nav-item" *ngIf="admin">
-        <a class="nav-link" [routerLink]="['/mailing']"> الإتصالات الإداریة</a>
-      </li>
 
-      <li class="nav-item" *ngIf="admin">
+      <li class="nav-item">
         <a class="nav-link" [routerLink]="['/decision-list']">	التعاميم والقرارات </a>
       </li>
 
       <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/film-details']">العلاقات العامة</a>
+        <a class="nav-link" [routerLink]="['/ticket2-add']">الدعم الفني</a>
       </li>
       <!--
+
+            <li class="nav-item">
+        <a class="nav-link" [routerLink]="['/film-details']">العلاقات العامة</a>
+      </li>
+      <li class="nav-item" >
+        <a class="nav-link" [routerLink]="['/mailing']"> الإتصالات الإداریة</a>
+      </li>
   <li class="nav-item">
     <a class="nav-link" [routerLink]="['/news-list-viewer']">المركز الإعلامي</a>
   </li>
@@ -62,18 +66,9 @@
   -->
     </ul>
     <div class="my-2 my-lg-0" *ngIf="userDetails">
+      <a [routerLink]="['/home']" class="ml-2 alert-btn notification"><i class="fa fa-home fa-lg"></i></a>
 
-
-      <a *ngIf="testroledir" [routerLink]="['/alerts']" class="ml-2 alert-btn notification"><span class="badge" *ngIf="nbd!=0">{{nbd}}</span><i class="fa fa-bell fa-lg"></i></a>      
-    
-      <!--<a class="ml-2 alert-btn notification nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="badge" *ngIf="pointer">?</span><i class="fa fa-user-circle fa-lg"></i></a>
-  <div class="dropdown-menu">
-
-    <a class="dropdown-item" [routerLink]="['/pointage-presence-add']" *ngIf="pointer">تسجيل حضور</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" [routerLink]="['/pointage-quitter-add']">تسجيل إنصراف </a>
-
-  </div>-->
+      <a *ngIf="testroledir" [routerLink]="['/alerts']" class="ml-2 alert-btn notification"><span class="badge" *ngIf="nbd!=0">{{nbd}}</span><i class="fa fa-bell fa-lg"></i></a>
       <button class="btn  user-btn my-2 my-sm-0 mx-3"> مرحبا {{userDetails.fullName}}</button>
     </div>
     <div class="dropdown d-inline-block">

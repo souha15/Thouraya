@@ -1,1 +1,404 @@
-<p>visite-type-crud works!</p>
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+      <!-- Tasks Page Content -->
+      <section class="page-content">
+        <h4 class="my-2 task-head">إضافة الصلاحيات </h4>
+        <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+
+          <div class="form-box w-100">
+
+            <div class="w-100 text-right">
+              <label class="main">
+                <span><i class="fa fa-user-cog"></i></span>
+                الصلاحيات الأولية
+              </label>
+            </div>
+
+            <div class="card-block">
+              <h6 class="m-b-20 p-b-5 b-b-default f-w-600">صلاحيات المستخدم</h6>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div *ngFor="let user of roleslist" style="display:inline-block">
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='EMPLOYEE'">
+                      موظف
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='DIRECTORGENERAL'">
+                      المدير التنفيذي
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='ADMINISTRATEUR'">
+                      مسؤول النظام
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='DIRECTORETAB'">
+                      مدير قسم
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='RESSOURCEHUMAINE'">
+                      مسؤول شؤون الموظفين
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='RESPFINANCE'">
+                      مسؤول مالية
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='DIRECTORADMN'">
+                      مدير ادارة
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+                  </div>
+                </div>
+                </div>
+        
+                    <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">إضافة صلاحيات</h6>
+               
+                <div class="row">
+                      <div class="col-sm-12">
+                        <div style="display:inline-block">
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn19 (click)="add19();btn19.disabled = true;">موظف</button>
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn20 (click)="add20();btn20.disabled = true;">المدير التنفيذي</button>
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn21 (click)="add21();btn21.disabled = true;">مسؤول النظام</button>
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn22 (click)="add22();btn22.disabled = true;">مدير قسم</button>
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn23 (click)="add23();btn23.disabled = true;">مسؤول شؤون الموظفين</button>
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn24 (click)="add24();btn24.disabled = true;">مسؤول مالية</button>
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn25 (click)="add25();btn25.disabled = true;">مدير ادارة </button>
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+
+          
+              </div>
+
+
+          <div class="form-box w-100">
+
+            <div class="w-100 text-right">
+              <label class="main">
+                <span><i class="fa fa-user-check"></i></span>
+                مكتب المدير العام
+              </label>
+            </div>
+
+            <div class="card-block">
+              <h6 class="m-b-20 p-b-5 b-b-default f-w-600">صلاحيات المستخدم</h6>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div *ngFor="let user of roleslist" style="display:inline-block">
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='DIRPRIV'">
+                      مكتب المدير العام
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='COMADPRIV'">
+                      الاتصالات الإدارية
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='RETPRIV'">
+                      الاستقطاعات
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                  </div>
+                </div>
+
+              </div>
+              <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">إضافة صلاحيات</h6>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div style="display:inline-block">
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn1 (click)="add1();btn1.disabled = true;">    مكتب المدير العام</button>
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn2 (click)="add2();btn2.disabled = true;"> الاتصالات الإدارية</button>
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn3 (click)="add3();btn3.disabled = true;"> الاستقطاعات</button>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="form-box w-100">
+
+            <label class="main">
+              <span><i class="fa fa-hand-holding-usd"></i></span>
+              الشؤون المالية والإدارية
+            </label>
+
+            <div class="card-block">
+              <h6 class="m-b-20 p-b-5 b-b-default f-w-600">صلاحيات المستخدم</h6>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div *ngFor="let user of roleslist" style="display:inline-block">
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='FINPRIV'">
+                      الشؤون المالية والإدارية
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='COMPTAPRIV'">
+                      الحسابات
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='BOXPRIV'">
+                      الصندوق
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='EVFINPRIV'">
+                      تنمية الموارد المالية
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='RHPRIV'">
+                      الموارد البشرية
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                  </div>
+                </div>
+
+              </div>
+              <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">إضافة صلاحيات</h6>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div style="display:inline-block">
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn4 (click)="add4();btn4.disabled = true;">   الشؤون المالية والإدارية </button>
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn5 (click)="add5();btn5.disabled = true;">الحسابات </button>
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn6 (click)="add6();btn6.disabled = true;"> الصندوق</button>
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn7 (click)="add7();btn7.disabled = true;"> تنمية الموارد المالية </button>
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn8 (click)="add8();btn8.disabled = true;"> الموارد البشرية </button>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+          <div class="form-box w-100">
+
+            <label class="main">
+              <span><i class="fa fa-building"></i></span>
+              الأوقاف والخدمات
+            </label>
+
+
+            <div class="card-block">
+              <h6 class="m-b-20 p-b-5 b-b-default f-w-600">صلاحيات المستخدم</h6>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div *ngFor="let user of roleslist" style="display:inline-block">
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='DOTPRIV'">
+                      الأوقاف والخدمات
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='SERPRIV'">
+                      الخدمات المساندة
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='LOCPRIV'">
+                      الاوقاف
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='TECHPRIV'">
+                      التقنية
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                  </div>
+                </div>
+
+              </div>
+              <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">إضافة صلاحيات</h6>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div style="display:inline-block">
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn9 (click)="add9();btn9.disabled = true;">   الأوقاف والخدمات </button>
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn10 (click)="add10();btn10.disabled = true;"> الخدمات المساندة </button>
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn11 (click)="add11();btn11.disabled = true;"> الاوقاف</button>
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn26 (click)="add26();btn26.disabled = true;"> التقنية</button>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+
+          </div>
+
+          <div class="form-box w-100">
+
+
+            <label class="main">
+              <span><i class="fa fa-mosque"></i></span>
+              الشؤون الدعوية
+            </label>
+
+
+            <div class="card-block">
+              <h6 class="m-b-20 p-b-5 b-b-default f-w-600">صلاحيات المستخدم</h6>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div *ngFor="let user of roleslist" style="display:inline-block">
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='DAWAAPRIV'">
+                      الشؤون الدعوية
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='MUSPRIV'">
+                      الجاليات
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+
+                  </div>
+                </div>
+
+              </div>
+              <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">إضافة صلاحيات</h6>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div style="display:inline-block">
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn12 (click)="add12();btn12.disabled = true;"> الشؤون الدعوية  </button>
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn13 (click)="add13();btn13.disabled = true;"> الجاليات  </button>
+
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+          <div class="form-box w-100">
+            <label class="main">
+              <span><i class="fa fa-comment-dots"></i></span>
+              العلاقات والاعلام
+            </label>
+
+
+            <div class="card-block">
+              <h6 class="m-b-20 p-b-5 b-b-default f-w-600">صلاحيات المستخدم</h6>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div *ngFor="let user of roleslist" style="display:inline-block">
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='MEDIAPRIV'">
+                      العلاقات والاعلام
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='MEDIACENTERPRIV'">
+                      العلاقات العامة
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                  </div>
+                </div>
+
+              </div>
+              <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">إضافة صلاحيات</h6>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div style="display:inline-block">
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn14 (click)="add14();btn14.disabled = true;">  العلاقات والاعلام  </button>
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn15 (click)="add15();btn15.disabled = true;">   العلاقات العامة </button>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+          </div>
+
+
+          <div class="form-box w-100">
+            <label class="main">
+              <span><i class="fa fa-users"></i></span>
+              إدارة المشاريع والمستفيدين
+            </label>
+
+
+            <div class="card-block">
+              <h6 class="m-b-20 p-b-5 b-b-default f-w-600">صلاحيات المستخدم</h6>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div *ngFor="let user of roleslist" style="display:inline-block">
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='PROJBENPRIV'">
+                      إدارة المشاريع و المستفيدين
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='PROJPRIV'">
+                      إدارة المشاريع
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                    <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="user=='BENPRIV'">
+                      إدارة  المستفيدين
+                      <a (click)="delete(UserId,user)"><span class="counter counter-lg" style="color:red">X</span></a>
+                    </p>
+
+                  </div>
+                </div>
+
+              </div>
+              <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">إضافة صلاحيات</h6>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div style="display:inline-block">
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn16 (click)="add16();btn16.disabled = true;">    إدارة المشاريع و المستفيدين </button>
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn17 (click)="add17();btn17.disabled = true;">  إدارة المشاريع  </button>
+                    <button id="rcorners2" class="m-b-10 f-w-600" #btn18 (click)="add18();btn18.disabled = true;">  إدارة  المستفيدين</button>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </form>
+      </section>
+    </div><!-- End col-9 -->
+
+  </div>
+
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+</footer>

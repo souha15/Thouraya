@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.NetworkInformation;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -83,10 +86,32 @@ namespace WebApplicationPlateforme.Controllers.Pointage
         [HttpPost]
         public async Task<ActionResult<PointageUser>> PostPointageUser(PointageUser pointageUser)
         {
-            //var ip = _accessor.ActionContext.HttpContext.Connection.RemoteIpAddress.ToString();
-            var ip = HttpContext.Connection.RemoteIpAddress.ToString();
+            string macAddresses = "";
+
+            foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                if (nic.OperationalStatus == OperationalStatus.Up)
+                {
+                    macAddresses += nic.GetPhysicalAddress().ToString();
+                    break;
+                }
+            }
+
+            var builder = new StringBuilder(macAddresses);
+            for (int i = builder.Length - 2; i > 0; i -= 2)
+            {
+                builder.Insert(i, ':');
+            }
+            pointageUser.adresseMac = builder.ToString();
+            Console.WriteLine(builder.ToString());
+
+           //var ip = _accessor.ActionContext.HttpContext.Connection.RemoteIpAddress.ToString();
+           var ip = HttpContext.Connection.RemoteIpAddress.ToString();
             pointageUser.adresseIP = ip;
-            _context.PointageUsers.Add(pointageUser);
+
+           
+         _context.PointageUsers.Add(pointageUser);
+
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPointageUser", new { id = pointageUser.Id }, pointageUser);

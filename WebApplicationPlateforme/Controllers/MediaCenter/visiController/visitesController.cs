@@ -14,9 +14,9 @@ namespace WebApplicationPlateforme.Controllers.MediaCenter.visiController
     [ApiController]
     public class visitesController : ControllerBase
     {
-        private readonly FinanceContext _context;
+        private readonly DawaaContext _context;
 
-        public visitesController(FinanceContext context)
+        public visitesController(DawaaContext context)
         {
             _context = context;
         }

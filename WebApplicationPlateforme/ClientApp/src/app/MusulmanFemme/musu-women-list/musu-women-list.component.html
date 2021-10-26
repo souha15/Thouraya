@@ -1,0 +1,93 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <app-musu-women-menu></app-musu-women-menu>
+      <h2 class="task-head">قائمة المسلمات  الجدد </h2>
+
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
+      <div class="tabel-cont">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th scope="col" (click)="sort('id')">
+                <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('tacheNom')">
+                الداعية
+                <span class="glyphicon sort-icon" *ngIf="key =='tacheNom'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+
+              <th scope="col" (click)="sort('creatorName')">
+                رقم الملف
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('creatorName')">
+                الاسم الجديد
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('creatorName')">
+                الاسم القديم
+                <span class="glyphicon sort-icon" *ngIf="key =='creatorName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+              <th scope="col" (click)="sort('tacheNom')">
+                الجنسية
+                <span class="glyphicon sort-icon" *ngIf="key =='tacheNom'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+              <th scope="col" (click)="sort('description')">
+                الجوال
+                <span class="glyphicon sort-icon" *ngIf="key =='description'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+              <th scope="col">تعديل</th>
+              <th scope="col">حذف</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tache of mus | orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: c }; let i = index">
+
+              <th [routerLink]="['/musu-women-details', tache.id]">{{(c-1) * count + i + 1}}</th>
+              <td [routerLink]="['/musu-women-details', tache.id]">{{tache.predicateur}}</td>
+              <td [routerLink]="['/musu-women-details', tache.id]">{{tache.numdos}}</td>
+              <td [routerLink]="['/musu-women-details', tache.id]">{{tache.nvnom}}</td>
+              <td [routerLink]="['/musu-women-details', tache.id]">{{tache.prevnom}}</td>
+              <td [routerLink]="['/musu-women-details', tache.id]">{{tache.nat}}</td>
+              <td [routerLink]="['/musu-women-details', tache.id]">{{tache.telmus}}</td>
+              <td><a class="btn btn-success" [routerLink]="['/musu-women-edit', tache.id]"><i class="fa fa-edit"></i></a></td>
+              <td><a (click)="onDelete(tache.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+            </tr>
+
+          </tbody>
+
+
+        </table>
+      </div>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+
+          <pagination-controls (pageChange)="c = $event" previousLabel="السابق"
+                               nextLabel="التالي"></pagination-controls>
+        </ul>
+      </nav>
+
+
+
+
+
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+</footer>

@@ -365,4 +365,7 @@ export class UploadDownloadService {
   deletef(id) {
     return this.httpClient.delete(this.rootURL + '/PiecesJointesfs/' + id);
   }
+
+
+
 }

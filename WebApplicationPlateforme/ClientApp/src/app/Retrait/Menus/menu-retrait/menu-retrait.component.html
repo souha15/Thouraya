@@ -1,0 +1,58 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head"> تنمية الموارد المالية</h3>
+      </header>
+      <div class="row que-serv">
+
+        <div class="que-serv">
+          <div class="que-serv">
+
+            <a href="" [routerLink]="['/cheque-retrait-add']">
+              <span class="icon"><i class="fa fa-user"></i></span>
+              إضافة مستقطع
+            </a>
+
+
+            <a href="" [routerLink]="['/cheque-retrait-list-general']">
+              <span class="icon"><i class="fa fa-money-bill"></i></span>
+              الاستقطاع البنكي
+            </a>
+
+            <a href="" [routerLink]="['/espece-retrait-list']">
+              <span class="icon"><i class="fa fa-hand-holding-usd"></i></span>
+              الاستقطاع اليدوي
+            </a>
+
+            <a [routerLink]="['/projet-list']">
+              <span class="icon"><i class="fa fa-building"></i></span>
+              إدارة المشاريع
+            </a>
+
+            <a [routerLink]="['/gest-ben-list-accepte']">
+              <span class="icon"><i class="fa fa-users-cog"></i></span>
+              إدارة المستفيدين
+            </a>
+            <a href="">
+              <span class="icon"><i class="fa fa-file-pdf"></i></span>
+              التقارير
+            </a>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+</footer>

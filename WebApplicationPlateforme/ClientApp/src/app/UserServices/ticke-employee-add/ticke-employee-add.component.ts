@@ -52,24 +52,28 @@ export class TickeEmployeeAddComponent implements OnInit {
   onSubmit() {
     this.conge.dateenreg = this.date;
     this.conge.etat = "في الانتظار";
-    this.conge.photosPath = this.path;
-    this.fileslist.forEach(item => {
-      this.path = item;
-      if (this.path != null) {
-        this.pathurl = "/uploads/" + this.path;
-        this.photoexit = true
-      } else {
-        this.photoexit = false;
-      }
 
-      this.congeService.Add(this.conge).subscribe(res => {
+
+
+    this.congeService.Add(this.conge).subscribe(res => {
+      //this.fileslist.forEach(item => {
+      //  this.path = item;
+      //  if (this.path != null) {
+      //    this.pathurl = "/uploads/" + this.path;
+      //    this.photoexit = true
+      //  } else {
+      //    this.photoexit = false;
+      //  }
+      //})
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+   
+   
       },
         err => {
           this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
         }
       )
-    })
+   
   }
 
 
@@ -151,6 +155,10 @@ export class TickeEmployeeAddComponent implements OnInit {
         }
       );
       this.fileslist.push(this.file.name);
+      this.conge.photosPath = this.file.name;
+      this.pathurl = "/uploads/" + this.file.name;
+      this.photoexit = true;
+      console.log(this.pathurl)
       console.log(this.fileslist)
     }
   }

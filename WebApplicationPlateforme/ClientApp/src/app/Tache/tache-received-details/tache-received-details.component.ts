@@ -170,12 +170,15 @@ export class TacheReceivedDetailsComponent implements OnInit {
   testsend: boolean = true;
   tp: TacheProcess = new TacheProcess();
   date = new Date().toLocaleDateString();
-
+  getdetails(event) {
+    this.ev.Attribut2 = event.target.value
+  }
   send() {
 
     this.ev.affectedName = this.UserIdConnected;
     this.ev.Attribut1 = this.UserNameConnected;
-    if (this.retarde == "تحت الإجراء") {
+    console.log(this.testsend)
+    if (this.ev.etat == "تحت الإجراء") {
       this.ev.etat = "للتقييم"
 
       this.tacheService.PutObservableE(this.ev).subscribe(
@@ -207,7 +210,7 @@ export class TacheReceivedDetailsComponent implements OnInit {
 
   receive() {
 
-    if (this.retarde == "في الإنتظار") {
+    if (this.ev.etat == "في الإنتظار") {
       this.ev.etat = "تحت الإجراء"
       this.ev.affectedName = this.UserIdConnected;
       this.ev.Attribut1 = this.UserNameConnected;

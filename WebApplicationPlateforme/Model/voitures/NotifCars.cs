@@ -14,6 +14,9 @@ namespace WebApplicationPlateforme.Model.voitures
         public string dateTime { get; set; }
         public string dateenreg { get; set; }
         public string userNameCreator { get; set; }
+        public string kilometrage { get; set; }
+        public string details { get; set; }
+        public int idvoiture { get; set; }
 
         [ForeignKey("ApplicationUser")]
         public string idUserCreator { get; set; }

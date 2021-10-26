@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Output, Input, EventEmitter, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, Input, EventEmitter, ElementRef, Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { ProprietaireService } from '../../../../shared/Services/AdministrativeCommunication/proprietaire.service';
 import { UserServiceService } from '../../../../shared/Services/User/user-service.service';
@@ -23,15 +23,52 @@ import { UserDetail } from '../../../../shared/Models/User/user-detail.model';
 import { Administration } from '../../../../shared/Models/Administration/administration.model';
 import { Liaison } from '../../../../shared/Models/AdministrativeCommunication/liaison.model';
 import { LiaisonService } from '../../../../shared/Services/AdministrativeCommunication/liaison.service';
+import { TypeTransactionService } from '../../../../shared/Services/NewServicesForDawa/type-transaction.service';
+import { TbListening } from '../../../../shared/Models/Evenements/tb-listening.model';
+import {
+  NgbDateStruct, NgbCalendar, NgbCalendarIslamicUmalqura, NgbDatepickerI18n, NgbDate
+} from '@ng-bootstrap/ng-bootstrap';
+
+import { TranslationWidth } from '@angular/common';
+const WEEKDAYS = ['ن', 'ث', 'ر', 'خ', 'ج', 'س', 'ح'];
+const MONTHS = ['محرم', 'صفر', 'ربيع الأول', 'ربيع الآخر', 'جمادى الأولى', 'جمادى الآخرة', 'رجب', 'شعبان', 'رمضان', 'شوال',
+  'ذو القعدة', 'ذو الحجة'];
+
+@Injectable()
+export class IslamicI18n extends NgbDatepickerI18n {
+
+  getWeekdayShortName(weekday: number): string {
+    return WEEKDAYS[weekday - 1];
+  }
+  getMonthShortName(month: number) {
+    return MONTHS[month - 1];
+  }
+
+  getMonthFullName(month: number) {
+    return MONTHS[month - 1];
+  }
+
+  getWeekdayLabel(weekday: number, width?: TranslationWidth) {
+    return WEEKDAYS[weekday - 1];
+  }
+
+  getDayAriaLabel(date: NgbDateStruct): string {
+    return `${date.day}-${date.month}-${date.year}`;
+  }
+}
 
 @Component({
   selector: 'app-enregistrer-tr-recue',
   templateUrl: './enregistrer-tr-recue.component.html',
-  styleUrls: ['./enregistrer-tr-recue.component.css']
+  styleUrls: ['./enregistrer-tr-recue.component.css'],
+  providers: [
+    { provide: NgbCalendar, useClass: NgbCalendarIslamicUmalqura },
+    { provide: NgbDatepickerI18n, useClass: IslamicI18n }
+  ]
 })
 export class EnregistrerTRRecueComponent implements OnInit {
 
-
+  model: NgbDateStruct;
   @Input() public disabled: boolean;
   @Output() public uploadStatuss: EventEmitter<ProgressStatus>;
   @ViewChild('inputFile') inputFile: ElementRef;
@@ -46,19 +83,64 @@ export class EnregistrerTRRecueComponent implements OnInit {
     private transactionRecueService: TransactionService,
     private affectationService: AffectationService,
     private http: HttpClient,
+    private calendar: NgbCalendar,
     private liaisonService: LiaisonService,
     public serviceupload: UploadDownloadService,
+    public typeService: TypeTransactionService,
     private rootUrl: PathSharedService) {
     this.uploadStatuss = new EventEmitter<ProgressStatus>();}
 
   ngOnInit(): void {
+   
     this.getUserConnected();
     this.getFiles();
     this.getAdministrationList();
     this.getUsersList();
+    this.getType();
+  }
+
+  typeTr: TbListening[] = [];
+  getType() {
+    this.typeService.GetTalent().subscribe(res => {
+      this.typeTr =res
+    })
+  }
+
+  onDateSelect(date: NgbDate) {
+
+    var day: string = date.day.toString()
+    var month: string = date.month.toString()
+    var year: string = date.year.toString()
+    this.tr.date = year + "-" + month + "-" + day;
+
   }
 
 
+  hij: boolean = false;
+  mil: boolean = false;
+  getDate(event) {    
+    if (event.target.value == "2") {
+      this.hij = false;
+      this.mil = true;
+
+    }
+    else {
+      this.hij = true
+      this.mil = true;
+    }
+
+    if (event.target.value == "1") {
+      this.hij = true;
+      this.mil = false;
+
+    }
+    else {
+      this.hij = false;
+      this.mil = true;
+    }
+
+
+  }
   //Get Users List
 
   UsersList: UserDetail[] = [];
@@ -171,7 +253,7 @@ export class EnregistrerTRRecueComponent implements OnInit {
           console.log(this.testemp1)
           if (this.testemp1 != undefined) {
 
-            this.affectation.datenereg = this.date;
+           
             this.affectation.idUserCreator = this.UserIdConnected;
             this.affectation.creatorName = this.UserNameConnected;
             this.affectation.idUserQuiAffecte = this.UserIdConnected;

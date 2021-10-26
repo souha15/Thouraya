@@ -24,24 +24,23 @@
                   <thead class="thead-gestimary">
                     <tr>
                       <th scope="col">	# </th>
-                      <th scope="col">	رقم الموظف </th>
-
                       <th scope="col">	التاريخ </th>
                       <th scope="col">وقت الحضور</th>
                       <th scope="col"> وقت الإنصراف </th>
+                      <th scope="col">ماك أدريس  </th>
                     </tr>
                   </thead>
 
                   <tbody>
                     <tr *ngFor="let point of pointList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p } ; let i = index">
-                      <th scope="row">{{i+1}}</th>
-                      <td>{{point.numEmp}}</td>
-                      <td>{{point.date}}</td>
-                      <td>{{point.heureAssister}}</td>
-                      <td>{{point.heurePartir}}</td>
-
-
-
+                      <th scope="row">{{(p-1) * count + i + 1}}</th>
+                      <td>{{point.datePresence}}</td>
+                      <td>{{point.timePresence}}</td>
+                      <td>{{point.timeQuitter}}</td>
+                      <td>{{point.adresseMac}}
+                      <i style="color:green;" *ngIf="point.attribut1 == 1" class="fa fa-check-circle"> </i>
+                      <i style="color:red;" *ngIf="point.attribut1 == 0" class="fa fa-times-circle"> </i>
+                      </td>
 
                     </tr>
                   </tbody>
@@ -50,6 +49,12 @@
 
                 </table>
               </div>
+              <nav aria-label="Page navigation example">
+                <ul class="pagination justify-content-center">
+                  <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                       nextLabel="التالي"></pagination-controls>
+                </ul>
+              </nav>
             </div>
           </div>
         </div>
@@ -63,5 +68,5 @@
 
 <!-- Footer -->
 <footer class="text-center">
-  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
 </footer>

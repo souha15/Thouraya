@@ -9,48 +9,41 @@
       <header>
         <h3 class="task-head">الأخبار</h3>
       </header>
-
-      <div class="news px-3">
-        <div class="news-box row" *ngFor="let ne of newsList">
-          <div class="col-md-3">
-            <div class="journalist-img">
-              <img src="/uploads/{{ne.photo}}" alt="Image" />
-            </div>
+      <div class="news-page">
+        <div class="new" *ngFor="let ne of newsList">
+          <div class="header">
+            <div class="title"><strong>{{ne.titre}}</strong></div>
+            <div class="date">{{ne.date}}</div>
           </div>
-          <div class="col-md-9">
-            <div class="news-content">
-              <h4>
-                {{ne.titre}}
-              </h4>
-              <p>
-                {{ne.description}}
-              </p>
-              <a [routerLink]="['/news-detail', ne.id]" class="btn btn-primary">المزيد</a>
-              <span class="news-date">{{ne.date}}</span>
+          <div class="row">
+            <div class="col-md-2">
+              <div class="img-wrapper">
+                <img src="/uploads/{{ne.photo}}" class="w-100" alt="">
+              </div>
+            </div>
+            <div class="col-md-10">
+              <div class="text">
+                <p class="text-right">
+                  {{ne.description}}
+                </p>
+                <div class="link">
+                  <a style="float: left;" [routerLink]="['/news-detail', ne.id]" class="btn btn-outline-info">المزيد</a>
+                </div>
+              </div>
             </div>
           </div>
         </div>
 
       </div>
 
-      <!--
 
 
-              <select (change)="getconnectionId($event)">
-        <option *ngFor="let ne of list" value="{{ne}}">{{ne}}</option>
-      </select>
-      <input type="text" (change)="getmessage($event)" />
-      <button type="submit" (click)="send()">send</button>
-      <ul id="messages">
-      </ul>
-
-  End News -->
     </div>
   </div>
 
 </div>
 <!-- Footer -->
 <footer class="text-center">
- <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
 </footer>
 

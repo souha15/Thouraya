@@ -3,6 +3,8 @@ import { UserServiceService } from '../../shared/Services/User/user-service.serv
 import { PointageService } from '../../shared/Services/Pointage/pointage.service';
 import { UserDetail } from '../../shared/Models/User/user-detail.model';
 import { Pointage } from '../../shared/Models/Pointage/pointage.model';
+import { MacAddressTable } from '../../shared/Models/Pointage/mac-address-table.model';
+import { MacAddressTableService } from '../../shared/Services/Pointage/mac-address-table.service';
 
 @Component({
   selector: 'app-pointage-list',
@@ -12,10 +14,12 @@ import { Pointage } from '../../shared/Models/Pointage/pointage.model';
 export class PointageListComponent implements OnInit {
 
   constructor(private UserService: UserServiceService,
-    private pointageService: PointageService) { }
+    private pointageService: PointageService,
+    private adrTableService: MacAddressTableService) { }
 
   ngOnInit(): void {
     this.getUsersList();
+    this.GetMacList();
   }
 
   UserList: UserDetail[] = [];
@@ -64,16 +68,59 @@ export class PointageListComponent implements OnInit {
   cinSearch(event) {
     this.cin = event.target.value;
 
+    this.adrTableService.Get().subscribe(res => {
+      this.listmac2 = res
+
+      this.listmac = this.listmac2.filter(item1 => item1.userId == this.cin);
+      if (this.listmac.length != 0) {
+
+        this.mac = this.listmac[0].adresseMac;
+      } else {this.mac= null}
+    })
+
+  }
+
+  MacList: MacAddressTable[] = [];
+  GetMacList() {
+    this.adrTableService.Get().subscribe(res => {
+      this.MacList=res
+    })
   }
 
   pointList: Pointage[] = [];
   pointList2: Pointage[] = [];
+  mac: string = null;
+  listmac2: MacAddressTable[] = [];
+  listmac: MacAddressTable[] = [];
   Chercher() {
     this.pointageService.Get().subscribe(res => {
       this.pointList2 = res;
       this.pointList = this.pointList2.filter(item => item.idUserCreator == this.cin)
+
+      this.pointList.forEach(item => {
+        
+          if (this.mac != null) {
+
+            if (item.adresseMac == this.mac) {
+
+              item.attribut1 = 1
+
+            }
+
+            else {
+
+              item.attribut1 = 0
+            }
+
+          }
+          else {
+            item.attribut1 = 0
+          }   
+      })
+
     })
   }
+
 
 
   //get day
@@ -84,7 +131,7 @@ export class PointageListComponent implements OnInit {
   }
 
   //Search by Day
-
+  mac2: MacAddressTable[] = [];
   SearchByDay() {
     this.pointageService.Get().subscribe(res => {
       this.pointList2 = res;
@@ -94,6 +141,27 @@ export class PointageListComponent implements OnInit {
         var d2 = this.day.split("/").reverse().join("/");
         if (d1 == d2) {
           this.pointList.push(item)
+          this.pointList.forEach(item => {
+            this.mac2 = this.MacList.filter(itemm => itemm.userId = item.idUserCreator)
+            if (this.mac2.length != 0) {
+              if (this.mac2[0].adresseMac != null) {
+
+                if (item.adresseMac == this.mac2[0].adresseMac) {
+
+                item.attribut1 = 1
+
+              }
+
+              else {
+
+                item.attribut1 = 0
+              }
+
+            }
+            } else {
+              item.attribut1 = 0
+            }
+          })
         }
       })
     })
@@ -111,6 +179,27 @@ export class PointageListComponent implements OnInit {
       this.pointList2.forEach(item => {
         if (this.month == item.mois) {
           this.pointList.push(item)
+          this.pointList.forEach(item => {
+            this.mac2 = this.MacList.filter(itemm => itemm.userId = item.idUserCreator)
+            if (this.mac2.length != 0) {
+              if (this.mac2[0].adresseMac != null) {
+
+                if (item.adresseMac == this.mac2[0].adresseMac) {
+
+                  item.attribut1 = 1
+
+                }
+
+                else {
+
+                  item.attribut1 = 0
+                }
+
+              }
+            } else {
+              item.attribut1 = 0
+            }
+          })
         }
       })
     })

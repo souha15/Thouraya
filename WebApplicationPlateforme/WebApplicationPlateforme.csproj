@@ -37,6 +37,7 @@
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.1.3" />
     <PackageReference Include="System.Net.Http.Formatting.Extension" Version="5.2.3" />
+    <PackageReference Include="Twilio" Version="5.65.3" />
   </ItemGroup>
 
   <ItemGroup>
@@ -83,6 +84,7 @@
     <Folder Include="ClientApp\src\app\shared\Services\Dotations\" />
     <Folder Include="ClientApp\src\app\shared\Services\AdministrativeCommunication\" />
     <Folder Include="ClientApp\src\app\shared\Services\MediaCenter\DesignImpression\" />
+    <Folder Include="ClientApp\src\app\shared\Services\NotificationSettings\" />
     <Folder Include="ClientApp\src\app\shared\Services\ProjetOrg\" />
     <Folder Include="ClientApp\src\app\shared\Services\Rh\" />
     <Folder Include="ClientApp\src\app\shared\Services\Taches\" />

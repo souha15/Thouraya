@@ -208,3 +208,14 @@ ul {
 .file-label {
   cursor: pointer;
 }
+
+/*Dropzone Format*/
+.dropzone {
+  font-size: 18px;
+  color: #2196f3;
+  border: 2px dashed #2196f3;
+}
+
+  .dropzone input[type="file"] {
+    display: none;
+  }

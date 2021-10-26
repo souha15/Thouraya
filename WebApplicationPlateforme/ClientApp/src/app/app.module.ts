@@ -631,6 +631,55 @@ import { EditMusulmanComponent } from './NvMusulman/edit-musulman/edit-musulman.
 import { DetailsMusulmanComponent } from './NvMusulman/details-musulman/details-musulman.component';
 import { MenuMusulmanComponent } from './NvMusulman/menu-musulman/menu-musulman.component';
 import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.component';
+import { MenuRetraitComponent } from './Retrait/Menus/menu-retrait/menu-retrait.component';
+import { MenuRetraitGeneralComponent } from './Retrait/Menus/menu-retrait-general/menu-retrait-general.component';
+import { MenuRetraitEspeceComponent } from './Retrait/Menus/menu-retrait-espece/menu-retrait-espece.component';
+import { MenuRetraitChequeComponent } from './Retrait/Menus/menu-retrait-cheque/menu-retrait-cheque.component';
+import { ChequeRetraitAddComponent } from './Retrait/RetraitCheque/cheque-retrait-add/cheque-retrait-add.component';
+import { ChequeRetraitEditComponent } from './Retrait/RetraitCheque/cheque-retrait-edit/cheque-retrait-edit.component';
+import { ChequeRetraitDetailsComponent } from './Retrait/RetraitCheque/cheque-retrait-details/cheque-retrait-details.component';
+import { ChequeRetraitListActiveComponent } from './Retrait/RetraitCheque/cheque-retrait-list-active/cheque-retrait-list-active.component';
+import { ChequeRetraitListTribucheComponent } from './Retrait/RetraitCheque/cheque-retrait-list-tribuche/cheque-retrait-list-tribuche.component';
+import { ChequeRetraitListGeneralComponent } from './Retrait/RetraitCheque/cheque-retrait-list-general/cheque-retrait-list-general.component';
+import { EspeceRetraitAddComponent } from './Retrait/RetraitEspece/espece-retrait-add/espece-retrait-add.component';
+import { EspeceRetraitListComponent } from './Retrait/RetraitEspece/espece-retrait-list/espece-retrait-list.component';
+import { EspeceRetraitListActiveComponent } from './Retrait/RetraitEspece/espece-retrait-list-active/espece-retrait-list-active.component';
+import { EspeceRetraitListTribucheComponent } from './Retrait/RetraitEspece/espece-retrait-list-tribuche/espece-retrait-list-tribuche.component';
+import { EspeceRetraitEditComponent } from './Retrait/RetraitEspece/espece-retrait-edit/espece-retrait-edit.component';
+import { EspeceRetraitDetailsComponent } from './Retrait/RetraitEspece/espece-retrait-details/espece-retrait-details.component';
+import { NotifTextCrudComponent } from './NotificationSettings/notif-text-crud/notif-text-crud.component';
+import { AdressMacAddComponent } from './Pointage/AdressesMac/adress-mac-add/adress-mac-add.component';
+import { AdressMacListComponent } from './Pointage/AdressesMac/adress-mac-list/adress-mac-list.component';
+import { AdressMacEditComponent } from './Pointage/AdressesMac/adress-mac-edit/adress-mac-edit.component';
+import { AdressMacDetailsComponent } from './Pointage/AdressesMac/adress-mac-details/adress-mac-details.component';
+import { NewChequeListDirDirecteComponent } from './ChequeNew/new-cheque-list-dir-directe/new-cheque-list-dir-directe.component';
+import { NewChequeListEtabFinComponent } from './ChequeNew/new-cheque-list-etab-fin/new-cheque-list-etab-fin.component';
+import { NewChequeListDirFinComponent } from './ChequeNew/new-cheque-list-dir-fin/new-cheque-list-dir-fin.component';
+import { NewChequeListDirGeneralComponent } from './ChequeNew/new-cheque-list-dir-general/new-cheque-list-dir-general.component';
+import { NewChequeListBoxMenComponent } from './ChequeNew/new-cheque-list-box-men/new-cheque-list-box-men.component';
+import { NewChequeListPayeeComponent } from './ChequeNew/new-cheque-list-payee/new-cheque-list-payee.component';
+import { NewChequeMenuDirComponent } from './ChequeNew/new-cheque-menu-dir/new-cheque-menu-dir.component';
+import { NewChequeMenuDirGComponent } from './ChequeNew/new-cheque-menu-dir-g/new-cheque-menu-dir-g.component';
+import { NewChequeMenuDirFinComponent } from './ChequeNew/new-cheque-menu-dir-fin/new-cheque-menu-dir-fin.component';
+import { NewChequeMenuEtabFinComponent } from './ChequeNew/new-cheque-menu-etab-fin/new-cheque-menu-etab-fin.component';
+import { NewChequeMenuBonMenComponent } from './ChequeNew/new-cheque-menu-bon-men/new-cheque-menu-bon-men.component';
+import { NewChequeMenuPayeeComponent } from './ChequeNew/new-cheque-menu-payee/new-cheque-menu-payee.component';
+import { ActiviteeAddComponent } from './Activitee/activitee-add/activitee-add.component';
+import { ActiviteeListComponent } from './Activitee/activitee-list/activitee-list.component';
+import { ActiviteeEditComponent } from './Activitee/activitee-edit/activitee-edit.component';
+import { ActiviteeDetailComponent } from './Activitee/activitee-detail/activitee-detail.component';
+import { TypeActiviteeComponent } from './Activitee/type-activitee/type-activitee.component';
+import { MenuActiviteeComponent } from './Activitee/menu-activitee/menu-activitee.component';
+import { TypeTransactionComponent } from './AdministrativeCommunication/type-transaction/type-transaction.component';
+import { MusuWomenAddComponent } from './MusulmanFemme/musu-women-add/musu-women-add.component';
+import { MusuWomenListComponent } from './MusulmanFemme/musu-women-list/musu-women-list.component';
+import { MusuWomenEditComponent } from './MusulmanFemme/musu-women-edit/musu-women-edit.component';
+import { MusuWomenDetailsComponent } from './MusulmanFemme/musu-women-details/musu-women-details.component';
+import { MusuWomenMenuComponent } from './MusulmanFemme/musu-women-menu/musu-women-menu.component';
+import { TypeRecrutementComponent } from './RH/Recrutement/type-recrutement/type-recrutement.component';
+import { ChangeRibAddComponent } from './ChangeRib/change-rib-add/change-rib-add.component';
+import { ChangeRibUserListComponent } from './ChangeRib/change-rib-user-list/change-rib-user-list.component';
+import { ChangeRibRhListComponent } from './ChangeRib/change-rib-rh-list/change-rib-rh-list.component';
 
 @NgModule({
   declarations: [
@@ -1229,6 +1278,55 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
     DetailsMusulmanComponent,
     MenuMusulmanComponent,
     ListMusulmanComponent,
+    MenuRetraitComponent,
+    MenuRetraitGeneralComponent,
+    MenuRetraitEspeceComponent,
+    MenuRetraitChequeComponent,
+    ChequeRetraitAddComponent,
+    ChequeRetraitEditComponent,
+    ChequeRetraitDetailsComponent,
+    ChequeRetraitListActiveComponent,
+    ChequeRetraitListTribucheComponent,
+    ChequeRetraitListGeneralComponent,
+    EspeceRetraitAddComponent,
+    EspeceRetraitListComponent,
+    EspeceRetraitListActiveComponent,
+    EspeceRetraitListTribucheComponent,
+    EspeceRetraitEditComponent,
+    EspeceRetraitDetailsComponent,
+    NotifTextCrudComponent,
+    AdressMacAddComponent,
+    AdressMacListComponent,
+    AdressMacEditComponent,
+    AdressMacDetailsComponent,
+    NewChequeListDirDirecteComponent,
+    NewChequeListEtabFinComponent,
+    NewChequeListDirFinComponent,
+    NewChequeListDirGeneralComponent,
+    NewChequeListBoxMenComponent,
+    NewChequeListPayeeComponent,
+    NewChequeMenuDirComponent,
+    NewChequeMenuDirGComponent,
+    NewChequeMenuDirFinComponent,
+    NewChequeMenuEtabFinComponent,
+    NewChequeMenuBonMenComponent,
+    NewChequeMenuPayeeComponent,
+    ActiviteeAddComponent,
+    ActiviteeListComponent,
+    ActiviteeEditComponent,
+    ActiviteeDetailComponent,
+    TypeActiviteeComponent,
+    MenuActiviteeComponent,
+    TypeTransactionComponent,
+    MusuWomenAddComponent,
+    MusuWomenListComponent,
+    MusuWomenEditComponent,
+    MusuWomenDetailsComponent,
+    MusuWomenMenuComponent,
+    TypeRecrutementComponent,
+    ChangeRibAddComponent,
+    ChangeRibUserListComponent,
+    ChangeRibRhListComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -1272,28 +1370,32 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
       { path: 'user-edit', component: UserEditComponent, canActivate: [AuthGuard] },
       { path: 'user-edit/:id', component: UserEditComponent, canActivate: [AuthGuard] },
       { path: 'user-change-pasword', component: UserChangePaswordComponent, canActivate: [AuthGuard] },
-      { path: 'tasks-reports', component: TasksReportsComponent, canActivate: [AuthGuard] },
+
+      { path: 'tasks-reports', component: TasksReportsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN'] }},
       { path: 'tasks-reports-received', component: TasksReportsReceivedComponent, canActivate: [AuthGuard] },
-      { path: 'tasks-list-created', component: TasksListCreatedComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
-      { path: 'tasks-list-received', component: TasksListReceivedComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
-      { path: 'tasks-list-done', component: TasksListDoneComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
-      { path: 'tasks-list-delayed', component: TasksListDelayedComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
-      { path: 'user-registration', component: UserRegistrationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE'] }  },
+  { path: 'tasks-list-created', component: TasksListCreatedComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN'] } },
+      { path: 'tasks-list-received', component: TasksListReceivedComponent, canActivate: [AuthGuard] },
+      { path: 'tasks-list-done', component: TasksListDoneComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN'] }},
+      { path: 'tasks-list-delayed', component: TasksListDelayedComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN'] }},
+      { path: 'user-registration', component: UserRegistrationComponent, canActivate: [AuthGuard] },
       { path: 'side-menu', component: SideMenuComponent, canActivate: [AuthGuard] },
       { path: 'nav-menu', component: NavMenuComponent, canActivate: [AuthGuard] },
-      { path: 'mailing', component: MailingComponent, canActivate: [AuthGuard] },
-      { path: 'alerts', component: AlertsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL'] }},
-      { path: 'alertsrh', component: AlertsrhComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE'] } },
-      { path: 'completed-task', component: CompletedTaskComponent, canActivate: [AuthGuard] },
-      { path: 'completed-task/:id', component: CompletedTaskComponent, canActivate: [AuthGuard] },
-      { path: 'evaluated-task', component: EvaluatedTaskComponent, canActivate: [AuthGuard] },
-      { path: 'evaluated-task/:id', component: EvaluatedTaskComponent, canActivate: [AuthGuard] },
-      { path: 'task-details/:id', component: TaskDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
-      { path: 'task-details', component: TaskDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
-      { path: 'tasks-list', component: TasksListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
-      { path: 'new-task', component: NewTaskComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
-      { path: 'main-tasks', component: MainTasksComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE','SECRETAIRE'] } },
-      { path: 'user-info', component: UserInfoComponent, canActivate: [AuthGuard]},
+      { path: 'mailing', component: MailingComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'COMADPRIV'] } },
+      { path: 'alerts', component: AlertsComponent, canActivate: [AuthGuard]},
+      { path: 'alertsrh', component: AlertsrhComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE', 'RHPRIV','FINPRIV'] } },
+
+      { path: 'completed-task', component: CompletedTaskComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN'] } },
+      { path: 'completed-task/:id', component: CompletedTaskComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN'] } },
+      { path: 'evaluated-task', component: EvaluatedTaskComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN'] }},
+      { path: 'evaluated-task/:id', component: EvaluatedTaskComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN'] } },
+      { path: 'task-details/:id', component: TaskDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'task-details', component: TaskDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'tasks-list', component: TasksListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN'] }},
+  { path: 'new-task', component: NewTaskComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN'] } },
+      { path: 'main-tasks', component: MainTasksComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN'] } },
+
+
+      { path: 'user-info', component: UserInfoComponent, canActivate: [AuthGuard] },
       { path: 'users-list', component: UsersListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
       { path: 'administration-list', component: AdministrationListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
       { path: 'new-administration', component: NewAdministrationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
@@ -1305,33 +1407,34 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       //Finanace Project
 
-      { path: 'liste-dotation', component: ListeDotationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] }},
-      { path: 'dotation-details', component: DotationDetailsComponent, canActivate: [AuthGuard]  },
-      { path: 'dotation-edit', component: DotationEditComponent, canActivate: [AuthGuard]    },
-      { path: 'unite-edit', component: UniteEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
-      { path: 'unite-edit/:id', component: UniteEditComponent, canActivate: [AuthGuard]  },
-      { path: 'unite-details', component: UniteDetailsComponent, canActivate: [AuthGuard]  },
-      { path: 'enregistrer-unite', component: EnregistrerUniteComponent, canActivate: [AuthGuard]   },
-      { path: 'liste-unite', component: ListeUniteComponent, canActivate: [AuthGuard]  },
-      { path: 'liste-locataire', component: ListeLocataireComponent, canActivate: [AuthGuard]  },
-      { path: 'edit-locataire', component: EditLocataireComponent, canActivate: [AuthGuard]  },
-      { path: 'locataire-details', component: LocataireDetailsComponent, canActivate: [AuthGuard]  },
-      { path: 'revenus-details', component: RevenusDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }   },
-      { path: 'revenus-details/:id', component: RevenusDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
-      { path: 'revenus-list', component: RevenusListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
-      { path: 'enregistrer-revenus', component: EnregistrerRevenusComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTOR', 'SECRETAIRE'] } },
-      { path: 'enregistrer-revenus/:id', component: EnregistrerRevenusComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
-      { path: 'edit-revenus', component: EditRevenusComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
-      { path: 'enregistrer-locataire', component: EnregistrerLocataireComponent, canActivate: [AuthGuard]  },
-      { path: 'depot-revenus', component: DepotRevenusComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
-      { path: 'service-revenus', component: ServiceRevenusComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
-      { path: 'typedotation', component: TypedotationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
-      { path: 'etatdotation', component: EtatdotationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
-      { path: 'etatunite', component: EtatuniteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
-      { path: 'enregistrer-dotation', component: EnregistrerDotationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR','SECRETAIRE'] }   },
-      { path: 'typeunite', component: TypeuniteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'liste-dotation', component: ListeDotationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] }},
+      { path: 'dotation-details', component: DotationDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] }},
+      { path: 'dotation-edit', component: DotationEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] }   },
+      { path: 'unite-edit', component: UniteEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] } },
+      { path: 'unite-edit/:id', component: UniteEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] } },
+      { path: 'unite-details', component: UniteDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] } },
+      { path: 'enregistrer-unite', component: EnregistrerUniteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] }  },
+      { path: 'liste-unite', component: ListeUniteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] } },
+      { path: 'liste-locataire', component: ListeLocataireComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] } },
+      { path: 'edit-locataire', component: EditLocataireComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] } },
+      { path: 'locataire-details', component: LocataireDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] } },
+      { path: 'revenus-details', component: RevenusDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] }  },
+      { path: 'revenus-details/:id', component: RevenusDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] } },
+      { path: 'revenus-list', component: RevenusListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] } },
+
+      { path: 'enregistrer-revenus', component: EnregistrerRevenusComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] } },
+      { path: 'enregistrer-revenus/:id', component: EnregistrerRevenusComponent, data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] }},
+      { path: 'edit-revenus', component: EditRevenusComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] } },
+      { path: 'enregistrer-locataire', component: EnregistrerLocataireComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] } },
+      { path: 'depot-revenus', component: DepotRevenusComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] }},
+      { path: 'service-revenus', component: ServiceRevenusComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] } },
+      { path: 'typedotation', component: TypedotationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] } },
+      { path: 'etatdotation', component: EtatdotationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] }},
+      { path: 'etatunite', component: EtatuniteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] } },
+      { path: 'enregistrer-dotation', component: EnregistrerDotationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] } },
+      { path: 'typeunite', component: TypeuniteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV','LOCPRIV'] }},
       { path: 'menu-finance', component: MenuFinanceComponent, canActivate: [AuthGuard]  },
-      { path: 'main-finance-page', component: MainFinancePageComponent, canActivate: [AuthGuard]  },
+      { path: 'main-finance-page', component: MainFinancePageComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] }  },
       { path: 'main-farametrage-finance-page', component: MainFarametrageFinancePageComponent, canActivate: [AuthGuard]  },
       { path: 'bureau-immob-page', component: BureauImmobPageComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
 
@@ -1349,26 +1452,30 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
       //Communication Administrative
       { path: 'organisme', component: OrganismeComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }   },
       { path: 'proprietaire', component: ProprietaireComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
-      { path: 'enregistrer-tr-recue', component: EnregistrerTRRecueComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
-      { path: 'my-liste-tr', component: MyListeTrComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
+      { path: 'enregistrer-tr-recue', component: EnregistrerTRRecueComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'COMADPRIV'] }},
+      { path: 'my-liste-tr', component: MyListeTrComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'COMADPRIV'] } },
       { path: 'my-liste-tr-emise', component: MyListeTrEmiseComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
-      { path: 'enregistrer-tre', component: EnregistrerTREComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] }  },
-      { path: 'enregistrer-tri', component: EnregistrerTRIComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] }  },
-      { path: 'my-liste-tr-i', component: MyListeTrIComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
+
+
+      { path: 'enregistrer-tre', component: EnregistrerTREComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'COMADPRIV'] } },
+
+
+      { path: 'enregistrer-tri', component: EnregistrerTRIComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN'] } },
+      { path: 'my-liste-tr-i', component: MyListeTrIComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'COMADPRIV'] } },
       { path: 'my-liste-decision', component: MyListeDecisionComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
       { path: 'acmenu', component: ACMenuComponent, canActivate: [AuthGuard]  },
       { path: 'enregistrer-decision', component: EnregistrerDecisionComponent, canActivate: [AuthGuard]  },
       { path: 'liste-organisme', component: ListeOrganismeComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
       { path: 'liste-proprietaire', component: ListeProprietaireComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
-      { path: 'main-page-ac', component: MainPageACComponent, canActivate: [AuthGuard] },
-      { path: 'main-page-ac2', component: MainPageAC2Component, canActivate: [AuthGuard] },
-      { path: 'transactions-rlist', component: TransactionsRListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
+      { path: 'main-page-ac', component: MainPageACComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'COMADPRIV'] } },
+      { path: 'main-page-ac2', component: MainPageAC2Component, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'COMADPRIV'] }},
+      { path: 'transactions-rlist', component: TransactionsRListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'COMADPRIV'] } },
       { path: 'enreg-def-r', component: EnregDefRComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
       { path: 'enreg-temp-r', component: EnregTempRComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
       { path: 'enreg-r', component: EnregRComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
       { path: 'afftected-to-my-admin-r', component: AfftectedToMyAdminRComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
 
-      { path: 'transactions-elist', component: TransactionsElistComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
+      { path: 'transactions-elist', component: TransactionsElistComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'COMADPRIV'] } },
       { path: 'enreg-e', component: EnregEComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
       { path: 'afftected-to-my-admin-e', component: AfftectedToMyAdminEComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
       { path: 'enreg-temp-e', component: EnregTempEComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
@@ -1387,36 +1494,36 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
     //Evenement
 
-      { path: 'beneficiaire-c', component: BeneficiaireCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'beneficiaire-c', component: BeneficiaireCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] }},
 
-      { path: 'tache-ev-c', component: TacheEvCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
+      { path: 'tache-ev-c', component: TacheEvCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] }},
 
-      { path: 'outils-c', component: OutilsCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'outils-c', component: OutilsCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
 
-      { path: 'medias-c', component: MediasCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
+      { path: 'medias-c', component: MediasCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] }},
 
-      { path: 'classe-c', component: ClasseCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'classe-c', component: ClasseCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] }},
 
-  { path: 'tbl-menu', component: TblMenuComponent, canActivate: [AuthGuard] },
+      { path: 'tbl-menu', component: TblMenuComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
 
-  { path: 'tbl-main', component: TblMainComponent, canActivate: [AuthGuard] },
+      { path: 'tbl-main', component: TblMainComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
 
-      { path: 'event-register', component: EventRegisterComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'EMPLOYEE','PARTRESP','DIRECTOR','SECRETAIRE'] }},
+      { path: 'event-register', component: EventRegisterComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] }},
 
-      { path: 'event-details', component: EventDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'EMPLOYEE','PARTRESP','DIRECTOR', 'SECRETAIRE', 'RESPFINANCE', 'PARTNORMAL'] } },
+      { path: 'event-details', component: EventDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
 
-      { path: 'event-details/:id', component: EventDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'EMPLOYEE', 'PARTRESP','DIRECTOR', 'SECRETAIRE', 'RESPFINANCE', 'PARTNORMAL'] } },
+      { path: 'event-details/:id', component: EventDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] }},
 
-      { path: 'event-list', component: EventListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'EMPLOYEE', 'DIRECTOR', 'PARTRESP','SECRETAIRE', 'RESPFINANCE','PARTNORMAL'] }},
+      { path: 'event-list', component: EventListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] }},
 
-      { path: 'medias-c/:id', component: MediasCComponent, canActivate: [AuthGuard] },
+      { path: 'medias-c/:id', component: MediasCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] }},
  
-      { path: 'event-edit/:id', component: EventEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
-      { path: 'event-edit', component: EventEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'event-edit/:id', component: EventEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
+      { path: 'event-edit', component: EventEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] }},
 
-      { path: 'activity-c', component: ActivityCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'activity-c', component: ActivityCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
 
-      { path: 'depense-c', component: DepenseCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
+      { path: 'depense-c', component: DepenseCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] }},
 
       //Ressources Humaines
 
@@ -1424,7 +1531,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'my-list-conge', component: MyListCongeComponent, canActivate: [AuthGuard] },
 
-      { path: 'validate-conge', component: ValidateCongeComponent, canActivate: [AuthGuard] },
+      { path: 'validate-conge', component: ValidateCongeComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] } },
 
       { path: 'suivie-conge', component: SuivieCongeComponent, canActivate: [AuthGuard] },
 
@@ -1462,13 +1569,13 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'ticket-my-lis', component: TicketMyLisComponent, canActivate: [AuthGuard] },
 
-      { path: 'ticket-dir-lis', component: TicketDirLisComponent, canActivate: [AuthGuard] },
+      { path: 'ticket-dir-lis', component: TicketDirLisComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] }},
 
       { path: 'salaiale-add', component: SalaialeAddComponent, canActivate: [AuthGuard] },
 
       { path: 'salaiale-my-lis', component: SalaialeMyLisComponent, canActivate: [AuthGuard] },
 
-      { path: 'salaiale-dir-lis', component: SalaialeDirLisComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN', 'DIRECTORETAB', 'DIRECTORGENERAL'] } },
+      { path: 'salaiale-dir-lis', component: SalaialeDirLisComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] } },
 
       { path: 'solde-conge', component: SoldeCongeComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
 
@@ -1476,9 +1583,9 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'my-list-recrutment', component: MyListRecrutmentComponent, canActivate: [AuthGuard] },
 
-      { path: 'rh-recrutment-list', component: RhRecrutmentListComponent, canActivate: [AuthGuard] },
+      { path: 'rh-recrutment-list', component: RhRecrutmentListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] } },
 
-      { path: 'rh-conge-list', component: RhCongeListComponent, canActivate: [AuthGuard] },
+      { path: 'rh-conge-list', component: RhCongeListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] }},
 
       { path: 'news-detail', component: NewsDetailComponent, canActivate: [AuthGuard] },
 
@@ -1490,31 +1597,31 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'news-list-creator', component: NewsListCreatorComponent, canActivate: [AuthGuard] },
 
-      { path: 'priv-add', component: PrivAddComponent, canActivate: [AuthGuard] },
+      { path: 'priv-add', component: PrivAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] }},
 
-      { path: 'my-priv-list', component: MyPrivListComponent, canActivate: [AuthGuard] },
+      { path: 'my-priv-list', component: MyPrivListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] }},
 
-      { path: 'priv-list-dir', component: PrivListDirComponent, canActivate: [AuthGuard] },
+      { path: 'priv-list-dir', component: PrivListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] }},
 
-      { path: 'priv-list-rh', component: PrivListRhComponent, canActivate: [AuthGuard] },
+      { path: 'priv-list-rh', component: PrivListRhComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] } },
 
-      { path: 'cars-add', component: CarsAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTOR', 'SECRETAIRE','PARTRESP'] }  },
+      { path: 'cars-add', component: CarsAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'cars-list', component:CarsListComponent, canActivate: [AuthGuard] },
+      { path: 'cars-list', component: CarsListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
-      { path: 'cars-repair-request-add', component: CarsRepairRequestAddComponent, canActivate: [AuthGuard] },
+      { path: 'cars-repair-request-add', component: CarsRepairRequestAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
-      { path: 'cars-repair-request-list', component: CarsRepairRequestListComponent, canActivate: [AuthGuard] },
+      { path: 'cars-repair-request-list', component: CarsRepairRequestListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'cars-menu', component: CarsMenuComponent, canActivate: [AuthGuard] },
+      { path: 'cars-menu', component: CarsMenuComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
-      { path: 'type-voiture', component: TypeVoitureComponent, canActivate: [AuthGuard] },
+      { path: 'type-voiture', component: TypeVoitureComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
-      { path: 'organisme-voiture', component: OrganismeVoitureComponent, canActivate: [AuthGuard] },
+      { path: 'organisme-voiture', component: OrganismeVoitureComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'director-list-cars', component: DirectorListCarsComponent, canActivate: [AuthGuard] },
+      { path: 'director-list-cars', component: DirectorListCarsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'comptable-list-cars', component: ComptableListCarsComponent, canActivate: [AuthGuard] },
+      { path: 'comptable-list-cars', component: ComptableListCarsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
 
 
@@ -1564,7 +1671,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'cre-finan-list-director', component: CreFinanListDirectorComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN', 'DIRECTORETAB', 'DIRECTORGENERAL'] } },
 
-      { path: 'cre-finan-list-accepted', component: CreFinanListAcceptedComponent, canActivate: [AuthGuard] },
+      { path: 'cre-finan-list-accepted', component: CreFinanListAcceptedComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] } },
 
       { path: 'cre-finan-list-comptable', component: CreFinanListComptableComponent, canActivate: [AuthGuard] },
 
@@ -1572,7 +1679,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'avance-list-e', component: AvanceListEComponent, canActivate: [AuthGuard] },
 
-      { path: 'avance-list-c', component: AvanceListCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESPFINANCE'] }  },
+      { path: 'avance-list-c', component: AvanceListCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] }   },
 
       { path: 'avance-list-d', component: AvanceListDComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL'] } },
 
@@ -1664,7 +1771,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'demande-formation-lis', component: DemandeFormationLisComponent, canActivate: [AuthGuard] },
 
-      { path: 'demande-formation-list-rh', component: DemandeFormationListRhComponent, canActivate: [AuthGuard] },
+      { path: 'demande-formation-list-rh', component: DemandeFormationListRhComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] } },
 
       { path: 'demande-formation-list-c', component: DemandeFormationListCComponent, canActivate: [AuthGuard] },
 
@@ -1705,7 +1812,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'demande-supp-heure-add', component: DemandeSuppHeureAddComponent, canActivate: [AuthGuard] },
 
-      { path: 'demande-supp-heure-listcreator', component: DemandeSuppHeureListcreatorComponent, canActivate: [AuthGuard] },
+      { path: 'demande-supp-heure-listcreator', component: DemandeSuppHeureListcreatorComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] }},
 
       { path: 'demande-supp-heure-list-director', component: DemandeSuppHeureListDirectorComponent, canActivate: [AuthGuard] },
       { path: 'demande-formation-user-add', component: DemandeFormationUserAddComponent, canActivate: [AuthGuard] },
@@ -1732,7 +1839,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'attestation-travail-lis', component: AttestationTravailLisComponent, canActivate: [AuthGuard] },
 
-      { path: 'attestation-travail-rh-list', component: AttestationTravailRhListComponent, canActivate: [AuthGuard] },
+      { path: 'attestation-travail-rh-list', component: AttestationTravailRhListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] }},
 
                 /***************** Transfert Interne *********************/
 
@@ -1768,31 +1875,31 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
 
     /************************* Projet ************************/
-      { path: 'projet-add', component: ProjetAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
-      { path: 'projet-add2', component: ProjetAdd2Component, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'SECRETAIRE', 'DIRECTORGENERAL', 'DIRECTOR', 'EMPLOYEE', 'PARTRESP'] }  },
+      { path: 'projet-add', component: ProjetAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'PROJPRIV'] }},
+      { path: 'projet-add2', component: ProjetAdd2Component, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'PROJPRIV'] } },
 
-      { path: 'projet-list', component: ProjetListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE', 'EMPLOYEE'] } },
+      { path: 'projet-list', component: ProjetListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'PROJPRIV'] }},
 
-      { path: 'projet-details', component: ProjetDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE','EMPLOYEE'] }},
+      { path: 'projet-details', component: ProjetDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'PROJPRIV'] }},
 
-      { path: 'projet-details/:id', component: ProjetDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
+      { path: 'projet-details/:id', component: ProjetDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'PROJPRIV'] } },
 
-      { path: 'projet-edit', component: ProjetEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
-      { path: 'projet-edit/:id', component: ProjetEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
+      { path: 'projet-edit', component: ProjetEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'PROJPRIV'] } },
+      { path: 'projet-edit/:id', component: ProjetEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'PROJPRIV'] } },
 
-      { path: 'projet-menu', component: ProjetMenuComponent, canActivate: [AuthGuard] },
+      { path: 'projet-menu', component: ProjetMenuComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'PROJPRIV'] }},
 
-      { path: 'projet-listing-menu', component: ProjetListingMenuComponent, canActivate: [AuthGuard] },
+      { path: 'projet-listing-menu', component: ProjetListingMenuComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'PROJPRIV'] } },
 
-  { path: 'projet-compte', component: ProjetCompteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'projet-compte', component: ProjetCompteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] }},
 
-      { path: 'projet-org-supp', component: ProjetOrgSuppComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
+      { path: 'projet-org-supp', component: ProjetOrgSuppComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'PROJPRIV'] }},
 
-      { path: 'projet-class', component: ProjetClassComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'projet-class', component: ProjetClassComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'PROJPRIV'] } },
 
-      { path: 'projet-pay-activite', component: ProjetPayActiviteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'projet-pay-activite', component: ProjetPayActiviteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'PROJPRIV'] } },
 
-      { path: 'projet-pay-type', component: ProjetPayTypeComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
+      { path: 'projet-pay-type', component: ProjetPayTypeComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'PROJPRIV'] }},
 
     /******** Finance2 **************/
 
@@ -1802,7 +1909,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'edit-etat-compte', component: EditEtatCompteComponent, canActivate: [AuthGuard] },
 
-  { path: 'etat-compte-settings', component: EtatCompteSettingsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
+      { path: 'etat-compte-settings', component: EtatCompteSettingsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] }},
 
       { path: 'service-banque-add', component: ServiceBanqueAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTOR', 'SECRETAIRE','PARTRESP'] }  },
 
@@ -1826,9 +1933,9 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
     /************************ Cheques ****************************/
 
-      { path: 'chequec-add', component: ChequecAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTOR', 'SECRETAIRE','PARTRESP'] } },
+      { path: 'chequec-add', component: ChequecAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'BOXPRIV'] } },
 
-      { path: 'chequec-lis', component: ChequecLisComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
+      { path: 'chequec-lis', component: ChequecLisComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'BOXPRIV'] } },
 
       { path: 'chequec-edit', component: ChequecEditComponent, canActivate: [AuthGuard] },
       { path: 'chequec-edit/:id', component: ChequecEditComponent, canActivate: [AuthGuard]},
@@ -1837,13 +1944,13 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'chequec-details/:id', component: ChequecDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] }},
 
-      { path: 'pay-chequec-add', component: PayChequecAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN'] } },
+      { path: 'pay-chequec-add', component: PayChequecAddComponent, canActivate: [AuthGuard] },
 
       { path: 'pay-chequec-lis', component: PayChequecLisComponent, canActivate: [AuthGuard] },
 
-      { path: 'pay-chequec-detail', component: PayChequecDetailComponent, canActivate: [AuthGuard] },
+      { path: 'pay-chequec-detail', component: PayChequecDetailComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'BOXPRIV'] } },
 
-      { path: 'pay-chequec-detail/:id', component: PayChequecDetailComponent, canActivate: [AuthGuard] },
+      { path: 'pay-chequec-detail/:id', component: PayChequecDetailComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'BOXPRIV'] }},
 
       { path: 'pay-chequec-edit', component: PayChequecEditComponent, canActivate: [AuthGuard] },
       { path: 'pay-chequec-edit/:id', component: PayChequecEditComponent, canActivate: [AuthGuard] },
@@ -1852,9 +1959,9 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'cheque-pay-list-accept', component: ChequePayListAcceptComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL'] } },
 
-      { path: 'cheque-pay-list-pay', component: ChequePayListPayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESPFINANCE'] } },
+      { path: 'cheque-pay-list-pay', component: ChequePayListPayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'BOXPRIV'] } },
 
-      { path: 'chequeclasse', component: ChequeclasseComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
+      { path: 'chequeclasse', component: ChequeclasseComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] }},
 
 
     /******** Salaire *****************/
@@ -1879,7 +1986,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'salaire-report-add', component: SalaireReportAddComponent, canActivate: [AuthGuard] },
 
-      { path: 'salaire-report-print', component: SalaireReportPrintComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL'] }  },
+      { path: 'salaire-report-print', component: SalaireReportPrintComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] } },
 
       { path: 'demissio-list', component: DemissioListComponent, canActivate: [AuthGuard] },
 
@@ -1891,7 +1998,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'plaint-list', component: PlaintListComponent, canActivate: [AuthGuard] },
 
-      { path: 'plaint-listdir', component: PlaintListdirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN', 'DIRECTORETAB', 'DIRECTORGENERAL', 'RESSOURCEHUMAINE'] }   },
+      { path: 'plaint-listdir', component: PlaintListdirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] }  },
 
       { path: 'plaint-edit', component: PlaintEditComponent, canActivate: [AuthGuard] },
 
@@ -1901,9 +2008,9 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'permoission-edit/:id', component: PermoissionEditComponent, canActivate: [AuthGuard] },
 
-      { path: 'demission-edit', component: DemissionEditComponent, canActivate: [AuthGuard] },
+      { path: 'demission-edit', component: DemissionEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] }},
 
-      { path: 'demission-edit/:id', component: DemissionEditComponent, canActivate: [AuthGuard] },
+      { path: 'demission-edit/:id', component: DemissionEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] }},
  
       { path: 'residence-add', component: ResidenceAddComponent, canActivate: [AuthGuard] },
 
@@ -1911,7 +2018,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
       { path: 'residence-edit', component: ResidenceEditComponent, canActivate: [AuthGuard] },
       { path: 'residence-edit/:id', component: ResidenceEditComponent, canActivate: [AuthGuard] },
 
-      { path: 'residence-list-dir', component: ResidenceListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL'] }  },
+      { path: 'residence-list-dir', component: ResidenceListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] } },
 
       { path: 'experience-add', component: ExperienceAddComponent, canActivate: [AuthGuard] },
 
@@ -1919,13 +2026,13 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'langue-ev', component: LangueEvComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
 
-      { path: 'tache-global-details', component: TacheGlobalDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] }},
-      { path: 'tache-global-details/:id', component: TacheGlobalDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
-      { path: 'tache-received-details', component: TacheReceivedDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
-      { path: 'tache-received-details/:id', component: TacheReceivedDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
+      { path: 'tache-global-details', component: TacheGlobalDetailsComponent, canActivate: [AuthGuard]},
+      { path: 'tache-global-details/:id', component: TacheGlobalDetailsComponent, canActivate: [AuthGuard]},
+      { path: 'tache-received-details', component: TacheReceivedDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'tache-received-details/:id', component: TacheReceivedDetailsComponent, canActivate: [AuthGuard] },
 
-      { path: 'tache-arecevoir-details', component: TacheARecevoirDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
-      { path: 'tache-arecevoir-details/:id', component: TacheARecevoirDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
+      { path: 'tache-arecevoir-details', component: TacheARecevoirDetailsComponent, canActivate: [AuthGuard]},
+      { path: 'tache-arecevoir-details/:id', component: TacheARecevoirDetailsComponent, canActivate: [AuthGuard] },
 
 
       //locataire 2
@@ -1963,11 +2070,11 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'user-roles-edit/:id', component: UserRolesEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
 
-      { path: 'tasks-in-progress', component: TasksInProgressComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
+      { path: 'tasks-in-progress', component: TasksInProgressComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN'] } },
 
-      { path: 'tasks-not-done', component: TasksNotDoneComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
+      { path: 'tasks-not-done', component: TasksNotDoneComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN'] } },
 
-      { path: 'adding-transactions-page', component: AddingTransactionsPageComponent, canActivate: [AuthGuard] },
+      { path: 'adding-transactions-page', component: AddingTransactionsPageComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'COMADPRIV'] } },
 
       { path: 'transaction-global-r', component: TransactionGlobalRComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PARTNORMAL', 'RESPFINANCE'] } },
 
@@ -1999,11 +2106,11 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'demands-director', component: DemandsDirectorComponent, canActivate: [AuthGuard]},
 
-      { path: 'demands-rh', component: DemandsRHComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE'] } },
+      { path: 'demands-rh', component: DemandsRHComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] }},
 
       { path: 'demands-finance', component: DemandsFinanceComponent, canActivate: [AuthGuard] },
 
-      { path: 'permession-list-rh', component: PermessionListRHComponent, canActivate: [AuthGuard]},
+      { path: 'permession-list-rh', component: PermessionListRHComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] }},
 
       { path: 'equipement-list-rh', component: EquipementListRHComponent , canActivate: [AuthGuard]},
 
@@ -2036,7 +2143,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'ticket2-list-admin', component: Ticket2ListAdminComponent, canActivate: [AuthGuard] },
 
-      { path: 'ticket2-list-user', component: Ticket2ListUserComponent, canActivate: [AuthGuard] },
+      { path: 'ticket2-list-user', component: Ticket2ListUserComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'TECHPRIV'] } },
 
       { path: 'ticket2-my-list', component: Ticket2MyListComponent, canActivate: [AuthGuard] },
 
@@ -2052,7 +2159,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
   
       { path: 'org-part-add', component: OrgPartAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
 
-      { path: 'org-part-details', component: OrgPartDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
+      { path: 'org-part-details', component: OrgPartDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
       { path: 'org-part-details/:id', component: OrgPartDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
 
@@ -2065,113 +2172,113 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
     /************** Gest Ben ***********************/
 
-      { path: 'type-rev-ben-crud', component: TypeRevBenCrudComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'type-rev-ben-crud', component: TypeRevBenCrudComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] } },
 
-      { path: 'type-maison-crud', component: TypeMaisonCrudComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'type-maison-crud', component: TypeMaisonCrudComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] } },
 
-      { path: 'type-droit-crud', component: TypeDroitCrudComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'type-droit-crud', component: TypeDroitCrudComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] } },
 
-      { path: 'type-ben-crud', component: TypeBenCrudComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'type-ben-crud', component: TypeBenCrudComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] }},
 
-      { path: 'crud-gest-ben-menu', component: CrudGestBenMenuComponent, canActivate: [AuthGuard] },
+      { path: 'crud-gest-ben-menu', component: CrudGestBenMenuComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] }},
 
-      { path: 'gest-ben-edit-chercheur', component: GestBenEditChercheurComponent , canActivate: [AuthGuard] },
-      { path: 'gest-ben-edit-chercheur/:id', component: GestBenEditChercheurComponent , canActivate: [AuthGuard] },
+      { path: 'gest-ben-edit-chercheur', component: GestBenEditChercheurComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] } },
+      { path: 'gest-ben-edit-chercheur/:id', component: GestBenEditChercheurComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] }},
 
-      { path: 'gest-ben-list-chercheur', component: GestBenListChercheurComponent , canActivate: [AuthGuard] },
+      { path: 'gest-ben-list-chercheur', component: GestBenListChercheurComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] }},
 
-      { path: 'gest-ben-menu-chercheur', component: GestBenMenuChercheurComponent , canActivate: [AuthGuard] },
+      { path: 'gest-ben-menu-chercheur', component: GestBenMenuChercheurComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] } },
 
-      { path: 'gest-ben-list-dir', component: GestBenListDirComponent , canActivate: [AuthGuard] },
+      { path: 'gest-ben-list-dir', component: GestBenListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] }},
 
-      { path: 'dem-dir-menu', component: DemDirMenuComponent , canActivate: [AuthGuard] },
+      { path: 'dem-dir-menu', component: DemDirMenuComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] } },
 
-      { path: 'gest-ben-add', component: GestBenAddComponent , canActivate: [AuthGuard] },
+      { path: 'gest-ben-add', component: GestBenAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] } },
 
-      { path: 'gest-ben-edit', component: GestBenEditComponent , canActivate: [AuthGuard] },
-      { path: 'gest-ben-edit/:id', component: GestBenEditComponent , canActivate: [AuthGuard] },
+      { path: 'gest-ben-edit', component: GestBenEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] }},
+      { path: 'gest-ben-edit/:id', component: GestBenEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] }},
 
-      { path: 'gest-ben-detail', component: GestBenDetailComponent , canActivate: [AuthGuard] },
-      { path: 'gest-ben-detail/:id', component: GestBenDetailComponent , canActivate: [AuthGuard] },
+      { path: 'gest-ben-detail', component: GestBenDetailComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] }},
+      { path: 'gest-ben-detail/:id', component: GestBenDetailComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] } },
 
-      { path: 'gest-ben-list-accepte', component: GestBenListAccepteComponent , canActivate: [AuthGuard] },
+      { path: 'gest-ben-list-accepte', component: GestBenListAccepteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] } },
 
-      { path: 'gest-ben-list-refuse', component: GestBenListRefuseComponent , canActivate: [AuthGuard] },
+      { path: 'gest-ben-list-refuse', component: GestBenListRefuseComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] } },
 
-      { path: 'menu-gest-ben-add', component: MenuGestBenAddComponent, canActivate: [AuthGuard] },
+      { path: 'menu-gest-ben-add', component: MenuGestBenAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'PROJBENPRIV', 'BENPRIV'] } },
 
     /******* Gestion de Stock  **************/
 
-      { path: 'add-stock', component: AddStockComponent, canActivate: [AuthGuard] },
+      { path: 'add-stock', component: AddStockComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
-      { path: 'edit-stock', component: EditStockComponent, canActivate: [AuthGuard] },
+      { path: 'edit-stock', component: EditStockComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
-      { path: 'list-stock', component: ListStockComponent, canActivate: [AuthGuard] },
+      { path: 'list-stock', component: ListStockComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'details-stock', component: DetailsStockComponent, canActivate: [AuthGuard] },
-      { path: 'details-stock/:id', component: DetailsStockComponent, canActivate: [AuthGuard] },
+      { path: 'details-stock', component: DetailsStockComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
+      { path: 'details-stock/:id', component: DetailsStockComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'details-type-stock', component: DetailsTypeStockComponent, canActivate: [AuthGuard] },
-      { path: 'details-type-stock/:id', component: DetailsTypeStockComponent, canActivate: [AuthGuard] },
+      { path: 'details-type-stock', component: DetailsTypeStockComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
+      { path: 'details-type-stock/:id', component: DetailsTypeStockComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'list-type-stock', component: ListTypeStockComponent, canActivate: [AuthGuard] },
+      { path: 'list-type-stock', component: ListTypeStockComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
-      { path: 'edit-type-stock', component: EditTypeStockComponent, canActivate: [AuthGuard] },
+      { path: 'edit-type-stock', component: EditTypeStockComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
-      { path: 'add-type-stock', component: AddTypeStockComponent, canActivate: [AuthGuard] },
+      { path: 'add-type-stock', component: AddTypeStockComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
-      { path: 'menu-stockage-settings', component: MenuStockageSettingsComponent, canActivate: [AuthGuard] },
+      { path: 'menu-stockage-settings', component: MenuStockageSettingsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'add-stockage', component: AddStockageComponent, canActivate: [AuthGuard] },
+      { path: 'add-stockage', component: AddStockageComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'edit-stockage', component: EditStockageComponent, canActivate: [AuthGuard] },
-      { path: 'edit-stockage/:id', component: EditStockageComponent, canActivate: [AuthGuard] },
+      { path: 'edit-stockage', component: EditStockageComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
+      { path: 'edit-stockage/:id', component: EditStockageComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
-      { path: 'list-stockage', component: ListStockageComponent, canActivate: [AuthGuard] },
+      { path: 'list-stockage', component: ListStockageComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'details-stockage', component: DetailsStockageComponent, canActivate: [AuthGuard] },
-      { path: 'details-stockage/:id', component: DetailsStockageComponent, canActivate: [AuthGuard] },
+      { path: 'details-stockage', component: DetailsStockageComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
+      { path: 'details-stockage/:id', component: DetailsStockageComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'add-pay-directe', component: AddPayDirecteComponent, canActivate: [AuthGuard] },
+      { path: 'add-pay-directe', component: AddPayDirecteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'e-dit-pay-directe', component: EDitPayDirecteComponent, canActivate: [AuthGuard] },
-      { path: 'e-dit-pay-directe/:id', component: EDitPayDirecteComponent, canActivate: [AuthGuard] },
+      { path: 'e-dit-pay-directe', component: EDitPayDirecteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
+      { path: 'e-dit-pay-directe/:id', component: EDitPayDirecteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
-      { path: 'details-pay-directe', component: DetailsPayDirecteComponent, canActivate: [AuthGuard] },
-      { path: 'details-pay-directe/:id', component: DetailsPayDirecteComponent, canActivate: [AuthGuard] },
+      { path: 'details-pay-directe', component: DetailsPayDirecteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
+      { path: 'details-pay-directe/:id', component: DetailsPayDirecteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'list-pay-directe', component: ListPayDirecteComponent, canActivate: [AuthGuard] },
+      { path: 'list-pay-directe', component: ListPayDirecteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'list-creator-pay-directe', component: ListCreatorPayDirecteComponent, canActivate: [AuthGuard] },
+      { path: 'list-creator-pay-directe', component: ListCreatorPayDirecteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'list-dir-pay-directe', component: ListDirPayDirecteComponent, canActivate: [AuthGuard] },
+      { path: 'list-dir-pay-directe', component: ListDirPayDirecteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'add-ordre-pay', component: AddOrdrePayComponent, canActivate: [AuthGuard] },
+      { path: 'add-ordre-pay', component: AddOrdrePayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
-      { path: 'edit-ordre-pay', component: EditOrdrePayComponent, canActivate: [AuthGuard] },
-      { path: 'edit-ordre-pay/:id', component: EditOrdrePayComponent, canActivate: [AuthGuard] },
+      { path: 'edit-ordre-pay', component: EditOrdrePayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
+      { path: 'edit-ordre-pay/:id', component: EditOrdrePayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'details-ordre-pay', component: DetailsOrdrePayComponent, canActivate: [AuthGuard] },
-      { path: 'details-ordre-pay/:id', component: DetailsOrdrePayComponent, canActivate: [AuthGuard] },
+      { path: 'details-ordre-pay', component: DetailsOrdrePayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
+      { path: 'details-ordre-pay/:id', component: DetailsOrdrePayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'list-ordre-pay', component: ListOrdrePayComponent, canActivate: [AuthGuard] },
+      { path: 'list-ordre-pay', component: ListOrdrePayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'list-resp-ordre-pay', component: ListRespOrdrePayComponent, canActivate: [AuthGuard] },
+      { path: 'list-resp-ordre-pay', component: ListRespOrdrePayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
       { path: 'list-admin-ordre-pay', component: ListAdminOrdrePayComponent, canActivate: [AuthGuard] },
 
-      { path: 'list-dir-ordre-pay', component: ListDirOrdrePayComponent, canActivate: [AuthGuard] },
+      { path: 'list-dir-ordre-pay', component: ListDirOrdrePayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
-      { path: 'list-ben-pay-stockage', component: ListBenPayStockageComponent, canActivate: [AuthGuard] },
+      { path: 'list-ben-pay-stockage', component: ListBenPayStockageComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
-      { path: 'details-ben-pay-stockage', component: DetailsBenPayStockageComponent, canActivate: [AuthGuard] },
-      { path: 'details-ben-pay-stockage/:id', component: DetailsBenPayStockageComponent, canActivate: [AuthGuard] },
+      { path: 'details-ben-pay-stockage', component: DetailsBenPayStockageComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
+      { path: 'details-ben-pay-stockage/:id', component: DetailsBenPayStockageComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
-      { path: 'menu-stockage1', component: MenuStockage1Component, canActivate: [AuthGuard] },
+      { path: 'menu-stockage1', component: MenuStockage1Component, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'menu-stockage2', component: MenuStockage2Component, canActivate: [AuthGuard] },
+      { path: 'menu-stockage2', component: MenuStockage2Component, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'home-stockage', component: HomeStockageComponent, canActivate: [AuthGuard] },
+      { path: 'home-stockage', component: HomeStockageComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
     /*********** Orphelin **************/
 
@@ -2337,7 +2444,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'dem-conge-menu', component: DemCongeMenuComponent, canActivate: [AuthGuard] },
 
-      { path: 'main-ready-avance', component: MainReadyAvanceComponent, canActivate: [AuthGuard] },
+  { path: 'main-ready-avance', component: MainReadyAvanceComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] } },
 
     /**** Assistance ***/
       { path: 'dem-assistance-add', component: DemAssistanceAddComponent, canActivate: [AuthGuard] },
@@ -2346,11 +2453,11 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'dem-assistance-listdir', component: DemAssistanceListdirComponent, canActivate: [AuthGuard] },
 
-      { path: 'dem-assistance-listdirfin', component: DemAssistanceListdirfinComponent, canActivate: [AuthGuard] },
+      { path: 'dem-assistance-listdirfin', component: DemAssistanceListdirfinComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] }},
 
       { path: 'dem-assistance-listetabfin', component: DemAssistanceListetabfinComponent, canActivate: [AuthGuard] },
 
-      { path: 'dem-assistance-listerh', component: DemAssistanceListerhComponent, canActivate: [AuthGuard] },
+      { path: 'dem-assistance-listerh', component: DemAssistanceListerhComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] }},
 
 
 
@@ -2371,7 +2478,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'interview-list-creator', component: InterviewListCreatorComponent, canActivate: [AuthGuard] },
 
-      { path: 'interview-list-users', component: InterviewListUsersComponent, canActivate: [AuthGuard] },
+      { path: 'interview-list-users', component: InterviewListUsersComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
 
       { path: 'interview-menu-settings', component: InterviewMenuSettingsComponent, canActivate: [AuthGuard] },
 
@@ -2383,7 +2490,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'meadia-center-demands-list-user', component: MeadiaCenterDemandsListUserComponent, canActivate: [AuthGuard] },
 
-      { path: 'meadia-center-demands-list-dir', component: MeadiaCenterDemandsListDirComponent, canActivate: [AuthGuard] },
+      { path: 'meadia-center-demands-list-dir', component: MeadiaCenterDemandsListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
 
       { path: 'meadia-center-demands-add-dir', component: MeadiaCenterDemandsAddDirComponent, canActivate: [AuthGuard] },
 
@@ -2391,11 +2498,11 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'cadeaux-list', component: CadeauxListComponent, canActivate: [AuthGuard] },
 
-      { path: 'cadeaux-list-dir', component: CadeauxListDirComponent , canActivate: [AuthGuard] },
+      { path: 'cadeaux-list-dir', component: CadeauxListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
 
       { path: 'cadeaux-list-user', component: CadeauxListUserComponent, canActivate: [AuthGuard] },
 
-      { path: 'cadeaux-list-etab', component: CadeauxListEtabComponent, canActivate: [AuthGuard] },
+      { path: 'cadeaux-list-etab', component: CadeauxListEtabComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] } },
 
       { path: 'cadeaux-occasion-crud', component: CadeauxOccasionCrudComponent, canActivate: [AuthGuard] },
 
@@ -2405,7 +2512,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'exthechnique-list-user', component: ExthechniqueListUserComponent, canActivate: [AuthGuard] },
 
-      { path: 'exthechnique-list-dir', component: ExthechniqueListDirComponent, canActivate: [AuthGuard] },
+      { path: 'exthechnique-list-dir', component: ExthechniqueListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
 
       { path: 'exthechnique-list-etab', component: ExthechniqueListEtabComponent, canActivate: [AuthGuard] },
 
@@ -2415,33 +2522,33 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'recording-archive-list-user', component: RecordingArchiveListUserComponent, canActivate: [AuthGuard] },
 
-      { path: 'recording-archive-list-dir', component: RecordingArchiveListDirComponent, canActivate: [AuthGuard] },
+      { path: 'recording-archive-list-dir', component: RecordingArchiveListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
 
-      { path: 'recording-archive-list-etab', component: RecordingArchiveListEtabComponent, canActivate: [AuthGuard] },
+      { path: 'recording-archive-list-etab', component: RecordingArchiveListEtabComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
       { path: 'type-recording-archive-crud', component: TypeRecordingArchiveCrudComponent, canActivate: [AuthGuard] },
 
       { path: 'rendonne-add', component: RendonneAddComponent, canActivate: [AuthGuard] },
 
-      { path: 'rendonne-list-dir', component: RendonneListDirComponent, canActivate: [AuthGuard] },
+      { path: 'rendonne-list-dir', component: RendonneListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
 
       { path: 'rendonne-list-user', component: RendonneListUserComponent, canActivate: [AuthGuard] },
 
-      { path: 'rendonne-list-etab', component: RendonneListEtabComponent, canActivate: [AuthGuard] },
+      { path: 'rendonne-list-etab', component: RendonneListEtabComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'LOCPRIV'] } },
 
       { path: 'type-rendonne-crud', component: TypeRendonneCrudComponent, canActivate: [AuthGuard] },
 
       { path: 'film-add', component: FilmAddComponent, canActivate: [AuthGuard] },
 
-      { path: 'film-edity', component: FilmEdityComponent, canActivate: [AuthGuard] },
-      { path: 'film-edity/:id', component: FilmEdityComponent, canActivate: [AuthGuard] },
+      { path: 'film-edity', component: FilmEdityComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] } },
+      { path: 'film-edity/:id', component: FilmEdityComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] } },
 
       { path: 'film-details', component: FilmDetailsComponent, canActivate: [AuthGuard] },
       { path: 'film-details/:id', component: FilmDetailsComponent, canActivate: [AuthGuard] },
 
       { path: 'film-list-user', component: FilmListUserComponent, canActivate: [AuthGuard] },
 
-      { path: 'film-list-dir', component: FilmListDirComponent, canActivate: [AuthGuard] },
+      { path: 'film-list-dir', component: FilmListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
 
       { path: 'film-list-etab', component: FilmListEtabComponent, canActivate: [AuthGuard] },
 
@@ -2457,7 +2564,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'occasion-soiree-list-user', component: OccasionSoireeListUserComponent, canActivate: [AuthGuard] },
 
-      { path: 'occasion-soiree-list-dir', component: OccasionSoireeListDirComponent, canActivate: [AuthGuard] },
+      { path: 'occasion-soiree-list-dir', component: OccasionSoireeListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
 
       { path: 'occasion-soiree-list-etab', component: OccasionSoireeListEtabComponent, canActivate: [AuthGuard] },
 
@@ -2473,7 +2580,7 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'partage-media-list-user', component: PartageMediaListUserComponent, canActivate: [AuthGuard] },
 
-      { path: 'partage-media-list-dir', component: PartageMediaListDirComponent, canActivate: [AuthGuard] },
+      { path: 'partage-media-list-dir', component: PartageMediaListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] }},
 
       { path: 'partage-media-list-etab', component: PartageMediaListEtabComponent, canActivate: [AuthGuard] },
 
@@ -2485,9 +2592,9 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       { path: 'visite-list-user', component: VisiteListUserComponent, canActivate: [AuthGuard] },
 
-      { path: 'visite-list-dir', component: VisiteListDirComponent, canActivate: [AuthGuard] },
+      { path: 'visite-list-dir', component: VisiteListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
 
-      { path: 'visite-list-etab', component: VisiteListEtabComponent, canActivate: [AuthGuard] },
+      { path: 'visite-list-etab', component: VisiteListEtabComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
 
       { path: 'visite-edit', component: VisiteEditComponent, canActivate: [AuthGuard] },
       { path: 'visite-edit/:id', component: VisiteEditComponent, canActivate: [AuthGuard] },
@@ -2496,13 +2603,14 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
       { path: 'visite-details/:id', component: VisiteDetailsComponent, canActivate: [AuthGuard] },
 
       { path: 'visite-type-crud', component: VisiteTypeCrudComponent, canActivate: [AuthGuard] },
+      { path: 'visite-type-crud/:id', component: VisiteTypeCrudComponent, canActivate: [AuthGuard] },
 
 
       { path: 'montage-add', component: MontageAddComponent, canActivate: [AuthGuard] },
 
       { path: 'montage-list-user', component: MontageListUserComponent, canActivate: [AuthGuard] },
 
-      { path: 'montage-list-dir', component: MontageListDirComponent, canActivate: [AuthGuard] },
+      { path: 'montage-list-dir', component: MontageListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
 
       { path: 'montage-list-employee', component: MontageListEmployeeComponent, canActivate: [AuthGuard] },
 
@@ -2525,11 +2633,11 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
       { path: 'design-details', component: DesignDetailsComponent, canActivate: [AuthGuard] },
       { path: 'design-details/:id', component: DesignDetailsComponent, canActivate: [AuthGuard] },
 
-      { path: 'design-edit', component: DesignEditComponent, canActivate: [AuthGuard] },
-      { path: 'design-edit/:id', component: DesignEditComponent , canActivate: [AuthGuard] },
+      { path: 'design-edit', component: DesignEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] } },
+      { path: 'design-edit/:id', component: DesignEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] } },
 
-      { path: 'design-list-recep', component: DesignListRecepComponent, canActivate: [AuthGuard] },
-      { path: 'design-list-recep/:id', component: DesignListRecepComponent, canActivate: [AuthGuard] },
+      { path: 'design-list-recep', component: DesignListRecepComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
+      { path: 'design-list-recep/:id', component: DesignListRecepComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV', 'MEDIACENTERPRIV'] } },
 
       { path: 'design-list-creator', component: DesignListCreatorComponent, canActivate: [AuthGuard] },
 
@@ -2540,38 +2648,156 @@ import { ListMusulmanComponent } from './NvMusulman/list-musulman/list-musulman.
 
       /**** Transfert Service *****/
 
-      { path: 'formation-etab-list', component: FormationEtabListComponent , canActivate: [AuthGuard] },
+      { path: 'formation-etab-list', component: FormationEtabListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] }},
 
       { path: 'formation-rhlist', component: FormationRHListComponent, canActivate: [AuthGuard] },
 
       { path: 'sup-heure-rhlist', component: SupHeureRHListComponent, canActivate: [AuthGuard] },
 
-      { path: 'sup-heure-etab-list', component: SupHeureEtabListComponent, canActivate: [AuthGuard] },
+      { path: 'sup-heure-etab-list', component: SupHeureEtabListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] } },
 
-      { path: 'travail-etab-list', component: TravailEtabListComponent, canActivate: [AuthGuard] },
+      { path: 'travail-etab-list', component: TravailEtabListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] }},
 
       { path: 'travail-rhlist', component: TravailRHListComponent, canActivate: [AuthGuard] },
 
-      { path: 'avance-rhlist', component: AvanceRHListComponent, canActivate: [AuthGuard] },
+      { path: 'avance-rhlist', component: AvanceRHListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] } },
 
       { path: 'avance-etab-list', component: AvanceEtabListComponent, canActivate: [AuthGuard] },
 
 /****** Musulman Part  *****/
 
-      { path: 'add-musulman', component: AddMusulmanComponent, canActivate: [AuthGuard] },
+      { path: 'add-musulman', component: AddMusulmanComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DAWAAPRIV', 'MUSPRIV'] }},
 
-      { path: 'edit-musulman', component: EditMusulmanComponent, canActivate: [AuthGuard] },
-      { path: 'edit-musulman/:id', component: EditMusulmanComponent, canActivate: [AuthGuard] },
+      { path: 'edit-musulman', component: EditMusulmanComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DAWAAPRIV', 'MUSPRIV'] } },
+      { path: 'edit-musulman/:id', component: EditMusulmanComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DAWAAPRIV', 'MUSPRIV'] }},
 
-      { path: 'details-musulman', component: DetailsMusulmanComponent, canActivate: [AuthGuard] },
-      { path: 'details-musulman/:id', component: DetailsMusulmanComponent, canActivate: [AuthGuard] },
+      { path: 'details-musulman', component: DetailsMusulmanComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DAWAAPRIV', 'MUSPRIV'] } },
+      { path: 'details-musulman/:id', component: DetailsMusulmanComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DAWAAPRIV', 'MUSPRIV'] } },
 
-      { path: 'menu-musulman', component: MenuMusulmanComponent, canActivate: [AuthGuard] },
+      { path: 'menu-musulman', component: MenuMusulmanComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DAWAAPRIV', 'MUSPRIV'] } },
 
-      { path: 'list-musulman', component: ListMusulmanComponent, canActivate: [AuthGuard] },
+      { path: 'list-musulman', component: ListMusulmanComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DAWAAPRIV', 'MUSPRIV'] } },
+
+      /* Retrait */ 
+
+      { path: 'menu-retrait', component: MenuRetraitComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV','EVFINPRIV'] }},
+
+      { path: 'menu-retrait-general', component: MenuRetraitGeneralComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV', 'EVFINPRIV'] }},
+
+      { path: 'menu-retrait-espece', component: MenuRetraitEspeceComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV', 'EVFINPRIV'] }},
+
+      { path: 'menu-retrait-cheque', component: MenuRetraitChequeComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV', 'EVFINPRIV'] } },
+
+      { path: 'cheque-retrait-add', component: ChequeRetraitAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV', 'EVFINPRIV'] } },
+
+      { path: 'cheque-retrait-edit', component: ChequeRetraitEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV', 'EVFINPRIV'] } },
+      { path: 'cheque-retrait-edit/:id', component: ChequeRetraitEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV', 'EVFINPRIV'] }},
+
+      { path: 'cheque-retrait-details', component: ChequeRetraitDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV', 'EVFINPRIV'] } },
+      { path: 'cheque-retrait-details/:id', component: ChequeRetraitDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV','EVFINPRIV'] }},
+
+      { path: 'cheque-retrait-list-active', component: ChequeRetraitListActiveComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV','EVFINPRIV'] } },
+
+      { path: 'cheque-retrait-list-tribuche', component: ChequeRetraitListTribucheComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV','EVFINPRIV'] } },
+
+      { path: 'cheque-retrait-list-general', component: ChequeRetraitListGeneralComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV','EVFINPRIV'] } },
+
+      { path: 'espece-retrait-add', component: EspeceRetraitAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV','EVFINPRIV'] } },
+
+      { path: 'espece-retrait-list', component: EspeceRetraitListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV','EVFINPRIV'] } },
+
+      { path: 'espece-retrait-list-active', component: EspeceRetraitListActiveComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV','EVFINPRIV'] } },
+
+      { path: 'espece-retrait-list-tribuche', component: EspeceRetraitListTribucheComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV','EVFINPRIV'] } },
+
+      { path: 'espece-retrait-edit', component: EspeceRetraitEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV','EVFINPRIV'] } },
+      { path: 'espece-retrait-edit/:id', component: EspeceRetraitEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV','EVFINPRIV'] } },
+
+      { path: 'espece-retrait-details', component: EspeceRetraitDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV','EVFINPRIV'] } },
+      { path: 'espece-retrait-details/:id', component: EspeceRetraitDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV','EVFINPRIV'] } },
 
 
+/** Notif Text ***/
 
+     { path: 'notif-text-crud', component: NotifTextCrudComponent , canActivate: [AuthGuard] },
+
+      { path: 'adress-mac-add', component: AdressMacAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'adress-mac-list', component: AdressMacListComponent, canActivate: [AuthGuard] },
+
+      { path: 'adress-mac-edit', component: AdressMacEditComponent, canActivate: [AuthGuard] },
+      { path: 'adress-mac-edit/:id', component: AdressMacEditComponent, canActivate: [AuthGuard] },
+
+      { path: 'adress-mac-details/:id', component: AdressMacDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV', 'EVFINPRIV'] } },
+      { path: 'adress-mac-details', component: AdressMacDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'MEDIAPRIV'] }},
+
+    /** Cheque New **/
+
+      { path: 'new-cheque-list-dir-directe', component: NewChequeListDirDirecteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORETAB','DIRECTORETAB'] }},
+
+      { path: 'new-cheque-list-etab-fin', component: NewChequeListEtabFinComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'COMPTAPRIV'] } },
+
+      { path: 'new-cheque-list-dir-fin', component: NewChequeListDirFinComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV'] } },
+
+      { path: 'new-cheque-list-dir-general', component: NewChequeListDirGeneralComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL'] } },
+
+      { path: 'new-cheque-list-box-men', component: NewChequeListBoxMenComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'BOXPRIV'] } },
+
+      { path: 'new-cheque-list-payee', component: NewChequeListPayeeComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'BOXPRIV'] } },
+
+      { path: 'new-cheque-menu-dir', component: NewChequeMenuDirComponent, canActivate: [AuthGuard]},
+
+      { path: 'new-cheque-menu-dir-g', component: NewChequeMenuDirGComponent, canActivate: [AuthGuard]},
+
+      { path: 'new-cheque-menu-dir-fin', component: NewChequeMenuDirFinComponent, canActivate: [AuthGuard] },
+
+      { path: 'new-cheque-menu-etab-fin', component: NewChequeMenuEtabFinComponent, canActivate: [AuthGuard]},
+
+      { path: 'new-cheque-menu-bon-men', component: NewChequeMenuBonMenComponent, canActivate: [AuthGuard]},
+
+      { path: 'new-cheque-menu-payee', component: NewChequeMenuPayeeComponent, canActivate: [AuthGuard] },
+
+      /*****New Pages ** /
+       *
+       */
+
+      { path: 'activitee-add', component: ActiviteeAddComponent , canActivate: [AuthGuard] },
+
+{ path: 'activitee-list', component: ActiviteeListComponent , canActivate: [AuthGuard] },
+
+{ path: 'activitee-edit', component: ActiviteeEditComponent , canActivate: [AuthGuard] },
+{ path: 'activitee-edit/:id', component: ActiviteeEditComponent , canActivate: [AuthGuard] },
+
+{ path: 'activitee-detail', component: ActiviteeDetailComponent, canActivate: [AuthGuard] },
+{ path: 'activitee-detail/:id', component: ActiviteeDetailComponent , canActivate: [AuthGuard] },
+
+{ path: 'type-activitee', component: TypeActiviteeComponent , canActivate: [AuthGuard] },
+
+{ path: 'menu-activitee', component: MenuActiviteeComponent , canActivate: [AuthGuard] },
+
+{ path: 'type-transaction', component: TypeTransactionComponent, canActivate: [AuthGuard] },
+
+{ path: 'musu-women-add', component: MusuWomenAddComponent , canActivate: [AuthGuard] },
+
+{ path: 'musu-women-list', component: MusuWomenListComponent , canActivate: [AuthGuard] },
+
+{ path: 'musu-women-edit', component: MusuWomenEditComponent , canActivate: [AuthGuard] },
+{ path: 'musu-women-edit/:id', component: MusuWomenEditComponent, canActivate: [AuthGuard] },
+
+{ path: 'musu-women-details', component: MusuWomenDetailsComponent, canActivate: [AuthGuard] },
+{ path: 'musu-women-details/:id', component: MusuWomenDetailsComponent , canActivate: [AuthGuard] },
+
+{ path: 'musu-women-menu', component: MusuWomenMenuComponent , canActivate: [AuthGuard] },
+
+{ path: 'type-recrutement', component: TypeRecrutementComponent , canActivate: [AuthGuard] },
+
+    /*** Changer Rib **/
+
+      { path: 'change-rib-add', component: ChangeRibAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'change-rib-user-list', component: ChangeRibUserListComponent, canActivate: [AuthGuard] },
+
+      { path: 'change-rib-rh-list', component: ChangeRibRhListComponent, canActivate: [AuthGuard] },
 
     ])
   ],/*,  {

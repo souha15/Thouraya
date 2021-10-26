@@ -28,6 +28,7 @@ export class NewsDetailComponent implements OnInit {
     this.getUserConnected();
     this.getIdUrl();
     this.getDetails();
+    this.getListNews()
   }
 
   // Get User Connected
@@ -68,27 +69,41 @@ export class NewsDetailComponent implements OnInit {
     this.routeSub.unsubscribe();
   }
 
-  path: string;
-  public openPDF() {
-    var data = document.getElementById('htmlData');
+  List: News[] = [];
+  newsList: News[] = [];
+  ne1: News = new News();
+  ne2: News = new News();
+  ne3: News = new News();
+  ne4: News = new News();
+  testne1: boolean = false;
+  testne2: boolean = false;
+  testne3: boolean = false;
+  testne4: boolean = false;
+  getListNews() {
 
-    html2canvas(data).then(canvas => {
-      // Few necessary setting options
-  
-      var imgWidth = 208;
-      var pageHeight = 295;
-      var imgHeight = canvas.height * imgWidth / canvas.width;
-      var heightLeft = imgHeight;
+      this.newsService.Get().subscribe(res => {
+        this.List = res
+        this.newsList = this.List.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
 
-      const contentDataURL = canvas.toDataURL('image/png')
-      let pdf = new jsPDF('p', 'mm', 'a4'); // A4 size page of PDF
-
-      var position = 0;
-      pdf.addImage(contentDataURL, 'PNG', 0, position, imgWidth, imgHeight)
-      this.path = "News" + this.news.id + ".pdf"
-      pdf.save(this.path); // Generated PDF
-
-    });
-
+        this.ne1 = this.newsList[0];
+        if (this.ne1 != null) {
+          this.testne1 = true;
+        }
+        this.ne2 = this.newsList[1];
+        if (this.ne2 != null) {
+          this.testne2 = true;
+        }
+        this.ne3 = this.newsList[2];
+        if (this.ne3 != null) {
+          this.testne3 = true;
+        }
+        this.ne4 = this.newsList[3];
+        if (this.ne4 != null) {
+          this.testne4 = true;
+        }
+   
+           
+      })
+   
   }
 }

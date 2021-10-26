@@ -80,9 +80,10 @@ export class VisiteAddComponent implements OnInit {
       this.dem.diretat = "في الانتظار";
       this.dem.idUserCreator = this.UserId;
       this.dem.userNameCreator = this.UserName;
+      if (this.idEtab != null) {
       this.dem.etabid = this.idEtab.toString();
       this.dem.etabnom = this.nomEtab;
-
+      }
       this.demService.Create(this.dem).subscribe(res => {
         this.Dem2 = res;
         if (this.guestTest) {

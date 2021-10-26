@@ -22,6 +22,7 @@ import { FilesPayChequesC } from '../../../shared/Models/Cheques/files-pay-chequ
 import { ArticlePayCheque } from '../../../shared/Models/Cheques/article-pay-cheque.model';
 import { DemPayCheque } from '../../../shared/Models/Cheques/dem-pay-cheque.model';
 import { AdministrationService } from '../../../shared/Services/Administration/administration.service';
+import { Administration } from '../../../shared/Models/Administration/administration.model';
 
 @Component({
   selector: 'app-pay-chequec-add',
@@ -43,12 +44,20 @@ export class PayChequecAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
+    this.getAdminList();
     this.getClasses();
     this.getComptes();
     this.getthelastId()
   }
 
+  //getAdminList()
 
+  adminList: Administration[] = [];
+  getAdminList() {
+    this.adminService.ListAdministration().subscribe(res => {
+      this.adminList =res
+    })
+}
 
   // Get Compte List
   cptLis: EtatListCompte[] = [];
@@ -75,6 +84,7 @@ export class PayChequecAddComponent implements OnInit {
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
+      this.admindir = res.attribut1
     })
 
   }
@@ -138,6 +148,7 @@ export class PayChequecAddComponent implements OnInit {
       this.ch.dateenreg = this.date;
       this.ch.creatorName = this.UserNameConnected;
       this.ch.idUserCreator = this.UserIdConnected;
+      this.ch.iddir = this.admindir;
       this.ch.etatgeneral = "في الإنتظار"
       this.ch.etatfinacier = "في الإنتظار"
       this.ch.etatdirecteur = "في الإنتظار"

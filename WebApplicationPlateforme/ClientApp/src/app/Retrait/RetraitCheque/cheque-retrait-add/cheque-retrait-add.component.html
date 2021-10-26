@@ -1,0 +1,258 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+    
+      <!-- Second Navbar -->
+      <!-- Tasks Page Content -->
+      <section class="page-content">
+        <h4 class="my-2 task-head"> إضافة مستقطع</h4>
+        <form action="" class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)" (keydown.enter)="$event.target.tagName == 'TEXTAREA'">
+          <div class="col-sm-12">
+            <label for="reg-date"><span><i class="fa fa-money-check"></i></span> الاستقطاع  </label>
+            &nbsp; &nbsp; <input type="radio" name="date" value="newone" (click)="setradio('newone')" ngModel>&nbsp; &nbsp; استقطاع بنكي
+            &nbsp; &nbsp; <input type="radio" name="date" value="oldone" (click)="setradio('oldone')" [checked]='true' ngModel>&nbsp; &nbsp;استقطاع يدوي
+          </div>
+          <div class="col-md-6">
+            <label for="rent-stop-name"><span><i class="fa fa-pen-square fa-lg"></i></span>	نوع التبرع  </label>
+            <select id="building" name="typedons" #typedons="ngModel" [(ngModel)]="retrait.typedons">
+              <option [ngValue]="undefined" selected disabled>- 	نوع التبرع  -</option>
+              <option *ngFor="let item of tbl" value="{{item.nom}}">{{item.nom}}</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="rent-cost"><span><i class="fa fa-user fa-lg"></i></span>الاسم</label>
+            <input type="text" id="rent-cost" name="nom" #nom="ngModel" [(ngModel)]="retrait.nom">
+          </div>
+
+          <div class="col-md-6">
+            <label for="rent-cost"><span><i class="fa fa-building fa-lg"></i></span>الجهة</label>
+            <input type="text" id="rent-cost" name="organisme" #organisme="ngModel" [(ngModel)]="retrait.organisme">
+          </div>
+
+          <div class="col-md-6">
+            <label for="rent-cost"><span><i class="fa fa-phone fa-lg"></i></span>الجوال</label>
+            <input type="text" id="rent-cost" name="tel" #tel="ngModel" [(ngModel)]="retrait.tel">
+          </div>
+
+          <div class="col-md-6">
+            <label for="rent-cost"><span><i class="fa fa-id-card fa-lg"></i></span>رقم الحساب</label>
+            <input type="text" id="rent-cost" name="rib" #rib="ngModel" [(ngModel)]="retrait.rib">
+          </div>
+
+          <div class="col-md-6">
+            <label for="rent-cost"><span><i class="fa fa-briefcase fa-lg"></i></span>البنك</label>
+
+            <select id="building" name="banque" #banque="ngModel" [(ngModel)]="retrait.banque">
+              <option [ngValue]="undefined" selected disabled>- 	البنك -</option>
+              <option *ngFor="let item of ListB" value="{{item.type}}">{{item.type}}</option>
+
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="contract-num">
+              <span><i class="fa fa-user-alt fa-lg"></i></span>
+              حساب المستفيد
+            </label>
+            <select id="building" name="ribben" #ribben="ngModel" [(ngModel)]="retrait.ribben">
+              <option [ngValue]="undefined" selected disabled>- 	المستفيد -</option>
+              <option *ngFor="let item of benList" value="{{item.nomprenom}}">{{item.nomprenom}}</option>
+
+            </select>
+          </div>
+
+          <div class="col-sm-12">
+            <label for="reg-date"><span><i class="fa fa-calendar"></i></span>التاريخ هجري او ميلادي </label>
+            &nbsp; &nbsp; <input type="radio" name="date1" value="hij" (click)="setradio1('hij')" ngModel>&nbsp; &nbsp;هجري
+            &nbsp; &nbsp; <input type="radio" name="date1" value="mil" (click)="setradio1('mil')" [checked]='true' ngModel>&nbsp; &nbsp;ميلادي
+          </div>
+
+          <div class="col-md-6" *ngIf="hij">
+            <div class="form-group form-inline">
+
+              <label for="inputhijdate"><span><i class="fa fa-calendar fa-lg"></i></span>بداية الإستقطاع هجري</label>
+
+              <div id="input_container">
+                <a (click)="d.toggle()"><i id="input_icon" class="fa fa-calendar-alt"></i></a>
+                <input id="inputhijdate" class="form-control" style="width:160px;"
+                       name="datedebuthij" #datedebuthij="ngModel"
+                       [(ngModel)]="model" ngbDatepicker
+                       #d="ngbDatepicker" (dateSelect)="onDateSelect($event)">
+
+
+
+              </div>
+            </div>
+          </div>
+
+
+          <div class="col-md-6" *ngIf="hij">
+            <div class="form-group form-inline">
+              <label for="inputhijdate"><span><i class="fa fa-calendar fa-lg"></i></span>نهاية الإستقطاع هجري</label>
+
+              <div id="input_container">
+                <a (click)="c.toggle()"><i id="input_icon" class="fa fa-calendar-alt"></i></a>
+                <input id="inputhijdate" class="form-control" style="width:160px;"
+                       name="datefinhij" #datefinhij="ngModel"
+                       [(ngModel)]="model1" ngbDatepicker
+                       #c="ngbDatepicker" (dateSelect)="onDateSelect2($event)">
+
+
+
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6" *ngIf="mil">
+            <label for="rent-cost"><span><i class="fa fa-calendar fa-lg"></i></span>بداية الإستقطاع ميلادي</label>
+            <input type="date" id="rent-cost" name="datedebutmiledi" #datedebutmiledi="ngModel" [(ngModel)]="retrait.datedebutmiledi">
+          </div>
+
+          <div class="col-md-6" *ngIf="mil">
+            <label for="rent-time"><span><i class="fa fa-calendar fa-lg"></i></span>نهاية الإستقطاع ميلادي</label>
+            <input type="date" id="rent-time" name="datefinmiledi" #datefinmiledi="ngModel" [(ngModel)]="retrait.datefinmiledi">
+
+          </div>
+
+
+
+          <div class="col-md-6">
+            <label for="contract-num"><span><i class="fa fa-coins fa-lg"></i></span>المبلغ</label>
+            <input type="number" id="contract-num" name="prix" #prix="ngModel" [(ngModel)]="retrait.prix">
+          </div>
+
+          <div class="col-md-6">
+            <label for="contract-num"><span><i class="fa fa-user-circle fa-lg"></i></span>  المندوب</label>
+            <input type="text" id="contract-num" name="delegues" #delegues="ngModel" [(ngModel)]="retrait.delegues">
+          </div>
+
+          <div class="col-md-12">
+            <label for="contract-num"><span><i class="fa fa-calendar-plus fa-lg"></i></span>   أشهر الإستقطاع</label>
+
+          </div>
+
+          <div class="col-xl-12 col-md-12">
+            <div class="card user-card-full">
+              <div class="row m-l-0 m-r-0">
+
+                <div class="col-sm-8">
+                  <div class="card-block" style="display:inline-block">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div style="display:inline-block">
+
+                          <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="retrait.janvier != null">
+                            يناير
+                            <a (click)="del1();btn1.disabled = false;"><span class="counter counter-lg" style="color:red">X</span></a>
+                          </p>
+
+                          <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="retrait.fevrier != null">
+                            فبراير
+                            <a (click)="del2();btn2.disabled = false;"><span class="counter counter-lg" style="color:red">X</span></a>
+                          </p>
+
+                          <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="retrait.mars != null">
+                            مارس
+                            <a (click)="del3();btn3.disabled = false;"><span class="counter counter-lg" style="color:red">X</span></a>
+                          </p>
+
+                          <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="retrait.avril != null">
+                            ابريل
+                            <a (click)="del4();btn4.disabled = false;"><span class="counter counter-lg" style="color:red">X</span></a>
+                          </p>
+
+                          <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="retrait.mai != null">
+                            مايو
+                            <a (click)="del5();btn5.disabled = false;"><span class="counter counter-lg" style="color:red">X</span></a>
+                          </p>
+
+                          <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="retrait.juin != null">
+                            يونيو
+                            <a (click)="del6();btn6.disabled = false;"><span class="counter counter-lg" style="color:red">X</span></a>
+                          </p>
+
+                          <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="retrait.juillet != null">
+                            يوليو
+                            <a (click)="del7();btn7.disabled = false;"><span class="counter counter-lg" style="color:red">X</span></a>
+                          </p>
+
+
+                          <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="retrait.aout != null">
+                            أغسطس
+                            <a (click)="del8();btn8.disabled = false;"><span class="counter counter-lg" style="color:red">X</span></a>
+                          </p>
+
+
+                          <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="retrait.septembre != null">
+                            سبتمبر
+                            <a (click)="del9();btn9.disabled = false;"><span class="counter counter-lg" style="color:red">X</span></a>
+                          </p>
+
+                          <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="retrait.octobre != null">
+                            أكتوبر
+                            <a (click)="del10();btn10.disabled = false;"><span class="counter counter-lg" style="color:red">X</span></a>
+                          </p>
+
+                          <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="retrait.novembre != null">
+                            نوفمبر
+                            <a (click)="del11();btn11.disabled = false;"><span class="counter counter-lg" style="color:red">X</span></a>
+                          </p>
+
+                          <p id="rcorners2" class="m-b-10 f-w-600" *ngIf="retrait.decembre != null">
+                            ديسمبر
+                            <a (click)="del12();btn12.disabled = false;"><span class="counter counter-lg" style="color:red">X</span></a>
+                          </p>
+                        </div>
+                      </div>
+
+                    </div>
+                    <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">إضافة أشهر الإستقطاع</h6>
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div style="display:inline-block">
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn1 (click)="add1();btn1.disabled = true;">يناير</button>
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn2 (click)="add2();btn2.disabled = true;">فبراير</button>
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn3 (click)="add3();btn3.disabled = true;">مارس</button>
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn4 (click)="add4();btn4.disabled = true;">ابريل</button>
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn5 (click)="add5();btn5.disabled = true;">مايو</button>
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn6 (click)="add6();btn6.disabled = true;">يونيو</button>
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn7 (click)="add7();btn7.disabled = true;">يوليو </button>
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn8 (click)="add8();btn8.disabled = true;">أغسطس </button>
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn9 (click)="add9();btn9.disabled = true;">سبتمبر</button>
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn10 (click)="add10();btn10.disabled = true;">أكتوبر </button>
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn11 (click)="add11();btn11.disabled = true;">نوفمبر</button>
+                          <button id="rcorners2" class="m-b-10 f-w-600" #btn12 (click)="add12();btn12.disabled = true;">ديسمبر</button>
+
+
+                        </div>
+                      </div>
+
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="mx-auto my-3">
+            <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
+          </div>
+        </form>
+      </section>
+    </div><!-- End col-9 -->
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+</footer>
+

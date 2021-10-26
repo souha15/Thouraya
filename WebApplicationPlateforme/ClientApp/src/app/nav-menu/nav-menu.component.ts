@@ -93,6 +93,10 @@ export class NavMenuComponent implements OnInit {
       this.UserNameConnected = res.fullName;
     })
   }
+
+  checker(arr1, arr2) {
+    return arr1.some(elem => arr2.includes(elem));
+  }
   // Get User Connected
   UserIdConnected: string;
   UserNameConnected: string;
@@ -109,6 +113,7 @@ export class NavMenuComponent implements OnInit {
   demg1: DemPayCheque[] = [];
   demg2: DemPayCheque[] = [];
   admin: boolean;
+  allowedRoles = ["DIRECTORGENERAL", "DIRECTORADMN", "DIRECTORETAB", "ADMINISTRATEUR"];
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
@@ -117,18 +122,15 @@ export class NavMenuComponent implements OnInit {
       this.sexe = res.sexe;
       this.UserService.getUserRoles(this.UserIdConnected).subscribe(res => {
         this.roleslist = res;
-        this.roleslist.forEach(item => {
-    
-          if (item == "DIRECTORGENERAL" || item == "DIRECTORADMN" || item == "DIRECTORETAB" || item == "ADMINISTRATEUR") {
-            this.testroledir = true;
-          } else {
-            this.testroledir = false;
-          }
-          if (item == "ADMINISTRATEUR") {
-            this.admin = true;
-          } else {
-            this.admin = false;
-          }
+        console.log(this.roleslist)
+        if (this.checker(this.roleslist, this.allowedRoles)) {
+          this.testroledir = true;
+
+        } else {
+          this.testroledir = false;
+        }
+
+      
 
           this.demandeService.Get().subscribe(res => {
             this.dem1 = res
@@ -147,7 +149,7 @@ export class NavMenuComponent implements OnInit {
 
           
           })
-        })
+      
 
       })
     })
