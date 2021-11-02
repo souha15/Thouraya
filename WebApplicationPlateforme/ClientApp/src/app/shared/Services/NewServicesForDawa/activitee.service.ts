@@ -64,4 +64,6 @@ export class ActiviteeService {
   GetById(Id) {
     return this.http.get<Activite>(this.rootURL + '/Activitees/' + Id);
   }
+
+  public list: Activite[] = [];
 }

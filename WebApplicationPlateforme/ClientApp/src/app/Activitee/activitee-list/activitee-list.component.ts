@@ -31,12 +31,13 @@ export class ActiviteeListComponent implements OnInit {
 
   UserIdConnected: string;
   UserNameConnected: string;
+  UserEtabId: number;
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-
+      this.UserEtabId = res.idDepartement;
     })
 
   }
@@ -44,9 +45,12 @@ export class ActiviteeListComponent implements OnInit {
   //Get Activité List
 
   list: Activite[] = [];
+  list2: Activite[] = [];
   getActiviteListG() {
     this.activiteService.List().subscribe(res => {
-      this.list = res
+      this.list2 = res;
+      this.list = this.list2.filter(item => item.attribut1 == this.UserEtabId.toString())
+
     })
   }
 

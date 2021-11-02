@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using WebApplicationPlateforme.Model.ActivitePart;
 using WebApplicationPlateforme.Model.AdministrativeCommunication;
 using WebApplicationPlateforme.Model.ChangerRib;
+using WebApplicationPlateforme.Model.ConfigSystemShowing;
 using WebApplicationPlateforme.Model.MediaCenter.PartageMedia;
 using WebApplicationPlateforme.Model.MediaCenter.Visite;
 using WebApplicationPlateforme.Model.MusulumanFemme;
@@ -44,5 +45,9 @@ namespace WebApplicationPlateforme.Data
         /** Changer Rib **/
         public DbSet<DemChangeRib> DemChangeRib { get; set; }
         public DbSet<FilesDemChangeRib> FilesDemChangeRib { get; set; }
+
+        /** System From Config **/
+
+        public DbSet<ConfigSystemFront> ConfigSystemFront { get; set; }
     }
 }

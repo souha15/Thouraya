@@ -28,12 +28,13 @@ export class ActiviteeAddComponent implements OnInit {
 
   UserIdConnected: string;
   UserNameConnected: string;
+  UserEtabId: number;
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-
+      this.UserEtabId = res.idDepartement
     })
 
   }
@@ -57,6 +58,9 @@ export class ActiviteeAddComponent implements OnInit {
     } else {
 
       this.isValidFormSubmitted = true
+      if (this.UserEtabId != null) {
+        this.ac.attribut1 = this.UserEtabId.toString();
+      }
       this.ac.userNameCreator = this.UserNameConnected;
       this.ac.idUserCreator = this.UserIdConnected;
       this.ac.dateEnreg = this.date;

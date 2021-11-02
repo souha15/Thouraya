@@ -51,7 +51,7 @@
               </a>
             </li>
             <li class="save-btn">
-              <a  data-toggle="modal" data-target="#myModal4">
+              <a data-toggle="modal" data-target="#myModal4">
                 <span><i class="fa fa-save"></i></span>
                 حفظ
               </a>
@@ -59,42 +59,43 @@
 
           </ul>
         </nav>
+      </section>
+      <!-- Transaction1 Page Content -->
 
-        <!-- Transaction1 Page Content -->
-        <section class="page-content text-right">
 
-          <div class="form-group pull-right">
 
-            <input class="search form-control" type="text" name="search" [(ngModel)]="filter" placeholder="ما الذي تبحث عنه ؟">
-          </div>
-          <span class="counter pull-right"></span>
-          <div class="tabel-cont table-responsive">
-            <table class="table table-striped results table-bordered sortable" id="myTable">
-              <thead>
-                <tr>
+      <input class="search form-control" type="text" name="search" [(ngModel)]="filter" placeholder="ما الذي تبحث عنه ؟">
 
-                  <th scope="col">#</th>
-                  <th scope="col">رقم المعاملة</th>
-                  <th scope="col">الجهة</th>
-                  <th scope="col">الموضوع</th>
-                  <th scope="col"> التاريخ</th>
-                  <th scope="col">الأولوية</th>
-                  <th scope="col">درجة السرية</th>
-                  <th scope="col">الاستلام</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let tr of FiltredList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; index as i;">
+    <br />
+      <span class="counter pull-right"></span>
 
-                  <td (click)="populateForm(tr,i)"><input type="radio" name="modelGroup" value="modelGroup"></td>
-                  <td (click)="populateForm(tr,i)">{{(p-1) * count + i + 1}}</td>
-                  <td (click)="populateForm(tr,i)" *ngIf="tr.nomOrg!==null">{{tr.nomOrg}}</td>
-                  <td (click)="populateForm(tr,i)" *ngIf="tr.nomProp!==null">{{tr.nomProp}}</td>
-                  <td (click)="populateForm(tr,i)">{{tr.sujet}}</td>
-                  <td (click)="populateForm(tr,i)">{{tr.date}}</td>
-                  <td (click)="populateForm(tr,i)">{{tr.priorite}}</td>
-                  <td (click)="populateForm(tr,i)">{{tr.securite}}</td>
-                  <td [ngClass]="{
+        <div class="table-responsive">
+          <table class="table table-striped results table-bordered">
+            <thead>
+              <tr>
+
+                <th scope="col">#</th>
+                <th scope="col">رقم المعاملة</th>
+                <th scope="col">الجهة</th>
+                <th scope="col">الموضوع</th>
+                <th scope="col"> التاريخ</th>
+                <th scope="col">الأولوية</th>
+                <th scope="col">درجة السرية</th>
+                <th scope="col">الاستلام</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let tr of FiltredList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; index as i;">
+
+                <td (click)="populateForm(tr,i)"><input type="radio" name="modelGroup" value="modelGroup"></td>
+                <td (click)="populateForm(tr,i)">{{(p-1) * count + i + 1}}</td>
+                <td (click)="populateForm(tr,i)" *ngIf="tr.nomOrg!==null">{{tr.nomOrg}}</td>
+                <td (click)="populateForm(tr,i)" *ngIf="tr.nomProp!==null">{{tr.nomProp}}</td>
+                <td (click)="populateForm(tr,i)">{{tr.sujet}}</td>
+                <td (click)="populateForm(tr,i)">{{tr.date}}</td>
+                <td (click)="populateForm(tr,i)">{{tr.priorite}}</td>
+                <td (click)="populateForm(tr,i)">{{tr.securite}}</td>
+                <td [ngClass]="{
 
     'wait': tr.etat === 'تحت الإجراء',
     'done': tr.etat === 'مستلمة',
@@ -102,27 +103,28 @@
 
 
 }">
-                    <a (click)="populateForm(tr,i)">{{tr.etat}} </a>
-                  </td>
+                  <a (click)="populateForm(tr,i)">{{tr.etat}} </a>
+                </td>
 
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <!-- Pagination -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <!-- Pagination -->
 
-          <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-              <pagination-controls (pageChange)="p = $event"
-                                   previousLabel="السابق"
-                                   nextLabel="التالي"></pagination-controls>
-            </ul>
-          </nav>
-        </section>
-      </section>
-    </div><!-- End col-9 -->
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event"
+                                 previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
 
-  </div>
+
+      </div><!-- End col-9 -->
+
+    </div>
 
 </div>
 <!-- Footer -->

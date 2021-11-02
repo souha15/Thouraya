@@ -1,0 +1,121 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+
+      <header>
+        <h3 class="task-head">تقارير المسلمين</h3>
+      </header>
+      <div class="events1">
+
+        <div class="form-row events-form mb-3">
+          <div class="col-md-12 col-sm-12">
+
+            <div class="d-flex w-100 justify-content-start flex-wrap">
+              <div class="ml-3">
+                <div class="form-group form-inline">
+                  <label for="inputhijdate">
+                    <span><i class="fa fa-calendar-alt fa-lg"></i></span> &nbsp; &nbsp;
+                    تاريخ الإسلام هجري
+                  </label>
+
+                  <div id="input_container">
+                    <a (click)="d.toggle()"><i id="input_icon" class="fa fa-calendar-alt"></i></a>
+                    <input id="inputhijdate" class="form-control" style="width:160px;"
+                           name="datehij" #datehij="ngModel"
+                           [(ngModel)]="model" ngbDatepicker
+                           #d="ngbDatepicker" (dateSelect)="onDateSelect($event)">
+
+
+
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="ml-3">
+                <label for="month">
+                  <span><i class="fa fa-calendar-alt fa-lg"></i></span> &nbsp; &nbsp;
+                  تاريخ الإسلام ميلادي
+                </label>
+
+                <input type="date" (change)="getDateMil($event)" />
+              </div>
+
+              <div class="ml-3">
+                <button class="btn add-inputs0" id="" (click)="getActiviteListG()" type="button">بحث</button>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+
+        <div class="row w-100 d-flex form-box">
+          <div class="col-md-12 col-sm-12">
+
+            <label class="main">
+              <span><i class="fa fa-search"></i></span>
+              نتيجة البحث
+            </label>
+            <div class="d-flex w-100 justify-content-start flex-wrap">
+              <div class="table-responsive new-table2">
+                <table class="table table-bordered text-center table-striped">
+                  <thead class="thead-gestimary">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">    الداعية</th>
+                      <th scope="col"> رقم الملف</th>
+                      <th scope="col"> الاسم الجديد</th>
+                      <th scope="col">     الاسم القديم</th>
+                      <th scope="col">  الجنسية</th>
+                      <th scope="col">تاريخ الإسلام ميلادي</th>
+                      <th scope="col">تاريخ الإسلام هجري</th>
+
+                    </tr>
+                  </thead>
+
+                  <tbody>
+                    <tr *ngFor="let cg of list |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p } ; let i = index">
+                      <th>{{(p-1) * count + i + 1}}</th>
+                      <td>{{cg.predicateur}}</td>
+                      <td>{{cg.numdos}}</td>
+                      <td>{{cg.nvnom}}</td>
+                      <td>{{cg.prevnom}}</td>
+                      <td>{{cg.nat}}</td>
+
+                      <td>{{cg.datemil}}</td>
+                      <td>{{cg.datehij}}</td>
+
+                    </tr>
+                  </tbody>
+
+
+
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="ml-3">
+          <button class="btn add-inputs0" id="" [routerLink]="['/cheque-retrait-details']" type="button">طباعة</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+</footer>
+

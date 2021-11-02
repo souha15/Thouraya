@@ -1,5 +1,4 @@
 /********************/
-/********************/
 .notdonee {
   background: #dc3545;
 }
@@ -28,7 +27,7 @@
   background: #dc3545
 }
 
-.tr-print,
+/*.tr-print,
 .revesion-print,
 .tr-follow-report {
   padding: 30px;
@@ -94,7 +93,7 @@ main {
     font-weight: bold
   }
 
-/*-- revesion-print --*/
+
 .table1 {
   margin-top: 50px;
 }
@@ -133,7 +132,7 @@ th {
   padding: 10px;
   margin-top: 40px;
   text-align: center
-}
+}*/
 
 .parcode {
   font-size: 35px
@@ -364,169 +363,183 @@ p .label1 {
   font-weight: bold
 }
 
-
-/*************/
-
-/**
-
-* {
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
+/*-- leave-request-list --*/
+.leave-request-list table thead {
+  background-color: #91c3d8;
 }
 
-.tr-print,
-.revesion-print,
-.tr-follow-report {
-  padding: 30px;
-  direction: rtl
+
+
+.leave-request-list .ok {
+  background-color: #28a745 !important;
 }
 
-header {
-  padding: 15px 0;
-  border-bottom: 2px solid #333;
-  display: flex;
-  align-items: center;
-  justify-content: space-between
+.leave-request-list .refused {
+  background-color: #dc3545 !important;
 }
 
-  header .date {
-    padding: 10px 15px;
-    border: 1px solid #333;
-    border-radius: 10px;
-    display: inline-block
-  }
-
-  header h2 {
-    text-align: center;
-    width: 30%;
-    font-size: 1.8rem
-  }
-
-  header h2,
-  header span,
-  header div {
-    width: 30%;
-    text-align: center
-  }
-
-  header div {
-    font-size: 20px;
-    font-weight: bold;
-  }
-
-main {
-  padding-top: 20px;
-  position: relative
+.leave-request-list .wait {
+  background-color: #fcba03 !important;
 }
 
-p {
-  font-size: 1.3em;
-  font-weight: bold;
+/*-- Electronic Sevices Forms --*/
+.task-form input:focus:not([type="submit"]):not([type="reset"]),
+.task-form select:focus {
+  outline-color: #999;
 }
 
-  p .label {
-    color: #00047f;
-    margin-left: 15px;
-    font-weight: bold
-  }
-
-h1,
-h2,
-.date {
-  text-align: center;
-  color: #00047f;
-  font-weight: bold
+.task-form option:hover {
+  border: none !important;
 }
 
-/*-- revesion-print --*/
-/*.table1 {
-  margin-top: 50px;
+.service-form label {
+  background-color: #91c3d8;
+  color: #333;
 }
 
-table,
-th,
-td {
-  border: 1px solid black;
-  border-collapse: collapse;
-  color: #000;
+.service-form select {
+  width: 50%;
 }
 
-table {
-  margin: 20px auto
-}
-
-th,
-td {
-  padding: 10px;
-  text-align: right;
-  font-size: 16px;
-}
-
-th {
-  font-weight: bold;
+.service-form input[type="submit"] {
+  width: 140px;
   font-size: 18px;
-  background: #d1d1d1;
 }
 
-.table2 th {
-  width: 30%
+.service-form input[type="reset"] {
+  width: 140px;
+  font-size: 18px;
 }
 
-h3 {
-  background: #d1d1d1;
-  padding: 10px;
-  margin-top: 40px;
-  text-align: center
+/*-- leave-request-list --*/
+.leave-request-list table thead {
+  background-color: #91c3d8;
 }
 
-.parcode {
-  font-size: 35px
+
+
+.leave-request-list .ok {
+  background-color: #28a745 !important;
 }
 
-.underline::after {
-  content: '';
-  display: block;
-  width: 200px;
-  height: 2px;
-  background: #00047f;
-  margin: 20px auto
+.leave-request-list .refused {
+  background-color: #dc3545 !important;
 }
 
-main section {
-  padding: 30px 0;
-  border-top: 2px solid #333;
-}*/
+.leave-request-list .wait {
+  background-color: #fcba03 !important;
+}
 
-/*-- Recieve Alert Start --*/
-/**.par-code {
-  position: absolute;
-  display: inline-block;
-  top: 20px;
+
+/*-- Start Popup --*/
+.popup-page {
+  position: fixed;
+  top: 0;
   left: 0;
-  font-size: 30px;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99999;
+  padding: 50px;
+  display: none;
+  overflow-y: scroll
 }
 
-.marking {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.close-popup {
+  padding: 10px 15px;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block
 }
 
-  .marking div {
-    color: #00047f;
-    font-size: 20px;
-    display: inline-block
+.popup-content {
+  background: #fff;
+  padding: 20px;
+}
+
+  .popup-content .task-form {
+    padding: 10px;
   }
 
-    .marking div span {
-      color: #000;
-    }
-
-.dotted {
-  border-bottom: 2px dotted #00047f;
-  padding-bottom: 20px
+.page-wrapper {
+  margin-top: 20px;
+  border: 1px solid #333;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: right;
+  direction: rtl;
 }
-    */
 
-/***/
+body.noscroll {
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
+.buttons a,
+.buttons button {
+  display: inline-block;
+  text-decoration: none;
+  padding: 8px 15px;
+  margin-bottom: 5px;
+  border: 1px solid #107F98;
+  background: #107F98;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.3s
+}
+
+  .buttons a:hover,
+  .buttons button:hover {
+    color: #107F98;
+    background: #fff;
+    border-width: 2px;
+  }
+
+.transaction-show,
+.transaction-follow,
+.transaction-refer,
+.transaction-link,
+.transaction-storage,
+.transaction-save {
+  display: none
+}
+
+.popup-head {
+  text-align: center;
+  color: #107F98;
+}
+
+  .popup-head::after {
+    content: "";
+    display: block;
+    width: 80px;
+    border-bottom: 2px dashed #107F98;
+    margin: 10px auto 0;
+  }
+
+.papers {
+  list-style: none;
+  display: inline-block
+}
+
+  .papers li {
+    display: inline-block;
+    padding: 6px 10px;
+    border: 1px solid #c3c8c7;
+    border-radius: 6px;
+  }
+
+.wait {
+  background: #dbcf46;
+}
+
+.success {
+  background: #2aa830;
+}
+
+.denied {
+  background: #ed4b1a;
+}

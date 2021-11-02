@@ -102,7 +102,7 @@
 
             <div class="col-md-6">
               <label for="date">	رقم الايبان الجديد  </label>
-              <input type="number" id="date" name="rib" #rib="ngModel" [(ngModel)]="dem.rib" required />
+              <input type="text" id="date" name="rib" #rib="ngModel" [(ngModel)]="dem.rib" required style="width:300px" />
               <div *ngIf="rib.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
                 مطلوب 	 	رقم الايبان الجديد    .
               </div>
@@ -111,7 +111,7 @@
 
 
             <div class="col-sm-12">
-              <label for=""> المخاصة</label>
+              <label for=""> المخالصة البنكية من البنك السابق</label>
               <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
                 <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
                 <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">

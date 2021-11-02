@@ -1,25 +1,33 @@
-#input_container {
-  position: relative;
-  padding: 0;
-  margin: 0;
-}
-
-#inputhijdate {
-  margin: 0;
-  padding-left: 30px;
-}
-
-#input_icon {
-  position: absolute;
-  bottom: 6px;
-  left: 10px;
-  width: 17px;
-  height: 17px;
-}
-
 /********************/
+.notdonee {
+  background: #dc3545;
+}
 
-.tr-print,
+.donee {
+  background: #28a745;
+}
+
+.worke {
+  background: #007bff;
+}
+
+.receive {
+  background: #28a745;
+}
+
+.wait {
+  background: #faec2f;
+}
+
+.finished {
+  background: #7fdb90;
+}
+
+.retarde {
+  background: #dc3545
+}
+
+/*.tr-print,
 .revesion-print,
 .tr-follow-report {
   padding: 30px;
@@ -85,7 +93,7 @@ main {
     font-weight: bold
   }
 
-/*-- revesion-print --*/
+
 .table1 {
   margin-top: 50px;
 }
@@ -124,7 +132,7 @@ th {
   padding: 10px;
   margin-top: 40px;
   text-align: center
-}
+}*/
 
 .parcode {
   font-size: 35px
@@ -175,26 +183,6 @@ main section {
 }
 
 /********************/
-
-.saved-nav ul {
-  width: 60%;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-  flex-wrap: wrap;
-  font-size: 1.1rem;
-  margin: auto
-}
-
-@media(max-width:500px) {
-  .saved-nav ul {
-    width: 100%
-  }
-}
-
-.transaction-back {
-  display: none
-}
 
 .isred {
   background: #ff6666;
@@ -278,6 +266,170 @@ ul {
         .transaction-nav ul li:hover a {
           color: #fff
         }
+
+
+.papers {
+  list-style: none;
+  display: inline-block
+}
+
+  .papers li {
+    display: inline-block;
+    padding: 6px 10px;
+    border: 1px solid #c3c8c7;
+    border-radius: 6px;
+  }
+
+/*-- Transaction Refer --*/
+.refer-nav {
+  border-bottom: 2px solid #107F98;
+  padding-bottom: 8px;
+  margin-bottom: 10px;
+}
+
+  .refer-nav a {
+    text-decoration: none;
+    color: #107F98;
+    border: 1px solid #107F98;
+    padding: 8px 10px;
+    transition: all 0.3s
+  }
+
+    .refer-nav a:hover,
+    .refer-nav a.active {
+      background: #107F98;
+      color: #FFF;
+    }
+
+.to-employee-form {
+  display: none
+}
+
+/*-- Transaction Link --*/
+.transaction-link .task-form .tra-link-btn {
+  padding: 8px 15px !important;
+  color: #fff;
+  background: #107F98;
+  border: 0;
+  border-radius: 10px;
+  display: inline-block;
+}
+
+.confirm {
+  font-size: 1.3rem;
+  text-align: center;
+  color: #777;
+}
+
+.task-form label {
+  min-width: 126px;
+  background: #91c3d8;
+  color: #444;
+}
+/**************/
+.tr-print,
+.revesion-print,
+.tr-follow-report {
+  padding: 30px;
+  direction: rtl
+}
+
+header .date1 {
+  padding: 10px 15px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  display: inline-block
+}
+
+h1,
+h2,
+.date1 {
+  text-align: center;
+  color: #00047f;
+  font-weight: bold
+}
+
+.hea {
+  padding: 15px 0;
+  border-bottom: 2px solid #333;
+  display: flex;
+  align-items: center;
+  justify-content: space-between
+}
+
+p .label1 {
+  color: #00047f;
+  margin-left: 15px;
+  font-weight: bold
+}
+
+/*-- leave-request-list --*/
+.leave-request-list table thead {
+  background-color: #91c3d8;
+}
+
+
+
+.leave-request-list .ok {
+  background-color: #28a745 !important;
+}
+
+.leave-request-list .refused {
+  background-color: #dc3545 !important;
+}
+
+.leave-request-list .wait {
+  background-color: #fcba03 !important;
+}
+
+/*-- Electronic Sevices Forms --*/
+.task-form input:focus:not([type="submit"]):not([type="reset"]),
+.task-form select:focus {
+  outline-color: #999;
+}
+
+.task-form option:hover {
+  border: none !important;
+}
+
+.service-form label {
+  background-color: #91c3d8;
+  color: #333;
+}
+
+.service-form select {
+  width: 50%;
+}
+
+.service-form input[type="submit"] {
+  width: 140px;
+  font-size: 18px;
+}
+
+.service-form input[type="reset"] {
+  width: 140px;
+  font-size: 18px;
+}
+
+/*-- leave-request-list --*/
+.leave-request-list table thead {
+  background-color: #91c3d8;
+}
+
+
+
+.leave-request-list .ok {
+  background-color: #28a745 !important;
+}
+
+.leave-request-list .refused {
+  background-color: #dc3545 !important;
+}
+
+.leave-request-list .wait {
+  background-color: #fcba03 !important;
+}
+
 
 /*-- Start Popup --*/
 .popup-page {
@@ -380,85 +532,14 @@ body.noscroll {
     border-radius: 6px;
   }
 
-/*-- Transaction Refer --*/
-.refer-nav {
-  border-bottom: 2px solid #107F98;
-  padding-bottom: 8px;
-  margin-bottom: 10px;
+.wait {
+  background: #dbcf46;
 }
 
-  .refer-nav a {
-    text-decoration: none;
-    color: #107F98;
-    border: 1px solid #107F98;
-    padding: 8px 10px;
-    transition: all 0.3s
-  }
-
-    .refer-nav a:hover,
-    .refer-nav a.active {
-      background: #107F98;
-      color: #FFF;
-    }
-
-.to-employee-form {
-  display: none
+.success {
+  background: #2aa830;
 }
 
-/*-- Transaction Link --*/
-.transaction-link .task-form .tra-link-btn {
-  padding: 8px 15px !important;
-  color: #fff;
-  background: #107F98;
-  border: 0;
-  border-radius: 10px;
-  display: inline-block;
-}
-
-.confirm {
-  font-size: 1.3rem;
-  text-align: center;
-  color: #777;
-}
-
-.task-form label {
-  min-width: 126px;
-  background: #91c3d8;
-  color: #444;
-}
-/**************/
-.tr-print,
-.revesion-print,
-.tr-follow-report {
-  padding: 30px;
-  direction: rtl
-}
-
-header .date1 {
-  padding: 10px 15px;
-  border: 1px solid #333;
-  border-radius: 10px;
-  display: inline-block
-}
-
-h1,
-h2,
-.date1 {
-  text-align: center;
-  color: #00047f;
-  font-weight: bold
-}
-
-.hea {
-  padding: 15px 0;
-  border-bottom: 2px solid #333;
-  display: flex;
-  align-items: center;
-  justify-content: space-between
-}
-
-p .label1 {
-  color: #00047f;
-  margin-left: 15px;
-  font-weight: bold
+.denied {
+  background: #ed4b1a;
 }

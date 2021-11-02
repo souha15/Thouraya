@@ -1,0 +1,175 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+
+      <header>
+        <h3 class="task-head">إعدادات البرنامج </h3>
+      </header>
+
+      <span class="counter pull-right"></span>
+      <div class="table-responsive">
+        <table class="table results text-center table-bordered theme-table">
+          <thead>
+            <tr>
+              <th scope="col">شعار الجمعية</th>
+              <th scope="col">الخلفية</th>
+              <th scope="col">شعار التقارير (الأيمن)</th>
+              <th scope="col">شعار التقارير (الأيسر) </th>
+              <th scope="col">الإمضاء</th>
+          
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+
+              <td>
+                <div>
+                  <a (click)="download(c.icon1)" class="ml-3" *ngIf="c.icon1!=null">
+                    <span><i class="fa fa-file-download fa-lg" style="color:dodgerblue"></i></span>
+                  </a>
+
+                  <input type="file" id="report-copy" (change)="upload1($event)" #inputFile hidden />
+                  <label for="report-copy" class="file-label">
+                    <span><i class="fa fa-file-upload fa-lg" style="color:red"></i></span>
+                  </label>
+                </div>
+
+                <div class="news px-3" *ngIf="c.icon1!=null">
+                  <div class="news-box row">
+                    <div class="col-md-3">
+                      <div class="journalist-img">
+                        <img src="/uploads/{{c.icon1}}" alt="Image" target="_blank" />
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </td>
+
+              <td>
+                <div>
+                  <a *ngIf="c.homeBackground!=null" (click)="download(c.homeBackground)" class="ml-3">
+                    <span><i class="fa fa-file-download fa-lg" style="color:dodgerblue"></i></span>
+                  </a>
+
+                  <input type="file" id="report-copy" (change)="upload2($event)" #inputFile hidden />
+                  <label for="report-copy" class="file-label">
+                    <span><i class="fa fa-file-upload fa-lg" style="color:red"></i></span>
+                  </label>
+                </div>
+
+                <div class="news px-3" *ngIf="c.homeBackground!=null">
+                  <div class="news-box row">
+                    <div class="col-md-3">
+                      <div class="journalist-img">
+                        <img src="/uploads/{{c.homeBackground}}" alt="Image" target="_blank" />
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </td>
+
+              <td>
+                <div>
+                  <a *ngIf="c.reportRightIcon!=null" (click)="download(c.reportRightIcon)" class="ml-3">
+                    <span><i class="fa fa-file-download fa-lg" style="color:dodgerblue"></i></span>
+                  </a>
+
+                  <input type="file" id="report-copy" (change)="upload3($event)" #inputFile hidden />
+                  <label for="report-copy" class="file-label">
+                    <span><i class="fa fa-file-upload fa-lg" style="color:red"></i></span>
+                  </label>
+                </div>
+
+
+                <div class="news px-3" *ngIf="c.reportRightIcon!=null">
+                  <div class="news-box row">
+                    <div class="col-md-3">
+                      <div class="journalist-img">
+                        <img src="/uploads/{{c.reportRightIcon}}" alt="Image" target="_blank" />
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </td>
+
+
+              <td>
+                <div>
+                  <a *ngIf="c.reportLeftIcon!=null" (click)="download(c.reportLeftIcon)" class="ml-3">
+                    <span><i class="fa fa-file-download fa-lg" style="color:dodgerblue"></i></span>
+                  </a>
+
+                  <input type="file" id="report-copy" (change)="upload4($event)" #inputFile hidden />
+                  <label for="report-copy" class="file-label">
+                    <span><i class="fa fa-file-upload fa-lg" style="color:red"></i></span>
+                  </label>
+                </div>
+
+
+                <div class="news px-3" *ngIf="c.reportLeftIcon!=null">
+                  <div class="news-box row">
+                    <div class="col-md-3">
+                      <div class="journalist-img">
+                        <img src="/uploads/{{c.reportLeftIcon}}" alt="Image" target="_blank" />
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </td>
+
+
+              <td>
+                <div>
+                  <a *ngIf="c.reportSignature!=null" (click)="download(c.reportSignature)" class="ml-3">
+                    <span><i class="fa fa-file-download fa-lg" style="color:dodgerblue"></i></span>
+                  </a>
+
+                  <input type="file" id="report-copy" (change)="upload5($event)" #inputFile hidden />
+                  <label for="report-copy" class="file-label">
+                    <span><i class="fa fa-file-upload fa-lg" style="color:red"></i></span>
+                  </label>
+                </div>
+
+
+                <div class="news px-3" *ngIf="c.reportSignature!=null">
+                  <div class="news-box row">
+                    <div class="col-md-3">
+                      <div class="journalist-img">
+                        <img src="/uploads/{{c.reportSignature}}" alt="Image" target="_blank" />
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </td>
+
+            </tr>
+          </tbody>
+        </table>
+
+
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+</footer>

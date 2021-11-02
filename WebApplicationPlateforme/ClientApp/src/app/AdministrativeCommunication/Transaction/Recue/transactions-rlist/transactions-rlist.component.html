@@ -62,6 +62,7 @@
                   <td data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)">{{tr.date}}</td>
                   <td data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)" *ngIf="tr.nomOrg!==null">{{tr.nomOrg}}</td>
                   <td  data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)" *ngIf="tr.nomProp!==null">{{tr.nomProp}}</td>
+                  <td  data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)" *ngIf="tr.nomProp==null && tr.nomOrg!==null">{{tr.nomProp}}</td>
                   <td data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)">{{tr.sujet}}</td>
                   <td data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)">{{tr.attribut3}}</td>
                   <td data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)" [ngClass]="{

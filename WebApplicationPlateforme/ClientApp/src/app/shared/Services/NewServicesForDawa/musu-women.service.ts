@@ -64,4 +64,5 @@ export class MusuWomenService {
   GetById(Id) {
     return this.http.get<Musulman>(this.rootURL + '/musulmanWomen/' + Id);
   }
+  public list: Musulman[] = [];
 }

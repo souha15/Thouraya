@@ -51,7 +51,7 @@ export class NavMenuComponent implements OnInit {
   intervale;
   autoSave() {
     this.intervale = setInterval(() => {
-      console.log('setTimeOut');
+
       this.save = true;
       if (this.UserIdConnected != null) {
         this.getUserConnected();
@@ -122,7 +122,7 @@ export class NavMenuComponent implements OnInit {
       this.sexe = res.sexe;
       this.UserService.getUserRoles(this.UserIdConnected).subscribe(res => {
         this.roleslist = res;
-        console.log(this.roleslist)
+
         if (this.checker(this.roleslist, this.allowedRoles)) {
           this.testroledir = true;
 

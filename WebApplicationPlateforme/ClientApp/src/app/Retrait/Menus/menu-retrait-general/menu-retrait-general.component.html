@@ -1,1 +1,72 @@
-<p>menu-retrait-general works!</p>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+  <!-- Main Style File -->
+
+</head>
+<body>
+  <a class="btn show-details-btn text-info" (click)="print()">
+    <i class="fa fa-print fa-lg"></i>
+  </a>
+  <br />
+  <br />
+
+  <div class="salary-page" id="htmlData">
+    <header>
+      <img class="img1" src="assets/images/taef.jpeg" alt="">
+      <div class="header-title">
+        جمعية الدعوة والإرشاد
+        <br />
+        وتوعية الجاليات بالطائف
+      </div>
+      <img class="img2" src="assets/images/vision-2030.png" alt="">
+    </header>
+    <div class="content">
+      <h2 class="header-title"> تقارير الأنشطة</h2>
+      <div class="table-responsive">
+        <table class="table table-bordered">
+
+          <tbody>
+            <tr>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">اسم النشاط</th>
+              <th scope="col">عدد الانشطة</th>
+              <th scope="col">عدد المستفيدين</th>
+              <th scope="col"> تاريخ بداية المشروع </th>
+              <th scope="col">تاريخ نهاية المشروع</th>
+            </tr>
+          </tbody>
+
+          <tbody>
+            <tr *ngFor="let cg of Id |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p } ; let i = index">
+              <th >{{(p-1) * count + i + 1}}</th>
+              <td >{{cg.nom}}</td>
+              <td >{{cg.nbActivite}}</td>
+              <td >{{cg.nbBenef}}</td>
+              <td >{{cg.dateDeb}}</td>
+              <td >{{cg.datefin}}</td>
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+
+    </div>
+  </div>
+
+
+</body>
+</html>

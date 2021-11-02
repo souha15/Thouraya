@@ -87,6 +87,7 @@
                   <td (click)="populateForm(tr)">{{tr.date}}</td>
                   <td (click)="populateForm(tr)" *ngIf="tr.nomOrg!==null">{{tr.nomOrg}}</td>
                   <td (click)="populateForm(tr)" *ngIf="tr.nomProp!==null">{{tr.nomProp}}</td>
+                  <td (click)="populateForm(tr)" *ngIf="tr.nomProp==null && tr.nomOrg==null"></td>
                   <td (click)="populateForm(tr)">{{tr.sujet}}</td>
                   <td (click)="populateForm(tr)">{{tr.attribut3}}</td>
                   <td  (click)="populateForm(tr)" [ngClass]="{

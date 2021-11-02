@@ -680,6 +680,12 @@ import { TypeRecrutementComponent } from './RH/Recrutement/type-recrutement/type
 import { ChangeRibAddComponent } from './ChangeRib/change-rib-add/change-rib-add.component';
 import { ChangeRibUserListComponent } from './ChangeRib/change-rib-user-list/change-rib-user-list.component';
 import { ChangeRibRhListComponent } from './ChangeRib/change-rib-rh-list/change-rib-rh-list.component';
+import { ActiviteeRapDawaaHommeComponent } from './Rapports/Activitee/activitee-rap-dawaa-homme/activitee-rap-dawaa-homme.component';
+import { ActiviteeRapDawaawomenComponent } from './Rapports/Activitee/activitee-rap-dawaawomen/activitee-rap-dawaawomen.component';
+import { RapWomenComponent } from './Rapports/MusulmanFemme/rap-women/rap-women.component';
+import { RapMenComponent } from './Rapports/MusulmanHomme/rap-men/rap-men.component';
+import { ConfigFrontSystemCrudComponent } from './ConfigSystemShowing/config-front-system-crud/config-front-system-crud.component';
+import { ConfigFrontSystemDetailsComponent } from './ConfigSystemShowing/config-front-system-details/config-front-system-details.component';
 
 @NgModule({
   declarations: [
@@ -1327,6 +1333,12 @@ import { ChangeRibRhListComponent } from './ChangeRib/change-rib-rh-list/change-
     ChangeRibAddComponent,
     ChangeRibUserListComponent,
     ChangeRibRhListComponent,
+    ActiviteeRapDawaaHommeComponent,
+    ActiviteeRapDawaawomenComponent,
+    RapWomenComponent,
+    RapMenComponent,
+    ConfigFrontSystemCrudComponent,
+    ConfigFrontSystemDetailsComponent,
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -2799,6 +2811,22 @@ import { ChangeRibRhListComponent } from './ChangeRib/change-rib-rh-list/change-
 
       { path: 'change-rib-rh-list', component: ChangeRibRhListComponent, canActivate: [AuthGuard] },
 
+    /**** Rapport ******/
+
+      { path: 'activitee-rap-dawaa-homme', component: ActiviteeRapDawaaHommeComponent, canActivate: [AuthGuard] },
+ 
+      { path: 'activitee-rap-dawaawomen', component: ActiviteeRapDawaawomenComponent, canActivate: [AuthGuard] },
+
+      { path: 'rap-women', component: RapWomenComponent, canActivate: [AuthGuard] },
+
+      { path: 'rap-men', component: RapMenComponent, canActivate: [AuthGuard] },
+
+    /** Config System **/
+
+      { path: 'config-front-system-crud', component: ConfigFrontSystemCrudComponent, canActivate: [AuthGuard] },
+
+      { path: 'config-front-system-details', component: ConfigFrontSystemDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'config-front-system-details/:id', component: ConfigFrontSystemDetailsComponent, canActivate: [AuthGuard] },
     ])
   ],/*,  {
     provide: HTTP_INTERCEPTORS,

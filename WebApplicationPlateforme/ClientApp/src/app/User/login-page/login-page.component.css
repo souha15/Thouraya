@@ -17,7 +17,7 @@ body {
   width: 100%;
   min-height: 100vh;
   overflow-y: auto;
-  background-image: url("/assets/images/login-bg.png");
+  background-image: url("/assets/images/login-bg.jpg");
   background-size: cover;
   background-position: center;
   display: flex;
@@ -50,13 +50,13 @@ body {
     margin-bottom: 0px;
   }
 
-  .login-page-awal form h2 {
+  .login-page-awal form h3 {
     color: #a1d11c;
     font-size: 2.5rem;
     margin-bottom: 20px;
   }
 
-  .login-page-awal form h3 {
+  .login-page-awal form h2 {
     margin-bottom: 10px;
     color: rgb(64,98,183);
     color: linear-gradient(45deg, rgba(64,98,183,1) 15%, rgba(44,56,131,1) 85%);
@@ -107,8 +107,8 @@ body {
   }
 
 .login-page-awal form input[type='submit'] {
-  background: rgb(89,129,40);
-  background: linear-gradient(45deg, rgba(89,129,40,1) 15%, rgba(166,215,28,1) 85%);
+  background: rgb(64,98,183);
+  background: linear-gradient(45deg, rgba(64,98,183,1) 15%, rgba(44,56,131,1) 85%);
   border: none;
   outline: none;
   border-radius: 20px;

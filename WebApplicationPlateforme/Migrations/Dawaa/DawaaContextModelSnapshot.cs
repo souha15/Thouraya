@@ -396,6 +396,78 @@ namespace WebApplicationPlateforme.Migrations.Dawaa
                     b.ToTable("FilesDemChangeRib");
                 });
 
+            modelBuilder.Entity("WebApplicationPlateforme.Model.ConfigSystemShowing.ConfigSystemFront", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("footerIcon")
+                        .HasColumnType("text");
+
+                    b.Property<string>("footerText")
+                        .HasColumnType("text");
+
+                    b.Property<string>("homeBackground")
+                        .HasColumnType("text");
+
+                    b.Property<string>("icon1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("icon10")
+                        .HasColumnType("text");
+
+                    b.Property<string>("icon2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("icon3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("icon4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("icon5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("icon6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("icon7")
+                        .HasColumnType("text");
+
+                    b.Property<string>("icon8")
+                        .HasColumnType("text");
+
+                    b.Property<string>("icon9")
+                        .HasColumnType("text");
+
+                    b.Property<string>("loginBackground")
+                        .HasColumnType("text");
+
+                    b.Property<string>("loginIcon")
+                        .HasColumnType("text");
+
+                    b.Property<string>("loginText")
+                        .HasColumnType("text");
+
+                    b.Property<string>("navIcon")
+                        .HasColumnType("text");
+
+                    b.Property<string>("reportLeftIcon")
+                        .HasColumnType("text");
+
+                    b.Property<string>("reportRightIcon")
+                        .HasColumnType("text");
+
+                    b.Property<string>("reportSignature")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ConfigSystemFront");
+                });
+
             modelBuilder.Entity("WebApplicationPlateforme.Model.Global.Administration", b =>
                 {
                     b.Property<int?>("Id")
