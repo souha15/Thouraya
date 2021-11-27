@@ -6,37 +6,143 @@
       <app-side-menu></app-side-menu>
     </div>
     <div class="col-md-9 col-sm-8">
+      <app-ticket-edit></app-ticket-edit>
       <header>
         <h3 class="task-head"> قائمة التذاكر</h3>
       </header>
+
+      <section class="page-content">
+        <div class="d-flex flex-wrap p-2 bd-highlight nav-2">
+
+          <div class="p-2 flex-fill bd-highlight item" style="height:100px;text-align:center;border-color:black">
+            <div class="sympol">
+              <span style="font-size:40px;color:black;text-align:center"><i class="fa fa-bell"></i></span>
+            </div>
+            <div class="text">
+              <p style="font-size:20px;color:black">في الإنتظار</p>
+              <span style="color:black;font-size:30px;">{{enattente}}</span>
+            </div>
+          </div>
+          <div class="p-2 flex-fill bd-highlight item" style="height:100px;text-align:center;border-color:black">
+            <div class="sympol">
+              <span style="font-size:40px;color:#3957ed;text-align:center"><i class="fa fa-pencil-alt"></i></span>
+            </div>
+            <div class="text">
+              <p style="font-size:20px;text-align:center;color:#3957ed"> تحت الإجراء</p>
+
+
+              <span style="color:#3957ed;font-size:30px;">{{encours}}</span>
+            </div>
+          </div>
+          <div class="p-2 flex-fill bd-highlight item" style="height:100px;text-align:center;border-color:black">
+            <div class="sympol">
+              <span style="font-size:40px;color:#0f630a;text-align:center"><i class="fa fa-check-circle"></i></span>
+            </div>
+            <div class="text">
+              <p style="font-size:20px;text-align:center;color:#0f630a"> منجزة</p>
+
+
+              <span style="color:#28a745;font-size:30px;">{{done}}</span>
+            </div>
+          </div>
+
+          <div class="p-2 flex-fill bd-highlight item" style="height:100px;text-align:center;border-color:black">
+            <div class="sympol">
+              <span style="font-size:40px;color:#dc3545;text-align:center"><i class="fa fa-times-circle"></i></span>
+            </div>
+            <div class="text">
+              <a style="font-size:20px;color:#dc3545">مغلقة</a>
+              <br /><br />
+              <span style="color:#dc3545;font-size:30px;">{{closed}}</span>
+            </div>
+          </div>
+
+          <div class="p-2 flex-fill bd-highlight item" style="height:100px;text-align:center;border-color:black">
+            <div class="sympol">
+              <span style="font-size:40px;color:#a39d9d;text-align:center"><i class="fa fa-stopwatch"></i></span>
+            </div>
+            <div class="text">
+              <a style="font-size:20px;color:#a39d9d">مؤجلة</a>
+              <br /><br />
+              <span style="color:#a39d9d;font-size:30px;">{{suspendu}}</span>
+            </div>
+          </div>
+        </div>
+      </section>
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
+      <br />
       <div class="table-responsive mandate">
         <table class="table text-center table-bordered table-striped theme-table">
-          <thead>
 
+          <thead>
             <tr>
-              <th scope="col">#</th>
-              <th scope="col">العنوان</th>
-              <th scope="col">التاريخ</th>
-              <th scope="col">التفاصيل</th>
-              <th scope="col">الحالة </th>
+              <th scope="col" (click)="sort('id')">
+                <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                #
+              </th>
+              <th scope="col" (click)="sort('clientName')">
+                الموظف
+                <span class="glyphicon sort-icon" *ngIf="key =='clientName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+
+              <th scope="col" (click)="sort('titre')">
+                العنوان
+                <span class="glyphicon sort-icon" *ngIf="key =='titre'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('clientDate')">
+                التاريخ
+                <span class="glyphicon sort-icon" *ngIf="key =='clientDate'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('priorite')">
+                الأولوية
+                <span class="glyphicon sort-icon" *ngIf="key =='priorite'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+              <th scope="col" (click)="sort('type')">
+                النوع
+                <span class="glyphicon sort-icon" *ngIf="key =='type'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+              <th scope="col" (click)="sort('path')">
+                رابط الصفحة
+                <span class="glyphicon sort-icon" *ngIf="key =='path'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('etat')">
+                <p style="color:white">
+                  <span class="glyphicon sort-icon" *ngIf="key =='etat'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </p>
+                الحالة
+              </th>
+
+              <th scope="col">
+                تعليق
+              </th>
             </tr>
           </thead>
           <tbody>
             <tr *ngFor="let ne of ticketList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; let i = index">
-              <th scope="row">{{(p-1) * count + i + 1}}</th>
+              <th scope="row">{{ne.id}}</th>
+              <th scope="row">{{ne.clientName}}</th>
               <td (click)="populateForm(ne)" data-toggle="modal" data-target="#myModal1">{{ne.titre}}</td>
-              <td (click)="populateForm(ne)" data-toggle="modal" data-target="#myModal1">{{ne.date}}</td>
-              <td (click)="populateForm(ne)" data-toggle="modal" data-target="#myModal1">{{ne.details}}</td>
+              <td (click)="populateForm(ne)" data-toggle="modal" data-target="#myModal1">{{ne.clientDate}}</td>
+              <td (click)="populateForm(ne)" data-toggle="modal" data-target="#myModal1">{{ne.priorite}}</td>
+              <td (click)="populateForm(ne)" data-toggle="modal" data-target="#myModal1">{{ne.type}}</td>
+              <td (click)="populateForm(ne)" data-toggle="modal" data-target="#myModal1"><a href="{{ne.path}}" target="_blank">{{ne.path}}</a></td>
               <td data-toggle="modal" data-target="#myModal" (click)="populateForm(ne)"
                   [ngClass]="{
 
     'work': ne.etat === 'تحت الإجراء',
     'done': ne.etat === 'منجزة',
-    'wait': ne.etat === 'في الإنتظار'
+    'wait': ne.etat === 'في الإنتظار',
+    'suspendu': ne.etat === 'مؤجلة',
+    'notdonee': ne.etat === 'مغلقة',
+    'enattenterep': ne.etat === 'بانتظار رد صاحب التذكرة'
 }">
                 {{ne.etat}}
-                </td>
-</tr>
+              </td>
+              <td (click)="populateForm(ne)"><a [routerLink]="['/ticket-detail-client', ne.id]" class="btn btn-primary"><i class="fa fa-comment-dots"></i></a></td>
+            </tr>
           </tbody>
         </table>
       </div> <!-- End Table Responsive -->
@@ -54,63 +160,8 @@
 <footer class="text-center">
  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
 </footer>
-<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
-  <div class="">
 
-    <div class="popup-content">
-
-
-      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
-
-
-      <div class="page-wrapper">
-        <h3 class="popup-head">{{ticket.titre}}</h3>
-        <div class="modal-body" style="direction:rtl; text-align:right;">
-          <div class="task-form form-row stop-form">
-            <form class="task-form form-row service-form">
-
-              <div class="col-md-4">
-                <label>التاريخ </label>
-                {{ticket.date}}
-              </div>
-
-              <div class="col-md-8">
-                <label>التفاصيل </label>
-                {{ticket.details}}
-              </div>
-
-              <div class="col-md-4">
-                <label>الحالة </label>
-                {{ticket.etat}}
-              </div>
-
-              <div class="col-md-4">
-                <label>الملاحظات </label>
-                {{ticket.remarque}}
-              </div>
-
-              <div class="col-md-12">
-                <label>المرفقات </label>
-                <span class="data">
-                  <span *ngFor="let pr of ticketfiles">
-                    <i class="ml-2 fa fa-arrow-down" style="color:dodgerblue"></i>
-                    <a (click)="download(pr.path)" class="ml-3" style="color:dodgerblue">{{pr.path}}</a>
-
-                  </span>
-                </span>
-              </div>
-
-            </form>
-
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</div>
-
-<div id="myModal" class="popup-page" role="dialog" style="direction:ltr;">
+<div id="myModal" class="popup-page" role="dialog" style="    direction: ltr;">
   <div class="">
 
     <div class="popup-content">
@@ -121,7 +172,8 @@
 
       <div class="page-wrapper">
 
-        <div class="modal-body" style="direction:rtl; text-align:right;">
+        <div class="modal-body" style="    direction: rtl;
+    text-align: right;">
           <h2 class="text-center my-2"> تعديل الحالة</h2>
           <form class="form-row task-form">
             <div class="col-sm-12">
@@ -131,6 +183,9 @@
                 <option value="في الإنتظار">في الإنتظار</option>
                 <option value="تحت الإجراء">تحت الإجراء</option>
                 <option value="منجزة">منجزة</option>
+                <option value="مؤجلة">مؤجلة</option>
+                <option value="مغلقة">مغلقة</option>
+                <option value="بانتظار رد صاحب التذكرة">بانتظار رد صاحب التذكرة</option>
 
               </select>
 

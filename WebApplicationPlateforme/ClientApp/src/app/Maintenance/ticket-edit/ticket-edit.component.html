@@ -1,1 +1,14 @@
-<p>ticket-edit works!</p>
+<nav class="d-flex p-0 bd-highlight tasks-nav mt-2 finance-nav">
+
+  <a [routerLink]="['/ticket-list-agent']" class="p-2 flex-fill bd-highlight stop-btn">
+    <span><i class="fa fa-plus"></i></span>
+    قائمة التذاكر
+  </a>
+
+  <a [routerLink]="['/tickets-comments']" class="p-2 flex-fill bd-highlight alert-btn notification">
+    <span class=" badge" *ngIf="nb!=0">{{nb}}</span>
+    <span><i class="fa fa-bell"></i></span>
+    الإشعارات
+  </a>
+
+</nav>

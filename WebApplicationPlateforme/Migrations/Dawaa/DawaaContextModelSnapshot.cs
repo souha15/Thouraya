@@ -468,6 +468,456 @@ namespace WebApplicationPlateforme.Migrations.Dawaa
                     b.ToTable("ConfigSystemFront");
                 });
 
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Decision.DecisionDecisif", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("IdUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserNameCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("anneeDecHij")
+                        .HasColumnType("text");
+
+                    b.Property<string>("anneeDecMil")
+                        .HasColumnType("text");
+
+                    b.Property<string>("anneeHij")
+                        .HasColumnType("text");
+
+                    b.Property<string>("anneeMil")
+                        .HasColumnType("text");
+
+                    b.Property<int>("attribut1")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<int>("dateHijMil")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datehijmil")
+                        .HasColumnType("text");
+
+                    b.Property<string>("decisionNb")
+                        .HasColumnType("text");
+
+                    b.Property<string>("infraction")
+                        .HasColumnType("text");
+
+                    b.Property<string>("joursHij")
+                        .HasColumnType("text");
+
+                    b.Property<string>("joursMil")
+                        .HasColumnType("text");
+
+                    b.Property<string>("moisDecHij")
+                        .HasColumnType("text");
+
+                    b.Property<string>("moisDecMil")
+                        .HasColumnType("text");
+
+                    b.Property<string>("moisHij")
+                        .HasColumnType("text");
+
+                    b.Property<string>("moisMil")
+                        .HasColumnType("text");
+
+                    b.Property<string>("periode")
+                        .HasColumnType("text");
+
+                    b.Property<string>("repetion")
+                        .HasColumnType("text");
+
+                    b.Property<string>("typeDec")
+                        .HasColumnType("text");
+
+                    b.Property<int>("typeDecstr")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("userId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdUserCreator");
+
+                    b.ToTable("DecisionDecisifs");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Decision.DecissionCommun", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("IdUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserNameCreator")
+                        .HasColumnType("text");
+
+                    b.Property<int>("adminId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("adminName")
+                        .HasColumnType("text");
+
+                    b.Property<int>("attribut1")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("autre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateFinContratHij")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateFinContratMil")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateTravail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("emploi")
+                        .HasColumnType("text");
+
+                    b.Property<int>("etabId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("etabName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("infraction")
+                        .HasColumnType("text");
+
+                    b.Property<string>("num")
+                        .HasColumnType("text");
+
+                    b.Property<string>("position")
+                        .HasColumnType("text");
+
+                    b.Property<string>("raison")
+                        .HasColumnType("text");
+
+                    b.Property<int>("typeDecint")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("typeDecstr")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdUserCreator");
+
+                    b.ToTable("DecissionCommuns");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.GestionDestTickets.CommentsTicketFiles", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Text")
+                        .HasColumnType("text");
+
+                    b.Property<int>("idComment")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("path")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idComment");
+
+                    b.ToTable("CommentsTicketFiles");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.GestionDestTickets.CommentsTickets", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("Text")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut7")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut8")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateTime")
+                        .HasColumnType("text");
+
+                    b.Property<int>("idTicket")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("path")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userName")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idTicket");
+
+                    b.ToTable("CommentsTickets");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.GestionDestTickets.FilesGestionTickets", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("idTicket")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("path")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idTicket");
+
+                    b.ToTable("FilesGestionTickets");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.GestionDestTickets.GestionTickets", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("agentId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("agentName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut7")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut8")
+                        .HasColumnType("text");
+
+                    b.Property<string>("clientDate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("clientId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("clientName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateAgent")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateDeb")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateEtat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateFin")
+                        .HasColumnType("text");
+
+                    b.Property<string>("description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("descriptionAgent")
+                        .HasColumnType("text");
+
+                    b.Property<string>("detailAgent")
+                        .HasColumnType("text");
+
+                    b.Property<string>("details")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("num")
+                        .HasColumnType("text");
+
+                    b.Property<int>("numTicket")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("path")
+                        .HasColumnType("text");
+
+                    b.Property<string>("priorite")
+                        .HasColumnType("text");
+
+                    b.Property<string>("remarque")
+                        .HasColumnType("text");
+
+                    b.Property<string>("remarqueAgent")
+                        .HasColumnType("text");
+
+                    b.Property<string>("titre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("GestionTickets");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Gestion_de_stock.Stock", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("attribut1")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<int>("attribut7")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("respId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("respNom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("Stock");
+                });
+
             modelBuilder.Entity("WebApplicationPlateforme.Model.Global.Administration", b =>
                 {
                     b.Property<int?>("Id")
@@ -933,6 +1383,82 @@ namespace WebApplicationPlateforme.Migrations.Dawaa
                     b.ToTable("TypeRecrutement");
                 });
 
+            modelBuilder.Entity("WebApplicationPlateforme.Model.gestion_de_stock.RetourStock", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("attribut1")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<int>("attribut7")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("bennom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("categorie")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateRetour")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomstock")
+                        .HasColumnType("text");
+
+                    b.Property<string>("quatite")
+                        .HasColumnType("text");
+
+                    b.Property<string>("respId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("respnom")
+                        .HasColumnType("text");
+
+                    b.Property<int>("stockId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.HasIndex("stockId");
+
+                    b.ToTable("RetourStocks");
+                });
+
             modelBuilder.Entity("WebApplicationPlateforme.Model.User.ApplicationUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
@@ -1171,6 +1697,54 @@ namespace WebApplicationPlateforme.Migrations.Dawaa
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Decision.DecisionDecisif", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("IdUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Decision.DecissionCommun", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("IdUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.GestionDestTickets.CommentsTicketFiles", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.GestionDestTickets.CommentsTickets", "CommentsTickets")
+                        .WithMany()
+                        .HasForeignKey("idComment")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.GestionDestTickets.CommentsTickets", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.GestionDestTickets.GestionTickets", "GestionTickets")
+                        .WithMany()
+                        .HasForeignKey("idTicket")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.GestionDestTickets.FilesGestionTickets", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.GestionDestTickets.GestionTickets", "GestionTickets")
+                        .WithMany()
+                        .HasForeignKey("idTicket")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Gestion_de_stock.Stock", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
             modelBuilder.Entity("WebApplicationPlateforme.Model.Global.Departement", b =>
                 {
                     b.HasOne("WebApplicationPlateforme.Model.Global.Administration", "Administration")
@@ -1217,6 +1791,19 @@ namespace WebApplicationPlateforme.Migrations.Dawaa
                     b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("userId");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.gestion_de_stock.RetourStock", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+
+                    b.HasOne("WebApplicationPlateforme.Model.Gestion_de_stock.Stock", "Stock")
+                        .WithMany()
+                        .HasForeignKey("stockId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("WebApplicationPlateforme.Model.User.ApplicationUser", b =>

@@ -10,42 +10,89 @@ import { Ticket } from '../../shared/Models/Maintenance/ticket.model';
 import { NgForm } from '@angular/forms';
 import { FilesTicket } from '../../shared/Models/Maintenance/files-ticket.model';
 import { ProgressStatusEnum } from '../../shared/Enum/progress-status-enum.enum';
-
+import { UserServiceService } from '../../shared/Services/User/user-service.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 @Component({
   selector: 'app-ticket-list-client',
   templateUrl: './ticket-list-client.component.html',
   styleUrls: ['./ticket-list-client.component.css']
 })
 export class TicketListClientComponent implements OnInit {
+  htmlContent = '';
+  filter;
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '10rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['bold']
+    ],
+    customClasses: [
+      {
+        name: "quote",
+        class: "quote",
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: "titleText",
+        class: "titleText",
+        tag: "h1",
+      },
+    ]
+  };
+
   @Input() public disabled: boolean;
   @Input() public fileName: string;
   @Output() public downloadStatus: EventEmitter<ProgressStatus>;
   @Output() public uploadStatuss: EventEmitter<ProgressStatus>;
   @ViewChild('inputFile') inputFile: ElementRef;
-  filter;
+ 
   constructor(private ticketService: TicketService,
     private toastr: ToastrService,
     private filesTicketService: FilesFilesTicketService,
     private http: HttpClient,
     private rootUrl: PathSharedService,
+    private UserService: UserServiceService,
     public serviceupload: UploadDownloadService, ) {
     this.downloadStatus = new EventEmitter<ProgressStatus>();
     this.uploadStatuss = new EventEmitter<ProgressStatus>();}
 
   ngOnInit(): void {
-    this.getTicketsList();
+    this.getUserConnected();
     this.resetForm();
     this.getFiles();
   }
-
-
+  userId: string;
+  admin: boolean = false;
+  getUserConnected() {
+    this.UserService.getUserProfileObservable().subscribe(res => {
+      this.userId = res.id
+      if (res.num == "3012") {
+        this.admin = true
+      } else {
+        this.admin = false;
+      }
+      this.ticketService.GetUserTickets(this.userId).subscribe(res => {
+        this.ticketList = res;
+      })
+    })
+  }
 
   // This Get Tickets List
   p: Number = 1;
   count: Number = 5;
   ticketList: Ticket[] = [];
+  
   getTicketsList() {
-    this.ticketService.List().subscribe(res => {
+    this.ticketService.GetUserTickets(this.userId).subscribe(res => {
       this.ticketList = res;
     })
   }
@@ -61,10 +108,13 @@ export class TicketListClientComponent implements OnInit {
     this.ticketService.formData = Object.assign({}, facture)
     this.id = facture.id;
     this.ticket = Object.assign({}, facture);
-    this.filesTicketService.List().subscribe(res => {
-      this.ticketfilesG = res
-      this.ticketfiles = this.ticketfilesG.filter(item => item.idTic == this.id)
-    })
+
+    let path = this.rootUrl.getPath();
+    this.http.get<FilesTicket[]>(path + '/FilesGestionTickets')
+      .subscribe(res => {
+        this.ticketfilesG = res
+        this.ticketfiles = this.ticketfilesG.filter(item => item.idTicket == this.ticket.id)
+      });
   }
 
   date = new Date().toLocaleDateString();
@@ -92,12 +142,12 @@ export class TicketListClientComponent implements OnInit {
 
     this.ticketService.Edit().subscribe(
       res => {
-      this.pj.idTic = this.id;
+      this.pj.idTicket = this.id;
       let path = this.rootUrl.getPath();
       this.fileslist.forEach(item => {
         this.pj.path = item;
         console.log(item)
-        this.http.post(path + '/FilesTickets', this.pj)
+        this.http.post(path + '/FilesGestionTickets', this.pj)
           .subscribe(res => {
             this.serviceupload.refreshList();
             this.GetFileName();
@@ -119,22 +169,38 @@ export class TicketListClientComponent implements OnInit {
     if (form != null)
       form.resetForm();
     this.ticketService.formData = {
+
       id: null,
-      date: '',
+      clientId: '',
+      clientName: '',
+      clientDate: '',
+      numTicket: null,
+      num: '',
+      path: '',
       titre: '',
-      prob: '',
+      description: '',
       details: '',
-      pageUrl: '',
       remarque: '',
       etat: '',
-      etatdate:'',
-      attribut1: null,
+      agentId: '',
+      agentName: '',
+      dateAgent: '',
+      type: '',
+      priorite: '',
+      dateDeb: '',
+      dateFin: '',
+      dateEtat: '',
+      descriptionAgent: '',
+      detailAgent: '',
+      remarqueAgent: '',
+      attribut1: '',
       attribut2: '',
       attribut3: '',
       attribut4: '',
       attribut5: '',
       attribut6: '',
-      dateenreg: '',
+      attribut7: '',
+      attribut8: '',
 
     }
   }

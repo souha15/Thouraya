@@ -27,6 +27,10 @@ export class ActiviteeService {
     return this.http.put<Activite>(this.rootURL + '/Activitees/' + Transaction.id, Transaction, this.headers);
 
   }
+
+  GetByAdmin(Id) {
+    return this.http.get<Activite[]>(this.rootURL + '/GetActiviteeByEtab/' + Id);
+  }
   //Create Cadeaux
 
   Create(tache: Activite) {

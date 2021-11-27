@@ -13,6 +13,7 @@ import { UploadDownloadService } from '../../shared/Services/Taches/upload-downl
 import { ProgressStatusEnum } from '../../shared/Enum/progress-status-enum.enum';
 import { FilesCarService } from '../../shared/Services/Supplies/files-car.service';
 import { FilesCars } from '../../shared/Models/Supplies/files-cars.model';
+import { UserDetail } from '../../shared/Models/User/user-detail.model';
 
 @Component({
   selector: 'app-cars-list',
@@ -42,9 +43,23 @@ export class CarsListComponent implements OnInit {
     this.getUserConnected();
 
     this.getrecpList();
+    this.getEmpList();
   }
 
-
+  userId: string;
+  getUserName(event) {
+    this.userId = event.target.value
+    this.UserService.GetUserById(this.userId).subscribe(res => {
+      this.fact.recepeteur = res.fullName;
+    })
+  }
+  //get Employee List
+  usersList: UserDetail[] = [];
+  getEmpList() {
+    this.UserService.GetUsersList().subscribe(res => {
+      this.usersList = res;
+    })
+  }
   p: Number = 1;
   count: Number = 5;
 
@@ -79,6 +94,21 @@ export class CarsListComponent implements OnInit {
     this.recpService.formData = Object.assign({}, facture)
     this.factId = facture.id;
     this.fact = Object.assign({}, facture);
+    if (this.fact.recepteurinterne == "1") {
+     
+      this.int = true
+      this.ext = false;
+      } else {
+        this.int = false;
+    }
+
+
+    if (this.fact.recepteurinterne== "0") {
+      this.ext = true
+      this.int = false;
+    } else {
+      this.ext = false;
+    }
     this.filesCarService.Get().subscribe(res => {
       this.FilessList2 = res;
       this.FilessList = this.FilessList2.filter(item => item.idVoiture == this.factId)
@@ -109,6 +139,22 @@ export class CarsListComponent implements OnInit {
     this.tabList[this.i] = this.tabmec
     this.tabmec = new NotifCars();
     this.i = this.i + 1;
+  }
+
+  int: boolean = false;
+  ext: boolean = false;
+  inteext(event) {
+    if (event.target.value == "1") {
+      this.int = true
+    } else {
+      this.int = false;
+    }
+
+    if (event.target.value == "0") {
+      this.ext = true
+    } else {
+      this.ext = false;
+    }
   }
 
   del1(dp, i) {

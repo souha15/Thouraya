@@ -27,6 +27,22 @@
             </div>
           </div>
 
+          <div class="col-md-6">
+            <label class="main main1" for="gestoject">
+              <span><i class="fa fa-spinner"></i></span>
+              النوع
+            </label>
+
+            <select id="account" name="attribut6" #attribut6="ngModel" [(ngModel)]="stockage.attribut6" required>
+              <option [ngValue]="undefined" selected disabled>-اختر-</option>
+              <option value="تسترجع">تسترجع </option>
+              <option value="لا تسترجع">لا تسترجع</option>
+            </select>
+            <div *ngIf="attribut6.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب النوع  .
+            </div>
+          </div>
+
           <div class="row w-100 d-flex form-box">
             <div class="col-md-8 col-sm-12">
               <label class="main">
@@ -51,6 +67,20 @@
                          name="quantite" #quantite="ngModel" [(ngModel)]="stock.quantite" (change)="getTot($event)" />
                 </div>
 
+                <div class="ml-3">
+                  <label class="number">
+
+                    النوع
+                  </label>
+
+                  <select id="account" name="attribut6" #attribut6="ngModel" [(ngModel)]="stock.attribut6" required>
+                    <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                    <option value="تسترجع">تسترجع </option>
+                    <option value="لا تسترجع">لا تسترجع</option>
+                  </select>
+
+                </div>
+
                 <button class="btn add-inputs0" id="" (click)="addtype()" type="button">اضافة</button>
               </div>
 
@@ -71,6 +101,7 @@
                     <th scope="col">	اسم المستودع </th>
                     <th scope="col">	الصنف </th>
                     <th scope="col">	الكمية </th>
+                    <th scope="col">	النوع </th>
                     <th scope="col">الوحدة  </th>
                     <th scope="col">	سعر الوحدة  </th>
                     <th scope="col">	الاجمالي   </th>
@@ -82,6 +113,7 @@
                     <td>{{dp.nomstock}}</td>
                     <td>{{dp.type}}</td>
                     <td>{{dp.quantite}}</td>
+                    <td>{{dp.attribut6}}</td>
                     <td>{{dp.unite}}</td>
                     <td>{{dp.prix}}</td>
                     <td>{{dp.tot}}</td>
@@ -92,6 +124,7 @@
                     <td>{{dp.nomstock}}</td>
                     <td>{{dp.type}}</td>
                     <td>{{dp.quantite}}</td>
+                    <td>{{dp.attribut6}}</td>
                     <td>{{dp.unite}}</td>
                     <td>{{dp.prix}}</td>
                     <td>{{dp.tot}}</td>

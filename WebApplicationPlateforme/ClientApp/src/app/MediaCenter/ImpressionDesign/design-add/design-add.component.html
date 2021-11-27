@@ -68,6 +68,8 @@
                          name="budget" #budget="ngModel" [(ngModel)]="TypeImp.budget" />
                 </div>
 
+       
+
                 <div class="ml-3">
                   <a (click)="add()"
                      class="btn mt-md-4"
@@ -94,6 +96,7 @@
                     <th scope="col">العرض</th>
                     <th scope="col">الكمية</th>
                     <th scope="col">الميزانية</th>
+                    <th scope="col">رابط المادة </th>
 
                     <th scope="col">حذف</th>
                   </tr>
@@ -105,6 +108,7 @@
                     <td>{{dp.typeDesign}}</td>
                     <td>{{dp.quantite}}</td>
                     <td>{{dp.budget}}</td>
+                    <td>{{dp.autre}}</td>
 
                     <td><a (click)="del(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
                   </tr>
@@ -154,7 +158,11 @@
                   <input type="date" id="target"
                          name="datediffusion" #datediffusion="ngModel" [(ngModel)]="TypeImp.datediffusion" />
                 </div>
-
+                <div class="ml-3">
+                  <label for="target">رابط المادة  </label>
+                  <input type="text" id="target"
+                         name="autre" #autre="ngModel" [(ngModel)]="TypeImp.autre" />
+                </div>
                 <div class="ml-3">
                   <a (click)="add()"
                      class="btn mt-md-4"
@@ -181,7 +189,9 @@
                     <th scope="col">الطول</th>
                     <th scope="col">العرض</th>
                     <th scope="col">الميزانية  </th>
+
                     <th scope="col">تاريخ التوزيع   </th>
+                    <th scope="col">رابط المادة   </th>
 
 
                     <th scope="col">حذف</th>
@@ -195,6 +205,7 @@
                     <td>{{dp.typeDesign}}</td>
                     <td>{{dp.budget}}</td>
                     <td>{{dp.datediffusion}}</td>
+                    <td>{{dp.autre}}</td>
 
 
                     <td><a (click)="del(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
@@ -233,7 +244,11 @@
                   <input type="date" id="target"
                          name="datediffusion" #datediffusion="ngModel" [(ngModel)]="TypeImp.datediffusion" />
                 </div>
-
+                <div class="ml-3">
+                  <label for="target">رابط المادة  </label>
+                  <input type="text" id="target"
+                         name="autre" #autre="ngModel" [(ngModel)]="TypeImp.autre" />
+                </div>
                 <div class="ml-3">
                   <a (click)="add()"
                      class="btn mt-md-4"
@@ -259,8 +274,9 @@
                     <th scope="col">عدد الشهادات  </th>
                     <th scope="col">الميزانية  </th>
                     <th scope="col">تاريخ التوزيع   </th>
+                    <th scope="col">رابط المادة  </th>
 
-
+     
                     <th scope="col">حذف</th>
                   </tr>
                 </thead>
@@ -270,6 +286,7 @@
                     <td>{{dp.nbdiplome}}</td>
                     <td>{{dp.budget}}</td>
                     <td>{{dp.datediffusion}}</td>
+                    <td>{{dp.autre}}</td>
 
 
                     <td><a (click)="del(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
@@ -303,7 +320,11 @@
                          name="placement" #placement="ngModel" [(ngModel)]="TypeImp.placement" />
                 </div>
 
-
+                <div class="ml-3">
+                  <label for="target">رابط المادة  </label>
+                  <input type="text" id="target"
+                         name="autre" #autre="ngModel" [(ngModel)]="TypeImp.autre" />
+                </div>
                 <div class="ml-3">
                   <a (click)="add()"
                      class="btn mt-md-4"
@@ -328,7 +349,8 @@
 
                     <th scope="col">طول وارتفاع البنر </th>
                     <th scope="col">موقع التركيب</th>
-
+                    <th scope="col">رابط المادة</th>
+         
 
                     <th scope="col">حذف</th>
                   </tr>
@@ -338,6 +360,7 @@
 
                     <td>{{dp.longueurtaille}}</td>
                     <td>{{dp.placement}}</td>
+                    <td>{{dp.autre}}</td>
 
 
                     <td><a (click)="del(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
@@ -387,7 +410,11 @@
                   <input type="number" id="target"
                          name="budget" #budget="ngModel" [(ngModel)]="TypeImp.budget" />
                 </div>
-
+                <div class="ml-3">
+                  <label for="target">رابط المادة  </label>
+                  <input type="text" id="target"
+                         name="autre" #autre="ngModel" [(ngModel)]="TypeImp.autre" />
+                </div>
                 <div class="ml-3">
                   <a (click)="add()"
                      class="btn mt-md-4"
@@ -415,6 +442,7 @@
                     <th scope="col">الكمية</th>
                     <th scope="col">عدد الصفحات</th>
                     <th scope="col">الميزانية</th>
+                    <th scope="col">رابط المادة</th>
 
                     <th scope="col">حذف</th>
                   </tr>
@@ -427,6 +455,7 @@
                     <td>{{dp.quantite}}</td>
                     <td>{{dp.nbpage}}</td>
                     <td>{{dp.budget}}</td>
+                    <td>{{dp.autre}}</td>
 
                     <td><a (click)="del(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
                   </tr>
@@ -468,7 +497,11 @@
                   <input type="number" id="target"
                          name="budget" #budget="ngModel" [(ngModel)]="TypeImp.budget" />
                 </div>
-
+                <div class="ml-3">
+                  <label for="target">رابط المادة  </label>
+                  <input type="text" id="target"
+                         name="autre" #autre="ngModel" [(ngModel)]="TypeImp.autre" />
+                </div>
                 <div class="ml-3">
                   <a (click)="add()"
                      class="btn mt-md-4"
@@ -495,6 +528,7 @@
                     <th scope="col">العرض</th>
                     <th scope="col">الكمية</th>
                     <th scope="col">الميزانية</th>
+                    <th scope="col">رابط المادة </th>
 
                     <th scope="col">حذف</th>
                   </tr>
@@ -506,6 +540,7 @@
                     <td>{{dp.typeDesign}}</td>
                     <td>{{dp.quantite}}</td>
                     <td>{{dp.budget}}</td>
+                    <td>{{dp.autre}}</td>
 
                     <td><a (click)="del(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
                   </tr>
@@ -559,7 +594,11 @@
                   <input type="number" id="target"
                          name="budget" #budget="ngModel" [(ngModel)]="TypeImp.budget" />
                 </div>
-
+                <div class="ml-3">
+                  <label for="target">رابط المادة  </label>
+                  <input type="text" id="target"
+                         name="autre" #autre="ngModel" [(ngModel)]="TypeImp.autre" />
+                </div>
                 <div class="ml-3">
                   <a (click)="add()"
                      class="btn mt-md-4"
@@ -586,6 +625,7 @@
                     <th scope="col">العرض</th>
                     <th scope="col">الكمية</th>
                     <th scope="col">الميزانية</th>
+                    <th scope="col">رابط المادة</th>
 
                     <th scope="col">حذف</th>
                   </tr>
@@ -597,6 +637,7 @@
                     <td>{{dp.typeDesign}}</td>
                     <td>{{dp.quantite}}</td>
                     <td>{{dp.budget}}</td>
+                    <td>{{dp.autre}}</td>
 
                     <td><a (click)="del(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
                   </tr>

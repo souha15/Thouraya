@@ -7,13 +7,13 @@
     </div>
 
     <div class="col-md-9 col-sm-8">
-      <app-menu-stockage1></app-menu-stockage1>
+
       <header>
         <h3 class="task-head">تغذية المستودع </h3>
       </header>
       <div class="events1">
         <form class="form-row events-form mb-3" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-          <div>
+          <div class="col-md-6">
             <label class="main main1" for="gestoject">
               <span><i class="fa fa-spinner"></i></span>
               اسم المستودع
@@ -27,18 +27,34 @@
               مطلوب اسم المستودع .
             </div>
           </div>
+   
+          <div class="col-md-6">
+            <label class="main main1" for="gestoject">
+              <span><i class="fa fa-spinner"></i></span>
+              النوع
+            </label>
+
+            <select id="account" name="attribut6" #attribut6="ngModel" [(ngModel)]="stockage.attribut6" required>
+              <option [ngValue]="undefined" selected disabled>-اختر-</option>
+              <option value="تسترجع">تسترجع </option>
+              <option value="لا تسترجع">لا تسترجع</option>
+            </select>
+            <div *ngIf="attribut6.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب النوع  .
+            </div>
+          </div>
 
           <div class="row w-100 d-flex form-box">
             <div class="col-md-8 col-sm-12">
               <label class="main">
                 <span><i class="fa fa-cart-plus"></i></span>
-               	الصنف
+                الصنف
               </label>
               <div class="d-flex w-100 justify-content-start flex-wrap">
                 <input type="text" name="unite" #unite="ngModel" [(ngModel)]="stock.unite" hidden />
-                <input type="text" name="prix" #prix="ngModel" [(ngModel)]="stock.prix"  hidden />
-                <input type="text" name="tot" #tot="ngModel" [(ngModel)]="stock.tot"  hidden />
-                <input type="text" name="nomstock" #nomstock="ngModel" [(ngModel)]="stock.nomstock"  hidden />
+                <input type="text" name="prix" #prix="ngModel" [(ngModel)]="stock.prix" hidden />
+                <input type="text" name="tot" #tot="ngModel" [(ngModel)]="stock.tot" hidden />
+                <input type="text" name="nomstock" #nomstock="ngModel" [(ngModel)]="stock.nomstock" hidden />
                 <div class="ml-3">
                   <label for="target">	الصنف </label>
                   <select id="account" name="attribut1" #attribut1="ngModel" [(ngModel)]="stock.attribut1" (change)="getTypeStockData($event)">
@@ -50,6 +66,20 @@
                   <label for="number">	الكمية </label>
                   <input type="number" maxlength="10" id="number"
                          name="quantite" #quantite="ngModel" [(ngModel)]="stock.quantite" (change)="getTot($event)" />
+                </div>
+
+                <div class="ml-3">
+                  <label class="number">
+         
+                    النوع
+                  </label>
+
+                  <select id="account" name="attribut6" #attribut6="ngModel" [(ngModel)]="stock.attribut6" required>
+                    <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                    <option value="تسترجع">تسترجع </option>
+                    <option value="لا تسترجع">لا تسترجع</option>
+                  </select>
+     
                 </div>
 
                 <button class="btn add-inputs0" id="" (click)="addtype()" type="button">اضافة</button>
@@ -72,6 +102,7 @@
                     <th scope="col">	اسم المستودع </th>
                     <th scope="col">	الصنف </th>
                     <th scope="col">	الكمية </th>
+                    <th scope="col">	النوع </th>
                     <th scope="col">الوحدة  </th>
                     <th scope="col">	سعر الوحدة  </th>
                     <th scope="col">	الاجمالي   </th>
@@ -83,6 +114,7 @@
                     <td>{{dp.nomstock}}</td>
                     <td>{{dp.type}}</td>
                     <td>{{dp.quantite}}</td>
+                    <td>{{dp.attribut6}}</td>
                     <td>{{dp.unite}}</td>
                     <td>{{dp.prix}}</td>
                     <td>{{dp.tot}}</td>

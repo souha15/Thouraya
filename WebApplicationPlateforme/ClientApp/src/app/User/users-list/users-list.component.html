@@ -19,9 +19,17 @@
       <table class="table results sortable">
         <thead>
           <tr>
-            <th scope="col">الإسم </th>
+
+            <th scope="col" (click)="sort('fullName')">
+              الإسم
+              <span class="glyphicon sort-icon" *ngIf="key =='fullName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
             <th scope="col">الجنسية </th>
-            <th scope="col">الرقم الوظيفي </th>
+
+            <th scope="col" (click)="sort('num')">
+              الرقم الوظيفي
+              <span class="glyphicon sort-icon" *ngIf="key =='num'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+            </th>
             <th scope="col">الوظيفة</th>
             <th scope="col">الجوال</th>
             <th scope="col">الصورة</th>

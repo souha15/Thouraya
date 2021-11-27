@@ -1,0 +1,94 @@
+/*---------------------------------
+	New Style Added in 11/9/2020 
+----------------------------------*/
+/*-- Courses Page - The style here will be in another pages - Edited 11/9/2020 --*/
+.accord {
+  padding: 8px 8px;
+  border: 1px solid #d1d1d1;
+  display: block;
+  text-decoration: none;
+  border-radius: 5px;
+  color: #276985;
+  font-size: 18px;
+  transition: 0.3s ease-in-out;
+  margin-top: 15px;
+}
+
+  .accord:first-of-type {
+    margin-top: 0;
+  }
+
+  .accord:after {
+    content: "\02795";
+    /* Unicode character for "plus" sign (+) */
+    font-size: 15px;
+    color: #fff;
+    float: left;
+    margin-right: 5px;
+    margin-top: 3px;
+    transition: 0.3s ease-in-out;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    text-align: center;
+    border-radius: 50%;
+    background: #276985;
+  }
+
+  .accord.active {
+    background-color: #276985;
+    color: #fff;
+    border-radius: 5px 5px 0 0;
+  }
+
+    .accord.active:after {
+      content: "\2796";
+      /* Unicode character for "minus" sign (-) */
+      color: #276985;
+      background: #fff;
+    }
+
+  .accord:hover:after {
+    color: #276985;
+    background: #fff;
+  }
+
+  .accord:hover {
+    background-color: #276985;
+    color: #fff;
+    text-decoration: none;
+  }
+
+.panel {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: 1px solid;
+  border-color: transparent #276985 #276985 #276985;
+  border-radius: 0 0 5px 5px;
+  display: none;
+  color: #276985;
+}
+/*End Courses Page */
+/*Logo Editing - Emp-pages */
+.emp-logo img {
+  width: 100px;
+  margin-left: 20px;
+  border-radius: 10px 0;
+}
+/*Decision Page*/
+.head1 {
+  text-align: center;
+  color: #276985;
+  position: relative;
+  margin-bottom: 30px;
+}
+
+  .head1::after {
+    content: "";
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50px;
+    border-bottom: 2px dashed #276985;
+  }

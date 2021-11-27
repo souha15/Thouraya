@@ -21,28 +21,79 @@
           قائمة التذاكر
         </a>
 
+        <a [routerLink]="['/ticket-list']" class="p-2 flex-fill bd-highlight stop-btn" *ngIf="admin">
+          <span><i class="fa fa-users"></i></span>
+          قائمة تذاكر الموظفين
+        </a>
       </nav>
       <header>
-        <h3 class="task-head">إضافة تذكرة</h3>
+        <h3 class="task-head">  إضافة تذكرة</h3>
       </header>
       <form class="form-row task-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-        <div class="col-md-6">
-          <label for="">العنوان </label>
-          <input class="form-control" type="text" name="titre" #titre="ngModel" [(ngModel)]="ticket.titre" required />
+
+
+        <div class="col-md-12">
+          <label for="keys"> <span><i class="fa fa-bold"></i></span> العنوان </label>
+          <input id="keys" class="" type="text" name="titre" #titre="ngModel" [(ngModel)]="ticket.titre" required style="width:500px" />
           <div *ngIf="titre.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
             مطلوب عنوان التذكرة .
           </div>
 
         </div>
+        <br />
         <div class="col-md-6">
-          <label for="">التفاصيل</label>
-          <textarea class="form-control" name="details" #details="ngModel" [(ngModel)]="ticket.details" required></textarea>
+          <label for="keys"> <span><i class="fa fa-stop"></i></span>   الأولوية </label>
+          <select id="building" name="priorite" #priorite="ngModel" [(ngModel)]="ticket.priorite">
+            <option [ngValue]="undefined" selected disabled>-الأولوية-</option>
+            <option value="عادية ">عادية </option>
+            <option value="متوسطة">متوسطة</option>
+            <option value="مهمة وغير عاجلة">مهمة وغير عاجلة</option>
+            <option value="مهمة وعاجلة ">مهمة وعاجلة </option>
 
-          <div *ngIf="details.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
-            مطلوب تفاصيل التذكرة  .
+          </select>
+          <div *ngIf="priorite.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب الأولوية .
           </div>
+
         </div>
 
+        <div class="col-md-6">
+          <label for="keys"> <span><i class="fa fa-stop"></i></span>   نوع التذكرة </label>
+          <select id="building" name="type" #type="ngModel" [(ngModel)]="ticket.type">
+            <option [ngValue]="undefined" selected disabled>-نوع التذكرة-</option>
+            <option value="خطأ بالخدمة ">خطأ بالخدمة </option>
+            <option value="خطأ برمجي">خطأ برمجي</option>
+            <option value="خطأ في التصميم"> خطأ في التصميم</option>
+            <option value="محتوى منقوص">محتوى منقوص</option>
+            <option value="اقتراح">اقتراح </option>
+            <option value="اضافة جديدة">اضافة جديدة </option>
+          </select>
+          <div *ngIf="type.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب نوع التذكرة .
+          </div>
+
+        </div>
+        <div class="col-md-6">
+          <label for="keys"> <span><i class="fa fa-link"></i></span>     رابط الصفحة </label>
+          <input id="keys" class="" type="text" name="path" #path="ngModel" [(ngModel)]="ticket.path" required style="width:250px" />
+          <div *ngIf="path.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب رابط الصفحة .
+          </div>
+
+        </div>
+
+        <br />
+
+        <div class="col-md-12">
+          <label for="keys"> <span><i class="fa fa-paragraph"></i></span>  التفاصيل</label>
+
+          <angular-editor name="description" #description="ngModel" [(ngModel)]="ticket.description" [config]="editorConfig"></angular-editor>
+
+        </div>
+        <div class="col-md-12">
+          <p></p>
+          <br />
+        </div>
         <div class="col-sm-12">
           <label for="">إضافة المرفقات</label>
           <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>

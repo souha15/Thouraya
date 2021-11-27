@@ -36,7 +36,7 @@ export class PointagePresenceAddComponent implements OnInit {
   getPointage() {
     this.PointageService.Get().subscribe(res => {
       this.plist2 = res
-      this.plist = this.plist2.filter(item => item.idUserCreator == this.UserIdConnected && item.datePresence == this.fulldate)
+      this.plist = this.plist2.filter(item => item.idUserCreator == this.UserIdConnected && item.datePresence == this.date)
       if (this.plist.length == 0) {
         this.tableshow = false;
         this.pointer = true;
@@ -68,23 +68,30 @@ export class PointagePresenceAddComponent implements OnInit {
   }
 
  
-  date = new Date();
+ // date = new Date().toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hour12: false, minute: '2-digit', second: '2-digit' })
+  date = new Date().toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' })
   timeHour: number;
   timeMinute: number;
   month: number;
   day: number;
   year: number;
+  Time =new Date().toLocaleTimeString(undefined, { hour: '2-digit', hour12: false, minute: '2-digit' });
   point: Pointage = new Pointage();
 
   onSubmit(form: NgForm) {
     if (this.codesaisie == this.code) {
-      this.timeHour = this.date.getHours();
-      this.timeMinute = this.date.getMinutes();
-      this.month = this.date.getMonth() + 1;
-      this.day = this.date.getDay();
-      this.year = this.date.getFullYear();
-      this.point.datePresence = this.fulldate;
-      this.point.timePresence = this.timeHour + ":" + this.timeMinute;
+      //this.timeHour = this.date.getHours();
+      //this.timeMinute = this.date.getMinutes();
+      //this.month = this.date.getMonth() + 1;
+      //this.day = this.date.getDay();
+      //this.year = this.date.getFullYear();
+     
+      this.point.datePresence = this.date;
+      this.point.timePresence = this.Time
+      this.day = +this.date.substr(0, 2)
+      this.month = +this.date.substr(3, 2)
+      this.year = +this.date.substr(6, 4)
+
       this.point.code = this.codesaisie.toString();
       if (this.month == 1) {
         this.point.attribut2 = "يناير"

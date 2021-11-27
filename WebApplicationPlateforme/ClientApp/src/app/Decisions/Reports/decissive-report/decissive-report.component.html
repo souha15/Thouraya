@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>قرار حسم</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+  <!-- Main Style File -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+  </style>
+</head>
+
+<body>
+  <a class="btn show-details-btn text-info" (click)="print()">
+    <i class="fa fa-print fa-lg"></i>
+  </a>
+  <br />
+  <br />
+  <div class="deduction-page" id="htmlData">
+    <header>
+      <img class="img1" src="assets/images/taef.jpeg" alt="">
+      <div class="header-title">
+        جمعية الدعوة والإرشاد
+        <br />
+        وتوعية الجاليات بالطائف
+      </div>
+      <img class="img2" src="assets/images/vision-2030.png" alt="">
+    </header>
+    <div class="content">
+      <h2 class="header-title">قرار حسم</h2>
+
+      <div class="my-4">
+        <div class="container">
+          <h4>
+            المكرم الموظف / {{dem.userName}}<span style="width: 200px;display:inline-block"></span> سلمه
+            الله
+          </h4>
+          <h4>الســـــلام عليكم ورحمة الله وبركاته . . . أما بعد . .</h4>
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-bordered text-center">
+          <tbody class="align-middle">
+            <tr>
+              <th scope="row">المخالفة</th>
+              <td colspan="12">{{dem.infraction}}</td>
+            </tr>
+            <tr>
+              <th rowspan="2">الشهر</th>
+              <td rowspan="2" style="width: 130px;">{{dem.moisHij}}</td>
+              <th rowspan="2">السنة</th>
+              <td rowspan="2" style="width: 130px;">{{dem.anneeHij}}</td>
+              <th rowspan="2">الفترة</th>
+              <td rowspan="1">{{dem.periode}}</td>
+              <td>م</td>
+              <th rowspan="2">تكرار</th>
+              <td rowspan="1">1</td>
+              <td rowspan="1">2</td>
+              <td rowspan="1">3</td>
+              <td rowspan="1">4</td>
+            </tr>
+            <tr>
+              <td rowspan="1">&nbsp;</td>
+              <td rowspan="1"  *ngIf="dem.repetion == '1'">X</td>
+              <td rowspan="1"  *ngIf="dem.repetion != '1'"></td>
+              <td rowspan="1"  *ngIf="dem.repetion == '2'">X</td>
+              <td rowspan="1"  *ngIf="dem.repetion != '2'"></td>
+              <td rowspan="1"  *ngIf="dem.repetion == '3'">X</td>
+              <td rowspan="1" *ngIf="dem.repetion != '3'"></td>
+              <td rowspan="1"  *ngIf="dem.repetion == '4'">X</td>
+              <td rowspan="1"  *ngIf="dem.repetion != '4'"></td>
+              <td rowspan="1" *ngIf="dem.repetion == '5'">X</td>
+              <td rowspan="1" *ngIf="dem.repetion != '5'"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="centered">
+        <p>
+          بناء على ما ورد في نظام الجزاءات في المادة ( 40 ) من اللائحة الداخلية لنظام الجمعية بشأن المخالفة
+          الموضحة أعلاه . <br> عليه يعتمد حسم ( {{dem.decisionNb}} ) يوم ، ريال ، دقيقة من راتب شهر
+          <span>{{dem.moisDecHij}}</span>
+          لعام {{dem.anneeDecHij}}
+        </p>
+        <div>
+          &nbsp; &nbsp; والله الموفق ،،،.
+        </div>
+        <div class="sign">
+          <span>مدير إدارة الشؤون المالية والإدارية</span><br>
+          <!-- صورة التوقيع هنا -->
+          <img src="assets/images/sign.png" width="140" alt="">
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</body>
+
+</html>

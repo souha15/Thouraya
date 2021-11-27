@@ -58,11 +58,11 @@ export class ListRespOrdrePayComponent implements OnInit {
   getList() {
     this.OrdrePayService.ListOrdrePayStockage().subscribe(res => {
       this.ListStockage = res
-      this.ListStockageNew = this.ListStockage.filter(item => item.typeOrdre == "مباشر" && item.respId == this.UserIdConnected)
+      this.ListStockageNew = this.ListStockage.filter(item => item.typeOrdre == "مباشر" )
       console.log(this.ListStockage)
       console.log(this.ListStockageNew)
       this.nb1 = this.ListStockageNew.length;
-      this.ListStockageClosed = this.ListStockage.filter(item => item.typeOrdre == "للاعتماد" && item.respId == this.UserIdConnected && item.etatOrdre =="معتمدة")
+      this.ListStockageClosed = this.ListStockage.filter(item => item.typeOrdre == "للاعتماد" ||  item.etatOrdre =="معتمدة")
       this.nb3 = this.ListStockageClosed.length;
 
     })

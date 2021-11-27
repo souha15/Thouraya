@@ -30,7 +30,13 @@ export class UsersListComponent implements OnInit {
 
   }
 
-
+  //sorting
+  key: string = 'name'; //set default
+  reverse: boolean = false;
+  sort(key) {
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
   //Users List
 
   private _Users: Observable<UserDetail[]>;

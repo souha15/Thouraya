@@ -34,8 +34,9 @@ export class PointageQuitterAddComponent implements OnInit {
   getTodayPoint() {
     this.PointageService.Get().subscribe(res => {
       this.p2List = res
-      this.pList = this.p2List.filter(item => item.idUserCreator == this.UserIdConnected && item.datePresence == this.fulldate);
+      this.pList = this.p2List.filter(item => item.idUserCreator == this.UserIdConnected && item.datePresence == this.date);
       if (this.pList.length == 1) {
+        console.log(this.pList)
         this.tableshow = true;
         this.point = this.pList[0]
       } else {
@@ -60,7 +61,7 @@ export class PointageQuitterAddComponent implements OnInit {
 
   }
 
-  date = new Date();
+  date = new Date().toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' })
   fulldate = new Date().toLocaleDateString();
   timeHour: number;
   timeMinute: number;
@@ -68,17 +69,21 @@ export class PointageQuitterAddComponent implements OnInit {
   day: number;
   year: number;
   point: Pointage = new Pointage();
+  Time = new Date().toLocaleTimeString(undefined, { hour: '2-digit', hour12: false, minute: '2-digit' });
   btnshow: boolean = true;
 
   onSubmit(form: NgForm) {
-    if (this.codesaisie == this.code && this.tableshow) {
-      this.timeHour = this.date.getHours();
-      this.timeMinute = this.date.getMinutes();
-      this.month = this.date.getMonth() + 1;
-      this.day = this.date.getDay();
-      this.year = this.date.getFullYear();
-      this.point.dateQuitter = this.fulldate;
-      this.point.timeQuitter = this.timeHour + ":" + this.timeMinute;
+    if (this.codesaisie == this.code) {
+      //this.timeHour = this.date.getHours();
+      //this.timeMinute = this.date.getMinutes();
+      //this.month = this.date.getMonth() + 1;
+      //this.day = this.date.getDay();
+      //this.year = this.date.getFullYear();
+      this.point.dateQuitter = this.date;
+      this.point.timeQuitter = this.Time
+      this.day = +this.date.substr(0, 2)
+      this.month = +this.date.substr(3, 2)
+      this.year = +this.date.substr(6, 4)
       this.point.code = this.codesaisie.toString();
       if (this.month == 1) {
         this.point.attribut2 = "يناير"
@@ -111,7 +116,7 @@ export class PointageQuitterAddComponent implements OnInit {
       this.point.userNameCreator = this.UserNameConnected;
       this.point.idUserCreator = this.UserIdConnected;
       this.PointageService.PutObservableE(this.point).subscribe(res => {
-        this.btnshow = false;
+        //this.btnshow = false;
         this.toastr.success(" تم تسجيل الإنصراف بنجاح ")
       },
         err => {

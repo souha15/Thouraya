@@ -33,6 +33,7 @@ export class ListDirOrdrePayComponent implements OnInit {
 
   p: Number = 1;
   count: Number = 5;
+  allist: boolean =true;
   //Get User Connected
   UserIdConnected: string;
   UserNameConnected: string;
@@ -51,6 +52,7 @@ export class ListDirOrdrePayComponent implements OnInit {
     this.newT = true;
     this.acceptedT = false;
     this.closedT = false;
+    this.allist = false;
 
 
   }
@@ -60,6 +62,7 @@ export class ListDirOrdrePayComponent implements OnInit {
     this.newT = false;
     this.acceptedT = true;
     this.closedT = false;
+    this.allist = false;
 
   }
 
@@ -68,6 +71,7 @@ export class ListDirOrdrePayComponent implements OnInit {
     this.newT = false;
     this.acceptedT = false;
     this.closedT = true;
+    this.allist = false;
   }
 
   ListStockageA: OrdrePayStockage[] = [];

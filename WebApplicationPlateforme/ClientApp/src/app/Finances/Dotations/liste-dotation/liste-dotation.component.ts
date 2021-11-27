@@ -66,11 +66,16 @@ export class ListeDotationComponent implements OnInit {
   un1: Unite[] = [];
   tot: number = 0;
   dotationlist() {
+    this.uniteService.Get().subscribe(res21 => {
+      this.payListF = res21
+
+
     this.dotationService.Get().subscribe(res => {
       this.list = res
-      for (let i = 0; i <= this.list.length; i++) {
+      for (let i = 0; i <= this.list.length-1; i++) {
         this.nbloue = 0;
         this.nbnonloue = 0;
+        console.log(this.list[i].id)
         this.un1 = this.payListF.filter(item => item.idDotation == this.list[i].id)
         this.tot = this.un1.length;
         this.un1.forEach(item => {
@@ -86,11 +91,10 @@ export class ListeDotationComponent implements OnInit {
         this.list[i].attribut3 = this.tot.toString();
 
       }
-/*   
-      }*/
+
     });
 
-
+    })
   }
 
   getUnite() {

@@ -7,7 +7,7 @@
     </div>
 
     <div class="col-md-9 col-sm-8">
-      <app-menu-stockage1></app-menu-stockage1>
+
       <header>
         <h3 class="task-head">     اضافة  صرف مباشر</h3>
       </header>
@@ -24,118 +24,127 @@
               <option [ngValue]="undefined" selected disabled>-اختر-</option>
               <option value="مسجل">مسجل </option>
               <option value="غير مسجل">غير مسجل</option>
+              <option value="موظف">موظف </option>
             </select>
             <div *ngIf="typeBen.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
               مطلوب  نوع المستفيد .
             </div>
           </div>
 
-            <div class="col-md-6" *ngIf="existedBen">
+          <div class="col-md-6" *ngIf="existedBen">
 
-              <ng-multiselect-dropdown name="employeead"
-                                       [placeholder]="'اختر المستفيد'"
-                                       [settings]="dropdownSettings"
-                                       [data]="cities"
-                                       [disabled]="disabled"
-                                       (onSelect)="onItemSelect($event)"
-                                       (onFilterChange)="onFilterChange($event)">
-              </ng-multiselect-dropdown>
+            <ng-multiselect-dropdown name="employeead"
+                                     [placeholder]="'اختر المستفيد'"
+                                     [settings]="dropdownSettings"
+                                     [data]="cities"
+                                     [disabled]="disabled"
+                                     (onSelect)="onItemSelect($event)"
+                                     (onFilterChange)="onFilterChange($event)">
+            </ng-multiselect-dropdown>
+          </div>
+
+          <div class="col-md-6" *ngIf="employee">
+            <label for="target">	الموظف </label>
+            <select id="account" name="attribut6" #attribut6="ngModel" [(ngModel)]="pay.attribut6">
+              <option [ngValue]="undefined" selected disabled>-الموظف-</option>
+              <option *ngFor="let item of UsersList" value="{{item.fullName}}">{{item.fullName}}</option>
+            </select>
+          </div>
+
+          <div class="col-md-6">
+            <label for="target">
+
+              اسم المستودع
+            </label>
+
+            <select id="account" name="idstock" #idstock="ngModel" [(ngModel)]="pay.idstock" (change)="getStockData($event)" required>
+              <option [ngValue]="undefined" selected disabled>-اختر-</option>
+              <option *ngFor="let item of stocklist" value="{{item.id}}">{{item.nom}}</option>
+            </select>
+            <div *ngIf="idstock.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب اسم المستودع .
             </div>
+          </div>
+          <div class="col-md-6">
+            <label for="target">	الصنف </label>
+            <select id="account" name="attribut1" #attribut1="ngModel" [(ngModel)]="pay.attribut1" (change)="getTypeStockData($event)" required>
+              <option [ngValue]="undefined" selected disabled>-اختر-</option>
+              <option *ngFor="let item of typeStockList" value="{{item.id}}">{{item.type}}</option>
+            </select>
 
-            <div class="col-md-6">
-              <label for="target">
+            <div *ngIf="attribut1.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب الصنف .
+            </div>
+          </div>
 
-                اسم المستودع
+          <div class="col-md-6">
+            <label for="target">	الكمية  </label>
+            <input type="number" name="quantite" #quantite="ngModel" [(ngModel)]="pay.quantite" (change)="calculqt($event)" />
+            <div *ngIf="quantite.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب الكمية .
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <br />
+            <span class="completed" *ngIf="redorgreen && TestQt">الكمية المتبقية : {{quantiteC}}</span>
+            <span class="retardet" *ngIf="!redorgreen && TestQt">الكمية المتبقية أقل من المطولب الرجاء التأكد من الكمية !!!</span>
+            <br />
+          </div>
+
+          <div class="row w-100 d-flex form-box" *ngIf="addBen">
+            <div class="col-md-8 col-sm-12">
+              <label class="main">
+                <span><i class="fa fa-users"></i></span>
+                إضافة مستفيد
               </label>
+              <div class="d-flex w-100 justify-content-start flex-wrap">
 
-              <select id="account" name="idstock" #idstock="ngModel" [(ngModel)]="pay.idstock" (change)="getStockData($event)" required>
-                <option [ngValue]="undefined" selected disabled>-اختر-</option>
-                <option *ngFor="let item of stocklist" value="{{item.id}}">{{item.nom}}</option>
-              </select>
-              <div *ngIf="idstock.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
-                مطلوب اسم المستودع .
-              </div>
-            </div>
-            <div class="col-md-6">
-              <label for="target">	الصنف </label>
-              <select id="account" name="attribut1" #attribut1="ngModel" [(ngModel)]="pay.attribut1" (change)="getTypeStockData($event)">
-                <option [ngValue]="undefined" selected disabled>-اختر-</option>
-                <option *ngFor="let item of typeStockList" value="{{item.id}}">{{item.type}}</option>
-              </select>
+                <div class="ml-3">
+                  <label for="number">	 الاسم  </label>
+                  <input type="text"
+                         name="nom" #nom="ngModel" [(ngModel)]="pay.nom" />
 
-              <div *ngIf="attribut1.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
-                مطلوب الصنف .
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <label for="target">	الكمية  </label>
-              <input type="number" name="quantite" #quantite="ngModel" [(ngModel)]="pay.quantite" (change)="calculqt($event)" />
-              <div *ngIf="quantite.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
-                مطلوب الكمية .
-              </div>
-            </div>
-
-            <div class="col-md-6">
-              <br />
-              <span class="completed" *ngIf="redorgreen && TestQt">الكمية المتبقية : {{quantiteC}}</span>
-              <span class="retardet" *ngIf="!redorgreen && TestQt">الكمية المتبقية أقل من المطولب الرجاء التأكد من الكمية !!!</span>
-              <br />
-            </div>
-
-            <div class="row w-100 d-flex form-box" *ngIf="addBen">
-              <div class="col-md-8 col-sm-12">
-                <label class="main">
-                  <span><i class="fa fa-users"></i></span>
-                  إضافة مستفيد
-                </label>
-                <div class="d-flex w-100 justify-content-start flex-wrap">
-
-                  <div class="ml-3">
-                    <label for="number">	 الاسم  </label>
-                    <input type="text"
-                           name="nom" #nom="ngModel" [(ngModel)]="pay.nom" />
-
-                    <div *ngIf="nom.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
-                      مطلوب  الاسم .
-                    </div>
-                  </div>
-
-                  <div class="ml-3">
-                    <label for="number">	الهوية </label>
-                    <input type="text"
-                           name="cin" #cin="ngModel" [(ngModel)]="pay.cin" />
-                    <div *ngIf="cin.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
-                      مطلوب  الهوية .
-                    </div>
-                  </div>
-
-                  <div class="ml-3">
-                    <label for="number">	الجنسية </label>
-                    <input type="text"
-                           name="nat" #nat="ngModel" [(ngModel)]="pay.nat" />
-                  </div>
-
-                  <div class="ml-3">
-                    <label for="number">	رقم الجوال  </label>
-                    <input type="number" maxlength="10" id="number"
-                           name="tel" #tel="ngModel" [(ngModel)]="pay.tel" />
+                  <div *ngIf="nom.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                    مطلوب  الاسم .
                   </div>
                 </div>
-                <div class="d-flex w-100 justify-content-start flex-wrap">
 
+                <div class="ml-3">
+                  <label for="number">	الهوية </label>
+                  <input type="text"
+                         name="cin" #cin="ngModel" [(ngModel)]="pay.cin" />
+                  <div *ngIf="cin.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                    مطلوب  الهوية .
+                  </div>
+                </div>
+
+                <div class="ml-3">
+                  <label for="number">	الجنسية </label>
+                  <input type="text"
+                         name="nat" #nat="ngModel" [(ngModel)]="pay.nat" />
+                </div>
+
+                <div class="ml-3">
+                  <label for="number">	رقم الجوال  </label>
+                  <input type="number" maxlength="10" id="number"
+                         name="tel" #tel="ngModel" [(ngModel)]="pay.tel" />
                 </div>
               </div>
-              <div class="col-md-4 col-sm-12">
-                <p>  </p>
-                <br />
+              <div class="d-flex w-100 justify-content-start flex-wrap">
+
               </div>
             </div>
-
-            <div class="col-12 text-left">
-              <input class="btn btn-info px-4" type="submit" value="حفظ" />
-
+            <div class="col-md-4 col-sm-12">
+              <p>  </p>
+              <br />
             </div>
+          </div>
+
+          <div class="col-12 text-left">
+            <input class="btn btn-info px-4" type="submit" value="حفظ" />
+
+          </div>
         </form>
       </div>
 

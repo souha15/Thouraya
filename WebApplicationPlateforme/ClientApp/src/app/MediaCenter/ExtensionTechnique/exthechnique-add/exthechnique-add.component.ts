@@ -28,7 +28,7 @@ export class ExthechniqueAddComponent implements OnInit {
 
   UserId: string;
   UserName: string;
-  idEtab: number;
+  idEtab: number = null;
   nomEtab: string;
   getUserConnected() {
 
@@ -36,8 +36,11 @@ export class ExthechniqueAddComponent implements OnInit {
 
       this.UserId = res.id;
       this.UserName = res.fullName;
+
+      if (res.idDepartement != null) {
       this.idEtab = res.idDepartement;
-      this.nomEtab = res.nomDepartement;
+        this.nomEtab = res.nomDepartement; 1
+      }
     })
 
   }
@@ -68,8 +71,10 @@ export class ExthechniqueAddComponent implements OnInit {
       this.exth.diretat = "في الانتظار";
       this.exth.idUserCreator = this.UserId;
       this.exth.userNameCreator = this.UserName;
+      if (this.idEtab != null) {
       this.exth.etabid = this.idEtab.toString();
-      this.exth.etabnom = this.nomEtab;
+        this.exth.etabnom = this.nomEtab;
+      }
       this.exthService.CreateExthechnique(this.exth).subscribe(res => {
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         form.resetForm();

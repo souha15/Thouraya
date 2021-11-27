@@ -1,0 +1,61 @@
+.change-pass {
+  width: 400px;
+  margin: 100px auto;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #ccc;
+}
+
+@media(max-width:500px) {
+  .change-pass {
+    width: 90%;
+    margin: 40px auto;
+  }
+}
+
+.change-pass h4 {
+  text-align: center;
+  margin-bottom: 15px;
+  padding: 10px;
+  color: #1e91a3;
+}
+
+.change-pass .form-group {
+  position: relative;
+}
+
+  .change-pass .form-group input {
+    padding-right: 45px;
+    border-color: #24a4ad;
+    border-radius: 5px;
+    outline: none;
+  }
+
+    .change-pass .form-group input:focus {
+      border-color: #24a4ad;
+      outline: none;
+      box-shadow: 0 0 10px #24a4ad;
+    }
+
+  .change-pass .form-group label {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 40px;
+    height: 100%;
+    text-align: center;
+    line-height: 40px;
+    color: #24a4ad;
+  }
+
+.change-pass form button {
+  min-width: 100px;
+  padding: 5px 10px;
+  text-align: center;
+  color: #fff;
+  background: #1e91a3;
+  border: none;
+  outline: none;
+  border-radius: 5px;
+}

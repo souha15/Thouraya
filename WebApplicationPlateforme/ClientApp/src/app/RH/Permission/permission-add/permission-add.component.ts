@@ -35,7 +35,14 @@ export class PermissionAddComponent implements OnInit {
     })
 
   }
-
+  autre: boolean = false;
+  testAutre(event) {
+    if (event.target.value =="أخرى") {
+      this.autre = true;
+    } else {
+      this.autre = false; 
+    }
+  }
   per: PermissionU = new PermissionU();
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();

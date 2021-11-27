@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.NetworkInformation;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -86,9 +87,9 @@ namespace WebApplicationPlateforme.Controllers.Pointage
         [HttpPost]
         public async Task<ActionResult<PointageUser>> PostPointageUser(PointageUser pointageUser)
         {
-            string macAddresses = "";
+           
 
-            foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
+            /*foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
             {
                 if (nic.OperationalStatus == OperationalStatus.Up)
                 {
@@ -103,18 +104,66 @@ namespace WebApplicationPlateforme.Controllers.Pointage
                 builder.Insert(i, ':');
             }
             pointageUser.adresseMac = builder.ToString();
-            Console.WriteLine(builder.ToString());
+            Console.WriteLine(builder.ToString());*/
 
            //var ip = _accessor.ActionContext.HttpContext.Connection.RemoteIpAddress.ToString();
            var ip = HttpContext.Connection.RemoteIpAddress.ToString();
             pointageUser.adresseIP = ip;
+            pointageUser.adresseMac = GetClientMAC(ip);
 
            
-         _context.PointageUsers.Add(pointageUser);
+            _context.PointageUsers.Add(pointageUser);
 
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPointageUser", new { id = pointageUser.Id }, pointageUser);
+        }
+
+
+        //get MAC Address
+
+        [DllImport("Iphlpapi.dll")]
+        private static extern int SendARP(Int32 dest, Int32 host, ref Int64 mac, ref Int32 length);
+        [DllImport("Ws2_32.dll")]
+        private static extern Int32 inet_addr(string ip);
+
+        private static string GetClientMAC(string strClientIP)
+        {
+            string mac_dest = "";
+            try
+            {
+                Int32 ldest = inet_addr(strClientIP);
+                Int32 lhost = inet_addr("");
+                Int64 macinfo = new Int64();
+                Int32 len = 6;
+                int res = SendARP(ldest, 0, ref macinfo, ref len);
+                string mac_src = macinfo.ToString("X");
+
+                while (mac_src.Length < 12)
+                {
+                    mac_src = mac_src.Insert(0, "0");
+                }
+
+                for (int i = 0; i < 11; i++)
+                {
+                    if (0 == (i % 2))
+                    {
+                        if (i == 10)
+                        {
+                            mac_dest = mac_dest.Insert(0, mac_src.Substring(i, 2));
+                        }
+                        else
+                        {
+                            mac_dest = "-" + mac_dest.Insert(0, mac_src.Substring(i, 2));
+                        }
+                    }
+                }
+            }
+            catch (Exception err)
+            {
+                throw new Exception("L?i " + err.Message);
+            }
+            return mac_dest;
         }
 
         // DELETE: api/PointageUsers/5

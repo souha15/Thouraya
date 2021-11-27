@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UserServiceService } from '../../shared/Services/User/user-service.service';
 import { UserDetail } from '../../shared/Models/User/user-detail.model';
 import { ToastrService } from 'ngx-toastr';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-user-change-pasword',
@@ -14,7 +15,7 @@ export class UserChangePaswordComponent implements OnInit {
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
- ///   this.getUserConnected();
+   this.getUserConnected();
   }
 
 
@@ -31,23 +32,24 @@ export class UserChangePaswordComponent implements OnInit {
 
     })
   }
-  fullname:string
+  /*fullname:string
   getfull(event) {
     this.fullname = event.target.value;
     this.userService.GetUserByUserName(this.fullname).subscribe(res => {
       this.UserIdConnected = res.id;
     })
-  }
+  }*/
 
   //Change Pasword
 
   userdetail: UserDetail = new UserDetail();
   
 
-  onSubmit() {
+  onSubmit(form: NgForm) {
     this.userdetail.id = this.UserIdConnected;
     
     this.userService.ChangePassword(this.userdetail).subscribe(res => {
+      form.resetForm();
       this.toastr.success('تم إعادة تعيين كلمة المرور الخاصة بك', 'نجاح');
     })
   }

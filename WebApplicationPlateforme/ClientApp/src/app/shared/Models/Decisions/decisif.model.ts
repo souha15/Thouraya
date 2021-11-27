@@ -1,0 +1,32 @@
+export class Decisif {
+  id: number;
+ userId :string;
+ userName:string;
+ infraction :string;
+ dateHijMil: number;
+ typeDecstr: number;
+ datehijmil :string;  
+ moisHij :string;
+ joursHij :string;
+ anneeHij :string;
+ moisMil :string;
+ joursMil :string;
+ anneeMil :string;
+ periode :string;
+ repetion :string;
+ decisionNb :string;
+ typeDec :string;
+ moisDecHij :string;
+ moisDecMil :string;
+ anneeDecHij :string;
+ anneeDecMil :string;
+attribut1: number;
+ attribut2 :string;
+ attribut3 :string;
+ attribut4 :string;
+ attribut5 :string;
+ attribut6 :string;
+ dateenreg :string;
+ userNameCreator :string;
+ idUserCreator :string;
+}

@@ -21,7 +21,7 @@ export class MenurequestsComponent implements OnInit {
   count: Number = 5;
   ngOnInit(): void {
     this.getUserConnected();
-    this.CongeList();
+    //this.CongeList();
     this.resetForm();
   }
 
@@ -40,7 +40,9 @@ export class MenurequestsComponent implements OnInit {
       this.UserNameConnected = res.fullName;
       this.congeService.GetUsersDemands(this.UserIdConnected).subscribe(res => {
         this.filtredCongeList = res
+        console.log(this.filtredCongeList)
       })
+
     })
 
   }
@@ -48,8 +50,10 @@ export class MenurequestsComponent implements OnInit {
   congeList: Conge[] = [];
   filtredCongeList: Conge[] = [];
   CongeList() {
+    console.log(this.UserIdConnected)
     this.congeService.GetUsersDemands(this.UserIdConnected).subscribe(res => {
-      this.filtredCongeList =res
+      this.filtredCongeList = res
+      console.log(this.filtredCongeList)
     })
   }
 

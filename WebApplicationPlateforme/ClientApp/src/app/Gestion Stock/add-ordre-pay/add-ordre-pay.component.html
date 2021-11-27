@@ -7,7 +7,7 @@
     </div>
 
     <div class="col-md-9 col-sm-8">
-      <app-menu-stockage-settings></app-menu-stockage-settings>
+      <!--<app-menu-stockage-settings></app-menu-stockage-settings>-->
       <header>
         <h3 class="task-head"> اضافة امر صرف</h3>
       </header>
@@ -67,6 +67,12 @@
             <div *ngIf="typePay.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
               مطلوب        نوع الصرف .
             </div>
+          </div>
+          <div class="col-md-6">
+            <label for="target">
+              أخرى
+            </label>
+            <input type="text" name="attribut6" #attribut6="ngModel" [(ngModel)]="pay.attribut6" />
           </div>
 
           <div class="col-md-6" *ngIf="categ">

@@ -80,10 +80,10 @@ export class CarsAddComponent implements OnInit {
       this.usersList = res;
     })
   }
-
+  userId: string;
   getUserName(event) {
-
-    this.UserService.GetUserById(event.target.value).subscribe(res => {
+    this.userId = event.target.value
+    this.UserService.GetUserById(this.userId ).subscribe(res => {
       this.voiture.recepeteur = res.fullName;
     })
   }

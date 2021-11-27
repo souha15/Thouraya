@@ -81,6 +81,7 @@
     <Folder Include="ClientApp\src\app\shared\Models\Taches\" />
     <Folder Include="ClientApp\src\app\shared\Interfaces\" />
     <Folder Include="ClientApp\src\app\shared\Enum\" />
+    <Folder Include="ClientApp\src\app\shared\Services\Decisions\" />
     <Folder Include="ClientApp\src\app\shared\Services\Dotations\" />
     <Folder Include="ClientApp\src\app\shared\Services\AdministrativeCommunication\" />
     <Folder Include="ClientApp\src\app\shared\Services\MediaCenter\DesignImpression\" />

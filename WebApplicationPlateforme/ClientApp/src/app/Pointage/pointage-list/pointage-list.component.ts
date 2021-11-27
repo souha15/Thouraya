@@ -142,7 +142,7 @@ export class PointageListComponent implements OnInit {
         if (d1 == d2) {
           this.pointList.push(item)
           this.pointList.forEach(item => {
-            this.mac2 = this.MacList.filter(itemm => itemm.userId = item.idUserCreator)
+            this.mac2 = this.MacList.filter(itemm => itemm.userId == item.idUserCreator)
             if (this.mac2.length != 0) {
               if (this.mac2[0].adresseMac != null) {
 
@@ -180,7 +180,7 @@ export class PointageListComponent implements OnInit {
         if (this.month == item.mois) {
           this.pointList.push(item)
           this.pointList.forEach(item => {
-            this.mac2 = this.MacList.filter(itemm => itemm.userId = item.idUserCreator)
+            this.mac2 = this.MacList.filter(itemm => itemm.userId == item.idUserCreator)
             if (this.mac2.length != 0) {
               if (this.mac2[0].adresseMac != null) {
 

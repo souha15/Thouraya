@@ -90,7 +90,7 @@ namespace WebApplicationPlateforme.Controllers.Maintenance
             _context.tickets.Add(ticket);
             await _context.SaveChangesAsync();
             // await _mailer.SendEmailAsync("souhakhemiri20@gmail.com", ticket.titre, ticket.details);
-            try { 
+          /*  try { 
             var fromAddress = new MailAddress("souhakhemiri20@gmail.com", "From Client Abo Areesh");
             var toAddress = new MailAddress("info@almukhashi-it.com", "Almukhashi-it");
             const string fromPassword = "bassoumamamaty2010";
@@ -102,7 +102,7 @@ namespace WebApplicationPlateforme.Controllers.Maintenance
             {
                 Host = "smtp.gmail.com",
                 Port = 587,
-                //EnableSsl = true,
+                EnableSsl = true,                
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
                 Credentials = new NetworkCredential(fromAddress.Address, fromPassword)
@@ -122,7 +122,7 @@ namespace WebApplicationPlateforme.Controllers.Maintenance
                 Console.WriteLine(smtpex);
                 throw;
                 
-            }
+            }*/
             /*smtpClient.UseDefaultCredentials = false;
             smtpClient.Port = 587;
             await this.smtpClient.SendMailAsync(new MailMessage(

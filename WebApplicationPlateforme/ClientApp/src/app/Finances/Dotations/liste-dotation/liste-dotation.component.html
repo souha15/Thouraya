@@ -55,8 +55,8 @@
                 <td (click)="populateForm(dot)" data-toggle="modal" data-target="#myModal1">{{dot.attribut3}}</td>
                 <td (click)="populateForm(dot)" data-toggle="modal" data-target="#myModal1">{{dot.attribue4}}</td>
                 <td (click)="populateForm(dot)" data-toggle="modal" data-target="#myModal1">{{dot.attribut2}}</td>
-             <td *ngIf="testrole"><a class="btn btn-success" [routerLink]="['/unite-edit', dot.id]"><i class="fa fa-edit"></i></a></td>
-     <td *ngIf="testrole"><a (click)="onDelete(dot.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+             <td ><a class="btn btn-success" [routerLink]="['/unite-edit', dot.id]"><i class="fa fa-edit"></i></a></td>
+     <td ><a (click)="onDelete(dot.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
               </tr>
 
             </tbody>

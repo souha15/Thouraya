@@ -1070,6 +1070,15 @@ button.enter {
     background: #3266a8;
   }
 
+  .content .box.yellow .num,
+  .content .box.yellow .sympol {
+    color: #ffff33;
+  }
+
+  .content .box.yellow h4 {
+    background: #ffff33;
+  }
+
   .content .box.orders h4 {
     background: #ed6ce2;
   }

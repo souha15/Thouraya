@@ -175,87 +175,6 @@ export class ChequeRetraitAddComponent implements OnInit {
 
   }
 
-  /** delete */
-  del1() {
-    this.retrait.janvier = null
-  }
-
-  del2() {
-    this.retrait.fevrier = null
-  }
-
-  del3() {
-    this.retrait.mars = null
-  }
-  del4() {
-    this.retrait.avril = null
-  }
-  del5() {
-    this.retrait.mai = null
-  }
-  del6() {
-    this.retrait.juin = null
-  }
-  del7() {
-    this.retrait.juillet = null
-  }
-  del8() {
-    this.retrait.aout = null
-  }
-  del9() {
-    this.retrait.septembre = null
-  }
-  del10() {
-    this.retrait.octobre = null
-  }
-  del11() {
-    this.retrait.novembre = null
-  }
-  del12() {
-    this.retrait.decembre = null
-  }
-/** Add Months */
-
-  add1() {
-    this.retrait.janvier = "يناير"
-  }
-
-  add2() {
-    this.retrait.fevrier = "فبراير"
-  }
-
-  add3() {
-    this.retrait.mars = "مارس"
-  }
-  add4() {
-    this.retrait.avril = "ابريل"
-  }
-  add5() {
-    this.retrait.mai = "مايو"
-  }
-  add6() {
-    this.retrait.juin = "يونيو"
-  }
-  add7() {
-    this.retrait.juillet = "يوليو"
-  }
-  add8() {
-    this.retrait.aout = "أغسطس"
-  }
-  add9() {
-    this.retrait.septembre = "سبتمبر"
-  }
-  add10() {
-    this.retrait.octobre = "أكتوبر"
-  }
-  add11() {
-    this.retrait.novembre = "نوفمبر"
-  }
-  add12() {
-    this.retrait.decembre = "ديسمبر"
-  }
-
-
   /*** Add  Retrait **/
   retrait: Retrait = new Retrait();
   date = new Date().toLocaleDateString();
@@ -275,18 +194,7 @@ export class ChequeRetraitAddComponent implements OnInit {
 
       this.retraitService.Create(this.retrait).subscribe(res => {
         form.resetForm();
-        this.del1();
-        this.del2();
-        this.del3();
-        this.del4();
-        this.del5();
-        this.del6();
-        this.del7();
-        this.del8();
-        this.del9();
-        this.del10();
-        this.del11();
-        this.del12();
+
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
       },
         err => {

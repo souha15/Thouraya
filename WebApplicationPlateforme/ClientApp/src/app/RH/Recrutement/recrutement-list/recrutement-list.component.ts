@@ -22,7 +22,8 @@ export class RecrutementListComponent implements OnInit {
     this.resetForm();
     this.UserList();
   }
-
+  p: Number = 1;
+  count: Number = 5;
   //Get Users List
   user: UserDetail[] = [];
   UserList() {

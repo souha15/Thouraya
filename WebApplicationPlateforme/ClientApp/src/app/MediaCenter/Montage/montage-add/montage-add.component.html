@@ -38,30 +38,35 @@
 
           <div class="col-md-6">
             <p></p>
-            </div>
+          </div>
 
-            <div class="col-md-6">
-              <label for="time1">	السيناريو</label>
-              <textarea class="form-control" id="reason" name="scenario" #scenario="ngModel" [(ngModel)]="dem.scenario" style="width:400px;"></textarea>
-            </div>
+          <div class="col-md-6">
+            <label for="time1">	السيناريو</label>
+            <textarea class="form-control" id="reason" name="scenario" #scenario="ngModel" [(ngModel)]="dem.scenario" style="width:400px;"></textarea>
+          </div>
 
-            <div class="col-md-6">
-              <label for="reason">التوصيات </label>
-              <textarea class="form-control" id="reason" name="detail" #detail="ngModel" [(ngModel)]="dem.detail" style="width:400px;"></textarea>
-            </div>
+          <div class="col-md-6">
+            <label for="reason">التوصيات </label>
+            <textarea class="form-control" id="reason" name="detail" #detail="ngModel" [(ngModel)]="dem.detail" style="width:400px;"></textarea>
+          </div>
 
-            <div class="col-md-12">
-              <label for="reason">	التعليق  </label>
-              <input type="text" id="other-type" name="commentaireUrl" #commentaireUrl="ngModel" [(ngModel)]="dem.commentaireUrl" style="width:400px;" />
+          <div class="col-md-12">
+            <label for="reason">	التعليق  </label>
+            <input type="text" id="other-type" name="commentaireUrl" #commentaireUrl="ngModel" [(ngModel)]="dem.commentaireUrl" style="width:400px;" />
 
-            </div>
+          </div>
+          <div class="col-md-12">
+            <label for="reason">	 رابط التحميل  </label>
+            <input type="text" id="other-type" name="attribut6" #attribut6="ngModel" [(ngModel)]="dem.attribut6" style="width:400px;" />
 
-            <div class="col-12 text-center text-md-left mt-3">
-              <input class="btn btn-info"
-                     style="width: 130px"
-                     type="submit"
-                     value="ارسال" />
-            </div>
+          </div>
+
+          <div class="col-12 text-center text-md-left mt-3">
+            <input class="btn btn-info"
+                   style="width: 130px"
+                   type="submit"
+                   value="ارسال" />
+          </div>
         </form>
       </div>
     </div><!-- End col-9 -->

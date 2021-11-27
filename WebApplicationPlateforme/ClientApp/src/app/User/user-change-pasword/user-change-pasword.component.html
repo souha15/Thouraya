@@ -7,33 +7,23 @@
     </div>
     <div class="col-md-9 col-sm-8">
 
-      <form class="login-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-        <h4 class="text-center">تغيير كلمة  المرور</h4>
-        <div class="logo">
-          <img src="assets/images/logo.jpg" alt="logo">
-        </div>
-        <div class="form-group">
-          <label for="password"><i class="fa fa-user"></i></label>
-          <input type="text" (change)="getfull($event)" class="form-control" placeholder="اسم المستخدم" required>
-        </div>
+      <div class="change-pass">
+        <h4>تغيير كلمة المرور</h4>
+        <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
           <div class="form-group">
-            <label for="password"><i class="fa fa-key"></i></label>
-            <input #Password="ngModel" name="Password" [(ngModel)]="userdetail.Password" type="password" id="password" class="form-control" placeholder="كلمة المرور  الجديدة" required>
+            <label for="password"><i class="fa fa-lock"></i></label>
+            <input type="password" #Password="ngModel" name="Password" [(ngModel)]="userdetail.Password"  id="password" class="form-control" placeholder="كلمة المرور الجديدة" required>
           </div>
-          <!-- <div class="form-group">
-      <label for="password"><i class="fa fa-key"></i></label>
-      <input #Password="ngModel" name="Password" [(ngModel)]="formModel.Password" type="password" id="password" class="form-control" placeholder="كلمة المرور الجديدة" required>
-    </div>
-    <div class="form-group">
-      <label for="password"><i class="fa fa-key"></i></label>
-      <input #Password="ngModel" name="Password" [(ngModel)]="formModel.Password" type="password" id="password" class="form-control" placeholder="تأكيد كلمة  المرور الجديدة" required>
-    </div>
-     -->
-          <hr>
-          <button type="submit" class="enter" [disabled]="form.invalid">تغيير </button>
-          <div class="clearfix"></div>
 
-      </form>
+          <div class="form-group">
+            <label for="cc"><i class="fa fa-lock"></i></label>
+            <input type="password" id="cc"   class="form-control" placeholder="تأكيد كلمة  المرور الجديدة" required>
+          </div>
+          <div class="text-center">
+            <button class="" type="submit">تغيير</button>
+          </div>
+        </form>
+      </div>
     </div>
     </div>
 

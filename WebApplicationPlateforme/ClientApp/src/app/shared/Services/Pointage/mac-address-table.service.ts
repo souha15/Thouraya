@@ -60,4 +60,10 @@ export class MacAddressTableService {
     return this.http.delete(this.rootURL + '/AddresseMacs/' + id);
   }
 
+
+  PutObservableE(Transaction: MacAddressTable) {
+    return this.http.put<MacAddressTable>(this.rootURL + '/AddresseMacs/' + Transaction.id, Transaction, this.headers);
+
+  }
+
 }

@@ -41,7 +41,7 @@
 
           <div class="col-md-6">
             <label for="care-emp-mobile">جوال</label>
-            <input type="text" id="care-emp-mobile" name="tel" #tel="ngModel" [(ngModel)]="equ.tel">
+            <input type="tel" maxlength="10" id="care-emp-mobile" name="tel" #tel="ngModel" [(ngModel)]="equ.tel">
           </div>
           <div class="col-md-6">
             <label for="care-mail">الايميل الرسمي</label>
@@ -60,6 +60,7 @@
       </div>
     </div>
 
+  </div>
   </div>
 <!-- Footer -->
 <footer class="text-center">

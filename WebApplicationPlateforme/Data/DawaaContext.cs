@@ -8,6 +8,9 @@ using WebApplicationPlateforme.Model.ActivitePart;
 using WebApplicationPlateforme.Model.AdministrativeCommunication;
 using WebApplicationPlateforme.Model.ChangerRib;
 using WebApplicationPlateforme.Model.ConfigSystemShowing;
+using WebApplicationPlateforme.Model.Decision;
+using WebApplicationPlateforme.Model.gestion_de_stock;
+using WebApplicationPlateforme.Model.GestionDestTickets;
 using WebApplicationPlateforme.Model.MediaCenter.PartageMedia;
 using WebApplicationPlateforme.Model.MediaCenter.Visite;
 using WebApplicationPlateforme.Model.MusulumanFemme;
@@ -20,7 +23,7 @@ namespace WebApplicationPlateforme.Data
     public class DawaaContext : IdentityDbContext
     {
         public DawaaContext(DbContextOptions<DawaaContext> options) : base(options) { }
-        public DbSet<NotifText> NotifTexts { get; set; }
+       public DbSet<NotifText> NotifTexts { get; set; }
         public DbSet<AddresseMac> AddresseMacs { get; set; }
         public DbSet<visite> visite { get; set; }
         public DbSet<offreImpression> offreImpression { get; set; }
@@ -49,5 +52,22 @@ namespace WebApplicationPlateforme.Data
         /** System From Config **/
 
         public DbSet<ConfigSystemFront> ConfigSystemFront { get; set; }
+
+        /** Decision **/ 
+
+        public DbSet<DecisionDecisif> DecisionDecisifs { get; set; }
+        public DbSet<DecissionCommun> DecissionCommuns { get; set; }
+
+
+        /*** Gestion Tickets**/
+
+        public DbSet<GestionTickets> GestionTickets { get; set; }
+
+        public DbSet<CommentsTickets> CommentsTickets { get; set; }
+        public DbSet<CommentsTicketFiles> CommentsTicketFiles { get; set; }
+        public DbSet<FilesGestionTickets> FilesGestionTickets { get; set; }
+
+        /***Stockage **/
+        public DbSet<RetourStock> RetourStock { get; set; }
     }
 }

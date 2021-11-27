@@ -14,6 +14,7 @@ import { UserServiceService } from '../../shared/Services/User/user-service.serv
 import { Stock } from '../../shared/Models/Gestion Stock/stock.model';
 import { TypeStock } from '../../shared/Models/Gestion Stock/type-stock.model';
 import { TypeStockage } from '../../shared/Models/Gestion Stock/type-stockage.model';
+import { UserDetail } from '../../shared/Models/User/user-detail.model';
 
 @Component({
   selector: 'app-add-pay-directe',
@@ -34,7 +35,7 @@ export class AddPayDirecteComponent implements OnInit {
   BenList: GestBen[] = [];
   ngOnInit(): void {
     this.getUserConnected();
-
+    this.getUsersList();
     this.benService.ListGestBen().subscribe(res => {
       this.BenList = res
       let i = 0;
@@ -54,7 +55,7 @@ export class AddPayDirecteComponent implements OnInit {
     };
 
     this.getStockList();
-    //this.getTypeStock();
+    this.getTypeStock();
 
   }
 
@@ -125,8 +126,6 @@ export class AddPayDirecteComponent implements OnInit {
     this.TypeStockageService.ListTypeStockage().subscribe(res => {
       this.typeStockListF = res;
       this.typeStockList = this.typeStockListF.filter(item => item.idstock == this.stock.id)
-      console.log(this.typeStockList)
-      console.log(this.typeStockListF)
     })
   }
 
@@ -185,6 +184,7 @@ export class AddPayDirecteComponent implements OnInit {
   TypeBen: string;
   addBen: boolean = false;
   existedBen: boolean = false;
+  employee; boolean = false;
   getTypeBen(event) {
     this.TypeBen = event.target.value
     if (this.TypeBen == "غير مسجل") {
@@ -197,6 +197,12 @@ export class AddPayDirecteComponent implements OnInit {
       this.existedBen = true;
     } else {
       this.existedBen = false;
+    }
+
+    if (this.TypeBen == "موظف") {
+      this.employee = true;
+    } else {
+      this.employee = false;
     }
   }
 
@@ -221,6 +227,15 @@ export class AddPayDirecteComponent implements OnInit {
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
+    })
+
+  }
+
+  // get Users Lis
+  UsersList: UserDetail[] = [];
+  getUsersList() {
+    this.UserService.GetUsersList().subscribe(res => {
+      this.UsersList = res;
     })
 
   }

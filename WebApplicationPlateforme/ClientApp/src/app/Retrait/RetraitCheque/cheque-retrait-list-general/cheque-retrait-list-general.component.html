@@ -20,7 +20,6 @@
               </th>
               <th scope="col">الاسم</th>
               <th scope="col">الجوال</th>
-              <th scope="col">بداية الإستقطاع</th>
               <th scope="col">نوع التبرع</th>
               <th scope="col">المبلغ</th>
               <th scope="col">المندوب</th>
@@ -35,9 +34,6 @@
               <th (click)="populateForm(cg)">{{(c-1) * count + i + 1}}</th>
               <td (click)="populateForm(cg)">{{cg.nom}}</td>
               <td (click)="populateForm(cg)">{{cg.tel}}</td>
-              <td (click)="populateForm(cg)" *ngIf="cg.datedebuthij != null">{{cg.datedebuthij}}</td>
-              <td (click)="populateForm(cg)" *ngIf="cg.datedebutmiledi != null">{{cg.datedebutmiledi}}</td>
-              <td (click)="populateForm(cg)" *ngIf="cg.datedebutmiledi == null && cg.datedebuthij == null">{{cg.datedebutmiledi}}</td>
               <td (click)="populateForm(cg)">{{cg.typedons}}</td>
               <td (click)="populateForm(cg)">{{cg.prix}}</td>
               <td (click)="populateForm(cg)">{{cg.delegues}}</td>
@@ -106,7 +102,17 @@
           <div class="form-row task-form service-form text-center">
             <div class="col-md-6">
               <div>
-                <label> الاسم</label>
+                <label> الاستقطاع</label>
+                <p>{{retrait.typeRetrait}}</p>
+              </div>
+
+              <div>
+                <label> 	نوع التبرع </label>
+                <p>{{retrait.typedons}}</p>
+              </div>
+
+              <div>
+                <label>   اسم المستقطع</label>
                 <p>{{retrait.nom}}</p>
               </div>
               <div>
@@ -118,37 +124,37 @@
                 <p>{{retrait.organisme}}</p>
               </div>
               <div>
-                <label>رقم الحساب</label>
+                <label>حساب المستقطع</label>
                 <p>{{retrait.rib}}</p>
               </div>
               <div>
-                <label>البنك</label>
+                <label>بنك المستقطع</label>
                 <p>{{retrait.banque}}</p>
               </div>
               <div *ngIf="retrait.datedebuthij != null">
-                <label>بداية الاستقطاع</label>
+                <label>بداية الاستقطاع الهجري </label>
                 <p>{{retrait.datedebuthij}}</p>
               </div>
               <div *ngIf="retrait.datedebutmiledi != null">
-                <label>بداية الاستقطاع</label>
+                <label>بداية الاستقطاع الميلادي </label>
                 <p>{{retrait.datedebutmiledi}}</p>
               </div>
 
-              <div *ngIf="retrait.datefinhij != null">
-                <label>نهاية الاستقطاع</label>
-                <p>{{retrait.datefinhij}}</p>
-              </div>
-
-              <div *ngIf="retrait.datefinmiledi != null">
-                <label>نهاية الاستقطاع</label>
-                <p>{{retrait.datefinmiledi}}</p>
-              </div>
 
             </div>
             <div class="col-md-6">
               <div>
+                <label> المستفيد</label>
+                <p>{{retrait.nomben}}</p>
+              </div>
+              <div>
                 <label>حساب المستفيد</label>
                 <p>{{retrait.ribben}}</p>
+              </div>
+
+              <div>
+                <label>بنك المستفيد</label>
+                <p>{{retrait.nombanque}}</p>
               </div>
               <div>
                 <label>نوع التبرع</label>
@@ -163,21 +169,17 @@
                 <p>{{retrait.delegues}}</p>
               </div>
 
-              <div>
-                <label>أشهر الإستقطاع</label>
-                <p *ngIf="retrait.janvier != null" style="width:50px;">{{retrait.janvier}}</p>&nbsp;
-                <p *ngIf="retrait.fevrier != null" style="width:50px;">{{retrait.fevrier}}</p>&nbsp;
-                <p *ngIf="retrait.mars != null" style="width:50px;">{{retrait.mars}}</p>&nbsp;
-                <p *ngIf="retrait.avril != null" style="width:50px;">{{retrait.avril}}</p>&nbsp;
-                <p *ngIf="retrait.mai != null" style="width:50px;">{{retrait.mai}}</p>&nbsp;
-                <p *ngIf="retrait.juin != null" style="width:50px;">{{retrait.juin}}</p>&nbsp;
-                <p *ngIf="retrait.juillet != null" style="width:50px;">{{retrait.juillet}}</p>&nbsp;
-                <p *ngIf="retrait.aout != null" style="width:50px;">{{retrait.aout}}</p>&nbsp;
-                <p *ngIf="retrait.septembre != null" style="width:50px;">{{retrait.septembre}}</p>&nbsp;
-                <p *ngIf="retrait.octobre != null" style="width:50px;">{{retrait.octobre}}</p>&nbsp;
-                <p *ngIf="retrait.novembre != null" style="width:50px;">{{retrait.novembre}}</p>&nbsp;
-                <p *ngIf="retrait.decembre != null" style="width:50px;">{{retrait.decembre}}</p>&nbsp;
+
+              <div *ngIf="retrait.datefinhij != null">
+                <label>نهاية الاستقطاع الهجري </label>
+                <p>{{retrait.datefinhij}}</p>
               </div>
+
+              <div *ngIf="retrait.datefinmiledi != null">
+                <label>نهاية الاستقطاع الميلادي </label>
+                <p>{{retrait.datefinmiledi}}</p>
+              </div>
+
             </div>
 
             <div class="send-alerts">

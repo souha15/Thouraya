@@ -1,0 +1,273 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">قرار حسم    </h3>
+      </header>
+      <div class="row">
+        <div class="col-md-10">
+          <div class="leave-request">
+            <form class="form-row task-form service-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+              <div class="col-sm-6">
+                <label for="replace-emp">الموظف </label>
+                <select id="stop-status" name="userId" #userId="ngModel" [(ngModel)]="dem.userId" (change)="getDataUser($event)" required>
+                  <option [ngValue]="undefined" selected disabled>-الموظف المعوض-</option>
+                  <option *ngFor="let item of userList" value="{{item.id}}">{{item.fullName}}</option>
+                </select>
+                <div *ngIf="userId.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+
+
+                  مطلوب
+                  الموظف .
+
+                </div>
+
+              </div>
+
+              <div class="col-sm-6">
+                <label for="replace-emp">التاريخ </label>
+                <select id="stop-status" (change)="getDateType($event)" name="dateHijMil" #dateHijMil="ngModel" [(ngModel)]="dem.dateHijMil">
+                  <option [ngValue]="undefined" selected disabled>-التاريخ-</option>
+                  <option value="1">هجري </option>
+                  <option value="2">ميلادي </option>
+                </select>
+
+              </div>
+
+
+              <div class="col-md-6" *ngIf="hij">
+
+                <label for="inputhijdate">	الشهر  </label>
+                <select id="stop-status" name="moisHij" #moisHij="ngModel" [(ngModel)]="dem.moisHij">
+                  <option [ngValue]="undefined" selected disabled>-الشهر-</option>
+
+                  <option value="مُحرّم">مُحرّم</option>
+                  <option value="صفر">صفر</option>
+                  <option value="ربيع الأول">ربيع الأول</option>
+                  <option value=" ربيع الثاني"> ربيع الثاني</option>
+                  <option value="جُمادى الأولى">جُمادى الأولى</option>
+                  <option value="جُمادى الآخرة">جُمادى الآخرة</option>
+                  <option value="رجب">رجب</option>
+                  <option value="شعبان">شعبان</option>
+                  <option value="رمضان">رمضان</option>
+                  <option value="شوال">شوال</option>
+                  <option value="ذو القعدة"> ذو القعدة</option>
+                  <option value="ذو الحجة">ذو الحجة</option>
+
+                </select>
+
+
+
+              </div>
+              <div class="col-md-6" *ngIf="hij">
+                <label for="inputhijdate">	السنة  </label>
+                <select id="stop-status" name="anneeHij" #anneeHij="ngModel" [(ngModel)]="dem.anneeHij">
+                  <option [ngValue]="undefined" selected disabled>-الشهر-</option>
+
+                  <option value="1443">1443</option>
+                  <option value="1444">1444</option>
+                  <option value="1445">1445</option>
+                  <option value="1446">1446</option>
+                  <option value="1447">1447</option>
+                  <option value="1448">1448</option>
+                  <option value="1449">1448</option>
+                  <option value="1450">1450</option>
+                  <option value="1451">1451</option>
+                  <option value="1452">1452</option>
+                  <option value="1453">1453</option>
+
+                </select>
+              </div>
+
+              <div class="col-md-6" *ngIf="mil">
+
+                <label for="inputhijdate">	الشهر  </label>
+                <select id="stop-status" name="moisHij" #moisHij="ngModel" [(ngModel)]="dem.moisHij">
+                  <option [ngValue]="undefined" selected disabled>-الشهر-</option>
+
+                  <option value="يناير">يناير</option>
+                  <option value="فبراير">فبراير</option>
+                  <option value="مارس">مارس</option>
+                  <option value="أبريل">أبريل</option>
+                  <option value="مايو">مايو</option>
+                  <option value="يونيو">يونيو</option>
+                  <option value="يوليو">يوليو</option>
+                  <option value="أغسطس">أغسطس</option>
+                  <option value="سبتمبر">سبتمبر</option>
+                  <option value="أكتوبر">أكتوبر</option>
+                  <option value="نوفمبر">نوفمبر</option>
+                  <option value="ديسمبر">ديسمبر</option>
+
+                </select>
+
+
+
+              </div>
+              <div class="col-md-6" *ngIf="mil">
+                <label for="inputhijdate">	السنة  </label>
+                <select id="stop-status" name="anneeHij" #anneeHij="ngModel" [(ngModel)]="dem.anneeHij">
+                  <option [ngValue]="undefined" selected disabled>-الشهر-</option>
+
+                  <option value="2021">2021</option>
+                  <option value="2022">2022</option>
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                  <option value="2025">2025</option>
+                  <option value="2026">2026</option>
+                  <option value="2027">2027</option>
+                  <option value="2028">2028</option>
+                  <option value="2029">2029</option>
+                  <option value="2030">2030</option>
+
+                </select>
+              </div>
+
+
+              <div class="col-md-6">
+                <label for="times">الفترة   </label>
+
+                <input type="text" id="recom"
+                       name="periode" #periode="ngModel" [(ngModel)]="dem.periode" />
+              </div>
+
+              <div class="col-md-6">
+                <label for="inputhijdate">		تكرار   </label>
+                <select id="stop-status" name="repetion" #repetion="ngModel" [(ngModel)]="dem.repetion">
+                  <option [ngValue]="undefined" selected disabled>-تكرار-</option>
+                  <option value="1">1</option>
+                  <option value="2">2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                </select>
+              </div>
+
+              <div class="col-md-6">
+                <label for="times">	الحسم    </label>
+
+                <input type="text" id="recom"
+                       name="decisionNb" #decisionNb="ngModel" [(ngModel)]="dem.decisionNb" />
+              </div>
+
+
+              <div class="col-md-6">
+                <label for="inputhijdate">		الصنف    </label>
+                <select id="stop-status" name="typeDec" #typeDec="ngModel" [(ngModel)]="dem.typeDec">
+                  <option [ngValue]="undefined" selected disabled>-الصنف-</option>
+                  <option value="يوم">يوم </option>
+                  <option value="ريال ">ريال </option>
+                  <option value="دقيقة">دقيقة</option>
+                  <option value="ساعة ">ساعة </option>
+                </select>
+              </div>
+
+              <div class="col-md-6" *ngIf="hij">
+
+                <label for="inputhijdate">		شهر الحسم   </label>
+                <select id="stop-status" name="moisDecHij" #moisDecHij="ngModel" [(ngModel)]="dem.moisDecHij">
+                  <option [ngValue]="undefined" selected disabled>-الشهر-</option>
+
+                  <option value="مُحرّم">مُحرّم</option>
+                  <option value="صفر">صفر</option>
+                  <option value="ربيع الأول">ربيع الأول</option>
+                  <option value=" ربيع الثاني"> ربيع الثاني</option>
+                  <option value="جُمادى الأولى">جُمادى الأولى</option>
+                  <option value="جُمادى الآخرة">جُمادى الآخرة</option>
+                  <option value="رجب">رجب</option>
+                  <option value="شعبان">شعبان</option>
+                  <option value="رمضان">رمضان</option>
+                  <option value="شوال">شوال</option>
+                  <option value="ذو القعدة"> ذو القعدة</option>
+                  <option value="ذو الحجة">ذو الحجة</option>
+
+                </select>
+
+
+
+              </div>
+              <div class="col-md-6" *ngIf="hij">
+                <label for="inputhijdate">	سنة الحسم   </label>
+                <select id="stop-status" name="anneeDecHij" #anneeDecHij="ngModel" [(ngModel)]="dem.anneeDecHij">
+                  <option [ngValue]="undefined" selected disabled>-الشهر-</option>
+
+                  <option value="1443">1443</option>
+                  <option value="1444">1444</option>
+                  <option value="1445">1445</option>
+                  <option value="1446">1446</option>
+                  <option value="1447">1447</option>
+                  <option value="1448">1448</option>
+                  <option value="1449">1448</option>
+                  <option value="1450">1450</option>
+                  <option value="1451">1451</option>
+                  <option value="1452">1452</option>
+                  <option value="1453">1453</option>
+
+                </select>
+              </div>
+
+              <div class="col-md-6" *ngIf="mil">
+
+                <label for="inputhijdate">	شهر الحسم   </label>
+                <select id="stop-status" name="moisDecHij" #moisDecHij="ngModel" [(ngModel)]="dem.moisDecHij">
+                  <option [ngValue]="undefined" selected disabled>-الشهر-</option>
+                  <option value="يناير">يناير</option>
+                  <option value="فبراير">فبراير</option>
+                  <option value="مارس">مارس</option>
+                  <option value="أبريل">أبريل</option>
+                  <option value="مايو">مايو</option>
+                  <option value="يونيو">يونيو</option>
+                  <option value="يوليو">يوليو</option>
+                  <option value="أغسطس">أغسطس</option>
+                  <option value="سبتمبر">سبتمبر</option>
+                  <option value="أكتوبر">أكتوبر</option>
+                  <option value="نوفمبر">نوفمبر</option>
+                  <option value="ديسمبر">ديسمبر</option>
+
+                </select>
+
+
+
+              </div>
+              <div class="col-md-6" *ngIf="mil">
+                <label for="inputhijdate">	سنة الحسم   </label>
+                <select id="stop-status" name="anneeDecHij" #anneeDecHij="ngModel" [(ngModel)]="dem.anneeDecHij">
+                  <option [ngValue]="undefined" selected disabled>-الشهر-</option>
+                  <option value="2021">2021</option>
+                  <option value="2022">2022</option>
+                  <option value="2023">2023</option>
+                  <option value="2024">2024</option>
+                  <option value="2025">2025</option>
+                  <option value="2026">2026</option>
+                  <option value="2027">2027</option>
+                  <option value="2028">2028</option>
+                  <option value="2029">2029</option>
+                  <option value="2030">2030</option>
+
+                </select>
+              </div>
+
+
+              <div class="col-12 text-left">
+                <input class="btn btn-primary px-4" type="submit" value="تسجيل">
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <div class="col-md-2">
+
+        </div>
+      </div>
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+</footer>

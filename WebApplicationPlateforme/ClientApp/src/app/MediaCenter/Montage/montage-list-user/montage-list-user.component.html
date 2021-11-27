@@ -117,7 +117,7 @@
 
             <div class="col-md-6">
               <label for="time1">	السيناريو</label>
-              <textarea class="form-control" id="reason" name="scenario" #scenario="ngModel" [(ngModel)]="dem.scenario" ></textarea>
+              <textarea class="form-control" id="reason" name="scenario" #scenario="ngModel" [(ngModel)]="dem.scenario"></textarea>
             </div>
 
             <div class="col-md-6">
@@ -128,6 +128,13 @@
             <div class="col-md-12">
               <label for="reason">	التعليق  </label>
               <input type="text" id="other-type" name="commentaireUrl" #commentaireUrl="ngModel" [(ngModel)]="dem.commentaireUrl" style="width:400px;" />
+
+            </div>
+
+
+            <div class="col-md-12">
+              <label for="reason">	 رابط التحميل  </label>
+              <input type="text" id="other-type" name="attribut6" #attribut6="ngModel" [(ngModel)]="dem.attribut6" style="width:400px;" />
 
             </div>
 

@@ -82,7 +82,12 @@
                   <option *ngFor="let item of adminList" value="{{item.nom}}">{{item.nom}}</option>
                 </select>
               </div>
-              <div class="col-md-12">
+              <div class="col-md-4">
+                <label for="devision">التاريخ</label>
+                <input type="date" id="devision" name="description" #description="ngModel" [(ngModel)]="ar.description" />
+
+              </div>
+              <div class="col-md-8">
                 <label for="topic">الملاحظات</label>
                 <input type="text" style="width:500px"
                        name="detail" #detail="ngModel" [(ngModel)]="ar.detail"

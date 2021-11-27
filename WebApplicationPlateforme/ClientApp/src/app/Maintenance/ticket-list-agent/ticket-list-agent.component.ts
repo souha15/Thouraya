@@ -17,7 +17,7 @@ import { ProgressStatusEnum } from '../../shared/Enum/progress-status-enum.enum'
   styleUrls: ['./ticket-list-agent.component.css']
 })
 export class TicketListAgentComponent implements OnInit {
-
+  filter;
   @Input() public disabled: boolean;
   @Input() public fileName: string;
   @Output() public downloadStatus: EventEmitter<ProgressStatus>;
@@ -35,14 +35,34 @@ export class TicketListAgentComponent implements OnInit {
 
   // This Get Tickets List
   p: Number = 1;
-  count: Number = 5;
+  count: Number = 6;
   ticketList: Ticket[] = [];
+  enattente: number = 0;
+  done: number = 0;
+  encours: number = 0;
+  closed: number = 0;
+  suspendu: number = 0;
+  enattenterep: number = 0;
   getTicketsList() {
     this.ticketService.List().subscribe(res => {
       this.ticketList = res;
+      this.done = this.ticketList.filter(item => item.etat == "منجزة").length;
+      this.encours = this.ticketList.filter(item => item.etat == "تحت الإجراء").length;
+      this.closed = this.ticketList.filter(item => item.etat == "مغلقة").length;
+      this.suspendu = this.ticketList.filter(item => item.etat == "مؤجلة").length;
+      this.enattente = this.ticketList.filter(item => item.etat == "في الإنتظار").length;
+      this.enattenterep = this.ticketList.filter(item => item.etat == "بانتظار رد صاحب التذكرة").length;
+    
     })
   }
 
+  //sorting
+  key: string = 'name'; //set default
+  reverse: boolean = false;
+  sort(key) {
+    this.key = key;
+    this.reverse = !this.reverse;
+  }
 
   ticket: Ticket = new Ticket();
   ticketfilesG: FilesTicket[] = []
@@ -54,7 +74,8 @@ export class TicketListAgentComponent implements OnInit {
     this.ticket = Object.assign({}, facture);
     this.filesTicketService.List().subscribe(res => {
       this.ticketfilesG = res
-      this.ticketfiles = this.ticketfilesG.filter(item => item.idTic == this.id)
+      this.ticketfiles = this.ticketfilesG.filter(item => item.id == this.id)
+
     })
   }
 
@@ -71,7 +92,7 @@ export class TicketListAgentComponent implements OnInit {
   isValidFormSubmitted = false;
   onSubmit() {
     console.log(this.ticket);
-    this.ticket.etatdate = this.date;
+    this.ticket.dateAgent = this.date;
     this.ticket.remarque = this.remarque;
     this.ticket.etat = this.etat;
     this.ticketService.PutObservable(this.ticket).subscribe(

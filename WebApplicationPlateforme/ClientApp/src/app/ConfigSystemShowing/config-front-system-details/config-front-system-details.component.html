@@ -1,1 +1,34 @@
-<p>config-front-system-details works!</p>
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+
+      <div class="change-pass">
+        <h4>تغيير كلمة المرور</h4>
+        <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <div class="form-group">
+            <label for="password"><i class="fa fa-lock"></i></label>
+            <input type="text" (change)="getfull($event)" class="form-control" placeholder="اسم المستخدم" required >
+          </div>
+
+          <div class="form-group">
+            <label for="cc"><i class="fa fa-lock"></i></label>
+            <input #Password="ngModel" name="Password" [(ngModel)]="userdetail.Password" type="password" id="password" class="form-control" placeholder="كلمة المرور  الجديدة" required>
+          </div>
+          <div class="text-center">
+            <button class="" type="submit">تغيير</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+</footer>

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { OrdrePayStockageService } from '../../shared/Services/Gsetion Stock/ordre-pay-stockage.service';
 import { OrdrePayStockage } from '../../shared/Models/Gestion Stock/ordre-pay-stockage.model';
 import { ToastrService } from 'ngx-toastr';
+import { UserServiceService } from '../../shared/Services/User/user-service.service';
 
 @Component({
   selector: 'app-list-ordre-pay',
@@ -11,10 +12,25 @@ import { ToastrService } from 'ngx-toastr';
 export class ListOrdrePayComponent implements OnInit {
 
   constructor(private OrdrePayService: OrdrePayStockageService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private UserService: UserServiceService,) { }
 
   ngOnInit(): void {
+    this.getUserConnected()
     this.getList();
+
+  }
+  //Get User Connected
+  UserIdConnected: string;
+  UserNameConnected: string;
+  getUserConnected() {
+
+    this.UserService.getUserProfileObservable().subscribe(res => {
+      this.UserIdConnected = res.id;
+      this.UserNameConnected = res.fullName;
+
+    })
+
   }
 
   first: boolean = true;
@@ -53,11 +69,11 @@ export class ListOrdrePayComponent implements OnInit {
   getList() {
     this.OrdrePayService.ListOrdrePayStockage().subscribe(res => {
       this.ListStockage = res
-      this.ListStockageNew = this.ListStockage.filter(item => item.etatOrdre == "في الإنتظار")
+      this.ListStockageNew = this.ListStockage.filter(item => item.etatOrdre == "في الإنتظار" && item.idUserCreator == this.UserIdConnected)
       this.nb1 = this.ListStockageNew.length;
-      this.ListStockageClosed = this.ListStockage.filter(item => item.etatOrdre == "مغلقة")
+      this.ListStockageClosed = this.ListStockage.filter(item => item.etatOrdre == "مغلقة" && item.idUserCreator == this.UserIdConnected)
       this.nb2 = this.ListStockageClosed.length;
-      this.ListStockageAccepted = this.ListStockage.filter(item => item.etatOrdre == "معتمدة")
+      this.ListStockageAccepted = this.ListStockage.filter(item => item.etatOrdre == "معتمدة" && item.idUserCreator == this.UserIdConnected)
       this.nb3 = this.ListStockageAccepted.length;
     })
   }

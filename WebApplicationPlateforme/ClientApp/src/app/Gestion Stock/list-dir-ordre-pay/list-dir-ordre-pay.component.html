@@ -52,6 +52,20 @@
               </tr>
             </thead>
 
+            <tbody *ngIf="allist">
+              <tr *ngFor="let ev of ListStockageA|  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p } ; let i = index">
+                <th scope="row" [routerLink]="['/details-ordre-pay', ev.id]">{{(p-1) * count + i + 1}}</th>
+
+                <td [routerLink]="['/details-ordre-pay', ev.id]">{{ev.userNameCreator}}</td>
+                <td [routerLink]="['/details-ordre-pay', ev.id]">{{ev.nomOrdre}}</td>
+                <td [routerLink]="['/details-ordre-pay', ev.id]">{{ev.dateFin}}</td>
+                <td [routerLink]="['/details-ordre-pay', ev.id]">{{ev.typePay}}</td>
+                <td [routerLink]="['/details-ordre-pay', ev.id]" class="success">{{ev.etatOrdre}}</td>
+
+              </tr>
+            </tbody>
+
+
             <tbody *ngIf="acceptedT">
               <tr *ngFor="let ev of ListStockageAccepted |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p } ; let i = index">
                 <th scope="row" [routerLink]="['/details-ordre-pay', ev.id]">{{(p-1) * count + i + 1}}</th>
@@ -66,8 +80,8 @@
             </tbody>
 
             <tbody *ngIf="newT">
-              <tr *ngFor="let ev of ListStockageNew |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p } ; let i = index">
-                <th scope="row" [routerLink]="['/details-ordre-pay', ev.id]">{{ev.id}}</th>
+              <tr *ngFor="let ev of ListStockageNew |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p } ; let i = index">
+                <th scope="row" [routerLink]="['/details-ordre-pay', ev.id]">{{(p-1) * count + i + 1}}</th>
 
                 <td [routerLink]="['/details-ordre-pay', ev.id]">{{ev.nomOrdre}}</td>
                 <td [routerLink]="['/details-ordre-pay', ev.id]">{{ev.dateFin}}</td>
@@ -78,8 +92,8 @@
             </tbody>
 
             <tbody *ngIf="closedT">
-              <tr *ngFor="let ev of ListStockageClosed |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p } ; let i = index">
-                <th scope="row" [routerLink]="['/details-ordre-pay', ev.id]">{{ev.id}}</th>
+              <tr *ngFor="let ev of ListStockageClosed |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p } ; let i = index">
+                <th scope="row" [routerLink]="['/details-ordre-pay', ev.id]">{{(p-1) * count + i + 1}}}</th>
 
                 <td [routerLink]="['/details-ordre-pay', ev.id]">{{ev.nomOrdre}}</td>
                 <td [routerLink]="['/details-ordre-pay', ev.id]">{{ev.dateFin}}</td>

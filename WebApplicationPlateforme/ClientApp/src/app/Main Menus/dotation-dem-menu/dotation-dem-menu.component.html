@@ -1,0 +1,39 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head"> طلبات الموظفين</h3>
+      </header>
+      <div class="que-serv">
+
+        <a href="" [routerLink]="['/forbidden-page']">
+          <span class="icon"><i class="fa fa-car"></i></span>
+          طلبات سيارة
+        </a>
+        <a href="" [routerLink]="['/director-list-cars']">
+          <span class="icon"><i class="fa fa-car-crash"></i></span>
+          طلبات صيانة سيارة
+        </a>
+
+        <a href="" [routerLink]="['/list-dir-ordre-pay']">
+          <span class="icon"><i class="fa fa-box-open"></i></span>
+          طلبات صرف من المستودع
+        </a>
+
+
+      </div>
+    </div>
+
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+</footer>

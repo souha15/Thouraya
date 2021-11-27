@@ -25,7 +25,7 @@ export class MontageAddComponent implements OnInit {
 
   UserId: string;
   UserName: string;
-  idEtab: number;
+  idEtab: number =null;
   nomEtab: string;
   getUserConnected() {
 
@@ -33,8 +33,11 @@ export class MontageAddComponent implements OnInit {
 
       this.UserId = res.id;
       this.UserName = res.fullName;
-      this.idEtab = res.idDepartement;
-      this.nomEtab = res.nomDepartement;
+      if (this.idEtab != null) {
+        this.idEtab = res.idDepartement;
+      
+        this.nomEtab = res.nomDepartement;
+      }
     })
 
   }
@@ -56,8 +59,10 @@ export class MontageAddComponent implements OnInit {
       this.dem.etat = "في الانتظار";
       this.dem.idUserCreator = this.UserId;
       this.dem.userNameCreator = this.UserName;
+      if (this.idEtab != null) {
       this.dem.etabid = this.idEtab.toString();
-      this.dem.etabnom = this.nomEtab;
+        this.dem.etabnom = this.nomEtab;
+      }
       this.demService.Create(this.dem).subscribe(res => {
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         form.resetForm();

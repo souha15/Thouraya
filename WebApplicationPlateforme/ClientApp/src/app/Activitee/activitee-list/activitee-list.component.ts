@@ -21,8 +21,8 @@ export class ActiviteeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
-    this.getActiviteList();
-    this.getActiviteListG();
+   // this.getActiviteList();
+
   }
   p: Number = 1;
   count: Number = 5;
@@ -32,12 +32,19 @@ export class ActiviteeListComponent implements OnInit {
   UserIdConnected: string;
   UserNameConnected: string;
   UserEtabId: number;
+  UserAsminId:number
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
       this.UserEtabId = res.idDepartement;
+      if (res.idDepartement != null) {
+        this.getActiviteListG(res.idDepartement);
+      } else {
+        this.getActiviteListG(res.idAdministration);
+      }
+   
     })
 
   }
@@ -46,11 +53,9 @@ export class ActiviteeListComponent implements OnInit {
 
   list: Activite[] = [];
   list2: Activite[] = [];
-  getActiviteListG() {
-    this.activiteService.List().subscribe(res => {
-      this.list2 = res;
-      this.list = this.list2.filter(item => item.attribut1 == this.UserEtabId.toString())
-
+  getActiviteListG(id1) {
+    this.activiteService.GetByAdmin(id1).subscribe(res => {
+      this.list = res;
     })
   }
 
@@ -84,7 +89,7 @@ export class ActiviteeListComponent implements OnInit {
       this.ac.dateEnreg = this.date;
       this.activiteService.PutObservableE(this.ac).subscribe(
         res => {
-          this.getActiviteListG();
+          this.getUserConnected();
           this.toastr.success('تم التحديث بنجاح', 'نجاح')
           form.resetForm();
         },
@@ -103,7 +108,7 @@ export class ActiviteeListComponent implements OnInit {
 
       this.activiteService.Delete(Id)
         .subscribe(res => {
-          this.getActiviteListG();
+          this.getUserConnected()
           this.toastr.success("تم الحذف  بنجاح", "نجاح");
         },
 

@@ -8,7 +8,8 @@
     color: #444;
   }
 
-  .task-form input[type="date"] {
+  .task-form input[type="date"], 
+  .task-form textarea {
     padding: 8px 10px;
     border-radius: 10px;
     border: 1px solid #ccc;

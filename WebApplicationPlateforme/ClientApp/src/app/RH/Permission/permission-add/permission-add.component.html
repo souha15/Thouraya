@@ -19,15 +19,17 @@
           </div>
           <div class="col-md-6">
             <label for="perm-type">نوع الاستئذان</label>
-            <select id="perm-type" name="type" #type="ngModel" [(ngModel)]="per.type">
-              <option value="0">نوع الاستئذان</option>
+            <select id="perm-type" name="type" #type="ngModel" [(ngModel)]="per.type" (change)="testAutre($event)">
+              <option [ngValue]="undefined" selected disabled>-نوع الاستئذان-</option>
               <option value="انصراف مبكر">انصراف مبكر</option>
               <option value="تأخر في الحضور">تأخر في الحضور</option>
+              <option value="استئذان عمل">استئذان عمل</option>
+              <option value=" اسئذان خاص"> اسئذان خاص</option>
               <option value="الخروج والعودة أثناء الدوام">الخروج والعودة أثناء الدوام</option>
               <option value="أخرى">أخرى</option>
             </select>
           </div>
-          <div class="col-md-6">
+          <div class="col-md-6" *ngIf="autre">
             <label for="other-type">إذن آخر</label>
             <input type="text" id="other-type" name="autre" #autre="ngModel" [(ngModel)]="per.autre"/>
           </div>

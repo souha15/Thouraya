@@ -23,9 +23,9 @@ export class OrgPartDetailsComponent implements OnInit {
         this.employee = true;
       } else {
         this.employee = false
-
+        this.dir = true;
       }
-      if (res.emploi == "مدير إدارة الأوقاف والخدمات") {
+      if (res.emploi == "مدير إدارة الأوقاف والخدمات ") {
         this.dir = true;
       } else {
         this.dir = false

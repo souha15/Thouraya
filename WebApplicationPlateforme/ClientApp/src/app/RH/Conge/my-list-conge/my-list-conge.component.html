@@ -60,7 +60,9 @@
                 <th scope="col">المدة</th>
                 <th scope="col">تاريخ بدء الاجازة</th>
                 <th scope="col">تاريخ نهاية الإجازة</th>
+
                 <th scope="col">الحالة</th>
+                <th scope="col">التفاصيل</th>
                 <th scope="col">تعديل</th>
                 <th scope="col">حذف</th>
               </tr>
@@ -69,9 +71,9 @@
               <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
                 <th (click)="populateForm(cg)">{{(p-1) * count + i + 1}}</th>
                 <td (click)="populateForm(cg)">{{cg.type}}</td>
-                <td (click)="populateForm(cg)" >{{cg.duree}}</td>
-                <td (click)="populateForm(cg)" >{{cg.datedebut}}</td>
-                <td (click)="populateForm(cg)" >{{cg.datefin}}</td>
+                <td (click)="populateForm(cg)">{{cg.duree}}</td>
+                <td (click)="populateForm(cg)">{{cg.datedebut}}</td>
+                <td (click)="populateForm(cg)">{{cg.datefin}}</td>
 
                 <td (click)="populateForm(cg)"
                     [ngClass]="{
@@ -82,8 +84,9 @@
 }">
                   {{cg.attribut2}}
                 </td>
-                <td (click)="populateForm(cg)"><a class="btn btn-success" data-toggle="modal" data-target="#myModal1" *ngIf="cg.etat === '5%'"><i class="fa fa-edit"></i> تعديل </a></td>
-                <td (click)="populateForm(cg)"><a (click)="populateForm(cg);onDelete(cg.id)" class="btn btn-danger" *ngIf="cg.etat === '5%'"><i class="fa fa-trash"></i>حذف</a></td>
+                <td (click)="populateForm(cg)"><a class="btn btn-primary" data-toggle="modal" data-target="#myModal2"><i class="fa fa-eye"></i>  </a></td>
+                <td (click)="populateForm(cg)"><a class="btn btn-success" data-toggle="modal" data-target="#myModal1" *ngIf="cg.etat === '5%'"><i class="fa fa-edit"></i>  </a></td>
+                <td (click)="populateForm(cg)"><a (click)="populateForm(cg);onDelete(cg.id)" class="btn btn-danger" *ngIf="cg.etat === '5%'"><i class="fa fa-trash"></i></a></td>
               </tr>
 
             </tbody>
@@ -104,7 +107,7 @@
 </div>
 <!-- Footer -->
 <footer class="text-center">
- <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
 </footer>
 
 
@@ -123,7 +126,7 @@
           <div class="task-form form-row stop-form">
             <form class="form-row task-form service-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
 
-             
+
               <div class="col-md-6">
                 <label for="leave-date-start">تاريخ بداية الاجازة</label>
                 <input type="date" id="leave-date-start" name="datedebut" #datedebut="ngModel" [(ngModel)]="conge.datedebut" (change)="tdatedebut($event)" required>
@@ -174,9 +177,78 @@
             </form>
 
           </div>
+        </div>
       </div>
-    </div>
 
+    </div>
   </div>
 </div>
+
+<div id="myModal2" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+        <h3 class="popup-head"> طلب الإجازة</h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="task-form form-row stop-form">
+            <form class="task-form form-row service-form">
+
+              <div class="col-md-4">
+                <label for="permision-hours">الرقم الطلب</label>
+                {{conge.id}}
+
+              </div>
+
+              <div class="col-md-4">
+                <label for="permision-hours">المدة</label>
+                {{conge.duree}}
+
+              </div>
+
+
+              <div class="col-md-4">
+                <label for="permision-hours">نوع الاجازة</label>
+                {{conge.type}}
+
+              </div>
+              <div class="col-md-4">
+                <label for="permision-hours">تاريخ بداية الاجازة</label>
+                {{conge.datedebut}}
+
+              </div>
+
+
+              <div class="col-md-4">
+                <label for="permision-hours">تاريخ نهاية الاجازة</label>
+                {{conge.datefin}}
+
+              </div>
+
+
+              <div class="col-md-4">
+                <label for="permision-hours"> سبب الإجازة</label>
+                {{conge.tel}}
+
+              </div>
+
+              <div class="col-md-4">
+                <label for="permision-hours">الحالة</label>
+                {{conge.etatd}}
+
+              </div>
+
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
+</div>

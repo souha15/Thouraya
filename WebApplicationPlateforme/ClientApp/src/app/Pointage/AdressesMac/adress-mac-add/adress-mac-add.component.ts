@@ -76,7 +76,7 @@ export class AdressMacAddComponent implements OnInit {
   }
 
   mac: MacAddressTable = new MacAddressTable();
-  onSubmit(form: NgForm) {
+  add(form: NgForm) {
     this.macService.Add(this.mac).subscribe(res => {
       this.getMacList();
       form.resetForm();
@@ -86,8 +86,22 @@ export class AdressMacAddComponent implements OnInit {
         this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
     })
   }
-  update() {
-
+  update(form: NgForm) {
+    this.macService.PutObservableE(this.mac).subscribe(res => {
+      this.getMacList();
+      form.resetForm();
+      this.mac = new MacAddressTable();
+      this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+    }, err => {
+      this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
+    })
+  }
+  onSubmit(form: NgForm) {
+    if (this.mac.id == null) {
+      this.add(form)
+    } else {
+      this.update(form)
+    }
   }
 
   //Delete Dotation

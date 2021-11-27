@@ -9,14 +9,45 @@ import { PathSharedService } from '../../../shared/path-shared.service';
 import { Ticket } from '../../../shared/Models/Maintenance/ticket.model';
 import { NgForm } from '@angular/forms';
 import { FilesTicket } from '../../../shared/Models/Maintenance/files-ticket.model';
-
+import { UserServiceService } from '../../../shared/Services/User/user-service.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 @Component({
   selector: 'app-ticket-add',
   templateUrl: './ticket-add.component.html',
   styleUrls: ['./ticket-add.component.css']
 })
 export class TicketAddComponent implements OnInit {
+  htmlContent = '';
 
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '10rem',
+    minHeight: '5rem',
+    placeholder: 'Enter text here...',
+    translate: 'no',
+    defaultParagraphSeparator: 'p',
+    defaultFontName: 'Arial',
+    toolbarHiddenButtons: [
+      ['bold']
+    ],
+    customClasses: [
+      {
+        name: "quote",
+        class: "quote",
+      },
+      {
+        name: 'redText',
+        class: 'redText'
+      },
+      {
+        name: "titleText",
+        class: "titleText",
+        tag: "h1",
+      },
+    ]
+  };
+ 
   @Input() public disabled: boolean;
   @Output() public uploadStatuss: EventEmitter<ProgressStatus>;
   @ViewChild('inputFile') inputFile: ElementRef;
@@ -25,16 +56,37 @@ export class TicketAddComponent implements OnInit {
     private toastr: ToastrService,
     public serviceupload: UploadDownloadService,
     private http: HttpClient,
+    private UserService: UserServiceService,
     private rootUrl: PathSharedService,
   ) { this.uploadStatuss = new EventEmitter<ProgressStatus>(); }
 
+  num: number = 0;
+  numTicket: string;
   ngOnInit(): void {
-    this.getFiles();
-  }
 
+    this.getUserConnected();
+    this.getFiles();
+
+  }
+  admin: boolean = false;
+  getUserConnected() {
+
+    this.UserService.getUserProfileObservable().subscribe(res => {
+      if (res.num == "3012") {
+        this.admin = true
+      } else {
+        this.admin = false;
+      }
+      this.ticket.clientId = res.id
+      this.ticket.clientName = res.fullName;
+
+    })
+
+  }
   ticket: Ticket = new Ticket();
   isValidFormSubmitted = false;
-  date = new Date().toLocaleDateString();
+  options = { year: 'numeric', month: 'numeric', day: 'numeric' };
+  date = new Date().toLocaleDateString('fr-Fr',this.options);
   onSubmit(form: NgForm) {
 
     if (form.invalid) {
@@ -43,17 +95,18 @@ export class TicketAddComponent implements OnInit {
     }
     else {
       this.isValidFormSubmitted = true;
-
-      this.ticket.date = this.date;
+      this.ticket.numTicket = this.num;
+      this.ticket.num = this.num.toString();
+      this.ticket.clientDate = this.date;
       this.ticket.etat = "في الإنتظار";
       this.ticketService.Create(this.ticket).subscribe(res => {
         let id = res.id
-        this.pj.idTic = id;
+        this.pj.idTicket = id;
         let path = this.rootUrl.getPath();
         this.fileslist.forEach(item => {
           this.pj.path = item;
           console.log(item)
-          this.http.post(path + '/FilesTickets', this.pj)
+          this.http.post(path + '/FilesGestionTickets', this.pj)
             .subscribe(res => {
               this.serviceupload.refreshList();
               this.GetFileName();
@@ -62,6 +115,8 @@ export class TicketAddComponent implements OnInit {
 
         this.toastr.success("تم تسجيل التذكرة  بنجاح", " تسجيل التذكرة ");
         form.resetForm();
+
+        this.numTicket = '[' + res.numTicket +1 +']';
         this.files1 = [];
         this.isValidFormSubmitted = false;
       },

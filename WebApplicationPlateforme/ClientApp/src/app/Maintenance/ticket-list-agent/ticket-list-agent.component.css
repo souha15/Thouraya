@@ -404,5 +404,12 @@ ul {
 }
 
 .retarde {
-  background: #dc3545
+  background: #dc3545;
+}
+
+.enattenterep {
+  background: #f29811;
+}
+.suspendu {
+  background: #a39d9d;
 }

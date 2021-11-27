@@ -686,7 +686,38 @@ import { RapWomenComponent } from './Rapports/MusulmanFemme/rap-women/rap-women.
 import { RapMenComponent } from './Rapports/MusulmanHomme/rap-men/rap-men.component';
 import { ConfigFrontSystemCrudComponent } from './ConfigSystemShowing/config-front-system-crud/config-front-system-crud.component';
 import { ConfigFrontSystemDetailsComponent } from './ConfigSystemShowing/config-front-system-details/config-front-system-details.component';
-
+import { DotationDemMenuComponent } from './Main Menus/dotation-dem-menu/dotation-dem-menu.component';
+import { DotationDemUserShowMenuComponent } from './Main Menus/dotation-dem-user-show-menu/dotation-dem-user-show-menu.component';
+import { DotationForSettingsMenuComponent } from './Main Menus/dotation-for-settings-menu/dotation-for-settings-menu.component';
+import { DecisionUserMenuComponent } from './Decisions/DecisionMenus/decision-user-menu/decision-user-menu.component';
+import { DecisionDirMenuComponent } from './Decisions/DecisionMenus/decision-dir-menu/decision-dir-menu.component';
+import { AlarmeAddComponent } from './Decisions/Alarme/alarme-add/alarme-add.component';
+import { AlarmeListComponent } from './Decisions/Alarme/alarme-list/alarme-list.component';
+import { AttetionAddComponent } from './Decisions/Attention/attetion-add/attetion-add.component';
+import { AttetionLisComponent } from './Decisions/Attention/attetion-lis/attetion-lis.component';
+import { DecisifAddComponent } from './Decisions/Decisif/decisif-add/decisif-add.component';
+import { DecisifListDirComponent } from './Decisions/Decisif/decisif-list-dir/decisif-list-dir.component';
+import { DecisifListUserComponent } from './Decisions/Decisif/decisif-list-user/decisif-list-user.component';
+import { DecisifDetailsComponent } from './Decisions/Decisif/decisif-details/decisif-details.component';
+import { DecisifEditComponent } from './Decisions/Decisif/decisif-edit/decisif-edit.component';
+import { CommunDetailsComponent } from './Decisions/Commun/commun-details/commun-details.component';
+import { CommunEditComponent } from './Decisions/Commun/commun-edit/commun-edit.component';
+import { RabattreAddComponent } from './Decisions/Rabattre/rabattre-add/rabattre-add.component';
+import { RabattreListComponent } from './Decisions/Rabattre/rabattre-list/rabattre-list.component';
+import { MenuDecisionListComponent } from './Decisions/DecisionMenus/menu-decision-list/menu-decision-list.component';
+import { DecisionDemissionAddComponent } from './Decisions/Demission/decision-demission-add/decision-demission-add.component';
+import { DecisionDemissionListComponent } from './Decisions/Demission/decision-demission-list/decision-demission-list.component';
+import { AttentionReportComponent } from './Decisions/Reports/attention-report/attention-report.component';
+import { RabattreReportComponent } from './Decisions/Reports/rabattre-report/rabattre-report.component';
+import { DecissiveReportComponent } from './Decisions/Reports/decissive-report/decissive-report.component';
+import { TicketsCommentsComponent } from './Maintenance/tickets-comments/tickets-comments.component';
+import { AllTicketsComponent } from './Maintenance/all-tickets/all-tickets.component';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { RetyourStockAddComponent } from './Gestion Stock/RetourStock/retyour-stock-add/retyour-stock-add.component';
+import { HomeMenuStockageServiceComponent } from './Gestion Stock/RetourStock/home-menu-stockage-service/home-menu-stockage-service.component';
+import { RetyourStockEditComponent } from './Gestion Stock/RetourStock/retyour-stock-edit/retyour-stock-edit.component';
+import { RetyourStockListComponent } from './Gestion Stock/RetourStock/retyour-stock-list/retyour-stock-list.component';
+import { RetyourStockDetailsComponent } from './Gestion Stock/RetourStock/retyour-stock-details/retyour-stock-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -1339,10 +1370,43 @@ import { ConfigFrontSystemDetailsComponent } from './ConfigSystemShowing/config-
     RapMenComponent,
     ConfigFrontSystemCrudComponent,
     ConfigFrontSystemDetailsComponent,
+    DotationDemMenuComponent,
+    DotationDemUserShowMenuComponent,
+    DotationForSettingsMenuComponent,
+    DecisionUserMenuComponent,
+    DecisionDirMenuComponent,
+    AlarmeAddComponent,
+    AlarmeListComponent,
+    AttetionAddComponent,
+    AttetionLisComponent,
+    DecisifAddComponent,
+    DecisifListDirComponent,
+    DecisifListUserComponent,
+    DecisifDetailsComponent,
+    DecisifEditComponent,
+    CommunDetailsComponent,
+    CommunEditComponent,
+    RabattreAddComponent,
+    RabattreListComponent,
+    MenuDecisionListComponent,
+    DecisionDemissionAddComponent,
+    DecisionDemissionListComponent,
+    AttentionReportComponent,
+    RabattreReportComponent,
+    DecissiveReportComponent,
+    TicketsCommentsComponent,
+    AllTicketsComponent,
+    RetyourStockAddComponent,
+    HomeMenuStockageServiceComponent,
+    RetyourStockEditComponent,
+    RetyourStockListComponent,
+    RetyourStockDetailsComponent,
   ],
   imports: [
+
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
+    AngularEditorModule,
     FormsModule,
     YouTubePlayerModule,
     NgSelectModule,
@@ -1577,7 +1641,7 @@ import { ConfigFrontSystemDetailsComponent } from './ConfigSystemShowing/config-
 
 
 
-      { path: 'ticket-add', component: TicketAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'ticket-add', component: TicketAddComponent, canActivate: [AuthGuard] },
 
       { path: 'ticket-my-lis', component: TicketMyLisComponent, canActivate: [AuthGuard] },
 
@@ -1621,9 +1685,9 @@ import { ConfigFrontSystemDetailsComponent } from './ConfigSystemShowing/config-
 
       { path: 'cars-list', component: CarsListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
-      { path: 'cars-repair-request-add', component: CarsRepairRequestAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
+      { path: 'cars-repair-request-add', component: CarsRepairRequestAddComponent, canActivate: [AuthGuard]},
 
-      { path: 'cars-repair-request-list', component: CarsRepairRequestListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
+      { path: 'cars-repair-request-list', component: CarsRepairRequestListComponent, canActivate: [AuthGuard]},
 
       { path: 'cars-menu', component: CarsMenuComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
 
@@ -2010,7 +2074,7 @@ import { ConfigFrontSystemDetailsComponent } from './ConfigSystemShowing/config-
 
       { path: 'plaint-list', component: PlaintListComponent, canActivate: [AuthGuard] },
 
-      { path: 'plaint-listdir', component: PlaintListdirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] }  },
+      { path: 'plaint-listdir', component: PlaintListdirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV','DOTPRIV'] }  },
 
       { path: 'plaint-edit', component: PlaintEditComponent, canActivate: [AuthGuard] },
 
@@ -2049,16 +2113,16 @@ import { ConfigFrontSystemDetailsComponent } from './ConfigSystemShowing/config-
 
       //locataire 2
 
-      { path: 'locataire-dot-add', component: LocataireDotAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'RESP', 'SECRETAIRE'] }},
+      { path: 'locataire-dot-add', component: LocataireDotAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV','LOCPRIV'] }},
 
-      { path: 'locataire-dot-details', component: LocataireDotDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] }},
+      { path: 'locataire-dot-details', component: LocataireDotDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV', 'LOCPRIV']  }},
 
-      { path: 'locataire-dot-details/:id', component: LocataireDotDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
+      { path: 'locataire-dot-details/:id', component: LocataireDotDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV', 'LOCPRIV']  } },
 
-      { path: 'locataire-dot-edit', component: LocataireDotEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
-      { path: 'locataire-dot-edit/:id', component: LocataireDotEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'locataire-dot-edit', component: LocataireDotEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV', 'LOCPRIV']  } },
+      { path: 'locataire-dot-edit/:id', component: LocataireDotEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV', 'LOCPRIV']  } },
 
-      { path: 'locataire-dot-list', component: LocataireDotListComponent, canActivate: [AuthGuard] },
+      { path: 'locataire-dot-list', component: LocataireDotListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV', 'LOCPRIV'] } },
 
       //Task 2
 
@@ -2098,11 +2162,11 @@ import { ConfigFrontSystemDetailsComponent } from './ConfigSystemShowing/config-
 
 
     /****** Maintenance ******* */
-      { path: 'ticket-edit', component: TicketEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'ticket-edit', component: TicketEditComponent, canActivate: [AuthGuard]},
 
-      { path: 'ticket-list', component: TicketListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'ticket-list', component: TicketListComponent, canActivate: [AuthGuard] },
 
-      { path: 'ticket-list-client', component: TicketListClientComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'ticket-list-client', component: TicketListClientComponent, canActivate: [AuthGuard] },
 
       { path: 'ticket-list-agent', component: TicketListAgentComponent },
 
@@ -2112,7 +2176,8 @@ import { ConfigFrontSystemDetailsComponent } from './ConfigSystemShowing/config-
 
       { path: 'page-frwarded-to-ticket-list-for-agent-code', component: PageFrwardedToTicketListForAgentCodeComponent },
 
-      { path: 'ticket-detail-client', component: TicketDetailClientComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'ticket-detail-client', component: TicketDetailClientComponent, canActivate: [AuthGuard]},
+      { path: 'ticket-detail-client/:id', component: TicketDetailClientComponent, canActivate: [AuthGuard]},
 
       /********** ,Demands Pages *************** */
 
@@ -2265,7 +2330,7 @@ import { ConfigFrontSystemDetailsComponent } from './ConfigSystemShowing/config-
 
       { path: 'list-dir-pay-directe', component: ListDirPayDirecteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'add-ordre-pay', component: AddOrdrePayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
+      { path: 'add-ordre-pay', component: AddOrdrePayComponent, canActivate: [AuthGuard]},
 
       { path: 'edit-ordre-pay', component: EditOrdrePayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
       { path: 'edit-ordre-pay/:id', component: EditOrdrePayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
@@ -2273,7 +2338,7 @@ import { ConfigFrontSystemDetailsComponent } from './ConfigSystemShowing/config-
       { path: 'details-ordre-pay', component: DetailsOrdrePayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
       { path: 'details-ordre-pay/:id', component: DetailsOrdrePayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'list-ordre-pay', component: ListOrdrePayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
+      { path: 'list-ordre-pay', component: ListOrdrePayComponent, canActivate: [AuthGuard] },
 
       { path: 'list-resp-ordre-pay', component: ListRespOrdrePayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
@@ -2827,6 +2892,88 @@ import { ConfigFrontSystemDetailsComponent } from './ConfigSystemShowing/config-
 
       { path: 'config-front-system-details', component: ConfigFrontSystemDetailsComponent, canActivate: [AuthGuard] },
       { path: 'config-front-system-details/:id', component: ConfigFrontSystemDetailsComponent, canActivate: [AuthGuard] },
+
+    /***** Menus **/
+
+      { path: 'dotation-dem-menu', component: DotationDemMenuComponent, canActivate: [AuthGuard] },
+
+      { path: 'dotation-dem-user-show-menu', component: DotationDemUserShowMenuComponent, canActivate: [AuthGuard] },
+      { path: 'dotation-for-settings-menu', component: DotationForSettingsMenuComponent, canActivate: [AuthGuard] },
+
+    /** Decision **/
+
+      { path: 'decision-user-menu', component: DecisionUserMenuComponent , canActivate: [AuthGuard] },
+
+      { path: 'decision-dir-menu', component: DecisionDirMenuComponent , canActivate: [AuthGuard] },
+
+      { path: 'alarme-add', component: AlarmeAddComponent, canActivate: [AuthGuard] },
+      { path: 'alarme-add/:id', component: AlarmeAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'alarme-list', component: AlarmeListComponent, canActivate: [AuthGuard] },
+
+      { path: 'attetion-add', component: AttetionAddComponent, canActivate: [AuthGuard] },
+      { path: 'attetion-add/:id', component: AttetionAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'attetion-lis', component: AttetionLisComponent, canActivate: [AuthGuard] },
+
+      { path: 'decisif-add', component: DecisifAddComponent, canActivate: [AuthGuard] },
+      { path: 'decisif-add/:id', component: DecisifAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'decisif-list-dir', component: DecisifListDirComponent, canActivate: [AuthGuard] },
+
+      { path: 'decisif-list-user', component: DecisifListUserComponent, canActivate: [AuthGuard] },
+
+      { path: 'decisif-details', component: DecisifDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'decisif-details/:id', component: DecisifDetailsComponent, canActivate: [AuthGuard] },
+
+      { path: 'decisif-edit', component: DecisifEditComponent, canActivate: [AuthGuard] },
+      { path: 'decisif-edit/:id', component: DecisifEditComponent, canActivate: [AuthGuard] },
+
+      { path: 'commun-details', component: CommunDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'commun-details/:id', component: CommunDetailsComponent, canActivate: [AuthGuard] },
+      
+      { path: 'commun-edit', component: CommunEditComponent, canActivate: [AuthGuard] },
+      { path: 'commun-edit/:id', component: CommunEditComponent, canActivate: [AuthGuard] },
+
+     { path: 'decision-demission-add', component: DecisionDemissionAddComponent, canActivate: [AuthGuard] },
+     { path: 'decision-demission-add/:id', component: DecisionDemissionAddComponent, canActivate: [AuthGuard] },
+
+     { path: 'decision-demission-list', component: DecisionDemissionListComponent, canActivate: [AuthGuard] },
+
+      { path: 'rabattre-add', component: RabattreAddComponent, canActivate: [AuthGuard] },
+      { path: 'rabattre-add/:id', component: RabattreAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'rabattre-list', component: RabattreListComponent, canActivate: [AuthGuard] },
+      { path: 'menu-decision-list', component: MenuDecisionListComponent, canActivate: [AuthGuard] },
+
+      { path: 'attention-report', component: AttentionReportComponent, canActivate: [AuthGuard] },
+      { path: 'attention-report/:id', component: AttentionReportComponent, canActivate: [AuthGuard] },
+
+
+      { path: 'rabattre-report', component: RabattreReportComponent , canActivate: [AuthGuard] },
+      { path: 'rabattre-report/:id', component: RabattreReportComponent , canActivate: [AuthGuard] },
+
+      { path: 'decissive-report', component: DecissiveReportComponent, canActivate: [AuthGuard] },
+      { path: 'decissive-report/:id', component: DecissiveReportComponent, canActivate: [AuthGuard] },
+
+      /** All Tickets **/
+       { path: 'tickets-comments', component: TicketsCommentsComponent, canActivate: [AuthGuard] },
+       { path: 'all-tickets', component: AllTicketsComponent, canActivate: [AuthGuard] },
+
+    /** Stockage Add */
+
+      { path: 'retyour-stock-add', component: RetyourStockAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'home-menu-stockage-service', component: HomeMenuStockageServiceComponent, canActivate: [AuthGuard] },
+
+      { path: 'retyour-stock-edit', component: RetyourStockEditComponent, canActivate: [AuthGuard] },
+      { path: 'retyour-stock-edit/:id', component: RetyourStockEditComponent, canActivate: [AuthGuard] },
+
+      { path: 'retyour-stock-list', component: RetyourStockListComponent, canActivate: [AuthGuard] },
+
+      { path: 'retyour-stock-details', component: RetyourStockDetailsComponent, canActivate: [AuthGuard] },
+      { path: 'retyour-stock-details/:id', component: RetyourStockDetailsComponent, canActivate: [AuthGuard] },
+
     ])
   ],/*,  {
     provide: HTTP_INTERCEPTORS,
