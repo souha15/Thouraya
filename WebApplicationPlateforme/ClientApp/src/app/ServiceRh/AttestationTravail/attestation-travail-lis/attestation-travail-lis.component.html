@@ -100,7 +100,10 @@
                 <label>اللغة</label>
                 <p>{{fact.langue}}</p>
               </div>
-
+              <div *ngIf="fact.attribut6!=null">
+                <label>سبب الرفض</label>
+                <p>{{fact.attribut6}}</p>
+              </div>
             </div>
             <div class="col-md-6">
 

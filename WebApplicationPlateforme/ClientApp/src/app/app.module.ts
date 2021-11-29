@@ -718,6 +718,7 @@ import { HomeMenuStockageServiceComponent } from './Gestion Stock/RetourStock/ho
 import { RetyourStockEditComponent } from './Gestion Stock/RetourStock/retyour-stock-edit/retyour-stock-edit.component';
 import { RetyourStockListComponent } from './Gestion Stock/RetourStock/retyour-stock-list/retyour-stock-list.component';
 import { RetyourStockDetailsComponent } from './Gestion Stock/RetourStock/retyour-stock-details/retyour-stock-details.component';
+import { AllDemandsComponent } from './all-demands/all-demands.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -1401,6 +1402,7 @@ import { RetyourStockDetailsComponent } from './Gestion Stock/RetourStock/retyou
     RetyourStockEditComponent,
     RetyourStockListComponent,
     RetyourStockDetailsComponent,
+    AllDemandsComponent,
   ],
   imports: [
 
@@ -2974,6 +2976,11 @@ import { RetyourStockDetailsComponent } from './Gestion Stock/RetourStock/retyou
       { path: 'retyour-stock-details', component: RetyourStockDetailsComponent, canActivate: [AuthGuard] },
       { path: 'retyour-stock-details/:id', component: RetyourStockDetailsComponent, canActivate: [AuthGuard] },
 
+    /**** All Demands  **/
+
+      {
+        path: 'all-demands', component: AllDemandsComponent, canActivate: [AuthGuard], data: {
+          permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORETAB', 'DIRECTORADMN', 'RESSOURCEHUMAINE', 'RESPFINANCE', 'DAWAAPRIV', 'DOTPRIV', 'FINPRIV','DIRPRIV'] }},
     ])
   ],/*,  {
     provide: HTTP_INTERCEPTORS,

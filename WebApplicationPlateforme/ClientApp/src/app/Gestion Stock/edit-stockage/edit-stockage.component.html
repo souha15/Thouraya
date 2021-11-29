@@ -68,6 +68,17 @@
                 </div>
 
                 <div class="ml-3">
+                  <label for="number">	المقاسات  </label>
+                  <input type="text"
+                         name="attribut5" #attribut5="ngModel" [(ngModel)]="stock.attribut5" />
+                </div>
+
+                <div class="ml-3">
+                  <label for="number">	الماركة   </label>
+                  <input type="text"
+                         name="attribut4" #attribut4="ngModel" [(ngModel)]="stock.attribut4" />
+                </div>
+                <div class="ml-3">
                   <label class="number">
 
                     النوع
@@ -103,6 +114,8 @@
                     <th scope="col">	الكمية </th>
                     <th scope="col">	النوع </th>
                     <th scope="col">الوحدة  </th>
+                    <th scope="col">المقاسات  </th>
+                    <th scope="col">الماركة  </th>
                     <th scope="col">	سعر الوحدة  </th>
                     <th scope="col">	الاجمالي   </th>
                     <th scope="col">حذف</th>
@@ -115,6 +128,8 @@
                     <td>{{dp.quantite}}</td>
                     <td>{{dp.attribut6}}</td>
                     <td>{{dp.unite}}</td>
+                    <td>{{dp.attribut5}}</td>
+                    <td>{{dp.attribut4}}</td>
                     <td>{{dp.prix}}</td>
                     <td>{{dp.tot}}</td>
                     <td><a (click)="del1(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
@@ -126,6 +141,8 @@
                     <td>{{dp.quantite}}</td>
                     <td>{{dp.attribut6}}</td>
                     <td>{{dp.unite}}</td>
+                    <td>{{dp.attribut5}}</td>
+                    <td>{{dp.attribut4}}</td>
                     <td>{{dp.prix}}</td>
                     <td>{{dp.tot}}</td>
                     <td><a (click)="del11(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>

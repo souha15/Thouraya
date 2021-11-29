@@ -34,8 +34,8 @@
           </thead>
           <tbody>
 
-            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
-              <th scope="row">{{cg.id}}</th>
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; let i = index">
+              <th scope="row">{{(p-1) * count + i + 1}}</th>
               <td (click)="populateForm(cg)">{{cg.langue}}</td>
               <td (click)="populateForm(cg)">{{cg.org}}</td>
               <td (click)="populateForm(cg)">{{cg.userNameCreator}}</td>
@@ -87,6 +87,8 @@
         <div class="modal-body" style="direction:rtl; text-align:right;">
           <div class="task-form form-row stop-form">
             <div class="mx-auto my-3 text-center">
+              <textarea (change)="getRefuseRaison($event)" rows="5" cols="330"></textarea>
+              <br />
               <button class="btn btn-success px-2 ml-3" (click)="refuse()"><span class="ml-2"><i class="fa fa-save"></i></span> موافق</button>
               <button class="btn btn-danger px-2 ml-3"><span class="ml-2"><i class="fa fa-times"></i></span> إلغاء</button>
             </div>

@@ -40,7 +40,6 @@ export class AttestationTravailRhListComponent implements OnInit {
   getCreance() {
     this.atService.Get().subscribe(res => {
       this.GfactList = res;
-
       this.factList = this.GfactList.filter(item => item.etat == "في الإنتظار")
 
     })
@@ -55,8 +54,10 @@ export class AttestationTravailRhListComponent implements OnInit {
     this.factId = facture.id;
     this.fact = Object.assign({}, facture);
   }
-
-
+  reason: string;
+  getRefuseRaison(event) {
+    this.reason = event.target.value;
+  }
   date = new Date().toLocaleDateString();
   accept() {
     this.fact.etat = "موافقة"
@@ -79,6 +80,7 @@ export class AttestationTravailRhListComponent implements OnInit {
     this.fact.etatrh = "رفض"
     this.fact.idrh = this.UserIdConnected;
     this.fact.nomrh = this.UserNameConnected;
+    this.fact.attribut6 = this.reason
 
     this.atService.PutObservableE(this.fact).subscribe(res => {
       this.getCreance();
@@ -88,5 +90,7 @@ export class AttestationTravailRhListComponent implements OnInit {
           this.toastr.warning('لم يتم رفض الطلب ', ' فشل');
         })
     }
-  
+  p: Number = 1;
+
+  count: Number = 5;
 }

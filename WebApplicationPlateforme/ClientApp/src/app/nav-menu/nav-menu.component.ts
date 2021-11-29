@@ -113,7 +113,7 @@ export class NavMenuComponent implements OnInit {
   demg1: DemPayCheque[] = [];
   demg2: DemPayCheque[] = [];
   admin: boolean;
-  allowedRoles = ["DIRECTORGENERAL", "DIRECTORADMN", "DIRECTORETAB", "ADMINISTRATEUR"];
+  allowedRoles = ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORETAB', 'DIRECTORADMN', 'RESSOURCEHUMAINE', 'RESPFINANCE', 'DAWAAPRIV', 'DOTPRIV', 'FINPRIV', 'DIRPRIV'];
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
