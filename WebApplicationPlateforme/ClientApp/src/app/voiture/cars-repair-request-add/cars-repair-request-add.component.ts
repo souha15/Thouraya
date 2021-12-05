@@ -89,10 +89,7 @@ date = new Date().toLocaleDateString();
       this.isValidFormSubmitted = false;
 
     }
-    else {
-      if (this.exists == false) {
-        this.toastr.error('يرجى التحقق من رقم اللوحة')
-      }
+   
       else {
         this.isValidFormSubmitted = true
         this.voiture.idUserCreator = this.UserIdConnected;
@@ -129,7 +126,7 @@ date = new Date().toLocaleDateString();
           }
         )
 
-      }
+      
     }
   }
 
@@ -329,7 +326,7 @@ date = new Date().toLocaleDateString();
         }
       );
       this.fileslist3.push(this.file.name);
-      console.log(this.fileslist1)
+
     }
   }
 }

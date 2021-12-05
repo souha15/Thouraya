@@ -1383,7 +1383,7 @@ namespace WebApplicationPlateforme.Migrations.Dawaa
                     b.ToTable("TypeRecrutement");
                 });
 
-            modelBuilder.Entity("WebApplicationPlateforme.Model.gestion_de_stock.RetourStock", b =>
+            modelBuilder.Entity("WebApplicationPlateforme.Model.TechnicalDemands.DemTech", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -1408,7 +1408,217 @@ namespace WebApplicationPlateforme.Migrations.Dawaa
                     b.Property<string>("attribut6")
                         .HasColumnType("text");
 
-                    b.Property<int>("attribut7")
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatdate")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<int>("idadmin")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("marque")
+                        .HasColumnType("text");
+
+                    b.Property<string>("modele")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomadmin")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomprog")
+                        .HasColumnType("text");
+
+                    b.Property<string>("numorg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("numsalle")
+                        .HasColumnType("text");
+
+                    b.Property<string>("numvideo")
+                        .HasColumnType("text");
+
+                    b.Property<string>("techid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("technnom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("typedem")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("demTeches");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.TechnicalDemands.TypeTechDem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TypeTechDems");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.VenteServices.OffreVente", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("idVente")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("path")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idVente");
+
+                    b.ToTable("OffreVentes");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.VenteServices.ServiceVente", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("admin")
+                        .HasColumnType("text");
+
+                    b.Property<int>("adminId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("attribut1")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datedot")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateenreg")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datefin")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etat")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatdot")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatfin")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("iddot")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idfin")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomdot")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomfin")
+                        .HasColumnType("text");
+
+                    b.Property<string>("remarque")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("ServiceVentes");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.VenteServices.TypeServiceVente", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TypeServiceVentes");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.gestion_de_stock.RetourStock", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<int>("benId")
                         .HasColumnType("integer");
 
                     b.Property<string>("bennom")
@@ -1444,7 +1654,7 @@ namespace WebApplicationPlateforme.Migrations.Dawaa
                     b.Property<int>("stockId")
                         .HasColumnType("integer");
 
-                    b.Property<string>("type")
+                    b.Property<string>("typestock")
                         .HasColumnType("text");
 
                     b.Property<string>("userNameCreator")
@@ -1456,7 +1666,7 @@ namespace WebApplicationPlateforme.Migrations.Dawaa
 
                     b.HasIndex("stockId");
 
-                    b.ToTable("RetourStocks");
+                    b.ToTable("RetourStock");
                 });
 
             modelBuilder.Entity("WebApplicationPlateforme.Model.User.ApplicationUser", b =>
@@ -1791,6 +2001,29 @@ namespace WebApplicationPlateforme.Migrations.Dawaa
                     b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
                         .WithMany()
                         .HasForeignKey("userId");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.TechnicalDemands.DemTech", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.VenteServices.OffreVente", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.VenteServices.ServiceVente", "ServiceVente")
+                        .WithMany()
+                        .HasForeignKey("idVente")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.VenteServices.ServiceVente", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
                 });
 
             modelBuilder.Entity("WebApplicationPlateforme.Model.gestion_de_stock.RetourStock", b =>

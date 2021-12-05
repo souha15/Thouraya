@@ -17,6 +17,8 @@ using WebApplicationPlateforme.Model.MusulumanFemme;
 using WebApplicationPlateforme.Model.NotificationSettings;
 using WebApplicationPlateforme.Model.Pointage;
 using WebApplicationPlateforme.Model.Ressource_Humaines;
+using WebApplicationPlateforme.Model.TechnicalDemands;
+using WebApplicationPlateforme.Model.VenteServices;
 
 namespace WebApplicationPlateforme.Data
 {
@@ -69,5 +71,14 @@ namespace WebApplicationPlateforme.Data
 
         /***Stockage **/
         public DbSet<RetourStock> RetourStock { get; set; }
+        /******** Dem Technical ******/
+        public DbSet <TypeTechDem> TypeTechDems { get; set; }
+        public DbSet<DemTech> demTeches { get; set; }
+
+        /***** Service Vente **/ 
+
+        public DbSet <TypeServiceVente> TypeServiceVentes { get; set; }
+        public DbSet <ServiceVente> ServiceVentes { get; set; }
+        public DbSet <OffreVente> OffreVentes { get; set; }
     }
 }

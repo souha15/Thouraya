@@ -719,6 +719,19 @@ import { RetyourStockEditComponent } from './Gestion Stock/RetourStock/retyour-s
 import { RetyourStockListComponent } from './Gestion Stock/RetourStock/retyour-stock-list/retyour-stock-list.component';
 import { RetyourStockDetailsComponent } from './Gestion Stock/RetourStock/retyour-stock-details/retyour-stock-details.component';
 import { AllDemandsComponent } from './all-demands/all-demands.component';
+import { TypeDemTechCrudComponent } from './TechnicalDemands/Settings/type-dem-tech-crud/type-dem-tech-crud.component';
+import { MenuDirDemTechComponent } from './TechnicalDemands/Menus/menu-dir-dem-tech/menu-dir-dem-tech.component';
+import { MenuUserDemTechComponent } from './TechnicalDemands/Menus/menu-user-dem-tech/menu-user-dem-tech.component';
+import { DemTechAddUserComponent } from './TechnicalDemands/main/dem-tech-add-user/dem-tech-add-user.component';
+import { DemTechListUserComponent } from './TechnicalDemands/main/dem-tech-list-user/dem-tech-list-user.component';
+import { DemTechListDirrComponent } from './TechnicalDemands/main/dem-tech-list-dirr/dem-tech-list-dirr.component';
+import { DemTechEditComponent } from './TechnicalDemands/main/dem-tech-edit/dem-tech-edit.component';
+import { DemTechDetailsComponent } from './TechnicalDemands/main/dem-tech-details/dem-tech-details.component';
+import { ServiceVenteAddComponent } from './ServiceVente/service-vente-add/service-vente-add.component';
+import { ServiceVenteListComponent } from './ServiceVente/service-vente-list/service-vente-list.component';
+import { ServiceVenteListFinComponent } from './ServiceVente/service-vente-list-fin/service-vente-list-fin.component';
+import { ServiceVenteListDotComponent } from './ServiceVente/service-vente-list-dot/service-vente-list-dot.component';
+import { CrudTypeServiceVenteComponent } from './ServiceVente/crud-type-service-vente/crud-type-service-vente.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -1403,6 +1416,19 @@ import { AllDemandsComponent } from './all-demands/all-demands.component';
     RetyourStockListComponent,
     RetyourStockDetailsComponent,
     AllDemandsComponent,
+    TypeDemTechCrudComponent,
+    MenuDirDemTechComponent,
+    MenuUserDemTechComponent,
+    DemTechAddUserComponent,
+    DemTechListUserComponent,
+    DemTechListDirrComponent,
+    DemTechEditComponent,
+    DemTechDetailsComponent,
+    ServiceVenteAddComponent,
+    ServiceVenteListComponent,
+    ServiceVenteListFinComponent,
+    ServiceVenteListDotComponent,
+    CrudTypeServiceVenteComponent,
   ],
   imports: [
 
@@ -2981,6 +3007,27 @@ import { AllDemandsComponent } from './all-demands/all-demands.component';
       {
         path: 'all-demands', component: AllDemandsComponent, canActivate: [AuthGuard], data: {
           permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORETAB', 'DIRECTORADMN', 'RESSOURCEHUMAINE', 'RESPFINANCE', 'DAWAAPRIV', 'DOTPRIV', 'FINPRIV','DIRPRIV'] }},
+
+    /****** TechDemands**/
+ 
+      { path: 'type-dem-tech-crud', component: TypeDemTechCrudComponent , canActivate: [AuthGuard] },
+      { path: 'menu-dir-dem-tech', component: MenuDirDemTechComponent, canActivate: [AuthGuard] },
+      { path: 'menu-user-dem-tech', component: MenuUserDemTechComponent, canActivate: [AuthGuard] },
+      { path: 'dem-tech-add-user', component: DemTechAddUserComponent, canActivate: [AuthGuard] },
+      { path: 'dem-tech-list-user', component: DemTechListUserComponent, canActivate: [AuthGuard] },
+      { path: 'dem-tech-list-dirr', component: DemTechListDirrComponent, canActivate: [AuthGuard] },
+      { path: 'dem-tech-edit', component: DemTechEditComponent, canActivate: [AuthGuard] },
+      { path: 'dem-tech-edit/:id', component: DemTechEditComponent , canActivate: [AuthGuard] },
+      { path: 'dem-tech-details', component: DemTechDetailsComponent , canActivate: [AuthGuard] },
+      { path: 'dem-tech-details/:id', component: DemTechDetailsComponent, canActivate: [AuthGuard] },
+
+    /** Service Vente **/
+      { path: 'service-vente-add', component: ServiceVenteAddComponent, canActivate: [AuthGuard] },
+      { path: 'service-vente-list', component: ServiceVenteListComponent, canActivate: [AuthGuard] },
+      { path: 'service-vente-list-fin', component: ServiceVenteListFinComponent, canActivate: [AuthGuard] },
+      { path: 'service-vente-list-dot', component: ServiceVenteListDotComponent, canActivate: [AuthGuard] },
+      { path: 'crud-type-service-vente', component: CrudTypeServiceVenteComponent, canActivate: [AuthGuard] },
+
     ])
   ],/*,  {
     provide: HTTP_INTERCEPTORS,

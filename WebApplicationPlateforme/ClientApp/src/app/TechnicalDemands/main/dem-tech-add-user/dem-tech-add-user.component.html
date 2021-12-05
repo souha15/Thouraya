@@ -1,0 +1,99 @@
+
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head">طلب خدمة تقنية</h3>
+      </header>
+      <form class="form-row task-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <div class="col-md-6">
+          <label for="">نوع الطلب </label>
+          <input type="text" name="attribut2" #attribut2="ngModel" [(ngModel)]="dem.attribut2" />
+
+        </div>
+        <div class="col-md-6">
+          <label for="">الادارة</label>
+          <select name="nomadmin" #nomadmin="ngModel" [(ngModel)]="dem.nomadmin">
+            <option [ngValue]="undefined" selected disabled>الادارة</option>
+            <option *ngFor="let item of adminList" value="{{item.nom}}">{{item.nom}}</option>
+
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="">الخدمات</label>
+          <select name="typedem" #typedem="ngModel" [(ngModel)]="dem.typedem" required (change)="getService($event)">
+            <option [ngValue]="undefined" selected disabled>الخدمات</option>
+            <option *ngFor="let item of typeList" value="{{item.nom}}">{{item.nom}}</option>
+            <option value="أخرى">أخرى </option>
+
+          </select>
+          <div *ngIf="typedem.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+            مطلوب الخدمات .
+          </div>
+        </div>
+        <div class="col-md-6" *ngIf="imprimante">
+          <label for="">الشركة</label>
+
+          <input type="text" name="marque" #marque="ngModel" [(ngModel)]="dem.marque" />
+
+        </div>
+
+        <div class="col-md-6" *ngIf="imprimante">
+          <label for="">الموديل </label>
+
+          <input type="text" name="modele" #modele="ngModel" [(ngModel)]="dem.modele" />
+
+        </div>
+
+        <div class="col-md-6" *ngIf="prog">
+          <label for="">إسم البرنامج</label>
+
+          <input type="text" name="nomprog" #nomprog="ngModel" [(ngModel)]="dem.nomprog" />
+
+        </div>
+
+        <div class="col-md-6" *ngIf="video">
+          <label for="">رقم الغرفة</label>
+
+          <input type="text" name="numsalle" #numsalle="ngModel" [(ngModel)]="dem.numsalle" />
+
+        </div>
+        <div class="col-md-6" *ngIf="video">
+          <label for="">رقم الجهة</label>
+
+          <input type="text" name="numorg" #numorg="ngModel" [(ngModel)]="dem.numorg" />
+
+        </div>
+        <div class="col-md-6" *ngIf="video">
+          <label for="">رقم الفيديو كونفرنس</label>
+
+          <input type="text" name="numvideo" #numvideo="ngModel" [(ngModel)]="dem.numvideo" />
+
+        </div>
+        <div class="col-md-6" *ngIf="autre">
+          <label for="req-det">أخرى </label>
+          <textarea id="req-det"
+                    class="form-control" name="attribut6" #attribut6="ngModel" [(ngModel)]="dem.attribut6"></textarea>
+        </div>
+
+        <div class="col-12 text-center text-md-left mt-3">
+          <input class="btn btn-info"
+                 style="width: 130px;"
+                 type="submit"
+                 value="ارسال الطلب" />
+        </div>
+      </form>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+</footer>
