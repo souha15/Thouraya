@@ -38,9 +38,9 @@
           <tbody>
             <tr *ngFor="let cg of demList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
               <th scope="row">{{(p-1) * count + i + 1}}</th>
+              <td (click)="populateForm(cg)">{{cg.dateenreg}}</td>
               <td (click)="populateForm(cg)">{{cg.userNameCreator}}</td>
               <td (click)="populateForm(cg)">{{cg.admin}}</td>
-              <td (click)="populateForm(cg)">{{cg.dateenreg}}</td>
               <td (click)="populateForm(cg)">{{cg.type}}</td>
               <td (click)="populateForm(cg)">{{cg.remarque}}</td>
               <td (click)="populateForm(cg)"

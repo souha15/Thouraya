@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using WebApplicationPlateforme.Model.AchatVoitures;
 using WebApplicationPlateforme.Model.ActivitePart;
 using WebApplicationPlateforme.Model.AdministrativeCommunication;
 using WebApplicationPlateforme.Model.ChangerRib;
@@ -34,7 +35,8 @@ namespace WebApplicationPlateforme.Data
         /****Activity ***/
 
         public DbSet<TypeActivitee> TypeActivitee { get; set; }
-        public DbSet<Activitee> Activitee { get; set; }
+        public DbSet<Activiteee> Activitee { get; set; }
+  
 
         /**** Type Transaction **/
         public DbSet<TypeTransaction> TypeTransaction { get; set; }
@@ -80,5 +82,28 @@ namespace WebApplicationPlateforme.Data
         public DbSet <TypeServiceVente> TypeServiceVentes { get; set; }
         public DbSet <ServiceVente> ServiceVentes { get; set; }
         public DbSet <OffreVente> OffreVentes { get; set; }
+
+        /**Activite For Women */ 
+
+        public DbSet <ActiviteeWomen> ActiviteeWomens { get; set; }
+        public DbSet <TypeActiviteeForWomen> TypeActiviteeForWomens { get; set; }
+        public DbSet <ActiviteCompagne> ActiviteCompagnes { get; set; }
+        public DbSet <TypeActiviteCompagne> TypeActiviteCompagnes { get; set; }
+        public DbSet <ActiviteEducation> ActiviteEducations { get; set; }
+        public DbSet <TypeActiviteEducation> TypeActiviteEducation { get; set; }
+        public DbSet<ActivitePrepa> ActivitePrepas { get; set; }
+        public DbSet<TypeActivitePrepa> TypeActivitePrepas { get; set; }
+        public DbSet<ActiviteeImmigrant> ActiviteeImmigrants { get; set; }
+        public DbSet<TypeActiviteeImmigrant> TypeActiviteeImmigrants { get; set; }
+        public DbSet<ActiviteDawa> activiteDawas { get; set; }
+        public DbSet<TypeActiviteDawa> TypeActiviteDawas { get; set; }
+
+        public DbSet<ActiviteDawaElec> ActiviteDawaElecs { get; set; }
+        public DbSet<TypeActiviteDawaaElec> TypeActiviteDawaaElecs { get; set; }
+
+        /********* Voiture Achat ***/
+
+        public DbSet <DemandeVoiture> DemandeVoitures { get; set; }
+
     }
 }

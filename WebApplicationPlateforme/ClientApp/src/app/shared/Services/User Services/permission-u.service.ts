@@ -26,6 +26,10 @@ export class PermissionUService {
     return this.http.post<PermissionU>(this.rootURL + '/PermissionUs', PermissionU, this.headers);
   }
 
+  geByUser(id) {
+    return this.http.get<PermissionU[]>(this.rootURL + '/PermissionByUser/'+id);
+  }
+
   PutObservableE(Transaction: PermissionU) {
     return this.http.put<PermissionU>(this.rootURL + '/PermissionUs/' + Transaction.id, Transaction, this.headers);
 

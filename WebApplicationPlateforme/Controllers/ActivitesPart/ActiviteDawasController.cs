@@ -8,52 +8,52 @@ using Microsoft.EntityFrameworkCore;
 using WebApplicationPlateforme.Data;
 using WebApplicationPlateforme.Model.ActivitePart;
 
-namespace WebApplicationPlateforme.Controllers.NewControllersForDawa
+namespace WebApplicationPlateforme.Controllers.ActivitesPart
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ActiviteesController : ControllerBase
+    public class ActiviteDawasController : ControllerBase
     {
         private readonly DawaaContext _context;
 
-        public ActiviteesController(DawaaContext context)
+        public ActiviteDawasController(DawaaContext context)
         {
             _context = context;
         }
 
-        // GET: api/Activitees
+        // GET: api/ActiviteDawas
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Activitee>>> GetActivitee()
+        public async Task<ActionResult<IEnumerable<ActiviteDawa>>> GetactiviteDawas()
         {
-            return await _context.Activitee.ToListAsync();
+            return await _context.activiteDawas.ToListAsync();
         }
 
-        // GET: api/Activitees/5
+        // GET: api/ActiviteDawas/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Activitee>> GetActivitee(int id)
+        public async Task<ActionResult<ActiviteDawa>> GetActiviteDawa(int id)
         {
-            var activitee = await _context.Activitee.FindAsync(id);
+            var activiteDawa = await _context.activiteDawas.FindAsync(id);
 
-            if (activitee == null)
+            if (activiteDawa == null)
             {
                 return NotFound();
             }
 
-            return activitee;
+            return activiteDawa;
         }
 
-        // PUT: api/Activitees/5
+        // PUT: api/ActiviteDawas/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutActivitee(int id, Activitee activitee)
+        public async Task<IActionResult> PutActiviteDawa(int id, ActiviteDawa activiteDawa)
         {
-            if (id != activitee.Id)
+            if (id != activiteDawa.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(activitee).State = EntityState.Modified;
+            _context.Entry(activiteDawa).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace WebApplicationPlateforme.Controllers.NewControllersForDawa
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!ActiviteeExists(id))
+                if (!ActiviteDawaExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace WebApplicationPlateforme.Controllers.NewControllersForDawa
             return NoContent();
         }
 
-        // POST: api/Activitees
+        // POST: api/ActiviteDawas
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Activitee>> PostActivitee(Activitee activitee)
+        public async Task<ActionResult<ActiviteDawa>> PostActiviteDawa(ActiviteDawa activiteDawa)
         {
-            _context.Activitee.Add(activitee);
+            _context.activiteDawas.Add(activiteDawa);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetActivitee", new { id = activitee.Id }, activitee);
+            return CreatedAtAction("GetActiviteDawa", new { id = activiteDawa.Id }, activiteDawa);
         }
 
-        // DELETE: api/Activitees/5
+        // DELETE: api/ActiviteDawas/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Activitee>> DeleteActivitee(int id)
+        public async Task<ActionResult<ActiviteDawa>> DeleteActiviteDawa(int id)
         {
-            var activitee = await _context.Activitee.FindAsync(id);
-            if (activitee == null)
+            var activiteDawa = await _context.activiteDawas.FindAsync(id);
+            if (activiteDawa == null)
             {
                 return NotFound();
             }
 
-            _context.Activitee.Remove(activitee);
+            _context.activiteDawas.Remove(activiteDawa);
             await _context.SaveChangesAsync();
 
-            return activitee;
+            return activiteDawa;
         }
 
-        private bool ActiviteeExists(int id)
+        private bool ActiviteDawaExists(int id)
         {
-            return _context.Activitee.Any(e => e.Id == id);
+            return _context.activiteDawas.Any(e => e.Id == id);
         }
     }
 }

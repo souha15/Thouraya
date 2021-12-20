@@ -18,6 +18,10 @@
           <span><i class="fa fa-list"></i></span>
           قائمة الفعاليات
         </a>
+        <a [routerLink]="['/events-report']" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-file-excel"></i></span>
+          تقارير الفعاليات
+        </a>
       </nav>
 
       <header>
@@ -382,6 +386,9 @@
             </div>
           </div>
           <div class="col-md-12">
+            l-
+            
+            la
             <label class="main"><span><i class="fa fa-file-upload"></i></span> المرفقات</label>
             <input type="file" id="contract" (change)="upload1($event)" #inputFile>
             <label for="contract" style="background: #91C3D8 !important;cursor:pointer"><span><i class="fa fa-images fa-lg"></i></span> صور <span class="mr-4"><i class="fa fa-upload"></i></span></label>

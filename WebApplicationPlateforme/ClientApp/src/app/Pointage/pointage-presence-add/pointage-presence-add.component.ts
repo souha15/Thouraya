@@ -27,17 +27,15 @@ export class PointagePresenceAddComponent implements OnInit {
   }
 
 
-  plist: Pointage[] = [];
-  plist2: Pointage[] = [];
+  plist: Pointage = new Pointage();
   fulldate = new Date().toLocaleDateString();
   btnshow: boolean = true;
   tableshow: boolean = false;
   pointer: boolean = false;
   getPointage() {
-    this.PointageService.Get().subscribe(res => {
-      this.plist2 = res
-      this.plist = this.plist2.filter(item => item.idUserCreator == this.UserIdConnected && item.datePresence == this.date)
-      if (this.plist.length == 0) {
+    this.PointageService.GetByDate(this.UserIdConnected).subscribe(res => {
+      this.plist = res
+      if (this.plist == null) {
         this.tableshow = false;
         this.pointer = true;
         this.btnshow = true;
@@ -63,69 +61,44 @@ export class PointagePresenceAddComponent implements OnInit {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
       this.dirId = res.attribut1;
+      console.log(this.UserIdConnected)
+      this.PointageService.GetByDate(this.UserIdConnected).subscribe(res => {
+        this.point1 = res
+        if (this.point1 == null) {
+          this.tableshow = false;
+          this.pointer = true;
+          this.btnshow = true;
+        } else {
+          this.tableshow = true;
+          this.btnshow = false;
+
+        }
+      })
     })
 
   }
 
- 
- // date = new Date().toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', hour12: false, minute: '2-digit', second: '2-digit' })
-  date = new Date().toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' })
-  timeHour: number;
-  timeMinute: number;
-  month: number;
-  day: number;
-  year: number;
-  Time =new Date().toLocaleTimeString(undefined, { hour: '2-digit', hour12: false, minute: '2-digit' });
+  getData() {
+
+    this.PointageService.GetByDate(this.UserIdConnected).subscribe(res => {
+      this.point1 = res
+
+    })
+  }
+
+  point1: Pointage = new Pointage();
   point: Pointage = new Pointage();
-
   onSubmit(form: NgForm) {
+
+
     if (this.codesaisie == this.code) {
-      //this.timeHour = this.date.getHours();
-      //this.timeMinute = this.date.getMinutes();
-      //this.month = this.date.getMonth() + 1;
-      //this.day = this.date.getDay();
-      //this.year = this.date.getFullYear();
-     
-      this.point.datePresence = this.date;
-      this.point.timePresence = this.Time
-      this.day = +this.date.substr(0, 2)
-      this.month = +this.date.substr(3, 2)
-      this.year = +this.date.substr(6, 4)
 
-      this.point.code = this.codesaisie.toString();
-      if (this.month == 1) {
-        this.point.attribut2 = "يناير"
-      } else if (this.month == 2) {
-        this.point.attribut2 = "فبراير"
-      } else if (this.month == 3) {
-        this.point.attribut2 = "مارس"
-      } else if (this.month == 4) {
-        this.point.attribut2 = "إبريل"
-      } else if (this.month == 5) {
-        this.point.attribut2 = "مايو"
-      } else if (this.month == 6) {
-        this.point.attribut2 = "يونيو"
-      } else if (this.month == 7) {
-        this.point.attribut2 = "يوليو"
-      } else if (this.month == 8) {
-        this.point.attribut2 = "أغسطس"
-      } else if (this.month == 9) {
-        this.point.attribut2 = "سبتمبر"
-      } else if (this.month == 10) {
-        this.point.attribut2 = "أكتوبر"
-      } else if (this.month == 11) {
-        this.point.attribut2 = "نوفمبر"
-      } else {
-        this.point.attribut2 = "ديسمبر"
-      }
-
-      this.point.attribut3 = this.year.toString();
-      this.point.mois = this.month.toString();
+      //this.point.code = this.codesaisie.toString();
       this.point.userNameCreator = this.UserNameConnected;
       this.point.idUserCreator = this.UserIdConnected;
       this.point.attribut6 = this.dirId
- 
       this.PointageService.Add(this.point).subscribe(res => {
+        this.getData();
         this.btnshow = false;
         this.toastr.success(" تم تسجيل الحضور بنجاح ")
         this.tableshow = true;

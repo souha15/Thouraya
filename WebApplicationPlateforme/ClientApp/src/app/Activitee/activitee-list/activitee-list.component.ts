@@ -21,7 +21,8 @@ export class ActiviteeListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
-   // this.getActiviteList();
+    this.getTypeActiviteList();
+   this.getActiviteList();
 
   }
   p: Number = 1;
@@ -39,11 +40,6 @@ export class ActiviteeListComponent implements OnInit {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
       this.UserEtabId = res.idDepartement;
-      if (res.idDepartement != null) {
-        this.getActiviteListG(res.idDepartement);
-      } else {
-        this.getActiviteListG(res.idAdministration);
-      }
    
     })
 
@@ -53,8 +49,8 @@ export class ActiviteeListComponent implements OnInit {
 
   list: Activite[] = [];
   list2: Activite[] = [];
-  getActiviteListG(id1) {
-    this.activiteService.GetByAdmin(id1).subscribe(res => {
+  getActiviteList() {
+    this.activiteService.List().subscribe(res => {
       this.list = res;
     })
   }
@@ -68,7 +64,7 @@ export class ActiviteeListComponent implements OnInit {
   //Get Type Activite List
 
   typeList: TbListening[] = [];
-  getActiviteList() {
+  getTypeActiviteList() {
     this.typeService.GetTalent().subscribe(res => {
       this.typeList = res;
     })
@@ -89,7 +85,7 @@ export class ActiviteeListComponent implements OnInit {
       this.ac.dateEnreg = this.date;
       this.activiteService.PutObservableE(this.ac).subscribe(
         res => {
-          this.getUserConnected();
+          this.getActiviteList();
           this.toastr.success('تم التحديث بنجاح', 'نجاح')
           form.resetForm();
         },
@@ -108,7 +104,7 @@ export class ActiviteeListComponent implements OnInit {
 
       this.activiteService.Delete(Id)
         .subscribe(res => {
-          this.getUserConnected()
+          this.getActiviteList()
           this.toastr.success("تم الحذف  بنجاح", "نجاح");
         },
 

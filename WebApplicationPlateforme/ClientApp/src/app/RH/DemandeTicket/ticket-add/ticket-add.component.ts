@@ -89,7 +89,7 @@ export class TicketAddComponent implements OnInit {
   date = new Date().toLocaleDateString('fr-Fr',this.options);
   onSubmit(form: NgForm) {
 
-    if (form.invalid) {
+   /*if (form.invalid) {
 
       this.isValidFormSubmitted = false;
     }
@@ -123,8 +123,9 @@ export class TicketAddComponent implements OnInit {
         err => {
           this.toastr.error("فشل تسجيل التذكرة", " تسجيل التذكرة")
         })
-
-    }
+        }*/
+    this.toastr.error("لايمكن رفع تذكرة جديدة في الوقت الحالي")
+    
   }
   public response: { 'dbpathsasstring': '' };
   public isCreate: boolean;

@@ -42,6 +42,10 @@ export class PointageService {
     return this.http.post(this.rootURL + '/PointageUsers', this.formData, this.headers);
   }
 
+  GetByDate(Id) {
+    return this.http.get <Pointage>(this.rootURL + '/GetPointageDataByUser/'+ Id);
+  }
+
   //Get Pointage List
 
   Get(): Observable<Pointage[]> {

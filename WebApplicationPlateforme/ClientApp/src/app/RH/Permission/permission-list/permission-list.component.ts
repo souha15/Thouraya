@@ -21,7 +21,6 @@ export class PermissionListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
-    this.CongeList();
     this.resetForm();
   }
   p: Number = 1;
@@ -48,6 +47,9 @@ export class PermissionListComponent implements OnInit {
       this.userc = res
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
+      this.congeService.geByUser(this.UserIdConnected).subscribe(res => {
+        this.filtredCongeList = res
+      })
     })
 
   }
@@ -57,9 +59,8 @@ export class PermissionListComponent implements OnInit {
   congeList: PermissionU[] = [];
   filtredCongeList: PermissionU[] = [];
   CongeList() {
-    this.congeService.Get().subscribe(res => {
-      this.congeList = res
-      this.filtredCongeList = this.congeList.filter(item => item.idUserCreator == this.UserIdConnected)
+    this.congeService.geByUser(this.UserIdConnected).subscribe(res => {
+      this.filtredCongeList = res
     })
   }
 

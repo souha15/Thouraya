@@ -29,6 +29,10 @@ export class RecrutementService {
     return this.http.post<Recrutement>(this.rootURL + '/Recrutements', dotation, this.headers);
   }
 
+  getDirList(id) {
+    return this.http.get<Recrutement[]>(this.rootURL + '/RecrutementUsers/'+id);
+  }
+
   //Save Type Dotation
   Post() {
     return this.http.post(this.rootURL + '/Recrutements', this.formData, this.headers);

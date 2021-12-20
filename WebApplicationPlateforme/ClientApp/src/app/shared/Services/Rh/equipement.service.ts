@@ -33,6 +33,11 @@ export class EquipementService {
     return this.http.post(this.rootURL + '/Equipements', this.formData, this.headers);
   }
 
+  //Save Type Dotation
+  GetByUser(id) {
+    return this.http.get<Equipement[]>(this.rootURL + '/EquipementByUserCreator/'+id);
+  }
+
   //Get Type dotation List
 
   GetDotation(): Observable<Equipement[]> {

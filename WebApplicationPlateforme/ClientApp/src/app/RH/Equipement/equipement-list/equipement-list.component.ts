@@ -24,7 +24,6 @@ export class EquipementListComponent implements OnInit {
     this.getNomEquipementList();
     this.getTypeEquipementList();
     this.getUserConnected();
-    this.CongeList();
     this.resetForm();
     this.UserList();
   }
@@ -69,6 +68,10 @@ export class EquipementListComponent implements OnInit {
       this.userc = res
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
+      console.log()
+      this.congeService.GetByUser(this.UserIdConnected).subscribe(res => {
+        this.filtredCongeList = res
+      })
     })
 
   }
@@ -78,10 +81,9 @@ export class EquipementListComponent implements OnInit {
 
   congeList: Equipement[] = [];
   filtredCongeList: Equipement[] = [];
-  CongeList() {
-    this.congeService.Get().subscribe(res => {
-      this.congeList = res
-      this.filtredCongeList = this.congeList.filter(item => item.idUserCreator == this.UserIdConnected)
+  CongeList(id) {
+    this.congeService.GetByUser(id).subscribe(res => {
+      this.filtredCongeList =res
     })
   }
 
@@ -92,7 +94,7 @@ export class EquipementListComponent implements OnInit {
     if (confirm('هل أنت متأكد من حذف هذا السجل؟')) {
       this.congeService.Delete(id)
         .subscribe(res => {
-          this.CongeList();
+          this.CongeList(this.UserIdConnected);
           this.toastr.success("تم الحذف  بنجاح", "نجاح");
         },
 
@@ -121,7 +123,7 @@ export class EquipementListComponent implements OnInit {
       this.congeService.Edit().subscribe(res => {
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
         this.resetForm();
-        this.CongeList();
+        this.CongeList(this.UserIdConnected);
       },
         err => {
           this.toastr.error('لم يتم التحديث  ', ' فشل');

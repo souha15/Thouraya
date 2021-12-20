@@ -732,6 +732,38 @@ import { ServiceVenteListComponent } from './ServiceVente/service-vente-list/ser
 import { ServiceVenteListFinComponent } from './ServiceVente/service-vente-list-fin/service-vente-list-fin.component';
 import { ServiceVenteListDotComponent } from './ServiceVente/service-vente-list-dot/service-vente-list-dot.component';
 import { CrudTypeServiceVenteComponent } from './ServiceVente/crud-type-service-vente/crud-type-service-vente.component';
+import { EventsReportComponent } from './Rapports/events-report/events-report.component';
+import { TypeActiviteForWomensComponent } from './Activitee/type-activite-for-womens/type-activite-for-womens.component';
+import { ActiviteForWomensComponent } from './Activitee/activite-for-womens/activite-for-womens.component';
+import { ActiviteForWomensListComponent } from './Activitee/activite-for-womens-list/activite-for-womens-list.component';
+import { ActiviteForWomensMenusComponent } from './Activitee/activite-for-womens-menus/activite-for-womens-menus.component';
+import { ActiviteDawaAddComponent } from './Activitee/Dawaa/activite-dawa-add/activite-dawa-add.component';
+import { ActiviteDawaListComponent } from './Activitee/Dawaa/activite-dawa-list/activite-dawa-list.component';
+import { DawaaMenuComponent } from './Activitee/Dawaa/dawaa-menu/dawaa-menu.component';
+import { ActiviteCompagneAddComponent } from './Activitee/Compagne/activite-compagne-add/activite-compagne-add.component';
+import { ActiviteCompagneListComponent } from './Activitee/Compagne/activite-compagne-list/activite-compagne-list.component';
+import { ActiviteCompagneMenuComponent } from './Activitee/Compagne/activite-compagne-menu/activite-compagne-menu.component';
+import { ActiviteEducationAddComponent } from './Activitee/Education/activite-education-add/activite-education-add.component';
+import { ActiviteEducationListComponent } from './Activitee/Education/activite-education-list/activite-education-list.component';
+import { EducationMenuComponent } from './Activitee/Education/education-menu/education-menu.component';
+import { ActiviteImmigrationAddComponent } from './Activitee/Immigration/activite-immigration-add/activite-immigration-add.component';
+import { ActiviteImmigrationListComponent } from './Activitee/Immigration/activite-immigration-list/activite-immigration-list.component';
+import { ImmigrationMenuComponent } from './Activitee/Immigration/immigration-menu/immigration-menu.component';
+import { ActivitePrepaAddComponent } from './Activitee/Prepa/activite-prepa-add/activite-prepa-add.component';
+import { ActivitePrepaListComponent } from './Activitee/Prepa/activite-prepa-list/activite-prepa-list.component';
+import { PrepaMenuComponent } from './Activitee/Prepa/prepa-menu/prepa-menu.component';
+import { ActiviteTypePrepaComponent } from './Activitee/Prepa/activite-type-prepa/activite-type-prepa.component';
+import { TypeActiviteeImmigrationComponent } from './Activitee/Immigration/type-activitee-immigration/type-activitee-immigration.component';
+import { TypeActiviteeEducationComponent } from './Activitee/Education/type-activitee-education/type-activitee-education.component';
+import { TypeActiviteeDawaaComponent } from './Activitee/Dawaa/type-activitee-dawaa/type-activitee-dawaa.component';
+import { TypeActiviteeCompagneComponent } from './Activitee/Compagne/type-activitee-compagne/type-activitee-compagne.component';
+import { ActiviteDawaElecAddComponent } from './Activitee/DawaaElec/activite-dawa-elec-add/activite-dawa-elec-add.component';
+import { ActiviteDawaElecListComponent } from './Activitee/DawaaElec/activite-dawa-elec-list/activite-dawa-elec-list.component';
+import { DawaElecMenuComponent } from './Activitee/DawaaElec/dawa-elec-menu/dawa-elec-menu.component';
+import { TypeDawaElecComponent } from './Activitee/DawaaElec/type-dawa-elec/type-dawa-elec.component';
+import { DemandeVoitureAddComponent } from './DemandeVoiture/demande-voiture-add/demande-voiture-add.component';
+import { DemandeVoitureListUserComponent } from './DemandeVoiture/demande-voiture-list-user/demande-voiture-list-user.component';
+import { DemandeVoitureListDirComponent } from './DemandeVoiture/demande-voiture-list-dir/demande-voiture-list-dir.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -1429,6 +1461,38 @@ import { CrudTypeServiceVenteComponent } from './ServiceVente/crud-type-service-
     ServiceVenteListFinComponent,
     ServiceVenteListDotComponent,
     CrudTypeServiceVenteComponent,
+    EventsReportComponent,
+    TypeActiviteForWomensComponent,
+    ActiviteForWomensComponent,
+    ActiviteForWomensListComponent,
+    ActiviteForWomensMenusComponent,
+    ActiviteDawaAddComponent,
+    ActiviteDawaListComponent,
+    DawaaMenuComponent,
+    ActiviteCompagneAddComponent,
+    ActiviteCompagneListComponent,
+    ActiviteCompagneMenuComponent,
+    ActiviteEducationAddComponent,
+    ActiviteEducationListComponent,
+    EducationMenuComponent,
+    ActiviteImmigrationAddComponent,
+    ActiviteImmigrationListComponent,
+    ImmigrationMenuComponent,
+    ActivitePrepaAddComponent,
+    ActivitePrepaListComponent,
+    PrepaMenuComponent,
+    ActiviteTypePrepaComponent,
+    TypeActiviteeImmigrationComponent,
+    TypeActiviteeEducationComponent,
+    TypeActiviteeDawaaComponent,
+    TypeActiviteeCompagneComponent,
+    ActiviteDawaElecAddComponent,
+    ActiviteDawaElecListComponent,
+    DawaElecMenuComponent,
+    TypeDawaElecComponent,
+    DemandeVoitureAddComponent,
+    DemandeVoitureListUserComponent,
+    DemandeVoitureListDirComponent,
   ],
   imports: [
 
@@ -2730,7 +2794,7 @@ import { CrudTypeServiceVenteComponent } from './ServiceVente/crud-type-service-
       { path: 'montage-employee-recep', component: MontageEmployeeRecepComponent, canActivate: [AuthGuard] },
       { path: 'montage-employee-recep/:id', component: MontageEmployeeRecepComponent, canActivate: [AuthGuard] },
 
-      { path: 'montage-employee-add-files', component: MontageEmployeeAddFilesComponent, canActivate: [AuthGuard] },
+      { path: 'montage-employee-add-files', component: MontageEmployeeAddFilesComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV','RHPRIV'] }},
       { path: 'montage-employee-add-files/:id', component: MontageEmployeeAddFilesComponent, canActivate: [AuthGuard] },
 
       { path: 'design-add', component: DesignAddComponent, canActivate: [AuthGuard] },
@@ -2785,7 +2849,7 @@ import { CrudTypeServiceVenteComponent } from './ServiceVente/crud-type-service-
 
       /* Retrait */ 
 
-      { path: 'menu-retrait', component: MenuRetraitComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV','EVFINPRIV'] }},
+      { path: 'menu-retrait', component: MenuRetraitComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV', 'EVFINPRIV','FINPRIV'] }},
 
       { path: 'menu-retrait-general', component: MenuRetraitGeneralComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'RETPRIV', 'EVFINPRIV'] }},
 
@@ -2914,6 +2978,11 @@ import { CrudTypeServiceVenteComponent } from './ServiceVente/crud-type-service-
 
       { path: 'rap-men', component: RapMenComponent, canActivate: [AuthGuard] },
 
+   { path: 'type-activite-for-womens', component: TypeActiviteForWomensComponent , canActivate: [AuthGuard] },
+   { path: 'activite-for-womens', component: ActiviteForWomensComponent, canActivate: [AuthGuard] },
+   { path: 'activite-for-womens-list', component: ActiviteForWomensListComponent, canActivate: [AuthGuard] },
+   { path: 'activite-for-womens-menus', component: ActiviteForWomensMenusComponent, canActivate: [AuthGuard] },
+
     /** Config System **/
 
       { path: 'config-front-system-crud', component: ConfigFrontSystemCrudComponent, canActivate: [AuthGuard] },
@@ -3027,6 +3096,67 @@ import { CrudTypeServiceVenteComponent } from './ServiceVente/crud-type-service-
       { path: 'service-vente-list-fin', component: ServiceVenteListFinComponent, canActivate: [AuthGuard] },
       { path: 'service-vente-list-dot', component: ServiceVenteListDotComponent, canActivate: [AuthGuard] },
       { path: 'crud-type-service-vente', component: CrudTypeServiceVenteComponent, canActivate: [AuthGuard] },
+/** Events Report **/
+
+      { path: 'events-report', component: EventsReportComponent, canActivate: [AuthGuard] },
+
+    /**** Activite Types ***/
+
+
+       { path: 'activite-dawa-add', component: ActiviteDawaAddComponent , canActivate: [AuthGuard] },
+
+      { path: 'activite-dawa-list', component: ActiviteDawaListComponent, canActivate: [AuthGuard] },
+
+      { path: 'dawaa-menu', component: DawaaMenuComponent, canActivate: [AuthGuard] },
+
+      { path: 'activite-compagne-add', component: ActiviteCompagneAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'activite-compagne-list', component: ActiviteCompagneListComponent, canActivate: [AuthGuard] },
+
+      { path: 'activite-compagne-menu', component: ActiviteCompagneMenuComponent, canActivate: [AuthGuard] },
+
+      { path: 'activite-education-add', component: ActiviteEducationAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'activite-education-list', component: ActiviteEducationListComponent, canActivate: [AuthGuard] },
+
+      { path: 'education-menu', component: EducationMenuComponent, canActivate: [AuthGuard] },
+
+      { path: 'activite-immigration-add', component: ActiviteImmigrationAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'activite-immigration-list', component: ActiviteImmigrationListComponent, canActivate: [AuthGuard] },
+
+      { path: 'immigration-menu', component: ImmigrationMenuComponent, canActivate: [AuthGuard] },
+
+      { path: 'activite-prepa-add', component: ActivitePrepaAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'activite-prepa-list', component: ActivitePrepaListComponent, canActivate: [AuthGuard] },
+
+      { path: 'prepa-menu', component: PrepaMenuComponent, canActivate: [AuthGuard] },
+
+      { path: 'activite-type-prepa', component: ActiviteTypePrepaComponent, canActivate: [AuthGuard] },
+
+      { path: 'type-activitee-immigration', component: TypeActiviteeImmigrationComponent, canActivate: [AuthGuard] },
+
+      { path: 'type-activitee-education', component: TypeActiviteeEducationComponent, canActivate: [AuthGuard] },
+
+      { path: 'type-activitee-dawaa', component: TypeActiviteeDawaaComponent, canActivate: [AuthGuard] },
+
+      { path: 'type-activitee-compagne', component: TypeActiviteeCompagneComponent, canActivate: [AuthGuard] },
+
+      { path: 'activite-dawa-elec-add', component: ActiviteDawaElecAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'activite-dawa-elec-list', component: ActiviteDawaElecListComponent, canActivate: [AuthGuard] },
+
+      { path: 'dawa-elec-menu', component: DawaElecMenuComponent, canActivate: [AuthGuard] },
+
+      { path: 'type-dawa-elec', component: TypeDawaElecComponent, canActivate: [AuthGuard] },
+
+
+    /** Demande Voiture **/
+
+    { path: 'demande-voiture-add', component: DemandeVoitureAddComponent , canActivate: [AuthGuard] },
+    { path: 'demande-voiture-list-user', component: DemandeVoitureListUserComponent, canActivate: [AuthGuard] },
+    { path: 'demande-voiture-list-dir', component: DemandeVoitureListDirComponent , canActivate: [AuthGuard] },
 
     ])
   ],/*,  {

@@ -20,10 +20,10 @@ namespace WebApplicationPlateforme.Model.ActivitePart
         }
 
         [HttpGet("{idetab?}")]
-        public List<Activitee> GetActiviteeByEtab(int? idetab)
+        public List<Activiteee> GetActiviteeByEtab(int? idetab)
         {
 
-            List<Activitee> UserTickets = new List<Activitee>();
+            List<Activiteee> UserTickets = new List<Activiteee>();
             var tcList = _context.Activitee.ToList();
           
             if(idetab != null) { 

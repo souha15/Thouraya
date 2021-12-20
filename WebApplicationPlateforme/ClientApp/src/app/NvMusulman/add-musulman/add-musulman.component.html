@@ -522,6 +522,19 @@
 
                         </div>
 
+
+                        <div class="ml-3">
+
+                          <label for="number">الوثائق</label>
+                          <ngx-dropzone (change)="uploadFiles($event);onSelect4($event)" class="dropzone" #inputFile>
+                            <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                            <ngx-dropzone-preview *ngFor="let f of files4" [removable]="true" (removed)="onRemove4(f)">
+                              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                            </ngx-dropzone-preview>
+                          </ngx-dropzone>
+
+
+                        </div>
                       </div>
                     </div>
                   </div>

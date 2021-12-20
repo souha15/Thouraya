@@ -32,17 +32,7 @@ export class PointageQuitterAddComponent implements OnInit {
   p2List: Pointage[] = [];
   tableshow: boolean = false;
   getTodayPoint() {
-    this.PointageService.Get().subscribe(res => {
-      this.p2List = res
-      this.pList = this.p2List.filter(item => item.idUserCreator == this.UserIdConnected && item.datePresence == this.date);
-      if (this.pList.length == 1) {
-        console.log(this.pList)
-        this.tableshow = true;
-        this.point = this.pList[0]
-      } else {
-        this.tableshow = false;
-      }
-    })
+  
   }
   codesaisie: number;
   captchacode(event) {
@@ -57,67 +47,43 @@ export class PointageQuitterAddComponent implements OnInit {
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
+    
+        this.PointageService.GetByDate(this.UserIdConnected).subscribe(res => {
+          this.point = res
+          if (this.point == null) {
+            this.tableshow = false;
+            //this.pointer = true;
+            this.btnshow = false;
+          } else {
+            this.tableshow = true;
+            this.btnshow = true;
+
+          }
+       
+    })
     })
 
   }
+  getData() {
 
-  date = new Date().toLocaleDateString(undefined, { year: 'numeric', month: '2-digit', day: '2-digit' })
-  fulldate = new Date().toLocaleDateString();
-  timeHour: number;
-  timeMinute: number;
-  month: number;
-  day: number;
-  year: number;
+    this.PointageService.GetByDate(this.UserIdConnected).subscribe(res => {
+      this.point = res
+
+    })
+  }
   point: Pointage = new Pointage();
-  Time = new Date().toLocaleTimeString(undefined, { hour: '2-digit', hour12: false, minute: '2-digit' });
+  point1: Pointage = new Pointage();
   btnshow: boolean = true;
 
   onSubmit(form: NgForm) {
     if (this.codesaisie == this.code) {
-      //this.timeHour = this.date.getHours();
-      //this.timeMinute = this.date.getMinutes();
-      //this.month = this.date.getMonth() + 1;
-      //this.day = this.date.getDay();
-      //this.year = this.date.getFullYear();
-      this.point.dateQuitter = this.date;
-      this.point.timeQuitter = this.Time
-      this.day = +this.date.substr(0, 2)
-      this.month = +this.date.substr(3, 2)
-      this.year = +this.date.substr(6, 4)
-      this.point.code = this.codesaisie.toString();
-      if (this.month == 1) {
-        this.point.attribut2 = "يناير"
-      } else if (this.month == 2) {
-        this.point.attribut2 = "فبراير"
-      } else if (this.month == 3) {
-        this.point.attribut2 = "مارس"
-      } else if (this.month == 4) {
-        this.point.attribut2 = "إبريل"
-      } else if (this.month == 5) {
-        this.point.attribut2 = "مايو"
-      } else if (this.month == 6) {
-        this.point.attribut2 = "يونيو"
-      } else if (this.month == 7) {
-        this.point.attribut2 = "يوليو"
-      } else if (this.month == 8) {
-        this.point.attribut2 = "أغسطس"
-      } else if (this.month == 9) {
-        this.point.attribut2 = "سبتمبر"
-      } else if (this.month == 10) {
-        this.point.attribut2 = "أكتوبر"
-      } else if (this.month == 11) {
-        this.point.attribut2 = "نوفمبر"
-      } else {
-        this.point.attribut2 = "ديسمبر"
-      }
 
-      this.point.attribut3 = this.year.toString();
-      this.point.mois = this.month.toString();
+      //this.point.code = this.codesaisie.toString();   
       this.point.userNameCreator = this.UserNameConnected;
       this.point.idUserCreator = this.UserIdConnected;
       this.PointageService.PutObservableE(this.point).subscribe(res => {
-        //this.btnshow = false;
         this.toastr.success(" تم تسجيل الإنصراف بنجاح ")
+        this.getData()
       },
         err => {
           this.toastr.error("فشل في تسجيل الإنصراف")

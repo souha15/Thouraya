@@ -60,6 +60,12 @@ namespace WebApplicationPlateforme.Controllers.Pointage
                 return BadRequest();
             }
 
+            DateTime date1 = DateTime.Now;
+
+            int hour = date1.Hour;
+            int minute = date1.Minute;
+
+            pointageUser.timeQuitter = hour.ToString() + ':' + minute.ToString();
             _context.Entry(pointageUser).State = EntityState.Modified;
 
             try
@@ -87,31 +93,79 @@ namespace WebApplicationPlateforme.Controllers.Pointage
         [HttpPost]
         public async Task<ActionResult<PointageUser>> PostPointageUser(PointageUser pointageUser)
         {
-           
-
-            /*foreach (NetworkInterface nic in NetworkInterface.GetAllNetworkInterfaces())
-            {
-                if (nic.OperationalStatus == OperationalStatus.Up)
-                {
-                    macAddresses += nic.GetPhysicalAddress().ToString();
-                    break;
-                }
-            }
-
-            var builder = new StringBuilder(macAddresses);
-            for (int i = builder.Length - 2; i > 0; i -= 2)
-            {
-                builder.Insert(i, ':');
-            }
-            pointageUser.adresseMac = builder.ToString();
-            Console.WriteLine(builder.ToString());*/
-
-           //var ip = _accessor.ActionContext.HttpContext.Connection.RemoteIpAddress.ToString();
+                       
            var ip = HttpContext.Connection.RemoteIpAddress.ToString();
             pointageUser.adresseIP = ip;
             pointageUser.adresseMac = GetClientMAC(ip);
 
-           
+
+            DateTime dateOnly = DateTime.Now;
+
+            int year = dateOnly.Year;
+            int month = dateOnly.Month;
+            if (month == 1)
+            {
+                pointageUser.attribut2 = "يناير";
+      }
+            else if (month == 2)
+            {
+                pointageUser.attribut2 = "فبراير";
+          }
+            else if (month == 3)
+            {
+                pointageUser.attribut2 = "مارس";
+          }
+            else if (month == 4)
+            {
+                pointageUser.attribut2 = "إبريل";
+          }
+            else if (month == 5)
+            {
+                pointageUser.attribut2 = "مايو";
+          }
+            else if (month == 6)
+            {
+                pointageUser.attribut2 = "يونيو";
+          }
+            else if (month == 7)
+            {
+                pointageUser.attribut2 = "يوليو";
+          }
+            else if (month == 8)
+            {
+                pointageUser.attribut2 = "أغسطس";
+          }
+            else if (month == 9)
+            {
+                pointageUser.attribut2 = "سبتمبر";
+          }
+            else if (month == 10)
+            {
+                pointageUser.attribut2 = "أكتوبر";
+          }
+            else if (month == 11)
+            {
+                pointageUser.attribut2 = "نوفمبر";
+          }
+            else if(month == 12)
+            {
+                pointageUser.attribut2 = "ديسمبر";
+          }
+
+
+
+            int day = dateOnly.Day;
+
+            int hour = dateOnly.Hour;
+
+            int minute = dateOnly.Minute;
+
+            pointageUser.attribut3 = year.ToString();
+            pointageUser.mois = month.ToString();
+            pointageUser.timePresence = hour.ToString() + ':' + minute.ToString();
+            pointageUser.datePresence = dateOnly.ToShortDateString();
+            pointageUser.attribut4 = day.ToString();
+
             _context.PointageUsers.Add(pointageUser);
 
             await _context.SaveChangesAsync();

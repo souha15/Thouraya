@@ -157,7 +157,17 @@ export class AddMusulmanComponent implements OnInit {
               })
             })
          
-       
+        /*  Files */
+
+
+        this.pjfiles.idmusulman = this.Id;
+        this.pjfiles.typefile = "الوثائق"
+        this.fileslistFiles.forEach(item => {
+          this.pjfiles.paths = item;
+          this.FilesService.Create(this.pjfiles).subscribe(res => {
+
+          })
+        })
 
 
         form.resetForm();
@@ -165,6 +175,7 @@ export class AddMusulmanComponent implements OnInit {
         this.files1 = [];
         this.files2 = [];
         this.files3= [];
+        this.files4= [];
       }, err => {
           this.toastr.error("  فشل في تسجيل	 ", "فشل")
       })
@@ -209,11 +220,24 @@ export class AddMusulmanComponent implements OnInit {
     this.files3.splice(this.files2.indexOf(event), 1);
 
   }
+
+
+  files4: File[] = [];
+  onSelect4(event) {
+    //console.log(event);
+    this.files4.push(...event.addedFiles);
+  }
+
+  onRemove4(event) {
+    this.files4.splice(this.files2.indexOf(event), 1);
+
+  }
   public response: { 'dbpathsasstring': '' };
   public isCreate: boolean;
   public pjPass: FilesMusulman = new FilesMusulman();
   public pjPhoto: FilesMusulman = new FilesMusulman();
   public pjResi: FilesMusulman = new FilesMusulman();
+  public pjfiles: FilesMusulman = new FilesMusulman();
 
   public files: string[];
 
@@ -359,6 +383,43 @@ export class AddMusulmanComponent implements OnInit {
         }
       );
       this.fileslistPhoto.push(this.file.name);
+
+    }
+  }
+
+
+  fileslistFiles: string[] = [];
+  public uploadFiles(event) {
+    if (event.addedFiles && event.addedFiles.length > 0) {
+      this.file = event.addedFiles[0];
+      this.uploadStatuss.emit({ status: ProgressStatusEnum.START });
+      this.serviceupload.uploadFile(this.file).subscribe(
+        data => {
+          if (data) {
+            switch (data.type) {
+              case HttpEventType.UploadProgress:
+                this.uploadStatuss.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
+                break;
+              case HttpEventType.Response:
+                // this.inputFile.nativeElement.value = '';
+                this.uploadStatuss.emit({ status: ProgressStatusEnum.COMPLETE });
+                break;
+            }
+            this.getFiles();
+            this.GetFileName();
+
+
+
+          }
+
+        },
+
+        error => {
+          /// this.inputFile.nativeElement.value = '';
+          this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
+        }
+      );
+      this.fileslistFiles.push(this.file.name);
 
     }
   }

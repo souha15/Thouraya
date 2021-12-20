@@ -19,7 +19,6 @@ export class RecrutmenetDirListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
-    this.CongeList();
     this.resetForm();
   }
 
@@ -38,16 +37,18 @@ export class RecrutmenetDirListComponent implements OnInit {
       this.userc = res
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
+this.congeService.getDirList(this.UserIdConnected).subscribe(res => {
+        this.filtredCongeList = res
+    })
     })
 
   }
 
   congeList: Recrutement[] = [];
   filtredCongeList: Recrutement[] = [];
-  CongeList() {
-    this.congeService.Get().subscribe(res => {
-      this.congeList = res
-      this.filtredCongeList = this.congeList.filter(item => item.iddir == this.UserIdConnected && item.etatdir == "في الانتظار")
+  CongeList(id) {
+    this.congeService.getDirList(id).subscribe(res => {
+      this.filtredCongeList = res
     })
   }
 
@@ -79,7 +80,7 @@ export class RecrutmenetDirListComponent implements OnInit {
     this.congeService.Edit().subscribe(res => {
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
       this.resetForm();
-      this.CongeList();
+      this.CongeList(this.UserIdConnected);
     },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');
