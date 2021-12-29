@@ -27,16 +27,56 @@
         <div class="col-md-6">
           <label for="">داخلي/خارجي</label>
 
-          <input type="radio" name="in-out" id="ch1" (change)="test($event)" value="داخلي" checked />
+          <input type="radio" name="in-out" id="ch1" (change)="test($event)" value="داخلي" />
           <label for="ch1" class="radio-lab">داخلي</label>
 
           <input type="radio" class="choise2" name="in-out" id="ch2" (change)="test($event)" value="خارجي" />
           <label for="ch2" class="radio-lab">خارجي</label>
+
           <div class="content2">
             <label for="">الجهة</label>
             <input type="text" name="org" #org="ngModel" [(ngModel)]="de.org" />
           </div>
+
+
         </div>
+     
+
+          <div *ngIf="interne" class="col-md-6">
+            <label for="card-num">إدارة / موظف </label>
+            <select id="keys" class="" (change)="EmployeeAdmin($event)">
+              <option [ngValue]="undefined" selected disabled>- إدارة / موظف-</option>
+              <option value="إدارة">إدارة</option>
+              <option value="موظف">موظف</option>
+            </select>
+          </div>
+
+          <div class="col-md-6" *ngIf="emp">
+            <label for="card-num">الموظف  </label>
+            <select id="keys" class="" name="employeeid" #employeeid="ngModel" [(ngModel)]="de.employeeid" (change)="getEmployeeName($event)">
+              <option [ngValue]="undefined" selected disabled>- الموظف-</option>
+              <option *ngFor="let item of UserList" value="{{item.id}}">{{item.fullName}}</option>
+            </select>
+          </div>
+
+
+          <div class="col-md-6" *ngIf="admin">
+            <label for="card-num">الإدارة </label>
+            <select id="keys" class="" (change)="tousOrOne($event)">
+              <option [ngValue]="undefined" selected disabled>- الإدارة-</option>
+              <option value="الكل">الكل</option>
+              <option value="إختر">إختر</option>
+            </select>
+          </div>
+
+          <div class="col-md-6" *ngIf="one">
+            <label for="card-num">الإدارة </label>
+            <select id="keys" class="" name="adminid" #adminid="ngModel" [(ngModel)]="adminid.type" (change)="getAdminName($event)">
+              <option [ngValue]="undefined" selected disabled>- الإدارة-</option>
+              <option *ngFor="let item of AdministrationList" value="{{item.id}}">{{item.nom}}</option>
+            </select>
+          </div>
+  
 
         <div class="col-md-6">
           <label for="">العنوان</label>

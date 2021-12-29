@@ -4,7 +4,12 @@ export class DecisionTwo {
   decision :string;
   titre :string;
   detail :string;
-  org :string;
+  org: string;
+  adminid: number;
+  adminnom: string;
+  alladmin: string;
+  employeeid: string;
+  employeenom: string;
   attribut1: number;
   attribut2 :string;
   attribut3 :string;

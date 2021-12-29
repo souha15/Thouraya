@@ -16,6 +16,11 @@ namespace WebApplicationPlateforme.Model.ServiceRh
         public string titre { get; set; }
         public string detail { get; set; }
         public string org { get; set; }
+        public int adminid { get;set;}
+        public string adminnom { get;set;}
+        public string alladmin { get;set;}
+        public string employeeid { get;set;}
+        public string employeenom { get;set;}
         public int attribut1 { get; set; }
         public string attribut2 { get; set; }
         public string attribut3 { get; set; }

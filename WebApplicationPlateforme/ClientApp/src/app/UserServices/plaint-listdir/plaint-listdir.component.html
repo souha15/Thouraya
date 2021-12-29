@@ -21,6 +21,7 @@
                 <th scope="col">الطرف الثاني للتظلم</th>
                 <th scope="col">الطرف الأول للتظلم</th>
                 <th scope="col">سبب التظلم</th>
+                <th scope="col"> الاجراء</th>
               </tr>
             </thead>
             <tbody>
@@ -31,6 +32,11 @@
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.creatorName}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.partieB}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.raison}}</td>
+                <td>
+                  <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal2">
+                    <i class="fa fa-reply fa-lg"></i>
+                  </a>
+                </td>
               </tr>
 
             </tbody>
@@ -115,6 +121,39 @@
             </form>
 
           </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div id="myModal2" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">الاجراء</h2>
+
+          <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <div class="col-md-12">
+              <label>الاجراء </label>
+              <textarea id="user" class="" name="etat" #etat="ngModel" [(ngModel)]="dem.etat"></textarea>
+               
+            </div>
+            <div class="save">
+              <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
+
+            </div>
+
+          </form>
+
         </div>
       </div>
 

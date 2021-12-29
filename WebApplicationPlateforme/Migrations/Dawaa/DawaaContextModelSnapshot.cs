@@ -909,6 +909,98 @@ namespace WebApplicationPlateforme.Migrations.Dawaa
                     b.ToTable("TypeTransaction");
                 });
 
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Allmaintenance.AllTypeOfMaintenance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("attribut1")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut2")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut3")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut4")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut5")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut6")
+                        .HasColumnType("text");
+
+                    b.Property<string>("attribut7")
+                        .HasColumnType("text");
+
+                    b.Property<string>("autre")
+                        .HasColumnType("text");
+
+                    b.Property<string>("datedir")
+                        .HasColumnType("text");
+
+                    b.Property<string>("dateemployee")
+                        .HasColumnType("text");
+
+                    b.Property<string>("detail")
+                        .HasColumnType("text");
+
+                    b.Property<string>("employeeid")
+                        .HasColumnType("text");
+
+                    b.Property<string>("employeenom")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etadir")
+                        .HasColumnType("text");
+
+                    b.Property<string>("etatemployee")
+                        .HasColumnType("text");
+
+                    b.Property<string>("idUserCreator")
+                        .HasColumnType("text");
+
+                    b.Property<string>("iddir")
+                        .HasColumnType("text");
+
+                    b.Property<string>("nomdir")
+                        .HasColumnType("text");
+
+                    b.Property<string>("req")
+                        .HasColumnType("text");
+
+                    b.Property<string>("type")
+                        .HasColumnType("text");
+
+                    b.Property<string>("userNameCreator")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("idUserCreator");
+
+                    b.ToTable("AllTypeOfMaintenance");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Allmaintenance.allMaintenanceType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("nom")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AllMaintenanceTypes");
+                });
+
             modelBuilder.Entity("WebApplicationPlateforme.Model.ChangerRib.DemChangeRib", b =>
                 {
                     b.Property<int>("Id")
@@ -2539,6 +2631,13 @@ namespace WebApplicationPlateforme.Migrations.Dawaa
                 });
 
             modelBuilder.Entity("WebApplicationPlateforme.Model.ActivitePart.Activiteee", b =>
+                {
+                    b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
+                        .WithMany()
+                        .HasForeignKey("idUserCreator");
+                });
+
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Allmaintenance.AllTypeOfMaintenance", b =>
                 {
                     b.HasOne("WebApplicationPlateforme.Model.User.ApplicationUser", "ApplicationUser")
                         .WithMany()

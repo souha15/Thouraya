@@ -764,6 +764,12 @@ import { TypeDawaElecComponent } from './Activitee/DawaaElec/type-dawa-elec/type
 import { DemandeVoitureAddComponent } from './DemandeVoiture/demande-voiture-add/demande-voiture-add.component';
 import { DemandeVoitureListUserComponent } from './DemandeVoiture/demande-voiture-list-user/demande-voiture-list-user.component';
 import { DemandeVoitureListDirComponent } from './DemandeVoiture/demande-voiture-list-dir/demande-voiture-list-dir.component';
+import { AllMaintenanceAddComponent } from './AllMaintenance/all-maintenance-add/all-maintenance-add.component';
+import { AllMaintenanceListComponent } from './AllMaintenance/all-maintenance-list/all-maintenance-list.component';
+import { AllMaintenanceListUserComponent } from './AllMaintenance/all-maintenance-list-user/all-maintenance-list-user.component';
+import { AllMaintenanceListDirrComponent } from './AllMaintenance/all-maintenance-list-dirr/all-maintenance-list-dirr.component';
+import { AllMaintenanceListEmployeeComponent } from './AllMaintenance/all-maintenance-list-employee/all-maintenance-list-employee.component';
+import { AllMaintenanceTypeCrudComponent } from './AllMaintenance/all-maintenance-type-crud/all-maintenance-type-crud.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -1493,6 +1499,12 @@ import { DemandeVoitureListDirComponent } from './DemandeVoiture/demande-voiture
     DemandeVoitureAddComponent,
     DemandeVoitureListUserComponent,
     DemandeVoitureListDirComponent,
+    AllMaintenanceAddComponent,
+    AllMaintenanceListComponent,
+    AllMaintenanceListUserComponent,
+    AllMaintenanceListDirrComponent,
+    AllMaintenanceListEmployeeComponent,
+    AllMaintenanceTypeCrudComponent,
   ],
   imports: [
 
@@ -1628,12 +1640,12 @@ import { DemandeVoitureListDirComponent } from './DemandeVoiture/demande-voiture
       { path: 'enregistrer-tre', component: EnregistrerTREComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'COMADPRIV'] } },
 
 
-      { path: 'enregistrer-tri', component: EnregistrerTRIComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN'] } },
+      { path: 'enregistrer-tri', component: EnregistrerTRIComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'COMADPRIV'] } },
       { path: 'my-liste-tr-i', component: MyListeTrIComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'COMADPRIV'] } },
       { path: 'my-liste-decision', component: MyListeDecisionComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
       { path: 'acmenu', component: ACMenuComponent, canActivate: [AuthGuard]  },
       { path: 'enregistrer-decision', component: EnregistrerDecisionComponent, canActivate: [AuthGuard]  },
-      { path: 'liste-organisme', component: ListeOrganismeComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
+      { path: 'liste-organisme', component: ListeOrganismeComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'COMADPRIV'] }  },
       { path: 'liste-proprietaire', component: ListeProprietaireComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }  },
       { path: 'main-page-ac', component: MainPageACComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'COMADPRIV'] } },
       { path: 'main-page-ac2', component: MainPageAC2Component, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRPRIV', 'COMADPRIV'] }},
@@ -3156,7 +3168,23 @@ import { DemandeVoitureListDirComponent } from './DemandeVoiture/demande-voiture
 
     { path: 'demande-voiture-add', component: DemandeVoitureAddComponent , canActivate: [AuthGuard] },
     { path: 'demande-voiture-list-user', component: DemandeVoitureListUserComponent, canActivate: [AuthGuard] },
-    { path: 'demande-voiture-list-dir', component: DemandeVoitureListDirComponent , canActivate: [AuthGuard] },
+      { path: 'demande-voiture-list-dir', component: DemandeVoitureListDirComponent, canActivate: [AuthGuard] },
+      { path: 'main-accepted-avance', component: MainAcceptedAvanceComponent, canActivate: [AuthGuard] },
+
+    /**All Maintenance  **/
+ 
+      { path: 'all-maintenance-add', component: AllMaintenanceAddComponent, canActivate: [AuthGuard] },
+
+      { path: 'all-maintenance-list', component: AllMaintenanceListComponent, canActivate: [AuthGuard] },
+
+      { path: 'all-maintenance-list-user', component: AllMaintenanceListUserComponent, canActivate: [AuthGuard] },
+
+      { path: 'all-maintenance-list-dirr', component: AllMaintenanceListDirrComponent, canActivate: [AuthGuard] },
+
+      { path: 'all-maintenance-list-employee', component: AllMaintenanceListEmployeeComponent, canActivate: [AuthGuard] },
+
+      { path: 'all-maintenance-type-crud', component: AllMaintenanceTypeCrudComponent, canActivate: [AuthGuard] },
+
 
     ])
   ],/*,  {

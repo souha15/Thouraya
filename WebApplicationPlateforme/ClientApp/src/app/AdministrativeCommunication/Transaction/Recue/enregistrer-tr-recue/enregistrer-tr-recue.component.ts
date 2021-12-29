@@ -198,8 +198,17 @@ export class EnregistrerTRRecueComponent implements OnInit {
 
     this.list2User = this.UsersList.filter(item => item.idAdministration == event.target.value)
     this.administrationService.GetById(this.testorg1).subscribe(res => {
-      this.affectation.attribut3 = res.nom
+      this.affectation.attribut4 = res.nom
     })
+  }
+
+  admin: boolean = false;
+  testorg11(event) {
+    if (event.target.value == "1") {
+      this.admin = true;
+    } else {
+      this.admin = false;
+    }
   }
 
 
@@ -253,7 +262,8 @@ export class EnregistrerTRRecueComponent implements OnInit {
           console.log(this.testemp1)
           if (this.testemp1 != undefined) {
 
-           
+            this.affectation.attribut3 = "مكتب المدير العام"
+            this.affectation.attribut1 = 28
             this.affectation.idUserCreator = this.UserIdConnected;
             this.affectation.creatorName = this.UserNameConnected;
             this.affectation.idUserQuiAffecte = this.UserIdConnected;
@@ -266,6 +276,23 @@ export class EnregistrerTRRecueComponent implements OnInit {
               form.resetForm();
 
             })
+          }
+         if (this.admin) {
+           for (var i = 0; this.AdministrationList.length > i; i++) {
+             this.affectation.idOrganisme = this.AdministrationList[i].id
+              this.affectation.attribut3 = "مكتب المدير العام"
+              this.affectation.attribut1 = 28
+              this.affectation.idUserCreator = this.UserIdConnected;
+              this.affectation.creatorName = this.UserNameConnected;
+              this.affectation.idTransaction = this.Idtransaction
+              this.affectation.attribut2 = "غير مستلمة"
+              this.affectationService.Create(this.affectation).subscribe(res => {
+
+
+                form.resetForm();
+
+              })
+            }
           }
 
           this.files1 = [];

@@ -11,18 +11,26 @@
         <h3 class="task-head">تقديم طلب صيانة</h3>
       </header>
       <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+
+        <div class="col-md-6">
+          <label for="cares">نوع السيارة </label>
+          <select id="cares" name="type" #type="ngModel" [(ngModel)]="voiture.type" required (change)="mattest($event)" >
+            <option [ngValue]="undefined" selected disabled>-اختر-</option>
+            <option *ngFor="let item of voiList" value="{{item.marque}}">{{item.marque}}</option>
+          </select>
+        </div>
+
+        <div *ngIf="type.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+          مطلوب السيارة .
+
+        </div>
+
         <div class="col-md-6">
           <label for="card-num">رقم اللوحة </label>
-          <input type="text" id="card-num" name="matricule" #matricule="ngModel" [(ngModel)]="voiture.matricule" (change)="mattest($event)" />
-          <div *ngIf="matricule.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
-            مطلوب رقم اللوحة .
+          <input type="text" id="card-num" name="matricule" #matricule="ngModel" [(ngModel)]="voiture.matricule" disabled/>
+        </div>
 
-          </div>
-        </div>
-        <div class="col-md-6">
-          <label for="car-type">نوع السيارة </label>
-          <input type="text" id="car-type" name="type" #type="ngModel" [(ngModel)]="voiture.type" />
-        </div>
 
         <div class="col-md-6">
           <label for="buy-date">تاريخ الصيانة </label>

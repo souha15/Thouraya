@@ -21,7 +21,8 @@ export class MyListeDecisionComponent implements OnInit {
     this.getCreance();
     this.resetForm();
   }
-
+  p: Number = 1;
+  count: Number = 5;
   decision: string = "داخلي";
   test(event) {
     this.decision = event.target.value
@@ -109,6 +110,11 @@ export class MyListeDecisionComponent implements OnInit {
       titre: '',
       detail: '',
       org: '',
+      adminid: null,
+      adminnom: '',
+      alladmin: '',
+      employeeid: '',
+      employeenom: '',
       attribut1: null,
       attribut2: '',
       attribut3: '',

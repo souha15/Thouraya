@@ -24,6 +24,8 @@ export class DecisionListComponent implements OnInit {
 
   }
 
+  p: Number = 1;
+  count: Number = 5;
   de: DecisionTwo[] = [];
   de1: DecisionTwo[] = [];
   nbd1: number;
@@ -85,9 +87,6 @@ export class DecisionListComponent implements OnInit {
   }
 
   //Pagination initialisation
-
-  p: number = 1;
-
   factId: number
   fact: DecisionTwo = new DecisionTwo();
   bb: boolean = false;

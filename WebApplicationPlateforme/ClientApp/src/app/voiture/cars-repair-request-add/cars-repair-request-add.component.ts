@@ -35,6 +35,7 @@ export class CarsRepairRequestAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
+    this.getVoitureList();
     this.getFiles();
   }
 
@@ -45,22 +46,21 @@ export class CarsRepairRequestAddComponent implements OnInit {
   voilist: Voiture[] = [];
   mattest(event) {
     this.mat = event.target.value;
+
+    this.voilist = this.voiList.filter(item => item.marque == this.mat);
+    this.voiture.matricule = this.voilist[0].matricule
+    this.idv = this.voilist[0].id;
+      console.log(this.voilist[0])
+  }
+
+
+  getVoitureList() {
+
     this.carService.Get().subscribe(res => {
       this.voiList = res
-      this.voilist = this.voiList.filter(item => item.matricule == this.mat);
-      if (this.voilist.length == 0) {
-        this.toastr.error('يرجى التحقق من رقم اللوحة')
-        this.exists = false;
-      } else {
-        this.exists = true;
-      this.voilist.forEach(item => {
-        this.idv = item.id;
-        console.log(this.idv)
-      })
-    }
     })
   }
-// Get User Connected
+  // Get User Connected
 
 UserIdConnected: string;
 UserNameConnected: string;

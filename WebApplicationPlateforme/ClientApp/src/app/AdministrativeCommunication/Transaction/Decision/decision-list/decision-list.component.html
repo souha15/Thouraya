@@ -98,8 +98,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of de1 | orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
-                    <th scope="row" >{{item.id}}</th>
+                  <tr *ngFor="let item of de1 | orderBy: key : reverse | filter:filter| paginate: {itemsPerPage:count,currentPage:p};let i=index">
+                    <th scope="row">{{(p-1)*count+i+1}}</th>
                     <td >{{item.titre}}</td>
                     <td>
                       <a class="btn show-details-btn text-info" (click)="populateForm(item)" data-toggle="modal" data-target="#myModal">
@@ -151,8 +151,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of de2 | orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
-                    <th scope="row">{{item.id}}</th>
+                  <tr *ngFor="let item of de2 | orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i=index">
+                    <th scope="row">{{(p-1)*count+i+1}}</th>
                     <td>{{item.titre}}</td>
                     <td>
                       <a class="btn show-details-btn text-info" (click)="populateForm(item)" data-toggle="modal" data-target="#myModal">
@@ -204,8 +204,8 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let item of de3 | orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
-                    <th scope="row">{{item.id}}</th>
+                  <tr *ngFor="let item of de3 | orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i=index">
+                    <th scope="row">{{(p-1)*count+i+1}}</th>
                     <td>{{item.titre}}</td>
                     <td>
                       <a class="btn show-details-btn text-info" (click)="populateForm(item)" data-toggle="modal" data-target="#myModal">

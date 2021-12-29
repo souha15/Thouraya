@@ -53,7 +53,7 @@ export class PlaintListdirComponent implements OnInit {
   CongeList() {
     this.plaintService.Get().subscribe(res => {
       this.congeList = res
-      this.filtredCongeList = this.congeList.filter(item => item.attribut2 == this.UserIdConnected)
+      this.filtredCongeList = this.congeList.filter(item => item.iddir == this.UserIdConnected)
     })
   }
 
@@ -64,6 +64,30 @@ export class PlaintListdirComponent implements OnInit {
     this.plaintService.formData = Object.assign({}, conge)
     this.dem = Object.assign({}, conge)
 
+  }
+
+  isValidFormSubmitted = false;
+  path: string;
+  date = new Date().toLocaleDateString();
+  onSubmit(form: NgForm) {
+    if (form.invalid) {
+      this.isValidFormSubmitted = false;
+    }
+    else {
+      this.isValidFormSubmitted = true
+      this.dem.datedir = this.date;
+      this.dem.iddir = this.UserIdConnected;
+      this.dem.nomdir = this.UserNameConnected
+
+      this.plaintService.PutObservableE(this.dem).subscribe(res => {
+        this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+        this.CongeList();
+        form.resetForm();
+      },
+        err => {
+          this.toastr.error("لم يتم التسجيل", "فشل في التسجيل");
+        })
+    }
   }
 
 }

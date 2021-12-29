@@ -181,28 +181,42 @@
                       <br />
                     </div>
                     <div class="col-sm-12">
-                      
-                        <label for="from2">محالة من</label>
-                        <select id="from2" name="attribut1" #attribut1="ngModel" [(ngModel)]="affectation.attribut1" (change)="testorg($event)">
+
+                      <label for="from2">محالة من</label>
+                      <select id="from2">
+                        <option [ngValue]="undefined" selected disabled>-الإدارة-</option>
+                        <option value="28">مكتب المدير العام</option>
+                      </select>
+
+                      &nbsp;&nbsp;&nbsp;
+
+                      <label for="from2">محال الى</label>
+                      <select id="from2" (change)="testorg11($event)">
+                        <option [ngValue]="undefined" selected disabled>-الإدارة-</option>
+                        <option value="1">الكل </option>
+                        <option value="2">إدارة </option>
+                      </select>
+                      <div>
+                        <label for="from2">الإدارات</label>
+                        <select id="from2" name="idOrganisme" #idOrganisme="ngModel" [(ngModel)]="affectation.idOrganisme" (change)="testorg($event)">
                           <option [ngValue]="undefined" selected disabled>-الإدارة-</option>
                           <option *ngFor="let item of AdministrationList" value="{{item.id}}">{{item.nom}}</option>
                         </select>
-                     
-                      &nbsp;&nbsp;&nbsp;
-                 
-                        <label for="from2">محال الى</label>
+
+
+                        <label for="from2">الموظف</label>
                         <select id="from2" name="iduserAffected" #iduserAffected="ngModel" [(ngModel)]="affectation.iduserAffected" (change)="testemp($event)">
                           <option [ngValue]="undefined" selected disabled>-الموظف -</option>
                           <option *ngFor="let item of list2User" value="{{item.id}}">{{item.fullName}}</option>
                         </select>
-                     
-              
 
-                  
                       </div>
+
+
+                    </div>
                     <div class="col-md-6">
 
-                      <label for="from2">تاريخ القيد</label>
+                      <label for="from2">تاريخ الاحالة</label>
                       <input id="from2" type="text" name="datenereg" #datenereg="ngModel" [(ngModel)]="affectation.datenereg" />
                     </div>
 

@@ -20,6 +20,7 @@
                 <th scope="col">تاريخ التظلم</th>
                 <th scope="col">الطرف الثاني للتظلم</th>
                 <th scope="col">سبب التظلم</th>
+                <th scope="col"> الاجراء</th>
                 <th scope="col">تعديل</th>
                 <th scope="col">حذف</th>
               </tr>
@@ -31,6 +32,7 @@
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.dateplaint}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.partieB}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.raison}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.etat}}</td>
                 <td><a class="btn btn-success" [routerLink]="['/plaint-edit', cg.id]"><i class="fa fa-edit"></i>تعديل</a></td>
                 <td><a (click)="onDelete(cg.id)" class="btn btn-danger"><i class="fa fa-trash"></i>حذف</a></td>
               </tr>
@@ -105,6 +107,13 @@
                 {{dem.description}}
 
               </div>
+
+              <div class="col-md-12">
+                <label for="permision-hours"> الاجراء</label>
+                {{dem.etat}}
+
+              </div>
+
 
             </form>
 

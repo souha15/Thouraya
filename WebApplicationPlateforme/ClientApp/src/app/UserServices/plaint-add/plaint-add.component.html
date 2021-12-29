@@ -20,20 +20,15 @@
         </div>
         <div class="col-md-6">
           <label for="">الطرف الثاني للتظلم</label>
-          <input type="text" name="partieB" #partieB="ngModel" [(ngModel)]="pl.partieB" id="" />
+          <select id="stop-status" name="affecter" #affecter="ngModel" [(ngModel)]="pl.affecter" (change)="getName($event)" >
+            <option [ngValue]="undefined" selected disabled>-الطرف -</option>
+            <option *ngFor="let item of userg" value="{{item.id}}">{{item.fullName}}</option>
+          </select>
         </div>
         <div class="col-md-6">
           <label for="job">سبب التظلم</label>
           <input type="text" name="raison" #raison="ngModel" [(ngModel)]="pl.raison" id="job" />
         </div>
-        <div class="col-md-6">
-          <label for="replace-emp">إلى</label>
-          <select id="stop-status" name="attribut2" #attribut2="ngModel" [(ngModel)]="pl.attribut2">
-            <option [ngValue]="undefined" selected disabled>-إلى-</option>
-            <option *ngFor="let item of user" value="{{item.id}}">{{item.fullName}}</option>
-          </select>
-        </div>
-
         <div class="col-md-6">
           <label for="req-det">شرح التظلم</label>
           <textarea name="description"

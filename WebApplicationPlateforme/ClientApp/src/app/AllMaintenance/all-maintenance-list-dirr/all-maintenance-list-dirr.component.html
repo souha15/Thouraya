@@ -1,0 +1,180 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <header>
+        <h3 class="task-head"> طلبات الصيانة </h3>
+      </header>
+      <div class="form-group pull-right">
+        <input type="text"
+               class="search form-control"
+               placeholder="ما الذي تبحث عنه ؟"
+               name="search" [(ngModel)]="filter" />
+      </div>
+      <div class="table-responsive">
+        <table class="table text-center table-bordered theme-table">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col"> مقدم الطلب</th>
+              <th scope="col">نوع الصيانة</th>
+              <th scope="col">  التاريخ</th>
+              <th scope="col">الملاحظات</th>
+              <th scope="col">الحالة</th>
+              <th scope="col">تفاصيل الطلب</th>
+              <th scope="col">إحالة</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let cg of demList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
+              <th scope="row">{{(p-1) * count + i + 1}}</th>
+              <td (click)="populateForm(cg)">{{cg.userNameCreator}}</td>
+              <td (click)="populateForm(cg)">{{cg.type}}</td>
+              <td (click)="populateForm(cg)">{{cg.attribut2}}</td>
+              <td (click)="populateForm(cg)">{{cg.req}}</td>
+              <td data-toggle="modal" 
+                  [ngClass]="{
+
+  'success': cg.etadir === 'موافقة',
+  'denied': cg.etadir === 'رفض',
+  'wait': cg.etadir === 'في الإنتظار'
+}">
+                {{cg.etadir}}
+              </td>
+              <td>
+                <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
+                  <i class="fa fa-eye fa-lg"></i>
+                </a>
+              </td>
+
+              <td>
+                <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">
+                  <i class="fa fa-user-check fa-lg"></i>
+                </a>
+              </td>
+
+
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- End Table Responsive -->
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+</footer>
+
+<div id="myModal" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تفاصيل الطلب</h2>
+          <div class="form-row task-form service-form text-center">
+            <br />
+
+            <div class="col-md-6">
+
+              <div>
+                <label>رقم </label>
+                <p>{{dem.id}}</p>
+              </div>
+              <div>
+                <label>التاريخ </label>
+                <p>{{dem.attribut2}}</p>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div>
+                <label>مقدم الطلب </label>
+                <p>{{dem.userNameCreator}}</p>
+              </div>
+              <div>
+                <label>نوع الصيانة </label>
+                <p>{{dem.type}}</p>
+              </div>
+            </div>
+            <div class="col-md-12">
+
+              <div>
+                <label>التفاصيل </label>
+                <p>{{dem.detail}}</p>
+              </div>
+
+
+            </div>
+
+            <div class="col-md-12">
+              <label>الملاحظات</label>
+              <p>{{dem.req}}</p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تعديل طلب الصيانة</h2>
+
+          <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <div class="col-md-6">
+              <label>الحالة </label>
+              <select id="user" class="" name="etadir" #etadir="ngModel" [(ngModel)]="dem.etadir">
+                <option [ngValue]="undefined" selected disabled>-حالة الطلب -</option>
+                <option value="موافقة">موافق</option>
+                <option value="رفض">رفض</option>
+
+              </select>
+            </div>
+
+            <div class="col-md-6">
+              <label>الموظف </label>
+              <select id="user" class="" name="employeeid" #employeeid="ngModel" [(ngModel)]="dem.employeeid" (change)="getEmployeeName($event)">
+                <option [ngValue]="undefined" selected disabled>-الموظف-</option>
+                <option *ngFor="let item of UsersList" value="{{item.id}}">{{item.fullName}}</option>
+              </select>
+            </div>
+            <div class="save">
+              <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
+
+            </div>
+
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

@@ -17,7 +17,7 @@
             <option [ngValue]="undefined" selected disabled>-اسم الصنف-</option>
             <option *ngFor="let item of typeList" value="{{item.nom}}">{{item.nom}}</option>
           </select>
-          <div *ngIf="type.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+          <div *ngIf="matricule.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
             مطلوب الصنف .
 
           </div>

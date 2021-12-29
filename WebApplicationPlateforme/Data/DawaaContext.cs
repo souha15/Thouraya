@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using WebApplicationPlateforme.Model.AchatVoitures;
 using WebApplicationPlateforme.Model.ActivitePart;
 using WebApplicationPlateforme.Model.AdministrativeCommunication;
+using WebApplicationPlateforme.Model.Allmaintenance;
 using WebApplicationPlateforme.Model.ChangerRib;
 using WebApplicationPlateforme.Model.ConfigSystemShowing;
 using WebApplicationPlateforme.Model.Decision;
@@ -104,6 +105,12 @@ namespace WebApplicationPlateforme.Data
         /********* Voiture Achat ***/
 
         public DbSet <DemandeVoiture> DemandeVoitures { get; set; }
+
+
+        /********* Maintenance All *********/
+
+        public DbSet<allMaintenanceType> AllMaintenanceTypes { get; set; }
+        public DbSet<AllTypeOfMaintenance> AllTypeOfMaintenance { get; set; }
 
     }
 }

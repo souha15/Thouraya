@@ -30,7 +30,6 @@
               <th scope="col">  الحالة</th>
               <th scope="col"> التفاصيل</th>
               <th scope="col"> موافقة / رفض</th>
-              <th scope="col">حذف</th>
 
             </tr>
 
@@ -43,7 +42,7 @@
               <td (click)="populateForm(cg)">{{cg.dateenreg}}</td>
               <td (click)="populateForm(cg)">{{cg.type}}</td>
               <td (click)="populateForm(cg)">{{cg.remarque}}</td>
-              <td (click)="populateForm(cg)"
+              <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal2"
                   [ngClass]="{
 
   'success': cg.etat === 'موافقة',
@@ -57,8 +56,6 @@
                   <i class="fa fa-eye fa-lg"></i>
                 </a>
               </td>
-              <td (click)="populateForm(cg)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1">تعديل</a></td>
-              <td (click)="populateForm(cg)"><a class="btn btn-danger" (click)="onDelete(cg.id)">حذف</a></td>
             </tr>
 
           </tbody>

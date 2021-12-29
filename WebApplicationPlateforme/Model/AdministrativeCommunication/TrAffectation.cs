@@ -21,8 +21,7 @@ namespace WebApplicationPlateforme.Model.AdministrativeCommunication
         public string details { get; set; }
         public string action { get; set; }
         public string type { get; set; }
-
-        [ForeignKey("Organisme")]
+    
         public int? idOrganisme { get; set; }
         public string nomOrganisme { get; set; }
 
@@ -48,6 +47,5 @@ namespace WebApplicationPlateforme.Model.AdministrativeCommunication
 
         public virtual ApplicationUser ApplicationUser { get; set; }
         public virtual Transaction Transaction { get; set; }
-        public virtual Organisme Organisme { get; set; }
     }
 }

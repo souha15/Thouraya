@@ -90,4 +90,23 @@ export class ServiceVenteListComponent implements OnInit {
         })
     }
   }
+
+  onDelete(Id) {
+    if (confirm('Are you sure to delete this record ?')) {
+
+      this.demService.Delete(Id)
+        .subscribe(res => {
+          this.getList();
+          this.toastr.success("تم الحذف  بنجاح", "نجاح");
+        },
+
+          err => {
+            console.log(err);
+            this.toastr.warning('لم يتم الحذف  ', ' فشل');
+
+          }
+        )
+
+    }
+  }
 }

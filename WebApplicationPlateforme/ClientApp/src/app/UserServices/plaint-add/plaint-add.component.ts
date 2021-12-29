@@ -75,7 +75,20 @@ export class PlaintAddComponent implements OnInit {
     })
   }
 
+  getName(event) {
 
+    this.UserService.GetUserById(event.target.value).subscribe(res => {
+      this.pl.partieB = res.fullName;
+
+      if (event.target.value == "792fc0bf-5424-4b7d-a0c4-c609c56bdf21") {
+        this.pl.iddir = "318e6451-f404-43aa-8dcb-fcaef185d0af"
+        this.pl.nomdir = "رائد بن سعيد عبد الله الزهراني"
+      } else {
+        this.pl.iddir = "792fc0bf-5424-4b7d-a0c4-c609c56bdf21"
+        this.pl.nomdir = "أسعد عبد المجيد نظر التركستاني"
+      }
+    })
+  }
   //OnSubmit
   pl: Plaint = new Plaint();
   date = new Date().toLocaleDateString();
@@ -85,6 +98,7 @@ export class PlaintAddComponent implements OnInit {
     this.pl.datenereg = this.date;
     this.pl.creatorName = this.UserNameConnected;
     this.pl.idUserCreator = this.UserIdConnected;
+
     this.plaintService.Add(this.pl).subscribe(
       res => {
         this.id = res.id
