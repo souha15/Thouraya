@@ -88,47 +88,57 @@
         <div class="row w-100 d-flex form-box">
           <div class="col-md-12 col-sm-12">
 
-            <label class="main">
+            <label class="main" style="font-weight:bolder;">
               <span><i class="fa fa-search"></i></span>
+   
               نتيجة البحث
             </label>
-            <div class="d-flex w-100 justify-content-start flex-wrap">
-              <div class="table-responsive new-table2">
-                <table class="table table-bordered text-center table-striped">
-                  <thead class="thead-gestimary">
-                    <tr>
-                      <th scope="col">	# </th>
-                      <th scope="col">	التاريخ </th>
-                      <th scope="col">	الموظف </th>
-                      <th scope="col">	ماك أدريس </th>
-                      <th scope="col">وقت الحضور</th>
-                      <th scope="col"> وقت الإنصراف </th>
-                    </tr>
-                  </thead>
 
-                  <tbody>
-                    <tr *ngFor="let point of pointList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p } ; let i = index">
-                      <th scope="row">{{i+1}}</th>
-                      <td>{{point.datePresence}}</td>
-                      <td>{{point.userNameCreator}}</td>
-                      <td>
-                        {{point.adresseMac}}
-                        <i style="color:green;" *ngIf="point.attribut1 == 1" class="fa fa-check-circle"> </i>
-                        <i style="color:red;" *ngIf="point.attribut1 == 0" class="fa fa-times-circle"> </i>
-                      </td>
-                      <td>{{point.timePresence}}</td>
-                      <td>{{point.timeQuitter}}</td>
+            <div>
+              <button (click)="ExportTOExcel()" style ="float:left;" class="btn btn-outline-primary"><span class="fa fa-file-excel"></span></button>
+              <br />
+            </div>
+  
+
+              <div class="d-flex w-100 justify-content-start flex-wrap">
+                <div class="table-responsive new-table2">
+                  <table class="table table-bordered text-center table-striped" #TABLE #table>
+                    <thead class="thead-gestimary">
+                      <tr>
+                        <th scope="col">	# </th>
+                        <th scope="col">	التاريخ </th>
+                        <th scope="col">	الشهر  </th>
+                        <th scope="col">	الموظف </th>
+                        <th scope="col">	ماك أدريس </th>
+                        <th scope="col">وقت الحضور</th>
+                        <th scope="col"> وقت الإنصراف </th>
+                      </tr>
+                    </thead>
+
+                    <tbody>
+                      <tr *ngFor="let point of pointList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p } ; let i = index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{point.datePresence}}</td>
+                        <td>{{point.attribut2}}</td>
+                        <td>{{point.userNameCreator}}</td>
+                        <td>
+                          {{point.adresseMac}}
+                          <i style="color:green;" *ngIf="point.attribut1 == 1" class="fa fa-check-circle"> </i>
+                          <i style="color:red;" *ngIf="point.attribut1 == 0" class="fa fa-times-circle"> </i>
+                        </td>
+                        <td>{{point.timePresence}}</td>
+                        <td>{{point.timeQuitter}}</td>
 
 
-                    </tr>
-                  </tbody>
+                      </tr>
+                    </tbody>
 
 
 
-                </table>
+                  </table>
+                </div>
               </div>
-              </div>
-              </div>
+            </div>
             </div>
           </div>
 

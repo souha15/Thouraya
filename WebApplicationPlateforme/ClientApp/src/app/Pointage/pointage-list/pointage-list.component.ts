@@ -1,18 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { UserServiceService } from '../../shared/Services/User/user-service.service';
 import { PointageService } from '../../shared/Services/Pointage/pointage.service';
 import { UserDetail } from '../../shared/Models/User/user-detail.model';
 import { Pointage } from '../../shared/Models/Pointage/pointage.model';
 import { MacAddressTable } from '../../shared/Models/Pointage/mac-address-table.model';
 import { MacAddressTableService } from '../../shared/Services/Pointage/mac-address-table.service';
-
+import * as XLSX from 'xlsx';
 @Component({
   selector: 'app-pointage-list',
   templateUrl: './pointage-list.component.html',
   styleUrls: ['./pointage-list.component.css']
 })
 export class PointageListComponent implements OnInit {
-
+  @ViewChild('TABLE', { static: false }) TABLE: ElementRef;
+  title = 'Excel';  
   constructor(private UserService: UserServiceService,
     private pointageService: PointageService,
     private adrTableService: MacAddressTableService) { }
@@ -22,6 +23,13 @@ export class PointageListComponent implements OnInit {
     this.GetMacList();
   }
 
+  // Export To Excel Function 
+  ExportTOExcel() {
+    const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(this.TABLE.nativeElement);
+    const wb: XLSX.WorkBook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    XLSX.writeFile(wb, 'PointingSheet.xlsx');
+  }
   UserList: UserDetail[] = [];
 
   getUsersList() {
@@ -66,6 +74,7 @@ export class PointageListComponent implements OnInit {
   cin: string;
   nom: string;
   cinSearch(event) {
+
     this.cin = event.target.value;
 
     this.adrTableService.Get().subscribe(res => {
@@ -93,6 +102,7 @@ export class PointageListComponent implements OnInit {
   listmac2: MacAddressTable[] = [];
   listmac: MacAddressTable[] = [];
   Chercher() {
+    this.pointList = [];
     this.pointageService.Get().subscribe(res => {
       this.pointList2 = res;
       this.pointList = this.pointList2.filter(item => item.idUserCreator == this.cin)
@@ -133,6 +143,7 @@ export class PointageListComponent implements OnInit {
   //Search by Day
   mac2: MacAddressTable[] = [];
   SearchByDay() {
+    this.pointList = [];
     this.pointageService.Get().subscribe(res => {
       this.pointList2 = res;
   
@@ -174,6 +185,7 @@ export class PointageListComponent implements OnInit {
   }
 
   SarchByMonth() {
+    this.pointList = [];
     this.pointageService.Get().subscribe(res => {
       this.pointList2 = res;
       this.pointList2.forEach(item => {

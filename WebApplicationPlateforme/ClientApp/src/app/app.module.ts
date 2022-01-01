@@ -8,7 +8,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { LoginPageComponent } from './User/login-page/login-page.component';
-import { UserInfoComponent } from './User/user-info/user-info.component';
+import { UserInfoComponent } from './User/user-info/user-info.component'; ticket - add
 import { MainTasksComponent } from './Tache/main-tasks/main-tasks.component';
 import { NewTaskComponent } from './Tache/new-task/new-task.component';
 import { TasksListComponent } from './Tache/tasks-list/tasks-list.component';
@@ -1745,7 +1745,7 @@ import { AllMaintenanceTypeCrudComponent } from './AllMaintenance/all-maintenanc
 
 
 
-      { path: 'ticket-add', component: TicketAddComponent, canActivate: [AuthGuard] },
+      { path: 'ticket-add', component: TicketAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
 
       { path: 'ticket-my-lis', component: TicketMyLisComponent, canActivate: [AuthGuard] },
 
