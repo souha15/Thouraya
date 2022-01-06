@@ -37,7 +37,9 @@ export class ChangeRibRhListComponent implements OnInit {
     this.getUserConnected();
     this.GetDemandList();
   }
+  p: Number = 1;
 
+  count: Number = 5;
   //Get User Connected
 
   UserIdConnected: string;

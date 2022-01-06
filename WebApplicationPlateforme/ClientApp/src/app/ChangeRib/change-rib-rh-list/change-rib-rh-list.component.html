@@ -22,6 +22,7 @@
           <thead>
             <tr>
               <th scope="col">#</th>
+              <th scope="col">مقدم الطلب</th>
               <th scope="col"> اسم البنك    </th>
               <th scope="col">	رقم الايبان الجديد  </th>
               <th scope="col">الحالة</th>
@@ -30,8 +31,9 @@
           </thead>
           <tbody>
 
-            <tr *ngFor="let cg of DemandList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p };let i = index">
+            <tr *ngFor="let cg of DemandList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
               <th scope="row">{{(p-1) * count + i + 1}}</th>
+              <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">{{cg.userNameCreator}}</td>
               <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">{{cg.nomBanque}}</td>
               <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">{{cg.rib}}</td>
               <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal"
@@ -116,7 +118,7 @@
       <div class="page-wrapper">
 
         <div class="modal-body" style="direction:rtl; text-align:right;">
-          <h2 class="text-center my-2">طلب انتاج فيلم</h2>
+          <h2 class="text-center my-2">طلب تعديل حساب بنكي</h2>
           <div class="form-row task-form service-form text-center">
             <div class="col-md-6">
 

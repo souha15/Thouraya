@@ -1,0 +1,65 @@
+<app-nav-menu></app-nav-menu>
+<!-- Page Content -->
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+
+      <header>
+        <h3 class="task-head">   قائمة أوامر الصرف</h3>
+      </header>
+      <div class="pro-list">
+        <div class="form-group pull-right">
+          <input type="text"
+                 class="search form-control"
+                 placeholder="ما الذي تبحث عنه ؟" [(ngModel)]="filter" />
+        </div>
+        <span class="counter pull-right"></span>
+        <div class="tabel-cont table-responsive">
+          <table class="table table-striped theme-table table-bordered results">
+            <thead class="">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">الموظف </th>
+                <th scope="col">	الامر </th>
+                <th scope="col">تاريخ الانتهاء</th>
+                <th scope="col">طريقة الصرف </th>
+                <th scope="col">	الحالة </th>
+              </tr>
+            </thead>
+
+            <tbody >
+              <tr *ngFor="let ev of ListStockageA|  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p } ; let i = index">
+                <th scope="row" [routerLink]="['/details-ordre-pay', ev.id]">{{(p-1) * count + i + 1}}</th>
+
+                <td [routerLink]="['/details-ordre-pay', ev.id]">{{ev.userNameCreator}}</td>
+                <td [routerLink]="['/details-ordre-pay', ev.id]">{{ev.nomOrdre}}</td>
+                <td [routerLink]="['/details-ordre-pay', ev.id]">{{ev.dateFin}}</td>
+                <td [routerLink]="['/details-ordre-pay', ev.id]">{{ev.typePay}}</td>
+                <td [routerLink]="['/details-ordre-pay', ev.id]" class="success">{{ev.etatOrdre}}</td>
+
+              </tr>
+            </tbody>
+          </table>
+          <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+              <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                   nextLabel="التالي"></pagination-controls>
+            </ul>
+          </nav>
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
+<!-- Footer -->
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+</footer>
+

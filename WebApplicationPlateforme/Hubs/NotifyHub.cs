@@ -10,6 +10,7 @@ namespace WebApplicationPlateforme.Hubs
 
     public class NotifyHub : Hub/*<ITypedHubClient>*/
     {
+        /*User.Claims.First(c => c.Type == "UserId").Value;*/
         public Task SendMessageToUser(string connectionId, string message)
         {
               return Clients.Client(connectionId).SendAsync("ReceiveMessage", message);

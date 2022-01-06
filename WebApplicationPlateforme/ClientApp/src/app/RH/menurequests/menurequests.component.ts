@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { NgForm } from '@angular/forms';
 import { UserDetail } from '../../shared/Models/User/user-detail.model';
 import { Conge } from '../../shared/Models/RH/conge.model';
+import { SoldeCongeService } from '../../shared/Services/Rh/solde-conge.service';
+import { SoldeConge } from '../../shared/Models/RH/solde-conge.model';
 
 @Component({
   selector: 'app-menurequests',
@@ -15,7 +17,8 @@ export class MenurequestsComponent implements OnInit {
 
   constructor(private congeService: CongeService,
     private toastr: ToastrService,
-    private UserService: UserServiceService, 
+    private UserService: UserServiceService,
+    private soldeCongeService: SoldeCongeService,
   ) { }
   p: Number = 1;
   count: Number = 5;
@@ -24,6 +27,7 @@ export class MenurequestsComponent implements OnInit {
     //this.CongeList();
     this.resetForm();
   }
+
 
   //Get UserConnected
 
@@ -59,10 +63,18 @@ export class MenurequestsComponent implements OnInit {
 
 
   per: Conge = new Conge();
-
+  soldecongel: SoldeConge[] = [];
+  soldecongel1: SoldeConge[] = [];
+  soldeconge: SoldeConge = new SoldeConge();
+  solde2: SoldeConge = new SoldeConge();
+  soldeconge1: SoldeConge[] = [];
+  soldexist: boolean = false;
+  solde: string;
+  sc: SoldeConge = new SoldeConge()
   populateForm(conge: Conge) {
     this.per = Object.assign({}, conge)
     this.congeService.formData = Object.assign({}, conge)
+   
   }
 
   etat: string;
@@ -77,20 +89,115 @@ export class MenurequestsComponent implements OnInit {
     this.conge = Object.assign(this.conge, form.value);
     this.congeService.formData.dated = this.date;
     if (this.etat == "رفض") {
-      this.congeService.formData.attribut2 ="رفض"
-    }
-    this.congeService.formData.etat = "50%";
-    this.congeService.Edit().subscribe(res => {
-      this.toastr.success('تم التحديث بنجاح', 'نجاح')
-      this.resetForm();
-      this.getUserConnected();
-    },
-      err => {
-        this.toastr.error('لم يتم التحديث  ', ' فشل');
-      }
+      this.congeService.formData.attribut2 = "رفض"
+    } 
+      this.UserService.GetUserById(this.per.idUserCreator).subscribe(res => {
+        if (res.attribut1 == "318e6451-f404-43aa-8dcb-fcaef185d0af") {
+          this.per.transferera = "2"
+          this.per.attribut6 = "إعتماد بخصم"
+          this.per.etat = "70%"
+          this.soldeCongeService.Get().subscribe(res => {
+            this.soldecongel1 = res
+            this.soldeconge1 = this.soldecongel1.filter(item => item.idUserCreator == this.per.idUserCreator);
+            if (this.soldecongel1.length > 0) {
+
+              this.solde2 = this.soldecongel1[this.soldecongel1.length - 1];
+            }
+
+            this.soldeCongeService.Get().subscribe(res => {
+              this.soldecongel = res
+              this.soldecongel.filter(item => item.idUserCreator == this.per.idUserCreator);
+              this.soldeconge = this.soldecongel[this.soldecongel.length - 1];
+              this.sc = this.soldecongel[this.soldecongel.length - 1]
+
+              if (this.per.type == "إجازة سنوية") {
+                this.sc.dateenreg = this.date;
+
+                let solde = +this.soldeconge.soldenormal - +this.per.duree
+                this.sc.soldenormal = solde.toString();
+
+                this.soldeCongeService.PutObservable(this.sc).subscribe(res => {
+                  this.toastr.success('تم التحديث بنجاح', 'نجاح')
+                  this.congeService.Edit().subscribe(res => {
+                    this.toastr.success('تم التحديث بنجاح', 'نجاح')
+                    this.resetForm();
+                    this.getUserConnected();
+                  },
+                    err => {
+                      this.toastr.error('لم يتم التحديث  ', ' فشل');
+                    }
 
 
-    )
+                  )
+                })
+
+              }
+              if (this.per.type == "إجازة إضطرارية") {
+
+                this.sc.dateenreg = this.date;
+                let solde = +this.soldeconge.soldeurgent - +this.per.duree
+                this.sc.soldeurgent = solde.toString();
+                this.soldeCongeService.PutObservable(this.sc).subscribe(res => {
+                  this.toastr.success('تم التحديث بنجاح', 'نجاح')
+
+                  this.congeService.Edit().subscribe(res => {
+                    this.toastr.success('تم التحديث بنجاح', 'نجاح')
+                    this.resetForm();
+                    this.getUserConnected();
+                  },
+                    err => {
+                      this.toastr.error('لم يتم التحديث  ', ' فشل');
+                    }
+
+
+                  )
+                })
+
+              }
+
+              if (this.per.type == "إجازة إستثنائية") {
+
+                this.sc.dateenreg = this.date;
+                let solde = +this.soldeconge.soldemaladie - +this.per.duree
+                this.sc.soldemaladie = solde.toString();
+                this.soldeCongeService.PutObservable(this.sc).subscribe(res => {
+                  this.toastr.success('تم التحديث بنجاح', 'نجاح')
+                  this.congeService.Edit().subscribe(res => {
+                    this.toastr.success('تم التحديث بنجاح', 'نجاح')
+                    this.resetForm();
+                    this.getUserConnected();
+                  },
+                    err => {
+                      this.toastr.error('لم يتم التحديث  ', ' فشل');
+                    }
+
+
+                  )
+                })
+
+              }
+
+            })
+          })
+
+        } else {
+
+        this.congeService.formData.etat = "50%";
+        this.congeService.Edit().subscribe(res => {
+          this.toastr.success('تم التحديث بنجاح', 'نجاح')
+          this.resetForm();
+          this.getUserConnected();
+        },
+          err => {
+            this.toastr.error('لم يتم التحديث  ', ' فشل');
+          }
+
+
+          )
+        }
+
+
+      })
 
   }
 

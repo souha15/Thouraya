@@ -18,9 +18,6 @@ namespace WebApplicationPlateforme.Controllers.SMSSender
         private static string UserName = "@@@";
         private static string DateSend = "";//&timeSend=01:00:00&dateSend=12/12/2012";
 
-
- 
-
         private static string _sendSMS(string MobileNo, string Msg, string SenderName)
         {
             //  WebRequest req = WebRequest.Create("http://www.mobily.ws/api/msgSend.php");
@@ -28,19 +25,15 @@ namespace WebApplicationPlateforme.Controllers.SMSSender
             string s1 = "mobile=" + MyNumber + "&password=" + MyPassword + "&numbers=" + MobileNo + "&sender=" + SenderName + "&msg=" + ConvertToUnicode(Msg) + DateSend + "&applicationType=24";
             req.Method = "POST";
             req.ContentType = "application/x-www-form-urlencoded";
-
             byte[] byteArray = Encoding.UTF8.GetBytes(s1);
             req.ContentLength = byteArray.Length;
             Stream dataStream = req.GetRequestStream();
             dataStream.Write(byteArray, 0, byteArray.Length);
             dataStream.Close();
             WebResponse resp = req.GetResponse();
-
-
             Stream s = resp.GetResponseStream();
             StreamReader sr = new StreamReader(s, Encoding.ASCII);
             string doc = sr.ReadToEnd();
-
             return doc;
         }
 

@@ -13,11 +13,11 @@
       <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
         <div class="col-md-6">
           <label for="card-num">الأصناف  </label>
-          <select id="keys" class="" name="matricule" #type="ngModel" [(ngModel)]="dem.type" >
+          <select id="keys" class="" name="type" #type="ngModel" [(ngModel)]="dem.type" >
             <option [ngValue]="undefined" selected disabled>-اسم الصنف-</option>
             <option *ngFor="let item of typeList" value="{{item.nom}}">{{item.nom}}</option>
           </select>
-          <div *ngIf="matricule.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+          <div *ngIf="type.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
             مطلوب الصنف .
 
           </div>

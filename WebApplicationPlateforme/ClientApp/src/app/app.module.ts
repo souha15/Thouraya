@@ -8,7 +8,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { LoginPageComponent } from './User/login-page/login-page.component';
-import { UserInfoComponent } from './User/user-info/user-info.component'; ticket - add
+import { UserInfoComponent } from './User/user-info/user-info.component'; 
 import { MainTasksComponent } from './Tache/main-tasks/main-tasks.component';
 import { NewTaskComponent } from './Tache/new-task/new-task.component';
 import { TasksListComponent } from './Tache/tasks-list/tasks-list.component';
@@ -770,6 +770,32 @@ import { AllMaintenanceListUserComponent } from './AllMaintenance/all-maintenanc
 import { AllMaintenanceListDirrComponent } from './AllMaintenance/all-maintenance-list-dirr/all-maintenance-list-dirr.component';
 import { AllMaintenanceListEmployeeComponent } from './AllMaintenance/all-maintenance-list-employee/all-maintenance-list-employee.component';
 import { AllMaintenanceTypeCrudComponent } from './AllMaintenance/all-maintenance-type-crud/all-maintenance-type-crud.component';
+import { HistoCongesComponent } from './Historique/Demandes/histo-conges/histo-conges.component';
+import { HistoPermissionComponent } from './Historique/Demandes/histo-permission/histo-permission.component';
+import { HistoEquiComponent } from './Historique/Demandes/histo-equi/histo-equi.component';
+import { HistoSlaireComponent } from './Historique/Demandes/histo-slaire/histo-slaire.component';
+import { HistoResidenceComponent } from './Historique/Demandes/histo-residence/histo-residence.component';
+import { HistoRecrutementComponent } from './Historique/Demandes/histo-recrutement/histo-recrutement.component';
+import { HistoPayChequeComponent } from './Historique/Demandes/histo-pay-cheque/histo-pay-cheque.component';
+import { HistoCreFinanceComponent } from './Historique/Demandes/histo-cre-finance/histo-cre-finance.component';
+import { HistoFormationComponent } from './Historique/Demandes/histo-formation/histo-formation.component';
+import { HistoDemissionComponent } from './Historique/Demandes/histo-demission/histo-demission.component';
+import { HistoPlaintComponent } from './Historique/Demandes/histo-plaint/histo-plaint.component';
+import { HistoTicketEmployeeComponent } from './Historique/Demandes/histo-ticket-employee/histo-ticket-employee.component';
+import { HistoAvanceComponent } from './Historique/Demandes/histo-avance/histo-avance.component';
+import { HistoMaintenanceComponent } from './Historique/Demandes/histo-maintenance/histo-maintenance.component';
+import { HistoHeureSuppComponent } from './Historique/Demandes/histo-heure-supp/histo-heure-supp.component';
+import { HistoEmploiComponent } from './Historique/Demandes/histo-emploi/histo-emploi.component';
+import { HistoAttestationComponent } from './Historique/Demandes/histo-attestation/histo-attestation.component';
+import { HistoAssistanceComponent } from './Historique/Demandes/histo-assistance/histo-assistance.component';
+import { HistoChangeRibComponent } from './Historique/Demandes/histo-change-rib/histo-change-rib.component';
+import { HistoVoitureComponent } from './Historique/Demandes/histo-voiture/histo-voiture.component';
+import { HistoMaintenanceVoitureComponent } from './Historique/Demandes/histo-maintenance-voiture/histo-maintenance-voiture.component';
+import { HistoStockageComponent } from './Historique/Demandes/histo-stockage/histo-stockage.component';
+import { HistoVenteComponent } from './Historique/Demandes/histo-vente/histo-vente.component';
+import { HistoTechComponent } from './Historique/Demandes/histo-tech/histo-tech.component';
+import { HistoAllMaintenanceComponent } from './Historique/Demandes/histo-all-maintenance/histo-all-maintenance.component';
+import { HistoMenusComponent } from './Historique/Menus/histo-menus/histo-menus.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -1505,6 +1531,32 @@ import { AllMaintenanceTypeCrudComponent } from './AllMaintenance/all-maintenanc
     AllMaintenanceListDirrComponent,
     AllMaintenanceListEmployeeComponent,
     AllMaintenanceTypeCrudComponent,
+    HistoCongesComponent,
+    HistoPermissionComponent,
+    HistoEquiComponent,
+    HistoSlaireComponent,
+    HistoResidenceComponent,
+    HistoRecrutementComponent,
+    HistoPayChequeComponent,
+    HistoCreFinanceComponent,
+    HistoFormationComponent,
+    HistoDemissionComponent,
+    HistoPlaintComponent,
+    HistoTicketEmployeeComponent,
+    HistoAvanceComponent,
+    HistoMaintenanceComponent,
+    HistoHeureSuppComponent,
+    HistoEmploiComponent,
+    HistoAttestationComponent,
+    HistoAssistanceComponent,
+    HistoChangeRibComponent,
+    HistoVoitureComponent,
+    HistoMaintenanceVoitureComponent,
+    HistoStockageComponent,
+    HistoVenteComponent,
+    HistoTechComponent,
+    HistoAllMaintenanceComponent,
+    HistoMenusComponent,
   ],
   imports: [
 
@@ -3185,6 +3237,34 @@ import { AllMaintenanceTypeCrudComponent } from './AllMaintenance/all-maintenanc
 
       { path: 'all-maintenance-type-crud', component: AllMaintenanceTypeCrudComponent, canActivate: [AuthGuard] },
 
+    /**** Historique *****/
+
+       { path: 'histo-conges', component: HistoCongesComponent , canActivate: [AuthGuard] },
+      { path: 'histo-permission', component: HistoPermissionComponent, canActivate: [AuthGuard] },
+      { path: 'histo-equi', component: HistoEquiComponent, canActivate: [AuthGuard] },
+      { path: 'histo-slaire', component: HistoSlaireComponent, canActivate: [AuthGuard] },
+      { path: 'histo-residence', component: HistoResidenceComponent, canActivate: [AuthGuard] },
+      { path: 'histo-recrutement', component: HistoRecrutementComponent, canActivate: [AuthGuard] },
+      { path: 'histo-pay-cheque', component: HistoPayChequeComponent, canActivate: [AuthGuard] },
+      { path: 'histo-cre-finance', component: HistoCreFinanceComponent, canActivate: [AuthGuard] },
+      { path: 'histo-formation', component: HistoFormationComponent, canActivate: [AuthGuard] },
+      { path: 'histo-demission', component: HistoDemissionComponent, canActivate: [AuthGuard] },
+      { path: 'histo-plaint', component: HistoPlaintComponent, canActivate: [AuthGuard] },
+      { path: 'histo-ticket-employee', component: HistoTicketEmployeeComponent, canActivate: [AuthGuard] },
+      { path: 'histo-avance', component: HistoAvanceComponent, canActivate: [AuthGuard] },
+      { path: 'histo-maintenance', component: HistoMaintenanceComponent, canActivate: [AuthGuard] },
+      { path: 'histo-heure-supp', component: HistoHeureSuppComponent, canActivate: [AuthGuard] },
+      { path: 'histo-emploi', component: HistoEmploiComponent, canActivate: [AuthGuard] },
+      { path: 'histo-attestation', component: HistoAttestationComponent, canActivate: [AuthGuard] },
+      { path: 'histo-assistance', component: HistoAssistanceComponent, canActivate: [AuthGuard] },
+      { path: 'histo-change-rib', component: HistoChangeRibComponent, canActivate: [AuthGuard] },
+      { path: 'histo-voiture', component: HistoVoitureComponent, canActivate: [AuthGuard] },
+      { path: 'histo-maintenance-voiture', component: HistoMaintenanceVoitureComponent, canActivate: [AuthGuard] },
+      { path: 'histo-stockage', component: HistoStockageComponent, canActivate: [AuthGuard] },
+      { path: 'histo-vente', component: HistoVenteComponent, canActivate: [AuthGuard] },
+      { path: 'histo-tech', component: HistoTechComponent, canActivate: [AuthGuard] },
+      { path: 'histo-all-maintenance', component: HistoAllMaintenanceComponent, canActivate: [AuthGuard] },
+      { path: 'histo-menus', component: HistoMenusComponent, canActivate: [AuthGuard] },
 
     ])
   ],/*,  {

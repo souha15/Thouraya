@@ -1,0 +1,202 @@
+.main-nav {
+  background: #276985 !important;
+}
+
+.notification {
+  background-color: none;
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  position: relative;
+  display: inline-block;
+}
+
+  .notification .badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: red;
+    color: white;
+  }
+
+#MyTable td:hover {
+  background-color: #ccc;
+}
+
+#MyTable tr {
+  cursor: pointer;
+}
+/*-- Electronic Sevices Forms --*/
+.task-form input:focus:not([type="submit"]):not([type="reset"]),
+.task-form select:focus {
+  outline-color: #999;
+}
+
+.task-form option:hover {
+  border: none !important;
+}
+
+.service-form label {
+  background-color: #91c3d8;
+  color: #333;
+}
+
+.service-form select {
+  width: 50%;
+}
+
+.service-form input[type="submit"] {
+  width: 140px;
+  font-size: 18px;
+}
+
+.service-form input[type="reset"] {
+  width: 140px;
+  font-size: 18px;
+}
+
+/*-- leave-request-list --*/
+.leave-request-list table thead {
+  background-color: #91c3d8;
+}
+
+
+/*-- Start Popup --*/
+.popup-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99999;
+  padding: 50px;
+  display: none;
+  overflow-y: scroll
+}
+
+.close-popup {
+  padding: 10px 15px;
+  background: #333;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block
+}
+
+.popup-content {
+  background: #fff;
+  padding: 20px;
+}
+
+  .popup-content .task-form {
+    padding: 10px;
+  }
+
+.page-wrapper {
+  margin-top: 20px;
+  border: 1px solid #333;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: right;
+  direction: rtl;
+}
+
+body.noscroll {
+  position: fixed;
+  left: 0;
+  right: 0;
+}
+
+.buttons a,
+.buttons button {
+  display: inline-block;
+  text-decoration: none;
+  padding: 8px 15px;
+  margin-bottom: 5px;
+  border: 1px solid #107F98;
+  background: #107F98;
+  color: #fff;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: all 0.3s
+}
+
+  .buttons a:hover,
+  .buttons button:hover {
+    color: #107F98;
+    background: #fff;
+    border-width: 2px;
+  }
+
+.transaction-show,
+.transaction-follow,
+.transaction-refer,
+.transaction-link,
+.transaction-storage,
+.transaction-save {
+  display: none
+}
+
+.popup-head {
+  text-align: center;
+  color: #107F98;
+}
+
+  .popup-head::after {
+    content: "";
+    display: block;
+    width: 80px;
+    border-bottom: 2px dashed #107F98;
+    margin: 10px auto 0;
+  }
+
+.papers {
+  list-style: none;
+  display: inline-block
+}
+
+  .papers li {
+    display: inline-block;
+    padding: 6px 10px;
+    border: 1px solid #c3c8c7;
+    border-radius: 6px;
+  }
+
+/*-- leave-request-list --*/
+.leave-request-list table thead {
+  background-color: #91c3d8;
+}
+
+.wait {
+  background: #dbcf46;
+}
+
+.success {
+  background: #2aa830;
+}
+
+.worke {
+  background: #2a86a8;
+}
+
+.towork {
+  background: #4c32a8;
+}
+
+.denied {
+  background: #ed4b1a;
+}
+
+.wait {
+  background: #faec2f;
+}
+
+.accord {
+  background: #e88c3c;
+}
+
+.retarde {
+  background: #dc3545
+}
