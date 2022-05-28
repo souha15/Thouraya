@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.MediaCenter
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Rendonee>>> GetRendonee()
         {
-            return await _context.Rendonee.ToListAsync();
+            return await _context.Rendonee.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/Rendonees/5

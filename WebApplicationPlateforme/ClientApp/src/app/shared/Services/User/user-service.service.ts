@@ -212,13 +212,39 @@ export class UserServiceService {
     return this.http.get(this.BaseURI + '/UserProfile', {
       headers: new HttpHeaders({
         "Authorization": "Bearer " + localStorage.getItem('token'),
-
+        'Access-Control-Allow-Origin': '*',
+        //"Content-Type": "application/json"
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
         //"Content-Type": "application/json"
       })
 
     });
   }
 
+  user: UserDetail = new UserDetail();
+
+  async getUserConnected(): Promise<UserDetail> {
+    return await  this.getUserProfileObservableAsync();  
+    
+  }
+
+  //res.header("Access-Control-Allow-Origin", "*");
+  //res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");   
+  async getUserProfileObservableAsync() {
+
+    return await this.http.get<UserDetail>(this.BaseURI + '/UserProfile', {
+      headers: new HttpHeaders({
+        "Authorization": "Bearer " + localStorage.getItem('token'),
+        'Access-Control-Allow-Origin': '*',
+        //"Content-Type": "application/json"
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+        
+      })
+
+    }).toPromise();
+  }
   //Get User Profile Observable
 
   getUserProfileObservable() {
@@ -226,12 +252,39 @@ export class UserServiceService {
     return this.http.get<UserDetail>(this.BaseURI + '/UserProfile', {
       headers: new HttpHeaders({
         "Authorization": "Bearer " + localStorage.getItem('token'),
-
+        'Access-Control-Allow-Origin': '*',
         //"Content-Type": "application/json"
+        'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+        'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
       })
 
     });
   }
+
+  getAdminDir(Id) {
+    return this.http.get<UserDetail>(this.BaseURI + '/UserProfile/GetAdminDir/' + Id);
+  }
+
+  getAdminFinDir() {
+    return this.http.get<UserDetail>(this.BaseURI + '/UserProfile/GetAdminDirFin');
+  }
+  GetEtabFin() {
+    return this.http.get<UserDetail>(this.BaseURI + '/UserProfile/GetEtabFin');
+  }
+
+  GetRhDepartement() {
+    return this.http.get<UserDetail>(this.BaseURI + '/UserProfile/GetRhDepartement');
+  }
+
+  GetAdminDirProj() {
+    return this.http.get<UserDetail>(this.BaseURI + '/UserProfile/GetAdminDirProj');
+  }
+
+  GetAdminDirG() {
+    return this.http.get<UserDetail>(this.BaseURI + '/UserProfile/GetAdminDirG');
+  }
+
+
 
   //Get UserList
 

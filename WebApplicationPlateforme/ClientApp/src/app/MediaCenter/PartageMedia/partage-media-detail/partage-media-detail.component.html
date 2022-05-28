@@ -4,15 +4,15 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <title>Salary</title>
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
   <!-- Main Style File -->
-
+  <link rel="stylesheet" href="css/print-style.css">
 </head>
 <body>
   <a class="btn show-details-btn text-info" (click)="print()">
@@ -21,7 +21,7 @@
   <br />
   <br />
 
-  <div class="salary-page" id="htmlData">
+  <div class="salary-page font-droid-kufi" id="htmlData">
     <header>
       <img class="img1" src="assets/images/taef.jpeg" alt="">
       <div class="header-title">
@@ -31,6 +31,14 @@
       </div>
       <img class="img2" src="assets/images/vision-2030.png" alt="">
     </header>
+    <div class="d-flex justify-content-between" style="padding: 10px 50px;border-bottom: 1px solid #ddd;">
+      <div>الرقم <span class="space-150"></span></div>
+      <div>إدارة / <span>---------</span></div>
+      <div>قسم / <span>---------</span></div>
+      <div>التاريخ / <span>---------</span></div>
+      <div>الموضوع / <span>---------</span></div>
+      <div>المشفوعات / <span>---------</span></div>
+    </div>
     <div class="content">
       <h2 class="header-title">تعريف بالراتب</h2>
       <div class="table-responsive">
@@ -80,10 +88,16 @@
       <div class="centered">
         <p>تشـــهد <span class="variable-text">جمعيـــة الــدعوة والإرشــاد وتوعيــة الجاليــات بمحــافظة الطــائف </span> بأن الموضحة بياناته أعلاه من منسوبي الجمعية ولا زال على رأس العمل. </p>
         <p>ولطلبه أعطي هذا المشهد لتقديمه إلى من يهمه الأمر دون أدنى مسئولية على الجمعية. <br>والله الموفق ،، . </p>
-        <div class="sign">
-          <span>مدير إدارة الشؤون المالية والإدارية</span><br>
-          <!-- صورة التوقيع هنا -->
-          <img src="assets/images/sign.png" width="140" alt="">
+        <div class="w-100 d-flex">
+          <div style="flex: 1;"></div>
+          <div class="text-center" style="flex: 1;">
+            <img src="assets/images/stamp.jpg" class="d-inline-block m-auto" width="120" alt="">
+          </div>
+          <div class="sign" style="flex: 1;">
+            <span>مدير إدارة الشؤون المالية والإدارية</span><br>
+            <!-- صورة التوقيع هنا -->
+            <img src="assets/images/sign.png" width="140" alt="">
+          </div>
         </div>
       </div>
 

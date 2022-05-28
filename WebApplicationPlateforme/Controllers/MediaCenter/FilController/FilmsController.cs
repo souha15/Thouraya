@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.MediaCenter.FilController
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Film>>> GetFilm()
         {
-            return await _context.Film.ToListAsync();
+            return await _context.Film.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/Films/5

@@ -19,7 +19,7 @@ export class CreationListDirGComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
-    this.getCreance();
+    //this.getCreance();
 
   }
 
@@ -32,6 +32,12 @@ export class CreationListDirGComponent implements OnInit {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
       this.position = res.position;
+      this.ctService.Get().subscribe(res => {
+        this.GfactList = res;
+
+        this.factList = this.GfactList.filter(item => item.iddir == this.UserIdConnected && item.etatdir == "في الإنتظار")
+
+      })
     })
 
   }

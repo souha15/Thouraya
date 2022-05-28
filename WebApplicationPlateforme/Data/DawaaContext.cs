@@ -17,11 +17,12 @@ using WebApplicationPlateforme.Model.MediaCenter.PartageMedia;
 using WebApplicationPlateforme.Model.MediaCenter.Visite;
 using WebApplicationPlateforme.Model.MusulumanFemme;
 using WebApplicationPlateforme.Model.NotificationSettings;
+using WebApplicationPlateforme.Model.NotifSignalR;
 using WebApplicationPlateforme.Model.Pointage;
 using WebApplicationPlateforme.Model.Ressource_Humaines;
 using WebApplicationPlateforme.Model.TechnicalDemands;
 using WebApplicationPlateforme.Model.VenteServices;
-
+using WebApplicationPlateforme.Model.ServiceRh;
 namespace WebApplicationPlateforme.Data
 {
     public class DawaaContext : IdentityDbContext
@@ -111,6 +112,15 @@ namespace WebApplicationPlateforme.Data
 
         public DbSet<allMaintenanceType> AllMaintenanceTypes { get; set; }
         public DbSet<AllTypeOfMaintenance> AllTypeOfMaintenance { get; set; }
+
+        /**Notification System **/
+
+        public DbSet<Notif> Notifs { get; set; }
+
+
+        /**** Conges Files **/
+
+        public DbSet<CongeFiles> CongeFiles { get; set; }
 
     }
 }

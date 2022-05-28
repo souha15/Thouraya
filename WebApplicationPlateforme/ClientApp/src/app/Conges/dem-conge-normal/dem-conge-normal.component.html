@@ -17,7 +17,7 @@
 
               <div class="col-md-6">
                 <label for="leave-date-start">تاريخ البداية</label>
-                <input type="date" id="leave-date-start" name="datedebut" #datedebut="ngModel" [(ngModel)]="conge.datedebut" (change)="tdatedebut($event)" required>
+                <input type="date" id="leave-date-start" name="datedebut" #datedebut="ngModel" [(ngModel)]="conge.datedebut" (change)="tdatedebut($event)" [min]="today" required>
               </div>
 
               <div *ngIf="datedebut.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
@@ -29,7 +29,7 @@
 
               <div class="col-md-6">
                 <label for="leave-date-end">تاريخ النهاية</label>
-                <input type="date" id="leave-date-end" name="datefin" #datefin="ngModel" [(ngModel)]="conge.datefin" (change)="tdatefin($event)" required>
+                <input type="date" id="leave-date-end" name="datefin" #datefin="ngModel" [(ngModel)]="conge.datefin" (change)="tdatefin($event)" [min]="today" required>
               </div>
 
               <div *ngIf="datefin.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">

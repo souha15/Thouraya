@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.ServiceRh
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Formation>>> Getformations()
         {
-            return await _context.formations.ToListAsync();
+            return await _context.formations.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/Formations/5

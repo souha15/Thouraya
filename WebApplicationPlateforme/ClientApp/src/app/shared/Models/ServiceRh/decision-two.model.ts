@@ -5,7 +5,7 @@ export class DecisionTwo {
   titre :string;
   detail :string;
   org: string;
-  adminid: number;
+  adminid: string;
   adminnom: string;
   alladmin: string;
   employeeid: string;

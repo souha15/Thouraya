@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.ServiceRh
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DemandeFormation>>> GetdemandeFormations()
         {
-            return await _context.demandeFormations.ToListAsync();
+            return await _context.demandeFormations.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/DemandeFormations/5

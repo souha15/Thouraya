@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.ServiceRh
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ReceptionEquipement>>> GetreceptionEquipements()
         {
-            return await _context.receptionEquipements.ToListAsync();
+            return await _context.receptionEquipements.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/ReceptionEquipements/5

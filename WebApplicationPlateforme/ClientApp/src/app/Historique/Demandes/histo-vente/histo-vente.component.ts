@@ -9,6 +9,8 @@ import { HttpEventType } from '@angular/common/http';
 import { TbListening } from '../../../shared/Models/Evenements/tb-listening.model';
 import { TypeTypeServiceVenteservice } from '../../../shared/Services/ServiceVente/type-service-vente.service';
 import { OffreVenteService } from '../../../shared/Services/ServiceVente/offre-vente.service';
+import { NgForm } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-histo-vente',
@@ -21,7 +23,8 @@ export class HistoVenteComponent implements OnInit {
   constructor(private demService: ServiceVenteervice,
     private typeService: TypeTypeServiceVenteservice,
     private offreService: OffreVenteService,
-    public serviceupload: UploadDownloadService, ) { this.downloadStatus = new EventEmitter<ProgressStatus>();}
+    public serviceupload: UploadDownloadService,
+    private toastr: ToastrService) { this.downloadStatus = new EventEmitter<ProgressStatus>(); }
 
 
   ngOnInit(): void {
@@ -97,5 +100,52 @@ export class HistoVenteComponent implements OnInit {
         this.downloadStatus.emit({ status: ProgressStatusEnum.ERROR });
       }
     );
+
+
+  }
+
+  isValidFormSubmitted = false;
+  path: string;
+  date = new Date().toLocaleDateString();
+  onSubmit(form: NgForm) {
+    if (form.invalid) {
+      this.isValidFormSubmitted = false;
+
+    }
+    else {
+      this.isValidFormSubmitted = true
+      this.dem.datefin = this.date
+
+      this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+      this.demService.PutObservableE(this.dem).subscribe(res => {
+        this.getList();
+        form.resetForm();
+
+      },
+        err => {
+          this.toastr.error("لم يتم التسجيل", "فشل في التسجيل");
+        })
+    }
+  }
+
+
+  onDelete(id: number) {
+
+
+    if (confirm('هل أنت متأكد من حذف هذا السجل؟')) {
+      this.demService.Delete(id)
+        .subscribe(res => {
+          this.getList();
+          this.toastr.success("تم الحذف  بنجاح", "نجاح");
+        },
+
+          err => {
+            console.log(err);
+            this.toastr.warning('لم يتم الحذف  ', ' فشل');
+          }
+        )
+
+    }
+
   }
 }

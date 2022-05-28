@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Server.HttpSys;
+using WebApplicationPlateforme.Data;
 using WebApplicationPlateforme.Model.User;
 
 namespace WebApplicationPlateforme.Controllers.UserControllers
@@ -18,14 +19,18 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
     public class UserProfileController : ControllerBase
     {
         private UserManager<ApplicationUser> _userManager;
-        public UserProfileController(UserManager<ApplicationUser> userManager)
+        private readonly ApplicationDbContext _context;
+        public UserProfileController(UserManager<ApplicationUser> userManager,ApplicationDbContext context)
         {
             _userManager = userManager;
+            _context = context;
         }
 
         [HttpGet]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [AllowAnonymous]
         //GET : /api/UserProfile
+
         public async Task<Object> GetUserProfile()
         {
             string userId = User.Claims.First(c => c.Type == "UserID").Value;
@@ -105,6 +110,69 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
 
             };
         }
+
+        [HttpGet]
+        [Route("GetAdminDir/{Id}")]
+        public async Task<Object> GetDataAdminDir(string id)
+        {
+            var user = await _userManager.FindByIdAsync(id);
+            var admin = await _context.administrations.FindAsync(user.idAdministration);
+            var dir = await _userManager.FindByIdAsync(admin.Description);
+            return dir;
+     
+        }
+
+
+        [HttpGet]
+        [Route("GetAdminDirFin")]
+        public async Task<Object> GetDataAdminDirFin()
+        {
+            var admin = await _context.administrations.FindAsync(33);
+            var dir = await _userManager.FindByIdAsync(admin.Description);
+            return dir;
+
+        }
+
+        [HttpGet]
+        [Route("GetAdminDirProj")]
+        public async Task<Object> GetDataAdminDirProj()
+        {
+            var admin = await _context.administrations.FindAsync(29);
+            var dir = await _userManager.FindByIdAsync(admin.Description);
+            return dir;
+
+        }
+
+        [HttpGet]
+        [Route("GetAdminDirG")]
+        public object GetDataAdminDirG()
+        {
+            var dir =  _userManager.Users.FirstOrDefault(item => item.position == "المدير التنفيذي");
+            return dir;
+
+        }
+
+        [HttpGet]
+        [Route("GetRhDepartement")]
+        public async Task<Object> GetRhDepartement()
+        {
+            var DirRh = await _context.departements.FindAsync(21);
+            var Dir = await _userManager.FindByIdAsync(DirRh.Description);
+            return Dir;
+
+        }
+
+        [HttpGet]
+        [Route("GetEtabFin")]
+        public async Task<Object> GetEtabFin()
+        {
+            var DirRh = await _context.departements.FindAsync(18);
+            var Dir = await _userManager.FindByIdAsync(DirRh.Description);
+            return Dir;
+
+        }
+
+
 
         [HttpGet]
         [Authorize(Roles = "ADMINISTRATEUR", AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]

@@ -51,7 +51,7 @@
               <span style="font-size:40px;color:#dc3545;text-align:center"><i class="fa fa-times-circle"></i></span>
             </div>
             <div class="text">
-              <a style="font-size:20px;color:#dc3545">مغلقة</a>
+              <a style="font-size:20px;color:#dc3545" (click)="getWiThClosed()">مغلقة</a>
               <br /><br />
               <span style="color:#dc3545;font-size:30px;">{{closed}}</span>
             </div>
@@ -72,7 +72,7 @@
       <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
       <br />
       <div class="table-responsive mandate">
-        <table class="table text-center table-bordered table-striped theme-table">
+        <table class="table text-center table-bordered table-striped theme-table" *ngIf="withoutClosed">
 
           <thead>
             <tr>
@@ -122,6 +122,80 @@
           </thead>
           <tbody>
             <tr *ngFor="let ne of ticketList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; let i = index">
+              <th scope="row">{{ne.id}}</th>
+              <th scope="row">{{ne.clientName}}</th>
+              <td (click)="populateForm(ne)" data-toggle="modal" data-target="#myModal1">{{ne.titre}}</td>
+              <td (click)="populateForm(ne)" data-toggle="modal" data-target="#myModal1">{{ne.clientDate}}</td>
+              <td (click)="populateForm(ne)" data-toggle="modal" data-target="#myModal1">{{ne.priorite}}</td>
+              <td (click)="populateForm(ne)" data-toggle="modal" data-target="#myModal1">{{ne.type}}</td>
+              <td (click)="populateForm(ne)" data-toggle="modal" data-target="#myModal1"><a href="{{ne.path}}" target="_blank">{{ne.path}}</a></td>
+              <td data-toggle="modal" data-target="#myModal" (click)="populateForm(ne)"
+                  [ngClass]="{
+
+    'work': ne.etat === 'تحت الإجراء',
+    'done': ne.etat === 'منجزة',
+    'wait': ne.etat === 'في الإنتظار',
+    'suspendu': ne.etat === 'مؤجلة',
+    'notdonee': ne.etat === 'مغلقة',
+    'enattenterep': ne.etat === 'بانتظار رد صاحب التذكرة'
+}">
+                {{ne.etat}}
+              </td>
+              <td (click)="populateForm(ne)"><a [routerLink]="['/ticket-detail-client', ne.id]" class="btn btn-primary"><i class="fa fa-comment-dots"></i></a></td>
+            </tr>
+          </tbody>
+        </table>
+
+      <table class="table text-center table-bordered table-striped theme-table" *ngIf="withClosed">
+
+          <thead>
+            <tr>
+              <th scope="col" (click)="sort('id')">
+                <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                #
+              </th>
+              <th scope="col" (click)="sort('clientName')">
+                الموظف
+                <span class="glyphicon sort-icon" *ngIf="key =='clientName'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+
+              <th scope="col" (click)="sort('titre')">
+                العنوان
+                <span class="glyphicon sort-icon" *ngIf="key =='titre'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('clientDate')">
+                التاريخ
+                <span class="glyphicon sort-icon" *ngIf="key =='clientDate'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('priorite')">
+                الأولوية
+                <span class="glyphicon sort-icon" *ngIf="key =='priorite'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+              <th scope="col" (click)="sort('type')">
+                النوع
+                <span class="glyphicon sort-icon" *ngIf="key =='type'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+              <th scope="col" (click)="sort('path')">
+                رابط الصفحة
+                <span class="glyphicon sort-icon" *ngIf="key =='path'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('etat')">
+                <p style="color:white">
+                  <span class="glyphicon sort-icon" *ngIf="key =='etat'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </p>
+                الحالة
+              </th>
+
+              <th scope="col">
+                تعليق
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let ne of ticketListWithClosed |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; let i = index">
               <th scope="row">{{ne.id}}</th>
               <th scope="row">{{ne.clientName}}</th>
               <td (click)="populateForm(ne)" data-toggle="modal" data-target="#myModal1">{{ne.titre}}</td>

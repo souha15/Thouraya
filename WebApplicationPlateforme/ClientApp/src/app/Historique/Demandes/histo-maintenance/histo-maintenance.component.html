@@ -28,6 +28,7 @@
               <th scope="col">تاريخ الطلب</th>
               <th scope="col">الحالة</th>
               <th scope="col">التفاصيل</th>
+              <th scope="col">حذف</th>
             </tr>
           </thead>
           <tbody>
@@ -43,7 +44,12 @@
                 <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-eye fa-lg"></i>
                 </a>
-              </td>           
+              </td>
+              <td>
+                <a class="btn show-details-btn text-danger" (click)="onDelete(cg.id)">
+                  <i class="fa fa-trash fa-lg"></i>
+                </a>
+              </td>
             </tr>
           </tbody>
         </table>

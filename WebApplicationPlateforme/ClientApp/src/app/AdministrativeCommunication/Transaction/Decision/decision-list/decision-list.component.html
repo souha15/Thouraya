@@ -42,12 +42,6 @@
         </ul>
         <div class="filtering">
           <div>
-            <a (click)="iterne()" class="ml-3">
-              <span class="ml-2"><i class="fa fa-sign-in-alt"></i></span>داخلية
-            </a>
-            <a (click)="externe()" class="ml-3">
-              <span class="ml-2"><i class="fa fa-sign-out-alt"></i></span>خارجية
-            </a>
             <a (click)="show()">
               <span class="ml-2"><i class="fa fa-search"></i></span>البحث
               المتقدم
@@ -87,20 +81,27 @@
                       التعميم
                       <span class="glyphicon sort-icon" *ngIf="key =='titre'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                     </th>
-
-                    <th scope="col">التفاصيل</th>
-
+                    <th scope="col" (click)="sort('titre')">
+                      داخلي/خارجي
+                      <span class="glyphicon sort-icon" *ngIf="key =='titre'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th>الموظف</th>
+                    <th>الإدارة</th>
 
                     <th scope="col" (click)="sort('org')">
                       الجهة
                       <span class="glyphicon sort-icon" *ngIf="key =='org'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                     </th>
+                    <th scope="col">التفاصيل</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of de1 | orderBy: key : reverse | filter:filter| paginate: {itemsPerPage:count,currentPage:p};let i=index">
                     <th scope="row">{{(p-1)*count+i+1}}</th>
-                    <td >{{item.titre}}</td>
+                    <td>{{item.titre}}</td>
+                    <td>{{item.decision}}</td>
+                    <td>{{item.employeenom}}</td>
+                    <td>{{item.adminnom}}</td>
                     <td>
                       <a class="btn show-details-btn text-info" (click)="populateForm(item)" data-toggle="modal" data-target="#myModal">
                         <i class="fa fa-eye fa-lg"></i>
@@ -140,20 +141,29 @@
                       القرار
                       <span class="glyphicon sort-icon" *ngIf="key =='titre'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                     </th>
-
-                    <th scope="col">التفاصيل</th>
-
+                    <th scope="col" (click)="sort('titre')">
+                      داخلي/خارجي
+                      <span class="glyphicon sort-icon" *ngIf="key =='titre'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th>الموظف</th>
+                    <th>الإدارة</th>
 
                     <th scope="col" (click)="sort('org')">
                       الجهة
                       <span class="glyphicon sort-icon" *ngIf="key =='org'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                     </th>
+                    <th scope="col">التفاصيل</th>
+
+
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of de2 | orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i=index">
                     <th scope="row">{{(p-1)*count+i+1}}</th>
                     <td>{{item.titre}}</td>
+                    <td>{{item.decision}}</td>
+                    <td>{{item.employeenom}}</td>
+                    <td>{{item.adminnom}}</td>
                     <td>
                       <a class="btn show-details-btn text-info" (click)="populateForm(item)" data-toggle="modal" data-target="#myModal">
                         <i class="fa fa-eye fa-lg"></i>
@@ -193,20 +203,29 @@
                       اللائحة
                       <span class="glyphicon sort-icon" *ngIf="key =='titre'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                     </th>
-
-                    <th scope="col">التفاصيل</th>
-
+                    <th scope="col" (click)="sort('titre')">
+                      داخلي/خارجي
+                      <span class="glyphicon sort-icon" *ngIf="key =='titre'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                    </th>
+                    <th>الموظف</th>
+                    <th>الإدارة</th>
 
                     <th scope="col" (click)="sort('org')">
                       الجهة
                       <span class="glyphicon sort-icon" *ngIf="key =='org'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                     </th>
+                    <th scope="col">التفاصيل</th>
+
+
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let item of de3 | orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i=index">
                     <th scope="row">{{(p-1)*count+i+1}}</th>
                     <td>{{item.titre}}</td>
+                    <td>{{item.decision}}</td>
+                    <td>{{item.employeenom}}</td>
+                    <td>{{item.adminnom}}</td>
                     <td>
                       <a class="btn show-details-btn text-info" (click)="populateForm(item)" data-toggle="modal" data-target="#myModal">
                         <i class="fa fa-eye fa-lg"></i>
@@ -265,6 +284,26 @@
                   داخلي/خارجي
                 </label>
                 <p>{{fact.decision}}</p>
+              </div>
+              <div *ngIf="fact.employeeid!=null">
+                <label>
+                  الموظف
+                </label>
+                <p>{{fact.employeenom}}</p>
+              </div>
+
+              <div *ngIf="fact.alladmin=='1'">
+                <label>
+                  الإدارة
+                </label>
+                <p>الكل</p>
+              </div>
+
+              <div *ngIf="fact.adminid!=null">
+                <label>
+                  الإدارة
+                </label>
+                <p>{{fact.adminnom}}</p>
               </div>
 
               <div>

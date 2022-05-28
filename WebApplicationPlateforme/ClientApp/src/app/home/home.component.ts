@@ -15,6 +15,8 @@ import { Ticket2 } from '../shared/Models/Ticket2/ticket2.model';
 import { PointageService } from '../shared/Services/Pointage/pointage.service'; 
 import { Pointage } from '../shared/Models/Pointage/pointage.model';
 import { Tache } from '../shared/Models/Taches/tache.model';
+import { NotifService } from '../shared/Services/NotifSystem/notif.service';
+import { UserDetail } from '../shared/Models/User/user-detail.model';
 
 @Component({
   selector: 'app-home',
@@ -30,58 +32,20 @@ export class HomeComponent implements OnInit {
     private affectationService: AffectationService,
     private notifmsgService: NotifMsgInterneService,
     private TicketService: Ticket2Service,
-    private pointageService: PointageService,) { }
+    private pointageService: PointageService,
+    private notifService: NotifService) { }
 
   ngOnInit(): void {
     this.getUserConnected();
-    this.getTransactionNotif();
-    this.notifmsg();
-    this.getTicketNotif();
-    this.getPointage();
 
   }
 
 
-  //get Ticket notif
-  ticList: Ticket2[] = [];
-  ticList1: Ticket2[] = [];
-  ticList2: Ticket2[] = [];
-  ticList3: Ticket2[] = [];
-  nbtic: number = 0;
-  testnbtic: boolean = false;
-  getTicketNotif() {
-    this.TicketService.ListTicket2().subscribe(res => {
-      this.ticList = res
-      this.ticList1 = this.ticList.filter(item => item.etat == "مرسلة" && item.idadmin == this.idadmin)
-      this.ticList2 = this.ticList.filter(item => item.etat == "مرسلة" && item.idetab == this.idetab)
-      this.ticList3 = this.ticList.filter(item => item.etat == "مرسلة" && item.iduser == this.UserIdConnected)
-      this.nbtic = this.ticList1.length + this.ticList2.length + this.ticList3.length
-      if (this.nbtic != 0) {
-        this.testnbtic = true
-      } else {
-        this.testnbtic = false;
-      }
-    })
-  }
-
+    // Get User Connected
   notifnb: number = 0;
   testnotifnb: boolean = false;
   notifMsgList: NotifMsgInterne[] = [];
   notifMsgList2: NotifMsgInterne[] = [];
-
-  notifmsg() {
-    this.notifmsgService.ListNotifMsgInterne().subscribe(res => {
-      this.notifMsgList2 = res;
-      this.notifMsgList = this.notifMsgList2.filter(item => item.userIdReceiver == this.UserIdConnected && item.seen == 0)
-      this.notifnb = this.notifMsgList.length;
-      if (this.notifnb != 0) {
-        this.testnotifnb = true;
-      } else {
-        this.testnotifnb = false;
-      }
-    })
-  }
-  // Get User Connected
   UserIdConnected: string;
   UserNameConnected: string;
   task: Tache[] = [];
@@ -94,33 +58,17 @@ export class HomeComponent implements OnInit {
   idetab: number;
   admin: boolean;
   mediadir: boolean = false;
-  getUserConnected() {
+  notif: number = 0;
+  testNotif: boolean = false;
+  user: UserDetail = new UserDetail();
 
-    this.UserService.getUserProfileObservable().subscribe(res => {
-      this.UserIdConnected = res.id;
-      this.UserNameConnected = res.fullName;
-      this.idadmin = res.idAdministration;
-      this.idetab = res.idDepartement;
-      if (res.emploi == "مدير إدارة العلاقات والاعلام ") {
-        this.mediadir=true
-      } else {
-        this.mediadir = false;
-      }
-      this.UserService.getUserRoles(this.UserIdConnected).subscribe(res => {
-        this.roleslist = res;
-        this.roleslist.forEach(item => {
-          if (item == "PARTNORMAL" || item == "RESPFINANCE") {
-            this.testrole = true;
-          }
-          if (item == "ADMINISTRATEUR") {
-            this.admin = true;
-          } else {
-            this.admin = false;
-          }
-       
-        })
-        console.log(this.testrole)
-      })
+  async getUserConnected(): Promise<any> {
+    this.user = await this.UserService.getUserConnected();
+    console.log(this.user)
+    this.UserIdConnected = this.user.id;
+    this.UserNameConnected = this.user.fullName;
+    this.idadmin = this.user.idAdministration;
+    this.idetab = this.user.idDepartement;
       this.TacheService.ListTache().subscribe(res => {
         this.task = res
         this.task2 = this.task.filter(item => item.affectedName == this.UserIdConnected && item.etat == "في الإنتظار");
@@ -132,97 +80,26 @@ export class HomeComponent implements OnInit {
 
         }
       })
-    })
-  }
-
-
-
- 
-  Globallist: Transaction[] = [];
-  FiltredList2: Transaction[] = [];
-  FiltredList: Transaction[] = [];
-  ListAffectation: any;
-  GlobalAffectationList: Affectation[] = [];
-  ListFitredAffec: Affectation[] = [];
-  affFiltredTr: Affectation[] = [];
-  lastaffFiltredTr: any;
-  affectatedTr: Transaction = new Transaction();
-  listtr: Transaction[] = [];
-  listlist: Affectation[] = [];
-  nbtr: number = 0;
-  shownbtr: boolean = false;
-  getTransactionNotif() {
-    let last: any;
-    let lastuser: any
-    this.FiltredList = [];
-    //Transaction List
-    this.transactionService.List().subscribe(res => {
-      this.Globallist = res
-      this.FiltredList = [];
-      //Transaction List copie originale et le createur c'es le user connecté
-
-      this.FiltredList2 = this.Globallist
-
-
-      //List global des affectation
-
-      this.affectationService.List().subscribe(res => {
-        this.GlobalAffectationList = res
-
-        // Tester les transactions qui ont des affectations
-
-        this.Globallist.forEach(element => {
-          this.affFiltredTr = [];
-          last = [];
-
-          this.ListAffectation = this.GlobalAffectationList.filter(item => item.idTransaction == element.id);
-
-
-          //get the last affected transaction to our user 
-
-          last = this.ListAffectation.map(el => el.idTransaction).lastIndexOf(element.id);
-
-          if (last != -1 && element.etat =="تحت الإجراء") {
-            if (this.ListAffectation[last].iduserAffected == this.UserIdConnected) {
-
-              this.transactionService.GetById(this.ListAffectation[last].idTransaction).subscribe(res => {
-            
-                this.FiltredList.push(res)
-                console.log(this.FiltredList)
-                this.nbtr = this.FiltredList.length
-                if (this.nbtr != 0) {
-                  this.shownbtr = true;
-                } else { this.shownbtr = false; }
-              })
-            }
-          }
-        })
-
-   
+      this.notifService.GetByUserUnRead(this.UserIdConnected).subscribe(res => {
+        this.notif = res.length;
+        if (this.notif) {
+          this.testNotif = true;
+        } else {
+          this.testNotif = false;
+        }
       })
 
-    })
-  }
-
-
-  point: Pointage = new Pointage();
-  plist: Pointage[] = [];
-  plist2: Pointage[] = [];
-  fulldate = new Date().toLocaleDateString();
-  pointer: boolean = false;
-
-  getPointage() {
-    this.pointageService.Get().subscribe(res => {
-      this.plist2 = res
-      this.plist = this.plist2.filter(item => item.idUserCreator == this.UserIdConnected && item.datePresence == this.fulldate)
-      if (this.plist.length == 0) {
-        this.pointer = true;
-
-      } else {
-        this.pointer = false;
-        this.point = this.plist[0];
-      }
-    })
+      this.notifmsgService.ListNotifMsgInterne().subscribe(res => {
+        this.notifMsgList2 = res;
+        this.notifMsgList = this.notifMsgList2.filter(item => item.userIdReceiver == this.UserIdConnected && item.seen == 0)
+        this.notifnb = this.notifMsgList.length;
+        if (this.notifnb != 0) {
+          this.testnotifnb = true;
+        } else {
+          this.testnotifnb = false;
+        }
+      })
+ 
   }
 
 }

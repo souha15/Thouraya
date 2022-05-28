@@ -178,8 +178,11 @@ export class DesignAddComponent implements OnInit {
 
       this.UserId = res.id;
       this.UserName = res.fullName;
-      this.idEtab = res.idDepartement;
-      this.nomEtab = res.nomDepartement;
+      if (res.idDepartement != null) {
+        this.idEtab = res.idDepartement;
+        this.nomEtab = res.nomDepartement;
+      }
+
     })
 
   }
@@ -203,8 +206,11 @@ export class DesignAddComponent implements OnInit {
       this.dem.etat = "في الانتظار";
       this.dem.idUserCreator = this.UserId;
       this.dem.userNameCreator = this.UserName;
-      this.dem.etabid = this.idEtab.toString();
-      this.dem.etabnom = this.nomEtab;
+      if (this.idEtab != null) {
+        this.dem.etabid = this.idEtab.toString();
+        this.dem.etabnom = this.nomEtab;
+      }
+
       this.demService.Create(this.dem).subscribe(res => {
         this.dem2 = res
         for (let i = 0; i < this.TypeImpList.length; i++) {

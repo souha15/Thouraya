@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.UserService
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Residence>>> Getresidences()
         {
-            return await _context.residences.ToListAsync();
+            return await _context.residences.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/Residences/5

@@ -37,11 +37,11 @@
                 <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
                     [ngClass]="{
 
-  'success': cg.etatdirecteur === 'معتمدة',
-  'denied': cg.etatdirecteur === 'مرفوضة',
-  'wait': cg.etatdirecteur === 'في الإنتظار'
+  'success': cg.etatadmin === 'معتمدة',
+  'denied': cg.etatadmin === 'مرفوضة',
+  'wait': cg.etatadmin === 'في الإنتظار'
 }">
-                  {{cg.etatdirecteur}}
+                  {{cg.etatadmin}}
                 </td>
             </tbody>
           </table>

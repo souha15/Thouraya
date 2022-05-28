@@ -25,6 +25,9 @@ using WebApplicationPlateforme.EmailSender;
 using System.Net.Mail;
 using System.Net;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Http;
+using System.Security.Principal;
+using Newtonsoft.Json;
 
 namespace WebApplicationPlateforme
 {
@@ -66,6 +69,7 @@ namespace WebApplicationPlateforme
 
             //get Ip Address
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
+            services.AddSingleton<IUserIdProvider, EmailBasedUserIdProvider>();
 
             services.Configure<ApplicationSettings>(Configuration.GetSection("ApplicationSettings"));
 
@@ -109,9 +113,21 @@ namespace WebApplicationPlateforme
             /*services.Configure<SmtpSettings>(Configuration.GetSection("SmtpSettings"));
             services.AddSingleton<IMailer, Mailer>();*/
 
-            services.AddSignalR();
+            services.AddSignalR(o =>
+            {
+                o.EnableDetailedErrors = true;
+            });
+            services.AddHttpContextAccessor();
+            services.AddTransient<IPrincipal>(provider => provider.GetService<IHttpContextAccessor>().HttpContext.User);
             //services.AddSingleton<IUserIdProvider, EmailBasedUserIdProvider>();
-            services.AddMvc().SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0).AddNewtonsoftJson();/*.AddJsonOptions(x => { })*/;
+        
+            services.AddMvc()
+                
+                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Version_3_0).AddNewtonsoftJson(o =>
+                {
+                    o.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                });
+
             //services.AddControllersWithViews();
             services.AddControllers()
             .AddNewtonsoftJson();
@@ -221,6 +237,7 @@ namespace WebApplicationPlateforme
 
                 if (env.IsDevelopment())
                 {
+                    spa.Options.StartupTimeout = new TimeSpan(0, 0, 80);
                     spa.UseAngularCliServer(npmScript: "start");
                 }
             });
@@ -232,7 +249,7 @@ namespace WebApplicationPlateforme
                 builder.AllowAnyOrigin()
                 .AllowAnyHeader()
                 .AllowAnyMethod()
-              //  .AllowCredentials()
+                //.AllowCredentials()
             );
             app.UseAuthentication();
 

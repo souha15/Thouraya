@@ -23,6 +23,8 @@ import { ArticlePayCheque } from '../../../shared/Models/Cheques/article-pay-che
 import { DemPayCheque } from '../../../shared/Models/Cheques/dem-pay-cheque.model';
 import { AdministrationService } from '../../../shared/Services/Administration/administration.service';
 import { Administration } from '../../../shared/Models/Administration/administration.model';
+import { NotifService } from '../../../shared/Services/NotifSystem/notif.service';
+import { Notif } from '../../../shared/Models/NotifSystem/notif.model';
 
 @Component({
   selector: 'app-pay-chequec-add',
@@ -40,7 +42,8 @@ export class PayChequecAddComponent implements OnInit {
     private http: HttpClient,
     private toastr: ToastrService,
     private rootUrl: PathSharedService,
-    private adminService: AdministrationService) { }
+    private adminService: AdministrationService,
+    private notifService: NotifService) { }
 
   ngOnInit(): void {
     this.getUserConnected();
@@ -79,12 +82,28 @@ export class PayChequecAddComponent implements OnInit {
   UserNameConnected: string;
   admindir: string;
   ida: number;
+  notif: Notif = new Notif();
+  dateTime = new Date();
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
+      if (res.attribut1 != null) {
       this.admindir = res.attribut1
+      this.notif.userReceiverId = res.attribut1;
+      this.notif.userReceiverName = res.directeur;
+        this.ch.iddir = res.attribut1;
+      }
+      this.notif.userTransmitterId = res.id;
+      this.notif.userTransmitterName = res.fullName;
+      this.notif.dateTime = this.date;
+      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
+      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
+      this.notif.TextNotification = "طلب صرف شيك من الموظف  " + res.fullName
+      this.notif.serviceName = "طلب صرف شيك"
+      this.notif.readUnread = "0";
+      this.notif.serviceId = 2;
     })
 
   }
@@ -148,7 +167,7 @@ export class PayChequecAddComponent implements OnInit {
       this.ch.dateenreg = this.date;
       this.ch.creatorName = this.UserNameConnected;
       this.ch.idUserCreator = this.UserIdConnected;
-      this.ch.iddir = this.admindir;
+
       this.ch.etatgeneral = "في الإنتظار"
       this.ch.etatfinacier = "في الإنتظار"
       this.ch.etatdirecteur = "في الإنتظار"
@@ -158,7 +177,9 @@ export class PayChequecAddComponent implements OnInit {
       this.ch.etatnum = "0"
       this.demandeService.Add(this.ch).subscribe(res => {
         this.chId = res.id
+        this.notifService.Add(this.notif).subscribe(res => {
 
+        })
         if (this.artest) {
           for (let i = 0; i < this.arlis.length; i++) {
             this.ar = this.arlis[i]

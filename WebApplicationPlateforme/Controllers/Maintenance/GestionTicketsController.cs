@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.Maintenance
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GestionTickets>>> GetGestionTickets()
         {
-            return await _context.GestionTickets.ToListAsync();
+            return await _context.GestionTickets.OrderBy(item=> item.Id).ToListAsync();
         }
 
         // GET: api/GestionTickets/5
@@ -101,7 +101,6 @@ namespace WebApplicationPlateforme.Controllers.Maintenance
 
             return gestionTickets;
         }
-
         private bool GestionTicketsExists(int id)
         {
             return _context.GestionTickets.Any(e => e.Id == id);

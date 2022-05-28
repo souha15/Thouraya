@@ -1,12 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ElementRef } from '@angular/core';
 
 import { ToastrService } from 'ngx-toastr';
 
 import { NgForm } from '@angular/forms';
-import { CongeService } from '../../shared/Services/Rh/conge.service';
+import { CongeService, CongeFiles } from '../../shared/Services/Rh/conge.service';
 import { UserServiceService } from '../../shared/Services/User/user-service.service';
 import { UserDetail } from '../../shared/Models/User/user-detail.model';
 import { Conge } from '../../shared/Models/RH/conge.model';
+import { ProgressStatus } from '../../shared/Interfaces/progress-status';
+import { UploadDownloadService } from '../../shared/Services/Taches/upload-download.service';
+import { HttpEventType } from '@angular/common/http';
+import { ProgressStatusEnum } from '../../shared/Enum/progress-status-enum.enum';
 
 @Component({
   selector: 'app-salaire-report-print',
@@ -14,12 +18,16 @@ import { Conge } from '../../shared/Models/RH/conge.model';
   styleUrls: ['./salaire-report-print.component.css']
 })
 export class SalaireReportPrintComponent implements OnInit {
-
+  @Input() public disabled: boolean;
+  @Input() public fileName: string;
+  @Output() public downloadStatus: EventEmitter<ProgressStatus>;
+  @ViewChild('htmlData') htmlData: ElementRef;
   constructor(private congeService: CongeService,
     private toastr: ToastrService,
     private UserService: UserServiceService,
-
-  ) { }
+    public serviceupload: UploadDownloadService, ) {
+    this.downloadStatus = new EventEmitter<ProgressStatus>();
+  }
   p: Number = 1;
   count: Number = 5;
   ngOnInit(): void {
@@ -58,10 +66,13 @@ export class SalaireReportPrintComponent implements OnInit {
 
 
   per: Conge = new Conge();
-
+  filesList: CongeFiles[] = [];
   populateForm(conge: Conge) {
     this.per = Object.assign({}, conge)
     this.congeService.formData = Object.assign({}, conge)
+    this.congeService.GetByCongesIdCF(this.per.id).subscribe(res => {
+      this.filesList = res
+    })
   }
 
   etat: string;
@@ -153,5 +164,36 @@ export class SalaireReportPrintComponent implements OnInit {
       idUserCreator: '',
 
     }
+  }
+
+
+  //Download
+
+  public download(filepath) {
+    this.downloadStatus.emit({ status: ProgressStatusEnum.START });
+    this.serviceupload.downloadFile(filepath).subscribe(
+      data => {
+        switch (data.type) {
+          case HttpEventType.DownloadProgress:
+            this.downloadStatus.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
+            break;
+          case HttpEventType.Response:
+            this.downloadStatus.emit({ status: ProgressStatusEnum.COMPLETE });
+            const downloadedFile = new Blob([data.body], { type: data.body.type });
+            const a = document.createElement('a');
+            a.setAttribute('style', 'display:none;');
+            document.body.appendChild(a);
+            a.download = filepath;
+            a.href = URL.createObjectURL(downloadedFile);
+            a.target = '_blank';
+            a.click();
+            document.body.removeChild(a);
+            break;
+        }
+      },
+      error => {
+        this.downloadStatus.emit({ status: ProgressStatusEnum.ERROR });
+      }
+    );
   }
 }

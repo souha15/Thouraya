@@ -156,3 +156,15 @@ body.noscroll {
     border: 1px solid #c3c8c7;
     border-radius: 6px;
   }
+
+.wait {
+  background: #dbcf46;
+}
+
+.success {
+  background: #2aa830;
+}
+
+.denied {
+  background: #ed4b1a;
+}

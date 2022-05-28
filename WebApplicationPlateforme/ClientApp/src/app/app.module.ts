@@ -796,6 +796,22 @@ import { HistoVenteComponent } from './Historique/Demandes/histo-vente/histo-ven
 import { HistoTechComponent } from './Historique/Demandes/histo-tech/histo-tech.component';
 import { HistoAllMaintenanceComponent } from './Historique/Demandes/histo-all-maintenance/histo-all-maintenance.component';
 import { HistoMenusComponent } from './Historique/Menus/histo-menus/histo-menus.component';
+import { NotifShowComponent } from './NotifSystem/notif-show/notif-show.component';
+import { HistoDotationMenusComponent } from './Historique/Menus/histo-dotation-menus/histo-dotation-menus.component';
+import { HistoServicesMenusComponent } from './Historique/Menus/histo-services-menus/histo-services-menus.component';
+import { HistoMediaMenusComponent } from './Historique/Menus/histo-media-menus/histo-media-menus.component';
+import { HistoInterviewsComponent } from './Historique/Demandes/histo-interviews/histo-interviews.component';
+import { HistoArtsComponent } from './Historique/Demandes/histo-arts/histo-arts.component';
+import { HistoPhotographeComponent } from './Historique/Demandes/histo-photographe/histo-photographe.component';
+import { HistoCadeauxComponent } from './Historique/Demandes/histo-cadeaux/histo-cadeaux.component';
+import { HistoRendonneComponent } from './Historique/Demandes/histo-rendonne/histo-rendonne.component';
+import { HistoSoireeComponent } from './Historique/Demandes/histo-soiree/histo-soiree.component';
+import { HistoMediaComponent } from './Historique/Demandes/histo-media/histo-media.component';
+import { HistoFilmComponent } from './Historique/Demandes/histo-film/histo-film.component';
+import { HistoVisiteComponent } from './Historique/Demandes/histo-visite/histo-visite.component';
+import { HistoMontageComponent } from './Historique/Demandes/histo-montage/histo-montage.component';
+import { HistoImpressionComponent } from './Historique/Demandes/histo-impression/histo-impression.component';
+import { CongeService } from './shared/Services/Rh/conge.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -1557,6 +1573,21 @@ import { HistoMenusComponent } from './Historique/Menus/histo-menus/histo-menus.
     HistoTechComponent,
     HistoAllMaintenanceComponent,
     HistoMenusComponent,
+    NotifShowComponent,
+    HistoDotationMenusComponent,
+    HistoServicesMenusComponent,
+    HistoMediaMenusComponent,
+    HistoInterviewsComponent,
+    HistoArtsComponent,
+    HistoPhotographeComponent,
+    HistoCadeauxComponent,
+    HistoRendonneComponent,
+    HistoSoireeComponent,
+    HistoMediaComponent,
+    HistoFilmComponent,
+    HistoVisiteComponent,
+    HistoMontageComponent,
+    HistoImpressionComponent,
   ],
   imports: [
 
@@ -2966,7 +2997,7 @@ import { HistoMenusComponent } from './Historique/Menus/histo-menus/histo-menus.
 
     /** Cheque New **/
 
-      { path: 'new-cheque-list-dir-directe', component: NewChequeListDirDirecteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORETAB','DIRECTORETAB'] }},
+      { path: 'new-cheque-list-dir-directe', component: NewChequeListDirDirecteComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORETAB','DIRECTORADMN'] }},
 
       { path: 'new-cheque-list-etab-fin', component: NewChequeListEtabFinComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'COMPTAPRIV'] } },
 
@@ -3265,6 +3296,25 @@ import { HistoMenusComponent } from './Historique/Menus/histo-menus/histo-menus.
       { path: 'histo-tech', component: HistoTechComponent, canActivate: [AuthGuard] },
       { path: 'histo-all-maintenance', component: HistoAllMaintenanceComponent, canActivate: [AuthGuard] },
       { path: 'histo-menus', component: HistoMenusComponent, canActivate: [AuthGuard] },
+      { path: 'histo-dotation-menus', component: HistoDotationMenusComponent, canActivate: [AuthGuard] },
+      { path: 'histo-services-menus', component: HistoServicesMenusComponent, canActivate: [AuthGuard] },
+      { path: 'histo-media-menus', component: HistoMediaMenusComponent, canActivate: [AuthGuard] },      
+      { path: 'histo-interviews', component: HistoInterviewsComponent, canActivate: [AuthGuard] },
+      { path: 'histo-arts', component: HistoArtsComponent, canActivate: [AuthGuard] },
+      { path: 'histo-photographe', component: HistoPhotographeComponent, canActivate: [AuthGuard] },
+      { path: 'histo-cadeaux', component: HistoCadeauxComponent, canActivate: [AuthGuard] },
+      { path: 'histo-rendonne', component: HistoRendonneComponent, canActivate: [AuthGuard] },
+      { path: 'histo-soiree', component: HistoSoireeComponent, canActivate: [AuthGuard] },
+      { path: 'histo-media', component: HistoMediaComponent, canActivate: [AuthGuard] },
+      { path: 'histo-film', component: HistoFilmComponent, canActivate: [AuthGuard] },
+      { path: 'histo-visite', component: HistoVisiteComponent, canActivate: [AuthGuard] },
+      { path: 'histo-montage', component: HistoMontageComponent, canActivate: [AuthGuard] },
+      { path: 'histo-impression', component: HistoImpressionComponent, canActivate: [AuthGuard] },
+
+    /*** Notif System **/
+      { path: 'notif-show', component: NotifShowComponent, canActivate: [AuthGuard] },
+
+      
 
     ])
   ],/*,  {
@@ -3291,6 +3341,7 @@ import { HistoMenusComponent } from './Historique/Menus/histo-menus/histo-menus.
     UniteService,
     LocataireService,
     DepotRevenusService,
+    CongeService
   ],
   bootstrap: [AppComponent]
 })

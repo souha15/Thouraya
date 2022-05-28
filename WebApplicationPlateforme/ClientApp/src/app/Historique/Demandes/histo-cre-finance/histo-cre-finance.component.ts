@@ -7,6 +7,7 @@ import { ProgressStatus } from '../../../shared/Interfaces/progress-status';
 import { CreanceFinanciere } from '../../../shared/Models/Finance/creance-financiere.model';
 import { PiecesJointesCF } from '../../../shared/Models/Finance/pieces-jointes-cf.model';
 import { ProgressStatusEnum } from '../../../shared/Enum/progress-status-enum.enum';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-histo-cre-finance',
@@ -22,6 +23,7 @@ export class HistoCreFinanceComponent implements OnInit {
     private rootUrl: PathSharedService,
     public serviceupload: UploadDownloadService,
     private http: HttpClient,
+    private toastr: ToastrService,
   ) { this.downloadStatus = new EventEmitter<ProgressStatus>();}
 
   ngOnInit(): void {
@@ -147,4 +149,24 @@ export class HistoCreFinanceComponent implements OnInit {
     );
   }
 
+
+  onDelete(id: number) {
+
+
+    if (confirm('هل أنت متأكد من حذف هذا السجل؟')) {
+      this.creanceService.Delete(id)
+        .subscribe(res => {
+          this.getCreance();
+          this.toastr.success("تم الحذف  بنجاح", "نجاح");
+        },
+
+          err => {
+            console.log(err);
+            this.toastr.warning('لم يتم الحذف  ', ' فشل');
+          }
+        )
+
+    }
+
+  }
 }

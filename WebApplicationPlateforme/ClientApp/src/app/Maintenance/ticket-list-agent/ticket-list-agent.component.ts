@@ -30,6 +30,9 @@ export class TicketListAgentComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTicketsList();
+    this.withoutClosed = true;
+    this.withClosed = false;
+
 
   }
 
@@ -37,25 +40,44 @@ export class TicketListAgentComponent implements OnInit {
   p: Number = 1;
   count: Number = 6;
   ticketList: Ticket[] = [];
+  ticketList2: Ticket[] = [];
+  ticketListWithClosed: Ticket[] = [];
   enattente: number = 0;
   done: number = 0;
   encours: number = 0;
   closed: number = 0;
   suspendu: number = 0;
   enattenterep: number = 0;
+  withoutClosed: boolean;
   getTicketsList() {
     this.ticketService.List().subscribe(res => {
-      this.ticketList = res;
-      this.done = this.ticketList.filter(item => item.etat == "منجزة").length;
-      this.encours = this.ticketList.filter(item => item.etat == "تحت الإجراء").length;
-      this.closed = this.ticketList.filter(item => item.etat == "مغلقة").length;
-      this.suspendu = this.ticketList.filter(item => item.etat == "مؤجلة").length;
-      this.enattente = this.ticketList.filter(item => item.etat == "في الإنتظار").length;
-      this.enattenterep = this.ticketList.filter(item => item.etat == "بانتظار رد صاحب التذكرة").length;
+      this.ticketList2 = res;
+      this.ticketList = this.ticketList2.filter(item => item.etat != "مغلقة");
+      this.done = this.ticketList2.filter(item => item.etat == "منجزة").length;
+      this.encours = this.ticketList2.filter(item => item.etat == "تحت الإجراء").length;
+      this.closed = this.ticketList2.filter(item => item.etat == "مغلقة").length;
+      this.suspendu = this.ticketList2.filter(item => item.etat == "مؤجلة").length;
+      this.enattente = this.ticketList2.filter(item => item.etat == "في الإنتظار").length;
+      this.enattenterep = this.ticketList2.filter(item => item.etat == "بانتظار رد صاحب التذكرة").length;
     
     })
   }
+  withClosed: boolean = false; 
+  getWiThClosed() {
+    if (!this.withClosed) {
+      this.withClosed = true;
+      this.withoutClosed = false;
 
+      this.ticketListWithClosed = this.ticketList2.filter(item => item.etat == "مغلقة")
+      
+    }
+    else {
+        this.withClosed = false;
+        this.withoutClosed = true;
+        this.getTicketsList();
+      }
+
+  }
   //sorting
   key: string = 'name'; //set default
   reverse: boolean = false;

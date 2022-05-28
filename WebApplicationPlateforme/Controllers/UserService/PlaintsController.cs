@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.UserService
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Plaint>>> Getplaints()
         {
-            return await _context.plaints.ToListAsync();
+            return await _context.plaints.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/Plaints/5

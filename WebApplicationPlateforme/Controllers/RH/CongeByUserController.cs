@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.RH
         public List<Conge> GetSolde(string idUserCreator)
         {
             var cgList = _context.conges.ToList();
-            var soldeConge = _context.conges.Where(item => item.directeurid == idUserCreator && item.etatd == "في الانتظار").ToList();  
+            var soldeConge = _context.conges.Where(item => item.directeurid == idUserCreator && item.etatd == "في الانتظار").OrderBy(item=> item.Id).ToList();  
             return soldeConge;
         }
     }

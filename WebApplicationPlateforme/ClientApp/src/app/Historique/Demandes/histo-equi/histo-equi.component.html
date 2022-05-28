@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <app-nav-menu></app-nav-menu>
 <!-- Page Content -->
 <div class="content">
@@ -26,6 +27,8 @@
                 <th scope="col">جوال</th>
                 <th scope="col">الايميل الرسمي</th>
                 <th scope="col">الحالة</th>
+                <th scope="col">سير الإجراء</th>
+                <th scope="col">حذف</th>
               </tr>
             </thead>
             <tbody>
@@ -37,16 +40,25 @@
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.tel}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.email}}</td>
 
-                <td  (click)="populateForm(cg)"
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal2"
                     [ngClass]="{
 
-  'ok': cg.etatdir === 'موافق',
-  'refused': cg.etatdir === 'رفض',
-  'wait': cg.etatdir === 'في الانتظار'
+  'ok': cg.attribut2 === 'موافق',
+  'refused': cg.attribut2 === 'رفض',
+  'wait': cg.attribut2 === 'في الانتظار'
 }">
-                  {{cg.etatdir}}
+                  {{cg.attribut2}}
                 </td>
 
+                <td (click)="populateForm(cg)">
+                  <a class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal3"><i class="fa fa-road"></i>  </a>
+                </td>
+
+                <td>
+                  <a class="btn show-details-btn text-danger" (click)="onDelete(cg.id)">
+                    <i class="fa fa-trash fa-lg"></i>
+                  </a>
+                </td>
               </tr>
             </tbody>
           </table>
@@ -150,3 +162,76 @@
   </div>
 </div>
 
+
+<div id="myModal3" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">سير الإجراء</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <div class="lables">
+          <div style="color:#db5a60; font-weight:bold"> تقديم الطلب</div>
+          <div style="color:dimgrey;font-weight:bold"> المدير المباشر</div>
+          <div style="color:green;font-weight:bold">مدير الأوقاف و الخدمات</div>
+
+        </div>
+        <div class="w3-light-grey w3-round" *ngIf="test0">
+          <div id="myBar" class="w3-container w3-round w3-red" style="height:24px;width:{{val}}">0</div>
+        </div>
+
+
+        <div class="w3-light-grey w3-round" *ngIf="test50">
+          <div id="myBar" class="w3-container w3-round w3-blue" style="height:24px;width:{{val}}">50%</div>
+        </div>
+
+        <div class="w3-light-grey w3-round" *ngIf="test100">
+          <div id="myBar" class="w3-container w3-round w3-green" style="height:24px;width:{{val}}">100%</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>
+<div id="myModal2" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">تعديل حالة العهدة</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <label for="user"><span><i class="fa fa-check"></i></span>حالة العهدة</label>
+          <select id="user" class="" name="attribut2" #attribut2="ngModel" [(ngModel)]="congeService.formData.attribut2" (change)="etattest($event)">
+            <option [ngValue]="undefined" selected disabled>-حالة العهدة-</option>
+            <option value="موافق">موافق</option>
+            <option value="رفض">رفض</option>
+
+          </select>
+
+          <div class="save">
+            <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>

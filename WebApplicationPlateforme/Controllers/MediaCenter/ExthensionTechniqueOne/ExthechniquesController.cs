@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.MediaCenter.ExthensionTechniqueOn
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Exthechnique>>> GetExthechnique()
         {
-            return await _context.Exthechnique.ToListAsync();
+            return await _context.Exthechnique.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/Exthechniques/5

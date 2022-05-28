@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.MediaCenter.MontPart
         [HttpGet]
         public async Task<ActionResult<IEnumerable<montage>>> GetMontages()
         {
-            return await _context.Montages.ToListAsync();
+            return await _context.Montages.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/montages/5

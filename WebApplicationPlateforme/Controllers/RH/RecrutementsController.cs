@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.RH
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Recrutement>>> Getrecrutements()
         {
-            return await _context.recrutements.ToListAsync();
+            return await _context.recrutements.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/Recrutements/5

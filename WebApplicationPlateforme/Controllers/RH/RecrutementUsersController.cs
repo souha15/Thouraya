@@ -37,7 +37,7 @@ namespace WebApplicationPlateforme.Controllers.RH
         public List<Recrutement> GetRecrutementUsers(string id)
         {
             List<Recrutement> recrutementDir = new List<Recrutement>();
-            recrutementDir = _context.recrutements.Where(item => item.iddir == id && item.etatdir == "في الانتظار").ToList();
+            recrutementDir = _context.recrutements.Where(item => item.iddir == id && item.etatdir == "في الانتظار").OrderBy(item => item.Id).ToList();
             return recrutementDir;
 
         }

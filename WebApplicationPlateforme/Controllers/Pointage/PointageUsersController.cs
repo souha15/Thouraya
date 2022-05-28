@@ -62,9 +62,9 @@ namespace WebApplicationPlateforme.Controllers.Pointage
             }
 
             DateTime date1 = DateTime.Now;
-
-            int hour = date1.Hour;
-            int minute = date1.Minute;
+            DateTime d1 = date1.AddHours(+2);
+            int hour = d1.Hour;
+            int minute = d1.Minute;
 
             pointageUser.timeQuitter = hour.ToString() + ':' + minute.ToString();
             _context.Entry(pointageUser).State = EntityState.Modified;
@@ -157,10 +157,10 @@ namespace WebApplicationPlateforme.Controllers.Pointage
 
 
             int day = dateOnly.Day;
-
-            int hour = dateOnly.Hour;
-
-            int minute = dateOnly.Minute;
+            DateTime date12 = DateTime.Now;
+            DateTime d2 = date12.AddHours(+2);
+            int hour = d2.Hour;
+            int minute = d2.Minute;
 
             pointageUser.attribut3 = year.ToString();
             pointageUser.mois = month.ToString();

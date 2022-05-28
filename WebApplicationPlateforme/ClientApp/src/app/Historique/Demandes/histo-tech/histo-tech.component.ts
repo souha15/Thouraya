@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TechDemService } from '../../../shared/Services/TechnicalDemands/tech-dem.service';
 import { TechDem } from '../../../shared/Models/TechnicalDemands/tech-dem.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-histo-tech',
@@ -9,7 +10,8 @@ import { TechDem } from '../../../shared/Models/TechnicalDemands/tech-dem.model'
 })
 export class HistoTechComponent implements OnInit {
 
-  constructor(private demTechService: TechDemService,) { }
+  constructor(private demTechService: TechDemService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getDemList();
@@ -71,6 +73,27 @@ export class HistoTechComponent implements OnInit {
     } else {
 
       this.imprimante = false
+    }
+
+  }
+
+
+  onDelete(id: number) {
+
+
+    if (confirm('هل أنت متأكد من حذف هذا السجل؟')) {
+      this.demTechService.Delete(id)
+        .subscribe(res => {
+          this.getDemList();
+          this.toastr.success("تم الحذف  بنجاح", "نجاح");
+        },
+
+          err => {
+            console.log(err);
+            this.toastr.warning('لم يتم الحذف  ', ' فشل');
+          }
+        )
+
     }
 
   }

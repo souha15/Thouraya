@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.ServiceRh
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CreationTravailDemande>>> GetcreationTravailDemandes()
         {
-            return await _context.creationTravailDemandes.ToListAsync();
+            return await _context.creationTravailDemandes.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/CreationTravailDemandes/5

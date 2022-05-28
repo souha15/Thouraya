@@ -36,8 +36,10 @@ export class VisiteAddComponent implements OnInit {
 
       this.UserId = res.id;
       this.UserName = res.fullName;
-      this.idEtab = res.idDepartement;
-      this.nomEtab = res.nomDepartement;
+      if (res.idDepartement != null) {
+        this.idEtab = res.idDepartement;
+        this.nomEtab = res.nomDepartement;
+      }
     })
 
   }

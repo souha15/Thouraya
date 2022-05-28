@@ -11,6 +11,8 @@ import { Recrutement } from '../../../shared/Models/RH/recrutement.model';
 import { NgForm } from '@angular/forms';
 import { UserDetail } from '../../../shared/Models/User/user-detail.model';
 import { RecrutementService } from '../../../shared/Services/Rh/recrutement.service';
+import { Notif } from '../../../shared/Models/NotifSystem/notif.model';
+import { NotifService } from '../../../shared/Services/NotifSystem/notif.service';
 
 @Component({
   selector: 'app-recrutement-add',
@@ -28,7 +30,8 @@ export class RecrutementAddComponent implements OnInit {
     public serviceupload: UploadDownloadService,
     public recrutementService: RecrutementService,
     private http: HttpClient,
-    private rootUrl: PathSharedService) { this.uploadStatuss = new EventEmitter<ProgressStatus>();}
+    private rootUrl: PathSharedService,
+    private notifService: NotifService) { this.uploadStatuss = new EventEmitter<ProgressStatus>(); }
 
   ngOnInit(): void {
     this.getFiles();
@@ -37,12 +40,25 @@ export class RecrutementAddComponent implements OnInit {
   }
 
   // Get User Connected
-
+  notif: Notif = new Notif();
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
-      this.rec.iddir = res.attribut1;
-      this.rec.nomdir = res.directeur;
+
+      if (res.attribut1 != null) {
+        this.rec.nomdir = res.directeur;
+        this.rec.iddir = res.attribut1;
+        this.notif.userReceiverId = res.attribut1;
+        this.notif.userReceiverName = res.directeur;
+      }
+      this.notif.userTransmitterId = res.id;
+      this.notif.userTransmitterName = res.fullName;
+      this.notif.dateTime = this.date;
+      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
+      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
+      this.notif.TextNotification = "طلب انتداب من الموظف  " + res.fullName
+      this.notif.serviceName = "طلب انتداب"
+      this.notif.readUnread = "0";
       this.rec.idUserCreator = res.id;
       this.rec.userNameCreator = res.fullName;
     })
@@ -73,6 +89,7 @@ export class RecrutementAddComponent implements OnInit {
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
   recId: number;
+  dateTime = new Date();
   onSubmit(form: NgForm) {
     this.rec.dateenreg = this.date;
     this.rec.etatdir = "في الانتظار";;
@@ -93,7 +110,9 @@ export class RecrutementAddComponent implements OnInit {
           this.pj.creatorName = this.rec.userNameCreator;
           this.pj.datenereg = this.date
           this.pj.date = this.date;
-
+          this.notif.serviceId = res.id;
+          this.notifService.Add(this.notif).subscribe(res => {
+          })
           this.pj.idrec = this.recId;
           let path = this.rootUrl.getPath();
           this.fileslist.forEach(item => {

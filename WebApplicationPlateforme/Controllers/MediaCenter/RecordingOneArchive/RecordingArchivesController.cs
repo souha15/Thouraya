@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.MediaCenter.RecordingOneArchive
         [HttpGet]
         public async Task<ActionResult<IEnumerable<RecordingArchive>>> GetRecordingArchive()
         {
-            return await _context.RecordingArchive.ToListAsync();
+            return await _context.RecordingArchive.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/RecordingArchives/5

@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.MediaCenter.visiController
         [HttpGet]
         public async Task<ActionResult<IEnumerable<visite>>> Getvisite()
         {
-            return await _context.visite.ToListAsync();
+            return await _context.visite.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/visites/5

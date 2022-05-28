@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.UserService
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Demission>>> Getdemissions()
         {
-            return await _context.demissions.ToListAsync();
+            return await _context.demissions.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/Demissions/5

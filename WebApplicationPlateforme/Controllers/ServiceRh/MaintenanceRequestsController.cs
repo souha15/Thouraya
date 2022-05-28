@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.ServiceRh
         [HttpGet]
         public async Task<ActionResult<IEnumerable<MaintenanceRequest>>> GetmaintenanceRequests()
         {
-            return await _context.maintenanceRequests.ToListAsync();
+            return await _context.maintenanceRequests.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/MaintenanceRequests/5

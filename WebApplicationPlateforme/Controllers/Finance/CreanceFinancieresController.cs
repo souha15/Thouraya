@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.Finance
         [HttpGet]
         public async Task<ActionResult<IEnumerable<CreanceFinanciere>>> GetcreanceFinancieres()
         {
-            return await _context.creanceFinancieres.ToListAsync();
+            return await _context.creanceFinancieres.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/CreanceFinancieres/5

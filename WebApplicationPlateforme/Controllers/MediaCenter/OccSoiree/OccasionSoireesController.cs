@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.MediaCenter.OccSoiree
         [HttpGet]
         public async Task<ActionResult<IEnumerable<OccasionSoiree>>> GetOccasionSoiree()
         {
-            return await _context.OccasionSoiree.ToListAsync();
+            return await _context.OccasionSoiree.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/OccasionSoirees/5

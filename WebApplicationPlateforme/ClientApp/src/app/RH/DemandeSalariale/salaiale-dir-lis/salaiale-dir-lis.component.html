@@ -20,6 +20,12 @@
                 <th scope="col">مقدم الطلب</th>
                 <th scope="col">نوع المشهد</th>
                 <th scope="col">لغة المشهد</th>
+                <th scope="col">
+                  التاريخ
+                </th>
+                <th scope="col">
+                  مدة شاحية التعريف
+                </th>
                 <th scope="col">جهة المشهد</th>
                 <th scope="col">الحالة</th>
               </tr>
@@ -30,6 +36,8 @@
                 <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.userNameCreator}}</th>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.type}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.langue}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.date}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.dateenreg}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.organisme}}</td>
 
                 <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
@@ -41,7 +49,7 @@
 }">
                   {{cg.etat}}
                 </td>
-            </tbody>
+</tbody>
           </table>
         </div>
         <!-- Pagination -->

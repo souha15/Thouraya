@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.ChangerRib
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DemChangeRib>>> GetDemChangeRib()
         {
-            return await _context.DemChangeRib.ToListAsync();
+            return await _context.DemChangeRib.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/DemChangeRibs/5

@@ -31,7 +31,7 @@ namespace WebApplicationPlateforme.Controllers.UserService
         public List<PermissionU> GetRecrutementUsers(string id)
         {
             List<PermissionU> recrutementDir = new List<PermissionU>();
-            recrutementDir = _context.permissionUs.Where(item => item.idUserCreator == id).ToList();
+            recrutementDir = _context.permissionUs.Where(item => item.idUserCreator == id).OrderBy(item => item.Id).ToList();
             return recrutementDir;
 
         }

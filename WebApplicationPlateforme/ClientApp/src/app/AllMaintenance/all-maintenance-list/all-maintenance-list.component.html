@@ -1,1 +1,7 @@
-<p>all-maintenance-list works!</p>
+<div id="divMessages" class="messages">
+</div>
+<div class="input-zone">
+  <label id="lblMessage" for="tbMessage">Message:</label>
+  <input id="tbMessage" class="input-zone-input" type="text" (change)="getmsg($event)" />
+  <button id="btnSend" (click)="send()">Send</button>
+</div>

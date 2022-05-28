@@ -6,6 +6,8 @@ import { CrationTravailDemande } from '../../../shared/Models/ServiceRh/cration-
 import { NgForm } from '@angular/forms';
 import { AdministrationService } from '../../../shared/Services/Administration/administration.service';
 import { Administration } from '../../../shared/Models/Administration/administration.model';
+import { NotifService } from '../../../shared/Services/NotifSystem/notif.service';
+import { Notif } from '../../../shared/Models/NotifSystem/notif.model';
 
 @Component({
   selector: 'app-creation-add',
@@ -18,7 +20,8 @@ export class CreationAddComponent implements OnInit {
     private ctService: CreationTravailDemandeService,
     private UserService: UserServiceService,
     private toastr: ToastrService,
-    private adminService: AdministrationService) { }
+    private adminService: AdministrationService,
+    private notifService: NotifService) { }
 
   ngOnInit(): void {
     this.getUserConnected();
@@ -33,6 +36,8 @@ export class CreationAddComponent implements OnInit {
   position: string;
   admindir: string;
   nom: string;
+  notif: Notif = new Notif();
+  dateTime = new Date();
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
@@ -40,14 +45,26 @@ export class CreationAddComponent implements OnInit {
       this.UserNameConnected = res.fullName;
       this.position = res.position;
       this.nom = res.nomAdministration
- 
-      this.adminService.GetAdminData(this.nom).subscribe(resp => {
-        
-        this.UserService.GetUserByUserName2(resp.nomDirecteur).subscribe(res => {
-          this.ct.iddir = res.id;
-          this.ct.nomdir = res.fullName;
-        })
+      this.notif.userTransmitterId = res.id;
+      this.notif.userTransmitterName = res.fullName;
+      this.notif.dateTime = this.date;
+      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
+      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
+      this.notif.TextNotification = "طلب استحداث وظيفة من الموظف  " + res.fullName
+      this.notif.serviceName = "طلب استحداث وظيفة"
+      this.notif.readUnread = "0";
+      this.notif.serviceId = 2;
+      this.UserService.getAdminDir(res.id).subscribe(resDir => {
+        if (resDir != null) {
+          this.ct.iddir = resDir.id;
+          this.ct.nomdir = resDir.fullName;
+          this.notif.userReceiverId = resDir.attribut1;
+          this.notif.userReceiverName = resDir.directeur;
+        }
+
+
       })
+
 
     })
   }
@@ -55,6 +72,7 @@ export class CreationAddComponent implements OnInit {
   ct: CrationTravailDemande = new CrationTravailDemande();
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
 
@@ -73,8 +91,12 @@ export class CreationAddComponent implements OnInit {
       this.ct.userNameCreator = this.UserNameConnected;
 
       this.ctService.Add(this.ct).subscribe(res => {
+ 
+        this.notifService.Add(this.notif).subscribe(res => {
+       
         form.resetForm();
-        this.toastr.success("تم التسجيل  بنجاح", " تسجيل ");
+          this.toastr.success("تم التسجيل  بنجاح", " تسجيل ");
+        })
       },
         err => {
           this.toastr.error("فشل التسجيل  الطلب", " تسجيل ")

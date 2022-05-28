@@ -11,51 +11,14 @@ import { Ticket2Service } from '../shared/Services/Ticket2/ticket2.service';
 })
 export class SideMenuComponent implements OnInit {
 
-  constructor(private privilegesService: PrivilegesService,
-    private UserService: UserServiceService,
-    private TicketService: Ticket2Service,) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.getUserConnected();
     
  
   }
 
 
-  // Get User Connected
-  UserIdConnected: string;
-  UserNameConnected: string;
-  privtestaddTask: boolean = false;
-  privtestfinance: boolean = false;
-  privtesttransaction: boolean = false;
-  privtestTasks: boolean = false;
-  roleslist: any = [];
-  testrole: boolean = false;
-  admin: boolean;
-  getUserConnected() {
-
-    this.UserService.getUserProfileObservable().subscribe(res => {
-      this.UserIdConnected = res.id;
-      this.UserNameConnected = res.fullName;
-   
-      this.UserService.getUserRoles(this.UserIdConnected).subscribe(res => {
-        this.roleslist = res;
-        this.roleslist.forEach(item => {
-          if (item == "PARTNORMAL" || item == "RESPFINANCE") {
-            this.testrole = true;
-          }
-
-          if (item == "ADMINISTRATEUR") {
-            this.admin = true;
-          } else {
-            this.admin = false;
-          }
-        })
-        console.log(this.testrole)
-      })   
-    })
-  }
-  //get Ticket notif
 
 
 }

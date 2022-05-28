@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.FinancePartTwo.Cheque
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DemandePayCheque>>> GetdemandePayCheques()
         {
-            return await _context.demandePayCheques.ToListAsync();
+            return await _context.demandePayCheques.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/DemandePayCheques/5

@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Model.GestionDestTickets
 
             var tcList = _context.GestionTickets.ToList();
           
-            var UserTickets = _context.GestionTickets.Where(item => item.clientId == idUserCreator ).ToList();
+            var UserTickets = _context.GestionTickets.Where(item => item.clientId == idUserCreator ).OrderBy(item=> item.Id).ToList();
 
             return UserTickets;
         }

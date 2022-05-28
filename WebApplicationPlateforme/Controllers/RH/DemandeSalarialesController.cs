@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.RH
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DemandeSalariale>>> GetdemandeSalariales()
         {
-            return await _context.demandeSalariales.ToListAsync();
+            return await _context.demandeSalariales.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/DemandeSalariales/5

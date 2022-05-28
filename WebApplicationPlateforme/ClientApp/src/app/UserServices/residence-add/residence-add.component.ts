@@ -4,6 +4,8 @@ import { UserServiceService } from '../../shared/Services/User/user-service.serv
 import { NgForm } from '@angular/forms';
 import { ResidenceService } from '../../shared/Services/User Services/residence.service';
 import { Residence } from '../../shared/Models/User Services/residence.model';
+import { NotifService } from '../../shared/Services/NotifSystem/notif.service';
+import { Notif } from '../../shared/Models/NotifSystem/notif.model';
 
 @Component({
   selector: 'app-residence-add',
@@ -14,10 +16,13 @@ export class ResidenceAddComponent implements OnInit {
 
   constructor(private residenceService: ResidenceService,
     private toastr: ToastrService,
-    private UserService: UserServiceService) { }
+    private UserService: UserServiceService,
+    private notifService: NotifService,
+ ) { }
 
   ngOnInit(): void {
     this.getUserConnected();
+
   }
 
   //Get UserConnected
@@ -28,6 +33,8 @@ export class ResidenceAddComponent implements OnInit {
   frontiere: string
   datefin: string;
   rs: Residence = new Residence();
+  notif: Notif = new Notif();
+  dateTime = new Date();
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
@@ -35,7 +42,22 @@ export class ResidenceAddComponent implements OnInit {
       this.UserNameConnected = res.fullName;
       this.bureau = res.mention;
       this.frontiere = res.paysetude;
-      this.datefin = res.unite
+      this.datefin = res.unite;
+      this.notif.userTransmitterId = res.id;
+      this.notif.userTransmitterName = res.fullName;
+      this.notif.dateTime = this.date;
+      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
+      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
+      this.notif.TextNotification = "طلب تجديد إقامة من الموظف  " + res.fullName
+      this.notif.serviceName = "طلب تجديد إقامة"
+      this.notif.readUnread = "0";
+      this.notif.serviceId = 6;
+
+      this.UserService.GetRhDepartement().subscribe(resDir => {
+        this.notif.userReceiverId = resDir.id;
+        this.notif.userReceiverName = resDir.fullName;
+      })
+
     })
 
   }
@@ -61,8 +83,11 @@ export class ResidenceAddComponent implements OnInit {
     this.rs.etatrh = "في الانتظار"
     this.residenceService.Add(this.rs).subscribe(
       res => {
-        this.toastr.success('تم التحديث بنجاح', 'نجاح')
-        form.resetForm();
+        this.notifService.Add(this.notif).subscribe(res => {
+
+          form.resetForm();
+          this.toastr.success("تم التسجيل  بنجاح", " تسجيل ");
+        })
       },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');

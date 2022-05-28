@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.AchatVoiture
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DemandeVoiture>>> GetDemandeVoitures()
         {
-            return await _context.DemandeVoitures.ToListAsync();
+            return await _context.DemandeVoitures.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/DemandeVoitures/5

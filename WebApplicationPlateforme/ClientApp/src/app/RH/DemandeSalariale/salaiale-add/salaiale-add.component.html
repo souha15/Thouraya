@@ -30,6 +30,15 @@
             </select>
           </div>
           <div class="col-md-6">
+            <label for="show-place">التاريخ </label>
+            <input type="date" id="show-place" name="date" #date="ngModel" [(ngModel)]="conge.date">
+          </div>
+
+          <div class="col-md-6">
+            <label for="show-place"> مدة شاحية التعريف</label>
+            <input type="text" id="show-place" name="dateenreg" #dateenreg="ngModel" [(ngModel)]="conge.dateenreg" disabled>
+          </div>
+          <div class="col-md-6">
             <label for="show-place">جهة المشهد</label>
             <input type="text" id="show-place" name="organisme" #organisme="ngModel" [(ngModel)]="conge.organisme" required>
           </div>

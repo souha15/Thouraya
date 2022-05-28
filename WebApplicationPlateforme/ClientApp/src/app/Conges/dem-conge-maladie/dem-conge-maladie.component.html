@@ -17,7 +17,7 @@
 
               <div class="col-md-6">
                 <label for="leave-date-start">تاريخ البداية</label>
-                <input type="date" id="leave-date-start" name="datedebut" #datedebut="ngModel" [(ngModel)]="conge.datedebut" (change)="tdatedebut($event)" required>
+                <input type="date" id="leave-date-start" name="datedebut" #datedebut="ngModel" [(ngModel)]="conge.datedebut" (change)="tdatedebut($event)" [min]="today" required>
               </div>
 
               <div *ngIf="datedebut.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
@@ -29,7 +29,7 @@
 
               <div class="col-md-6">
                 <label for="leave-date-end">تاريخ النهاية</label>
-                <input type="date" id="leave-date-end" name="datefin" #datefin="ngModel" [(ngModel)]="conge.datefin" (change)="tdatefin($event)" required>
+                <input type="date" id="leave-date-end" name="datefin" #datefin="ngModel" [(ngModel)]="conge.datefin" (change)="tdatefin($event)" [min]="today" required>
               </div>
 
               <div *ngIf="datefin.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
@@ -74,7 +74,31 @@
                 <input type="text" id="emp-mobile" name="tel" #tel="ngModel" [(ngModel)]="conge.tel">
               </div>
 
+              <div class="col-md-12">
+                <input type="file" id="contract" (change)="upload($event)" #inputFile>
+                <label for="contract" style="background: #91C3D8 !important;cursor:pointer"><span><i class="fa fa-file-upload fa-lg"></i></span> المرفقات <span class="mr-4"><i class="fa fa-upload"></i></span></label>
 
+              </div>
+              <div class="col-md-6">
+                <div class="table-responsive new-table2" *ngIf="bool">
+                  <table class="table table-bordered text-center table-striped">
+                    <thead class="thead-primary">
+                      <tr>
+
+                        <th scope="col">المرفق</th>
+                        <th scope="col">حذف</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let dp of fileslist; let i = index">
+                        <th scope="row">{{dp}}</th>
+                        <td><a (click)="del(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                      </tr>
+
+                    </tbody>
+                  </table>
+                </div>
+              </div>
               <div class="col-12 text-left">
                 <input class="btn btn-primary px-4" type="submit" value="تقديم">
               </div>

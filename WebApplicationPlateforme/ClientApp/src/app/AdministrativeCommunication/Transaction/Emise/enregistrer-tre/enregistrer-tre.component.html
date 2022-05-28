@@ -73,10 +73,7 @@
 
                   <div class="col-sm-6">
                     <label for="reg-date"><span><i class="fa fa-list-ul"></i></span>نوع المعاملة </label>
-                    <select id="reg-date" class="" name="attribut5" #attribut5="ngModel" [(ngModel)]="tr.attribut5">
-                      <option [ngValue]="undefined" selected disabled>-نوع المعاملة-</option>
-                      <option *ngFor="let item of typeTr" value="{{item.nom}}">{{item.nom}}</option>
-                    </select>
+                    <input id="reg-date" class="" type="text" name="attribut5" #attribut5="ngModel" [(ngModel)]="tr.attribut5"/>          
 
                   </div>
 

@@ -1,4 +1,4 @@
-
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <app-nav-menu></app-nav-menu>
 <!-- Page Content -->
 <div class="content">
@@ -24,6 +24,9 @@
                 <th scope="col"> تاریخ الانتھاء</th>
                 <th scope="col">طلب شيك</th>
                 <th scope="col"> الحالة</th>
+                <th scope="col">سير الإجراء</th>
+                <th scope="col">حذف</th>
+
               </tr>
             </thead>
             <tbody>
@@ -35,16 +38,24 @@
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.numfrontiere}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.datefin}}</td>
                 <td (click)="openInNewTab('/pay-chequec-add')"><a class="btn show-details-btn text-info"><i class="fa fa-hand-holding-usd fa-lg"></i> </a></td>
-                <td  (click)="populateForm(cg)"
+                <td (click)="populateForm(cg)" data-target="#myModal2" data-toggle="modal"
                     [ngClass]="{
 
-  'ok': cg.etatdir === 'موافق',
-  'refused': cg.etatdir === 'رفض',
-  'wait': cg.etatdir === 'في الانتظار'
+  'ok': cg.etat === 'موافق',
+  'refused': cg.etat === 'رفض',
+  'wait': cg.etat === 'في الانتظار'
 }">
-                  {{cg.etatdir}}
+                  {{cg.etat}}
                 </td>
 
+                <td (click)="populateForm(cg)">
+                  <a class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal3"><i class="fa fa-road"></i>  </a>
+                </td>
+                <td>
+                  <a class="btn show-details-btn text-danger" (click)="onDelete(cg.id)">
+                    <i class="fa fa-trash fa-lg"></i>
+                  </a>
+                </td>
               </tr>
 
             </tbody>
@@ -164,5 +175,76 @@
       </div>
 
     </div>
+  </div>
+</div>
+
+<div id="myModal2" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">تعديل حالة الإقامة</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <label for="user"><span><i class="fa fa-check"></i></span>حالة الإقامة</label>
+          <select id="user" class="" name="etat" #etat="ngModel" [(ngModel)]="dem.etat" (change)="etattest($event)">
+            <option [ngValue]="undefined" selected disabled>-حالة الإقامة-</option>
+            <option value="موافق">موافق</option>
+            <option value="رفض">رفض</option>
+
+          </select>
+
+          <div class="save">
+            <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="myModal3" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">سير الإجراء</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <div class="lables">
+          <div style="color:#db5a60; font-weight:bold"> تقديم الطلب</div>
+          <div style="color:green;font-weight:bold">شؤون الموظفين</div>
+
+        </div>
+        <div class="w3-light-grey w3-round" *ngIf="test0">
+          <div id="myBar" class="w3-container w3-round w3-red" style="height:24px;width:{{val}}">0</div>
+        </div>
+
+
+        <div class="w3-light-grey w3-round" *ngIf="test100">
+          <div id="myBar" class="w3-container w3-round w3-green" style="height:24px;width:{{val}}">100%</div>
+        </div>
+
+
+      </div>
+
+    </div>
+
   </div>
 </div>

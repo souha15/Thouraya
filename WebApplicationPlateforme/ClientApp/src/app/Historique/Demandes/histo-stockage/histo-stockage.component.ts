@@ -5,6 +5,8 @@ import { BenPayStockOrdreService } from '../../../shared/Services/Gsetion Stock/
 import { BenPayStockOrdre } from '../../../shared/Models/Gestion Stock/ben-pay-stock-ordre.model';
 import { TypeStockage } from '../../../shared/Models/Gestion Stock/type-stockage.model';
 import { TypeStockageService } from '../../../shared/Services/Gsetion Stock/type-stockage.service';
+import { ToastrService } from 'ngx-toastr';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-histo-stockage',
@@ -15,7 +17,8 @@ export class HistoStockageComponent implements OnInit {
 
   constructor(private OrdrePayService: OrdrePayStockageService,
     private BenOrdreService: BenPayStockOrdreService,
-    private TypeStockageService: TypeStockageService, ) { }
+    private TypeStockageService: TypeStockageService,
+    private toastr: ToastrService,) { }
 
   ngOnInit(): void {
     this.getList();
@@ -59,5 +62,71 @@ export class HistoStockageComponent implements OnInit {
     this.TypeStockageService.GetById(Id).subscribe(res => {
       this.Stock = res
     })
+  }
+  etat: string;
+  etattest(event) {
+    this.etat = event.target.value;
+  }
+  date = new Date().toLocaleDateString();
+  isValidFormSubmitted: boolean = false;
+  onSubmit(form: NgForm) {
+    if (form.invalid) {
+      this.isValidFormSubmitted = false;
+      this.toastr.warning("تأكد من  من صحة الحقول من فضلك")
+
+    }
+    else {
+
+      this.isValidFormSubmitted = true;
+      this.orPay.dateDir = this.date;
+      this.orPay.etatOrdre = this.orPay.etatDir
+      if (this.etat == "معتمدة") {
+        this.OrdrePayService.PutObservableE(this.orPay).subscribe(res => {
+          this.toastr.success("تم التسجيل بنجاح", "نجاح");
+          this.getList();
+        },
+          err => {
+            this.toastr.error(" فشل في التسجيل", "فشل")
+          })
+      } else {
+        this.OrdrePayService.PutObservableE(this.orPay).subscribe(res => {
+          this.Stock.quantite = (+this.Stock.quantite + this.tot).toString();
+          this.TypeStockageService.PutObservableE(this.Stock).subscribe(res => {
+            this.toastr.success("تم التسجيل بنجاح", "نجاح");
+            this.getList();
+          })
+
+        },
+          err => {
+
+            this.toastr.error(" فشل في التسجيل", "فشل")
+          })
+      }
+
+    }
+
+
+
+  }
+
+
+  onDelete(id: number) {
+
+
+    if (confirm('هل أنت متأكد من حذف هذا السجل؟')) {
+      this.OrdrePayService.DeleteOrdrePayStockage(id)
+        .subscribe(res => {
+          this.getList();
+          this.toastr.success("تم الحذف  بنجاح", "نجاح");
+        },
+
+          err => {
+            console.log(err);
+            this.toastr.warning('لم يتم الحذف  ', ' فشل');
+          }
+        )
+
+    }
+
   }
 }

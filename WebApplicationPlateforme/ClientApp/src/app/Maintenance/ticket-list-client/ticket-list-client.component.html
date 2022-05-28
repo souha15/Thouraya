@@ -36,14 +36,44 @@
           <thead>
 
             <tr>
-              <th scope="col">رقم التذكرة</th>
-              <th scope="col">العنوان</th>
-              <th scope="col">التاريخ</th>
-              <th scope="col">الأولوية</th>
-              <th scope="col">النوع </th>
-              <th scope="col">  رابط الصفحة </th>
-              <th scope="col">الحالة </th>
-              <th scope="col">تعليق </th>
+            <tr>
+              <th scope="col" (click)="sort('id')">
+                <span class="glyphicon sort-icon" *ngIf="key =='id'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                #
+              </th>
+       
+              <th scope="col" (click)="sort('titre')">
+                العنوان
+                <span class="glyphicon sort-icon" *ngIf="key =='titre'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('clientDate')">
+                التاريخ
+                <span class="glyphicon sort-icon" *ngIf="key =='clientDate'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('priorite')">
+                الأولوية
+                <span class="glyphicon sort-icon" *ngIf="key =='priorite'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+              <th scope="col" (click)="sort('type')">
+                النوع
+                <span class="glyphicon sort-icon" *ngIf="key =='type'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
+              <th scope="col" (click)="sort('path')">
+                رابط الصفحة
+                <span class="glyphicon sort-icon" *ngIf="key =='path'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+              <th scope="col" (click)="sort('etat')">
+                <p style="color:white">
+                  <span class="glyphicon sort-icon" *ngIf="key =='etat'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </p>
+                الحالة
+              </th>
+
+              <th scope="col">
+                تعليق
+              </th>
               <th scope="col">تعديل</th>
               <th scope="col">حذف</th>
             </tr>

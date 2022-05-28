@@ -12,6 +12,7 @@ namespace WebApplicationPlateforme.Hubs
         public virtual string GetUserId(HubConnectionContext connection)
         {
             /*User.Claims.First(c => c.Type == "UserId").Value;*/
+            //return connection.User?.FindFirst(ClaimTypes.Email)?.Value;
             return connection.User?.FindFirst(ClaimTypes.Email)?.Value;
         }
     }

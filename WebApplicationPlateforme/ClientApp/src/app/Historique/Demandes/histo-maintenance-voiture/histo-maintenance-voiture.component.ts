@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { RepairRequestService } from '../../../shared/Services/voiture/repair-request.service';
 import { RepairRequest } from '../../../shared/Models/voiture/repair-request.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-histo-maintenance-voiture',
@@ -9,7 +10,8 @@ import { RepairRequest } from '../../../shared/Models/voiture/repair-request.mod
 })
 export class HistoMaintenanceVoitureComponent implements OnInit {
 
-  constructor(private recpService: RepairRequestService,) { }
+  constructor(private recpService: RepairRequestService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getrecpList();
@@ -29,6 +31,41 @@ export class HistoMaintenanceVoitureComponent implements OnInit {
     this.recpService.formData = Object.assign({}, facture)
     this.factId = facture.id;
     this.fact = Object.assign({}, facture);
+
+  }
+
+  getBack() {
+    this.fact.etat = "معتمدة"
+    this.fact.etatdir = "معتمدة"
+    this.recpService.PutObservableE(this.fact).subscribe(res => {
+      this.getrecpList();
+      this.toastr.success("تم إعتماد طلب صيانة السيارة بنجاح", "نجاح");
+    },
+      err => {
+        this.toastr.warning('لم يتم إعتماد طلب صيانة السيارة', ' فشل');
+      })
+
+
+  }
+
+
+  onDelete(id: number) {
+
+
+    if (confirm('هل أنت متأكد من حذف هذا السجل؟')) {
+      this.recpService.Delete(id)
+        .subscribe(res => {
+          this.getrecpList();
+          this.toastr.success("تم الحذف  بنجاح", "نجاح");
+        },
+
+          err => {
+            console.log(err);
+            this.toastr.warning('لم يتم الحذف  ', ' فشل');
+          }
+        )
+
+    }
 
   }
 }

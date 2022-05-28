@@ -14,7 +14,7 @@
 
         <form class="form-row events-form mb-6" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
 
-          <div class="col-md-6">
+          <div class="col-md-4">
             <label for="demm-type">نوع التصميم </label>
             <select id="demm-type" name="type" #type="ngModel" [(ngModel)]="dem.type" (change)="getTypeSelected($event)">
               <option [ngValue]="undefined" selected disabled>-النوع-</option>
@@ -27,6 +27,18 @@
               <option value="6">تصميم وطباعة الدروع </option>
               <option value="7">أخرى</option>
             </select>
+          </div>
+
+          <div class="col-md-8">
+            <label for="demm-type"> الموضوع  </label>
+            <input type="text" id="target" 
+                   name="attribut6" #attribut6="ngModel" [(ngModel)]="dem.attribut6" style="width:300px"/>
+          </div>
+
+          <div class="col-md-12">
+            <label for="demm-type"> الملاحظات   </label>
+            <input type="text"  id="target"
+                      name="attribut5" #attribut5="ngModel" [(ngModel)]="dem.attribut5" style="width:630px"/>
           </div>
 
           <div class="row w-100 d-flex form-box" *ngIf="autre">
@@ -68,7 +80,7 @@
                          name="budget" #budget="ngModel" [(ngModel)]="TypeImp.budget" />
                 </div>
 
-       
+
 
                 <div class="ml-3">
                   <a (click)="add()"
@@ -276,7 +288,7 @@
                     <th scope="col">تاريخ التوزيع   </th>
                     <th scope="col">رابط المادة  </th>
 
-     
+
                     <th scope="col">حذف</th>
                   </tr>
                 </thead>
@@ -350,7 +362,7 @@
                     <th scope="col">طول وارتفاع البنر </th>
                     <th scope="col">موقع التركيب</th>
                     <th scope="col">رابط المادة</th>
-         
+
 
                     <th scope="col">حذف</th>
                   </tr>

@@ -22,6 +22,8 @@
                 <th scope="col">موضوع الطلب</th>
                 <th scope="col">المبلغ</th>
                 <th scope="col">الحالة</th>
+                <th scope="col">سير الإجراء</th>
+                <th scope="col">حذف</th>
               </tr>
             </thead>
             <tbody>
@@ -33,7 +35,7 @@
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.prixnb}}</td>
 
 
-                <td  (click)="populateForm(cg)"
+                <td (click)="populateForm(cg)" data-target="#myModal2" data-toggle="modal"
                     [ngClass]="{
 
   'success': cg.etatgeneral === 'معتمدة',
@@ -45,7 +47,16 @@
 }">
                   {{cg.etatgeneral}}
                 </td>
-            </tbody>
+
+                <td (click)="populateForm(cg)">
+                  <a class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal3"><i class="fa fa-road"></i>  </a>
+                </td>
+                <td>
+                  <a class="btn show-details-btn text-danger" (click)="onDelete(cg.id)">
+                    <i class="fa fa-trash fa-lg"></i>
+                  </a>
+                </td>
+</tbody>
           </table>
         </div>
         <!-- Pagination -->
@@ -75,10 +86,15 @@
 
       <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
 
-
-      <div class="page-wrapper">
+      <div class="text-right">
+        <a (click)="openPDF()" class="btn" style="width: 70px;">
+          <img style="width: 100%;" src="/assets/images/printer2.png" alt="" />
+        </a>
+      </div>
+      <div class="page-wrapper" id="htmlData">
         <h3 class="popup-head"> طلب  صرف الشيك</h3>
-        <div class="modal-body" style="direction:rtl; text-align:right;">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;" >
           <div class="task-form form-row stop-form">
             <form class="task-form form-row service-form">
 
@@ -167,3 +183,73 @@
 
 
 
+
+<div id="myModal2" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title"> حالة صرف الشيك</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <form class="row events-form">
+
+          <div class="col-md-12 d-flex flex-column flex-wrap">
+            <!-- Attachments -->
+            <div class="">
+              <label>الحالة</label>
+              <select (change)="etattest($event)" style="width:150px;">
+                <option [ngValue]="undefined" selected disabled>-الحالة-</option>
+                <option value="معتمدة">إعتماد </option>
+                <option value="مرفوضة">رفض </option>
+
+
+              </select>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <input class="btn btn-success" type="button" value="إغلاق" (click)="accept()" style="width:100px;" />
+            </div>
+
+          </div>
+
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="myModal3" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">سير الإجراء</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <div class="lables">
+          <div style="color:red; font-weight:bold">المدير المباشر <br />
+          {{per.etatdirecteur}}</div> 
+          <div style="color:dimgrey;font-weight:bold"> المحاسبة  <br /> {{per.etatfinacier}}</div>
+          <div style="color:#276985;font-weight:bold"> مدير إدارة المالية  <br /> {{per.etatparfinancier}}</div>
+          <div style="color:#db5a60;font-weight:bold">المدير العام  <br /> {{per.etatadmin}}</div>
+          <div style="color:green;font-weight:bold">أمين الصندوق   <br />  {{per.etatpart}}</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

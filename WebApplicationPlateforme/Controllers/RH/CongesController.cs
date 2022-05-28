@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.RH
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Conge>>> Getconges()
         {
-            return await _context.conges.ToListAsync();
+            return await _context.conges.OrderBy(item=> item.Id).ToListAsync();
         }
 
         // GET: api/Conges/5

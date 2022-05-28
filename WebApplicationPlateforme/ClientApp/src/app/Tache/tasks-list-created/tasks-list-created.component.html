@@ -51,6 +51,13 @@
                 </p>
                 الحالة
               </th>
+              <th scope="col" (click)="sort('etat')">
+                <p style="color:white">
+                  <span class="glyphicon sort-icon" *ngIf="key =='etat'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+                </p>
+                التقييم
+              </th>
+           
 
             </tr>
           </thead>
@@ -75,6 +82,7 @@
 }">
                 <!--  'closed': tache.etat === 'مغلقة'-->
                 <a [routerLink]="['/tache-global-details', tache.id]" style="color:white">{{tache.etat}}</a>
+               
 
                 <!-- <span class="task-st in-work" *ngIf="tache.etat == 'تحت الإجراء'">{{tache.etat}}</span>
     <span class="task-st done" *ngIf="tache.etat == 'منجزة'">{{tache.etat}}</span>
@@ -82,6 +90,9 @@
      -->
 
 
+              </td>
+              <td>
+                <a [routerLink]="['/completed-task', tache.id]" style="color:green" *ngIf="tache.etat=='للتقييم'">{{tache.etat}}</a>
               </td>
             </tr>
 

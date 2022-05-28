@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AssistanceService } from '../../../shared/Services/ServiceRh/assistance.service';
 import { Assistance } from '../../../shared/Models/ServiceRh/assistance.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-histo-assistance',
@@ -9,7 +10,8 @@ import { Assistance } from '../../../shared/Models/ServiceRh/assistance.model';
 })
 export class HistoAssistanceComponent implements OnInit {
 
-  constructor(private assistanceService: AssistanceService,) { }
+  constructor(private assistanceService: AssistanceService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.getAsList();
@@ -26,5 +28,56 @@ export class HistoAssistanceComponent implements OnInit {
   assis: Assistance = new Assistance();
   populateForm(assistance: Assistance) {
     this.assis = Object.assign({}, assistance);
+  }
+
+
+  date = new Date().toLocaleDateString();
+  accept() {
+    this.assis.etat = "موافقة"
+
+    this.assis.datedir = this.date
+
+    this.assistanceService.PutObservableE(this.assis).subscribe(res => {
+      this.getAsList();
+      this.toastr.success("تم  موافقة الطلب بنجاح", "نجاح");
+    },
+      err => {
+        this.toastr.warning('لم  موافقة الطلب ', ' فشل');
+      })
+  }
+
+
+  refuse() {
+    this.assis.etat = "رفض"
+
+    this.assis.datedir = this.date;
+    this.assistanceService.PutObservableE(this.assis).subscribe(res => {
+      this.getAsList();
+      this.toastr.success("تم  رفض الطلب بنجاح", "نجاح");
+    },
+      err => {
+        this.toastr.warning('لم  ترفض الطلب ', ' فشل');
+      })
+  }
+
+
+  onDelete(id: number) {
+
+
+    if (confirm('هل أنت متأكد من حذف هذا السجل؟')) {
+      this.assistanceService.Delete(id)
+        .subscribe(res => {
+          this.getAsList();
+          this.toastr.success("تم الحذف  بنجاح", "نجاح");
+        },
+
+          err => {
+            console.log(err);
+            this.toastr.warning('لم يتم الحذف  ', ' فشل');
+          }
+        )
+
+    }
+
   }
 }

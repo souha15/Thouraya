@@ -4,6 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { UserServiceService } from '../../shared/Services/User/user-service.service';
 import { Demissioon } from '../../shared/Models/User Services/demissioon.model';
 import { NgForm } from '@angular/forms';
+import { Notif } from '../../shared/Models/NotifSystem/notif.model';
+import { NotifService } from '../../shared/Services/NotifSystem/notif.service';
 
 @Component({
   selector: 'app-demissio-listdir',
@@ -14,7 +16,8 @@ export class DemissioListdirComponent implements OnInit {
 
   constructor(private demService: DemissionService,
     private toastr: ToastrService,
-    private UserService: UserServiceService) { }
+    private UserService: UserServiceService,
+    private notifService: NotifService) { }
 
   ngOnInit(): void {
     this.getUserConnected();
@@ -26,6 +29,8 @@ export class DemissioListdirComponent implements OnInit {
 
   UserIdConnected: string;
   UserNameConnected: string;
+  notif: Notif = new Notif();
+  dateTime = new Date();
 
 
   getUserConnected() {
@@ -33,6 +38,19 @@ export class DemissioListdirComponent implements OnInit {
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
+      this.notif.userTransmitterId = res.id;
+      this.notif.userTransmitterName = res.fullName;
+      this.notif.dateTime = this.date;
+      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
+      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
+      this.notif.TextNotification = " تمت الموافقة على طلب انهاء عقد  من قبل" + ' ' + res.fullName
+      this.notif.serviceName = "طلب انهاء عقد"
+      this.notif.readUnread = "0";
+      this.notif.serviceId = 6;
+      this.UserService.GetRhDepartement().subscribe(resDir => {
+        this.notif.userReceiverId = resDir.id;
+        this.notif.userReceiverName = resDir.fullName;
+      })
     })
 
   }
@@ -68,9 +86,12 @@ export class DemissioListdirComponent implements OnInit {
     this.per.etatdir = this.etat;
 
     this.demService.PutObservableE(this.per).subscribe(res => {
-      this.toastr.success('تم التحديث بنجاح', 'نجاح')
-      this.CongeList();
-      form.resetForm();
+      this.notifService.Add(this.notif).subscribe(res => {
+        this.toastr.success('تم التحديث بنجاح', 'نجاح')
+        this.CongeList();
+        form.resetForm();
+      })
+ 
     },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');

@@ -48,10 +48,7 @@
                 <span class="glyphicon sort-icon" *ngIf="key =='nom'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
               </th>
 
-              <th scope="col" (click)="sort('description')">
-                الوصف
-                <span class="glyphicon sort-icon" *ngIf="key =='description'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-              </th>
+    
               <th scope="col" (click)="sort('nomDirecteur')">
                 <p style="color:white">
                   <span class="glyphicon sort-icon" *ngIf="key =='nomDirecteur'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
@@ -67,7 +64,6 @@
               <th scope="row">{{(c-1) * count + i + 1}}</th>
               <td>{{admin.nom}}</td>
 
-              <td>{{admin.description}}</td>
               <td>
                 {{admin.nomDirecteur}}
               </td>

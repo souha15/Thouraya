@@ -18,21 +18,38 @@ export class DecisionListComponent implements OnInit {
     private trinService: DecisionTwoService) { }
 
   ngOnInit(): void {
+    this.getUserConnected()
     this.getDe1();
     this.getDe2();
     this.getDe3();
 
   }
+  UserIdConnected: string;
+  UserNameConnected: string;
+  idadmin: string='';
+  getUserConnected() {
 
+    this.UserService.getUserProfileObservable().subscribe(res => {
+      this.UserIdConnected = res.id;
+      this.UserNameConnected = res.fullName;
+      if (res.idAdministration != null) {
+        this.idadmin = res.idAdministration.toString();
+      }
+
+    })
+
+  }
   p: Number = 1;
   count: Number = 5;
   de: DecisionTwo[] = [];
   de1: DecisionTwo[] = [];
+  de11: DecisionTwo[] = [];
   nbd1: number;
   getDe1() {
     this.trinService.Get().subscribe(res => {
       this.de = res
-      this.de1 = this.de.filter(item => item.type == "تعميم")
+      this.de1 = this.de.filter(item => (item.type == "تعميم" && item.alladmin == '1') || ((item.adminid == this.idadmin) || (item.employeeid == this.UserIdConnected)));
+
       this.nbd1 = this.de1.length;
 
     })
@@ -43,7 +60,7 @@ export class DecisionListComponent implements OnInit {
   getDe2() {
     this.trinService.Get().subscribe(res => {
       this.de = res
-      this.de2 = this.de.filter(item => item.type == "قرار")
+      this.de2 = this.de.filter(item => (item.type == "قرار" && item.alladmin == '1') || ((item.adminid == this.idadmin) || (item.employeeid == this.UserIdConnected)));
       this.nbd2 = this.de2.length;
     })
   }
@@ -53,7 +70,7 @@ export class DecisionListComponent implements OnInit {
   getDe3() {
     this.trinService.Get().subscribe(res => {
       this.de = res
-      this.de3 = this.de.filter(item => item.type == "لائحة")
+      this.de3 = this.de.filter(item => (item.type == "لائحة" && item.alladmin == '1') || ((item.adminid == this.idadmin) || (item.employeeid == this.UserIdConnected)));
       this.nbd3 = this.de3.length;
     })
   }
@@ -100,5 +117,11 @@ export class DecisionListComponent implements OnInit {
     else
       this.bb = true;
   }
+
+
+  //Get By Administration
+
+
+  // Get By Employee
 
 }

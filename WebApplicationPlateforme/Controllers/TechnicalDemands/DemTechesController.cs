@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.TechnicalDemands
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DemTech>>> GetdemTeches()
         {
-            return await _context.demTeches.ToListAsync();
+            return await _context.demTeches.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/DemTeches/5

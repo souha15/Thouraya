@@ -78,12 +78,14 @@ export class ServiceVenteAddComponent implements OnInit {
         this.dem.adminId = this.adminId
         this.dem.admin = this.admin
       }
-      this.demService.Add(this.dem).subscribe(res => {
+      this.demService.Add(this.dem).subscribe(
+        res => {
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         form.resetForm();
       },
         err => {
-          this.toastr.error("لم يتم التسجيل", "فشل في التسجيل");
+         
+          this.toastr.error("لا يمنك إضافة أكثر من طلبين شراء في الشهر الواحد", "فشل في التسجيل");
         })
     }
   }

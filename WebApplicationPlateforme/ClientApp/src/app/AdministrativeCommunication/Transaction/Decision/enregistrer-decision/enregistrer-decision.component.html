@@ -71,7 +71,7 @@
 
           <div class="col-md-6" *ngIf="one">
             <label for="card-num">الإدارة </label>
-            <select id="keys" class="" name="adminid" #adminid="ngModel" [(ngModel)]="adminid.type" (change)="getAdminName($event)">
+            <select id="keys" class="" name="adminid" #adminid="ngModel" [(ngModel)]="de.adminid" (change)="getAdminName($event)">
               <option [ngValue]="undefined" selected disabled>- الإدارة-</option>
               <option *ngFor="let item of AdministrationList" value="{{item.id}}">{{item.nom}}</option>
             </select>

@@ -80,10 +80,30 @@ namespace WebApplicationPlateforme.Controllers.VenteServices
         [HttpPost]
         public async Task<ActionResult<ServiceVente>> PostServiceVente(ServiceVente serviceVente)
         {
+
+            DateTime dateOnly = DateTime.Now;
+            int i = 0;
+            var listAchat = _context.ServiceVentes.Where(item=> item.idUserCreator == serviceVente.idUserCreator).ToList();
+            listAchat.ForEach(item =>
+            {
+                var date = Convert.ToDateTime(item.dateenreg);
+                if(date.Month == dateOnly.Month)
+                {
+                    i =i+1;
+                }
+            });
+
+            if(i < 2) { 
+            serviceVente.dateenreg = dateOnly.ToShortDateString();
+           
             _context.ServiceVentes.Add(serviceVente);
             await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetServiceVente", new { id = serviceVente.Id }, serviceVente);
+                return CreatedAtAction("GetServiceVente", new { id = serviceVente.Id }, serviceVente);
+            }
+            else
+            {
+                return BadRequest();
+            }
         }
 
         // DELETE: api/ServiceVentes/5

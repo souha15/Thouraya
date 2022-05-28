@@ -4,6 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { AvanceService } from '../../../shared/Services/Finance/avance.service';
 import { Avance } from '../../../shared/Models/Finance/avance.model';
 import { NgForm } from '@angular/forms';
+import { NotifService } from '../../../shared/Services/NotifSystem/notif.service';
+import { Notif } from '../../../shared/Models/NotifSystem/notif.model';
 
 @Component({
   selector: 'app-avance-list-c',
@@ -15,7 +17,9 @@ export class AvanceListCComponent implements OnInit {
 
   constructor(private UserService: UserServiceService,
     private toastr: ToastrService,
-    private avanceService: AvanceService) { }
+    private avanceService: AvanceService,
+
+    private notifService: NotifService) { }
 
   ngOnInit(): void {
     this.getUserConnected();
@@ -27,10 +31,28 @@ export class AvanceListCComponent implements OnInit {
   count: Number = 5;
   UserIdConnected: string;
   UserNameConnected: string;
+
+  notif: Notif = new Notif();
+  dateTime = new Date();
+
   getUserConnected() {
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
+
+      this.notif.userTransmitterId = res.id;
+      this.notif.userTransmitterName = res.fullName;
+      this.notif.dateTime = this.date;
+      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
+      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
+      this.notif.TextNotification = " تمت الموافقة على طلب سلفة  من قبل" + ' ' + res.fullName
+      this.notif.serviceName = "طلب سلفة"
+      this.notif.readUnread = "0";
+      this.notif.serviceId = 3;
+      this.UserService.getAdminFinDir().subscribe(resDir => {
+        this.notif.userReceiverId = resDir.id;
+        this.notif.userReceiverName = resDir.fullName;
+      })
 
     })
   }
@@ -68,8 +90,11 @@ export class AvanceListCComponent implements OnInit {
     this.fact.idtetab = this.UserIdConnected;
     this.fact.nomtetab = this.UserNameConnected;
     this.avanceService.PutObservableE(this.fact).subscribe(res => {
-      this.getDep();
-      this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
+      this.notifService.Add(this.notif).subscribe(res => {
+        this.getDep();
+        this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
+      })
+ 
     },
       err => {
         this.toastr.warning('لم يتم  قبول الطلب', ' فشل');

@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.MediaCenter.ParMedia
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PartageMedia>>> GetPartageMedia()
         {
-            return await _context.PartageMedia.ToListAsync();
+            return await _context.PartageMedia.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/PartageMedias/5

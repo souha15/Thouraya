@@ -25,7 +25,8 @@
               <th scope="col">رقم اللوحة</th>
               <th scope="col">نوع السيارة  </th>
               <th scope="col">عرض التفاصيل</th>
-
+              <th scope="col">صرف</th>
+              <th scope="col">حذف</th>
             </tr>
 
           </thead>
@@ -37,6 +38,12 @@
               <td (click)="populateForm(cg)">
                 <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-eye fa-lg"></i>
+                </a>
+              </td>
+              <td (click)="populateForm(cg)"><a class="btn btn-success" data-toggle="modal" data-target="#myModal2">إعتماد</a></td>
+              <td>
+                <a class="btn show-details-btn text-danger" (click)="onDelete(cg.id)">
+                  <i class="fa fa-trash fa-lg"></i>
                 </a>
               </td>
             </tr>
@@ -116,6 +123,39 @@
       </div>
 
     </div>
+  </div>
+</div>
+
+<div id="myModal2" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+        <h3 class="popup-head">إعتماد طلب صيانة السيارة </h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="task-form form-row stop-form">
+
+
+            <p class="text-center" style="text-align:center">هل أنت متأكد من إعتماد طلب صيانة السيارة   ؟</p>
+
+
+
+            <div class="mx-auto my-3 text-center">
+              <button class="btn btn-success px-2 ml-3" (click)="getBack()"><span class="ml-2"><i class="fa fa-save"></i></span> موافق</button>
+              <button class="btn btn-danger px-2 ml-3"><span class="ml-2"><i class="fa fa-times"></i></span> إلغاء</button>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
   </div>
 </div>
 

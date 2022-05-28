@@ -26,7 +26,7 @@ namespace WebApplicationPlateforme.Controllers.MediaCenter.ImperDesign
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DesignImpression>>> GetDesignImpression()
         {
-            return await _context.DesignImpression.ToListAsync();
+            return await _context.DesignImpression.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/DesignImpressions/5

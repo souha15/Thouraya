@@ -78,51 +78,53 @@ export class DesignDetailsComponent implements OnInit {
           this.envoi = false;
         }
 
-        this.filesService.List().subscribe(res => {
-          this.listFiles2 = res;
-          this.listFiles = this.listFiles2.filter(item => item.idImpression == this.Id)
-          if (this.listFiles.length > 0) {
-            this.testFiles = true;
-          } else { this.testFiles = false; }
-        })
+ 
 
         this.nomdesignService.List().subscribe(res => {
           this.listnomdesign = res;
           this.TypeImpList = this.listnomdesign.filter(item => item.idImpression == this.Id)
           if (this.TypeImpList.length > 0) {
-            if (this.dem.nomdesign == "تصميم للنشر الإلكتروني فقط") {
+            if (this.dem.attribut2 == "تصميم للنشر الإلكتروني فقط") {
               this.elec = true;
 
-            } else if (this.dem.nomdesign == "تصميم وطباعة بروشور") {
+            } else if (this.dem.attribut2 == "تصميم وطباعة بروشور") {
          
               this.bruch = true;
 
-            } else if (this.dem.nomdesign == "تصميم وطباعة استندات") {
+            } else if (this.dem.attribut2 == "تصميم وطباعة استندات") {
 
               this.imp = true;
 
-            } else if (this.dem.nomdesign == "تصميم وطباعة تقرير") {
+            } else if (this.dem.attribut2 == "تصميم وطباعة تقرير") {
 
               this.rap = true;
 
-            } else if (this.dem.nomdesign == "تصميم وطباعة بنر واللوحات") {
+            } else if (this.dem.attribut2 == "تصميم وطباعة بنر واللوحات") {
 
               this.ban = true;
 
-            } else if (this.dem.nomdesign == "تصميم وطباعة الشهادات") {
+            } else if (this.dem.attribut2 == "تصميم وطباعة الشهادات") {
 
               this.dip = true;
 
-            } else if (this.dem.nomdesign == "تصميم وطباعة الدروع") {
+            } else if (this.dem.attribut2 == "تصميم وطباعة الدروع") {
 
               this.drou = true;
 
-            } else if (this.dem.nomdesign == "أخرى") {
+            } else if (this.dem.attribut2 == "أخرى") {
 
               this.autre = true;
             }
             this.TypeImpTest = true;
           } else { this.TypeImpTest = false; }
+
+          this.filesService.List().subscribe(res => {
+            this.listFiles2 = res;
+            this.listFiles = this.listFiles2.filter(item => item.idImpression == this.Id)
+            if (this.listFiles.length > 0) {
+              this.testFiles = true;
+            } else { this.testFiles = false; }
+          })
         })
       })
     });

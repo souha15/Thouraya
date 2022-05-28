@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.ServiceRh
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DemandeAttestationTravail>>> GetdemandeAttestationTravails()
         {
-            return await _context.demandeAttestationTravails.ToListAsync();
+            return await _context.demandeAttestationTravails.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/DemandeAttestationTravails/5

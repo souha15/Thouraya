@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.MediaCenter.CadeauSouve
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Cadeaux>>> GetCadeaux()
         {
-            return await _context.Cadeaux.ToListAsync();
+            return await _context.Cadeaux.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/Cadeaux/5

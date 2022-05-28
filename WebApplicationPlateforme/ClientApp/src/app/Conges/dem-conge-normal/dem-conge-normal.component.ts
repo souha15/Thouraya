@@ -7,6 +7,9 @@ import { SoldeConge } from '../../shared/Models/RH/solde-conge.model';
 import { UserDetail } from '../../shared/Models/User/user-detail.model';
 import { Conge } from '../../shared/Models/RH/conge.model';
 import { NgForm } from '@angular/forms';
+import { NotifService } from '../../shared/Services/NotifSystem/notif.service';
+import { Notif } from '../../shared/Models/NotifSystem/notif.model';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-dem-conge-normal',
@@ -19,14 +22,16 @@ export class DemCongeNormalComponent implements OnInit {
   constructor(private congeService: CongeService,
     private soldeCongeService: SoldeCongeService,
     private UserService: UserServiceService,
-    private toastr: ToastrService, ) { }
+    private toastr: ToastrService,
+    private notifService: NotifService) { }
 
   ngOnInit(): void {
     this.getUserConnected();
     this.UserList();
- 
+    const datePipe = new DatePipe('en-Us');
+    this.today = datePipe.transform(new Date(), 'yyyy-MM-dd');
   }
-
+  today;
 
 
   soldeconges: SoldeConge = new SoldeConge();
@@ -37,15 +42,27 @@ export class DemCongeNormalComponent implements OnInit {
   UserIdConnected: string;
   UserNameConnected: string;
   userc: UserDetail = new UserDetail();
-
+  notif: Notif = new Notif();
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.userc = res
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-      this.conge.directeurnom = res.directeur;
-      this.conge.directeurid = res.attribut1;
+   
+      if (res.attribut1 != null) {
+        this.conge.directeurnom = res.directeur;
+        this.conge.directeurid = res.attribut1;
+        this.notif.userReceiverId = res.attribut1;
+        this.notif.userReceiverName = res.directeur;
+      }
+      this.notif.userTransmitterId = res.id;
+      this.notif.userTransmitterName = res.fullName;
+      this.notif.dateTime = this.date;
+      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth()+1).toString() + '-' + this.dateTime.getFullYear().toString();
+      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
+      this.notif.TextNotification = "طلب إجازة إعتيادية من الموظف  " + res.fullName
+      this.notif.readUnread = "0";
       this.conge.userNameCreator = res.fullName;
       this.conge.idUserCreator = res.id;
       this.soldeCongeService.GetSolde(this.UserIdConnected).subscribe(res => {
@@ -168,6 +185,7 @@ export class DemCongeNormalComponent implements OnInit {
   conge: Conge = new Conge();
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+  dateTime = new Date();
   onSubmit(form: NgForm) {
     this.conge.dateenreg = this.date;
     this.conge.etat = "5%";
@@ -192,11 +210,16 @@ export class DemCongeNormalComponent implements OnInit {
 
         this.congeService.Add(this.conge).subscribe(
           res => {
+            this.notif.serviceId = res.id;
+            this.notif.serviceName = "طلب إجازة"
+            this.notifService.Add(this.notif).subscribe(res => {
+
+           
             this.soldeconge = this.soldeconge - +this.conge.duree;
             this.diffDays = 0
             this.toastr.success(" تم تقديم الطلب بنجاح", "نجاح");
             form.resetForm();
-
+            })
           },
           err => {
             this.toastr.error("لم يتم تقديم الطلب", "فشل ")

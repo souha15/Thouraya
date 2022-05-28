@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.ServiceRh
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DecisionTwo>>> GetdecisionTwos()
         {
-            return await _context.decisionTwos.ToListAsync();
+            return await _context.decisionTwos.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/DecisionTwoes/5

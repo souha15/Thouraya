@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.MediaCenter.InterviewPart
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Interview>>> GetInterviews()
         {
-            return await _context.Interviews.ToListAsync();
+            return await _context.Interviews.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/Interviews/5

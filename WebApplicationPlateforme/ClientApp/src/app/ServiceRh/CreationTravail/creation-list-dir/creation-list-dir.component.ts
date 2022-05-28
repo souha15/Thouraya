@@ -4,6 +4,8 @@ import { ToastrService } from 'ngx-toastr';
 import { CreationTravailDemandeService } from '../../../shared/Services/ServiceRh/creation-travail-demande.service';
 import { CrationTravailDemande } from '../../../shared/Models/ServiceRh/cration-travail-demande.model';
 import { NgForm } from '@angular/forms';
+import { NotifService } from '../../../shared/Services/NotifSystem/notif.service';
+import { Notif } from '../../../shared/Models/NotifSystem/notif.model';
 
 @Component({
   selector: 'app-creation-list-dir',
@@ -14,7 +16,8 @@ export class CreationListDirComponent implements OnInit {
 
   constructor(private UserService: UserServiceService,
     private toastr: ToastrService,
-    private ctService: CreationTravailDemandeService
+    private ctService: CreationTravailDemandeService,
+    private notifService: NotifService
   ) { }
 
   ngOnInit(): void {
@@ -26,13 +29,28 @@ export class CreationListDirComponent implements OnInit {
   UserIdConnected: string;
   UserNameConnected: string;
   position: string
+  notif: Notif = new Notif();
+  dateTime = new Date();
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
       this.position = res.position;
-    })
+      this.notif.userTransmitterId = res.id;
+      this.notif.userTransmitterName = res.fullName;
+      this.notif.dateTime = this.dateTime.toString();
+      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
+      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
+      this.notif.TextNotification = " تمت الموافقة على طلب استحداث وظيفة  من قبل" + ' ' + res.fullName
+      this.notif.serviceName = "طلب استحداث وظيفة"
+      this.notif.readUnread = "0";
+      this.notif.serviceId = 3;
+      this.UserService.getAdminFinDir().subscribe(resDir => {
+        this.notif.userReceiverId = resDir.id;
+        this.notif.userReceiverName = resDir.fullName;
+      })
+      })
 
   }
 
@@ -58,8 +76,11 @@ export class CreationListDirComponent implements OnInit {
     this.fact.iddg = this.UserIdConnected;
     this.fact.nomdg = this.UserNameConnected;
     this.ctService.PutObservableE(this.fact).subscribe(res => {
-      this.getCreance();
-      this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
+      this.notifService.Add(this.notif).subscribe(res => {
+        this.getCreance();
+        this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
+      })
+    
     },
       err => {
         this.toastr.warning('لم يتم  قبول الطلب', ' فشل');

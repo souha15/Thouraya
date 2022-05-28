@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.MediaCenter.visiController
         [HttpGet]
         public async Task<ActionResult<IEnumerable<offreImpression>>> GetoffreImpression()
         {
-            return await _context.offreImpression.ToListAsync();
+            return await _context.offreImpression.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/offreImpressions/5

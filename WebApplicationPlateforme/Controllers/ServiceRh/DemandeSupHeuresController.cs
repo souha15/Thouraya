@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.ServiceRh
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DemandeSupHeure>>> GetdemandeSupHeures()
         {
-            return await _context.demandeSupHeures.ToListAsync();
+            return await _context.demandeSupHeures.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/DemandeSupHeures/5

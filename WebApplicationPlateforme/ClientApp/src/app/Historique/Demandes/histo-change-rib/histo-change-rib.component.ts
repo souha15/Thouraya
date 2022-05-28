@@ -7,6 +7,9 @@ import { FilesChangerRibService } from '../../../shared/Services/ChangeRib/files
 import { FilesChangerRib } from '../../../shared/Models/ChangeRib/files-changer-rib.model';
 import { ProgressStatusEnum } from '../../../shared/Enum/progress-status-enum.enum';
 import { HttpEventType } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
+import { UserServiceService } from '../../../shared/Services/User/user-service.service';
+import { UserDetail } from '../../../shared/Models/User/user-detail.model';
 
 @Component({
   selector: 'app-histo-change-rib',
@@ -20,7 +23,9 @@ export class HistoChangeRibComponent implements OnInit {
   @ViewChild('htmlData') htmlData: ElementRef;
   constructor(private demService: ChangerRibService,
     public serviceupload: UploadDownloadService,
-    private filesService: FilesChangerRibService,) {
+    private filesService: FilesChangerRibService,
+    private toastr: ToastrService,
+    private UserService: UserServiceService,) {
     this.downloadStatus = new EventEmitter<ProgressStatus>();}
 
   ngOnInit(): void {
@@ -36,8 +41,7 @@ export class HistoChangeRibComponent implements OnInit {
   DemandList: ChangerRib[] = [];
   GetDemandList() {
     this.demService.List().subscribe(res => {
-      this.DemandListGlobal = res
-      this.DemandList = this.DemandListGlobal.filter(item => item.etatrh == "في الانتظار")
+      this.DemandList = res
 
     })
   }
@@ -51,6 +55,9 @@ export class HistoChangeRibComponent implements OnInit {
     this.dem = Object.assign({}, dem);
     this.Id = this.dem.id;
     this.GetfilesList();
+    this.UserService.GetUserById(this.dem.idUserCreator).subscribe(res => {
+      this.user = res
+    })
   }
 
   // Files List
@@ -99,5 +106,61 @@ export class HistoChangeRibComponent implements OnInit {
     );
   }
 
+  /*** Accepter *****/
+
+  date = new Date().toLocaleDateString();
+  user: UserDetail = new UserDetail();
+  accept() {
+    this.dem.etatrh = "موافقة"
+    this.dem.daterh = this.date
+    this.user.dateQualification = this.dem.rib
+    this.user.faculteEcole = this.dem.nomBanque
+    this.demService.PutObservableE(this.dem).subscribe(res => {
+      this.UserService.PutObservable(this.user).subscribe(res => {
+        this.GetDemandList();
+        this.toastr.success("تم  قبول الطلب بنجاح و تعديل بيانات الموظف", "نجاح");
+      })
+
+    },
+      err => {
+        this.toastr.warning('لم يتم  قبول الطلب', ' فشل');
+      })
+
+  }
+
+  /**  Refuser **/
+
+  refuse() {
+    this.dem.etatrh = "رفض"
+    this.dem.daterh = this.date
+    this.demService.PutObservableE(this.dem).subscribe(res => {
+      this.GetDemandList();
+      this.toastr.success("تم  رفض الطلب بنجاح", "نجاح");
+    },
+      err => {
+        this.toastr.warning('لم يتم رفض الطلب ', ' فشل');
+      })
+  }
+
+
+  onDelete(id: number) {
+
+
+    if (confirm('هل أنت متأكد من حذف هذا السجل؟')) {
+      this.demService.Delete(id)
+        .subscribe(res => {
+          this.GetDemandList();
+          this.toastr.success("تم الحذف  بنجاح", "نجاح");
+        },
+
+          err => {
+            console.log(err);
+            this.toastr.warning('لم يتم الحذف  ', ' فشل');
+          }
+        )
+
+    }
+
+  }
 
 }

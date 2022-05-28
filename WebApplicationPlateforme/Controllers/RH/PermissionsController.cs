@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.RH
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Permission>>> Getpermissions()
         {
-            return await _context.permissions.ToListAsync();
+            return await _context.permissions.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/Permissions/5

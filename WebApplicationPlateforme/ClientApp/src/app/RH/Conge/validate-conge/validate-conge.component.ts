@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { CongeService } from '../../../shared/Services/Rh/conge.service';
+import { Component, OnInit, EventEmitter, ElementRef, ViewChild, Output, Input } from '@angular/core';
+import { CongeService, CongeFiles } from '../../../shared/Services/Rh/conge.service';
 import { UserServiceService } from '../../../shared/Services/User/user-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserDetail } from '../../../shared/Models/User/user-detail.model';
@@ -7,6 +7,12 @@ import { Conge } from '../../../shared/Models/RH/conge.model';
 import { NgForm } from '@angular/forms';
 import { SoldeCongeService } from '../../../shared/Services/Rh/solde-conge.service';
 import { SoldeConge } from '../../../shared/Models/RH/solde-conge.model';
+import { NotifService } from '../../../shared/Services/NotifSystem/notif.service';
+import { Notif } from '../../../shared/Models/NotifSystem/notif.model';
+import { HttpEventType } from '@angular/common/http';
+import { UploadDownloadService } from '../../../shared/Services/Taches/upload-download.service';
+import { ProgressStatus } from '../../../shared/Interfaces/progress-status';
+import { ProgressStatusEnum } from '../../../shared/Enum/progress-status-enum.enum';
 
 @Component({
   selector: 'app-validate-conge',
@@ -14,11 +20,19 @@ import { SoldeConge } from '../../../shared/Models/RH/solde-conge.model';
   styleUrls: ['./validate-conge.component.css']
 })
 export class ValidateCongeComponent implements OnInit {
+
+  @Input() public disabled: boolean;
+  @Input() public fileName: string;
+  @Output() public downloadStatus: EventEmitter<ProgressStatus>;
+  @ViewChild('htmlData') htmlData: ElementRef;
   constructor(private congeService: CongeService,
     private toastr: ToastrService,
     private UserService: UserServiceService,
     private soldeCongeService: SoldeCongeService,
-  ) { }
+    private notifService: NotifService,
+    public serviceupload: UploadDownloadService, ) {
+    this.downloadStatus = new EventEmitter<ProgressStatus>();
+  }
   p: Number = 1;
   count: Number = 5;
   ngOnInit(): void {
@@ -33,13 +47,23 @@ export class ValidateCongeComponent implements OnInit {
   UserNameConnected: string;
   adminisgtrationName: any;
   userc: UserDetail = new UserDetail();
-
+  notif: Notif = new Notif();
+  dateTime = new Date();
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.userc = res
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
+      this.notif.userTransmitterId = res.id;
+      this.notif.userTransmitterName = res.fullName;
+      this.notif.dateTime = this.date;
+      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
+      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
+      this.notif.TextNotification = " تمت الموافقة على طلب الإجازة  من قبل  " + res.fullName
+      this.notif.serviceName = "طلب إجازة"
+      this.notif.readUnread = "0";
+
     })
 
   }
@@ -62,6 +86,7 @@ export class ValidateCongeComponent implements OnInit {
   soldeconge1: SoldeConge[] = [];
   soldexist: boolean = false;
   solde: string;
+  filesList: CongeFiles[] = [];
   populateForm(conge: Conge) {
     this.per = Object.assign({}, conge)
     this.solde = this.per.adr
@@ -82,6 +107,10 @@ export class ValidateCongeComponent implements OnInit {
         this.sc = this.soldecongel[this.soldecongel.length - 1]
         console.log(this.sc)
       })
+    })
+
+    this.congeService.GetByCongesIdCF(this.per.id).subscribe(res => {
+      this.filesList = res
     })
   }
 
@@ -242,21 +271,70 @@ export class ValidateCongeComponent implements OnInit {
 
     }
   }
-
+  notif2: Notif = new Notif();
   transfererA: string;
   transfertData(event) {
     this.transfererA = event.target.value;
+    if (this.transfererA == '1') {
+      this.notif.serviceId = 5;
+      this.UserService.GetEtabFin().subscribe(resDir => {
+        this.notif.userReceiverId = resDir.id;
+        this.notif.userReceiverName = resDir.fullName;
+      })
+    }
+    if (this.transfererA == "2") {
+      this.notif.serviceId = 6;
+      this.UserService.GetRhDepartement().subscribe(resDir => {
+        this.notif.userReceiverId = resDir.id;
+        this.notif.userReceiverName = resDir.fullName;
+      })
+    }
+
   }
 
   transferer() {
     this.per.transferera = this.transfererA;
+  
     this.congeService.PutObservableE(this.per).subscribe(res => {
-      this.toastr.success("تم  تحويل  الطلب بنجاح", "نجاح");
-      this.CongeList();
+    
+      this.notifService.Add(this.notif).subscribe(res => {
+        this.toastr.success("تم  تحويل  الطلب بنجاح", "نجاح");
+        this.CongeList();
+      })
     },
       err => {
         this.toastr.warning('لم يتم  تحويل  الطلب بنجاح', ' فشل');
       })
+  }
+
+  //Download
+
+  public download(filepath) {
+    this.downloadStatus.emit({ status: ProgressStatusEnum.START });
+    this.serviceupload.downloadFile(filepath).subscribe(
+      data => {
+        switch (data.type) {
+          case HttpEventType.DownloadProgress:
+            this.downloadStatus.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
+            break;
+          case HttpEventType.Response:
+            this.downloadStatus.emit({ status: ProgressStatusEnum.COMPLETE });
+            const downloadedFile = new Blob([data.body], { type: data.body.type });
+            const a = document.createElement('a');
+            a.setAttribute('style', 'display:none;');
+            document.body.appendChild(a);
+            a.download = filepath;
+            a.href = URL.createObjectURL(downloadedFile);
+            a.target = '_blank';
+            a.click();
+            document.body.removeChild(a);
+            break;
+        }
+      },
+      error => {
+        this.downloadStatus.emit({ status: ProgressStatusEnum.ERROR });
+      }
+    );
   }
 }
 

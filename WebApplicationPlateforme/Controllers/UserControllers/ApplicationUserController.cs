@@ -131,8 +131,9 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
                     Subject = new ClaimsIdentity(new Claim[]
                     {
                         new Claim("UserID",user.Id.ToString()),
-                        new Claim(_options.ClaimsIdentity.RoleClaimType,role.FirstOrDefault())
-                    }),
+                        new Claim(_options.ClaimsIdentity.RoleClaimType,role.FirstOrDefault()),
+                        //new Claim("email", user.Email.ToString())
+            }),
                     Expires = DateTime.UtcNow.AddDays(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_appSettings.JWT_Secret)), SecurityAlgorithms.HmacSha256Signature)
                 };

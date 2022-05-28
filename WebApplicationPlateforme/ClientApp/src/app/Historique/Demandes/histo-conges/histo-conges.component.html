@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <app-nav-menu></app-nav-menu>
 <!-- Page Content -->
 <div class="content">
@@ -23,6 +24,8 @@
                 <th scope="col">تاريخ بدء الاجازة</th>
                 <th scope="col">تاريخ نهاية الاجازة</th>
                 <th scope="col">الحالة</th>
+                <th scope="col">سير الإجراء</th>
+                <th scope="col">حذف</th>
               </tr>
             </thead>
             <tbody>
@@ -35,16 +38,24 @@
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.datefin}}</td>
 
 
-                <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
+                <td data-toggle="modal" data-target="#myModal4" (click)="populateForm(cg)"
                     [ngClass]="{
 
- 'success': cg.etatd === 'موافق',
-  'denied': cg.etatd === 'رفض',
-  'wait': cg.etatd === 'في الانتظار'
+ 'success': cg.attribut2 === 'موافق',
+  'denied': cg.attribut2 === 'رفض',
+  'wait': cg.attribut2 === 'في الانتظار'
 }">
-                  {{cg.etatd}}
+                  {{cg.attribut2}}
                 </td>
-            </tbody>
+                <td (click)="populateForm(cg)">
+                  <a class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal3"><i class="fa fa-road"></i>  </a>
+                </td>
+                <td>
+                  <a class="btn show-details-btn text-danger" (click)="onDelete(cg.id)">
+                    <i class="fa fa-trash fa-lg"></i>
+                  </a>
+                </td>
+</tbody>
           </table>
         </div>
         <!-- Pagination -->
@@ -127,10 +138,19 @@
 
               <div class="col-md-4">
                 <label for="permision-hours">الحالة</label>
-                {{per.etatd}}
+                {{per.attribut2}}
 
               </div>
+              <div class="col-md-12">
+                <label>المرفقات</label>
+                <span class="data">
+                  <span *ngFor="let pr of filesList">
+                    <i class="ml-2 fa fa-arrow-down" style="color:dodgerblue"></i>
+                    <a (click)="download(pr.path)" class="ml-3" style="color:dodgerblue">{{pr.path}}</a>
 
+                  </span>
+                </span>
+              </div>
             </form>
 
           </div>
@@ -141,3 +161,84 @@
   </div>
 </div>
 
+<div id="myModal4" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">تعديل حالة الإجازة</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <label for="user"><span><i class="fa fa-check"></i></span>حالة الطلب</label>
+          <select id="user" class="" name="attribut2" #attribut2="ngModel" [(ngModel)]="congeService.formData.attribut2">
+            <option [ngValue]="undefined" selected disabled>-حالة الطلب-</option>
+            <option value="موافق">موافق</option>
+            <option value="رفض">رفض</option>
+
+          </select>
+          <input type="text" name="etat" #etat="ngModel" [(ngModel)]="congeService.formData.etat" hidden />
+          <div class="save">
+            <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<div id="myModal3" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">سير الإجراء</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+        <div class="lables">
+          <div style="color:#db5a60; font-weight:bold"> تقديم الطلب</div>
+          <div style="color:dimgrey;font-weight:bold"> المدير المباشر</div>
+          <div style="color:#276985;font-weight:bold"> مدير الشؤون المالية و الإدارية</div>
+          <div style="color:green;font-weight:bold">المحاسب / شؤون الموظفين</div>
+
+        </div>
+        <div class="w3-light-grey w3-round" *ngIf="test0">
+          <div id="myBar" class="w3-container w3-round w3-red" style="height:24px;width:{{val}}">0</div>
+        </div>
+
+
+        <div class="w3-light-grey w3-round" *ngIf="test25">
+          <div id="myBar" class="w3-container w3-round w3-amber" style="height:24px;width:{{val}}">25%</div>
+        </div>
+
+        <div class="w3-light-grey w3-round" *ngIf="test50">
+          <div id="myBar" class="w3-container w3-round w3-blue-grey" style="height:24px;width:{{val}}">50%</div>
+        </div>
+
+        <div class="w3-light-grey w3-round" *ngIf="test70">
+          <div id="myBar" class="w3-container w3-round w3-blue" style="height:24px;width:{{val}}">70%</div>
+        </div>
+        <div class="w3-light-grey w3-round" *ngIf="test100">
+          <div id="myBar" class="w3-container w3-round w3-green" style="height:24px;width:{{val}}">100%</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</div>

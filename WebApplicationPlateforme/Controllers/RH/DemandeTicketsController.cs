@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.RH
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DemandeTicket>>> GetdemandeTickets()
         {
-            return await _context.demandeTickets.ToListAsync();
+            return await _context.demandeTickets.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/DemandeTickets/5

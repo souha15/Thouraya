@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AllMaintenanceService } from '../../../shared/Services/AllMaintenance/all-maintenance.service';
 import { AllMaintenance } from '../../../shared/Models/AllMaintenance/all-maintenance.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-histo-all-maintenance',
@@ -9,7 +10,8 @@ import { AllMaintenance } from '../../../shared/Models/AllMaintenance/all-mainte
 })
 export class HistoAllMaintenanceComponent implements OnInit {
 
-  constructor(private demService: AllMaintenanceService,) { }
+  constructor(private demService: AllMaintenanceService,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.GetList();
@@ -29,6 +31,26 @@ export class HistoAllMaintenanceComponent implements OnInit {
   populateForm(dem: AllMaintenance) {
     this.demService.formData = Object.assign({}, dem)
     this.dem = Object.assign({}, dem);
+
+  }
+
+  onDelete(id: number) {
+
+
+    if (confirm('هل أنت متأكد من حذف هذا السجل؟')) {
+      this.demService.Delete(id)
+        .subscribe(res => {
+          this.GetList();
+          this.toastr.success("تم الحذف  بنجاح", "نجاح");
+        },
+
+          err => {
+            console.log(err);
+            this.toastr.warning('لم يتم الحذف  ', ' فشل');
+          }
+        )
+
+    }
 
   }
 }

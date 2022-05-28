@@ -36,8 +36,10 @@ export class RecordingArchiveAddComponent implements OnInit {
 
       this.UserId = res.id;
       this.UserName = res.fullName;
-      this.idEtab = res.idDepartement;
-      this.nomEtab = res.nomDepartement;
+      if (res.idDepartement != null) {
+        this.idEtab = res.idDepartement;
+        this.nomEtab = res.nomDepartement;
+      }
     })
 
   }
@@ -68,8 +70,10 @@ export class RecordingArchiveAddComponent implements OnInit {
       this.dem.diretat = "في الانتظار";
       this.dem.idUserCreator = this.UserId;
       this.dem.userNameCreator = this.UserName;
-      this.dem.etabid = this.idEtab.toString();
-      this.dem.etabnom = this.nomEtab;
+      if (this.idEtab != null) {
+        this.dem.etabid = this.idEtab.toString();
+        this.dem.etabnom = this.nomEtab;
+      }
       this.demService.CreateRecordingArchive(this.dem).subscribe(res => {
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         form.resetForm();

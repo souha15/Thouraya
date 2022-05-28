@@ -8,6 +8,8 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DemPayCheque } from '../../shared/Models/Cheques/dem-pay-cheque.model';
 import { ArticlePayCheque } from '../../shared/Models/Cheques/article-pay-cheque.model';
+import { Notif } from '../../shared/Models/NotifSystem/notif.model';
+import { NotifService } from '../../shared/Services/NotifSystem/notif.service';
 
 @Component({
   selector: 'app-new-cheque-list-dir-fin',
@@ -24,7 +26,8 @@ export class NewChequeListDirFinComponent implements OnInit {
     private tbLProjetService: ListeningProjetService,
     private UserService: UserServiceService,
     private router: Router,
-    private toastr: ToastrService, ) { }
+    private toastr: ToastrService,
+    private notifService: NotifService) { }
 
   ngOnInit(): void {
     //this.getVoiture();
@@ -69,6 +72,8 @@ export class NewChequeListDirFinComponent implements OnInit {
 
   // Get User Connected
   sexe: string;
+  notif: Notif = new Notif();
+  dateTime = new Date();
 
   getUserConnected() {
 
@@ -76,7 +81,19 @@ export class NewChequeListDirFinComponent implements OnInit {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
       this.sexe = res.sexe;
-
+      this.notif.userTransmitterId = res.id;
+      this.notif.userTransmitterName = res.fullName;
+      this.notif.dateTime = this.date;
+      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
+      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
+      this.notif.TextNotification = "طلب صرف شيك من الموظف  " + res.fullName
+      this.notif.serviceName = "طلب صرف شيك"
+      this.notif.readUnread = "0";
+      this.notif.serviceId = 1;
+      this.UserService.GetAdminDirG().subscribe(resDir => {
+        this.notif.userReceiverId = resDir.id;
+        this.notif.userReceiverName = resDir.fullName;
+      })
     })
   }
 
@@ -122,9 +139,13 @@ export class NewChequeListDirFinComponent implements OnInit {
     this.per.nomparfinancier = this.UserNameConnected;
     this.per.idparfinancier = this.UserIdConnected;
     this.demandeService.PutObservableE(this.per).subscribe(res => {
-      this.toastr.success('تم التحديث بنجاح', 'نجاح');
-      this.getUserConnected()
-      this.getDemPayList();
+      this.notifService.Add(this.notif).subscribe(res => {
+        this.toastr.success('تم التحديث بنجاح', 'نجاح');
+        this.getUserConnected()
+        this.getDemPayList();
+      })
+
+
     })
 
 

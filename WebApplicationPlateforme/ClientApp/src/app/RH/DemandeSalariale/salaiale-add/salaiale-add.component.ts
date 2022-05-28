@@ -38,6 +38,7 @@ export class SalaialeAddComponent implements OnInit {
       this.conge.dirid = res.attribut1;
       this.conge.userNameCreator = res.fullName;
       this.conge.idUserCreator = res.id;
+      this.conge.dateenreg ='شهر واحد من تاريخة'
 
     })
 
@@ -55,7 +56,6 @@ export class SalaialeAddComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.conge.dateenreg = this.date;
     this.conge.etat ="في الانتظار"
-    this.conge.date = this.date;
     if (form.invalid) {
       this.isValidFormSubmitted = false;
 

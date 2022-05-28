@@ -29,6 +29,8 @@
               <th scope="col">الملاحظات</th>
               <th scope="col">  الحالة</th>
               <th scope="col"> التفاصيل</th>
+              <th scope="col"> موافقة / رفض</th>
+              <th scope="col">حذف</th>
 
             </tr>
 
@@ -41,7 +43,7 @@
               <td (click)="populateForm(cg)">{{cg.dateenreg}}</td>
               <td (click)="populateForm(cg)">{{cg.type}}</td>
               <td (click)="populateForm(cg)">{{cg.remarque}}</td>
-              <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal2"
+              <td (click)="populateForm(cg)"
                   [ngClass]="{
 
   'success': cg.etat === 'موافقة',
@@ -53,6 +55,16 @@
               <td (click)="populateForm(cg)">
                 <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-eye fa-lg"></i>
+                </a>
+              </td>
+              <td (click)="populateForm(cg)">
+                <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">
+                  <i class="fa fa-edit fa-lg"></i>
+                </a>
+              </td>
+              <td>
+                <a class="btn show-details-btn text-danger" (click)="onDelete(cg.id)">
+                  <i class="fa fa-trash fa-lg"></i>
                 </a>
               </td>
             </tr>
@@ -159,6 +171,41 @@
 
 
           </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div id="myModal1" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <h2 class="text-center my-2">تعديل طلب الشراء</h2>
+
+          <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <select id="user" class="" name="etat" #etat="ngModel" [(ngModel)]="dem.etat">
+              <option [ngValue]="undefined" selected disabled>-حالة الطلب -</option>
+              <option value="موافقة">موافق</option>
+              <option value="رفض">رفض</option>
+
+            </select>
+
+            <div class="save">
+              <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
+
+            </div>
+
+          </form>
+
         </div>
       </div>
 

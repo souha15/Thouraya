@@ -25,7 +25,7 @@ namespace WebApplicationPlateforme.Controllers.Finance
         [HttpGet]
         public async Task<ActionResult<IEnumerable<DemandeAvance>>> GetdemandeAvances()
         {
-            return await _context.demandeAvances.ToListAsync();
+            return await _context.demandeAvances.OrderBy(item => item.Id).ToListAsync();
         }
 
         // GET: api/DemandeAvances/5

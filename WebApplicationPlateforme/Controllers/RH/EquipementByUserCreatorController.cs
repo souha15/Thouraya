@@ -31,7 +31,7 @@ namespace WebApplicationPlateforme.Controllers.RH
         public List<Equipement> GetRecrutementUsers(string id)
         {
             List<Equipement> recrutementDir = new List<Equipement>();
-            recrutementDir = _context.equipements.Where(item => item.idUserCreator == id).ToList();
+            recrutementDir = _context.equipements.Where(item => item.idUserCreator == id).OrderBy(item => item.Id).ToList();
             return recrutementDir;
 
         }

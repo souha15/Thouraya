@@ -35,52 +35,15 @@
       <li class="nav-item">
         <a class="nav-link" [routerLink]="['/film-details']">العلاقات العامة</a>
       </li>
-      <!--
-
-            <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/film-details']">العلاقات العامة</a>
-      </li>
-      <li class="nav-item" >
-        <a class="nav-link" [routerLink]="['/mailing']"> الإتصالات الإداریة</a>
-      </li>
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/news-list-viewer']">المركز الإعلامي</a>
-  </li>
-    -->
-      <!--
-      <li class="nav-item">
-        <a class="nav-link" *ngIf="!testrole" [routerLink]="['/mailing']">الإتصالات الإدارية</a>
-        <a class="nav-link" *ngIf="testrole" [routerLink]="['/menutr']">الإتصالات الإدارية</a>
-      </li>
-      <li class="nav-item">
-
-        <a class="nav-link" [routerLink]="['/event-list']">إدارة الفعاليات</a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link" [routerLink]="['/liste-dotation']"> إدارة العقارات</a>
-      </li>
-      <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/users-list']">الموظفين</a>
-  </li>
-
-  <li class="nav-item">
-    <a class="nav-link" [routerLink]="['/main-finance-page']">المالية</a>
-  </li>
-  -->
     </ul>
-    <div class="my-2 my-lg-0" *ngIf="userDetails">
+    <div class="my-2 my-lg-0" *ngIf="UserNameConnected!=''">
       <a [routerLink]="['/home']" class="ml-2 alert-btn notification"><i class="fa fa-home fa-lg"></i></a>
-
-      <a *ngIf="testroledir" [routerLink]="['/alerts']" class="ml-2 alert-btn notification"><span class="badge" *ngIf="nbd!=0">{{nbd}}</span><i class="fa fa-bell fa-lg"></i></a>
       <a *ngIf="testroledir" [routerLink]="['/all-demands']" class="ml-2 alert-btn notification"><i class="fa fa-envelope-open fa-lg"></i></a>
-      <button class="btn  user-btn my-2 my-sm-0 mx-3"> مرحبا {{userDetails.fullName}}</button>
+      <button class="btn  user-btn my-2 my-sm-0 mx-3"> مرحبا {{UserNameConnected}}</button>
     </div>
     <div class="dropdown d-inline-block">
       <a href="#" class="user-img dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <!---<img  src="/uploads/{{userDetails.photo}}" alt="user-image">-->
         <img src="assets/images/avatar.png" alt="user-image">
-        <!---<img src="assets/images/logowomen.jpg" alt="user-image" *ngIf="sexe == 'أنثى'">-->
       </a>
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 

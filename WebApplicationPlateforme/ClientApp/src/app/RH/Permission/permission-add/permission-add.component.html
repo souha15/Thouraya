@@ -15,7 +15,7 @@
         <form class="task-form form-row service-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
           <div class="col-md-6">
             <label for="date">التاريخ</label>
-            <input type="date" id="date" name="date" #date="ngModel" [(ngModel)]="per.date"/>
+            <input type="date" id="date" name="date" #date="ngModel" [(ngModel)]="per.date" [min]="today"/>
           </div>
           <div class="col-md-6">
             <label for="perm-type">نوع الاستئذان</label>
@@ -35,11 +35,11 @@
           </div>
           <div class="col-md-6">
             <label for="time1">من الساعة</label>
-            <input type="time"  id="time1" name="heuredeb" #heuredeb="ngModel" [(ngModel)]="per.heuredeb" />
+            <input type="time"  id="time1" name="heuredeb" #heuredeb="ngModel" [(ngModel)]="per.heuredeb" (change)="startTime($event)" />
           </div>
           <div class="col-md-6">
             <label for="time2">إلى الساعة</label>
-            <input type="time"  id="time2" name="heurefin" #heurefin="ngModel" [(ngModel)]="per.heurefin" />
+            <input type="time"  id="time2" name="heurefin" #heurefin="ngModel" [(ngModel)]="per.heurefin" (change)="endTime($event)" />
           </div>
           <div class="col-md-6">
             <label for="reason">سبب الاستئذان</label>

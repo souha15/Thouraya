@@ -73,7 +73,7 @@ export class ChangeRibRhListComponent implements OnInit {
     this.dem = Object.assign({}, dem);
     this.Id = this.dem.id;
     this.GetfilesList();
-    this.UserService.GetUserById(this.UserIdConnected).subscribe(res => {
+    this.UserService.GetUserById(this.dem.idUserCreator).subscribe(res => {
       this.user = res
     })
   }

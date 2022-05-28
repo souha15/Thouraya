@@ -6,6 +6,7 @@ import { HttpClient, HttpEventType } from '@angular/common/http';
 import { PathSharedService } from '../../../shared/path-shared.service';
 import { MaintenanceRequest } from '../../../shared/Models/ServiceRh/maintenance-request.model';
 import { ProgressStatusEnum } from '../../../shared/Enum/progress-status-enum.enum';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-histo-maintenance',
@@ -20,7 +21,8 @@ export class HistoMaintenanceComponent implements OnInit {
   constructor(private mnService: MaintenanceRequestService,
     public serviceupload: UploadDownloadService,
     private http: HttpClient,
-    private rootUrl: PathSharedService) { this.downloadStatus = new EventEmitter<ProgressStatus>();  }
+    private rootUrl: PathSharedService,
+    private toastr: ToastrService) { this.downloadStatus = new EventEmitter<ProgressStatus>(); }
 
   ngOnInit(): void {
     this.getCreance();
@@ -52,6 +54,25 @@ export class HistoMaintenanceComponent implements OnInit {
 
   }
 
+  onDelete(id: number) {
+
+
+    if (confirm('هل أنت متأكد من حذف هذا السجل؟')) {
+      this.mnService.Delete(id)
+        .subscribe(res => {
+          this.getCreance();
+          this.toastr.success("تم الحذف  بنجاح", "نجاح");
+        },
+
+          err => {
+            console.log(err);
+            this.toastr.warning('لم يتم الحذف  ', ' فشل');
+          }
+        )
+
+    }
+
+  }
 
   //Download
 

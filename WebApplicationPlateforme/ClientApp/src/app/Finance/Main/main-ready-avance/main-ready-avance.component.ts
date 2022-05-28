@@ -61,6 +61,7 @@ export class MainReadyAvanceComponent implements OnInit {
   accept() {
 
     this.fact.etatC = "موافقة"
+    this.fact.attribut2 = "موافقة"
     this.fact.dateC = this.date;
     this.fact.idC = this.UserIdConnected
     this.fact.nomC = this.UserNameConnected;

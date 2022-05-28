@@ -6,6 +6,8 @@ import { UserDetail } from '../../../shared/Models/User/user-detail.model';
 import { NgForm } from '@angular/forms';
 import { PermissionUService } from '../../../shared/Services/User Services/permission-u.service';
 import { PermissionU } from '../../../shared/Models/User Services/permission-u.model';
+import { NotifService } from '../../../shared/Services/NotifSystem/notif.service';
+import { Notif } from '../../../shared/Models/NotifSystem/notif.model';
 
 @Component({
   selector: 'app-permission-list-dir',
@@ -17,7 +19,8 @@ export class PermissionUListDirComponent implements OnInit {
   filter;
   constructor(private congeService: PermissionUService,
     private toastr: ToastrService,
-    private UserService: UserServiceService, ) { }
+    private UserService: UserServiceService,
+    private notifService: NotifService) { }
 
   ngOnInit(): void {
     this.getUserConnected();
@@ -34,13 +37,27 @@ export class PermissionUListDirComponent implements OnInit {
   UserNameConnected: string;
   adminisgtrationName: any;
   userc: UserDetail = new UserDetail();
-
+  notif: Notif = new Notif();
+  dateTime = new Date();
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.userc = res
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
+      this.notif.userTransmitterId = res.id;
+      this.notif.userTransmitterName = res.fullName;
+      this.notif.dateTime = this.date;
+      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
+      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
+      this.notif.TextNotification = " تمت الموافقة على طلب إذن  من قبل" + ' ' + res.fullName
+      this.notif.serviceName = "طلب إذن"
+      this.notif.readUnread = "0";
+      this.notif.serviceId = 6;
+      this.UserService.GetRhDepartement().subscribe(resDir => {
+        this.notif.userReceiverId = resDir.id;
+        this.notif.userReceiverName = resDir.fullName;
+      })
     })
 
   }
@@ -75,10 +92,13 @@ export class PermissionUListDirComponent implements OnInit {
     this.congeService.formData.datedir = this.date;
     this.congeService.formData.iddir = this.UserIdConnected;
     this.congeService.formData.nomdir = this.UserNameConnected;
-      this.congeService.Edit().subscribe(res => {
+    this.congeService.Edit().subscribe(res => {
+      this.notifService.Add(this.notif).subscribe(res => {
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
         this.resetForm();
         this.CongeList();
+      })
+   
       },
         err => {
           this.toastr.error('لم يتم التحديث  ', ' فشل');
