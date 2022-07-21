@@ -85,13 +85,7 @@
                       داخلي/خارجي
                       <span class="glyphicon sort-icon" *ngIf="key =='titre'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                     </th>
-                    <th>الموظف</th>
-                    <th>الإدارة</th>
-
-                    <th scope="col" (click)="sort('org')">
-                      الجهة
-                      <span class="glyphicon sort-icon" *ngIf="key =='org'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                    </th>
+                    <th>الإدارة/الموظف</th>             
                     <th scope="col">التفاصيل</th>
                   </tr>
                 </thead>
@@ -100,14 +94,12 @@
                     <th scope="row">{{(p-1)*count+i+1}}</th>
                     <td>{{item.titre}}</td>
                     <td>{{item.decision}}</td>
-                    <td>{{item.employeenom}}</td>
-                    <td>{{item.adminnom}}</td>
+                    <td>{{item.employeenom}}{{item.adminnom}}</td>
                     <td>
                       <a class="btn show-details-btn text-info" (click)="populateForm(item)" data-toggle="modal" data-target="#myModal">
                         <i class="fa fa-eye fa-lg"></i>
                       </a>
                     </td>
-                    <td>{{item.org}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -145,16 +137,8 @@
                       داخلي/خارجي
                       <span class="glyphicon sort-icon" *ngIf="key =='titre'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                     </th>
-                    <th>الموظف</th>
-                    <th>الإدارة</th>
-
-                    <th scope="col" (click)="sort('org')">
-                      الجهة
-                      <span class="glyphicon sort-icon" *ngIf="key =='org'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                    </th>
+                    <th>الإدارة/الموظف</th>
                     <th scope="col">التفاصيل</th>
-
-
                   </tr>
                 </thead>
                 <tbody>
@@ -162,14 +146,12 @@
                     <th scope="row">{{(p-1)*count+i+1}}</th>
                     <td>{{item.titre}}</td>
                     <td>{{item.decision}}</td>
-                    <td>{{item.employeenom}}</td>
-                    <td>{{item.adminnom}}</td>
+                    <td>{{item.employeenom}}{{item.adminnom}}</td>
                     <td>
                       <a class="btn show-details-btn text-info" (click)="populateForm(item)" data-toggle="modal" data-target="#myModal">
                         <i class="fa fa-eye fa-lg"></i>
                       </a>
                     </td>
-                    <td>{{item.org}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -207,16 +189,8 @@
                       داخلي/خارجي
                       <span class="glyphicon sort-icon" *ngIf="key =='titre'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
                     </th>
-                    <th>الموظف</th>
-                    <th>الإدارة</th>
-
-                    <th scope="col" (click)="sort('org')">
-                      الجهة
-                      <span class="glyphicon sort-icon" *ngIf="key =='org'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
-                    </th>
+                    <th>الإدارة/الموظف</th>
                     <th scope="col">التفاصيل</th>
-
-
                   </tr>
                 </thead>
                 <tbody>
@@ -224,14 +198,12 @@
                     <th scope="row">{{(p-1)*count+i+1}}</th>
                     <td>{{item.titre}}</td>
                     <td>{{item.decision}}</td>
-                    <td>{{item.employeenom}}</td>
-                    <td>{{item.adminnom}}</td>
+                    <td>{{item.employeenom}}{{item.adminnom}}</td>
                     <td>
                       <a class="btn show-details-btn text-info" (click)="populateForm(item)" data-toggle="modal" data-target="#myModal">
                         <i class="fa fa-eye fa-lg"></i>
                       </a>
                     </td>
-                    <td>{{item.org}}</td>
                   </tr>
                 </tbody>
               </table>
@@ -299,17 +271,19 @@
                 <p>الكل</p>
               </div>
 
-              <div *ngIf="fact.adminid!=null">
+              <div *ngIf="fact.adminid!=0">
                 <label>
                   الإدارة
                 </label>
                 <p>{{fact.adminnom}}</p>
               </div>
-
               <div>
-                <label>العنوان</label>
-                <p>{{fact.titre}}</p>
+                <label>
+                  التفاصيل
+                </label>
+                <p>{{fact.detail}}</p>
               </div>
+
 
             </div>
             <div class="col-md-6">
@@ -319,6 +293,10 @@
                 <p>{{fact.type}}</p>
               </div>
 
+              <div>
+                <label>العنوان</label>
+                <p>{{fact.titre}}</p>
+              </div>
 
               <div *ngIf="bb">
                 <label>
@@ -327,13 +305,17 @@
                 <p>{{fact.org}}</p>
               </div>
 
-
               <div>
-                <label>
-                  التفاصيل
-                </label>
-                <p>{{fact.detail}}</p>
+                <label>المرفقات</label>
+                <span class="data">
+                  <span *ngFor="let pr of files">
+                    <i class="ml-2 fa fa-arrow-down" style="color:dodgerblue"></i>
+                    <a (click)="download(pr.path)" class="ml-3" style="color:dodgerblue">{{pr.path}}</a>
+
+                  </span>
+                </span>
               </div>
+
             </div>
 
           </div>

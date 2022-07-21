@@ -38,7 +38,7 @@
               </div>
               <div class="col-md-4">
                 <label for="entry-date">تاريخ الادخال</label>
-                <input type="date" id="entry-date" name="dateEntre" #dateEntre="ngModel" [(ngModel)]="ch.dateEntre" style="width:150px" />
+                <input type="date" id="entry-date" name="dateEntre" #dateEntre="ngModel" [(ngModel)]="ch.dateEntre" style="width:150px"   [min]="today"/>
               </div>
 
               <div class="col-md-4">
@@ -86,7 +86,7 @@
 
               <div class="col-md-4">
                 <label for="devision">التاريخ</label>
-                <input type="date" id="devision" name="description" #description="ngModel" [(ngModel)]="ar.description" />
+                <input type="date" id="devision" name="description" #description="ngModel" [(ngModel)]="ar.description"   [min]="today"/>
                  
               </div>
               <div class="col-md-8">

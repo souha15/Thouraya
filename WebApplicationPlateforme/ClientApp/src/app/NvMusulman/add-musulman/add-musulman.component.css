@@ -93,7 +93,7 @@
 .events-form input[type="text"],
 .events-form input[type="tel"],
 .events-form input[type="password"] {
-  width: 160px;
+  width: 260px;
 }
 
 .events-form input[type="text"],
@@ -104,7 +104,7 @@
 .events-form select {
   border-radius: 5px;
   padding: 5px 10px;
-  width: 160px;
+  width: 260px;
   border: 1px solid #ccc;
 }
 
@@ -729,7 +729,7 @@ label.radio-lab {
 .events-form select {
   border-radius: 5px;
   padding: 5px 10px;
-  width: 160px;
+  width: 260px;
   border: 1px solid #ccc;
 }
 

@@ -10,6 +10,7 @@
       <header>
         <h3 class="task-head"> قائمة الحضور و الإنصراف</h3>
       </header>
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
       <div class="events1">
 
         <div class="row w-100 d-flex form-box">
@@ -37,9 +38,10 @@
                       <td>{{point.datePresence}}</td>
                       <td>{{point.timePresence}}</td>
                       <td>{{point.timeQuitter}}</td>
-                      <td>{{point.adresseMac}}
-                      <i style="color:green;" *ngIf="point.attribut1 == 1" class="fa fa-check-circle"> </i>
-                      <i style="color:red;" *ngIf="point.attribut1 == 0" class="fa fa-times-circle"> </i>
+                      <td>
+                        {{point.adresseMac}}
+                        <i style="color:green;" *ngIf="point.attribut1 == 1" class="fa fa-check-circle"> </i>
+                        <i style="color:red;" *ngIf="point.attribut1 == 0" class="fa fa-times-circle"> </i>
                       </td>
 
                     </tr>

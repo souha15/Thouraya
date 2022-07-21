@@ -1,0 +1,100 @@
+.space-150 {
+  display: inline-block;
+  min-width: 150px;
+}
+
+.space-300 {
+  display: inline-block;
+  min-width: 300px;
+}
+
+.print-table td, .print-table th {
+  padding: 5px;
+}
+@font-face {
+  font-family: 'Andalus';
+  src: url('http://www.fontsaddict.com/fontface/andalus.ttf');
+}
+/* @page{
+    size: 7in 9.25in;
+    margin: 27mm 16mm 27mm 16mm;
+} */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  direction: rtl;
+}
+
+.font-andalus {
+  font-family: 'Andalus';
+}
+
+.font-tagawal {
+  font-family: 'Tajawal', sans-serif;
+}
+
+.font-droid-kufi {
+  font-family: 'Droid-arabic-kufi', sans-serif;
+}
+
+header {
+  width: 100%;
+  height: 130px;
+  display: flex;
+  /* justify-content: space-between; */
+  align-items: center;
+  padding: 10px 50px;
+  border-bottom: 1px solid #eee;
+}
+
+.header-title {
+  text-align: center;
+}
+
+header .header-title {
+  font-size: 24px;
+}
+
+header .img1 {
+  height: 100%;
+}
+
+header .img2 {
+  width: 150px;
+  margin-right: auto;
+}
+
+.content {
+  padding: 50px 30px;
+}
+
+  .content h2 {
+    margin-bottom: 20px;
+  }
+
+  .content table {
+    width: 90%;
+    font-size: 18px;
+    margin: 0 auto 20px;
+  }
+
+  .content .centered {
+    width: 90%;
+    margin: auto;
+    font-size: 25px;
+  }
+
+    .content .centered .variable-text {
+      color: red;
+      font-weight: 400;
+    }
+
+    .content .centered .sign {
+      font-size: 18px;
+      text-align: left;
+    }

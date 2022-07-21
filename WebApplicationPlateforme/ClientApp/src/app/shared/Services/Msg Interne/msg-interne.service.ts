@@ -67,4 +67,16 @@ export class MsgInterneService {
   GetById(Id) {
     return this.http.get<MsgInterne>(this.rootURL + '/MsgInternes/' + Id);
   }
+
+  // Get Msgs By User
+
+  GetUsersMsg(IdReceiver) {
+    return this.http.get<MsgInterne[]>(this.rootURL + '/MsgInternes/GetUsersMsg/' + IdReceiver);
+  }
+
+  // Get Conversation By User
+
+  GetUsersConversations(IdReceiver,IdSender) {
+    return this.http.get<MsgInterne[]>(this.rootURL + '/MsgInternes/GetUserConversation/' + IdReceiver + '/' + IdSender);
+  }
 }

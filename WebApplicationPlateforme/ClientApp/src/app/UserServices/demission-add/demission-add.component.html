@@ -16,7 +16,8 @@
         </div>
         <div class="col-md-6">
           <label for="end">تاريخ طي القيد</label>
-          <input type="date" id="end" name="date" #date="ngModel" [(ngModel)]="dem.date"/>
+          <input type="date" id="end" name="date" #date="ngModel" [(ngModel)]="dem.date" 
+  [min]="today"/>
         </div>
 
         <div class="col-12 text-center text-md-left mt-3">

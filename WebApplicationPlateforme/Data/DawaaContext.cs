@@ -23,6 +23,8 @@ using WebApplicationPlateforme.Model.Ressource_Humaines;
 using WebApplicationPlateforme.Model.TechnicalDemands;
 using WebApplicationPlateforme.Model.VenteServices;
 using WebApplicationPlateforme.Model.ServiceRh;
+using WebApplicationPlateforme.Model.FinancePartTwo.Cheques;
+
 namespace WebApplicationPlateforme.Data
 {
     public class DawaaContext : IdentityDbContext
@@ -97,7 +99,7 @@ namespace WebApplicationPlateforme.Data
         public DbSet<TypeActivitePrepa> TypeActivitePrepas { get; set; }
         public DbSet<ActiviteeImmigrant> ActiviteeImmigrants { get; set; }
         public DbSet<TypeActiviteeImmigrant> TypeActiviteeImmigrants { get; set; }
-        public DbSet<ActiviteDawa> activiteDawas { get; set; }
+        public DbSet<ActiviteDawa> ActiviteDawas { get; set; }
         public DbSet<TypeActiviteDawa> TypeActiviteDawas { get; set; }
 
         public DbSet<ActiviteDawaElec> ActiviteDawaElecs { get; set; }
@@ -121,6 +123,12 @@ namespace WebApplicationPlateforme.Data
         /**** Conges Files **/
 
         public DbSet<CongeFiles> CongeFiles { get; set; }
+        public DbSet<soldeCongesInfosUpdate> soldeCongesInfosUpdates { get; set; }
+
+        /*** Activite Details **/
+        public DbSet<TypeDetailsActivite> TypeDetailsActivites { get; set; }
+        public DbSet<ActiviteDetails> ActiviteDetails { get; set; }
+        public DbSet<demandePayChequesReceive> demandePayChequesReceive { get; set; }
 
     }
 }

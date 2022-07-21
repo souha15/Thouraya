@@ -100,11 +100,11 @@ export class PayChequecDetailComponent implements OnInit {
     this.articleService.Get().subscribe(res => {
       this.arlis2 = res;
       this.arlis = this.arlis2.filter(item => item.idDem == this.per.id)
-      if (this.per.attibut1 != null) {
-        this.raistest = true;
-      } else {
-        this.raistest = false
-      }
+      //if (this.per.attibut1 != null) {
+      //  this.raistest = true;
+      //} else {
+      //  this.raistest = false
+      //}
     })
   }
 

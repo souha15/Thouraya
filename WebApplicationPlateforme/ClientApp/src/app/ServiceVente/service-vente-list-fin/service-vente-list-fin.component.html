@@ -37,9 +37,9 @@
           <tbody>
             <tr *ngFor="let cg of demList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
               <th scope="row">{{(p-1) * count + i + 1}}</th>
+              <td (click)="populateForm(cg)">{{cg.dateenreg}}</td>
               <td (click)="populateForm(cg)">{{cg.userNameCreator}}</td>
               <td (click)="populateForm(cg)">{{cg.admin}}</td>
-              <td (click)="populateForm(cg)">{{cg.dateenreg}}</td>
               <td (click)="populateForm(cg)">{{cg.type}}</td>
               <td (click)="populateForm(cg)">{{cg.remarque}}</td>
               <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal2"
@@ -191,7 +191,7 @@
           <h2 class="text-center my-2">تعديل طلب الشراء</h2>
 
           <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-            <select id="user" class="" name="etat" #etat="ngModel" [(ngModel)]="dem.etat">
+            <select id="user" class="" name="etat" #etat="ngModel" [(ngModel)]="dem.etat" (change)="getEtat($event)">
               <option [ngValue]="undefined" selected disabled>-حالة الطلب -</option>
               <option value="موافقة">موافق</option>
               <option value="رفض">رفض</option>
@@ -200,12 +200,130 @@
 
             <div class="save">
               <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
+              <button *ngIf="showChequeButton" class="btn btn-primary" (click)="GetChequeForm()"><span><i class="fa fa-edit"></i></span> إنشاء شيك</button>
 
             </div>
 
           </form>
+          <hr />
+          <form class="form-row events-form mb-3" #form1="ngForm" autocomplete="off" (submit)="CreateCheque(form1)" *ngIf="showChequeForm">
 
-        </div>
+            <div class="w-100">
+              <label class="main">
+                <span><i class="fa fa-info-circle"></i></span> المعلومات
+                الأساسية
+              </label>
+            </div>
+            <div class="d-flex w-100 justify-content-between flex-wrap">
+
+              <div class="col-md-4">
+                <label for="req-num">رقم الطلب</label>
+                <input type="number" min="0" id="req-num" value="{{id}}" disabled style="width:150px" />
+              </div>
+              <div class="col-md-4">
+                <label for="devision">القسم</label>
+                <select id="devision" name="calsse" #calsse="ngModel" [(ngModel)]="ch.calsse" style="width:150px">
+                  <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                  <option *ngFor="let item of classesList" value="{{item.nom}}">{{item.nom}}</option>
+                </select>
+              </div>
+              <div class="col-md-4">
+                <label for="entry-date">تاريخ الادخال</label>
+                <input type="date" id="entry-date" name="dateEntre" #dateEntre="ngModel" [(ngModel)]="ch.dateEntre" style="width:150px" />
+              </div>
+
+              <div class="col-md-4">
+                <label for="property">الصفة</label>
+                <input type="text" id="property" name="description" #description="ngModel" [(ngModel)]="ch.description" style="width:150px" />
+              </div>
+              <div class="col-md-4">
+                <label for="topic">موضوع الطلب</label>
+                <input type="text" id="topic" name="sujet" #sujet="ngModel" [(ngModel)]="ch.sujet" style="width:150px" />
+              </div>
+              <div class="col-md-4">
+                <label for="amount">المبلغ رقما</label>
+                <input type="number" min="0" id="amount" name="prixnb" #prixnb="ngModel" [(ngModel)]="ch.prixnb" style="width:150px" />
+              </div>
+              <div class="col-md-4">
+                <label for="amount-text">المبلغ كتابة</label>
+                <input type="text" id="amount-text" name="prixlettre" #prixlettre="ngModel" [(ngModel)]="ch.prixlettre" style="width:150px" />
+              </div>
+
+            </div>
+            <div class="w-100">
+              <label class="main"><span><i class="fa fa-edit"></i></span> التفاصيل</label>
+            </div>
+            <div class="d-flex w-100 justify-content-between flex-wrap">
+              <div class="col-md-4">
+                <label for="property">البيان</label>
+                <input type="text" id="property" name="article" #article="ngModel" [(ngModel)]="ar.article" style="width:150px" />
+              </div>
+              <div class="col-md-4">
+                <label for="amount-2">المشروع / البرنامج</label>
+                <input type="text"
+                       min="0"
+                       name="projet" #projet="ngModel" [(ngModel)]="ar.projet" style="width:150px"
+                       id="amount-2" />
+              </div>
+
+
+              <div class="col-md-4">
+                <label for="devision">يصرف من ميزانية</label>
+                <select id="devision" name="nomadmin" #nomadmin="ngModel" [(ngModel)]="ar.nomadmin" style="width:150px">
+                  <option [ngValue]="undefined" selected disabled>-الإدارة-</option>
+                  <option *ngFor="let item of adminList" value="{{item.nom}}">{{item.nom}}</option>
+                </select>
+              </div>
+
+              <div class="col-md-4">
+                <label for="devision">التاريخ</label>
+                <input type="date" id="devision" name="description" #description="ngModel" [(ngModel)]="ar.description" />
+
+              </div>
+              <div class="col-md-8">
+                <label for="topic">الملاحظات</label>
+                <input type="text" style="width:500px"
+                       name="detail" #detail="ngModel" [(ngModel)]="ar.detail"
+                       id="topic" />
+              </div>
+              <div class="w-100 text-center">
+                <input class="btn btn-info"
+                       style="width: 120px"
+                       type="button"
+                       id="add-inputs1" (click)="addar()" value="اضافة" />
+
+              </div>
+
+              <div class="table-responsive new-table2" *ngIf="artest">
+                <table class="table table-bordered text-center table-striped">
+                  <thead class="thead-primary">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">البيان</th>
+                      <th scope="col">المشروع / البرنامج</th>
+                      <th scope="col">الإدارة</th>
+                      <th scope="col">حذف</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let dp of arlis ; let i = index">
+                      <th scope="row">{{i+1}}</th>
+                      <td>{{dp.article}}</td>
+                      <td>{{dp.projet}}</td>
+                      <td>{{dp.nomadmin}}</td>
+                      <td><a (click)="delar(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="col-12 text-left mt-3">
+              <input class="btn btn-info px-4" type="submit" value="حفظ" />
+            </div>
+          </form>
+
+      </div>
       </div>
 
     </div>

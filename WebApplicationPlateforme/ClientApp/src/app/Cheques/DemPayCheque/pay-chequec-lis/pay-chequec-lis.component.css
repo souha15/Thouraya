@@ -1,4 +1,19 @@
-
+:host ::ng-deep .multiselect-dropdown .dropdown-btn {
+  display: inline;
+  border: 1px solid #adadad;
+  height: 123px;
+  width: 200px;
+  padding: 6px 12px;
+  margin-bottom: 0;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 1.1;
+  text-align: left;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border-radius: 4px;
+}
 #MyTable td:hover {
   background-color: #ccc;
 }
@@ -23,6 +38,11 @@
 
 .service-form select {
   width: 50%;
+}
+
+
+.stop-form label {
+  min-width: 120px;
 }
 
 .service-form input[type="submit"] {

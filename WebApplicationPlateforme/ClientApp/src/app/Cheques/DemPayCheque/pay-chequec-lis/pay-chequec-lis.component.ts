@@ -30,19 +30,23 @@ import { AdministrationService } from '../../../shared/Services/Administration/a
   styleUrls: ['./pay-chequec-lis.component.css']
 })
 export class PayChequecLisComponent implements OnInit {
-
+  @Input() public disabled: boolean;
+  @Output() public uploadStatuss: EventEmitter<ProgressStatus>;
+  @ViewChild('inputFile') inputFile: ElementRef;
   constructor(private demandeService: DemPayChequeService,
     private articleService: ArticlePayChequeService,
     private tbLService: TbListeningService,
     private tbLProjetService: ListeningProjetService,
     private UserService: UserServiceService,
     private adminService: AdministrationService,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    public serviceupload: UploadDownloadService, ) { this.uploadStatuss = new EventEmitter<ProgressStatus>(); }
 
   ngOnInit(): void {
     this.getUserConnected();
     this.getDemPayList();
     this.getAdminList();
+    this.getFiles();
   }
   adminList: Administration[] = [];
   getAdminList() {
@@ -91,12 +95,7 @@ export class PayChequecLisComponent implements OnInit {
     this.per = Object.assign({}, conge)
     this.articleService.Get().subscribe(res => {
       this.arlis2 = res;
-      this.arlis = this.arlis2.filter(item => item.idDem == this.per.id)
-      if (this.per.attibut1 != null) {
-        this.raistest = true;
-      } else {
-        this.raistest = false
-      }
+      this.arlis = this.arlis2.filter(item => item.idDem == this.per.id)  
     })
   }
 
@@ -127,4 +126,120 @@ export class PayChequecLisComponent implements OnInit {
     }
     })
   }
+
+
+/**** Retour Part ***/
+
+  showForm: boolean = false;
+  testRetour(event) {
+    if (event.target.value == "مسترجع") {
+      this.showForm = true
+    } else {
+      this.showForm = false;
+    }
+  }
+
+  onSubmit(form: NgForm) {
+    this.demandeService.PutObservableE(this.per).subscribe(res => {
+      this.toastr.success("تم التسجيل بنجاح", "نجاح")
+      this.getDemPayList();
+      form.resetForm();
+      this.files1=[];
+
+    }, err => {
+        this.toastr.error("  فشل في تسجيل ا الإستلام أو التسليم"
+          , "فشل")
+    })
+  }
+
+
+  //Files
+  files1: File[] = [];
+  onSelect(event) {
+    //console.log(event);
+    this.files1.push(...event.addedFiles);
+  }
+
+  onRemove(event) {
+    this.files1.splice(this.files1.indexOf(event), 1);
+  }
+
+  public response: { 'dbpathsasstring': '' };
+  public isCreate: boolean;
+  public files: string[];
+
+  //get List of Files
+
+  private getFiles() {
+    this.serviceupload.getFiles().subscribe(
+      data => {
+        this.files = data
+
+      }
+    );
+
+  }
+
+  //Get file name for Database
+
+  GetFileName() {
+    let sa: string;
+    let s: any;
+    let finalres: any;
+    let i: number = 0;
+    let tlistnew: any[] = [];
+    for (var k = 0; k < this.files.length; k++) {
+      sa = <string>this.files[k]
+      s = sa.toString().split('uploads\\,', sa.length - 1);
+      finalres = s.toString().split('uploads\\', sa.length - 1);
+
+      tlistnew[i] = finalres[1]
+      i++;
+
+    }
+
+
+  }
+
+  //Upload
+
+  //Save it ToDatabase
+  Idtransaction: number;
+  url: any;
+  file: any;
+  fileslist: string[] = [];
+  public upload(event) {
+    if (event.addedFiles && event.addedFiles.length > 0) {
+      this.file = event.addedFiles[0];
+      this.uploadStatuss.emit({ status: ProgressStatusEnum.START });
+      this.serviceupload.uploadFile(this.file).subscribe(
+        data => {
+          if (data) {
+            switch (data.type) {
+              case HttpEventType.UploadProgress:
+                this.uploadStatuss.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
+                break;
+              case HttpEventType.Response:
+                // this.inputFile.nativeElement.value = '';
+                this.uploadStatuss.emit({ status: ProgressStatusEnum.COMPLETE });
+                break;
+            }
+            this.getFiles();
+            this.GetFileName();
+
+
+
+          }
+
+        },
+
+        error => {
+          /// this.inputFile.nativeElement.value = '';
+          this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
+        }
+      );
+      this.per.fileRetour = this.file.name;
+    }
+  }
+
 }

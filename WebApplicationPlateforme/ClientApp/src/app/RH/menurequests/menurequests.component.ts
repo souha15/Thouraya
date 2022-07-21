@@ -121,9 +121,9 @@ export class MenurequestsComponent implements OnInit {
     this.congeService.formData.dated = this.date;
     if (this.etat == "رفض") {
       this.congeService.formData.attribut2 = "رفض"
-    } 
-      this.UserService.GetUserById(this.per.idUserCreator).subscribe(res => {
-        if (res.attribut1 == "318e6451-f404-43aa-8dcb-fcaef185d0af") {
+    } else {
+      //this.UserService.GetUserById(this.per.idUserCreator).subscribe(res => {
+        //if (res.attribut1 == "318e6451-f404-43aa-8dcb-fcaef185d0af") {
 
      
           this.per.transferera = "2"
@@ -169,7 +169,7 @@ export class MenurequestsComponent implements OnInit {
                 })
 
               }
-              if (this.per.type == "إجازة إضطرارية") {
+             else if (this.per.type == "إجازة إضطرارية") {
 
                 this.sc.dateenreg = this.date;
                 let solde = +this.soldeconge.soldeurgent - +this.per.duree
@@ -196,7 +196,7 @@ export class MenurequestsComponent implements OnInit {
 
               }
 
-              if (this.per.type == "إجازة إستثنائية") {
+              else if (this.per.type == "إجازة إستثنائية") {
 
                 this.sc.dateenreg = this.date;
                 let solde = +this.soldeconge.soldemaladie - +this.per.duree
@@ -218,32 +218,27 @@ export class MenurequestsComponent implements OnInit {
                   )
                 })
 
+              } else {
+
+                this.congeService.formData.etat = "50%";
+                this.congeService.Edit().subscribe(res => {
+                  this.notifService.Add(this.notif).subscribe(res => {
+                    this.toastr.success('تم التحديث بنجاح', 'نجاح')
+                    this.resetForm();
+                    this.getUserConnected();
+                  })
+                },
+                  err => {
+                    this.toastr.error('لم يتم التحديث  ', ' فشل');
+                  }
+
+
+                )
               }
 
             })
           })
-
-        } else {
-
-        this.congeService.formData.etat = "50%";
-        this.congeService.Edit().subscribe(res => {
-          this.notifService.Add(this.notif).subscribe(res => {
-            this.toastr.success('تم التحديث بنجاح', 'نجاح')
-            this.resetForm();
-            this.getUserConnected();
-          })
-        },
-          err => {
-            this.toastr.error('لم يتم التحديث  ', ' فشل');
-          }
-
-
-          )
         }
-
-
-      })
-
   }
 
   onSubmit(form: NgForm) {

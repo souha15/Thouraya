@@ -130,7 +130,10 @@ export class NewChequeListDirFinComponent implements OnInit {
   etattest(event) {
     this.etat = event.target.value;
   }
-
+  tran: string;
+  transaction(event) {
+    this.tran = event.target.value;
+  }
   date = new Date().toLocaleDateString();
   accept() {
     if (this.etat == "مرفوضة") { this.per.etatgeneral == "مرفوضة" }
@@ -138,6 +141,7 @@ export class NewChequeListDirFinComponent implements OnInit {
     this.per.etatparfinancier = this.etat
     this.per.nomparfinancier = this.UserNameConnected;
     this.per.idparfinancier = this.UserIdConnected;
+    this.per.demandeur = this.tran;
     this.demandeService.PutObservableE(this.per).subscribe(res => {
       this.notifService.Add(this.notif).subscribe(res => {
         this.toastr.success('تم التحديث بنجاح', 'نجاح');

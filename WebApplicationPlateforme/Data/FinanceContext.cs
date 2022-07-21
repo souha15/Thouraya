@@ -174,6 +174,7 @@ namespace WebApplicationPlateforme.Data
         public DbSet<Specialite> specialites { get; set; }
         public DbSet<DemandeFormation> demandeFormations { get; set; }
         public DbSet<DecisionTwo> decisionTwos { get; set; }
+        public DbSet<FilesDecisionTwoes> filesDecisionTwoes { get; set; }
         public DbSet<TransfertInterne> transfertInternes { get; set; }
         public DbSet<DemandeAttestationTravail> demandeAttestationTravails { get; set; }
         public DbSet<MaintenanceRequest> maintenanceRequests { get; set; }

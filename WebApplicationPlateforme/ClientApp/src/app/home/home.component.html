@@ -1,4 +1,5 @@
 <app-nav-menu></app-nav-menu>
+
 <!-- Page Content -->
 <div class="content">
   <div class="row">
@@ -6,6 +7,46 @@
       <app-side-menu></app-side-menu>
     </div>
     <style>
+
+      .banner {
+        width: 1068px;
+        background: url(http://s6.favim.com/orig/150112/background-cold-gif-nature-Favim.com-2380226.gif);
+        background-size: cover;
+        font-size: 80px;
+        color: #fff;
+        text-align: center;
+        padding: 40px 15px;
+        margin-right: -31px;
+        height: 10px;
+      }
+
+      .big-text {
+        font-size: 130px;
+        font-weight: 800;
+        animation-delay: 1s;
+      }
+      /*margin-top: -33px;
+font-size: 50px;
+display: block;*/
+      .banner a {
+        display: block;
+        background: #fff;
+        color: #36465d;
+        text-transform: uppercase;
+        padding: 4px;
+        font-size: 40px;
+        transition: .3s;
+        width: 344px;
+        height: 67px;
+        margin-right: 350px;
+      }
+
+        .banner a:hover {
+          background: #333;
+          color: #fff;
+          padding: 15px 20px;
+        }
+      /****/
       .item {
         position: relative;
         padding-top: 20px;
@@ -47,7 +88,11 @@
         }
     </style>
 
-      <div class="col-md-9 col-sm-8">
+    <div class="col-md-9 col-sm-8" >
+      <div class="banner animated tada" *ngIf="showAdmin||showUser||showAll">
+
+        <a [routerLink]="['/decision-list']">قرار أو تعميم وارد</a>
+      </div>
       <section class="main-content text-center bgImg">
         <div class="container ">
           <div class="row">
@@ -277,8 +322,6 @@
             </div>
 
 
-
- 
           </div>
         </div>
       </section>

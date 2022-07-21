@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./histo-formation.component.css']
 })
 export class HistoFormationComponent implements OnInit {
-
+  filter;
   constructor(private formationService: NewFormationService,
     private toastr: ToastrService,) { }
 

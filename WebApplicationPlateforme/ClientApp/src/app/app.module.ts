@@ -8,7 +8,7 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { LoginPageComponent } from './User/login-page/login-page.component';
-import { UserInfoComponent } from './User/user-info/user-info.component'; 
+import { UserInfoComponent } from './User/user-info/user-info.component';
 import { MainTasksComponent } from './Tache/main-tasks/main-tasks.component';
 import { NewTaskComponent } from './Tache/new-task/new-task.component';
 import { TasksListComponent } from './Tache/tasks-list/tasks-list.component';
@@ -812,6 +812,9 @@ import { HistoVisiteComponent } from './Historique/Demandes/histo-visite/histo-v
 import { HistoMontageComponent } from './Historique/Demandes/histo-montage/histo-montage.component';
 import { HistoImpressionComponent } from './Historique/Demandes/histo-impression/histo-impression.component';
 import { CongeService } from './shared/Services/Rh/conge.service';
+import { MyConversationMsgInterneComponent } from './Msg Interne/my-conversation-msg-interne/my-conversation-msg-interne.component';
+import { EmployeeConversationMsgInterneComponent } from './Msg Interne/employee-conversation-msg-interne/employee-conversation-msg-interne.component';
+import { TypeDetailsActiviteCrudComponent } from './Activitee/type-details-activite-crud/type-details-activite-crud.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -1588,6 +1591,9 @@ import { CongeService } from './shared/Services/Rh/conge.service';
     HistoVisiteComponent,
     HistoMontageComponent,
     HistoImpressionComponent,
+    MyConversationMsgInterneComponent,
+    EmployeeConversationMsgInterneComponent,
+    TypeDetailsActiviteCrudComponent,
   ],
   imports: [
 
@@ -2393,6 +2399,12 @@ import { CongeService } from './shared/Services/Rh/conge.service';
 
       { path: 'msg-interne-details/:id', component: MsgInterneDetailsComponent, canActivate: [AuthGuard] },
 
+      { path: 'my-conversation-msg-interne', component: MyConversationMsgInterneComponent, canActivate: [AuthGuard] },
+      { path: 'my-conversation-msg-interne/:id', component: MyConversationMsgInterneComponent, canActivate: [AuthGuard] },
+
+      { path: 'employee-conversation-msg-interne', component: EmployeeConversationMsgInterneComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RHPRIV'] }},
+      { path: 'employee-conversation-msg-interne/:id', component: EmployeeConversationMsgInterneComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RHPRIV'] }},
+
 
     /*********** Ticket 2 ******************/
 
@@ -2542,7 +2554,7 @@ import { CongeService } from './shared/Services/Rh/conge.service';
 
       { path: 'menu-stockage2', component: MenuStockage2Component, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
 
-      { path: 'home-stockage', component: HomeStockageComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
+      { path: 'home-stockage', component: HomeStockageComponent, canActivate: [AuthGuard] },
 
     /*********** Orphelin **************/
 
@@ -3020,6 +3032,7 @@ import { CongeService } from './shared/Services/Rh/conge.service';
       { path: 'new-cheque-menu-bon-men', component: NewChequeMenuBonMenComponent, canActivate: [AuthGuard]},
 
       { path: 'new-cheque-menu-payee', component: NewChequeMenuPayeeComponent, canActivate: [AuthGuard] },
+      { path: 'new-cheque-menu-payee/:id', component: NewChequeMenuPayeeComponent, canActivate: [AuthGuard] },
 
       /*****New Pages ** /
        *
@@ -3245,7 +3258,7 @@ import { CongeService } from './shared/Services/Rh/conge.service';
       { path: 'dawa-elec-menu', component: DawaElecMenuComponent, canActivate: [AuthGuard] },
 
       { path: 'type-dawa-elec', component: TypeDawaElecComponent, canActivate: [AuthGuard] },
-
+      { path: 'type-details-activite-crud', component: TypeDetailsActiviteCrudComponent, canActivate: [AuthGuard] },
 
     /** Demande Voiture **/
 

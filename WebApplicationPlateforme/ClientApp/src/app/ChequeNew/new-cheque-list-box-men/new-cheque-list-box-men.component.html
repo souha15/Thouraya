@@ -11,6 +11,7 @@
       <header>
         <h3 class="task-head"> طلبات  صرف الشيك</h3>
       </header>
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
       <div class="leave-request-list">
         <div class="table-responsive">
           <table class="table table-bordered text-center table-striped">
@@ -21,7 +22,8 @@
                 <th scope="col">مقدم الطلب</th>
                 <th scope="col">موضوع الطلب</th>
                 <th scope="col">المبلغ</th>
-
+                <th scope="col">الإجراء</th>
+                <th scope="col">استلام</th>
                 <th scope="col">الحالة</th>
               </tr>
             </thead>
@@ -32,7 +34,8 @@
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.creatorName}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.sujet}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.prixnb}}</td>
-
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.demandeur}}</td>
+                <td (click)="populateForm(cg)"><a *ngIf="cg.transfert != '1' && cg.retour != null && cg.etatgeneral === 'معتمدة'" class="btn btn-primary" data-toggle="modal" data-target="#myModal3"><i class="fa fa-paper-plane"></i></a></td>
 
                 <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
                     [ngClass]="{
@@ -211,3 +214,33 @@
   </div>
 </div>
 
+<div id="myModal3" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+        <h3 class="popup-head"> استلام و تحويل</h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="">
+            <form class="task-form form-row service-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+              <p>هل أنت متأكد من استلام و تحويل الطلب  للمحاسب</p>
+
+
+              <div class="col-12 text-left mt-3">
+                <input class="btn btn-info px-4" type="submit" value="استلام و تحويل" />
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

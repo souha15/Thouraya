@@ -22,7 +22,14 @@
             <tr>
 
               <th scope="col">رقم الفاتورة</th>
-              <th scope="col">عرض التفاصيل</th>
+              <th scope="col">التاريخ</th>
+              <th scope="col">الموظف المسجل</th>
+              <th scope="col">الصنف</th>
+              <th scope="col">الفرع 1</th>
+              <th scope="col">الفرع 2</th>
+              <th scope="col">المبلغ</th>
+              <th scope="col">المستفيد</th>
+              <th scope="col">التفاصيل</th>
               <th scope="col">صرف</th>
             </tr>
 
@@ -30,6 +37,13 @@
           <tbody>
             <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
               <td (click)="populateForm(cg)">{{cg.id}}</td>
+              <td (click)="populateForm(cg)">{{cg.date}}</td>
+              <td (click)="populateForm(cg)">{{cg.usernamecreator}}</td>
+              <td (click)="populateForm(cg)">{{cg.categorie}}</td>
+              <td (click)="populateForm(cg)">{{cg.brancheone}}</td>
+              <td (click)="populateForm(cg)">{{cg.branchetwo}}</td>
+              <td (click)="populateForm(cg)">{{cg.prix}}</td>
+              <td (click)="populateForm(cg)">{{cg.beneficiaire}}</td>
               <td (click)="populateForm(cg)">
                 <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-eye fa-lg"></i>
@@ -40,7 +54,6 @@
 
           </tbody>
         </table>
-
         <nav aria-label="Page navigation example">
           <ul class="pagination justify-content-center">
             <pagination-controls (pageChange)="p = $event" previousLabel="السابق"

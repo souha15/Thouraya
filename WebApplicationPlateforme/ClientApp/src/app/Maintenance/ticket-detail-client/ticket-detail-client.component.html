@@ -107,7 +107,12 @@
                    (input)="txtMessage=$event.target.value" (keydown.enter)="sendMessage()" />
             <button type="submit" class="btn btn-primary" (click)="sendMessage()"><i class="fa fa-paper-plane"></i></button>
           </div>
-     
+          <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+            <ngx-dropzone-label>تحميل</ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
           <br />
         </div>
         <br />

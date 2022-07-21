@@ -1,1 +1,170 @@
-<p>new-cheque-menu-payee works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>طلب شيك</title>
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500&display=swap" rel="stylesheet">
+  <!-- Bootstrap -->
+
+</head>
+<body>
+  <a class="btn show-details-btn text-info" (click)="print()">
+    <i class="fa fa-print fa-lg"></i>
+  </a>
+  <br />
+  <br />
+  <div class="experience-page" id="htmlData">
+    <header>
+      <img class="img1" src="assets/images/taef.jpeg" alt="">
+      <div class="header-title">
+        جمعية الدعوة والإرشاد
+        <br />
+        وتوعية الجاليات بالطائف
+      </div>
+      <img class="img2" src="assets/images/vision-2030.png" alt="">
+    </header>
+    <div class="d-flex justify-content-between" style="padding: 10px 50px;border-bottom: 1px solid #ddd;">
+      <div>الرقم <span class="space-150">{{dem.numdem}}</span></div>
+      <div>التاريخ / <span>{{dem.dateEntre}}</span></div>
+      <!--<div>الموافق / <span>{{dem.dateEntre}}</span></div>
+      <div>المشفوعات / <span>---------</span></div>-->
+    </div>
+    <div class="content">
+
+
+      <h2 class="header-title mb-5">نموذج طلب مبلغ مالي</h2>
+      <div>
+        <div class="centered">
+          <h3>أولا إجراءات الإدارة صاحبة الطلب</h3>
+          <h4>سعادة مدير إدارة الشؤون المالية والإدارية <span style="display: inline-block;width: 60px;"></span>سلمه الله</h4>
+          <p>نأمل التكرم بصرف مبلغ <span class="space-150">{{dem.prixnb}}</span> كتابة : <span class="space-300">{{dem.prixlettre}}</span> ريال فقط</p>
+          <p>يصرف من ميزانية : <span>{{article.nomadmin}}</span></p>
+          <p>يسلم المبلغ لــ : <span>{{dem.creatorName}}</span> رقم الحساب : <span>{{Iban}}</span></p>
+          <p>وذلك ضمن مشروع / برنامج : <span>{{article.projet}}</span> لغرض : <span>{{dem.detail}}</span></p>
+          <table class="print-table table-bordered w-100">
+            <tbody>
+              <tr *ngFor="let i of articleList ">
+                <td><span class="space-150">{{i.article}}</span></td>
+                <td><span class="space-150">{{i.detail}}</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <table class="print-table table-bordered w-100 ">
+            <thead>
+              <tr>
+                <th></th>
+                <th>معد الطلب</th>
+                <th>إعتماد الطلب</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>الاسم</th>
+                <td><span class="space-150">{{dem.creatorName}}</span></td>
+                <td><span class="space-150">{{dem.nomdir}}</span></td>
+
+
+              </tr>
+              <tr>
+                <th>المسمى الوظيفي</th>
+                <td><span class="space-150">{{user.emploi}}</span></td>
+                <td><span class="space-150">المدير المباشر</span></td>
+ 
+              </tr>
+              <tr>
+                <th>التوقيع</th>
+                <td><span class="space-150"></span></td>
+                <td><span class="space-150"></span></td>
+    
+              </tr>
+              <tr>
+                <th>التاريخ</th>
+                <td><span class="space-150"></span></td>
+                <td><span class="space-150"></span></td>
+
+              </tr>
+            </tbody>
+          </table>
+          <div style="font-size: 18px;">
+            ملاحظة مهمة : يتم رفض الطلب حالة (المشروع غير معتمد ، الميزانية غير كافية ، بنود الصرف غير واضحة أو غير متوافقة مع المشروع ، توقيع الاعتماد غير مطابق ، المفوض باستلام المبلغ غير معني ، وجود بند مشتريات غير معتمد من إدارة الأوقاف والممتلكات )
+          </div>
+          <hr>
+          <div>
+            <p class="text-center">تعبئة هذا الجزء من اختصاص الإدارة المالية</p>
+            <h3>ثانيا : اعتماد الإدارة المالية :</h3>
+            <p>اعتمدوا صرف المبلغ أعلاه ( <input type="checkbox" name="" id="pay1"> <label for="pay1">نقدا من العهدة</label> <input type="checkbox" name="" id="pay2"> <label for="pay2">اصدار شيك</label> ) <span class="space-150"></span> إدارة / <span>-----------------</span></p>
+            <p>من البند الرئيسي / <span class="space-150"></span> والبند الفرعي / <span class="space-150"></span> من مخصص / <span class="space-150"></span></p>
+            <table class="print-table table-bordered w-100 ">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>المراجعة</th>                
+                  <th>اعتماد مدير الشؤون الإدارية والمالية</th>
+                  <th>اعتماد مدير عام الجمعية</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>الاسم</th>
+                  <td><span class="space-150">{{dem.nomparfinancier}}</span></td>
+                  <td><span class="space-150">{{dem.nomfinancier}}</span></td>
+                  <td><span class="space-150">{{dem.nomadmin}}</span></td>
+                </tr>
+                <tr>
+                  <th>المسمى الوظيفي</th>
+                  <td><span class="space-150">المحاسب</span></td>
+                  <td ><span class="space-150">مدير الشؤون الإدارية والمالية</span></td>
+                  <td><span class="space-150">مدير عام الجمعية</span></td>
+                </tr>
+                <tr>
+                  <th>التوقيع</th>
+                  <td><span class="space-150"></span></td>
+                  <td><span class="space-150"></span></td>
+                  <td><span class="space-150"></span></td>
+                </tr>
+                <tr>
+                  <th>التاريخ</th>
+                  <td><span class="space-150"></span></td>
+                  <td><span class="space-150"></span></td>
+                  <td><span class="space-150"></span></td>
+                  <td><span class="space-150"></span></td>
+
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div>
+            <h3>ثالثا : استلام المبلغ :</h3>
+            <p>أقر أني استلمت المبلغ المذكور : <span class="space-150"></span> <input type="checkbox" name="" id=""> <label for="">نقدا</label> <span class="space-150"></span> <input type="checkbox" name="" id=""> <label for="">شيك (نسخة مرفقة للشيك)</label></p>
+            <p>رقما <span>------------</span> كتابة : <span>------------------------</span> ريال فقط لا غير ، وألتزم بصرفه في المشروع / البرنامج المحدد وعلى بنود الصرف المحددة بعاليه ، وتقديم مستندات الصرف في مدة لا تزيد عن <span>-----</span> يوم.</p>
+            <p>الاسم / <span class="space-300"></span> التاريخ / <span class="space-150"></span> التوقيع / <span class="space-300"></span></p>
+            <p>أقر أني أودعت المبلغ المذكور بالحساب البنكي المحدد : ( نسخة مرفقة للإيداع )</p>
+            <p>الاسم / <span class="space-300"></span> التاريخ / <span class="space-150"></span> التوقيع / <span class="space-300"></span></p>
+          </div>
+          <hr>
+          <div>
+            <h3>رابعا : إغلاق دورة محاسبة الطلب :</h3>
+            <p>استلمنا من / <span class="space-300"></span> البيان التالي / <span class="space-300"></span></p>
+            <ol>
+              <li>مستندات صرف عددها <span class="px-2">-------</span> بقيمة رقما ( <span class="space-150"></span> ) كتابة ( <span class="space-300"></span> ) ريال</li>
+              <li>مبلغ مرتجع بقيمة رقما ( <span class="space-150"></span> ) كتابة ( <span class="space-300"></span> ) ريال ، بسند قبض رقم ( <span class="space-150"></span> )</li>
+            </ol>
+            <p>المحاسب / <span class="space-300"></span> التاريخ / <span class="space-150"></span> التوقيع / <span class="space-300"></span></p>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+
+</body>
+</html>

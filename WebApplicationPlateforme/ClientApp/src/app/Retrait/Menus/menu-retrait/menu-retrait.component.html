@@ -39,9 +39,20 @@
               <span class="icon"><i class="fa fa-users-cog"></i></span>
               إدارة المستفيدين
             </a>
-            <a href="">
-              <span class="icon"><i class="fa fa-file-pdf"></i></span>
-              التقارير
+
+            <a href="" [routerLink]="['/rappot-emise']">
+              <span class="icon"><i class="fa fa-file-alt"></i></span>
+              المعاملات الصادرة
+            </a>
+
+            <a href="" [routerLink]="['/rapport-recue']">
+              <span class="icon"><i class="fa fa-file-contract"></i></span>
+              المعاملات الواردة
+            </a>
+
+            <a href="" [routerLink]="['/rapport-interne']">
+              <span class="icon"><i class="fa fa-file-archive"></i></span>
+              المعاملات الداخلية
             </a>
 
           </div>

@@ -41,7 +41,9 @@ export class MsgInterneListComponent implements OnInit {
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-
+      //this.MsgInterneService.GetUsersMsg(this.UserIdConnected).subscribe(resmsg => {
+      //  this.msgInterneList= res;
+      //})
     })
 
   }

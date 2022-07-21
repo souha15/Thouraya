@@ -50,7 +50,7 @@
 
           <div class="col-md-6">
             <label for="time1">الوقت</label>
-            <input type="datetime-local" id="time1" name="dateTime" #dateTime="ngModel" [(ngModel)]="dem.dateTime" />
+            <input type="datetime-local" id="time1" name="dateTime" #dateTime="ngModel" [(ngModel)]="dem.dateTime" [min]="today"/>
           </div>
 
           <div class="col-md-6">

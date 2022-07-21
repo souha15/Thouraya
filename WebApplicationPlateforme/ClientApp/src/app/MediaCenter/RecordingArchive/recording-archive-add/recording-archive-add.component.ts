@@ -6,7 +6,7 @@ import { RecordingArchiveService } from '../../../shared/Services/MediaCenter/Re
 import { TbListening } from '../../../shared/Models/Evenements/tb-listening.model';
 import { RecordingArchive } from '../../../shared/Models/MediaCenter/RecordingArchive/recording-archive.model';
 import { NgForm } from '@angular/forms';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-recording-archive-add',
   templateUrl: './recording-archive-add.component.html',
@@ -22,7 +22,11 @@ export class RecordingArchiveAddComponent implements OnInit {
   ngOnInit(): void {
     this.getUserConnected();
     this.SettingsList();
+    const datePipe = new DatePipe('en-Us');
+
+    this.today = new Date().toISOString().slice(0, 16)
   }
+  today;
 
   /** Get User Connected **/
 

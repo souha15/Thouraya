@@ -92,7 +92,7 @@ export class ChequePayListAcceptComponent implements OnInit {
             if (this.testrole == true) {
               this.dem3 = this.dem2.filter(item => item.idparfinancier != this.UserIdConnected && item.idfinancier != this.UserIdConnected && item.idpart != this.UserIdConnected)
               this.demg1 = this.dem2.filter(item => +item.etatnum < 3);
-              this.demg2 = this.dem1.filter(item => item.attribut5 == this.UserIdConnected && item.attribut3 == "editer");
+              this.demg2 = this.dem1.filter(item => item.attribut5 == this.UserIdConnected /*&& item.attribut3 == "editer"*/);
 
               this.nbr = this.demg1.length + this.demg2.length
 

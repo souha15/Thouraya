@@ -3,7 +3,24 @@
   height: 20px;
   border: 1px solid #91070e;
 }
+.dropzone {
+  font-size: 18px;
+  color: #2196f3;
+  border: 2px dashed #2196f3;
+  width: 200px;
+  height: 50px;
+  display:contents;
+}
 
+label.radio-lab {
+  display: inline-block;
+  min-width: 50px;
+  border-radius: 0;
+  padding-right: 4px;
+  background: none;
+  margin-left: 10px;
+  cursor: pointer;
+}
 /*-- Electronic Sevices Forms --*/
 .task-form input:focus:not([type="submit"]):not([type="reset"]),
 .task-form select:focus {

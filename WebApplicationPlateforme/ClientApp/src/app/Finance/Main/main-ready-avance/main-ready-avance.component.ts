@@ -38,7 +38,7 @@ export class MainReadyAvanceComponent implements OnInit {
   getDep() {
     this.avanceService.Get().subscribe(res => {
       this.GfactList = res;
-      this.factList = this.GfactList.filter(item => item.etatC == "في الإنتظار" && item.etatD == "موافقة" && item.transferera == null)
+      this.factList = this.GfactList.filter(item => item.etatetab == "في الإنتظار" && item.etatC == "موافقة")
     })
   }
 
@@ -59,12 +59,12 @@ export class MainReadyAvanceComponent implements OnInit {
 
   date = new Date().toLocaleDateString();
   accept() {
+    this.fact.etatetab = "موافقة"
+    this.fact.dateetab = this.date;
 
-    this.fact.etatC = "موافقة"
-    this.fact.attribut2 = "موافقة"
-    this.fact.dateC = this.date;
-    this.fact.idC = this.UserIdConnected
-    this.fact.nomC = this.UserNameConnected;
+    this.fact.idtetab = this.UserIdConnected;
+    this.fact.nomtetab = this.UserNameConnected;
+
     this.avanceService.PutObservableE(this.fact).subscribe(res => {
       this.getDep();
       this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
@@ -80,10 +80,10 @@ export class MainReadyAvanceComponent implements OnInit {
     if (this.raisonRefus != null) {
       this.fact.raisonRefusD = this.raisonRefus;
       this.fact.attribut2 = "رفض"
-      this.fact.etatC = "رفض"
-      this.fact.dateC = this.date;
-      this.fact.idC = this.UserIdConnected
-      this.fact.nomC = this.UserNameConnected;
+      this.fact.etatetab = "رفض"
+      this.fact.dateetab = this.date;
+      this.fact.idtetab = this.UserIdConnected
+      this.fact.nomtetab = this.UserNameConnected;
 
 
       this.avanceService.PutObservableE(this.fact).subscribe(res => {

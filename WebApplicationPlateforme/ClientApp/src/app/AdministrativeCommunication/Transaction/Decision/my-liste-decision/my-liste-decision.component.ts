@@ -48,8 +48,7 @@ export class MyListeDecisionComponent implements OnInit {
 
   getCreance() {
     this.trinService.Get().subscribe(res => {
-      this.GfactList = res;
-      this.factList = this.GfactList.filter(item => item.idUserCreator == this.UserIdConnected)
+      this.factList = res;
     })
 
   }

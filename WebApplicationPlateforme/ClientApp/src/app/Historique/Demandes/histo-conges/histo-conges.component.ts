@@ -17,6 +17,7 @@ export class HistoCongesComponent implements OnInit {
   @Input() public fileName: string;
   @Output() public downloadStatus: EventEmitter<ProgressStatus>;
   @ViewChild('htmlData') htmlData: ElementRef;
+  filter;
   constructor(private congeService: CongeService,
     private toastr: ToastrService,
     public serviceupload: UploadDownloadService, ) {

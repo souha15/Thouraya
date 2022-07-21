@@ -75,6 +75,7 @@ export class TicketDetailClientComponent implements OnInit {
 
   ngOnInit(): void {
     this.getIdUrl();
+    this.getFiles();
     this.getUserConnected();
     this.ListOfComments();
   }
@@ -110,7 +111,16 @@ export class TicketDetailClientComponent implements OnInit {
   }
 
 
+  getFileData() {
+    let path = this.rootUrl.getPath();
+    this.http.get<FilesTicket[]>(path + '/FilesGestionTickets')
+      .subscribe(res => {
+        this.existFiles = true;
+        this.ticketfilesG = res
+        this.ticketfiles = this.ticketfilesG.filter(item => item.idTicket == this.ev.id)
+      });
 
+  }
   txtMessage: string = '';
   messages = new Array<CommentsTickets>();
   message: CommentsTickets = new CommentsTickets();
@@ -192,6 +202,109 @@ export class TicketDetailClientComponent implements OnInit {
         this.downloadStatus.emit({ status: ProgressStatusEnum.ERROR });
       }
     );
+  }
+
+  // Files
+
+  onSelect(event) {
+
+    this.files1.push(...event.addedFiles);
+  }
+
+  onRemove(event) {
+    console.log(event);
+    this.files1.splice(this.files1.indexOf(event), 1);
+  }
+
+
+  public response: { 'dbpathsasstring': '' };
+  public isCreate: boolean;
+  public pj: FilesTicket = new FilesTicket();
+  //public files: string[];
+
+  //get List of Files
+  public files: string[];
+  private getFiles() {
+    this.serviceupload.getFiles().subscribe(
+      data => {
+        this.files = data
+
+      }
+    );
+
+  }
+
+
+  //Get file name for Database
+
+  GetFileName() {
+    let sa: any;
+    let s: any;
+    let finalres: any;
+    let i: number = 0;
+    let tlistnew: any[] = [];
+    for (var k = 0; k < this.files.length; k++) {
+      sa = <string>this.files[k]
+      s = sa.toString().split('uploads\\,', sa.length - 1);
+      finalres = s.toString().split('uploads\\', sa.length - 1);
+
+      tlistnew[i] = finalres[1]
+      i++;
+
+    }
+
+
+  }
+
+  //Upload
+
+  //Save it ToDatabase
+  files1: File[] = [];
+  url: any;
+  file: any;
+  fileslist: string[] = [];
+  public upload(event) {
+    if (event.addedFiles && event.addedFiles.length > 0) {
+      this.file = event.addedFiles[0];
+
+      this.uploadStatuss.emit({ status: ProgressStatusEnum.START });
+      this.serviceupload.uploadFile(this.file).subscribe(
+        data => {
+          if (data) {
+            switch (data.type) {
+              case HttpEventType.UploadProgress:
+                this.uploadStatuss.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
+                break;
+              case HttpEventType.Response:
+                // this.inputFile.nativeElement.value = '';
+                this.uploadStatuss.emit({ status: ProgressStatusEnum.COMPLETE });
+                break;
+            }
+            this.getFiles();
+            this.GetFileName();
+
+
+
+          }
+
+        },
+
+        error => {
+          /// this.inputFile.nativeElement.value = '';
+          this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
+        }
+      );
+      let path = this.rootUrl.getPath();
+      this.pj.idTicket = this.ev.id;
+      this.pj.path = this.file.name;
+      this.http.post(path + '/FilesGestionTickets', this.pj)
+        .subscribe(res => {
+          this.serviceupload.refreshList();
+          this.GetFileName();
+          this.getFileData();
+        });
+
+    }
   }
 
 }

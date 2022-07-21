@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -80,10 +81,23 @@ namespace WebApplicationPlateforme.Controllers.RH
         [HttpPost]
         public async Task<ActionResult<Conge>> PostConge(Conge conge)
         {
+            //DateTime dateOnly = DateTime.Now;
+            //var date = Convert.ToDateTime(dateOnly.ToString("d", new CultureInfo("es-ES")));
+
+            //if (Convert.ToDateTime(conge.datedebut)>= date && Convert.ToDateTime(conge.datefin)>=date)               
+            //{
+
+            //}
+            //else
+            //{
+            //    return NotFound();
+            //}
+
             _context.conges.Add(conge);
             await _context.SaveChangesAsync();
-
             return CreatedAtAction("GetConge", new { id = conge.Id }, conge);
+
+
         }
 
         // DELETE: api/Conges/5

@@ -13,7 +13,7 @@ import { UserDetail } from '../../../shared/Models/User/user-detail.model';
 import { RecrutementService } from '../../../shared/Services/Rh/recrutement.service';
 import { Notif } from '../../../shared/Models/NotifSystem/notif.model';
 import { NotifService } from '../../../shared/Services/NotifSystem/notif.service';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-recrutement-add',
   templateUrl: './recrutement-add.component.html',
@@ -37,8 +37,10 @@ export class RecrutementAddComponent implements OnInit {
     this.getFiles();
     this.getUserConnected();
     this.UserList();
+    const datePipe = new DatePipe('en-Us');
+    this.today = datePipe.transform(new Date(), 'yyyy-MM-dd');
   }
-
+  today;
   // Get User Connected
   notif: Notif = new Notif();
   getUserConnected() {

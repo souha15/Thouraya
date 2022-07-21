@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
@@ -80,16 +81,31 @@ namespace WebApplicationPlateforme.Controllers.UserService
         [HttpPost]
         public async Task<ActionResult<PermissionU>> PostPermissionU(PermissionU permissionU)
         {
+            //DateTime dateOnly = DateTime.Now;
+            //var date = Convert.ToDateTime(dateOnly.ToString("d", new CultureInfo("es-ES")));
+
+            //if (Convert.ToDateTime(permissionU.date) >= date)
+            //{
+
+
+            //}
+            //else
+            //{
+            //    return NotFound();
+            //}
+
             _context.permissionUs.Add(permissionU);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetPermissionU", new { id = permissionU.Id }, permissionU);
+
         }
 
         // DELETE: api/PermissionUs/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<PermissionU>> DeletePermissionU(int id)
         {
+
             var permissionU = await _context.permissionUs.FindAsync(id);
             if (permissionU == null)
             {

@@ -6,7 +6,7 @@ import { TblSettingsMediaCenterService } from '../../../shared/Services/MediaCen
 import { RendoneeService } from '../../../shared/Services/MediaCenter/Rendonee/rendonee.service';
 import { Rendonne } from '../../../shared/Models/MediaCenter/Rendonee/rendonne.model';
 import { NgForm } from '@angular/forms';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-rendonne-add',
   templateUrl: './rendonne-add.component.html',
@@ -23,7 +23,11 @@ export class RendonneAddComponent implements OnInit {
   ngOnInit(): void {
     this.getUserConnected();
     this.SettingsList();
+    const datePipe = new DatePipe('en-Us');
+
+    this.today = datePipe.transform(new Date(), 'yyyy-MM-dd');
   }
+  today;
 
   /** Get User Connected **/
 

@@ -7,7 +7,7 @@ import { NgForm } from '@angular/forms';
 import { NotifService } from '../../shared/Services/NotifSystem/notif.service';
 import { AdministrationService } from '../../shared/Services/Administration/administration.service';
 import { Notif } from '../../shared/Models/NotifSystem/notif.model';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-demission-add',
   templateUrl: './demission-add.component.html',
@@ -23,7 +23,10 @@ export class DemissionAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
+    const datePipe = new DatePipe('en-Us');
+    this.today = datePipe.transform(new Date(), 'yyyy-MM-dd');
   }
+  today;
 
   //Get UserConnected
 

@@ -9,7 +9,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./histo-attestation.component.css']
 })
 export class HistoAttestationComponent implements OnInit {
-
+  filter;
   constructor(private atService: DemandeAttestationTravailService,
     private toastr: ToastrService,) { }
 

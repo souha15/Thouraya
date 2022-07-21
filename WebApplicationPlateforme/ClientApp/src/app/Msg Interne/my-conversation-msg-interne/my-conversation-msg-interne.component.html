@@ -1,0 +1,50 @@
+<app-nav-menu></app-nav-menu>
+
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+
+      <section class="msger">
+        <header class="msger-header">
+          <div class="msger-header-title">
+            <i class="fas fa-comment-alt"></i> المحادثة
+          </div>
+          <div class="msger-header-options">
+        
+          </div>
+        </header>
+
+        <main class="msger-chat" >
+          <div class="msg left-msg" *ngFor="let msg of  msgList">
+            <div class="msg-img"
+                 style="background-image: url(assets/images/avatar.png)"></div>
+
+            <div class="msg-bubble">
+              <div class="msg-info">
+                <div class="msg-info-name">{{msg.userNameSender}}</div>
+                <div class="msg-info-time">{{msg.date}}</div>
+              </div>
+
+              <div class="msg-text">
+                <p style="text-decoration-line: underline; color:#276985 ;font-weight:bold">{{msg.titre}}</p>
+                <br />
+                {{msg.message}}
+
+              </div>
+            </div>
+            <hr />
+          </div>
+
+        </main>
+      </section>
+    </div>
+  </div>
+  </div>
+
+
+  <footer class="text-center">
+    <p>جمعية الدعوة والإرشاد وتوعية الجاليات في محافظة أبوعريش  <img src="assets/images/logo000.png" style="width:40px;height:40px;"> </p>
+  </footer>

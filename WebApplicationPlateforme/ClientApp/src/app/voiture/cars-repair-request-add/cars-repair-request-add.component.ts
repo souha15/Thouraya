@@ -11,7 +11,7 @@ import { UploadDownloadService } from '../../shared/Services/Taches/upload-downl
 import { PathSharedService } from '../../shared/path-shared.service';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { ProgressStatusEnum } from '../../shared/Enum/progress-status-enum.enum';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-cars-repair-request-add',
   templateUrl: './cars-repair-request-add.component.html',
@@ -37,7 +37,11 @@ export class CarsRepairRequestAddComponent implements OnInit {
     this.getUserConnected();
     this.getVoitureList();
     this.getFiles();
+    const datePipe = new DatePipe('en-Us');
+
+    this.today = datePipe.transform(new Date(), 'yyyy-MM-dd');
   }
+  today;
 
   mat: string;
   exists: boolean = false;

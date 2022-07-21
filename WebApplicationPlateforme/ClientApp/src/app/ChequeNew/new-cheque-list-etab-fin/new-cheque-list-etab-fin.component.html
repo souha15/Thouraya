@@ -11,6 +11,7 @@
       <header>
         <h3 class="task-head"> طلبات  صرف الشيك</h3>
       </header>
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
       <div class="leave-request-list">
         <div class="table-responsive">
           <table class="table table-bordered text-center table-striped">
@@ -21,6 +22,7 @@
                 <th scope="col">مقدم الطلب</th>
                 <th scope="col">موضوع الطلب</th>
                 <th scope="col">المبلغ</th>
+                <th scope="col">طباعة</th>
 
                 <th scope="col">الحالة</th>
               </tr>
@@ -32,6 +34,9 @@
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.creatorName}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.sujet}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.prixnb}}</td>
+                <td>
+                  <a *ngIf="cg.transfert == '1'" class="btn btn-primary" [routerLink]="['/new-cheque-menu-payee', cg.id]"><i class="fa fa-print"></i></a>
+                </td>
 
 
                 <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"

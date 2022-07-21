@@ -17,16 +17,17 @@
       display: none;
     }
 
-      .box-menu a {
-        display: block;
-        text-decoration: none;
-        text-align: center;
-        width: 100%;
-        padding: 6px 0;
-        border-bottom: 1px solid #d1d1d1;
-        background-color: #fff;
-        color: #108199;
-      }
+
+    .box-menu a {
+      display: block;
+      text-decoration: none;
+      text-align: center;
+      width: 100%;
+      padding: 6px 0;
+      border-bottom: 1px solid #d1d1d1;
+      background-color: #fff;
+      color: #108199;
+    }
 
         .box-menu a:hover {
           background-color: #108199;
@@ -169,7 +170,7 @@
                   <div class="col-sm-6">
 
                     <label for="from2">الإدارة</label>
-                    <select id="from2" name="attribut1" #attribut1="ngModel" [(ngModel)]="affectation.attribut1" (change)="testorg($event)">
+                    <select id="from2" name="idAdministration" #idAdministration="ngModel" [(ngModel)]="affectation.idAdministration" (change)="testorg($event)">
                       <option [ngValue]="undefined" selected disabled>-الإدارة-</option>
                       <option *ngFor="let item of AdministrationList" value="{{item.id}}">{{item.nom}}</option>
                     </select>

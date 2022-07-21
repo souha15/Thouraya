@@ -116,7 +116,7 @@ export class PermissionAddComponent implements OnInit {
           })
         },
         err => {
-          this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
+          this.toastr.error("  يجب أن يبدأ التاريخ من هذا اليوم", "لم يتم تقديم الطلب ")
         },
       )
 

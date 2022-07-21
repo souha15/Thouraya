@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { DemandeSalariale } from '../../../shared/Models/RH/demande-salariale.model';
 import { NgForm } from '@angular/forms';
 import { DemandeSalarialeService } from '../../../shared/Services/Rh/demande-salariale.service';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-salaiale-add',
   templateUrl: './salaiale-add.component.html',
@@ -19,7 +19,10 @@ export class SalaialeAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
+    const datePipe = new DatePipe('en-Us');
+    this.today = datePipe.transform(new Date(), 'yyyy-MM-dd');
   }
+  today;
 
   // Get User Connected
 

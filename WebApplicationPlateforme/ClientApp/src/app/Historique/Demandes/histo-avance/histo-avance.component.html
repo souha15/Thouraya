@@ -29,8 +29,8 @@
               <th scope="col">عدد أشهر الاستقطاع</th>
               <th scope="col">الاستقطاع شهر/سنة</th>
               <th scope="col">الحالة</th>
-              <th scope="col">عرض التفاصيل</th>
-              <th scope="col">رفض/موافقة</th>
+              <th scope="col"> التفاصيل</th>
+              <th scope="col">رفض / موافقة</th>
               <th scope="col">سير الإجراء</th>
               <th scope="col">حذف</th>
             </tr>
@@ -60,8 +60,8 @@
               </td>
 
               <td (click)="populateForm(cg)">
-                <a class="btn btn-danger ml-3" data-toggle="modal" data-target="#myModal1">رفض</a>
-                <a class="btn btn-success" data-toggle="modal" data-target="#myModal2">موافقة</a>
+                <a class="btn btn-danger ml-3" data-toggle="modal" data-target="#myModal1"><i class="fa fa-times"></i></a>
+                <a class="btn btn-success" data-toggle="modal" data-target="#myModal2"><i class="fa fa-check"></i></a>
               </td>
 
               <td (click)="populateForm(cg)">
@@ -77,6 +77,12 @@
             </tr>
           </tbody>
         </table>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination justify-content-center">
+            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
+                                 nextLabel="التالي"></pagination-controls>
+          </ul>
+        </nav>
       </div>
     </div>
   </div>

@@ -163,5 +163,10 @@ export class TransactionService {
   }
 
 
+  GetTransactionListBy(IdUser) {
+    return this.http.get<Transaction[]>(this.rootURL + '/TransactionIs/GetTransactionListBy/' + IdUser);
+  }
+
+
 /******/
 }

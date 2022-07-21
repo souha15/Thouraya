@@ -59,16 +59,29 @@
           </div>
         </div>
 
-        <div class="col-md-6">
-          <label for="keys">التفاصيل  </label>
-          <textarea id="keys" name="attribut4" #attribut4="ngModel" [(ngModel)]="ac.attribut4"></textarea>
-   
+
+        <div class="col-sm-6" >
+          <label for="from">
+            التفاصيل
+          </label>
+          <ng-multiselect-dropdown 
+                                   name="employeead"
+                                   [placeholder]="'التفاصيل '"
+                                   [settings]="dropdownSettings"
+                                   [data]="ListType"
+                                   [disabled]="disabled"
+                                   (onSelect)="onItemSelect($event)"
+                                   (onSelectAll)="onSelectAll($event)"
+                                   (onFilterChange)="onFilterChange($event)">
+          </ng-multiselect-dropdown>
         </div>
 
         <div class="col-md-6">
           <label for="keys">الملاحظات </label>
           <textarea id="keys" name="attribut5" #attribut5="ngModel" [(ngModel)]="ac.attribut5"></textarea>
         </div>
+
+
 
         <div class="col-md-12 text-left">
           <input type="submit"

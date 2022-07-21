@@ -102,6 +102,39 @@ namespace WebApplicationPlateforme.Controllers.Messages2
             return msgInterne;
         }
 
+
+        // Get Users Messages 
+        [HttpGet]
+        [Route("GetUsersMsg/{idUserReceiver}")]
+        public List<MsgInterne> GetUsersMsg(string idUserReceiver)
+        {
+            List<MsgInterne> msgListFirst = new List<MsgInterne>();
+            List<MsgInterne> msgList = new List<MsgInterne>();
+
+            msgListFirst = _context.msgInternes.Where(item => item.userIdReceiver == idUserReceiver).ToList();
+
+            msgList = msgListFirst.GroupBy(item=> new { item.userIdReceiver , item.userIdSender})
+                 .Select(grouping => grouping.FirstOrDefault())
+                .ToList();
+            msgList.OrderBy(item => item.Id);
+            return msgList;
+        }
+
+        // Get Users Conversation 
+        [HttpGet]
+        [Route("GetUserConversation/{idUserReceiver}/{idUserSender}")]
+        public List<MsgInterne> GetUserConversation(string idUserReceiver, string idUserSender)
+        {
+            List<MsgInterne> msgList = new List<MsgInterne>();
+
+            msgList = _context.msgInternes.Where(item => (item.userIdReceiver == idUserReceiver && item.userIdSender == idUserSender)||(item.userIdReceiver == idUserSender && item.userIdSender == idUserReceiver))
+               .OrderBy(item => item.Id)
+                .ToList();
+     
+            return msgList;
+        }
+
+
         private bool MsgInterneExists(int id)
         {
             return _context.msgInternes.Any(e => e.Id == id);

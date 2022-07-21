@@ -18,10 +18,11 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">القسم</th>
-                <th scope="col">تاريخ الادخال</th>
-                <th scope="col">موضوع الطلب</th>
+                <th scope="col">التاريخ</th>
+                <th scope="col">الموضوع </th>
                 <th scope="col">المبلغ</th>
                 <th scope="col">الحالة</th>
+                <th scope="col">استلام/تسليم</th>
                 <th scope="col">تعديل</th>
                 <th scope="col">حذف</th>
               </tr>
@@ -47,10 +48,10 @@
 }">
                   {{cg.etatgeneral}}
                 </td>
-
+                <td (click)="populateForm(cg)"><a *ngIf="cg.etatgeneral === 'معتمدة' && cg.retour === null" class="btn btn-primary" data-toggle="modal" data-target="#myModal2"><i class="fa fa-paper-plane"></i></a></td>
                 <td (click)="populateForm(cg)"><a *ngIf="cg.etatgeneral === 'في الإنتظار'" class="btn btn-success" [routerLink]="['/pay-chequec-edit', cg.id]"><i class="fa fa-edit"></i></a></td>
                 <td (click)="populateForm(cg)"><a *ngIf="cg.etatgeneral === 'في الإنتظار'" (click)="populateForm(cg);onDelete(cg.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
-</tbody>
+            </tbody>
           </table>
         </div>
         <!-- Pagination -->
@@ -68,7 +69,7 @@
 </div>
 <!-- Footer -->
 <footer class="text-center">
- <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
 </footer>
 
 
@@ -151,7 +152,7 @@
                         <th scope="col">المشروع / البرنامج</th>
                         <th scope="col">الإدارة</th>
                         <th scope="col">التاريخ</th>
-  
+
                       </tr>
                     </thead>
                     <tbody>
@@ -168,6 +169,61 @@
                 </div>
               </div>
 
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div id="myModal2" class="popup-page" role="dialog" style="direction:ltr;">
+  <div class="">
+
+    <div class="popup-content">
+
+
+      <button type="button" class="close-popup" data-dismiss="modal">&times;</button>
+
+
+      <div class="page-wrapper">
+        <h3 class="popup-head"> استلام / تسليم</h3>
+        <div class="modal-body" style="direction:rtl; text-align:right;">
+          <div class="">
+            <form class="task-form form-row service-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+              <div class="col-md-4">
+                <label for="permision-hours">مسترجع</label>
+                <select id="permision-hours" name="retour" #retour="ngModel" [(ngModel)]="per.retour" (change)="testRetour($event)">
+                  <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                  <option value="مسترجع">نعم</option>
+                  <option value="مستلمة">لا</option>
+                </select>
+              </div>
+
+              <div class="col-md-4" *ngIf="showForm">
+                <label for="permision-hours">المبلغ</label>
+                <input type="number" id="permision-hours" name="prixRetour" #prixRetour="ngModel" [(ngModel)]="per.prixRetour">
+
+              </div>
+
+
+              <div class="col-md-4" *ngIf="showForm">
+                <label for="permision-hours">الإيصال</label>
+                <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+                  <ngx-dropzone-label> التحميل</ngx-dropzone-label>
+                  <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                  </ngx-dropzone-preview>
+                </ngx-dropzone>
+              </div>
+
+
+              <div class="col-12 text-left mt-3">
+                <input class="btn btn-info px-4" type="submit" value="حفظ" />
+              </div>
             </form>
 
           </div>

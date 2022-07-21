@@ -10,6 +10,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./histo-avance.component.css']
 })
 export class HistoAvanceComponent implements OnInit {
+  filter;
 
   constructor(private avanceService: AvanceService,
     private toastr: ToastrService) { }

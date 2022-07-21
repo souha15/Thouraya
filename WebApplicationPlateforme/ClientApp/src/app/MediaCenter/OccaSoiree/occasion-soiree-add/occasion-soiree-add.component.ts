@@ -8,7 +8,7 @@ import { OccasionSoiree } from '../../../shared/Models/MediaCenter/OccaSoiree/oc
 import { NgForm } from '@angular/forms';
 import { GuestSoiree } from '../../../shared/Models/MediaCenter/OccaSoiree/guest-soiree.model';
 import { GuestSoireeOccasionService } from '../../../shared/Services/MediaCenter/OccaSoiree/guest-soiree-occasion.service';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-occasion-soiree-add',
   templateUrl: './occasion-soiree-add.component.html',
@@ -26,7 +26,11 @@ export class OccasionSoireeAddComponent implements OnInit {
   ngOnInit(): void {
     this.getUserConnected();
     this.SettingsList();
+    const datePipe = new DatePipe('en-Us');
+
+    this.today = new Date().toISOString().slice(0, 16)
   }
+  today;
 
   /** Get User Connected **/
 

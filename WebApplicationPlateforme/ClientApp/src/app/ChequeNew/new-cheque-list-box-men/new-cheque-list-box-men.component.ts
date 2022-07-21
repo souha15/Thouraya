@@ -8,6 +8,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { DemPayCheque } from '../../shared/Models/Cheques/dem-pay-cheque.model';
 import { ArticlePayCheque } from '../../shared/Models/Cheques/article-pay-cheque.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-new-cheque-list-box-men',
@@ -90,7 +91,7 @@ export class NewChequeListBoxMenComponent implements OnInit {
   getDemPayList() {
     this.demandeService.Get().subscribe(res => {
       this.dem5 = res
-      this.dem6 = this.dem5.filter(item => item.etatpart == "في الإنتظار" && item.etatadmin == "معتمدة")
+      this.dem6 = this.dem5.filter(item => (item.etatpart == "في الإنتظار" && item.etatadmin == "معتمدة") || (item.retour != null && item.etatgeneral == "معتمدة"))
 
     })
   }
@@ -121,6 +122,7 @@ export class NewChequeListBoxMenComponent implements OnInit {
     this.per.etatpart = this.etat
     this.per.nompart = this.UserNameConnected;
     this.per.idpart = this.UserIdConnected;
+    this.per.etatgeneral = this.etat;
     this.demandeService.PutObservableE(this.per).subscribe(res => {
       this.toastr.success('تم التحديث بنجاح', 'نجاح');
       this.getUserConnected()
@@ -130,4 +132,16 @@ export class NewChequeListBoxMenComponent implements OnInit {
 
   }
 
+  onSubmit(form: NgForm) {
+    this.per.transfert = "1";
+    this.demandeService.PutObservableE(this.per).subscribe(res => {
+      this.toastr.success("تم التسجيل بنجاح", "نجاح")
+      this.getDemPayList();
+      form.resetForm();
+
+    }, err => {
+      this.toastr.error("  فشل في تسجيل ا الإستلام أو التسليم"
+        , "فشل")
+    })
+  }
 }

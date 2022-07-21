@@ -10,7 +10,7 @@
       <header>
         <h3 class="task-head">قائمة الأنشطة</h3>
       </header>
-
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
       <div class="leave-request-list">
         <div class="table-responsive">
           <table class="table table-bordered text-center table-striped">
@@ -124,10 +124,25 @@
 
               </div>
 
-              <div class="col-md-6">
-                <label for="keys">التفاصيل  </label>
-                <textarea id="keys" name="attribut4" #attribut4="ngModel" [(ngModel)]="ac.attribut4"></textarea>
+              
+              <div class="col-sm-6">
+                <label for="from">
+                  التفاصيل
+                </label>
 
+                <div *ngFor="let i of ListDetail" >
+                  {{i.details}}
+                </div>
+
+                <ng-multiselect-dropdown name="employeead"
+                                         [placeholder]="'التفاصيل '"
+                                         [settings]="dropdownSettings"
+                                         [data]="ListType"
+                                         [disabled]="disabled"
+                                         (onSelect)="onItemSelect($event)"
+                                         (onSelectAll)="onSelectAll($event)"
+                                         (onFilterChange)="onFilterChange($event)">
+                </ng-multiselect-dropdown>
               </div>
 
               <div class="col-md-6">

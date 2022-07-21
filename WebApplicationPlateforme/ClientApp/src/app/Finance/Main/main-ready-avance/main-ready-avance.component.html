@@ -29,7 +29,7 @@
               <th scope="col">عدد أشهر الاستقطاع</th>
               <th scope="col">الاستقطاع شهر/سنة</th>
               <th scope="col">الحالة</th>
-              <th scope="col">عرض التفاصيل</th>
+              <th scope="col"> التفاصيل</th>
               <th scope="col">تحويل</th>
               <th scope="col">رفض/موافقة</th>
             </tr>
@@ -58,10 +58,10 @@
                   <i class="fa fa-eye fa-lg"></i>
                 </a>
               </td>
-              <td (click)="populateForm(cg)"><a class="btn btn-primary" data-toggle="modal" data-target="#myModal3">تحويل الى</a></td>
+              <td (click)="populateForm(cg)"><a class="btn btn-primary" data-toggle="modal" data-target="#myModal3">تحويل </a></td>
               <td (click)="populateForm(cg)">
-                <a class="btn btn-danger ml-3" data-toggle="modal" data-target="#myModal1">رفض</a>
-                <a class="btn btn-success" data-toggle="modal" data-target="#myModal2">موافقة</a>
+                <a class="btn btn-danger ml-3" data-toggle="modal" data-target="#myModal1"><i class="fa fa-times"></i></a>
+                <a class="btn btn-success" data-toggle="modal" data-target="#myModal2"><i class="fa fa-check"></i></a>
               </td>
 
             </tr>

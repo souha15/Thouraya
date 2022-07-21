@@ -6,7 +6,7 @@ import { TbListening } from '../../../shared/Models/Evenements/tb-listening.mode
 import { Exthechnique } from '../../../shared/Models/MediaCenter/ExtensionTechnique/exthechnique.model';
 import { NgForm } from '@angular/forms';
 import { ExthechniqueService } from '../../../shared/Services/MediaCenter/ExtensionTechnique/exthechnique.service';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-exthechnique-add',
   templateUrl: './exthechnique-add.component.html',
@@ -22,7 +22,12 @@ export class ExthechniqueAddComponent implements OnInit {
   ngOnInit(): void {
     this.getUserConnected();
     this.typeExthechniqueList();
+    const datePipe = new DatePipe('en-Us');
+    this.today = new Date().toISOString().slice(0, 16)
+      //datePipe.transform(new Date(), 'yyyy-MM-dd hh:mm');
+    console.log(this.today)
   }
+  today;
 
    /** Get User Connected **/
 

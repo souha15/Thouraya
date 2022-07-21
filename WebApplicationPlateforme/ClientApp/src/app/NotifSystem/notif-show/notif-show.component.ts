@@ -42,6 +42,7 @@ export class NotifShowComponent implements OnInit {
     this.notif = Object.assign({}, notif);
     this.notif.readUnread = "1"
     this.notifService.PutObservable(this.notif).subscribe(res => {
+
       if (this.notif.serviceName == "طلب سلفة " && this.notif.serviceId == 1) {
         this.router.navigate(['/avance-list-d'])
       }

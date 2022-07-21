@@ -9,7 +9,7 @@
       <header>
         <h3 class="task-head">قائمة إسترجاع المخزون</h3>
       </header>
-
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
       <div class="leave-request-list">
         <div class="table-responsive">
           <table class="table table-bordered text-center table-striped">
@@ -41,8 +41,8 @@
                   {{cg.etat}}
                 </td>
                 <td (click)="populateForm(cg)"><a class="btn btn-primary" data-toggle="modal" data-target="#myModal2"><i class="fa fa-eye"></i>  </a></td>
-                <td (click)="populateForm(cg)"><a class="btn btn-success" data-toggle="modal" data-target="#myModal1" ><i class="fa fa-edit"></i>  </a></td>
-                <td (click)="populateForm(cg)"><a (click)="populateForm(cg);onDelete(cg.id)" class="btn btn-danger" ><i class="fa fa-trash"></i></a></td>
+                <td (click)="populateForm(cg)"><a class="btn btn-success" data-toggle="modal" data-target="#myModal1"><i class="fa fa-edit"></i>  </a></td>
+                <td (click)="populateForm(cg)"><a (click)="populateForm(cg);onDelete(cg.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
               </tr>
 
             </tbody>

@@ -8,7 +8,7 @@ import { AdministrationService } from '../../../shared/Services/Administration/a
 import { Administration } from '../../../shared/Models/Administration/administration.model';
 import { NotifService } from '../../../shared/Services/NotifSystem/notif.service';
 import { Notif } from '../../../shared/Models/NotifSystem/notif.model';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-creation-add',
   templateUrl: './creation-add.component.html',
@@ -25,7 +25,10 @@ export class CreationAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
+    const datePipe = new DatePipe('en-Us');
+    this.today = datePipe.transform(new Date(), 'yyyy-MM-dd');
   }
+  today;
 
   // Get User Connected
 

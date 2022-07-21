@@ -7,7 +7,7 @@ import { TbListening } from '../../../shared/Models/Evenements/tb-listening.mode
 import { Cadeaux } from '../../../shared/Models/MediaCenter/CadeauxSouvenirs/cadeaux.model';
 import { NgForm } from '@angular/forms';
 import { CadeauxService } from '../../../shared/Services/MediaCenter/CadeauxSouvenirs/cadeaux.service';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-cadeaux-add',
   templateUrl: './cadeaux-add.component.html',
@@ -23,7 +23,11 @@ export class CadeauxAddComponent implements OnInit {
   ngOnInit(): void {
     this.getUserConnected();
     this.SettingsList();
+    const datePipe = new DatePipe('en-Us');
+
+    this.today = new Date().toISOString().slice(0, 16)
   }
+  today;
 
   /** Get User Connected **/
 

@@ -102,6 +102,24 @@ namespace WebApplicationPlateforme.Controllers.CommunicationAdministrative.Inter
             return tiAffectation;
         }
 
+        [HttpGet]
+        [Route("GetAffectations/{idAdmin}")]
+
+        public List<TransactionI> GetAffectations(int idAdmin)
+        {
+            List<TransactionI> ListTr = new List<TransactionI>();
+            ListTr = _context.transactionsI
+                .Join(_context.tiAffectations,
+                tr => tr.Id,
+                aff => aff.idTransaction,
+                (tr, aff) => new { Tr = tr, Aff = aff })
+                .Where(item => item.Aff.idAdministration == idAdmin)
+                .Select(item=> item.Tr)
+                .ToList();
+
+            return ListTr;
+        }
+
         private bool TiAffectationExists(int id)
         {
             return _context.tiAffectations.Any(e => e.Id == id);

@@ -11,6 +11,7 @@
       <header>
         <h3 class="task-head"> طلبات  صرف الشيك</h3>
       </header>
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
       <div class="leave-request-list">
         <div class="table-responsive">
           <table class="table table-bordered text-center table-striped">
@@ -21,6 +22,7 @@
                 <th scope="col">مقدم الطلب</th>
                 <th scope="col">موضوع الطلب</th>
                 <th scope="col">المبلغ</th>
+                <th scope="col">الإجراء</th>
                 <th scope="col">الحالة</th>
                 <th scope="col">سير الإجراء</th>
                 <th scope="col">حذف</th>
@@ -30,9 +32,10 @@
               <tr *ngFor="let cg of dem6 |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
                 <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{(p-1) * count + i + 1}}</th>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.numdem}}</td>
-                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.demandeur}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.creatorName}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.sujet}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.prixnb}}</td>
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.demandeur}}</td>
 
 
                 <td (click)="populateForm(cg)" data-target="#myModal2" data-toggle="modal"
@@ -56,7 +59,7 @@
                     <i class="fa fa-trash fa-lg"></i>
                   </a>
                 </td>
-</tbody>
+            </tbody>
           </table>
         </div>
         <!-- Pagination -->

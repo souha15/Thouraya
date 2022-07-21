@@ -24,21 +24,22 @@
 
 
         <!--
-        <a class="p-2 flex-fill bd-highlight">
-          <span><i class="fa fa-paper-plane"></i></span>
-          إضافة إعلان
-        </a>
+          <a class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-paper-plane"></i></span>
+            إضافة إعلان
+          </a>
 
-        <a class="p-2 flex-fill bd-highlight">
-          <span><i class="fa fa-list"></i></span>
-          قائمة الإعلانات
-        </a>
-  -->
+          <a class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-list"></i></span>
+            قائمة الإعلانات
+          </a>
+    -->
 
       </nav>
       <header>
         <h3 class="task-head"> قائمة الأخبار</h3>
       </header>
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
       <div class="table-responsive mandate">
         <table class="table text-center table-bordered table-striped theme-table">
           <thead>
@@ -64,7 +65,7 @@
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
-                                 nextLabel="التالي"></pagination-controls>
+                               nextLabel="التالي"></pagination-controls>
         </ul>
       </nav>
     </div>

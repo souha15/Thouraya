@@ -10,6 +10,7 @@
       <header>
         <h3 class="task-head">قائمة طلبات تجديد الإقامة</h3>
       </header>
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
       <div class="leave-request-list">
         <div class="table-responsive">
           <table class="table table-bordered text-center table-striped">
@@ -35,13 +36,15 @@
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.numfrontiere}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.datefin}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1"
-                                        [ngClass]="{
+                    [ngClass]="{
 
   'ok': cg.etat === 'موافق',
   'refused': cg.etat === 'رفض',
   'wait': cg.etat === 'في الانتظار'
-}">{{cg.etat}}</td>
-                <td ><a *ngIf="testEdit" class="btn btn-success" [routerLink]="['/residence-edit', cg.id]"><i class="fa fa-edit"></i>تعديل</a></td>
+}">
+                  {{cg.etat}}
+                </td>
+                <td><a *ngIf="testEdit" class="btn btn-success" [routerLink]="['/residence-edit', cg.id]"><i class="fa fa-edit"></i>تعديل</a></td>
                 <td><a *ngIf="testEdit" (click)="onDelete(cg.id)" class="btn btn-danger"><i class="fa fa-trash"></i>حذف</a></td>
               </tr>
 

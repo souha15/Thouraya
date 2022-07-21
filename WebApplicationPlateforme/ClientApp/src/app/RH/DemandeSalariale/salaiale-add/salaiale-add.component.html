@@ -31,7 +31,7 @@
           </div>
           <div class="col-md-6">
             <label for="show-place">التاريخ </label>
-            <input type="date" id="show-place" name="date" #date="ngModel" [(ngModel)]="conge.date">
+            <input type="date" id="show-place" name="date" #date="ngModel" [(ngModel)]="conge.date"   [min]="today">
           </div>
 
           <div class="col-md-6">

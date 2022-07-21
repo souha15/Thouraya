@@ -222,7 +222,7 @@ export class DemCongeNormalComponent implements OnInit {
             })
           },
           err => {
-            this.toastr.error("لم يتم تقديم الطلب", "فشل ")
+            this.toastr.error("  يجب أن يبدأ التاريخ من هذا اليوم", "لم يتم تقديم الطلب ")
             this.diffDays = 0
           })
       } else {

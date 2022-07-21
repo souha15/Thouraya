@@ -21,7 +21,7 @@
           </div>
           <div class="col-md-6">
             <label for="mandate-date">تاريخ الانتداب</label>
-            <input type="date" id="mandate-date" name="datedebut" #datedebut="ngModel" [(ngModel)]="rec.datedebut" required>
+            <input type="date" id="mandate-date" name="datedebut" #datedebut="ngModel" [(ngModel)]="rec.datedebut" [min]="today" required >
           </div>
           <div *ngIf="datedebut.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
 

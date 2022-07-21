@@ -21,6 +21,7 @@ export class HistoChangeRibComponent implements OnInit {
   @Input() public fileName: string;
   @Output() public downloadStatus: EventEmitter<ProgressStatus>;
   @ViewChild('htmlData') htmlData: ElementRef;
+  filter;
   constructor(private demService: ChangerRibService,
     public serviceupload: UploadDownloadService,
     private filesService: FilesChangerRibService,

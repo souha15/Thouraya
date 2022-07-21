@@ -40,7 +40,7 @@
 
         <div class="col-md-6">
           <label for="">تاريخ بداية العمل</label>
-          <input type="date" name="datedebut" #datedebut="ngModel" [(ngModel)]="ct.datedebut" />
+          <input type="date" name="datedebut" #datedebut="ngModel" [(ngModel)]="ct.datedebut"  [min]="today"/>
         </div>
         <div class="col-12 text-center text-md-left mt-3">
           <input class="btn btn-info"

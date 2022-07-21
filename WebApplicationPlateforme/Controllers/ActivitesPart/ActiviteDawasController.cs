@@ -25,14 +25,14 @@ namespace WebApplicationPlateforme.Controllers.ActivitesPart
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ActiviteDawa>>> GetactiviteDawas()
         {
-            return await _context.activiteDawas.ToListAsync();
+            return await _context.ActiviteDawas.ToListAsync();
         }
 
         // GET: api/ActiviteDawas/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ActiviteDawa>> GetActiviteDawa(int id)
         {
-            var activiteDawa = await _context.activiteDawas.FindAsync(id);
+            var activiteDawa = await _context.ActiviteDawas.FindAsync(id);
 
             if (activiteDawa == null)
             {
@@ -80,7 +80,7 @@ namespace WebApplicationPlateforme.Controllers.ActivitesPart
         [HttpPost]
         public async Task<ActionResult<ActiviteDawa>> PostActiviteDawa(ActiviteDawa activiteDawa)
         {
-            _context.activiteDawas.Add(activiteDawa);
+            _context.ActiviteDawas.Add(activiteDawa);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetActiviteDawa", new { id = activiteDawa.Id }, activiteDawa);
@@ -90,13 +90,13 @@ namespace WebApplicationPlateforme.Controllers.ActivitesPart
         [HttpDelete("{id}")]
         public async Task<ActionResult<ActiviteDawa>> DeleteActiviteDawa(int id)
         {
-            var activiteDawa = await _context.activiteDawas.FindAsync(id);
+            var activiteDawa = await _context.ActiviteDawas.FindAsync(id);
             if (activiteDawa == null)
             {
                 return NotFound();
             }
 
-            _context.activiteDawas.Remove(activiteDawa);
+            _context.ActiviteDawas.Remove(activiteDawa);
             await _context.SaveChangesAsync();
 
             return activiteDawa;
@@ -104,7 +104,7 @@ namespace WebApplicationPlateforme.Controllers.ActivitesPart
 
         private bool ActiviteDawaExists(int id)
         {
-            return _context.activiteDawas.Any(e => e.Id == id);
+            return _context.ActiviteDawas.Any(e => e.Id == id);
         }
     }
 }

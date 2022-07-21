@@ -102,6 +102,24 @@ namespace WebApplicationPlateforme.Controllers.CommunicationAdministrative.Inter
             return transactionI;
         }
 
+        [Route("GetTransactionListBy/{IdUser}")]
+        [HttpGet]
+
+        public List<TransactionI> GetTransactionListBy(string IdUser)
+        {
+            List<TransactionI> trList = new List<TransactionI>();
+            List<TiAffectation> tiAff = new List<TiAffectation>();
+
+            tiAff = _context.tiAffectations.Where(item => item.iduserAffected == IdUser && item.attribut2 == "غير مستلمة").ToList();
+            tiAff.ForEach(item => {
+               trList.Add( _context.transactionsI.Find(item.idTransaction));
+            });
+
+         
+            return trList;
+        }
+
+
         private bool TransactionIExists(int id)
         {
             return _context.transactionsI.Any(e => e.Id == id);

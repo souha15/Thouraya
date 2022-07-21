@@ -12,7 +12,7 @@ import { ProgressStatus } from '../../../shared/Interfaces/progress-status';
 import { FilesFilm } from '../../../shared/Models/MediaCenter/film/files-film.model';
 import { ProgressStatusEnum } from '../../../shared/Enum/progress-status-enum.enum';
 import { HttpEventType } from '@angular/common/http';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-film-add',
   templateUrl: './film-add.component.html',
@@ -35,7 +35,11 @@ export class FilmAddComponent implements OnInit {
   ngOnInit(): void {
     this.getUserConnected();
     this.getFiles();
+    const datePipe = new DatePipe('en-Us');
+
+    this.today = new Date().toISOString().slice(0, 16)
   }
+  today;
 
   /** Get User Connected **/
 

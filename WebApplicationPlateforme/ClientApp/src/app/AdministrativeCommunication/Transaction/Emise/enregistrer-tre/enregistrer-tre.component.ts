@@ -23,6 +23,7 @@ import { UserDetail } from '../../../../shared/Models/User/user-detail.model';
 import { Administration } from '../../../../shared/Models/Administration/administration.model';
 import { Liaison } from '../../../../shared/Models/AdministrativeCommunication/liaison.model';
 import { LiaisonService } from '../../../../shared/Services/AdministrativeCommunication/liaison.service';
+import { IDropdownSettings } from 'ng-multiselect-dropdown';
 import {
   NgbDateStruct, NgbCalendar, NgbCalendarIslamicUmalqura, NgbDatepickerI18n, NgbDate
 } from '@ng-bootstrap/ng-bootstrap';
@@ -89,10 +90,26 @@ export class EnregistrerTREComponent implements OnInit {
     private rootUrl: PathSharedService) {
     this.uploadStatuss = new EventEmitter<ProgressStatus>();
   }
-
+  ShowFilter = false;
+  limitSelection = false;
+  cities = [];
+  selectedItems = [];
+  dropdownSettings: any = {};
+  ListOrg: Organisme[] = [];
   ngOnInit(): void {
+    this.getData(); 
+    this.dropdownSettings = {
+      singleSelection: true,
+      idField: 'id',
+      textField: 'shortnom',
+      selectAllText: 'Select All',
+      unSelectAllText: 'UnSelect All',
+      itemsShowLimit: 3,
+      searchPlaceholderText: 'بحث',
+      allowSearchFilter: true
+    };
     this.getUserConnected();
-    this.GetOrganismeList();
+
     this.GetPropList();
     this.getFiles();
     this.TransactionsList();
@@ -102,6 +119,41 @@ export class EnregistrerTREComponent implements OnInit {
     this.getType()
   }
 
+  getData() {
+    this.organismeService.List().subscribe(res => {
+      this.ListOrg = res })
+  }
+  selecteditems = [];
+  onItemSelect(item: any) {
+    this.selecteditems.push({ id: item.id, text: item.shortnom });
+    this.organismeService.GetById(item.id).subscribe(res => {
+      this.OrgName = res.shortnom;
+       this.tr.idOrg = res.id
+    })
+  }
+
+
+  allselecteditems = [];
+  onSelectAll(items: any) {
+    this.allselecteditems.push(items);
+  }
+  toogleShowFilter() {
+    this.ShowFilter = !this.ShowFilter;
+    this.dropdownSettings = Object.assign({}, this.dropdownSettings, { allowSearchFilter: this.ShowFilter });
+  }
+
+  public onFilterChange(item: any) {
+    console.log(item);
+  }
+
+
+  handleLimitSelection() {
+    if (this.limitSelection) {
+      this.dropdownSettings = Object.assign({}, this.dropdownSettings, { limitSelection: 2 });
+    } else {
+      this.dropdownSettings = Object.assign({}, this.dropdownSettings, { limitSelection: null });
+    }
+  }
   typeTr: TbListening[] = [];
   getType() {
     this.typeService.GetTalent().subscribe(res => {
@@ -120,7 +172,7 @@ export class EnregistrerTREComponent implements OnInit {
 
 
   hij: boolean = false;
-  mil: boolean = false;
+  mil: boolean = true;
   getDate(event) {
     if (event.target.value == "2") {
       this.hij = false;
@@ -344,9 +396,9 @@ export class EnregistrerTREComponent implements OnInit {
     } else {
       this.isValidFormSubmittedO = true
       this.organismeService.Create(this.organisme).subscribe(res => {
-
+        this.getData();
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
-        formO.resetForm();
+
       },
         err => {
           console.log(err);
@@ -357,18 +409,9 @@ export class EnregistrerTREComponent implements OnInit {
 
 
 
-  //get Organisme List
 
-  ListOrg: Organisme[] = [];
 
-  GetOrganismeList() {
-    this.organismeService.List().subscribe(res => {
-      this.ListOrg = res
 
-    }
-
-    )
-  }
 
   //get Proprietaire List
 
@@ -439,7 +482,7 @@ export class EnregistrerTREComponent implements OnInit {
    
     this.tr.etat = "غير مستلمة"
     this.tr.attribut6 = "الأصل"
-
+    this.tr.type ="صادر خارجي"
 
     if (form.invalid) {
       this.isValidFormSubmittedTR = false;

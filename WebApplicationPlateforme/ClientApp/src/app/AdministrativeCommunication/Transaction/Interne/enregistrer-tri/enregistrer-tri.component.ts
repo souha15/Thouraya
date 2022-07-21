@@ -17,7 +17,7 @@ import { ProgressStatusEnum } from '../../../../shared/Enum/progress-status-enum
 import { PiecesJointes } from '../../../../shared/Models/Taches/pieces-jointes.model';
 import { PiecesJointesTr } from '../../../../shared/Models/AdministrativeCommunication/pieces-jointes-tr.model';
 import { PathSharedService } from '../../../../shared/path-shared.service';
-import { AffectationService } from '../../../../shared/Services/AdministrativeCommunication/affectation.service';
+import { AffectationService, AffectationI } from '../../../../shared/Services/AdministrativeCommunication/affectation.service';
 import { Affectation } from '../../../../shared/Models/AdministrativeCommunication/affectation.model';
 import { UserDetail } from '../../../../shared/Models/User/user-detail.model';
 import { Administration } from '../../../../shared/Models/Administration/administration.model';
@@ -162,8 +162,8 @@ export class EnregistrerTRIComponent implements OnInit {
       res => {
         this.UserIdConnected = res.id;
         this.UserNameConnected = res.fullName;
-        this.tr.idEtablissementUserCreator = res.idDepartement
-        this.tr.etablissementUserCreator = res.nomDepartement
+        //this.tr.idEtablissementUserCreator = res.idDepartement
+        //this.tr.etablissementUserCreator = res.nomDepartement
         this.tr.attribut1 = res.idAdministration
         this.tr.attribut2 = res.nomAdministration
         
@@ -247,7 +247,7 @@ export class EnregistrerTRIComponent implements OnInit {
     this.testorg1.toString();
     this.list2User = this.UsersList.filter(item => item.idAdministration == event.target.value)
     this.administrationService.GetById(this.testorg1).subscribe(res => {
-      this.affectation.attribut3 = res.nom
+      this.affectation.nomOrganisme = res.nom
     })
   }
 
@@ -263,7 +263,7 @@ export class EnregistrerTRIComponent implements OnInit {
   isValidFormSubmittedTR = false;
   Idtransaction: number;
   liaison: Liaison = new Liaison();
-  affectation: Affectation = new Affectation();
+  affectation: AffectationI = new AffectationI();
   onSubmit(form: NgForm) {
     this.tr.userNameCreator = this.UserNameConnected;
     this.tr.dateenreg = this.date;
@@ -310,12 +310,26 @@ export class EnregistrerTRIComponent implements OnInit {
           if (this.testemp1 != undefined) {
 
             this.affectation.datenereg = this.date;
-            this.affectation.idUserCreator = this.UserIdConnected;
-            this.affectation.creatorName = this.UserNameConnected;
+            this.affectation.IdUserCreator = this.UserIdConnected;
             this.affectation.idUserQuiAffecte = this.UserIdConnected;
             this.affectation.nomUserQuiAffecte = this.UserNameConnected;
             this.affectation.idTransaction = this.Idtransaction
             this.affectation.attribut2 = "غير مستلمة"
+            this.affectationService.CreateI(this.affectation).subscribe(res => {
+
+
+              form.resetForm();
+
+            })
+          }
+
+          if (this.testorg1 != undefined) {
+
+            this.affectation.datenereg = this.date;
+            this.affectation.IdUserCreator = this.UserIdConnected;
+            this.affectation.idUserQuiAffecte = this.UserIdConnected;
+            this.affectation.nomUserQuiAffecte = this.UserNameConnected;
+            this.affectation.idTransaction = this.Idtransaction;
             this.affectationService.CreateI(this.affectation).subscribe(res => {
 
 

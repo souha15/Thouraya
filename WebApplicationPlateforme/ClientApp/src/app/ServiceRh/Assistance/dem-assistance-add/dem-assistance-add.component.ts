@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UserServiceService } from '../../../shared/Services/User/user-service.service';
 import { Assistance } from '../../../shared/Models/ServiceRh/assistance.model';
 import { NgForm } from '@angular/forms';
-
+import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-dem-assistance-add',
   templateUrl: './dem-assistance-add.component.html',
@@ -18,7 +18,12 @@ export class DemAssistanceAddComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
+    const datePipe = new DatePipe('en-Us');
+    this.today = datePipe.transform(new Date(), 'yyyy-MM-dd');
   }
+  today;
+
+
 
   // Get User Connected
 

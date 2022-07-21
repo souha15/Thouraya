@@ -2261,6 +2261,36 @@ namespace WebApplicationPlateforme.Migrations.Dawaa
                     b.ToTable("TypeRecrutement");
                 });
 
+            modelBuilder.Entity("WebApplicationPlateforme.Model.Ressource_Humaines.soldeCongesInfosUpdate", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("cuurentdate")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime>("date")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<int>("day")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("month")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("updated")
+                        .HasColumnType("text");
+
+                    b.Property<int>("year")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("soldeCongesInfosUpdates");
+                });
+
             modelBuilder.Entity("WebApplicationPlateforme.Model.ServiceRh.CongeFiles", b =>
                 {
                     b.Property<int>("Id")
@@ -2284,7 +2314,7 @@ namespace WebApplicationPlateforme.Migrations.Dawaa
 
                     b.HasIndex("idConge");
 
-                    b.ToTable("congeFiles");
+                    b.ToTable("CongeFiles");
                 });
 
             modelBuilder.Entity("WebApplicationPlateforme.Model.TechnicalDemands.DemTech", b =>

@@ -10,6 +10,7 @@
       <header>
         <h3 class="task-head">قائمة طلبات انهاء عقد </h3>
       </header>
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
       <div class="leave-request-list">
         <div class="table-responsive">
           <table class="table table-bordered text-center table-striped">
@@ -18,7 +19,7 @@
                 <th scope="col">#</th>
                 <th scope="col">سبب الاستقالة </th>
                 <th scope="col">تاريخ طي القيد</th>
- 
+
                 <th scope="col">الحالة</th>
               </tr>
             </thead>

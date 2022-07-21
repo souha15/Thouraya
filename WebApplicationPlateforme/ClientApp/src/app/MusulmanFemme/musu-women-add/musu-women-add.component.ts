@@ -110,11 +110,11 @@ export class MusuWomenAddComponent implements OnInit {
   Id: number;
   onSubmit(form: NgForm) {
 
-    if (form.invalid) {
-      this.isValidFormSubmitted = false;
+    //if (form.invalid) {
+    //  this.isValidFormSubmitted = false;
 
-    }
-    else {
+    //}
+    //else {
 
       this.isValidFormSubmitted = true;
       this.mus.dateenreg = this.date;
@@ -166,7 +166,7 @@ export class MusuWomenAddComponent implements OnInit {
       }, err => {
         this.toastr.error("  فشل في تسجيل	 ", "فشل")
       })
-    }
+    //}
   }
 
   onSubmitOk() {

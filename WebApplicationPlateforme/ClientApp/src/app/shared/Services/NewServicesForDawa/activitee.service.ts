@@ -3,6 +3,14 @@ import { PathSharedService } from '../../path-shared.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Activite } from '../../Models/NewModelsForDawaa/activite.model';
 import { Observable } from 'rxjs';
+import { TbListening } from '../../Models/Evenements/tb-listening.model';
+import { TbListeningService } from '../Evenements/tb-listening.service';
+
+export class ActiviteDetail {
+  id: number;
+  idActivite: number;
+  details: string;
+}
 
 @Injectable({
   providedIn: 'root'
@@ -381,6 +389,101 @@ export class ActiviteeService {
     return this.http.get<Activite>(this.rootURL + '/ActiviteDawaElecs/' + Id);
   }
 
- 
 
+  //***************** Details Activite and TypeActivite
+
+  formDataDetail: ActiviteDetail;
+
+  PutObservableDetail(Transaction: ActiviteDetail) {
+    return this.http.put<ActiviteDetail>(this.rootURL + '/ActiviteDetails/' + Transaction.id, Transaction, this.headers);
+
+  }
+  //Create Cadeaux
+
+  CreateDetail(tache: ActiviteDetail) {
+    return this.http.post<ActiviteDetail>(this.rootURL + '/ActiviteDetails', tache, this.headers);
+  }
+
+  //Edit Cadeaux
+  EditDetail() {
+    return this.http.put(this.rootURL + '/ActiviteDetails/' + this.formDataDetail.id, this.formDataDetail, this.headers);
+  }
+
+  // List Cadeaux
+
+  ListDetail(): Observable<ActiviteDetail[]> {
+    return this.http.get<ActiviteDetail[]>(this.rootURL + '/ActiviteDetails');
+  }
+
+
+
+  //Delete Cadeaux
+
+  DeleteDetail(id) {
+    return this.http.delete(this.rootURL + '/ActiviteDetails/' + id);
+  }
+
+  //Put Cadeaux
+
+
+  PutDetail(Id) {
+    return this.http.put(this.rootURL + '/ActiviteDetails/' + this.formDataDetail.id, this.formDataDetail, this.headers);
+  }
+
+  //Get Cadeaux By Id
+
+  GetByIdDetail(Id) {
+    return this.http.get<ActiviteDetail>(this.rootURL + '/ActiviteDetails/' + Id);
+  }
+
+
+  //***************** Type Detail Activite and TypeActivite
+
+  formDataTypeDetail: TbListening;
+
+  PutObservableTypeDetail(Transaction: TbListening) {
+    return this.http.put<TbListening>(this.rootURL + '/TypeDetailsActivites/' + Transaction.id, Transaction, this.headers);
+
+  }
+  //Create Cadeaux
+
+  CreateTypeDetail(tache: TbListening) {
+    return this.http.post<TbListening>(this.rootURL + '/TypeDetailsActivites', tache, this.headers);
+  }
+
+  //Edit Cadeaux
+  EditTypeDetail() {
+    return this.http.put(this.rootURL + '/TypeDetailsActivites/' + this.formDataTypeDetail.id, this.formDataTypeDetail, this.headers);
+  }
+
+  // List Cadeaux
+
+  ListTypeDetail(): Observable<TbListening[]> {
+    return this.http.get<TbListening[]>(this.rootURL + '/TypeDetailsActivites');
+  }
+
+
+
+  //Delete Cadeaux
+
+  DeleteTypeDetail(id) {
+    return this.http.delete(this.rootURL + '/TypeDetailsActivites/' + id);
+  }
+
+  //Put Cadeaux
+
+
+  PutTypeDetail(Id) {
+    return this.http.put(this.rootURL + '/TypeDetailsActivites/' + this.formDataTypeDetail.id, this.formDataTypeDetail, this.headers);
+  }
+
+  //Get Cadeaux By Id
+
+  GetByIdTypeDetail(Id) {
+    return this.http.get<TbListening>(this.rootURL + '/TypeDetailsActivites/' + Id);
+  }
+
+  PostTypeDetail() {
+    return this.http.post(this.rootURL + '/TypeDetailsActivites', this.formDataTypeDetail, this.headers);
+  }
 }

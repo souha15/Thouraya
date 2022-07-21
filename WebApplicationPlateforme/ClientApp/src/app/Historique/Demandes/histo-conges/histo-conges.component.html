@@ -12,6 +12,7 @@
       <header>
         <h3 class="task-head">كشف طلبات الاجازات</h3>
       </header>
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
       <div class="leave-request-list">
         <div class="table-responsive">
           <table class="table table-bordered text-center table-striped">
@@ -55,7 +56,7 @@
                     <i class="fa fa-trash fa-lg"></i>
                   </a>
                 </td>
-</tbody>
+            </tbody>
           </table>
         </div>
         <!-- Pagination -->

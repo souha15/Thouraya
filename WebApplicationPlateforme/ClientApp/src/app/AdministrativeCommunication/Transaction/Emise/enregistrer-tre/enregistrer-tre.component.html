@@ -76,17 +76,6 @@
                     <input id="reg-date" class="" type="text" name="attribut5" #attribut5="ngModel" [(ngModel)]="tr.attribut5"/>          
 
                   </div>
-
-                  <div class="col-sm-6">
-                    <label for="reg-date"><span><i class="fa fa-list-ul"></i></span> نوع الصادر </label>
-                    <select id="reg-date" class="" name="type" #type="ngModel" [(ngModel)]="tr.type">
-                      <option [ngValue]="undefined" selected disabled>-نوع الصادر-</option>
-                      <option value="صادر داخلي">صادر داخلي</option>
-                      <option value="صادر خارجي">صادر خارجي</option>
-                    </select>
-
-                  </div>
-
                   <div class="col-md-6">
                     <label for="reg-date"><span><i class="fa fa-sort-numeric-up"></i></span>رقم القيد </label>
                     <input type="text" id="reg-date" value="{{id}}" disabled>
@@ -103,7 +92,7 @@
 
                   <div class="col-sm-6" *ngIf="mil">
                     <label for="reg-date"><span><i class="fa fa-calendar-alt"></i></span>تاريخ المعاملة</label>
-                    <input type="date" id="reg-date" name="date" #date="ngModel" [(ngModel)]="tr.date">
+                    <input type="date" id="reg-date" name="date" #date="ngModel" [(ngModel)]="tr.date" placeholder="ميلادي">
                   </div>
 
                   <div class="col-sm-6" *ngIf="hij">
@@ -143,12 +132,23 @@
                   </div>
 
 
-                  <div class="col-sm-6">
-                    <label for="from"><span><i class="fa fa-building"></i></span> جهة خارجية</label>
-                    <select id="from" name="idOrg" #idOrg="ngModel" [(ngModel)]="tr.idOrg" (change)="orgName($event)">
-                      <option [ngValue]="undefined" selected disabled>-الجهة المسجلة-</option>
-                      <option *ngFor="let item of ListOrg" value="{{item.id}}">{{item.shortnom}}</option>
-                    </select>
+                  <div class="col-sm-6" style="display: inline-flex;">
+                    <label for="from"><span><i class="fa fa-building"></i></span> الجهة الخارجية</label>
+                    <ng-multiselect-dropdown style="width:200px;"
+                                               name="employeead"
+                                              [placeholder]="'الجهة الخارجية '"
+                                              [settings]="dropdownSettings"
+                                              [data]="ListOrg"                                   
+                                              [disabled]="disabled"                   
+                                              (onSelect)="onItemSelect($event)"
+                                              (onSelectAll)="onSelectAll($event)"
+                                              (onFilterChange)="onFilterChange($event)">
+                    </ng-multiselect-dropdown>
+                    <!--<label for="from"><span><i class="fa fa-building"></i></span> جهة خارجية</label>
+  <select id="from" name="idOrg" #idOrg="ngModel" [(ngModel)]="tr.idOrg" (change)="orgName($event)">
+    <option [ngValue]="undefined" selected disabled>-الجهة المسجلة-</option>
+    <option *ngFor="let item of ListOrg" value="{{item.id}}">{{item.shortnom}}</option>
+  </select>-->
                   </div>
 
                   <div class="col-sm-6">

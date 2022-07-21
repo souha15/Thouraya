@@ -20,7 +20,7 @@
         </div>
         <div class="col-md-6">
           <label for="">التاريخ</label>
-          <input type="date" name="date" #date="ngModel" [(ngModel)]="sup.date" required />
+          <input type="date" name="date" #date="ngModel" [(ngModel)]="sup.date"   [min]="today" required />
           <div *ngIf="date.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
             مطلوب التاريخ .
           </div>

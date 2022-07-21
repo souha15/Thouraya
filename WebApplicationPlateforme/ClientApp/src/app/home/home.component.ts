@@ -17,6 +17,8 @@ import { Pointage } from '../shared/Models/Pointage/pointage.model';
 import { Tache } from '../shared/Models/Taches/tache.model';
 import { NotifService } from '../shared/Services/NotifSystem/notif.service';
 import { UserDetail } from '../shared/Models/User/user-detail.model';
+import { DecisionTwoService } from '../shared/Services/ServiceRh/decision-two.service';
+import { DecisionTwo } from '../shared/Models/ServiceRh/decision-two.model';
 
 @Component({
   selector: 'app-home',
@@ -33,15 +35,26 @@ export class HomeComponent implements OnInit {
     private notifmsgService: NotifMsgInterneService,
     private TicketService: Ticket2Service,
     private pointageService: PointageService,
-    private notifService: NotifService) { }
+    private notifService: NotifService,
+    private trinService: DecisionTwoService) { }
 
   ngOnInit(): void {
     this.getUserConnected();
 
   }
 
+  // Decision Banner
 
-    // Get User Connected
+  showAdmin: boolean = false;
+  showUser: boolean = false;
+  showAll: boolean = false;
+  ListDecision: DecisionTwo[]=[];
+  getDecision() {
+ 
+
+  }
+
+  // Get User Connected
   notifnb: number = 0;
   testnotifnb: boolean = false;
   notifMsgList: NotifMsgInterne[] = [];
@@ -64,11 +77,34 @@ export class HomeComponent implements OnInit {
 
   async getUserConnected(): Promise<any> {
     this.user = await this.UserService.getUserConnected();
-    console.log(this.user)
     this.UserIdConnected = this.user.id;
     this.UserNameConnected = this.user.fullName;
-    this.idadmin = this.user.idAdministration;
-    this.idetab = this.user.idDepartement;
+    if (this.user.idAdministration != null) {
+      this.idadmin = this.user.idAdministration;
+      this.idetab = this.user.idDepartement;
+    }
+
+    this.trinService.TestDecision(this.UserIdConnected, this.idadmin).subscribe(resultat => {
+      if (resultat == "Toadmin") {
+        this.trinService.DecisionGetByAdmin(this.user.idAdministration).subscribe(res => {
+          this.showAdmin = res
+
+        })
+      } else if (resultat == "ToUser") {
+        this.trinService.GetDecision(this.user.id).subscribe(res => {
+          this.showUser = res
+        })
+
+
+      } else {
+        this.trinService.DecisionGetAllAdmin().subscribe(res => {
+          this.showAll = res
+        })
+      }
+    })
+
+
+
       this.TacheService.ListTache().subscribe(res => {
         this.task = res
         this.task2 = this.task.filter(item => item.affectedName == this.UserIdConnected && item.etat == "في الإنتظار");

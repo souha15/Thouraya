@@ -52,6 +52,11 @@
                 <span class="glyphicon sort-icon" *ngIf="key =='tacheNom'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
               </th>
 
+              <th scope="col" (click)="sort('tacheNom')">
+                المحادثة
+                <span class="glyphicon sort-icon" *ngIf="key =='tacheNom'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
               <th scope="col" (click)="sort('description')">
                 الحالة
                 <span class="glyphicon sort-icon" *ngIf="key =='description'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
@@ -60,13 +65,18 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let msg of msgInterneList | orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: c }; let i = index" [routerLink]="['/msg-interne-details', msg.id]">
-              <th  scope="row">{{(c-1) * count + i + 1}}</th>
-              <td >{{msg.userNameSender}}</td>
-              <td>{{msg.userNameReceiver}}</td>
-              <td >{{msg.titre}}</td>
-              <td >{{msg.date}}</td>
-              <td>
+            <tr *ngFor="let msg of msgInterneList | orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: c }; let i = index">
+              <th scope="row" [routerLink]="['/msg-interne-details', msg.id]">{{(c-1) * count + i + 1}}</th>
+              <td [routerLink]="['/msg-interne-details', msg.id]">{{msg.userNameSender}}</td>
+              <td [routerLink]="['/msg-interne-details', msg.id]">{{msg.userNameReceiver}}</td>
+              <td [routerLink]="['/msg-interne-details', msg.id]">{{msg.titre}}</td>
+              <td [routerLink]="['/msg-interne-details', msg.id]">{{msg.date}}</td>
+              <td [routerLink]="['/my-conversation-msg-interne', msg.userIdSender]">
+                <span class="text-primary">
+                  <i class="fa fa-mail-bulk fa-lg"></i>
+                </span>
+              </td>
+              <td [routerLink]="['/msg-interne-details', msg.id]">
                 <span class="text-success" *ngIf="msg.seen==1">
                   <i class="fa fa-check fa-lg"></i>
                 </span>

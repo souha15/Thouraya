@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { ProgressStatus } from '../../../../shared/Interfaces/progress-status';
 import { TransactionService } from '../../../../shared/Services/AdministrativeCommunication/transaction.service';
 import { UserServiceService } from '../../../../shared/Services/User/user-service.service';
-import { AffectationService } from '../../../../shared/Services/AdministrativeCommunication/affectation.service';
+import { AffectationService, AffectationI } from '../../../../shared/Services/AdministrativeCommunication/affectation.service';
 import { UploadDownloadService } from '../../../../shared/Services/Taches/upload-download.service';
 import { ProprietaireService } from '../../../../shared/Services/AdministrativeCommunication/proprietaire.service';
 import { OrganismeService } from '../../../../shared/Services/AdministrativeCommunication/organisme.service';
@@ -16,7 +16,6 @@ import { EtablissementService } from '../../../../shared/Services/Etablissement/
 import { PathSharedService } from '../../../../shared/path-shared.service';
 import { HttpClient, HttpEventType } from '@angular/common/http';
 import { Transaction } from '../../../../shared/Models/AdministrativeCommunication/transaction.model';
-import { Affectation } from '../../../../shared/Models/AdministrativeCommunication/affectation.model';
 import { ProgressStatusEnum } from '../../../../shared/Enum/progress-status-enum.enum';
 import { PiecesJointesTr } from '../../../../shared/Models/AdministrativeCommunication/pieces-jointes-tr.model';
 import { Administration } from '../../../../shared/Models/Administration/administration.model';
@@ -104,7 +103,7 @@ export class EnregIComponent implements OnInit {
   // affectation to Employee or organisation
 
   private selectedLink1: string = "org";
-  affectation: Affectation = new Affectation();
+  affectation: AffectationI = new AffectationI();
   setradio1(e: string): void {
 
     this.selectedLink1 = e;
@@ -221,16 +220,16 @@ export class EnregIComponent implements OnInit {
   Globallist: Transaction[] = [];
   FiltredList2: Transaction[] = [];
   FiltredList: Transaction[] = [];
-  ListAffectation: Affectation[] = [];
-  GlobalAffectationList: Affectation[] = [];
-  ListFitredAffec: Affectation[] = [];
-  affFiltredTr: Affectation[] = [];
+  ListAffectation: AffectationI[] = [];
+  GlobalAffectationList: AffectationI[] = [];
+  ListFitredAffec: AffectationI[] = [];
+  affFiltredTr: AffectationI[] = [];
   lastaffFiltredTr: any;
 
   affectatedTr: Transaction = new Transaction();
   listtr: Transaction[] = [];
-  listlist: Affectation[] = [];
-  mapa = new Map<number, Affectation>();
+  listlist: AffectationI[] = [];
+  mapa = new Map<number, AffectationI>();
 
   TransactionList() {
 
@@ -471,12 +470,11 @@ export class EnregIComponent implements OnInit {
   }
 
 
-  //Affectation to Organization
+  //AffectationI to Organization
   onSubmitO(form: NgForm) {
 
     this.affectation.datenereg = this.date;
-    this.affectation.idUserCreator = this.UserIdConnected;
-    this.affectation.creatorName = this.UserNameConnected;
+    this.affectation.IdUserCreator = this.UserIdConnected;
     this.affectation.idUserQuiAffecte = this.UserIdConnected;
     this.affectation.nomUserQuiAffecte = this.UserNameConnected;
     this.affectation.idTransaction = this.tr.id
@@ -521,11 +519,10 @@ export class EnregIComponent implements OnInit {
 
   }
 
-  //Affectation to Employee
+  //AffectationI to Employee
   onSubmitE(form: NgForm) {
     this.affectation.datenereg = this.date;
-    this.affectation.idUserCreator = this.UserIdConnected;
-    this.affectation.creatorName = this.UserNameConnected;
+    this.affectation.IdUserCreator = this.UserIdConnected;
     this.affectation.idUserQuiAffecte = this.UserIdConnected;
     this.affectation.nomUserQuiAffecte = this.UserNameConnected;
     this.affectation.idTransaction = this.tr.id

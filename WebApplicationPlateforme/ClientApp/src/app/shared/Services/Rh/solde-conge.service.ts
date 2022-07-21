@@ -69,6 +69,11 @@ export class SoldeCongeService {
     return this.http.put<SoldeConge>(this.rootURL + '/SoldeConges/' + Ticket.id, Ticket, this.headers);
   }
 
+
+  PutAutomatically() {
+    return this.http.post<SoldeConge[]>(this.rootURL + '/soldeCongesInfosUpdates/PutAutomatically' , this.headers);
+  }
+
   //Create Type Dotation
 
   AddE(dotation: SoldeConge) {

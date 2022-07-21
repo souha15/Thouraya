@@ -13,7 +13,7 @@
       <form class="form-row task-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
         <div class="col-md-6">
           <label for="">تاريخ بداية العمل</label>
-          <input type="datetime-local" name="dateTime" #dateTime="ngModel" [(ngModel)]="assis.dateTime" />
+          <input type="date" name="dateTime" #dateTime="ngModel" [(ngModel)]="assis.dateTime"   [min] = "today" />
         </div>
         <div class="col-md-6">
           <label for="job-title">المسمى الوظيفي</label>

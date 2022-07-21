@@ -11,6 +11,7 @@
       <header>
         <h3 class="task-head"> طلبات  صرف الشيك</h3>
       </header>
+      <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
       <div class="leave-request-list">
         <div class="table-responsive">
           <table class="table table-bordered text-center table-striped">
@@ -190,6 +191,15 @@
                 <option [ngValue]="undefined" selected disabled>-الحالة-</option>
                 <option value="معتمدة">إعتماد </option>
                 <option value="مرفوضة">رفض </option>
+
+
+              </select>
+
+              <label>الإجراء</label>
+              <select (change)="transaction($event)" style="width:150px;">
+                <option [ngValue]="undefined" selected disabled>-الإجراء-</option>
+                <option value="يحسم من الصندوق">يحسم من الصندوق  </option>
+                <option value="شيك">شيك  </option>
 
 
               </select>

@@ -34,7 +34,7 @@
 
         <div class="col-md-6">
           <label for="buy-date">تاريخ الصيانة </label>
-          <input type="date" id="buy-date" name="daterepair" #daterepair="ngModel" [(ngModel)]="voiture.daterepair" />
+          <input type="date" id="buy-date" name="daterepair" #daterepair="ngModel" [(ngModel)]="voiture.daterepair"  [min]="today"/>
         </div>
         <div class="col-md-6">
           <label for="repairs">الأعطال </label>

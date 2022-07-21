@@ -3,8 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { TransactionService } from '../../../../shared/Services/AdministrativeCommunication/transaction.service';
 import { UserServiceService } from '../../../../shared/Services/User/user-service.service';
 import { Transaction } from '../../../../shared/Models/AdministrativeCommunication/transaction.model';
-import { AffectationService } from '../../../../shared/Services/AdministrativeCommunication/affectation.service';
-import { Affectation } from '../../../../shared/Models/AdministrativeCommunication/affectation.model';
+import { AffectationService, AffectationI } from '../../../../shared/Services/AdministrativeCommunication/affectation.service';
 import { ProgressStatus } from '../../../../shared/Interfaces/progress-status';
 import { UploadDownloadService } from '../../../../shared/Services/Taches/upload-download.service';
 import { PiecesJointesTr } from '../../../../shared/Models/AdministrativeCommunication/pieces-jointes-tr.model';
@@ -62,6 +61,7 @@ export class MyListeTrIComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
     this.alltransaction();
     this.getUserConnected();
     this.TransactionList();
@@ -120,7 +120,7 @@ export class MyListeTrIComponent implements OnInit {
   // affectation to Employee or organisation
 
   private selectedLink1: string = "org";
-  affectation: Affectation = new Affectation();
+  affectation: AffectationI = new AffectationI();
   setradio1(e: string): void {
 
     this.selectedLink1 = e;
@@ -155,6 +155,9 @@ export class MyListeTrIComponent implements OnInit {
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
+      this.transactionService.GetTransactionListBy(this.UserIdConnected).subscribe(res => {
+        console.log(res)
+      })
 
     })
 
@@ -169,15 +172,15 @@ export class MyListeTrIComponent implements OnInit {
   FiltredList2: Transaction[] = [];
   FiltredList: Transaction[] = [];
   ListAffectation: any;
-  GlobalAffectationList: Affectation[] = [];
-  ListFitredAffec: Affectation[] = [];
-  affFiltredTr: Affectation[] = [];
+  GlobalAffectationList: AffectationI[] = [];
+  ListFitredAffec: AffectationI[] = [];
+  affFiltredTr: AffectationI[] = [];
   lastaffFiltredTr: any;
 
   affectatedTr: Transaction = new Transaction();
   listtr: Transaction[] = [];
-  listlist: Affectation[] = [];
-  mapa = new Map<number, Affectation>();
+  listlist: AffectationI[] = [];
+  mapa = new Map<number, AffectationI>();
   TransactionList() {
     let last: any;
     let lastuser: any
@@ -211,8 +214,9 @@ export class MyListeTrIComponent implements OnInit {
           if (last != -1) {
             if (this.ListAffectation[last].iduserAffected == this.UserIdConnected) {
               this.transactionService.GetByIdI(this.ListAffectation[last].idTransaction).subscribe(res => {
-                if (res.attribut6 == "الأصل")
+                //if (res.attribut6 == "الأصل")
                   this.FiltredList.push(res)
+                console.log(this.FiltredList)
 
 
               })
@@ -328,10 +332,10 @@ export class MyListeTrIComponent implements OnInit {
       })
     }
 
-    //The last Affectation of  transaction
-    let affectationg: Affectation[] = [];
-    let affectationL: Affectation[] = [];
-    let last: Affectation;
+    //The last AffectationI of  transaction
+    let affectationg: AffectationI[] = [];
+    let affectationL: AffectationI[] = [];
+    let last: AffectationI;
     this.affectationService.ListI().subscribe(res => {
       affectationg = res
       affectationL = affectationg.filter(item => item.idTransaction == this.tr.id)
@@ -404,9 +408,9 @@ export class MyListeTrIComponent implements OnInit {
 
   }
 
-  AffListS: Affectation[] = [];
-  FAffListS: Affectation[] = [];
-  FAffListSR: Affectation[] = [];
+  AffListS: AffectationI[] = [];
+  FAffListS: AffectationI[] = [];
+  FAffListSR: AffectationI[] = [];
 
   suivieLis: Suivie[] = [];
   suivieModel: Suivie = new Suivie();
@@ -468,9 +472,9 @@ export class MyListeTrIComponent implements OnInit {
   receptionTr: Reception = new Reception();
   receptionl: Reception[] = [];
   receptionl2: Reception[] = [];
-  affectationl: Affectation[] = [];
-  affectationl2: Affectation[] = [];
-  lastaffectation: Affectation;
+  affectationl: AffectationI[] = [];
+  affectationl2: AffectationI[] = [];
+  lastaffectation: AffectationI;
   lastreception: any;
 
 
@@ -530,7 +534,7 @@ export class MyListeTrIComponent implements OnInit {
 
   //Refus
 
-  affecforRefus: Affectation = new Affectation();
+  affecforRefus: AffectationI = new AffectationI();
   refus() {
 
     this.affectationService.ListI().subscribe(res => {
@@ -562,7 +566,7 @@ export class MyListeTrIComponent implements OnInit {
               this.transactionService.PutObservableI(this.tr).subscribe(res => {
 
                 this.affecforRefus.iduserAffected = this.lastaffectation.idUserQuiAffecte;
-                this.affecforRefus.idUserCreator = this.UserIdConnected;
+                this.affecforRefus.IdUserCreator = this.UserIdConnected;
                 this.affecforRefus.idTransaction = this.lastaffectation.id;
                 this.affecforRefus.datenereg = this.date;
                 this.affecforRefus.idTransaction = this.tr.id;
@@ -591,7 +595,7 @@ export class MyListeTrIComponent implements OnInit {
 
   }
 
-  //Affectation to Organization
+  //AffectationI to Organization
   onSubmitO(form: NgForm) {
     this.affectationService.ListI().subscribe(res => {
       this.affectationl = res
@@ -609,8 +613,8 @@ export class MyListeTrIComponent implements OnInit {
 
         if (this.affectationl2.length != 0 && this.lastreception != null) {
           this.affectation.datenereg = this.date;
-          this.affectation.idUserCreator = this.UserIdConnected;
-          this.affectation.creatorName = this.UserNameConnected;
+          this.affectation.IdUserCreator = this.UserIdConnected;
+
           this.affectation.idUserQuiAffecte = this.UserIdConnected;
           this.affectation.nomUserQuiAffecte = this.UserNameConnected;
           this.affectation.idTransaction = this.tr.id
@@ -662,7 +666,7 @@ export class MyListeTrIComponent implements OnInit {
         })//end reception
     })//end affectation test
   }
-  //Affectation to Employee
+  //AffectationI to Employee
   onSubmitE(form: NgForm) {
     this.affectationService.ListI().subscribe(res => {
       this.affectationl = res
@@ -680,8 +684,8 @@ export class MyListeTrIComponent implements OnInit {
 
         if (this.affectationl2.length != 0 && this.lastreception != null) {
           this.affectation.datenereg = this.date;
-          this.affectation.idUserCreator = this.UserIdConnected;
-          this.affectation.creatorName = this.UserNameConnected;
+          this.affectation.IdUserCreator = this.UserIdConnected;
+
           this.affectation.idUserQuiAffecte = this.UserIdConnected;
           this.affectation.nomUserQuiAffecte = this.UserNameConnected;
           this.affectation.idTransaction = this.tr.id

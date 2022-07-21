@@ -44,14 +44,14 @@ namespace WebApplicationPlateforme.Model.FinancePartTwo.Cheques
         public string datefinancier { get; set; }
         public string dateparfinancier { get; set; }
         public string datepart { get; set; }
-        public string payetat { get; set; }
-        public string idpayUser { get; set; }
-        public string payUsernom { get; set; }
+        public string retour { get; set; }
+        public string prixRetour { get; set; }
+        public string transfert { get; set; }
 
-        public string attibut1 { get; set; }
-        public string attribut2 { get; set; }
-        public string attribut3 { get; set; }
-        public string attribut4 { get; set; }
+        public string dateRetour { get; set; }
+        public string etatRetourBoxMen { get; set; }
+        public string etatRetourComptable { get; set; }
+        public string fileRetour { get; set; }
         public string attribut5 { get; set; }
         public string attribut6 { get; set; }
         public string creatorName { get; set; }
