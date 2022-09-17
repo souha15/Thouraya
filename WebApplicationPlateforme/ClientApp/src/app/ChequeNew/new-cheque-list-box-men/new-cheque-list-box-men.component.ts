@@ -91,7 +91,7 @@ export class NewChequeListBoxMenComponent implements OnInit {
   getDemPayList() {
     this.demandeService.Get().subscribe(res => {
       this.dem5 = res
-      this.dem6 = this.dem5.filter(item => (item.etatpart == "في الإنتظار" && item.etatadmin == "معتمدة") || (item.retour != null && item.etatgeneral == "معتمدة"))
+      this.dem6 = this.dem5.filter(item => item.etatpart == "في الإنتظار" && item.etatadmin == "معتمدة")
 
     })
   }

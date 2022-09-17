@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplicationPlateforme.Data;
 using WebApplicationPlateforme.Model.AdministrativeCommunication;
+using WebApplicationPlateforme.ViewModels;
 
 namespace WebApplicationPlateforme.Controllers.CommunicationAdministrative
 {
@@ -100,6 +101,33 @@ namespace WebApplicationPlateforme.Controllers.CommunicationAdministrative
             await _context.SaveChangesAsync();
 
             return trAffectation;
+        }
+
+        [HttpGet]
+        [Route("GetAffectations/{idAdmin}")]
+
+        public List<TransactionsAffectationsViewModel> GetAffectations(int idAdmin)
+        {
+            List<TransactionsAffectationsViewModel> trAffList = new List<TransactionsAffectationsViewModel>();
+            trAffList = _context.transactions
+                .Join(_context.trAffectations,
+                tr => tr.Id,
+                aff => aff.idTransaction,
+                (tr, aff) => new { Tr = tr, Aff = aff })
+                .Where(item => item.Aff.attribut1 == idAdmin)
+                .Select(item => new TransactionsAffectationsViewModel()
+                {
+                    Id = item.Tr.Id,
+                    datenereg = item.Aff.datenereg,
+                    numAutorite = item.Tr.numAutorite,
+                    date = item.Tr.date,
+                    orgEnregTr = item.Tr.nomOrg,
+                    nomOrganisme = item.Aff.attribut3,
+                    etat = item.Tr.etat
+                })
+                .ToList();
+
+            return trAffList;
         }
 
         private bool TrAffectationExists(int id)

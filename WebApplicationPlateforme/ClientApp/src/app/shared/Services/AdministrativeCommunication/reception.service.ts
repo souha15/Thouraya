@@ -3,10 +3,20 @@ import { Reception } from '../../Models/AdministrativeCommunication/reception.mo
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { PathSharedService } from '../../path-shared.service';
 import { Observable } from 'rxjs';
-
+export class TransactionsReceptionsViewModel {
+  idAff: number;
+  idTr: number;
+  idRec: number;
+  dateAff: string;
+  userSender: string;
+  receiver: string;
+  userReceiver: string;
+  dateReceiving: string;
+}
 @Injectable({
   providedIn: 'root'
 })
+
 export class ReceptionService {
   
   constructor(private pathService: PathSharedService,
@@ -141,6 +151,10 @@ export class ReceptionService {
 
   GetByIdI(Id) {
     return this.http.get<Reception>(this.rootURL + '/ReceptionIs/' + Id);
+  }
+
+  GetReceivedAffectationsI(Id) {
+    return this.http.get<TransactionsReceptionsViewModel[]>(this.rootURL + '/ReceptionIs/GetReceivedAffectations/' + Id);
   }
   /*******/
 }

@@ -5,6 +5,19 @@ import { Affectation } from '../../Models/AdministrativeCommunication/affectatio
 import { Observable } from 'rxjs';
 import { Transaction } from '../../Models/AdministrativeCommunication/transaction.model';
 
+export class TransactionsAffectationsViewModel {
+  id: number;
+  
+ numAutorite: string;
+orgEnregTr: string;
+nomOrganisme: string;
+datenereg: string;
+date: string;
+etat: string;
+idAff: number;
+type: string;
+
+}
 export class AffectationI {
   id: number;
   iduserAffected: string;
@@ -74,8 +87,8 @@ export class AffectationService {
 
   //Put Affectation
 
-  PutObservable(Affectation: Affectation, Id: number) {
-    return this.http.put<Affectation>(this.rootURL + '/TrAffectations/' + Id, Affectation, this.headers);
+  PutObservable(Affectation: Affectation) {
+    return this.http.put<Affectation>(this.rootURL + '/TrAffectations/' + Affectation.id, Affectation, this.headers);
   }
 
   Put(Id) {
@@ -151,6 +164,13 @@ export class AffectationService {
   GetAffectations(idAdmin): Observable<Transaction[]> {
     return this.http.get<Transaction[]>(this.rootURL + '/TiAffectations/GetAffectations/'+idAdmin);
   }
+  GetAffectationsT(idAdmin): Observable<TransactionsAffectationsViewModel[]> {
+    return this.http.get<TransactionsAffectationsViewModel[]>(this.rootURL + '/TiAffectations/GetAffectations/' + idAdmin);
+  }
+
+  GetAffectationsTr(idAdmin): Observable<Transaction[]> {
+    return this.http.get<Transaction[]>(this.rootURL + '/TrAffectations/GetAffectations/' + idAdmin);
+  }
 
   //Delete Affectation
 
@@ -160,9 +180,10 @@ export class AffectationService {
 
   //Put Affectation
 
-  PutObservableI(Affectation: AffectationI, Id: number) {
-    return this.http.put<AffectationI>(this.rootURL + '/TiAffectations/' + Id, AffectationI, this.headers);
+  PutObservableI(Affectation: AffectationI) {
+    return this.http.put<AffectationI>(this.rootURL + '/TiAffectations/' + Affectation.id, Affectation, this.headers);
   }
+
 
   PutI(Id) {
     return this.http.put(this.rootURL + '/TiAffectations/' + this.formData2.id, this.formData2, this.headers);
@@ -172,6 +193,17 @@ export class AffectationService {
 
   GetByIdI(Id) {
     return this.http.get<AffectationI>(this.rootURL + '/TiAffectations/' + Id);
+  }
+
+
+  // Get Affcetations List I
+
+  GetAffectationsListI(Id) {
+    return this.http.get<AffectationI[]>(this.rootURL + '/TiAffectations/GetAffectationsList/' + Id);
+  }
+
+  GetAffectationsListR(Id) {
+    return this.http.get<Affectation[]>(this.rootURL + '/TiAffectations/GetAffectationsListR/' + Id);
   }
 /*****/
 }

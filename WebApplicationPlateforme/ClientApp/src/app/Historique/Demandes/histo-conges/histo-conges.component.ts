@@ -54,40 +54,38 @@ export class HistoCongesComponent implements OnInit {
   populateForm(conge: Conge) {
     this.per = Object.assign({}, conge)
     this.congeService.formData = Object.assign({}, conge)
- 
-    console.log(this.per)
-    if (this.per.etatd == 'في الانتظار') {
-      this.val = '0%'
+    if (this.per.etat == "100%") {
+      this.val = this.per.etat;
+      this.test0 = false;
+      this.test100 = true;
+      this.test25 = false;
+      this.test50 = false;
+      this.test70 = false;
+    } else if (this.per.etat == "50%") {
+      this.val = this.per.etat;
+      this.test0 = false;
+      this.test100 = false;
+      this.test25 = false;
+      this.test50 = true;
+      this.test70 = false;
+    } else if (this.per.etat == "5%") {
+      this.val = this.per.etat;
       this.test0 = true;
       this.test100 = false;
       this.test25 = false;
       this.test50 = false;
       this.test70 = false;
-    } else if (this.per.attribut2 == 'موافق') {
-      this.test100 = true;
+    }
+    else if (this.per.etat == "25%") {
+      this.val = this.per.etat;
       this.test0 = false;
-      this.test25 = false;
+      this.test100 = false;
+      this.test25 = true;
       this.test50 = false;
       this.test70 = false;
-    } else
-      this.val = this.per.etat;
-      if (this.val == "25%") {
-        this.test25 = true;
-        this.test100 = false;
-        this.test0 = false;
-        this.test50 = false;
-        this.test70 = false;
-      }
-
-      if (this.val == "50%") {
-        this.test50 = true;
-        this.test100 = false;
-        this.test0 = false;
-        this.test25 = false;
-        this.test70 = false;
-      }
-
-    if (this.val == "70%") {
+    }
+    else {
+      this.val = "70%";
       this.test70 = true;
       this.test100 = false;
       this.test0 = false;
@@ -95,7 +93,40 @@ export class HistoCongesComponent implements OnInit {
       this.test50 = false;
 
     }
+    if (this.per.etatetab == "موافق" && this.per.etat !="50%") {
+      this.val = "50%";
+      this.test70 = false;
+      this.test100 = false;
+      this.test0 = false;
+      this.test25 = false;
+      this.test50 = true;
+    }
 
+    if (this.per.etatd == "موافق" && this.per.etat != "25%") {
+      this.val = "25%";
+      this.test70 = false;
+      this.test100 = false;
+      this.test0 = false;
+      this.test25 = false;
+      this.test50 = true;
+    }
+
+    //console.log(this.per)
+    //if (this.per.etatd == 'في الانتظار') {
+    //  this.val = '0%'
+    //  this.test0 = true;
+    //  this.test100 = false;
+    //  this.test25 = false;
+    //  this.test50 = false;
+    //  this.test70 = false;
+    //}
+    //else if (this.per.attribut2 == 'موافق') {
+    //  this.test100 = true;
+    //  this.test0 = false;
+    //  this.test25 = false;
+    //  this.test50 = false;
+    //  this.test70 = false;
+    //}
     this.congeService.GetByCongesIdCF(this.per.id).subscribe(res => {
       this.filesList = res
     })

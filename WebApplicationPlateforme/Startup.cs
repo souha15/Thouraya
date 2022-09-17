@@ -88,6 +88,11 @@ namespace WebApplicationPlateforme
    options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddEntityFrameworkNpgsql()
+       .AddDbContext<NotificationContext>(
+       options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+
+
+            services.AddEntityFrameworkNpgsql()
       .AddDbContext<AdministrativeCommunicationContext>(
       options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             /* services.AddDefaultIdentity<ApplicationUser>()
@@ -243,7 +248,11 @@ namespace WebApplicationPlateforme
             });
 
 
-
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<NotifyHub>("Notify");
+            });
+            app.UseWebSockets();
             app.UseCors(builder =>
 
                 builder.AllowAnyOrigin()
@@ -258,11 +267,7 @@ namespace WebApplicationPlateforme
                 routes.MapHub<NotifyHub>("/notify");
             });*/
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapHub<NotifyHub>("notify");
-            });
-
+           
 
             //app.UseMvc();
 

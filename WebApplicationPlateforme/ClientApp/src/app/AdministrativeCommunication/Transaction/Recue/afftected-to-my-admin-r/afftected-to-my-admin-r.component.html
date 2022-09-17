@@ -12,26 +12,33 @@
         <h4 class="my-2 task-head">  قائمة المعاملات الواردة لإدارتي </h4>
 
         <nav class="d-flex p-0 bd-highlight tasks-nav mt-2">
-          <a href="" [routerLink]="['/transactions-rlist']" class="p-2 flex-fill bd-highlight">
-            <span><i class="fa fa-home"></i></span>
-            الرئيسية
+
+
+          <a href="" [routerLink]="['/afftected-to-my-admin-r']" class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-building"></i></span>
+            قائمة المعاملات الخارجية الواردة لإدارتي
           </a>
-          <a href="" [routerLink]="['/enreg-r']" class="p-2 flex-fill bd-highlight">
-            <span><i class="fa fa-save"></i></span>
-            قائمة المعاملات الواردة المسجلة
+
+          <a href="" [routerLink]="['/affected-to-my-admin-i']" class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-building"></i></span>
+            قائمة المعاملات  الداخلية  الواردة لإدارتي
           </a>
-          <!-- <a href="" [routerLink]="['/afftected-to-my-admin-r']" class="p-2 flex-fill bd-highlight">
-     <span><i class="fa fa-building"></i></span>
-     قائمة المعاملات الواردة لإدارتي
-   </a>-->
-          <a href="" [routerLink]="['/enreg-temp-r']" class="p-2 flex-fill bd-highlight">
-            <span><i class="fa fa-clock"></i></span>
-            قائمة المعاملات المحفوظة مؤقتا
-          </a>
-          <a href="" [routerLink]="['/enreg-def-r']" class="p-2 flex-fill bd-highlight box-menu-btn">
-            <span><i class="fa fa-box"></i></span>
-            قائمة المعاملات المحفوظة نهائيا
-          </a>
+          <!--<a href="" [routerLink]="['/transactions-rlist']" class="p-2 flex-fill bd-highlight">
+    <span><i class="fa fa-home"></i></span>
+    الرئيسية
+  </a>
+  <a href="" [routerLink]="['/enreg-r']" class="p-2 flex-fill bd-highlight">
+    <span><i class="fa fa-save"></i></span>
+    قائمة المعاملات الواردة المسجلة
+  </a>-->
+          <!--<a href="" [routerLink]="['/enreg-temp-r']" class="p-2 flex-fill bd-highlight">
+    <span><i class="fa fa-clock"></i></span>
+    قائمة المعاملات المحفوظة مؤقتا
+  </a>
+  <a href="" [routerLink]="['/enreg-def-r']" class="p-2 flex-fill bd-highlight box-menu-btn">
+    <span><i class="fa fa-box"></i></span>
+    قائمة المعاملات المحفوظة نهائيا
+  </a>-->
         </nav>
         <nav class="d-flex mt-2 transaction-nav">
           <ul>
@@ -59,24 +66,24 @@
                 احالة
               </a>
             </li>
-            <li class="refuse-btn">
+            <!--<li class="refuse-btn">
               <a (click)="refus()">
                 <span><i class="fa fa-times"></i></span>
                 رفض
               </a>
-            </li>
-            <li class="link-btn">
+            </li>-->
+            <!--<li class="link-btn">
               <a href="" data-toggle="modal" data-target="#myModal4">
                 <span><i class="fa fa-arrows-alt-h"></i></span>
                 ربط المعاملة
               </a>
-            </li>
+            </li>-->
             <!-- <li class="copy-btn">
-         <a href="#">
-           <span><i class="fa fa-copy"></i></span>
-           اضافة نسخة
-         </a>
-       </li>-->
+        <a href="#">
+          <span><i class="fa fa-copy"></i></span>
+          اضافة نسخة
+        </a>
+      </li>-->
             <li class="storage-btn">
               <a (click)="enregd()">
                 <span><i class="fa fa-database"></i></span>
@@ -106,33 +113,36 @@
                 <tr>
 
                   <th scope="col">#</th>
-                  <th scope="col">رقم المعاملة</th>
-                  <th scope="col">نوع المعاملة</th>
-                  <th scope="col">تاريخ التسجيل</th>
-                  <th scope="col">الأولوية</th>
-                  <th scope="col">درجة السرية</th>
+                  <th scope="col">المعاملة</th>
+                  <th scope="col">رقم القيد</th>
+                  <th scope="col"> التاريخ</th>
+                  <th scope="col">جهة الوارد</th>
+                  <th scope="col">جهة  الاحالة </th>
+                  <th scope="col">تاريخ الاحالة </th>
                   <th scope="col">الاستلام</th>
-                  <th scope="col">تاريخ الاستلام</th>
+
                 </tr>
               </thead>
               <tbody>
-                <tr *ngFor="let tr of FiltredList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+                <tr *ngFor="let tr of FiltredList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }; index as i;">
 
                   <td (click)="populateForm(tr)"><input type="radio" name="modelGroup" value="modelGroup"></td>
-                  <td (click)="populateForm(tr)">{{tr.id}}</td>
-                  <td (click)="populateForm(tr)">وارد من {{tr.typeRecue}}</td>
-                  <td (click)="populateForm(tr)">{{tr.date}}</td>
-                  <td (click)="populateForm(tr)">{{tr.priorite}}</td>
-                  <td (click)="populateForm(tr)">{{tr.securite}}</td>
+                  <td (click)="populateFormr(tr)">{{tr.id}}</td>
+                  <td (click)="populateFormr(tr)">{{tr.numAutorite}}</td>
+                  <td (click)="populateFormr(tr)">{{tr.date}}</td>
+                  <td (click)="populateFormr(tr)">{{tr.orgEnregTr}}</td>
+                  <td (click)="populateFormr(tr)">{{tr.nomOrganisme}}</td>
+                  <td (click)="populateFormr(tr)">{{tr.datenereg}}</td>
                   <td [ngClass]="{
 
-  'isgreen': tr.etat === 'مستلمة',
-  'isred': tr.etat === 'غير مستلمة',
-  'isblue': tr.etat === 'مرفوضة'
+
+   'wait': tr.etat === 'تحت الإجراء',
+    'done': tr.etat === 'مستلمة',
+    'closed': tr.etat === 'محفوظة'
 }">
                     <a (click)="populateForm(tr)">{{tr.etat}} </a>
                   </td>
-                  <td>{{tr.attribut2}}</td>
+
                 </tr>
               </tbody>
             </table>

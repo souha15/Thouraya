@@ -164,11 +164,12 @@ export class EnregistrerTRIComponent implements OnInit {
         this.UserNameConnected = res.fullName;
         //this.tr.idEtablissementUserCreator = res.idDepartement
         //this.tr.etablissementUserCreator = res.nomDepartement
+        if (res.idAdministration != null) {
         this.tr.attribut1 = res.idAdministration
         this.tr.attribut2 = res.nomAdministration
         
 
-
+}
 
       })
 
@@ -269,8 +270,8 @@ export class EnregistrerTRIComponent implements OnInit {
     this.tr.dateenreg = this.date;
     this.tr.idUserCreator = this.UserIdConnected;
     this.tr.nomOrg = this.OrgName;
-    this.tr.type = "صادر عام "
-       this.tr.etat = "تحت الإجراء"
+    this.tr.type = "معاملة داخلية"
+    this.tr.etat = "غير مستلمة"
     this.tr.attribut6 = "الأصل"
     this.tr.date = this.date;
 

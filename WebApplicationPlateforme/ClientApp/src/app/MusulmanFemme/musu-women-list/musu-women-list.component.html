@@ -47,6 +47,11 @@
                 <span class="glyphicon sort-icon" *ngIf="key =='description'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
               </th>
 
+              <th scope="col" (click)="sort('description')">
+                طباعة
+                <span class="glyphicon sort-icon" *ngIf="key =='description'" [ngClass]="{'glyphicon-chevron-up':reverse,'glyphicon-chevron-down':!reverse}"></span>
+              </th>
+
               <th scope="col">تعديل</th>
               <th scope="col">حذف</th>
             </tr>
@@ -61,6 +66,7 @@
               <td [routerLink]="['/musu-women-details', tache.id]">{{tache.prevnom}}</td>
               <td [routerLink]="['/musu-women-details', tache.id]">{{tache.nat}}</td>
               <td [routerLink]="['/musu-women-details', tache.id]">{{tache.telmus}}</td>
+              <td><a class="btn btn-primary" [routerLink]="['/menu-parrainage', tache.id]"><i class="fa fa-print"></i></a></td>
               <td><a class="btn btn-success" [routerLink]="['/musu-women-edit', tache.id]"><i class="fa fa-edit"></i></a></td>
               <td><a (click)="onDelete(tache.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
             </tr>

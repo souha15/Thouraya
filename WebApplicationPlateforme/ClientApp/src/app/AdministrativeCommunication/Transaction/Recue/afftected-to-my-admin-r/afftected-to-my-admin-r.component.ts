@@ -57,7 +57,8 @@ export class AfftectedToMyAdminRComponent implements OnInit {
     this.downloadStatus = new EventEmitter<ProgressStatus>();
     this.uploadStatuss = new EventEmitter<ProgressStatus>();
   }
-
+  p: number = 1;
+  count: number = 5;
   ngOnInit(): void {
     this.alltransaction();
     this.getUserConnected();
@@ -152,8 +153,18 @@ export class AfftectedToMyAdminRComponent implements OnInit {
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-      this.adminId = res.idAdministration
-      
+    
+      if (res.idAdministration != null) {
+        this.adminId = res.idAdministration
+
+        this.affectationService.GetAffectationsTr(this.adminId).subscribe(res => {
+          this.FiltredList = res
+        });
+
+        //this.affectationService.GetAffectationsTr(this.adminIdU).subscribe(res1 => {
+        //  res.for
+        //});
+      }
     })
 
   }
@@ -177,50 +188,50 @@ export class AfftectedToMyAdminRComponent implements OnInit {
   listlist: Affectation[] = [];
   mapa = new Map<number, Affectation>();
   TransactionList() {
-    let last: any;
-    let lastuser: any
-    this.FiltredList = [];
-    //Transaction List
-    this.transactionService.List().subscribe(res => {
-      this.Globallist = res
-      this.FiltredList = [];
-      //Transaction List copie originale et le createur c'es le user connecté
+    //let last: any;
+    //let lastuser: any
+    //this.FiltredList = [];
+    ////Transaction List
+    //this.transactionService.List().subscribe(res => {
+    //  this.Globallist = res
+    //  this.FiltredList = [];
+    //  //Transaction List copie originale et le createur c'es le user connecté
 
-      this.FiltredList2 = this.Globallist.filter(item => item.attribut6 == "الأصل")
-
-
-      //List global des affectation
-
-      this.affectationService.List().subscribe(res => {
-        this.GlobalAffectationList = res
-
-        // Tester les transactions qui ont des affectations
-
-        this.Globallist.forEach(element => {
-          this.affFiltredTr = [];
-          last = [];
-
-          this.ListAffectation = this.GlobalAffectationList.filter(item => item.idTransaction == element.id);
+    //  this.FiltredList2 = this.Globallist.filter(item => item.attribut6 == "الأصل")
 
 
-          //get the last affected transaction to our user 
+    //  //List global des affectation
 
-          last = this.ListAffectation.map(el => el.idTransaction).lastIndexOf(element.id);
+    //  this.affectationService.List().subscribe(res => {
+    //    this.GlobalAffectationList = res
 
-          console.log(this.adminId)
-          if (this.ListAffectation[last].attribut1 == this.adminId) {
+    //    // Tester les transactions qui ont des affectations
 
-            this.transactionService.GetById(this.ListAffectation[last].idTransaction).subscribe(res => {
-              if (res.attribut6 == "الأصل")
-                this.FiltredList.push(res)
+    //    this.Globallist.forEach(element => {
+    //      this.affFiltredTr = [];
+    //      last = [];
+
+    //      this.ListAffectation = this.GlobalAffectationList.filter(item => item.idTransaction == element.id);
 
 
-            })
-          }
-        })
-      })
+    //      //get the last affected transaction to our user 
 
-    })
+    //      last = this.ListAffectation.map(el => el.idTransaction).lastIndexOf(element.id);
+
+    //      console.log(this.adminId)
+    //      if (this.ListAffectation[last].attribut1 == this.adminId) {
+
+    //        this.transactionService.GetById(this.ListAffectation[last].idTransaction).subscribe(res => {
+    //          if (res.attribut6 == "الأصل")
+    //            this.FiltredList.push(res)
+
+
+    //        })
+    //      }
+    //    })
+    //  })
+
+    //})
 
   }
   /*TransactionList() {
@@ -277,8 +288,10 @@ export class AfftectedToMyAdminRComponent implements OnInit {
   etabname2: string;
 
   populateForm(transaction: Transaction) {
-    this.transactionService.formData = Object.assign({}, transaction);
-    this.tr = Object.assign({}, transaction)
+    //this.transactionService.formData = Object.assign({}, transaction);
+    //this.tr = Object.assign({}, transaction)
+    this.transactionService.GetById(transaction.id).subscribe(res => {
+      this.tr = res;
     this.barcodevalue = this.tr.id + this.tr.date + this.tr.nbPjNumerique
     //Files
 
@@ -362,7 +375,7 @@ export class AfftectedToMyAdminRComponent implements OnInit {
     this.suivie();
 
 
-
+    })
 
 
   }
@@ -497,7 +510,7 @@ export class AfftectedToMyAdminRComponent implements OnInit {
               this.tr.attribut2 = this.date;
               this.transactionService.PutObservable(this.tr).subscribe(res => {
                 this.toastr.success("تمت إستلام المعاملة بنجاح", "نجاح");
-                this.TransactionList();
+                this.getUserConnected();
 
               })
             },
@@ -516,7 +529,7 @@ export class AfftectedToMyAdminRComponent implements OnInit {
 
 
   }
-
+  
 
   //Refus
 

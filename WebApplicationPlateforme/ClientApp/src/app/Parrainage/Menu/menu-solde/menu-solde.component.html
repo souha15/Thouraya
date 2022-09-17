@@ -1,1 +1,70 @@
-<p>menu-solde works!</p>
+<!DOCTYPE html>
+<html lang="en">
+<body>
+  <a class="btn show-details-btn text-info" (click)="print()">
+    <i class="fa fa-print fa-lg"></i>
+  </a>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+
+  <div class="islam-publicize-page" id="htmlData">
+    <div class="container">
+      <h3 style="margin-bottom: 25px;">مشهد إشهار إسلام مؤقت</h3>
+      <table class="table table-bordered">
+        <thead class="" style="background-color: grey;">
+        <th>رقم الملف</th>
+        <th style="min-width:160px;">الإسم</th>
+        <th>الجنسية</th>
+        <th>رقم الإقامة</th>
+        <th>مصدرها</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td>{{mus.numdos}}</td>
+            <td>{{mus.prevnom}}</td>
+            <td>{{mus.nat}}</td>
+            <td>{{mus.residence}}</td>
+            <td>{{mus.sourceres}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="col-md-12">
+        <p><br /></p>
+      </div>
+      <div class="text-end">
+      
+        <p class="lead">
+          <span style="width: 40px;display: inline-block;"></span>
+          تشهد جمعية الدعوة والإرشاد وتوعية الجاليات بمحافظة الطائف بأن الموضحة بياناته قد أشهر إسلامه في مقر الجمعية وذلك يوم
+          <span width="100">{{mus.jours}}</span> الموافق <span>{{mus.datehij}}</span>
+          <br>
+          وتأمل الجمعية ممن يتعامل معه الإحسان إليه تثبيتا لإسلامه.
+        </p>
+        <p class="lead">
+          <span style="width: 40px;display: inline-block;"></span>
+          علما بأن هذا المشهد <span class="fw-bold">مؤقت لمدة شهر من تاريخه</span> ، ولا يستخدم لأي أغراض أخرى لحين استخراج وثيقة إثبات الدخول في الإسلام من الوزارة <span class="fw-bold">ولا تتحمل الجمعية أي مسؤولية </span>في حال استخدام المشهد لأي أغراض أخرى.
+        </p>
+      </div>
+      <div>
+        <p class="fw-bold">نسأل الله له الثبات على دينه . . .</p>
+        <p class="">والسلام عليكم ورحمة الله وبركاته،،</p>
+      </div>
+      <div class="row">
+        <div class="col-9"></div>
+        <div class="col-3">
+          <div class="text-end">
+            <p class="margin">المدير العام</p>
+            <p class="margin" ><b>د. محمد إبراهيم الصواط</b></p>
+          </div>
+        </div>
+      </div>
+
+      <p class="mt-5 fw-bold">ملاحظة : هذا النموذج لا يصلح لتعديل الديانة لدى إدارة الجوازات</p>
+    </div>
+  </div>
+</body>
+</html>

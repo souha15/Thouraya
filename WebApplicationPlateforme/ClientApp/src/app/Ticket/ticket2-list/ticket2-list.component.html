@@ -1,1 +1,14 @@
-<p>ticket2-list works!</p>
+
+<ul>
+  <!-- Online -->
+  <li *ngFor="let user of users" (click)="selectedUser = user">
+    <div class='icon-container'>
+      <div class='status-circle-Online'>
+      </div>
+    
+    </div>
+    {{user.userName}}
+
+  </li>
+</ul>
+<button class="btn btn-outline-primary" (click)="sendMsgInv()">Send</button>

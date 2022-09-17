@@ -55,7 +55,11 @@
                   {{cg.etat}}
                 </td>
                 <td >
-                  <a *ngIf="cg.etat == 'موافق'" class="btn show-details-btn text-info" [routerLink]="['/partage-media-detail']" href="" target="_blank">
+                  <a *ngIf="cg.etat == 'موافق' && cg.langue == 'عربى' " class="btn show-details-btn text-info" [routerLink]="['/partage-media-detail']" href="" target="_blank">
+                    <i class="fa fa-print fa-lg"></i>
+                  </a>
+
+                  <a *ngIf="cg.etat == 'موافق' && cg.langue == 'انجليزى'" class="btn show-details-btn text-info" [routerLink]="['/menu-dir-dem-tech']" href="" target="_blank">
                     <i class="fa fa-print fa-lg"></i>
                   </a>
                 </td>

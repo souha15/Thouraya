@@ -62,7 +62,7 @@ export class AffectedToMyAdminIComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.affectationService.GetAffectations(33).subscribe(res => { console.log(res) });
+    //this.affectationService.GetAffectations(33).subscribe(res => { console.log(res) });
     this.alltransaction();
     this.getUserConnected();
     this.TransactionList();
@@ -87,7 +87,8 @@ export class AffectedToMyAdminIComponent implements OnInit {
       })
     })
   }
-
+  p: number = 1;
+  count: number = 5;
 
   UsersList: UserDetail[] = [];
 
@@ -162,7 +163,11 @@ export class AffectedToMyAdminIComponent implements OnInit {
         this.adminNameU = res.nomAdministration
         this.affectationService.GetAffectations(this.adminIdU).subscribe(res => {
           this.FiltredList = res
-      });
+        });
+
+        //this.affectationService.GetAffectationsTr(this.adminIdU).subscribe(res1 => {
+        //  res.for
+        //});
       }
 
 
@@ -293,8 +298,12 @@ export class AffectedToMyAdminIComponent implements OnInit {
   etabname2: string;
 
   populateForm(transaction: Transaction) {
-    this.transactionService.formData = Object.assign({}, transaction);
-    this.tr = Object.assign({}, transaction)
+    //this.transactionService.formData = Object.assign({}, transaction);
+    //this.tr = Object.assign({}, transaction)
+
+    this.transactionService.GetByIdI(transaction.id).subscribe(res => {
+      this.tr = res;
+   
     let d: string;
     d = this.tr.dateenreg.replace(/\//g, '')
 
@@ -382,7 +391,7 @@ export class AffectedToMyAdminIComponent implements OnInit {
 
 
 
-
+    })
 
   }
 
@@ -518,7 +527,7 @@ export class AffectedToMyAdminIComponent implements OnInit {
               this.tr.attribut4 = this.UserIdConnected;
               this.transactionService.PutObservableI(this.tr).subscribe(res => {
                 this.toastr.success("تمت إستلام المعاملة بنجاح", "نجاح");
-                this.TransactionList();
+                this.getUserConnected();
 
               })
             },

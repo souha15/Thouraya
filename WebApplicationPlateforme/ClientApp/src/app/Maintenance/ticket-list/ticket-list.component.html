@@ -8,7 +8,7 @@
     <div class="col-md-9 col-sm-8">
       <nav class="d-flex p-0 bd-highlight tasks-nav mt-2 finance-nav">
 
-        <a [routerLink]="['/ticket-add']" class="p-2 flex-fill bd-highlight stop-btn">
+        <a [routerLink]="['/ticket-add']" class="p-2 flex-fill bd-highlight stop-btn" *ngIf="admin">
           <span><i class="fa fa-plus"></i></span>
           إضافة تذكرة
         </a>

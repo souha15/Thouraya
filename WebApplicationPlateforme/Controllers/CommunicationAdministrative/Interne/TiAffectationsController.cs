@@ -6,7 +6,9 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplicationPlateforme.Data;
+using WebApplicationPlateforme.Model.AdministrativeCommunication;
 using WebApplicationPlateforme.Model.AdministrativeCommunication.Interne;
+using WebApplicationPlateforme.ViewModels;
 
 namespace WebApplicationPlateforme.Controllers.CommunicationAdministrative.Interne
 {
@@ -105,19 +107,106 @@ namespace WebApplicationPlateforme.Controllers.CommunicationAdministrative.Inter
         [HttpGet]
         [Route("GetAffectations/{idAdmin}")]
 
-        public List<TransactionI> GetAffectations(int idAdmin)
+        public List<TransactionsAffectationsViewModel> GetAffectations(int idAdmin)
         {
-            List<TransactionI> ListTr = new List<TransactionI>();
-            ListTr = _context.transactionsI
-                .Join(_context.tiAffectations,
-                tr => tr.Id,
-                aff => aff.idTransaction,
-                (tr, aff) => new { Tr = tr, Aff = aff })
-                .Where(item => item.Aff.idAdministration == idAdmin)
-                .Select(item=> item.Tr)
-                .ToList();
+            List<TransactionsAffectationsViewModel> trAffListI = new List<TransactionsAffectationsViewModel>();
+            List<TransactionsAffectationsViewModel> trAffListR = new List<TransactionsAffectationsViewModel>();
+            List<TransactionsAffectationsViewModel> trAffList = new List<TransactionsAffectationsViewModel>();         
+            TiAffectation tiAff = new TiAffectation();
+            List<TransactionI> trI = new List<TransactionI>();
+            TrAffectation trAff = new TrAffectation();
+            List<Transaction> trR = new List<Transaction>();
 
-            return ListTr;
+            trI = _context.transactionsI.Where(item => item.etat != "محفوظة").ToList();
+           foreach(TransactionI tr in trI)
+            {
+                tiAff = _context.tiAffectations.Where(item => item.idTransaction == tr.Id)
+                    .OrderByDescending(item => item.Id)
+                    .FirstOrDefault();
+            
+                if(tiAff!= null &&  tiAff.idAdministration == idAdmin)
+                {
+                    TransactionsAffectationsViewModel traffv = new TransactionsAffectationsViewModel()
+                    {
+                        Id = tr.Id,
+                        datenereg = tiAff.datenereg,
+                        numAutorite = tr.numAutorite,
+                        date = tr.date,
+                        orgEnregTr = tr.orgEnregTr,
+                        nomOrganisme = tiAff.nomOrganisme,
+                        etat = tiAff.attribut2,
+                        idAff = tiAff.Id,
+                        type = tr.type,
+                    };
+                    trAffListI.Add(traffv);
+                    
+                }
+                
+            }
+
+
+            trR = _context.transactions.Where(item => item.etat != "محفوظة").ToList();
+            foreach (Transaction tr in trR)
+            {
+                trAff = _context.trAffectations.Where(item => item.idTransaction == tr.Id)
+                    .OrderByDescending(item => item.Id)
+                    .FirstOrDefault();
+
+                if (trAff!= null && trAff.attribut1 == idAdmin)
+                {
+                    TransactionsAffectationsViewModel traffR = new TransactionsAffectationsViewModel()
+                    {
+                        Id = tr.Id,
+                        datenereg = trAff.datenereg,
+                        numAutorite = tr.numAutorite,
+                        date = tr.date,
+                        orgEnregTr = tr.nomOrg,
+                        nomOrganisme = trAff.attribut3,
+                        etat = trAff.attribut2,
+                        idAff = trAff.Id,
+                        type = tr.type,
+                    }; 
+                    trAffListR.Add(traffR);
+
+                }
+            }
+
+            trAffList = trAffListI.Concat(trAffListR).ToList();
+
+            return trAffList;
+        }
+
+
+        [HttpGet]
+        [Route("GetAffectationsList/{id}")]
+
+        public List<TiAffectation> GetAffectationsList(int id)
+        {
+            List<TiAffectation> trAffList = new List<TiAffectation>();
+
+            trAffList = _context.tiAffectations
+                .Where(item => item.idTransaction == id)
+                .OrderBy(item => item.Id).ToList();
+            
+            return trAffList;
+
+
+        }
+
+        [HttpGet]
+        [Route("GetAffectationsListR/{id}")]
+
+        public List<TrAffectation> GetAffectationsListR(int id)
+        {
+            List<TrAffectation> trAffList = new List<TrAffectation>();
+
+            trAffList = _context.trAffectations
+                .Where(item => item.idTransaction == id)
+                .OrderBy(item => item.Id).ToList();
+
+            return trAffList;
+
+
         }
 
         private bool TiAffectationExists(int id)
@@ -125,4 +214,26 @@ namespace WebApplicationPlateforme.Controllers.CommunicationAdministrative.Inter
             return _context.tiAffectations.Any(e => e.Id == id);
         }
     }
+//    trAffListR = _context.transactions
+//.Join(_context.trAffectations,
+//tr => tr.Id,
+//          aff => aff.idTransaction,
+//          (tr, aff) => new { Tr = tr, Aff = aff
+//})
+//          .Where(item => item.Aff.attribut1 == idAdmin && item.Tr.etat != "محفوظة")
+//          .OrderByDescending(item => item.Aff.Id)
+//          //.Take(1)
+//          .Select(item => new TransactionsAffectationsViewModel()
+//{
+//    Id = item.Tr.Id,
+//              datenereg = item.Aff.datenereg,
+//              numAutorite = item.Tr.numAutorite,
+//              date = item.Tr.date,
+//              orgEnregTr = item.Tr.nomOrg,
+//              nomOrganisme = item.Aff.attribut3,
+//              etat = item.Aff.attribut2,
+//              idAff = item.Aff.Id,
+//              type = item.Tr.type
+//          })
+//          .ToList();
 }

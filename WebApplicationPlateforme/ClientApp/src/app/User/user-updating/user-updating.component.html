@@ -183,38 +183,45 @@
                aria-labelledby="salary-tab">
 
             <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onsubmit(form)">
-              <div class="col-md-6 mb-2"  *ngIf="!testrole">
+              <div class="col-md-6 mb-2" *ngIf="!testrole">
                 <label for="rank" style="width:25%;font-weight:bold">المرتبة</label>
-                <input type="text" id="rank"  name="rang"  #rang="ngModel" [(ngModel)]="UserService.formData.rang"/>
+                <input type="text" id="rank" name="rang" #rang="ngModel" [(ngModel)]="UserService.formData.rang" />
               </div>
-              <div class="col-md-6 mb-2"  *ngIf="!testrole">
+              <div class="col-md-6 mb-2" *ngIf="!testrole">
                 <label for="degree" style="width:25%;font-weight:bold"> الدرجة </label>
-                <input type="text" id="degree"  name="degre"  #degre="ngModel" [(ngModel)]="UserService.formData.degre" />
+                <input type="text" id="degree" name="degre" #degre="ngModel" [(ngModel)]="UserService.formData.degre" />
               </div>
-              <div class="col-md-6 mb-2"  *ngIf="!testrole">
+              <div class="col-md-6 mb-2" *ngIf="!testrole">
                 <label for="salary" style="width:25%;font-weight:bold">الراتب </label>
-                <input type="text" id="salary"   name="salaire"  #salaire="ngModel" [(ngModel)]="UserService.formData.salaire"(change)="getSalaire($event)" />
+                <input type="text" id="salary" name="salaire" #salaire="ngModel" [(ngModel)]="UserService.formData.salaire"  />
               </div>
-              <div class="col-md-6 mb-2"  *ngIf="!testrole">
+              <div class="col-md-6 mb-2" *ngIf="!testrole">
                 <label for="plus" style="width:25%;font-weight:bold">البدلات</label>
-                <input type="text" id="plus"  name="indemnite"  #indemnite="ngModel" [(ngModel)]="UserService.formData.indemnite" (change)="getIndemnite($event)" />
+                <input type="text" id="plus" name="indemnite" #indemnite="ngModel" [(ngModel)]="UserService.formData.indemnite"  />
               </div>
-              <div class="col-md-6 mb-2"  *ngIf="!testrole">
-                <label for="other-plus" style="width:25%;font-weight:bold">البدلات الاضافية</label>
-                <input type="text" id="other-plus"  name="autreIndemnite"  #autreIndemnite="ngModel" [(ngModel)]="UserService.formData.autreIndemnite" (change)="getAuteIndemnite($event)" />
+              <div class="col-md-6 mb-2" *ngIf="!testrole">
+                <label for="other-plus" style="width:25%;font-weight:bold">بدل سكن</label>
+                <input type="text" id="other-plus" name="autreIndemnite" #autreIndemnite="ngModel" [(ngModel)]="UserService.formData.autreIndemnite"  />
               </div>
 
-              <div class="col-md-6 mb-2"  *ngIf="!testrole">
+              <div class="col-md-6 mb-2" *ngIf="!testrole">
                 <label for="plus" style="width:25%;font-weight:bold">التأمينات </label>
-                <input type="text" id="plus"  name="typeEmploi"  #typeEmploi="ngModel" [(ngModel)]="UserService.formData.typeEmploi" (change)="getAssurance($event)" />
+                <input type="text" id="plus" name="typeEmploi" #typeEmploi="ngModel" [(ngModel)]="UserService.formData.typeEmploi" />
               </div>
               <div class="col-md-6 mb-2" *ngIf="SalaireNet|| !testrole">
-                <label for="plus" style="width:25%;font-weight:bold">الصافي  </label>
-                <input type="text" id="plus" [(ngModel)]="typeQualification" disabled />
+                <label for="plus" style="width:25%;font-weight:bold">الراتب الصافي  </label>
+                <input type="text" id="plus"  name="typeQualification" #typeQualification="ngModel" [(ngModel)]="UserService.formData.typeQualification"/>
               </div>
-              <div class="col-md-6 mb-2"  *ngIf="!testrole">
+
+              <div class="col-md-6 mb-2" *ngIf="!testrole">
+                <label for="plus" style="width:25%;font-weight:bold">الراتب الاجمالي  </label>
+                <input type="text" id="plus" name="etatuser" #etatuser="ngModel" [(ngModel)]="UserService.formData.etatuser"/>
+              </div>
+
+
+              <div class="col-md-6 mb-2" *ngIf="!testrole">
                 <label for="plus" style="width:25%;font-weight:bold">البنك </label>
-                <select class=""  name="faculteEcole"  #faculteEcole="ngModel" [(ngModel)]="UserService.formData.faculteEcole" style="width:50%">
+                <select class="" name="faculteEcole" #faculteEcole="ngModel" [(ngModel)]="UserService.formData.faculteEcole" style="width:50%">
                   <option [ngValue]="undefined" selected>-البنك-</option>
                   <option value="الراجحي ">الراجحي </option>
                   <option value="الأهلي ">الأهلي </option>
@@ -225,9 +232,9 @@
                   <option value="الجزيرة">الجزيرة</option>
                 </select>
               </div>
-              <div class="col-md-6 mb-2"  *ngIf="!testrole">
+              <div class="col-md-6 mb-2" *ngIf="!testrole">
                 <label for="plus" style="width:25%;font-weight:bold">رقم الآيبان</label>
-                <input type="text" id="plus"  name="dateQualification"  #dateQualification="ngModel" [(ngModel)]="UserService.formData.dateQualification" />
+                <input type="text" id="plus" name="dateQualification" #dateQualification="ngModel" [(ngModel)]="UserService.formData.dateQualification" />
               </div>
 
 

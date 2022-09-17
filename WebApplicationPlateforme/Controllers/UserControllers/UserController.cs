@@ -121,6 +121,7 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
             user.attribut4 = model.attribut4;
             user.attribut5 = model.attribut5;
             user.attribut6 = model.attribut6;
+            user.etatuser = model.etatuser;
             var result = await _userManager.UpdateAsync(user);
             return user;
         }

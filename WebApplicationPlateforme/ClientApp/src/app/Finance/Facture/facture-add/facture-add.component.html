@@ -34,24 +34,27 @@
 
         <div class="col-md-6">
           <label for="the-type">الصنف</label>
-          <select id="the-type" (change)="typeTest($event)">
-            <option [ngValue]="undefined" selected disabled>-الصنف-</option>
-            <option *ngFor="let item of typeFacture" value="{{item.id}}">{{item.nom}}</option>
-          </select>
+          <input type="text" id="payee" name="categorie" #categorie="ngModel" [(ngModel)]="facture.categorie" />
+          <!--<select id="the-type" (change)="typeTest($event)">
+    <option [ngValue]="undefined" selected disabled>-الصنف-</option>
+    <option *ngFor="let item of typeFacture" value="{{item.id}}">{{item.nom}}</option>
+  </select>-->
         </div>
         <div class="col-md-6">
           <label for="the-type">الفرع الأول</label>
-          <select id="the-type" (change)="TestBO($event)">
-            <option [ngValue]="undefined" selected disabled>-الفرع-</option>
-            <option *ngFor="let item of brancheOne" value="{{item.id}}">{{item.nom}}</option>
-          </select>
+          <input type="text" id="payee" name="brancheone" #brancheone="ngModel" [(ngModel)]="facture.brancheone" />
+          <!--<select id="the-type" (change)="TestBO($event)">
+    <option [ngValue]="undefined" selected disabled>-الفرع-</option>
+    <option *ngFor="let item of brancheOne" value="{{item.id}}">{{item.nom}}</option>
+  </select>-->
         </div>
         <div class="col-md-6">
           <label for="the-type">الفرع الثاني</label>
-          <select id="the-type" name="branchetwo" #branchetwo="ngModel" [(ngModel)]="facture.branchetwo">
-            <option [ngValue]="undefined" selected disabled>-الفرع-</option>
-            <option *ngFor="let item of brancheTwo" value="{{item.nom}}">{{item.nom}}</option>
-          </select>
+          <input type="text" id="payee" name="branchetwo" #branchetwo="ngModel" [(ngModel)]="facture.branchetwo" />
+          <!--<select id="the-type" name="branchetwo" #branchetwo="ngModel" [(ngModel)]="facture.branchetwo">
+    <option [ngValue]="undefined" selected disabled>-الفرع-</option>
+    <option *ngFor="let item of brancheTwo" value="{{item.nom}}">{{item.nom}}</option>
+  </select>-->
         </div>
 
         <div class="col-md-6">

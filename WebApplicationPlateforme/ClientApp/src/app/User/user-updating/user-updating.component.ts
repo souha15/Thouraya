@@ -122,7 +122,6 @@ export class UserUpdatingComponent implements OnInit {
 
 
   }
-
   // Type Presence
   typepresence: boolean = false;
   typePresence(event) {

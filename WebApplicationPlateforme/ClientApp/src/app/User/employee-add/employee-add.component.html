@@ -211,8 +211,13 @@
                 <input type="text" id="plus" formControlName="typeEmploi" (change)="getAssurance($event)" />
               </div>
               <div class="col-md-6 mb-2" *ngIf="SalaireNet ">
-                <label for="plus" style="width:25%;font-weight:bold">الصافي  </label>
+                <label for="plus" style="width:25%;font-weight:bold">الراتب الصافي  </label>
                 <input type="text" id="plus" formControlName="typeQualification" [(ngModel)]="typeQualification" disabled />
+              </div>
+
+              <div class="col-md-6 mb-2" *ngIf="SalaireNet">
+                <label for="plus" style="width:25%;font-weight:bold">الراتب الاجمالي  </label>
+                <input type="text" id="plus" formControlName="etatuser"/>
               </div>
               <div class="col-md-6 mb-2">
                 <label for="plus" style="width:25%;font-weight:bold">البنك </label>

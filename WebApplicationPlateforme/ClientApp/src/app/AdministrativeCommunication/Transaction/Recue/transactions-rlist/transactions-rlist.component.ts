@@ -154,8 +154,8 @@ export class TransactionsRListComponent implements OnInit {
     })
 
   }
-  p: Number = 1;
-  count: Number = 5;
+  p: any = 1;
+  count: any = 5;
   tr: Transaction = new Transaction();
   listPj: PiecesJointesTr[] = [];
   listPjFiltred: PiecesJointesTr[] = [];
@@ -168,11 +168,11 @@ export class TransactionsRListComponent implements OnInit {
   receptionS: Reception[] = [];
   filrecepS: Reception[] = [];
   afftrue: boolean = false;
-  indexId: number;
+  indexId: any;
   populateForm(transaction: Transaction,i:number) {
     this.transactionService.formData = Object.assign({}, transaction);
     this.tr = Object.assign({}, transaction)
-    this.indexId = i+1;
+    this.indexId = (this.p-1)*this.count+i+ 1;
  
     this.serviceupload.SearchTr().subscribe(res => {
       this.listPj = res

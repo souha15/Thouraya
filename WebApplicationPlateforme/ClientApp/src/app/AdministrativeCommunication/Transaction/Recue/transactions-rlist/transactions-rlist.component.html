@@ -46,12 +46,13 @@
               <thead>
                 <tr>
 
-                  <th scope="col">#</th>     
-                  <th scope="col"> التاريخ</th>
-                  <th scope="col">الجهة</th>
-                  <th scope="col">الموضوع</th>
-                  <th scope="col">المستلم</th>
-                  <th scope="col">الحالة</th>
+                  <th scope="col">#</th>
+                  <th scope="col">رقم المعاملة</th>
+                  <th scope="col">وارد من</th>
+                  <th scope="col">تاريخ التسجيل</th>
+                  <th scope="col">الأولوية</th>
+                  <th scope="col">درجة السرية</th>
+                  <th scope="col">الاستلام</th>
 
                 </tr>
               </thead>
@@ -59,12 +60,16 @@
                 <tr *ngFor="let tr of alltr |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; index as i;">
                   <th scope="row" data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)">{{(p-1) * count + i + 1}}</th>
 
+                  <td data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)">{{tr.id}}</td>
+                  <td data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)">وارد من {{tr.typeRecue}}</td>
                   <td data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)">{{tr.date}}</td>
-                  <td data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)" *ngIf="tr.nomOrg!==null">{{tr.nomOrg}}</td>
+                  <td data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)">{{tr.priorite}}</td>
+                  <td data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)">{{tr.securite}}</td>
+                  <!--<td data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)" *ngIf="tr.nomOrg!==null">{{tr.nomOrg}}</td>
                   <td  data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)" *ngIf="tr.nomProp!==null">{{tr.nomProp}}</td>
                   <td  data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)" *ngIf="tr.nomProp==null && tr.nomOrg!==null">{{tr.nomProp}}</td>
                   <td data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)">{{tr.sujet}}</td>
-                  <td data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)">{{tr.attribut3}}</td>
+                  <td data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)">{{tr.attribut3}}</td>-->
                   <td data-toggle="modal" data-target="#myModal1" (click)="populateForm(tr,i)" [ngClass]="{
 
     'wait': tr.etat === 'تحت الإجراء',

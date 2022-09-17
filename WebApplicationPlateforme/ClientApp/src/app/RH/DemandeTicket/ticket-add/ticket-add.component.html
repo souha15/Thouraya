@@ -16,7 +16,7 @@
           إضافة تذكرة
         </a>
 
-        <a [routerLink]="['/ticket-list-client']" class="p-2 flex-fill bd-highlight stop-btn">
+        <a [routerLink]="['/ticket-list-client']" class="p-2 flex-fill bd-highlight stop-btn" *ngIf="admin">
           <span><i class="fa fa-list"></i></span>
           قائمة التذاكر
         </a>

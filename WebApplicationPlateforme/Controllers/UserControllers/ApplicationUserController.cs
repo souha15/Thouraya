@@ -23,13 +23,12 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
         private UserManager<ApplicationUser> _userManager;
         // private SignInManager<ApplicationUser> _singInManager;
         private readonly ApplicationSettings _appSettings;
-  
-        public ApplicationUserController(UserManager<ApplicationUser> userManager, IOptions<ApplicationSettings> appSettings/*, SignInManager<ApplicationUser> signInManager*/)
+        private readonly NotificationContext _context;
+        public ApplicationUserController(UserManager<ApplicationUser> userManager, IOptions<ApplicationSettings> appSettings, NotificationContext context)
         {
             _userManager = userManager;
-            //_singInManager = signInManager;
             _appSettings = appSettings.Value;
-            
+            _context = context;
         }
 
         [HttpPost]
@@ -102,9 +101,7 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
             try
             {
                 var result = await _userManager.CreateAsync(applicationUser, model.Password);
-                //await _userManager.AddToRoleAsync(applicationUser, model.Roles);
-             //   await _userManager.AddClaimAsync(applicationUser, new Claim(ClaimTypes.Email, model.Email));
-
+                await _userManager.AddClaimAsync(applicationUser, new Claim(ClaimTypes.Email, model.Email));
                 await _userManager.AddToRolesAsync(applicationUser, model.Roles);
                 return Ok(result);
             }
@@ -131,6 +128,7 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
                     Subject = new ClaimsIdentity(new Claim[]
                     {
                         new Claim("UserID",user.Id.ToString()),
+                         //new Claim(ClaimTypes.Email,user.Email.ToString()),
                         new Claim(_options.ClaimsIdentity.RoleClaimType,role.FirstOrDefault()),
                         //new Claim("email", user.Email.ToString())
             }),

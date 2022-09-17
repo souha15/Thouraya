@@ -75,7 +75,7 @@ export class TicketListClientComponent implements OnInit {
   getUserConnected() {
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.userId = res.id
-      if (res.num == "3012") {
+      if (res.num == "3012" || res.num == "3062" || res.num =="3014") {
         this.admin = true
       } else {
         this.admin = false;

@@ -198,7 +198,7 @@
                       </select>
                       <div>
                         <label for="from2">الإدارات</label>
-                        <select id="from2" name="idOrganisme" #idOrganisme="ngModel" [(ngModel)]="affectation.idOrganisme" (change)="testorg($event)">
+                        <select id="from2" name="attribut1" #attribut1="ngModel" [(ngModel)]="affectation.attribut1" (change)="testorg($event)">
                           <option [ngValue]="undefined" selected disabled>-الإدارة-</option>
                           <option *ngFor="let item of AdministrationList" value="{{item.id}}">{{item.nom}}</option>
                         </select>
@@ -217,7 +217,7 @@
                     <div class="col-md-6">
 
                       <label for="from2">تاريخ الاحالة</label>
-                      <input id="from2" type="text" name="datenereg" #datenereg="ngModel" [(ngModel)]="affectation.datenereg" />
+                      <input id="from2" type="date" name="datenereg" #datenereg="ngModel" [(ngModel)]="affectation.datenereg" />
                     </div>
 
                       <div class="col-12 my-3 text-left">

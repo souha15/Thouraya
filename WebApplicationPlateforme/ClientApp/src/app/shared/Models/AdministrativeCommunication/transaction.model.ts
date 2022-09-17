@@ -42,4 +42,5 @@ export class Transaction {
   idOrg: number;
   idProp: number;
   idUserCreator: string;
+  idAff: number;
 }

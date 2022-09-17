@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WebApplicationPlateforme.Data;
 using WebApplicationPlateforme.Model.AdministrativeCommunication.Interne;
+using WebApplicationPlateforme.ViewModels;
 
 namespace WebApplicationPlateforme.Controllers.CommunicationAdministrative.Interne
 {
@@ -101,7 +102,32 @@ namespace WebApplicationPlateforme.Controllers.CommunicationAdministrative.Inter
 
             return receptionI;
         }
+        [HttpGet]
+        [Route("GetReceivedAffectations/{id}")]
+        public List<TransactionsReceptionsViewModel> GetReceivedAffectations(int id)
+        {
+            List<TransactionsReceptionsViewModel> TrReceivingAff = new List<TransactionsReceptionsViewModel>();
+            TrReceivingAff = _context.tiAffectations
+                .Join(_context.receptionIs,
+                aff => aff.Id,
+                rec => rec.idAffectation,
+                (aff, rec) => new { Aff = aff, Rec = rec })
+                .Where(item => item.Aff.idTransaction == id)
+                .Select(item => new TransactionsReceptionsViewModel()
+                {
+                    idAff = item.Aff.Id,
+                    idTr = item.Aff.idTransaction,
+                    idRec = item.Rec.Id,
+                    dateAff = item.Aff.datenereg,
+                    userSender = item.Aff.nomUserQuiAffecte,
+                    receiver = item.Aff.nomOrganisme,
+                    userReceiver = item.Rec.userName,
+                    dateReceiving = item.Rec.date
+                }).ToList();
 
+            return TrReceivingAff;
+
+        }
         private bool ReceptionIExists(int id)
         {
             return _context.receptionIs.Any(e => e.Id == id);

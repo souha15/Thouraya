@@ -5,7 +5,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
+import { HomeComponent } from './home/home.component'; 
 import { SideMenuComponent } from './side-menu/side-menu.component';
 import { LoginPageComponent } from './User/login-page/login-page.component';
 import { UserInfoComponent } from './User/user-info/user-info.component';
@@ -815,6 +815,10 @@ import { CongeService } from './shared/Services/Rh/conge.service';
 import { MyConversationMsgInterneComponent } from './Msg Interne/my-conversation-msg-interne/my-conversation-msg-interne.component';
 import { EmployeeConversationMsgInterneComponent } from './Msg Interne/employee-conversation-msg-interne/employee-conversation-msg-interne.component';
 import { TypeDetailsActiviteCrudComponent } from './Activitee/type-details-activite-crud/type-details-activite-crud.component';
+import { CloseChequeForBoxMenComponent } from './ChequeNew/CloseCheque/close-cheque-for-box-men/close-cheque-for-box-men.component';
+import { CloseChequeForComptableComponent } from './ChequeNew/CloseCheque/close-cheque-for-comptable/close-cheque-for-comptable.component';
+import { MenuChequeForBoxMenComponent } from './ChequeNew/CloseCheque/menu-cheque-for-box-men/menu-cheque-for-box-men.component';
+import { TransactionsAffectedToMyAdminOrToMeComponent } from './AdministrativeCommunication/transactions-affected-to-my-admin-or-to-me/transactions-affected-to-my-admin-or-to-me.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -1594,6 +1598,10 @@ import { TypeDetailsActiviteCrudComponent } from './Activitee/type-details-activ
     MyConversationMsgInterneComponent,
     EmployeeConversationMsgInterneComponent,
     TypeDetailsActiviteCrudComponent,
+    CloseChequeForBoxMenComponent,
+    CloseChequeForComptableComponent,
+    MenuChequeForBoxMenComponent,
+    TransactionsAffectedToMyAdminOrToMeComponent,
   ],
   imports: [
 
@@ -1759,7 +1767,8 @@ import { TypeDetailsActiviteCrudComponent } from './Activitee/type-details-activ
       { path: 'enreg-temp-i', component: EnregTempIComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
       { path: 'enreg-i', component: EnregIComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
       { path: 'affected-to-my-admin-i', component: AffectedToMyAdminIComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'EMPLOYEE', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
-
+      { path: 'transactions-affected-to-my-admin-or-to-me', component: TransactionsAffectedToMyAdminOrToMeComponent, canActivate: [AuthGuard]},
+      { path: 'transactions-affected-to-my-admin-or-to-me/:id', component: TransactionsAffectedToMyAdminOrToMeComponent, canActivate: [AuthGuard]},
 
     //Evenement
 
@@ -1832,9 +1841,9 @@ import { TypeDetailsActiviteCrudComponent } from './Activitee/type-details-activ
 
       { path: 'navmenurequests', component: NavmenurequestsComponent, canActivate: [AuthGuard] },
 
+      /**, data: { permittedRoles: ['ADMINISTRATEUR'] }*/
 
-
-      { path: 'ticket-add', component: TicketAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] }},
+      { path: 'ticket-add', component: TicketAddComponent, canActivate: [AuthGuard]},
 
       { path: 'ticket-my-lis', component: TicketMyLisComponent, canActivate: [AuthGuard] },
 
@@ -2605,10 +2614,12 @@ import { TypeDetailsActiviteCrudComponent } from './Activitee/type-details-activ
     /************Parrainage *************/
 
         { path: 'menu-solde', component: MenuSoldeComponent, canActivate: [AuthGuard] },
+      { path: 'menu-solde/:id', component: MenuSoldeComponent, canActivate: [AuthGuard] },
 
       { path: 'menu-tuteur', component: MenuTuteurComponent, canActivate: [AuthGuard] },
 
       { path: 'menu-parrainage', component: MenuParrainageComponent, canActivate: [AuthGuard] },
+      { path: 'menu-parrainage/:id', component: MenuParrainageComponent, canActivate: [AuthGuard] },
 
       { path: 'add-parrainage', component: AddParrainageComponent, canActivate: [AuthGuard] },
       { path: 'add-parrainage/:id', component: AddParrainageComponent, canActivate: [AuthGuard] },
@@ -3327,7 +3338,12 @@ import { TypeDetailsActiviteCrudComponent } from './Activitee/type-details-activ
     /*** Notif System **/
       { path: 'notif-show', component: NotifShowComponent, canActivate: [AuthGuard] },
 
-      
+/****  Close Cheque **/
+      {path: 'close-cheque-for-box-men', component: CloseChequeForBoxMenComponent, canActivate: [AuthGuard], data: {permittedRoles: ['ADMINISTRATEUR', 'DIRECTORETAB', 'RESPFINANCE', 'FINPRIV', 'BOXPRIV']}},
+        
+      {path: 'menu-cheque-for-box-men', component: MenuChequeForBoxMenComponent, canActivate: [AuthGuard], data: {permittedRoles: ['ADMINISTRATEUR', 'DIRECTORETAB', 'RESPFINANCE', 'FINPRIV', 'BOXPRIV']}},
+
+      {path: 'close-cheque-for-comptable', component: CloseChequeForComptableComponent, canActivate: [AuthGuard], data: {permittedRoles: ['ADMINISTRATEUR', 'DIRECTORETAB', 'RESPFINANCE', 'FINPRIV', 'BOXPRIV']}},
 
     ])
   ],/*,  {

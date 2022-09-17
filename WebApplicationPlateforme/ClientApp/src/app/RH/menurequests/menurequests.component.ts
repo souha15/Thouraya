@@ -81,7 +81,6 @@ export class MenurequestsComponent implements OnInit {
   congeList: Conge[] = [];
   filtredCongeList: Conge[] = [];
   CongeList() {
-    console.log(this.UserIdConnected)
     this.congeService.GetUsersDemands(this.UserIdConnected).subscribe(res => {
       this.filtredCongeList = res
       console.log(this.filtredCongeList)
@@ -128,7 +127,7 @@ export class MenurequestsComponent implements OnInit {
      
           this.per.transferera = "2"
           this.per.attribut6 = "إعتماد بخصم"
-          this.per.etat = "70%"
+          this.per.etat = "25%"
           this.soldeCongeService.Get().subscribe(res => {
             this.soldecongel1 = res
             this.soldeconge1 = this.soldecongel1.filter(item => item.idUserCreator == this.per.idUserCreator);

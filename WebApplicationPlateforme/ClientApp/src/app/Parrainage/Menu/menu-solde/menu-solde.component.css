@@ -1,0 +1,19 @@
+.islam-publicize-page {
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  padding: 150px 30px 40px;
+}
+
+  .islam-publicize-page table,
+  .islam-publicize-page tr,
+  .islam-publicize-page td,
+  .islam-publicize-page th {
+    border-color: #111;
+  }
+
+  .islam-publicize-page table {
+    border-style: double;
+  }
+.margin {
+  margin-left: -1800px;
+}

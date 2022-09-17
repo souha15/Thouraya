@@ -231,7 +231,7 @@ export class EnregistrerTRRecueComponent implements OnInit {
       this.tr.idUserCreator = this.UserIdConnected;
 
 
-      this.tr.type = "recue"
+      this.tr.type = "معاملة خارجية"
       this.tr.etat = "تحت الإجراء"
       this.tr.attribut6 = "الأصل"
 
@@ -263,7 +263,6 @@ export class EnregistrerTRRecueComponent implements OnInit {
           if (this.testemp1 != undefined) {
 
             this.affectation.attribut3 = "مكتب المدير العام"
-            this.affectation.attribut1 = 28
             this.affectation.idUserCreator = this.UserIdConnected;
             this.affectation.creatorName = this.UserNameConnected;
             this.affectation.idUserQuiAffecte = this.UserIdConnected;

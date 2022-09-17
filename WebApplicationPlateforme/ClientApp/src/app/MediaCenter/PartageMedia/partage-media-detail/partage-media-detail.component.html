@@ -32,17 +32,17 @@
       <img class="img2" src="assets/images/vision-2030.png" alt="">
     </header>
     <div class="d-flex justify-content-between" style="padding: 10px 50px;border-bottom: 1px solid #ddd;">
-      <div>الرقم <span class="space-150"></span></div>
-      <div>إدارة / <span>---------</span></div>
-      <div>قسم / <span>---------</span></div>
-      <div>التاريخ / <span>---------</span></div>
-      <div>الموضوع / <span>---------</span></div>
-      <div>المشفوعات / <span>---------</span></div>
+      <p>الرقم <span class="space-150"></span></p>
+      <p>إدارة  <span>{{user.nomAdministration}}</span></p>
+      <p>قسم  <span>{{user.nomDepartement}}</span></p>
+      <p>التاريخ / <span>{{today}}</span></p>
+      <p>الموضوع / <span>---------</span></p>
+      <p>المشفوعات / <span>---------</span></p>
     </div>
     <div class="content">
       <h2 class="header-title">تعريف بالراتب</h2>
       <div class="table-responsive">
-        <table class="table table-bordered">
+        <table class="table table-borderless">
           <tbody>
             <tr>
               <th scope="row">الاسم</th>
@@ -74,13 +74,15 @@
               <th>الراتب الأساسي</th>
               <td>{{user.salaire}}</td>
               <th>بدل السكن</th>
-              <td></td>
+              <td>{{user.autreIndemnite}}</td>              
               <th>بدلات أخرى</th>
-              <td>{{user.autreIndemnite}}</td>
+              <td>{{user.indemnite}}</td>
+              <!--<td>{{user.typeQualification}}</td>-->
             </tr>
             <tr>
               <th>الراتب الإجمالي</th>
-              <td colspan="5">{{user.typeQualification}}</td>
+              <!--<td colspan="5">{{user.typeQualification}}</td>-->
+              <td colspan="5">{{user.etatuser}}</td>
             </tr>
           </tbody>
         </table>
