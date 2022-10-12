@@ -1,16 +1,9 @@
-import { Component, OnInit, ElementRef, Input, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { UserServiceService } from '../shared/Services/User/user-service.service';
 import { Router } from '@angular/router';
-import { PrivilegesService } from '../shared/Services/User/privileges.service';
-import { VoitureService } from '../shared/Services/voiture/voiture.service';
-import { Voiture } from '../shared/Models/voiture/voiture.model';
-import { ToastrService, ToastrModule } from 'ngx-toastr';
-import { DemPayChequeService } from '../shared/Services/Cheques/dem-pay-cheque.service';
-import { DemPayCheque } from '../shared/Models/Cheques/dem-pay-cheque.model';
-import { PointageService } from '../shared/Services/Pointage/pointage.service';
+import { ToastrService } from 'ngx-toastr';
 import { UserDetail } from '../shared/Models/User/user-detail.model';
-import { Pointage } from '../shared/Models/Pointage/pointage.model';
-import { SignalRService, connection } from '../shared/Services/signalR/signal-r.service';
+import { SignalRService, connection, AutomaticNotification } from '../shared/Services/signalR/signal-r.service';
 
 @Component({
   selector: 'app-nav-menu',
@@ -29,7 +22,6 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     this.getUserConnected();
     this.signalrService.startConnection();
     this.sendMsgLis();
-
     if (this.signalrService.hubConnection.state == 1) this.getOnlineUsersInv();
     else {
       this.signalrService.ssSubj.subscribe((obj: any) => {
@@ -65,12 +57,12 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     this.signalrService.hubConnection.off("authResponseSuccess")
   }
 
-  /** Handle Notifications  ***/
+/** Handle Notifications  ***/
+
   users: Array<connection> = new Array<connection>();
   connected: boolean;
   userOnList(): void {
     this.signalrService.hubConnection.on("userOn", (newUser: connection) => {
-
       this.users.push(newUser);
       if (this.users.filter(item => item.userId != this.userDetails.id).length < 0) {
         this.connected = false
@@ -85,6 +77,7 @@ export class NavMenuComponent implements OnInit, OnDestroy {
   getOnlineUsersList(): void {
     this.signalrService.hubConnection.on("getOnlineUsersResponse", (onlineUsers: Array<connection>) => {
       this.users = [...onlineUsers];
+   
     });
   }
 
@@ -114,35 +107,77 @@ export class NavMenuComponent implements OnInit, OnDestroy {
   }
 
   // Receiving
+
   private sendMsgLis(): void {
     this.signalrService.hubConnection.on("sendMsgResponse", (connId: string, msg: string, userConSender: string, userConReceiver: string) => {
-      this.toastr.success(userConSender, msg)
+      this.toastr.success(msg ,userConSender)
+      this.GetNotifList(this.UserIdConnected);
+      this.CountNotif(this.UserIdConnected);
 
     });
   }
 
   // Get User Connected
+
   userDetails: UserDetail = new UserDetail();
-  user: UserDetail = new UserDetail();
-  
+  user: UserDetail = new UserDetail(); 
   UserIdConnected: string;
   UserNameConnected: string='';
   roleslist: any = [];
   testroledir: boolean = false;
   allowedRoles = ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORETAB', 'DIRECTORADMN', 'RESSOURCEHUMAINE', 'RESPFINANCE', 'DAWAAPRIV', 'DOTPRIV', 'FINPRIV', 'DIRPRIV'];
-
+  notifList: AutomaticNotification[] = [];
+  notifCount: number = 0;
   async getUserConnected(): Promise<any> {
     this.user = await this.UserService.getUserConnected();
     this.UserNameConnected = this.user.fullName;
     this.UserIdConnected = this.user.id
+
+    // Test Roles
     this.UserService.getUserRoles(this.user.id).subscribe(res => {
         this.roleslist = res;
       if (this.checker(this.roleslist, this.allowedRoles)) {
           this.testroledir = true;
-
         } else {
           this.testroledir = false;
-        }
+        }   
+    })
+   // GetAutomatic Notif
+
+    this.GetNotifList(this.UserIdConnected)
+    
+
+    // GetNotif Count
+
+    this.CountNotif(this.UserIdConnected)
+  }
+
+  // Count Notif
+
+  CountNotif(userId) {
+    this.signalrService.GetNotificationsNumber(userId).subscribe(res => {
+      this.notifCount = res;
+    })
+  }
+
+  // Get Notif List
+  GetNotifList(userId) {
+
+    this.signalrService.GetUnreadNotificationByUser(userId).subscribe(res => {
+      this.notifList = res.slice(0, 3);
+ 
+    })
+  }
+
+  notif: AutomaticNotification = new AutomaticNotification();
+  id: number;
+  updateNotif(item: AutomaticNotification) {
+    this.notif = Object.assign({}, item);
+    this.notif.vu = "1"
+    this.signalrService.UpdateNotif(this.notif).subscribe(res => {
+      this.router.navigate(['/' + this.notif.pageUrl])
+      this.GetNotifList(this.UserIdConnected);
+      this.CountNotif(this.UserIdConnected)
    
     })
   }

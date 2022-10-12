@@ -37,20 +37,7 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
             var user = await _userManager.FindByIdAsync(userId);
             return new
             {
-                /* user.FullName,
-                 user.Email,
-                 user.UserName,
-                 user.Id,
-                 user.idAdministration,
-                 user.idDepartement,
-                 user.registreCivil,
-                 user.num,
-                 user.soldeconge,
-                 user.attribut1,
-                 user.directeur,
-                 user.position,
-                 user.classement,
-                 user.FullNameEnglish,*/
+              
                  user.Id,
                 user.UserName,
                 user.Email,
@@ -169,6 +156,39 @@ namespace WebApplicationPlateforme.Controllers.UserControllers
             var DirRh = await _context.departements.FindAsync(18);
             var Dir = await _userManager.FindByIdAsync(DirRh.Description);
             return Dir;
+
+        }
+
+        [HttpGet]
+        [Route("GetDotDir")]
+        public async Task<Object> GetDotDir()
+        {
+            var DirDot = await _context.administrations.FindAsync(34);
+            var Dir = await _userManager.FindByIdAsync(DirDot.Description);
+            return Dir;
+
+        }
+
+        [HttpGet]
+        [Route("GetEtabFinList")]
+        public List<ApplicationUser> GetEtabFinList()
+        {
+            List<ApplicationUser> ListDir = new List<ApplicationUser>();
+
+            ListDir = _userManager.Users.Where(item => item.emploi == "محاسب").ToList();
+            return ListDir;
+
+        }
+
+        [HttpGet]
+        [Route("GetMediaDir")]
+        public async Task<Object>  GetMediaDir()
+        {
+       
+            var DirMedia = await _context.administrations.FindAsync(32);
+            var Dir = await _userManager.FindByIdAsync(DirMedia.Description);
+            return Dir;
+           
 
         }
 

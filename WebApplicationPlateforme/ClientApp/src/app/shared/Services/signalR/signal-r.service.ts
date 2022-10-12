@@ -17,7 +17,7 @@ export class connection {
   public msgs: Array<Message>;//signalr
 }
 
-export class Notification {
+export class AutomaticNotification {
   public id: number;
   public transmitterName: string;
   public transmitterId: string;
@@ -27,6 +27,12 @@ export class Notification {
   public receiverName: string;
   public receiverId: string;
   public vu: string;
+  serviceId: number;
+  pageUrl: string;
+  idService: number;
+  userType: string;
+  reponse: string;
+
 }
 
 export class Message {
@@ -106,4 +112,69 @@ export class SignalRService {
     })
   }
 
+  // Notification
+
+  readonly rootURL = this.pathService.getPath();
+  updateNotif(idTransmitter, idReceiver) {
+    return this.http.put(this.rootURL + '/AutomaticNotifs/GetReadUnread/' + idTransmitter + '/' + idReceiver, this.headers);
+  }
+
+  GetNotificationsNumber(idReceiver) {
+    return this.http.get<number>(this.rootURL + '/AutomaticNotifs/GetNotificationsNumber/' + idReceiver);
+  }
+  GetNotification(idReceiver, idSender) {
+    return this.http.get<number>(this.rootURL + '/AutomaticNotifs/GetNotification/' + idReceiver + '/' + idSender);
+  }
+
+  GetLastNotif(idTransmitter,idReceiver) {
+    return this.http.get<AutomaticNotification>(this.rootURL + '/AutomaticNotifs/GetLastNotif/' + idTransmitter +'/' + idReceiver);
+  }
+
+
+  GetNotificationByUser(idReceiver) {
+    return this.http.get<AutomaticNotification[]>(this.rootURL + '/AutomaticNotifs/GetNotificationByUser/' + idReceiver);
+  }
+  GetUnreadNotificationByUser(idReceiver) {
+    return this.http.get<AutomaticNotification[]>(this.rootURL + '/AutomaticNotifs/GetUnreadNotificationByUser/' + idReceiver);
+  }
+
+  GetUnreadServicesNotificationByUser(idReceiver) {
+    return this.http.get<AutomaticNotification[]>(this.rootURL + '/AutomaticNotifs/GetUnreadServicesNotificationByUser/' + idReceiver);
+  }
+
+  GetUnreadDotationsNotificationByUser(idReceiver) {
+    return this.http.get<AutomaticNotification[]>(this.rootURL + '/AutomaticNotifs/GetUnreadDotationsNotificationByUser/' + idReceiver);
+  }
+  GetUnreadMediaNotificationByUser(idReceiver) {
+      return this.http.get<AutomaticNotification[]>(this.rootURL + '/AutomaticNotifs/GetUnreadMediaNotificationByUser/' + idReceiver);
+  }
+
+  UpdateNotif(model: AutomaticNotification) {
+    return this.http.put<AutomaticNotification>(this.rootURL + '/AutomaticNotifs/' + model.id, model, this.headers);
+  }
+
+  CreateNotif(model: AutomaticNotification) {
+    return this.http.post<AutomaticNotification>(this.rootURL + '/AutomaticNotifs', model, this.headers);
+  }
+
+
+  GetLastConnection(idUser) {
+    return this.http.get<connection>(this.rootURL + '/connections/GetLastConnection/' + idUser);
+  }
+
+  deleteConnection(id) {
+    return this.http.delete(this.rootURL + '/connections/' + id);
+  }
+
+  GetConnectionList(idUser) {
+    return this.http.get<connection[]>(this.rootURL + '/connections/GetConnectionList/' + idUser);
+  }
+
+  GetConnectionByIdUser(idUser) {
+    return this.http.get<connection>(this.rootURL + '/connections/GetConnectionByIdUser/' + idUser);
+  }
+
+  TestIfUserConnected(currUserId) {
+    return this.http.get<boolean>(this.rootURL + '/connections/TestIfUserConnected/' + currUserId);
+  }
 }

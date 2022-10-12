@@ -40,6 +40,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
+    this.showdec = false;
 
   }
 
@@ -74,7 +75,7 @@ export class HomeComponent implements OnInit {
   notif: number = 0;
   testNotif: boolean = false;
   user: UserDetail = new UserDetail();
-
+  showdec: boolean = false;
   async getUserConnected(): Promise<any> {
     this.user = await this.UserService.getUserConnected();
     this.UserIdConnected = this.user.id;
@@ -83,25 +84,25 @@ export class HomeComponent implements OnInit {
       this.idadmin = this.user.idAdministration;
       this.idetab = this.user.idDepartement;
     }
+  
+    //this.trinService.TestDecision(this.UserIdConnected, this.idadmin).subscribe(resultat => {
+    //  if (resultat == "Toadmin") {
+    //    this.trinService.DecisionGetByAdmin(this.user.idAdministration).subscribe(res => {
+    //      this.showAdmin = res
 
-    this.trinService.TestDecision(this.UserIdConnected, this.idadmin).subscribe(resultat => {
-      if (resultat == "Toadmin") {
-        this.trinService.DecisionGetByAdmin(this.user.idAdministration).subscribe(res => {
-          this.showAdmin = res
-
-        })
-      } else if (resultat == "ToUser") {
-        this.trinService.GetDecision(this.user.id).subscribe(res => {
-          this.showUser = res
-        })
+    //    })
+    //  } else if (resultat == "ToUser") {
+    //    this.trinService.GetDecision(this.user.id).subscribe(res => {
+    //      this.showUser = res
+    //    })
 
 
-      } else {
-        this.trinService.DecisionGetAllAdmin().subscribe(res => {
-          this.showAll = res
-        })
-      }
-    })
+    //  } else {
+    //    this.trinService.DecisionGetAllAdmin().subscribe(res => {
+    //      this.showAll = res
+    //    })
+    //  }
+    //})
 
 
 

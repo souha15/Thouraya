@@ -284,6 +284,13 @@ export class UserServiceService {
     return this.http.get<UserDetail>(this.BaseURI + '/UserProfile/GetAdminDirG');
   }
 
+  GetDotDir() {
+    return this.http.get<UserDetail>(this.BaseURI + '/UserProfile/GetDotDir');
+  }
+
+  GetMediaDir() {
+    return this.http.get<UserDetail>(this.BaseURI + '/UserProfile/GetMediaDir');
+  }
 
 
   //Get UserList
@@ -388,6 +395,10 @@ async roleMatch(allowedRoles):Promise<boolean>{
 
   addroletoUser(userId: string, roleName: string) {
     return this.http.post(this.BaseURI + '/UserByRole/AddUserRole/' + userId + '/roles/' + roleName, this.headers)
+  }
+
+  GetEtabFinList() {
+    return this.http.get<UserDetail[]>(this.BaseURI + '/UserProfile/GetEtabFinList');
   }
 }
 

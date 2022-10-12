@@ -1,6 +1,4 @@
 <app-nav-menu></app-nav-menu>
-
-<!-- Page Content -->
 <div class="content">
   <div class="row">
     <div class="col-md-3 col-sm-4">
@@ -25,9 +23,7 @@
         font-weight: 800;
         animation-delay: 1s;
       }
-      /*margin-top: -33px;
-font-size: 50px;
-display: block;*/
+
       .banner a {
         display: block;
         background: #fff;
@@ -63,7 +59,6 @@ display: block;*/
         color: white;
         padding: 5px 10px;
         font-size: 15px;
-
       }
 
       .bgImg {
@@ -87,9 +82,9 @@ display: block;*/
           transform: translate(-50%, -50%);
         }
     </style>
-
-    <div class="col-md-9 col-sm-8" >
-      <div class="banner animated tada" *ngIf="showAdmin||showUser||showAll">
+    <!--showAdmin||showUser||showAll-->
+    <div class="col-md-9 col-sm-8">
+      <div class="banner animated tada" *ngIf="showdec">
 
         <a [routerLink]="['/decision-list']">قرار أو تعميم وارد</a>
       </div>

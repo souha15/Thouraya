@@ -39,18 +39,46 @@
     <div class="my-2 my-lg-0" *ngIf="UserNameConnected!=''">
       <a [routerLink]="['/home']" class="ml-2 alert-btn notification"><i class="fa fa-home fa-lg"></i></a>
       <a *ngIf="testroledir" [routerLink]="['/all-demands']" class="ml-2 alert-btn notification"><i class="fa fa-envelope-open fa-lg"></i></a>
+
+      <div class="dropdown d-inline-block">
+        <a class="ml-2 alert-btn notification" id="dropdownMenuButton1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fa fa-bell fa-lg"></i>
+          <span class="notify-badge">{{notifCount}}</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-width" aria-labelledby="dropdownMenuButton1">
+          <div class="notification-ui_dd-content">
+            <div class="notification-list notification-list--unread" *ngFor="let item of notifList;let i = index ">
+              <div class="notification-list_content">
+
+                <div class="notification-list_detail">
+                  <p><b>{{item.transmitterName}}</b></p>
+                  <p class="text-muted">{{item.text}}</p>
+                  <p class="text-muted"><small>{{item.shortDate}}-{{item.shortTime}}</small></p>
+                </div>
+              </div>
+              <div class="notification-list_feature-img">
+                <a style="color:blue" (click)="updateNotif(item)"><i class="fas fa-check-circle"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          <a class="dropdown-item showmore" [routerLink]="['/notif-show']">عرض المزيد</a>
+        </div>
+      </div>
       <button class="btn  user-btn my-2 my-sm-0 mx-3"> مرحبا {{UserNameConnected}}</button>
     </div>
+
+
     <div class="dropdown d-inline-block">
       <a href="#" class="user-img dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <img src="assets/images/avatar.png" alt="user-image">
       </a>
-  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 
-    <a class="dropdown-item" [routerLink]="['/user-info']">بيانات الموظف</a>
-    <a class="dropdown-item" [routerLink]="['/user-change-pasword']">تغيير كلمة  المرور</a>
-    <a class="dropdown-item" (click)="onLogout()" href="">خروج</a>
-</div>
+        <a class="dropdown-item" [routerLink]="['/user-info']">بيانات الموظف</a>
+        <a class="dropdown-item" [routerLink]="['/user-change-pasword']">تغيير كلمة  المرور</a>
+        <a class="dropdown-item" (click)="onLogout()" href="">خروج</a>
+      </div>
     </div>
   </div>
 </nav>

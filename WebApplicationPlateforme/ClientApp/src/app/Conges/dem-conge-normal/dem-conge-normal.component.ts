@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CongeService } from '../../shared/Services/Rh/conge.service';
 import { SoldeCongeService } from '../../shared/Services/Rh/solde-conge.service';
 import { UserServiceService } from '../../shared/Services/User/user-service.service';
@@ -10,29 +10,136 @@ import { NgForm } from '@angular/forms';
 import { NotifService } from '../../shared/Services/NotifSystem/notif.service';
 import { Notif } from '../../shared/Models/NotifSystem/notif.model';
 import { DatePipe } from '@angular/common';
+import { AutomaticNotification, SignalRService, connection } from '../../shared/Services/signalR/signal-r.service';
 
 @Component({
   selector: 'app-dem-conge-normal',
   templateUrl: './dem-conge-normal.component.html',
   styleUrls: ['./dem-conge-normal.component.css']
 })
-export class DemCongeNormalComponent implements OnInit {
+export class DemCongeNormalComponent implements OnInit, OnDestroy {
 
 
   constructor(private congeService: CongeService,
     private soldeCongeService: SoldeCongeService,
     private UserService: UserServiceService,
     private toastr: ToastrService,
-    private notifService: NotifService) { }
+    private notifService: NotifService,
+    private signalService: SignalRService) { }
 
   ngOnInit(): void {
     this.getUserConnected();
     this.UserList();
     const datePipe = new DatePipe('en-Us');
     this.today = datePipe.transform(new Date(), 'yyyy-MM-dd');
-  }
-  today;
+    this.userOnLis();
+    this.userOffLis();
+    this.logOutLis();
+    this.getOnlineUsersLis();
+    this.sendMsgLis();
+    if (this.signalService.hubConnection.state == 1) this.getOnlineUsersInv();
+    else {
+      this.signalService.ssSubj.subscribe((obj: any) => {
+        if (obj.type == "HubConnStarted") {
+          this.getOnlineUsersInv();
+        }
+      });
+    }
 
+  }
+
+  ngOnDestroy() {
+    this.signalService.hubConnection.off("authResponseSuccess")
+  }
+today;
+  users: connection[] = [];
+
+  // Hub Configuration
+
+  userOnLis(): void {
+    this.signalService.hubConnection.on("userOn", (newUser: connection) => {
+
+      this.users.push(newUser);
+    });
+  }
+
+
+  // Get Offline Users
+
+  userOffLis(): void {
+    this.signalService.hubConnection.on("userOff", (personId: string) => {
+      this.users = this.users.filter(u => u.userId != personId);
+    });
+  }
+
+  logOutLis(): void {
+    this.signalService.hubConnection.on("logoutResponse", () => {
+      localStorage.removeItem("userId");
+      location.reload();
+    });
+  }
+
+  //Get Online Users
+
+  getOnlineUsersInv(): void {
+    this.signalService.hubConnection.invoke("getOnlineUsers")
+      .catch(err => console.error(err));
+  }
+
+
+  getOnlineUsersLis(): void {
+    this.signalService.hubConnection.on("getOnlineUsersResponse", (onlineUsers: Array<connection>) => {
+      this.users = [...onlineUsers];
+    });
+  }
+
+  //Send Msg 
+  text: string = 'You Got an Demand From User';
+  sendMsgInv(): void {
+  
+    this.signalService.GetConnectionByIdUser(this.dirId).subscribe(res => {
+      this.userOnline = res;
+      this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text)
+        .catch(err => console.error(err));
+    })  
+  }
+
+
+  private sendMsgLis(): void {
+    this.signalService.hubConnection.on("sendMsgResponse", (connId: string, msg: string, userConSender: string, userConReceiver: string) => {
+      let receiver = this.users.find(u => u.signalrId === connId);
+    })
+  }
+
+
+  // Get Connected List Users
+  getOnlineUsersList(UserIdConnected){
+    this.signalService.GetConnectionList(UserIdConnected).subscribe(res => {
+      this.users = res;
+      console.log(this.users)
+    })
+  }
+
+  // Test If User Connected
+  userOnline: connection = new connection();
+  online: boolean;
+  TestIfUserConnected(userId):boolean {
+    this.signalService.TestIfUserConnected(userId).subscribe(res => {
+      this.online = res
+     
+    })
+    return this.online
+  }
+
+
+  //Dynamic Test of user connected
+  userConnected: boolean = false;
+  DynamicTestConnected() {
+    if (this.users.filter(item => item.userId == this.dirId).length > 0) {
+      this.userConnected = true
+    }
+  }
+  // Conges Creation
 
   soldeconges: SoldeConge = new SoldeConge();
   nbdays: number = 0;
@@ -43,23 +150,32 @@ export class DemCongeNormalComponent implements OnInit {
   UserNameConnected: string;
   userc: UserDetail = new UserDetail();
   notif: Notif = new Notif();
+  autoNotif: AutomaticNotification = new AutomaticNotification();
+  transmitterId: string;
+  receiverId: string;
+  dirId: string;
+  dirName: string;
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.userc = res
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-   
+      this.transmitterId = res.id;
+
       if (res.attribut1 != null) {
         this.conge.directeurnom = res.directeur;
         this.conge.directeurid = res.attribut1;
+        this.dirId = res.attribut1;
+        this.dirName = res.directeur
         this.notif.userReceiverId = res.attribut1;
         this.notif.userReceiverName = res.directeur;
+        this.receiverId = res.attribut1;
       }
       this.notif.userTransmitterId = res.id;
       this.notif.userTransmitterName = res.fullName;
       this.notif.dateTime = this.date;
-      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth()+1).toString() + '-' + this.dateTime.getFullYear().toString();
+      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
       this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
       this.notif.TextNotification = "طلب إجازة إعتيادية من الموظف  " + res.fullName
       this.notif.readUnread = "0";
@@ -90,15 +206,15 @@ export class DemCongeNormalComponent implements OnInit {
     })
 
   }
-
+  conge: Conge = new Conge();
   //Calculate
-  calculatedays(d1, d2) :number{
+  calculatedays(d1, d2): number {
     var months;
     months = (d2.getFullYear() - d1.getFullYear()) * 12;
     months -= d1.getMonth();
     months += d2.getMonth();
 
-   return  this.soldedays + (months * this.nbdays);
+    return this.soldedays + (months * this.nbdays);
   }
   //Get Users List
   user: UserDetail[] = [];
@@ -165,7 +281,7 @@ export class DemCongeNormalComponent implements OnInit {
     let newDated = new Date(this.dated)
     let newDatef = new Date(this.datef);
     var diff = Math.abs(newDated.getTime() - newDatef.getTime());
-    this.diffDays = Math.ceil(diff / (1000 * 3600 * 24))+1;
+    this.diffDays = Math.ceil(diff / (1000 * 3600 * 24)) + 1;
     this.conge.duree = this.diffDays.toString();
   }
 
@@ -178,11 +294,10 @@ export class DemCongeNormalComponent implements OnInit {
     }
     if (d1.getTime() > d2.getTime()) {
       this.testdates = "bad"
-    } 
+    }
   }
 
   //Conge Submit
-  conge: Conge = new Conge();
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
   dateTime = new Date();
@@ -212,14 +327,60 @@ export class DemCongeNormalComponent implements OnInit {
           res => {
             this.notif.serviceId = res.id;
             this.notif.serviceName = "طلب إجازة"
+      
+            this.text = "طلب إجازة إعتيادية";
+            this.autoNotif.serviceId = res.id;
+            this.autoNotif.pageUrl ="menurequests"
+            this.autoNotif.userType = "1";
+            this.autoNotif.reponse = "1";
+            //if (this.users.filter(item => item.userId == this.dirId).length > 0) {
+              this.signalService.GetConnectionByIdUser(this.dirId).subscribe(res1 => {
+                this.userOnline = res1;              
+                  this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+                    .catch(err => console.error(err));                       
+              }, err => {
+                  this.autoNotif.receiverName = this.dirName;
+                  this.autoNotif.receiverId = this.dirId;
+                  this.autoNotif.transmitterId = this.UserIdConnected;
+                  this.autoNotif.transmitterName = this.UserNameConnected;
+                  this.autoNotif.text = "طلب إجازة إعتيادية";
+                  this.autoNotif.vu = "0";
+                  this.autoNotif.reponse = "1";
+                  
+                  this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+
+                  })
+              })
+            //} else {
+            //  this.autoNotif.receiverName = this.dirName;
+            //  this.autoNotif.receiverId = this.dirId;
+            //  this.autoNotif.transmitterId = this.UserIdConnected;
+            //  this.autoNotif.transmitterName = this.UserNameConnected;
+            //  this.autoNotif.text = "طلب إجازة إعتيادية من الموظف  " + this.UserNameConnected;
+            //  this.autoNotif.vu = "0";
+            //  this.autoNotif.reponse = "0";
+            //  this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+
+            //  })
+            //}
+
+
+            //this.autoNotif.serviceId = res.id;
+            //this.autoNotif.pageUrl = "menurequests"
+            //this.signalRService.GetLastNotif(this.transmitterId, this.receiverId).subscribe(res => {
+            //  this.autoNotif = res;
+            //  this.signalRService.updateNotif(this.autoNotif).subscribe(res2 => {
+
+            //  })
+            //})
             this.notifService.Add(this.notif).subscribe(res => {
 
-           
+            })
+
             this.soldeconge = this.soldeconge - +this.conge.duree;
             this.diffDays = 0
             this.toastr.success(" تم تقديم الطلب بنجاح", "نجاح");
             form.resetForm();
-            })
           },
           err => {
             this.toastr.error("  يجب أن يبدأ التاريخ من هذا اليوم", "لم يتم تقديم الطلب ")
@@ -234,6 +395,4 @@ export class DemCongeNormalComponent implements OnInit {
     }
 
   }
-
-
 }

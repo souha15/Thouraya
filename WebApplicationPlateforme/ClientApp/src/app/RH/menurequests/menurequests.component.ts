@@ -14,6 +14,7 @@ import { ProgressStatus } from '../../shared/Interfaces/progress-status';
 import { UploadDownloadService } from '../../shared/Services/Taches/upload-download.service';
 import { ProgressStatusEnum } from '../../shared/Enum/progress-status-enum.enum';
 import { HttpEventType } from '@angular/common/http';
+import { SignalRService, connection, AutomaticNotification } from '../../shared/Services/signalR/signal-r.service';
 
 @Component({
   selector: 'app-menurequests',
@@ -30,15 +31,126 @@ export class MenurequestsComponent implements OnInit {
     private UserService: UserServiceService,
     private soldeCongeService: SoldeCongeService,
     private notifService: NotifService,
-    public serviceupload: UploadDownloadService, ) {
+    public serviceupload: UploadDownloadService,
+    private signalService: SignalRService, ) {
     this.downloadStatus = new EventEmitter<ProgressStatus>();
   }
   p: Number = 1;
   count: Number = 5;
   ngOnInit(): void {
     this.getUserConnected();
-    //this.CongeList();
     this.resetForm();
+    this.GetDirFin();
+    this.userOnLis();
+    this.userOffLis();
+    this.logOutLis();
+    this.getOnlineUsersLis();
+    this.sendMsgLis();
+    if (this.signalService.hubConnection.state == 1) this.getOnlineUsersInv();
+    else {
+      this.signalService.ssSubj.subscribe((obj: any) => {
+        if (obj.type == "HubConnStarted") {
+          this.getOnlineUsersInv();
+        }
+      });
+    }
+  }
+
+  // Handle Notification
+  // Hub Configuration
+  users: connection[] = [];
+  userOnLis(): void {
+    this.signalService.hubConnection.on("userOn", (newUser: connection) => {
+
+      this.users.push(newUser);
+    });
+  }
+
+
+  // Get Offline Users
+
+  userOffLis(): void {
+    this.signalService.hubConnection.on("userOff", (personId: string) => {
+      this.users = this.users.filter(u => u.userId != personId);
+    });
+  }
+
+  logOutLis(): void {
+    this.signalService.hubConnection.on("logoutResponse", () => {
+      localStorage.removeItem("userId");
+      location.reload();
+    });
+  }
+
+  //Get Online Users
+
+  getOnlineUsersInv(): void {
+    this.signalService.hubConnection.invoke("getOnlineUsers")
+      .catch(err => console.error(err));
+  }
+
+
+  getOnlineUsersLis(): void {
+    this.signalService.hubConnection.on("getOnlineUsersResponse", (onlineUsers: Array<connection>) => {
+      this.users = [...onlineUsers];
+    });
+  }
+
+  //Send Msg 
+  text: string;
+  sendMsgInv(): void {
+
+    this.signalService.GetConnectionByIdUser(this.dirId).subscribe(res => {
+      this.userOnline = res;
+      this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text)
+        .catch(err => console.error(err));
+    })
+  }
+
+
+  private sendMsgLis(): void {
+    this.signalService.hubConnection.on("sendMsgResponse", (connId: string, msg: string, userConSender: string, userConReceiver: string) => {
+      let receiver = this.users.find(u => u.signalrId === connId);
+    })
+  }
+
+
+  // Get Connected List Users
+  getOnlineUsersList(UserIdConnected) {
+    this.signalService.GetConnectionList(UserIdConnected).subscribe(res => {
+      this.users = res;
+      console.log(this.users)
+    })
+  }
+
+  // Test If User Connected
+  userOnline: connection = new connection();
+  online: boolean;
+  TestIfUserConnected(userId): boolean {
+    this.signalService.TestIfUserConnected(userId).subscribe(res => {
+      this.online = res
+
+    })
+    return this.online
+  }
+
+
+  //Dynamic Test of user connected
+  userConnected: boolean = false;
+  DynamicTestConnected() {
+    if (this.users.filter(item => item.userId == this.dirId).length > 0) {
+      this.userConnected = true
+    }
+  }
+
+  //Get Dir Fin Etab
+  dirId: string;
+  dirName: string;
+  GetDirFin() {
+    this.UserService.getAdminFinDir().subscribe(res => {
+      this.dirId = res.id;
+      this.dirName = res.fullName
+    })
   }
 
 
@@ -68,6 +180,8 @@ export class MenurequestsComponent implements OnInit {
       this.UserService.getAdminFinDir().subscribe(resDir => {
         this.notif.userReceiverId = resDir.id;
         this.notif.userReceiverName = resDir.fullName;
+        this.dirId = resDir.id
+        this.dirName = resDir.fullName
       })
       this.congeService.GetUsersDemands(this.UserIdConnected).subscribe(res => {
         this.filtredCongeList = res
@@ -113,18 +227,14 @@ export class MenurequestsComponent implements OnInit {
   }
   date = new Date().toLocaleDateString();
   conge: Conge = new Conge();
-
+  autoNotif: AutomaticNotification = new AutomaticNotification();
   updateRecord(form: NgForm) {
 
     this.conge = Object.assign(this.conge, form.value);
     this.congeService.formData.dated = this.date;
     if (this.etat == "رفض") {
       this.congeService.formData.attribut2 = "رفض"
-    } else {
-      //this.UserService.GetUserById(this.per.idUserCreator).subscribe(res => {
-        //if (res.attribut1 == "318e6451-f404-43aa-8dcb-fcaef185d0af") {
-
-     
+    } else {   
           this.per.transferera = "2"
           this.per.attribut6 = "إعتماد بخصم"
           this.per.etat = "25%"
@@ -237,6 +347,31 @@ export class MenurequestsComponent implements OnInit {
 
             })
           })
+
+      //Send Notification
+      this.text = "طلب  "+this.per.type;
+      this.autoNotif.serviceId = this.per.id;
+      this.autoNotif.pageUrl = "validate-conge"
+      this.autoNotif.userType = "2";
+      this.autoNotif.reponse = "1";
+      this.signalService.GetConnectionByIdUser(this.dirId).subscribe(res1 => {
+        this.userOnline = res1;
+        this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+          .catch(err => console.error(err));
+      }, err => {
+        this.autoNotif.receiverName = this.dirName;
+        this.autoNotif.receiverId = this.dirId;
+        this.autoNotif.transmitterId = this.UserIdConnected;
+        this.autoNotif.transmitterName = this.UserNameConnected;
+        this.autoNotif.text = "طلب  " + this.per.type;
+        this.autoNotif.vu = "0";
+        this.autoNotif.reponse = "1";
+
+        this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+
+        })
+      })
+
         }
   }
 

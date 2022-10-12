@@ -127,7 +127,58 @@ namespace WebApplicationPlateforme.Controllers.AutomaticNotificationControllers
             }
             return lastCon;
         }
-        private bool connectionExists(int id)
+
+        // Get Connection from Userid
+
+        [HttpGet]
+        [Route("GetConnectionByIdUser/{idUser}")]
+        public connection GetConnection(string idUser)
+        {
+            var lastCon = _context.Connections.Where(item => item.userId == idUser)
+                .OrderBy(item => item.timeStamp)
+                .Last();
+            return lastCon;
+        }
+
+        // Get Conected User 
+        [HttpGet]
+        [Route("GetConnectionList/{currUserId}")]
+        public List<connection> GetConnectionList(string currUserId) { 
+        List<connection> onlineUsers = new List<connection>();
+        onlineUsers = _context.Connections.Where(item => item.userId != currUserId).ToList();
+        return onlineUsers;
+    
+        }
+
+        [HttpGet]
+        [Route("TestIfUserConnected/{currUserId}")]
+        public bool TestIfUserConnected(string currUserId)
+        {
+            connection user = new connection();
+            List<connection> onlineUsers = new List<connection>();
+            onlineUsers = _context.Connections.ToList();
+            if (onlineUsers.Count > 0)
+            {
+                user = _context.Connections.Where(item => item.userId == currUserId).FirstOrDefault();
+            }
+                return onlineUsers.Contains(user);
+           
+  
+        }
+
+        //async Task<ActionResult<connection>> Getconnection(int id)
+        //{
+        //    var connection = await _context.Connections.FindAsync(id);
+
+        //    if (connection == null)
+        //    {
+        //        return NotFound();
+        //    }
+
+        //    return connection;
+
+
+            private bool connectionExists(int id)
         {
             return _context.Connections.Any(e => e.Id == id);
         }

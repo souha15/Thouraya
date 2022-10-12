@@ -9,7 +9,9 @@ export class PathSharedService {
 
   getPath() {
 //return  'https://awwal-dawahtaif.com/api'
- return 'http://localhost:49599/api'
+return 'http://localhost:49599/api'
+// return 'http://161.97.163.78:83/api'
+   // return 'http://173.212.215.254:84/api'
 
 
   }
