@@ -1,0 +1,4 @@
+Web deployment task failed. ( Impossible de se connecter à l'ordinateur distant ('vmi650189'). Vérifiez que le nom de l'ordinateur distant est correct et que vous pouvez vous y connecter.  Pour en savoir plus : http://go.microsoft.com/fwlink/?LinkId=221672#ERROR_DESTINATION_INVALID.)
+
+ Impossible de se connecter à l'ordinateur distant ('vmi650189'). Vérifiez que le nom de l'ordinateur distant est correct et que vous pouvez vous y connecter.  Pour en savoir plus : http://go.microsoft.com/fwlink/?LinkId=221672#ERROR_DESTINATION_INVALID.
+Le nom distant n'a pas pu être résolu: 'vmi650189'

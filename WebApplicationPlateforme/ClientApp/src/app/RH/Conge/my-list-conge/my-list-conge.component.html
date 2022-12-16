@@ -79,15 +79,15 @@
                 <td (click)="populateForm(cg)"
                     [ngClass]="{
 
-  'success': cg.attribut2 === 'موافق',
-  'denied': cg.attribut2 === 'رفض',
-  'wait': cg.attribut2 === 'في الانتظار'
+  'success': cg.etat === 'موافق',
+  'denied': cg.etat === 'رفض',
+  'wait': cg.etat === 'في الإنتظار'
 }">
-                  {{cg.attribut2}}
+                  {{cg.etat}}
                 </td>
                 <td (click)="populateForm(cg)"><a class="btn btn-primary" data-toggle="modal" data-target="#myModal2"><i class="fa fa-eye"></i>  </a></td>
-                <td (click)="populateForm(cg)"><a class="btn btn-success" data-toggle="modal" data-target="#myModal1" *ngIf="cg.etat === '5%'"><i class="fa fa-edit"></i>  </a></td>
-                <td (click)="populateForm(cg)"><a (click)="populateForm(cg);onDelete(cg.id)" class="btn btn-danger" *ngIf="cg.etat === '5%'"><i class="fa fa-trash"></i></a></td>
+                <td (click)="populateForm(cg)"><a class="btn btn-success" data-toggle="modal" data-target="#myModal1" *ngIf="cg.userEtat1 === 'في الإنتظار'"><i class="fa fa-edit"></i>  </a></td>
+                <td (click)="populateForm(cg)"><a (click)="populateForm(cg);onDelete(cg.id)" class="btn btn-danger" *ngIf="cg.userEtat1 === 'في الإنتظار'"><i class="fa fa-trash"></i></a></td>
               </tr>
 
             </tbody>
@@ -108,7 +108,7 @@
 </div>
 <!-- Footer -->
 <footer class="text-center">
-  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <a class="navbar-brand" href="#"> <img src="assets/images/awal.png" style="width:40px;height:40px;"></a> </p>
 </footer>
 
 

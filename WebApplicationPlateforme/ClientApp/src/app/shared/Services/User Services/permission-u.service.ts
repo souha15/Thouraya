@@ -7,6 +7,7 @@ import { PermissionU } from '../../Models/User Services/permission-u.model';
 @Injectable({
   providedIn: 'root'
 })
+ 
 export class PermissionUService {
   constructor(private pathService: PathSharedService,
     private http: HttpClient) { }
@@ -26,12 +27,19 @@ export class PermissionUService {
     return this.http.post<PermissionU>(this.rootURL + '/PermissionUs', PermissionU, this.headers);
   }
 
+ 
+
   geByUser(id) {
     return this.http.get<PermissionU[]>(this.rootURL + '/PermissionByUser/'+id);
   }
 
   PutObservableE(Transaction: PermissionU) {
     return this.http.put<PermissionU>(this.rootURL + '/PermissionUs/' + Transaction.id, Transaction, this.headers);
+
+  }
+
+  EditDemandByRole(Id:number, userEtat:string) {
+    return this.http.get<PermissionU>(this.rootURL + '/PermissionUs/EditDemandByRole/' + Id +'/'+ userEtat, this.headers);
 
   }
   Post() {
@@ -42,6 +50,17 @@ export class PermissionUService {
 
   Get(): Observable<PermissionU[]> {
     return this.http.get<PermissionU[]>(this.rootURL + '/PermissionUs');
+  }
+
+  GetPermissionByUserCreator(userId) {
+    return this.http.get<PermissionU[]>(this.rootURL + '/PermissionUs/GetPermissionByUserCreator/' + userId);
+  }
+  GetPermissionDemand(userId) {
+    return this.http.get<PermissionU[]>(this.rootURL + '/PermissionUs/GetPermissionDemand/' + userId);
+  }
+
+  GetPersmissionHistorique(id) {
+    return this.http.get<PermissionU>(this.rootURL + '/PermissionUs/GetPersmissionHistorique/' + id);
   }
 
   //Get PermissionU By Id

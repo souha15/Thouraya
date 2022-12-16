@@ -28,9 +28,6 @@ export class DemCongeMaladieComponent implements OnInit {
   constructor(private congeService: CongeService,
     private UserService: UserServiceService,
     private toastr: ToastrService,
-    private notifService: NotifService,
-    private rootUrl: PathSharedService,
-    private http: HttpClient,
     public serviceupload: UploadDownloadService,
     private signalService: SignalRService) {
     this.uploadStatuss = new EventEmitter<ProgressStatus>();
@@ -163,21 +160,6 @@ export class DemCongeMaladieComponent implements OnInit {
       this.userc = res
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-      if (res.attribut1 != null) {
-        this.conge.directeurnom = res.directeur;
-        this.conge.directeurid = res.attribut1;
-        this.notif.userReceiverId = res.attribut1;
-        this.notif.userReceiverName = res.directeur;
-        this.dirId = res.attribut1;
-        this.dirName = res.directeur
-      }
-      this.notif.userTransmitterId = res.id;
-      this.notif.userTransmitterName = res.fullName;
-      this.notif.dateTime = this.date;
-      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
-      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
-      this.notif.TextNotification = "طلب إجازة مرضية من الموظف  " + res.fullName
-      this.notif.readUnread = "0";
       this.conge.userNameCreator = res.fullName;
       this.conge.idUserCreator = res.id;
 
@@ -275,13 +257,8 @@ export class DemCongeMaladieComponent implements OnInit {
   date = new Date().toLocaleDateString();
   dateTime = new Date();
   onSubmit(form: NgForm) {
-    this.conge.dateenreg = this.date;
-    this.conge.etat = "5%";
-    this.conge.etatd = "في الانتظار";
-    this.conge.etatrh = "في الانتظار";
-    this.conge.attribut2 = "في الانتظار";
+    this.conge.etat = "في الإنتظار";
     this.conge.type = "إجازة مرضية"
-    this.conge.attribut6 = "في الانتظار";
     if (form.invalid) {
       this.isValidFormSubmitted = false;
     }
@@ -292,37 +269,38 @@ export class DemCongeMaladieComponent implements OnInit {
 
       this.congeService.Add(this.conge).subscribe(
         res => {
-          this.notif.serviceId = res.id;
-          this.notif.serviceName = "طلب إجازة"
+          this.toastr.success(" تم تقديم الطلب بنجاح", "نجاح");
+          form.resetForm();
           this.pj.idConge = res.id;
           this.fileslist.forEach(item => {
             this.pj.path = item;
-            this.congeService.AddCF(this.pj).subscribe(res => {
+            this.congeService.AddCF(this.pj).subscribe(res2 => {
               this.Files = [];
               this.bool = false;
             })
           })
-          this.notifService.Add(this.notif).subscribe(res => {
           this.diffDays = 0
           this.toastr.success(" تم تقديم الطلب بنجاح", "نجاح");
             form.resetForm();
 
 
-            this.text = "طلب إجازة مرضية";
-            this.autoNotif.serviceId = res.id;
-            this.autoNotif.pageUrl = "menurequests"
-            this.autoNotif.userType = "1";
-            this.autoNotif.reponse = "1";
+          this.dirId = res.userId1;
+          this.dirName = res.userName1;
+          this.text = "طلب إجازة مرضية";
+          this.autoNotif.serviceId = res.id;
+          this.autoNotif.pageUrl = "rh-conge-list"
+          this.autoNotif.userType = "1";
+          this.autoNotif.reponse = "1";
             //if (this.users.filter(item => item.userId == this.dirId).length > 0) {
             this.signalService.GetConnectionByIdUser(this.dirId).subscribe(res1 => {
               this.userOnline = res1;
               this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
                 .catch(err => console.error(err));
             }, err => {
-              this.autoNotif.receiverName = this.dirName;
-              this.autoNotif.receiverId = this.dirId;
-              this.autoNotif.transmitterId = this.UserIdConnected;
-              this.autoNotif.transmitterName = this.UserNameConnected;
+                this.autoNotif.receiverName = this.dirName;
+                this.autoNotif.receiverId = this.dirId;
+                this.autoNotif.transmitterId = this.UserIdConnected;
+                this.autoNotif.transmitterName = this.UserNameConnected;
               this.autoNotif.text = "طلب إجازة مرضية";
               this.autoNotif.vu = "0";
               this.autoNotif.reponse = "1";
@@ -332,7 +310,7 @@ export class DemCongeMaladieComponent implements OnInit {
               })
             })
 
-          })
+         
         },
         err => {
           this.toastr.error("لم يتم تقديم الطلب", "فشل ")

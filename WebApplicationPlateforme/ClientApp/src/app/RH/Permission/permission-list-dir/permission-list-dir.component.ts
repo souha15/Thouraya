@@ -1,13 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { CongeService } from '../../../shared/Services/Rh/conge.service';
 import { ToastrService } from 'ngx-toastr';
 import { UserServiceService } from '../../../shared/Services/User/user-service.service';
 import { UserDetail } from '../../../shared/Models/User/user-detail.model';
 import { NgForm } from '@angular/forms';
 import { PermissionUService } from '../../../shared/Services/User Services/permission-u.service';
 import { PermissionU } from '../../../shared/Models/User Services/permission-u.model';
-import { NotifService } from '../../../shared/Services/NotifSystem/notif.service';
-import { Notif } from '../../../shared/Models/NotifSystem/notif.model';
 import { SignalRService, connection, AutomaticNotification } from '../../../shared/Services/signalR/signal-r.service';
 
 @Component({
@@ -18,16 +15,14 @@ import { SignalRService, connection, AutomaticNotification } from '../../../shar
 export class PermissionUListDirComponent implements OnInit {
 
   filter;
-  constructor(private congeService: PermissionUService,
+  constructor(private permissionService: PermissionUService,
     private toastr: ToastrService,
     private UserService: UserServiceService,
-    private notifService: NotifService,
     private signalService: SignalRService) { }
 
   ngOnInit(): void {
     this.getUserConnected();
     this.CongeList();
-    this.resetForm();
     this.userOnLis();
     this.userOffLis();
     this.logOutLis();
@@ -86,7 +81,7 @@ export class PermissionUListDirComponent implements OnInit {
   text: string;
   sendMsgInv(): void {
 
-    this.signalService.GetConnectionByIdUser(this.dirId).subscribe(res => {
+    this.signalService.GetConnectionByIdUser(this.per.iddir).subscribe(res => {
       this.userOnline = res;
       this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text)
         .catch(err => console.error(err));
@@ -123,15 +118,14 @@ export class PermissionUListDirComponent implements OnInit {
   //Dynamic Test of user connected
   userConnected: boolean = false;
   DynamicTestConnected() {
-    if (this.users.filter(item => item.userId == this.dirId).length > 0) {
+    if (this.users.filter(item => item.userId == this.per.iddir).length > 0) {
       this.userConnected = true
     }
   }
 
   // Get Etab Fin List Comptable
   ComptaList: UserDetail[] = [];
-  dirId: string;
-  dirName: string;
+
   GetEtabFinList() {
     this.UserService.GetEtabFinList().subscribe(res => {
       this.ComptaList = res;
@@ -147,7 +141,6 @@ export class PermissionUListDirComponent implements OnInit {
   UserNameConnected: string;
   adminisgtrationName: any;
   userc: UserDetail = new UserDetail();
-  notif: Notif = new Notif();
   dateTime = new Date();
   getUserConnected() {
 
@@ -155,36 +148,26 @@ export class PermissionUListDirComponent implements OnInit {
       this.userc = res
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-      this.notif.userTransmitterId = res.id;
-      this.notif.userTransmitterName = res.fullName;
-      this.notif.dateTime = this.date;
-      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
-      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
-      this.notif.TextNotification = " تمت الموافقة على طلب إذن  من قبل" + ' ' + res.fullName
-      this.notif.serviceName = "طلب إذن"
-      this.notif.readUnread = "0";
-      this.notif.serviceId = 6;
-      this.UserService.GetRhDepartement().subscribe(resDir => {
-        this.notif.userReceiverId = resDir.id;
-        this.notif.userReceiverName = resDir.fullName;
-      })
+      this.permissionService.GetPermissionDemand(this.UserIdConnected).subscribe(res => {
+        this.PermissionList = res;
+      }
+        )
+
     })
 
   }
 
-  congeList: PermissionU[] = [];
-  filtredCongeList: PermissionU[] = [];
+  PermissionList: PermissionU[] = [];
   CongeList() {
-    this.congeService.Get().subscribe(res => {
-      this.congeList = res
-      this.filtredCongeList = this.congeList.filter(item => item.etatdir == "في الانتظار" && item.iddir == this.UserIdConnected)
+    this.permissionService.GetPermissionDemand(this.UserIdConnected).subscribe(res => {
+      this.PermissionList = res
     })
   }
+
   per: PermissionU = new PermissionU();
 
   populateForm(conge: PermissionU) {
     this.per = Object.assign({}, conge)
-    this.congeService.formData = Object.assign({}, conge)
   }
 
 
@@ -192,46 +175,95 @@ export class PermissionUListDirComponent implements OnInit {
   etattest(event) {
     this.etat = event.target.value;
   }
-
+  
   date = new Date().toLocaleDateString();
-  conge: PermissionU = new PermissionU();
 
   updateRecord(form: NgForm) {
+    this.permissionService.EditDemandByRole(this.per.id, this.etat).subscribe(res => {
+      this.per = res;    
+      this.permissionService.PutObservableE(this.per).subscribe(res1 => {
 
-    this.conge = Object.assign(this.conge, form.value);
-    this.congeService.formData.datedir = this.date;
-    this.congeService.formData.iddir = this.UserIdConnected;
-    this.congeService.formData.nomdir = this.UserNameConnected;
-    this.congeService.Edit().subscribe(res => {
-      if (this.etat == "موافق") {
-        this.autoNotif.serviceId = this.per.id;
-        this.autoNotif.pageUrl = "rh-conge-list"
-        this.autoNotif.userType = "3";
-        this.autoNotif.reponse = "2";
-        this.text = " طلب اذن ";
-        this.signalService.GetConnectionByIdUser(this.notif.userReceiverId).subscribe(res1 => {
-          this.userOnline = res1;
-          this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
-            .catch(err => console.error(err));
-        }, err => {
-          this.autoNotif.receiverName = this.dirName;
-          this.autoNotif.receiverId = this.dirId;
-          this.autoNotif.transmitterId = this.UserIdConnected;
-          this.autoNotif.transmitterName = this.UserNameConnected;
-            this.text =  " طلب اذن ";
-          this.autoNotif.vu = "0";
+        if (this.etat == "موافق") {
+          this.autoNotif.serviceId = this.per.id;
+          this.autoNotif.pageUrl = "permission-list-dir"
+          this.autoNotif.userType = "3";
+          this.autoNotif.reponse = "2";
+          this.text = " طلب اذن ";
+          this.signalService.GetConnectionByIdUser(this.per.iddir).subscribe(res1 => {
+            this.userOnline = res1;
+            this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+              .catch(err => console.error(err));
+          }, err => {
+            this.autoNotif.receiverName = this.per.nomdir;
+              this.autoNotif.receiverId = this.per.iddir;
+            this.autoNotif.transmitterId = this.UserIdConnected;
+            this.autoNotif.transmitterName = this.UserNameConnected;
+              this.autoNotif.text = " طلب اذن ";
+            this.autoNotif.vu = "0";
 
 
-          this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+            this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
 
+            })
           })
-        })
-      }
-      this.notifService.Add(this.notif).subscribe(res => {
+        } if (this.per.etat == "رفض") {
+          this.autoNotif.serviceId = this.per.id;
+          this.autoNotif.pageUrl = "permission-list"
+          this.autoNotif.userType = "0";
+          this.autoNotif.reponse = "2";
+          this.text = " لقد تم رفض طلب الإذن ";
+          this.signalService.GetConnectionByIdUser(this.per.idUserCreator).subscribe(res1 => {
+            this.userOnline = res1;
+            this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+              .catch(err => console.error(err));
+          }, err => {
+            this.autoNotif.receiverName = this.per.creatorName;
+            this.autoNotif.receiverId = this.per.idUserCreator;
+            this.autoNotif.transmitterId = this.UserIdConnected;
+            this.autoNotif.transmitterName = this.UserNameConnected;
+              this.autoNotif.text = " لقد تم رفض طلب الإذن";
+            this.autoNotif.vu = "0";
+
+
+            this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+
+            })
+          })
+        } if (this.per.etat == "موافق") {
+          this.autoNotif.serviceId = this.per.id;
+          this.autoNotif.pageUrl = "permission-list"
+          this.autoNotif.userType = "0";
+          this.autoNotif.reponse = "2";
+          this.text = " لقد تمت الموافقة على طلب الإذن ";
+          this.signalService.GetConnectionByIdUser(this.per.idUserCreator).subscribe(res1 => {
+            this.userOnline = res1;
+            this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+              .catch(err => console.error(err));
+          }, err => {
+              this.autoNotif.receiverName = this.per.creatorName;
+              this.autoNotif.receiverId = this.per.idUserCreator;
+            this.autoNotif.transmitterId = this.UserIdConnected;
+            this.autoNotif.transmitterName = this.UserNameConnected;
+              this.autoNotif.text = " لقد تمت الموافقة على طلب الإذن";
+            this.autoNotif.vu = "0";
+
+
+            this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+
+            })
+          })
+        }
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
-        this.resetForm();
+        form.resetForm();
         this.CongeList();
+
       })
+    
+
+ 
+
+
+      
    
       },
         err => {
@@ -248,37 +280,4 @@ export class PermissionUListDirComponent implements OnInit {
     this.updateRecord(form)
   }
 
-
-  resetForm(form?: NgForm) {
-    if (form != null)
-      form.resetForm();
-    this.congeService.formData = {
-      id: null,
-      date: '',
-      type: '',
-      autre: '',
-      heuredeb: '',
-      heurefin: '',
-      raison: '',
-      etat: '',
-      etatdir: '',
-      etatrh: '',
-      iddir: '',
-      idrh: '',
-      nomrh: '',
-      nomdir: '',
-      datedir: '',
-      daterh: '',
-      creatorName: '',
-      datenereg: '',
-      attibut1: '',
-      attribut2: '',
-      attribut3: '',
-      attribut4: '',
-      attribut5: '',
-      attribut6: '',
-      idUserCreator: '',
-
-    }
-  }
 }

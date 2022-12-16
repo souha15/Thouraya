@@ -1,0 +1,154 @@
+
+
+<app-nav-menu></app-nav-menu>
+
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+
+      <section class="page-content">
+        <nav class="d-flex p-0 bd-highlight tasks-nav mt-2">
+          <a [routerLink]="['/list-workflow-services']" href="" class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-list "></i></span>
+            قائمة سير الإجراء
+          </a>
+
+          <a [routerLink]="['/add-workflow-configuration']" href="" class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-plus"></i></span>
+            إضافة  سير إجراء
+          </a>
+
+
+
+        </nav>
+<br />
+        <h4 class="my-2 task-head"> إعدادات سير إجراء الخدمات</h4>
+
+
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-box w-100">
+              <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+                <div class="col-md-12">
+                  <label for="unit-num"><span><i class="fa fa-check-circle"></i></span>الخدمة </label>
+                  <select id="user" class="" name="serviceName" #serviceName="ngModel" [(ngModel)]="wf.serviceName" (change)="getServiceId($event)" required>
+                    <option [ngValue]="undefined" selected disabled>-الخدمة-</option>
+                    <option value="إجازة">إجازة</option>
+                    <option value="إذن">إذن</option>
+                    <option value="انتداب">انتداب</option>
+                    <option value="عهدة">عهدة</option>
+                    <option value="مشهد براتب">مشهد براتب</option>
+                    <option value="تجديد إقامة">تجديد إقامة</option>
+                    <option value="صرف شيك">صرف شيك</option>
+                    <option value="مستحقات مالية">مستحقات مالية</option>
+                    <option value="دورة تدريبية">دورة تدريبية</option>
+                    <option value="إستقالة">إستقالة</option>
+                    <option value="شكوى">شكوى</option>
+                    <option value="بطاقة موظف">بطاقة موظف</option>
+                    <option value="سلفة">سلفة</option>
+                    <option value="صيانة/دعم فني">صيانة/دعم فني</option>
+                    <option value="استحداث وظيفة">استحداث وظيفة</option>
+                    <option value="ساعات إضافية">ساعات إضافية</option>
+                    <option value="شهادة عمل">شهادة عمل</option>
+                    <option value="مباشرة عمل">مباشرة عمل</option>
+                    <option value="تعديل حساب بنكي">تعديل حساب بنكي</option>
+                  </select>
+                  <div *ngIf="serviceName.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                    مطلوب الخدمة .
+                  </div>
+
+                </div>
+
+                <div class="col-md-12">
+                  <label for="unit-num"><span><i class="fa fa-sort"></i></span> عدد الأطراف </label>
+                  <input type="number" id="user" class="" name="rolesNb" #rolesNb="ngModel" [(ngModel)]="wf.rolesNb" (change)="getDropDownSettings($event)" required>
+
+                  <div *ngIf="rolesNb.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                    مطلوب عدد الأطراف .
+                  </div>
+
+                </div>
+
+                <div class="col-md-12">
+
+                  <label for="task"><span><i class="fa fa-users"></i></span>الأطراف</label>
+                  <ng-multiselect-dropdown style="width:400px"
+                                           name="employeead"
+                                           [placeholder]="'اختر الأطراف'"
+                                           [(ngModel)]="itemselected"
+                                           [settings]="dropdownSettings"
+                                           [data]="roles"
+                                           [disabled]="disabled"
+                                           (onSelect)="onItemSelect($event)"
+                                           (onSelectAll)="onSelectAll($event)"
+                                           (onFilterChange)="onFilterChange($event)">
+                  </ng-multiselect-dropdown>
+                </div>
+
+                <div class="text-left">
+                  <button class="btn add-inputs0" type="submit">اضافة</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="form-box w-100">
+
+              <div class="col-md-4">
+                <div class="timeline">
+                  <ol class="list-numbered" cdkDropList
+                      [cdkDropListData]="selecteditems"
+                      (cdkDropListDropped)="drop($event)">
+
+                    <li>
+                      <span>الموظف</span>
+                    </li>
+                    <li *ngFor="let item of selecteditems" cdkDrag>
+                      <span>{{item.text}}</span>
+                    </li>
+                  </ol>
+                </div>
+              </div>
+
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <a class="navbar-brand" href="#"> <img src="assets/images/awal.png" style="width:40px;height:40px;"></a> </p>
+</footer>
+<!--<div class="table-responsive my-3" *ngIf="paytest">
+  <table class="table table-bordered table-striped theme-table">
+    <thead>
+      <tr>
+        <th scope="col">	رقم الوحدة</th>
+        <th scope="col">قيمة الايجار</th>
+        <th scope="col">عداد الكهرباء</th>
+        <th scope="col">حذف</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let dp of payList">
+        <td>{{dp.numRevenus}}</td>
+        <td>{{dp.prix}}</td>
+        <td>{{dp.compteurElc}}</td>
+        <td><a (click)="del1(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>-->

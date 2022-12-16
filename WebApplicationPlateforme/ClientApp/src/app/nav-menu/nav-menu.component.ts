@@ -127,6 +127,7 @@ export class NavMenuComponent implements OnInit, OnDestroy {
   testroledir: boolean = false;
   allowedRoles = ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORETAB', 'DIRECTORADMN', 'RESSOURCEHUMAINE', 'RESPFINANCE', 'DAWAAPRIV', 'DOTPRIV', 'FINPRIV', 'DIRPRIV'];
   notifList: AutomaticNotification[] = [];
+  notifListUser: AutomaticNotification[] = [];
   notifCount: number = 0;
   async getUserConnected(): Promise<any> {
     this.user = await this.UserService.getUserConnected();
@@ -145,11 +146,13 @@ export class NavMenuComponent implements OnInit, OnDestroy {
    // GetAutomatic Notif
 
     this.GetNotifList(this.UserIdConnected)
+    this.GetNotifListUser(this.UserIdConnected)
     
 
     // GetNotif Count
 
     this.CountNotif(this.UserIdConnected)
+    this.CountNotifUser(this.UserIdConnected)
   }
 
   // Count Notif
@@ -160,12 +163,29 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     })
   }
 
+  // Get Notif Number For user demanded
+  notifUser: number = 0;
+  CountNotifUser(userId) {
+    this.signalrService.GetNotificationsNumberForUserSender(userId).subscribe(res => {
+      this.notifUser = res;
+    })
+  }
   // Get Notif List
   GetNotifList(userId) {
 
     this.signalrService.GetUnreadNotificationByUser(userId).subscribe(res => {
       this.notifList = res.slice(0, 3);
  
+    })
+  }
+
+  // Get Notif List
+
+  GetNotifListUser(userId) {
+
+    this.signalrService.GetUnreadNotificationsForUserSenderList(userId).subscribe(res => {
+      this.notifListUser = res.slice(0, 3);
+
     })
   }
 

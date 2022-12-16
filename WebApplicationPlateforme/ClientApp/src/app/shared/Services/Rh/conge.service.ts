@@ -3,6 +3,7 @@ import { PathSharedService } from '../../path-shared.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Conge } from '../../Models/RH/conge.model';
 import { Observable } from 'rxjs';
+import { SoldeConge } from '../../Models/RH/solde-conge.model';
 
 
 export class CongeFiles {
@@ -61,6 +62,31 @@ export class CongeService {
 
   GetById(Id) {
     return this.http.get<Conge>(this.rootURL + '/Conges/' + Id);
+  }
+
+  GetCongeByUserCreator(userId) {
+    return this.http.get<Conge[]>(this.rootURL + '/Conges/GetCongeByUserCreator/' + userId);
+  }
+
+  GetCongeDemand(userId) {
+    return this.http.get<Conge[]>(this.rootURL + '/Conges/GetCongeDemand/' + userId);
+  }
+
+  GetCongeHistorique(id) {
+    return this.http.get<Conge>(this.rootURL + '/Conges/GetCongeHistorique/' + id);
+  }
+
+  EditDemandByRole(Id: number, userEtat: string) {
+    return this.http.get<Conge>(this.rootURL + '/Conges/EditDemandByRole/' + Id + '/' + userEtat, this.headers);
+
+  }
+
+  CreditSoldeReduit(idUser: string, id: number) {
+    return this.http.put<SoldeConge>(this.rootURL + '/Conges/CreditSoldeReduit/' + idUser + '/' + id, this.headers);
+
+  }
+  TestTheLastUser(id) {
+    return this.http.get<boolean>(this.rootURL + '/Conges/TestTheLastUser/' + id , this.headers);
   }
 
   GetUsersDemands(Id) {

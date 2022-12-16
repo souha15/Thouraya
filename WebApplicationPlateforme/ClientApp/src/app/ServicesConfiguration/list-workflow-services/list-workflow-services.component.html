@@ -1,0 +1,1351 @@
+
+
+<app-nav-menu></app-nav-menu>
+
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+      <!-- Second Navbar -->
+
+      <section class="page-content">
+        <nav class="d-flex p-0 bd-highlight tasks-nav mt-2">
+          <a [routerLink]="['/list-workflow-services']" href="" class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-list "></i></span>
+            قائمة سير الإجراء
+          </a>
+
+          <a [routerLink]="['/add-workflow-configuration']" href="" class="p-2 flex-fill bd-highlight">
+            <span><i class="fa fa-plus"></i></span>
+            إضافة  سير إجراء
+          </a>
+
+
+
+        </nav>
+        <br />
+        <h4 class="my-2 task-head"> إعدادات سير إجراء الخدمات</h4>
+
+
+        <div class="row">
+        
+          <div class="table-responsive my-3">
+            <table class="table table-bordered table-striped theme-table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">الخدمة</th>
+                  <th scope="col">عدد الأطراف</th>
+                  <!--<th scope="col">الأطراف</th>-->
+                  <th scope="col">تفاصيل</th>
+                  <!--<th scope="col">تعديل</th>-->
+                  <th scope="col">حذف </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let wf of WfList ;let i = index">
+                  <th scope="row">{{i + 1}}</th>
+                  <td>طلب {{wf.serviceName}}</td>
+                  <td>{{wf.rolesNb}}</td>
+                 <!-- <td>{{wf.roleName1}}-{{wf.roleName2}}-{{wf.roleName3}}-{{wf.roleName4}}-{{wf.roleName5}}-{{wf.roleName6}}-{{wf.roleName7}}-{{wf.roleName8}}</td>-->
+                  <td><a (click)="populateForm(wf)" class="btn btn-primary" data-toggle="modal" data-target="#myModal3"><i class="fa fa-eye"></i></a></td>
+                  <!--<td><a class="btn btn-success" [routerLink]="['/edit-workflow-configuration', wf.id]" data-toggle="modal" data-target="#myModal"><i class="fa fa-edit"></i></a></td>-->
+                  <td><a (click)="delete(wf.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+
+
+                </tr>
+
+              </tbody>
+
+            </table>
+          </div>
+
+        </div>
+      </section>
+
+
+    </div>
+
+  </div>
+
+</div>
+
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <a class="navbar-brand" href="#"> <img src="assets/images/awal.png" style="width:40px;height:40px;"></a> </p>
+</footer>
+
+<!-- Modal -->
+
+<div id="myModal3" class="modal fade bd-example-modal-lg" role="dialog" style="direction:ltr">
+  <div class="modal-dialog modal-lg">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+        <h4 class="modal-title">سير الإجراء</h4>
+
+      </div>
+      <div class="modal-body" style="direction:rtl; text-align:right">
+      
+      <div class="Timeline" *ngIf="wf.rolesNb==1">
+
+        <svg height="5" width="100">
+          <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event2" *ngIf="wf.roleName1!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang1}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName1}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">01</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName1!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="now">
+          الموظف
+        </div>
+
+        <svg height="5" width="50">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+        </svg>
+        <svg height="20" width="42">
+          <line x1="1" y1="0" x2="1" y2="20" style="stroke:#004165;stroke-width:2" />
+          <circle cx="11" cy="10" r="3" fill="#004165" />
+          <circle cx="21" cy="10" r="3" fill="#004165" />
+          <circle cx="31" cy="10" r="3" fill="#004165" />
+          <line x1="41" y1="0" x2="41" y2="20" style="stroke:#004165;stroke-width:2" />
+        </svg>
+
+      </div>
+      <div class="Timeline" *ngIf="wf.rolesNb==7">
+
+        <svg height="5" width="100">
+          <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event2" *ngIf="wf.roleName7!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang7}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName7}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">07</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName7!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event1" *ngIf="wf.roleName6!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang2}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName6}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">06</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName6!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event2" *ngIf="wf.roleName5!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang5}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName5}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">05</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName5!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event1" *ngIf="wf.roleName4!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang4}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName4}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">04</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName4!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event2" *ngIf="wf.roleName3!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang3}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName3}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">03</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName3!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event1" *ngIf="wf.roleName2!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang2}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName2}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">02</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName2!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event2" *ngIf="wf.roleName1!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang1}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName1}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">01</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName1!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="now">
+          الموظف
+        </div>
+
+        <svg height="5" width="50">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+        </svg>
+        <svg height="20" width="42">
+          <line x1="1" y1="0" x2="1" y2="20" style="stroke:#004165;stroke-width:2" />
+          <circle cx="11" cy="10" r="3" fill="#004165" />
+          <circle cx="21" cy="10" r="3" fill="#004165" />
+          <circle cx="31" cy="10" r="3" fill="#004165" />
+          <line x1="41" y1="0" x2="41" y2="20" style="stroke:#004165;stroke-width:2" />
+        </svg>
+
+      </div>
+      <div class="Timeline" *ngIf="wf.rolesNb==6">
+
+        <svg height="5" width="100">
+          <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+
+        <div class="event1" *ngIf="wf.roleName6!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang2}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName6}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">06</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName6!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event2" *ngIf="wf.roleName5!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang5}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName5}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">05</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName5!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event1" *ngIf="wf.roleName4!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang4}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName4}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">04</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName4!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event2" *ngIf="wf.roleName3!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang3}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName3}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">03</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName3!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event1" *ngIf="wf.roleName2!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang2}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName2}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">02</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName2!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event2" *ngIf="wf.roleName1!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang1}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName1}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">01</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName1!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="now">
+          الموظف
+        </div>
+
+        <svg height="5" width="50">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+        </svg>
+        <svg height="20" width="42">
+          <line x1="1" y1="0" x2="1" y2="20" style="stroke:#004165;stroke-width:2" />
+          <circle cx="11" cy="10" r="3" fill="#004165" />
+          <circle cx="21" cy="10" r="3" fill="#004165" />
+          <circle cx="31" cy="10" r="3" fill="#004165" />
+          <line x1="41" y1="0" x2="41" y2="20" style="stroke:#004165;stroke-width:2" />
+        </svg>
+
+      </div>
+      <div class="Timeline" *ngIf="wf.rolesNb==5">
+
+        <svg height="5" width="100">
+          <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+
+        <div class="event2" *ngIf="wf.roleName5!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang5}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName5}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">05</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName5!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event1" *ngIf="wf.roleName4!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang4}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName4}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">04</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName4!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event2" *ngIf="wf.roleName3!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang3}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName3}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">03</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName3!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event1" *ngIf="wf.roleName2!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang2}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName2}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">02</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName2!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event2" *ngIf="wf.roleName1!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang1}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName1}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">01</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName1!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="now">
+          الموظف
+        </div>
+
+        <svg height="5" width="50">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+        </svg>
+        <svg height="20" width="42">
+          <line x1="1" y1="0" x2="1" y2="20" style="stroke:#004165;stroke-width:2" />
+          <circle cx="11" cy="10" r="3" fill="#004165" />
+          <circle cx="21" cy="10" r="3" fill="#004165" />
+          <circle cx="31" cy="10" r="3" fill="#004165" />
+          <line x1="41" y1="0" x2="41" y2="20" style="stroke:#004165;stroke-width:2" />
+        </svg>
+
+      </div>
+      <div class="Timeline" *ngIf="wf.rolesNb==4">
+
+        <svg height="5" width="100">
+          <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event1" *ngIf="wf.roleName4!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang4}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName4}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">04</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName4!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event2" *ngIf="wf.roleName3!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang3}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName3}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">03</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName3!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event1" *ngIf="wf.roleName2!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang2}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName2}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">02</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName2!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event2" *ngIf="wf.roleName1!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang1}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName1}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">01</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName1!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="now">
+          الموظف
+        </div>
+
+        <svg height="5" width="50">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+        </svg>
+        <svg height="20" width="42">
+          <line x1="1" y1="0" x2="1" y2="20" style="stroke:#004165;stroke-width:2" />
+          <circle cx="11" cy="10" r="3" fill="#004165" />
+          <circle cx="21" cy="10" r="3" fill="#004165" />
+          <circle cx="31" cy="10" r="3" fill="#004165" />
+          <line x1="41" y1="0" x2="41" y2="20" style="stroke:#004165;stroke-width:2" />
+        </svg>
+
+      </div>
+      <div class="Timeline" *ngIf="wf.rolesNb==2">
+
+        <svg height="5" width="100">
+          <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event1" *ngIf="wf.roleName2!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang2}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName2}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">02</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName2!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event2" *ngIf="wf.roleName1!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang1}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName1}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">01</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName1!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="now">
+          الموظف
+        </div>
+
+        <svg height="5" width="50">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+        </svg>
+        <svg height="20" width="42">
+          <line x1="1" y1="0" x2="1" y2="20" style="stroke:#004165;stroke-width:2" />
+          <circle cx="11" cy="10" r="3" fill="#004165" />
+          <circle cx="21" cy="10" r="3" fill="#004165" />
+          <circle cx="31" cy="10" r="3" fill="#004165" />
+          <line x1="41" y1="0" x2="41" y2="20" style="stroke:#004165;stroke-width:2" />
+        </svg>
+
+      </div>
+      <div class="Timeline" *ngIf="wf.rolesNb==3">
+
+        <svg height="5" width="100">
+          <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event2" *ngIf="wf.roleName3!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang3}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName3}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">03</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName3!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event1" *ngIf="wf.roleName2!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang2}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName2}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">02</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName2!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event2" *ngIf="wf.roleName1!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang1}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName1}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">01</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName1!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="now">
+          الموظف
+        </div>
+
+        <svg height="5" width="50">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+        </svg>
+        <svg height="20" width="42">
+          <line x1="1" y1="0" x2="1" y2="20" style="stroke:#004165;stroke-width:2" />
+          <circle cx="11" cy="10" r="3" fill="#004165" />
+          <circle cx="21" cy="10" r="3" fill="#004165" />
+          <circle cx="31" cy="10" r="3" fill="#004165" />
+          <line x1="41" y1="0" x2="41" y2="20" style="stroke:#004165;stroke-width:2" />
+        </svg>
+
+      </div>
+      <div class="Timeline" *ngIf="wf.rolesNb==7">
+
+        <svg height="5" width="100">
+          <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+
+        <div class="event2" *ngIf="wf.roleName7!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang7}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName7}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">07</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName7!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event1" *ngIf="wf.roleName6!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang2}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName6}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">06</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName6!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event2" *ngIf="wf.roleName5!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang5}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName5}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">05</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName5!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event1" *ngIf="wf.roleName4!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang4}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName4}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">04</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName4!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event2" *ngIf="wf.roleName3!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang3}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName3}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">03</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName3!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event1" *ngIf="wf.roleName2!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang2}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName2}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">02</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName2!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event2" *ngIf="wf.roleName1!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang1}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName1}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">01</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName1!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="now">
+          الموظف
+        </div>
+
+        <svg height="5" width="50">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+        </svg>
+        <svg height="20" width="42">
+          <line x1="1" y1="0" x2="1" y2="20" style="stroke:#004165;stroke-width:2" />
+          <circle cx="11" cy="10" r="3" fill="#004165" />
+          <circle cx="21" cy="10" r="3" fill="#004165" />
+          <circle cx="31" cy="10" r="3" fill="#004165" />
+          <line x1="41" y1="0" x2="41" y2="20" style="stroke:#004165;stroke-width:2" />
+        </svg>
+
+      </div>
+      <div class="Timeline" *ngIf="wf.rolesNb==8">
+
+        <svg height="5" width="100">
+          <line x1="0" y1="0" x2="100" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event1" *ngIf="wf.roleName8!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang8}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName8}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">08</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName8!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event2" *ngIf="wf.roleName7!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang7}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName7}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">07</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName7!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event1" *ngIf="wf.roleName6!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang2}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName6}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">06</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName6!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event2" *ngIf="wf.roleName5!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang5}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName5}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">05</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName5!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event1" *ngIf="wf.roleName4!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang4}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName4}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">04</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName4!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event2" *ngIf="wf.roleName3!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang3}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName3}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">03</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName3!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+        <div class="event1" *ngIf="wf.roleName2!=''">
+
+          <div class="event1Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang2}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName2}}</div>
+          </div>
+          <div class="eventAuthor"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time">02</div>
+
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName2!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="event2" *ngIf="wf.roleName1!=''">
+
+          <div class="event2Bubble">
+            <div class="eventTime">
+              <div class="DayDigit">0{{wf.roleRang1}}</div>
+              <div class="Day">
+
+                <div class="MonthYear"></div>
+              </div>
+            </div>
+            <div class="eventTitle">{{wf.roleName1}}</div>
+          </div>
+          <div class="event2Author"></div>
+          <svg height="20" width="20">
+            <circle cx="10" cy="11" r="5" fill="#004165" />
+          </svg>
+          <div class="time2">01</div>
+        </div>
+
+        <svg height="5" width="50" *ngIf="wf.roleName1!=''">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+          Sorry, your browser does not support inline SVG.
+        </svg>
+
+        <div class="now">
+          الموظف
+        </div>
+
+        <svg height="5" width="50">
+          <line x1="0" y1="0" x2="50" y2="0" style="stroke:#004165;stroke-width:5" />
+        </svg>
+        <svg height="20" width="42">
+          <line x1="1" y1="0" x2="1" y2="20" style="stroke:#004165;stroke-width:2" />
+          <circle cx="11" cy="10" r="3" fill="#004165" />
+          <circle cx="21" cy="10" r="3" fill="#004165" />
+          <circle cx="31" cy="10" r="3" fill="#004165" />
+          <line x1="41" y1="0" x2="41" y2="20" style="stroke:#004165;stroke-width:2" />
+        </svg>
+
+      </div>
+      <!--<div class="lables">
+    <div style="color:#db5a60; font-weight:bold" *ngIf="wf.roleName1!=''">1•{{wf.roleName1}}</div>&nbsp;
+    <div style="color:dimgrey;font-weight:bold" *ngIf="wf.roleName2!=''">2• {{wf.roleName2}}</div>&nbsp;
+    <div style="color:#276985;font-weight:bold" *ngIf="wf.roleName3!=''">3•{{wf.roleName3}}</div>&nbsp;
+    <div style="color:#f3e30c;font-weight:bold" *ngIf="wf.roleName4!=''">4•{{wf.roleName4}}</div>&nbsp;
+    <div style="color:#e95d16;font-weight:bold" *ngIf="wf.roleName5!=''">5•{{wf.roleName5}}</div>&nbsp;
+    <div style="color:#ba2ed1;font-weight:bold" *ngIf="wf.roleName6!=''">6•{{wf.roleName6}}</div>&nbsp;
+    <div style="color:#5b980d;font-weight:bold" *ngIf="wf.roleName7!=''">7•{{wf.roleName7}}</div>&nbsp;
+    <div style="color:#26d9c0;font-weight:bold" *ngIf="wf.roleName8!=''">8•{{wf.roleName8}}</div>&nbsp;
+
+  </div>-->
+    </div>
+
+    </div>
+
+  </div>
+</div>

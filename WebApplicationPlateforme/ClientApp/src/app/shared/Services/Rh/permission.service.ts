@@ -42,6 +42,8 @@ export class PermissionService {
   Get() {
     return this.http.get<Permission[]>(this.rootURL + '/Permissions');
   }
+
+
   //Get Type Dotation By Id
 
   GetById(Id) {

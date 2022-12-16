@@ -26,7 +26,7 @@ export class HistoCongesComponent implements OnInit {
 
   ngOnInit(): void {
     this.CongeList();
-    this.resetForm();
+    //this.resetForm();
   }
 
   p: Number = 1;
@@ -149,7 +149,7 @@ export class HistoCongesComponent implements OnInit {
     this.congeService.Edit().subscribe(res => {
      
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
-        this.resetForm();
+        //this.resetForm();
         this.CongeList();
 
     
@@ -166,58 +166,58 @@ export class HistoCongesComponent implements OnInit {
     this.updateRecord(form)
   }
 
-  resetForm(form?: NgForm) {
+  //resetForm(form?: NgForm) {
 
-    if (form != null)
-      form.resetForm();
-    this.congeService.formData = {
-      id: null,
-      transferera: '',
-      transfereretab: '',
-      transfertrh: '',
-      transfertdeux: '',
-      datetransfert: '',
-      idtrh: '',
-      idtetab: '',
-      nomtrh: '',
-      nomtetab: '',
-      etatetab: '',
-      dateetab: '',
-      tran1: '',
-      tran2: '',
-      tran3: '',
-      tran4: '',
-      tran5: '',
-      tran6: '',
-      datedebut: '',
-      datefin: '',
-      duree: '',
-      tel: '',
-      type: '',
-      adr: '',
-      idremplacant: '',
-      nomremplacant: '',
-      etat: '',
-      etatd: '',
-      etatrh: '',
-      directeurid: '',
-      directeurnom: '',
-      rhid: '',
-      rhnom: '',
-      dated: '',
-      daterh: '',
-      attribut1: null,
-      attribut2: '',
-      attribut3: '',
-      attribut4: '',
-      attribut5: '',
-      attribut6: '',
-      dateenreg: '',
-      userNameCreator: '',
-      idUserCreator: '',
+  //  if (form != null)
+  //    form.resetForm();
+  //  this.congeService.formData = {
+  //    id: null,
+  //    transferera: '',
+  //    transfereretab: '',
+  //    transfertrh: '',
+  //    transfertdeux: '',
+  //    datetransfert: '',
+  //    idtrh: '',
+  //    idtetab: '',
+  //    nomtrh: '',
+  //    nomtetab: '',
+  //    etatetab: '',
+  //    dateetab: '',
+  //    tran1: '',
+  //    tran2: '',
+  //    tran3: '',
+  //    tran4: '',
+  //    tran5: '',
+  //    tran6: '',
+  //    datedebut: '',
+  //    datefin: '',
+  //    duree: '',
+  //    tel: '',
+  //    type: '',
+  //    adr: '',
+  //    idremplacant: '',
+  //    nomremplacant: '',
+  //    etat: '',
+  //    etatd: '',
+  //    etatrh: '',
+  //    directeurid: '',
+  //    directeurnom: '',
+  //    rhid: '',
+  //    rhnom: '',
+  //    dated: '',
+  //    daterh: '',
+  //    attribut1: null,
+  //    attribut2: '',
+  //    attribut3: '',
+  //    attribut4: '',
+  //    attribut5: '',
+  //    attribut6: '',
+  //    dateenreg: '',
+  //    userNameCreator: '',
+  //    idUserCreator: '',
 
-    }
-  }
+  //  }
+  //}
 
   onDelete(id: number) {
 

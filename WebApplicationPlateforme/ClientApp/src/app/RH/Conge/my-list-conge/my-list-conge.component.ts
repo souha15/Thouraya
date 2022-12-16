@@ -185,6 +185,14 @@ export class MyListCongeComponent implements OnInit {
       dateenreg: '',
       userNameCreator: '',
       idUserCreator: '',
+      userName1: '', userId1: '', userEtat1: '', userDate1: '',
+      userName2: '', userId2: '', userEtat2: '', userDate2: '',
+      userName3: '', userId3: '', userEtat3: '', userDate3: '',
+      userName4: '', userId4: '', userEtat4: '', userDate4: '',
+      userName5: '', userId5: '', userEtat5: '', userDate5: '',
+      userName6: '', userId6: '', userEtat6: '', userDate6: '',
+      userName7: '', userId7: '', userEtat7: '', userDate7: '',
+      userName8: '', userId8: '', userEtat8: '', userDate8: '',
 
     }
   }

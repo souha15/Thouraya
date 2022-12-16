@@ -161,11 +161,35 @@ namespace WebApplicationPlateforme.Controllers.AutomaticNotificationControllers
         public int GetNotificationsNumber(string idReceiver)
         {
             int count = 0;
-            var list = _context.AutomaticNotifs.Where(item => item.receiverId == idReceiver && item.vu == "0")
+            var list = _context.AutomaticNotifs.Where(item => item.receiverId == idReceiver && item.vu == "0" && item.userType != "0")
                 .ToList();
             if (list.Count != 0) count = list.Count();
             else count = 0;
             return count;
+
+        }
+
+        [HttpGet]
+        [Route("GetNotificationsNumberForUserSender/{idReceiver}")]
+        public int GetNotificationsNumberForUserSender(string idReceiver)
+        {
+            int count = 0;
+            var list = _context.AutomaticNotifs.Where(item => item.receiverId == idReceiver && item.vu == "0" && item.userType =="0")
+                .ToList();
+            if (list.Count != 0) count = list.Count();
+            else count = 0;
+            return count;
+
+        }
+
+        [HttpGet]
+        [Route("GetUnreadNotificationsForUserSenderList/{idReceiver}")]
+        public List<AutomaticNotif> GetUnreadNotificationsForUserSenderList(string idReceiver)
+        {
+            var list = _context.AutomaticNotifs.Where(item => item.receiverId == idReceiver && item.vu == "0" && item.userType == "0")
+                   .OrderByDescending(item => item.dateSend)
+                   .ToList();
+            return list;
 
         }
 
@@ -183,7 +207,7 @@ namespace WebApplicationPlateforme.Controllers.AutomaticNotificationControllers
         [Route("GetUnreadNotificationByUser/{idReceiver}")]
         public List<AutomaticNotif> GetUnreadNotificationByUser(string idReceiver)
         {
-            var list = _context.AutomaticNotifs.Where(item => item.receiverId == idReceiver && item.vu=="0")
+            var list = _context.AutomaticNotifs.Where(item => item.receiverId == idReceiver && item.vu=="0" && item.userType != "0")
                 .OrderByDescending(item => item.dateSend)
                 .ToList();
             return list;

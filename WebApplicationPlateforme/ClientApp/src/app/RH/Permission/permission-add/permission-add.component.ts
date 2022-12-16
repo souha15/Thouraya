@@ -23,7 +23,6 @@ export class PermissionAddComponent implements OnInit {
   constructor(private UserService: UserServiceService,
     private toastr: ToastrService,
     private permissionService: PermissionUService,
-    private notifService: NotifService,
     private signalService: SignalRService,) { }
 
   ngOnInit(): void {
@@ -138,7 +137,7 @@ export class PermissionAddComponent implements OnInit {
     }
   }
 
-  notif: Notif = new Notif();
+
 
   UserIdConnected: string;
   UserNameConnected: string;
@@ -149,22 +148,6 @@ export class PermissionAddComponent implements OnInit {
       this.per.idUserCreator = res.id;
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-      if (res.attribut1 != null) {
-        this.per.iddir = res.attribut1;
-        this.per.nomdir = res.directeur
-        this.notif.userReceiverId = res.attribut1;
-        this.notif.userReceiverName = res.directeur;
-        this.dirId = res.attribut1;
-        this.dirName = res.directeur
-      }
-      this.notif.userTransmitterId = res.id;
-      this.notif.userTransmitterName = res.fullName;
-      this.notif.dateTime = this.date;
-      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
-      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
-      this.notif.TextNotification = "طلب إذن من الموظف  " + res.fullName
-      this.notif.readUnread = "0";
-
 
     })
 
@@ -179,9 +162,7 @@ export class PermissionAddComponent implements OnInit {
       if (this.start > this.end) {
         this.toastr.error("يجب أن يكون وقت البدء أقل من وقت الانتهاء")
       }
-    } else {
-      this.toastr.error("يجب عليك ملئ وقت الانتهاء")
-    }
+    } 
   }
 
   end;
@@ -211,9 +192,6 @@ export class PermissionAddComponent implements OnInit {
   dateTime = new Date();
   onSubmit(form: NgForm) {
     this.per.datenereg = this.date;
-    this.per.etatdir = "في الانتظار";
-    this.per.etat = "في الانتظار";
-    this.per.etatrh = "في الانتظار";
     console.log(form.invalid)
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -221,23 +199,20 @@ export class PermissionAddComponent implements OnInit {
     else {
 
       this.isValidFormSubmitted = true
-      this.permissionService.Add(this.per).subscribe(
-        res => {
-          this.notif.serviceId = res.id;
-          this.notif.serviceName = "طلب 10-1-2022"
-          this.notifService.Add(this.notif).subscribe(res => {
-
-          this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+      this.per.creatorName = this.UserNameConnected;
+      this.per.idUserCreator = this.UserIdConnected;
+      if (this.per.idUserCreator != null) {
+        this.permissionService.Add(this.per).subscribe(
+          res => {
+            this.toastr.success("تمت الإضافة بنجاح", "نجاح");
             form.resetForm();
-
-
-
             this.text = "طلب إذن";
+            this.dirId = res.userId1;
+            this.dirName = res.userName1;
             this.autoNotif.serviceId = res.id;
             this.autoNotif.pageUrl = "permission-list-dir"
             this.autoNotif.userType = "1";
             this.autoNotif.reponse = "2";
-            //if (this.users.filter(item => item.userId == this.dirId).length > 0) {
             this.signalService.GetConnectionByIdUser(this.dirId).subscribe(res1 => {
               this.userOnline = res1;
               this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
@@ -248,18 +223,22 @@ export class PermissionAddComponent implements OnInit {
               this.autoNotif.transmitterId = this.UserIdConnected;
               this.autoNotif.transmitterName = this.UserNameConnected;
               this.autoNotif.text = "طلب إذن";
-              this.autoNotif.vu = "0";    
+              this.autoNotif.vu = "0";
               this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
 
               })
             })
-          })
-        },
-        err => {
-          this.toastr.error("  يجب أن يبدأ التاريخ من هذا اليوم", "لم يتم تقديم الطلب ")
-        },
-      )
 
+          },
+          err => {
+            this.toastr.error(" لم يتم تقديم الطلب ", "لم يتم تقديم الطلب ")
+          },
+        )
+
+      } else {
+        this.toastr.error(" لم يتم تقديم الطلب ", "لم يتم تقديم الطلب ")
+      }
     }
-  }
+    }
+  
 }

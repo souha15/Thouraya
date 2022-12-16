@@ -104,7 +104,7 @@ export class DemCongeExceptionnelComponent implements OnInit {
   }
 
   //Send Msg 
-  text: string;
+  text: string = "طلب إجازة إستثنائية";
   sendMsgInv(): void {
 
     this.signalService.GetConnectionByIdUser(this.dirId).subscribe(res => {
@@ -164,21 +164,6 @@ export class DemCongeExceptionnelComponent implements OnInit {
       this.userc = res
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-      if (res.attribut1 != null) {
-        this.conge.directeurnom = res.directeur;
-        this.conge.directeurid = res.attribut1;
-        this.notif.userReceiverId = res.attribut1;
-        this.notif.userReceiverName = res.directeur;
-        this.dirId = res.attribut1;
-        this.dirName = res.directeur
-      }
-      this.notif.userTransmitterId = res.id;
-      this.notif.userTransmitterName = res.fullName;
-      this.notif.dateTime = this.date;
-      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
-      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
-      this.notif.TextNotification = "طلب إجازة إستثنائية من الموظف  " + res.fullName
-      this.notif.readUnread = "0";
       this.conge.userNameCreator = res.fullName;
       this.conge.idUserCreator = res.id;
       this.soldeCongeService.GetSolde(this.UserIdConnected).subscribe(res => {
@@ -281,12 +266,8 @@ export class DemCongeExceptionnelComponent implements OnInit {
   dateTime = new Date();
   onSubmit(form: NgForm) {
     this.conge.dateenreg = this.date;
-    this.conge.etat = "5%";
-    this.conge.etatd = "في الانتظار";
-    this.conge.etatrh = "في الانتظار";
-    this.conge.attribut2 = "في الانتظار";
     this.conge.type = "إجازة إستثنائية"
-    this.conge.attribut6 = "في الانتظار";
+  
     this.conge.adr = this.soldeconge.toString();
 
     if (form.invalid) {
@@ -303,29 +284,28 @@ export class DemCongeExceptionnelComponent implements OnInit {
 
         this.congeService.Add(this.conge).subscribe(
           res => {
-            this.notif.serviceId = res.id;
-            this.notif.serviceName = "طلب إجازة"
+            this.toastr.success(" تم تقديم الطلب بنجاح", "نجاح");
+            form.resetForm();
             this.pj.idConge = res.id;
             this.fileslist.forEach(item => {
               this.pj.path = item;
-              this.congeService.AddCF(this.pj).subscribe(res => {
+              this.congeService.AddCF(this.pj).subscribe(res2 => {
                 this.Files = [];
                 this.bool = false;
               })
             })
-            this.notifService.Add(this.notif).subscribe(res => {
+     
 
             this.soldeconge = this.soldeconge - +this.conge.duree;
             this.diffDays = 0
-            this.toastr.success(" تم تقديم الطلب بنجاح", "نجاح");
-              form.resetForm();
-
-
-              this.text = "طلب إجازة إستثنائية";
+     
+              this.dirId = res.userId1;
+              this.dirName = res.userName1;             
               this.autoNotif.serviceId = res.id;
-              this.autoNotif.pageUrl = "menurequests"
+              this.autoNotif.pageUrl = "rh-conge-list"
               this.autoNotif.userType = "1";
               this.autoNotif.reponse = "1";
+              this.text = "طلب إجازة إستثنائية";
               //if (this.users.filter(item => item.userId == this.dirId).length > 0) {
               this.signalService.GetConnectionByIdUser(this.dirId).subscribe(res1 => {
                 this.userOnline = res1;
@@ -336,15 +316,14 @@ export class DemCongeExceptionnelComponent implements OnInit {
                 this.autoNotif.receiverId = this.dirId;
                 this.autoNotif.transmitterId = this.UserIdConnected;
                 this.autoNotif.transmitterName = this.UserNameConnected;
-                  this.autoNotif.text = "طلب إجازة إستثنائية";
+                this.autoNotif.text = "طلب إجازة إستثنائية";
                 this.autoNotif.vu = "0";
-                this.autoNotif.reponse = "1";
 
                 this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
 
                 })
               })
-            })
+          
           
           },
           err => {

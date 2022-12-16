@@ -819,6 +819,11 @@ import { CloseChequeForBoxMenComponent } from './ChequeNew/CloseCheque/close-che
 import { CloseChequeForComptableComponent } from './ChequeNew/CloseCheque/close-cheque-for-comptable/close-cheque-for-comptable.component';
 import { MenuChequeForBoxMenComponent } from './ChequeNew/CloseCheque/menu-cheque-for-box-men/menu-cheque-for-box-men.component';
 import { TransactionsAffectedToMyAdminOrToMeComponent } from './AdministrativeCommunication/transactions-affected-to-my-admin-or-to-me/transactions-affected-to-my-admin-or-to-me.component';
+import { AddWorkflowConfigurationComponent } from './ServicesConfiguration/add-workflow-configuration/add-workflow-configuration.component';
+import { EditWorkflowConfigurationComponent } from './ServicesConfiguration/edit-workflow-configuration/edit-workflow-configuration.component';
+import { ListWorkflowServicesComponent } from './ServicesConfiguration/list-workflow-services/list-workflow-services.component';
+import { DetailWorkflowConfigurationComponent } from './ServicesConfiguration/detail-workflow-configuration/detail-workflow-configuration.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 @NgModule({
   declarations: [
     AppComponent,
@@ -1602,6 +1607,10 @@ import { TransactionsAffectedToMyAdminOrToMeComponent } from './AdministrativeCo
     CloseChequeForComptableComponent,
     MenuChequeForBoxMenComponent,
     TransactionsAffectedToMyAdminOrToMeComponent,
+    AddWorkflowConfigurationComponent,
+    EditWorkflowConfigurationComponent,
+    ListWorkflowServicesComponent,
+    DetailWorkflowConfigurationComponent,
   ],
   imports: [
 
@@ -1621,6 +1630,7 @@ import { TransactionsAffectedToMyAdminOrToMeComponent } from './AdministrativeCo
     NgbModule,
     NgxCaptchaModule,
     NgxDropzoneModule,
+    DragDropModule,
     NgMultiSelectDropDownModule.forRoot(),
     ToastrModule.forRoot(),
     NgCircleProgressModule.forRoot({
@@ -1832,7 +1842,7 @@ import { TransactionsAffectedToMyAdminOrToMeComponent } from './AdministrativeCo
  
       { path: 'equipement-list-dir', component: EquipementListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN', 'DIRECTORETAB', 'DIRECTORGENERAL'] } },
 
-      { path: 'permission-list-dir', component: PermissionUListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN', 'DIRECTORETAB', 'DIRECTORGENERAL']  } },
+      { path: 'permission-list-dir', component: PermissionUListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN', 'DIRECTORETAB', 'DIRECTORGENERAL', 'DIRDIRECTE', 'FINPRIV', 'DOTPRIV', 'RHPRIV', 'COMPTAPRIV','BOXPRIV']  } },
 
       {
         path: 'menurequests', component: MenurequestsComponent,
@@ -3194,7 +3204,7 @@ import { TransactionsAffectedToMyAdminOrToMeComponent } from './AdministrativeCo
 
       {
         path: 'all-demands', component: AllDemandsComponent, canActivate: [AuthGuard], data: {
-          permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORETAB', 'DIRECTORADMN', 'RESSOURCEHUMAINE', 'RESPFINANCE', 'DAWAAPRIV', 'DOTPRIV', 'FINPRIV','DIRPRIV'] }},
+          permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORETAB', 'DIRECTORADMN', 'RESSOURCEHUMAINE', 'RESPFINANCE', 'DAWAAPRIV', 'DOTPRIV', 'FINPRIV', 'DIRPRIV', 'DIRDIRECTE'] }},
 
     /****** TechDemands**/
  
@@ -3336,14 +3346,25 @@ import { TransactionsAffectedToMyAdminOrToMeComponent } from './AdministrativeCo
       { path: 'histo-impression', component: HistoImpressionComponent, canActivate: [AuthGuard] },
 
     /*** Notif System **/
+
       { path: 'notif-show', component: NotifShowComponent, canActivate: [AuthGuard] },
 
-/****  Close Cheque **/
-      {path: 'close-cheque-for-box-men', component: CloseChequeForBoxMenComponent, canActivate: [AuthGuard], data: {permittedRoles: ['ADMINISTRATEUR', 'DIRECTORETAB', 'RESPFINANCE', 'FINPRIV', 'BOXPRIV']}},
-        
-      {path: 'menu-cheque-for-box-men', component: MenuChequeForBoxMenComponent, canActivate: [AuthGuard], data: {permittedRoles: ['ADMINISTRATEUR', 'DIRECTORETAB', 'RESPFINANCE', 'FINPRIV', 'BOXPRIV']}},
 
+    /****  Close Cheque **/
+
+      {path: 'close-cheque-for-box-men', component: CloseChequeForBoxMenComponent, canActivate: [AuthGuard], data: {permittedRoles: ['ADMINISTRATEUR', 'DIRECTORETAB', 'RESPFINANCE', 'FINPRIV', 'BOXPRIV']}},        
+      {path: 'menu-cheque-for-box-men', component: MenuChequeForBoxMenComponent, canActivate: [AuthGuard], data: {permittedRoles: ['ADMINISTRATEUR', 'DIRECTORETAB', 'RESPFINANCE', 'FINPRIV', 'BOXPRIV']}},
       {path: 'close-cheque-for-comptable', component: CloseChequeForComptableComponent, canActivate: [AuthGuard], data: {permittedRoles: ['ADMINISTRATEUR', 'DIRECTORETAB', 'RESPFINANCE', 'FINPRIV', 'BOXPRIV']}},
+
+
+    /** Config Workflow **/
+
+
+      { path: 'add-workflow-configuration', component: AddWorkflowConfigurationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'edit-workflow-configuration', component: EditWorkflowConfigurationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'list-workflow-services', component: ListWorkflowServicesComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'detail-workflow-configuration', component: DetailWorkflowConfigurationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+
 
     ])
   ],/*,  {

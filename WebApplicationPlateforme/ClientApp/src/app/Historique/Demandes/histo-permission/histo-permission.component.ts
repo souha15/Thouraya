@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class HistoPermissionComponent implements OnInit {
 
-  constructor(private congeService: PermissionUService,
+  constructor(private permissionService: PermissionUService,
     private toastr: ToastrService) { }
 
   ngOnInit(): void {
@@ -24,7 +24,7 @@ export class HistoPermissionComponent implements OnInit {
   congeList: PermissionU[] = [];
   filtredCongeList: PermissionU[] = [];
   CongeList() {
-    this.congeService.Get().subscribe(res => {
+    this.permissionService.Get().subscribe(res => {
       this.filtredCongeList = res
     })
   }
@@ -32,33 +32,14 @@ export class HistoPermissionComponent implements OnInit {
 
 
   per: PermissionU = new PermissionU();
-  val: string;
-  test0: boolean = false;
-  test50: boolean = false;
-  test100: boolean = false;
+  rslt: any;
   populateForm(conge: PermissionU) {
     this.per = Object.assign({}, conge)
-    this.congeService.formData = Object.assign({}, conge)
-    if (this.per.etatdir == "موافق") {
-      this.test100 = false;
-      this.test0 = false;
-      this.test50 = true;
-      this.val = "50%"
-    }
+    this.permissionService.formData = Object.assign({}, conge)
+    this.permissionService.GetPersmissionHistorique(this.per.id).subscribe(res => {
+      this.rslt = res.attribut6
 
-    if (this.per.etatdir == "في الانتظار") {
-      this.val= "0%"
-      this.test100 = false;
-      this.test0 = true;
-      this.test50 = false;
-    }
-
-    if (this.per.etat == "موافق") {
-      this.test100 = true;
-      this.val = "100%"
-      this.test0 = false;
-      this.test50 =false
-    }
+    })
   }
 
 
@@ -73,7 +54,7 @@ export class HistoPermissionComponent implements OnInit {
   updateRecord(form: NgForm) {
 
     this.conge = Object.assign(this.conge, form.value);
-    this.congeService.Edit().subscribe(res => {
+    this.permissionService.Edit().subscribe(res => {
 
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
         this.resetForm();
@@ -95,7 +76,7 @@ export class HistoPermissionComponent implements OnInit {
 
 
     if (confirm('هل أنت متأكد من حذف هذا السجل؟')) {
-      this.congeService.Delete(id)
+      this.permissionService.Delete(id)
         .subscribe(res => {
           this.CongeList();
           this.toastr.success("تم الحذف  بنجاح", "نجاح");
@@ -119,7 +100,7 @@ export class HistoPermissionComponent implements OnInit {
   resetForm(form?: NgForm) {
     if (form != null)
       form.resetForm();
-    this.congeService.formData = {
+    this.permissionService.formData = {
       id: null,
       date: '',
       type: '',
@@ -145,7 +126,14 @@ export class HistoPermissionComponent implements OnInit {
       attribut5: '',
       attribut6: '',
       idUserCreator: '',
-
+      userName1: '', userId1: '', userEtat1: '', userDate1: '',
+      userName2: '', userId2: '', userEtat2: '', userDate2: '',
+      userName3: '', userId3: '', userEtat3: '', userDate3: '',
+      userName4: '', userId4: '', userEtat4: '', userDate4: '',
+      userName5: '', userId5: '', userEtat5: '', userDate5: '',
+      userName6: '', userId6: '', userEtat6: '', userDate6: '',
+      userName7: '', userId7: '', userEtat7: '', userDate7: '',
+      userName8: '', userId8: '', userEtat8: '', userDate8: '',
     }
   }
 }

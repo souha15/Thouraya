@@ -8,186 +8,39 @@
 
     <div class="col-md-9 col-sm-8">
       <header>
-        <h3 class="task-head">طلبات الموظفين</h3>
+        <h3 class="task-head">الإشعارات</h3>
       </header>
-      <div class="que-serv">
-        <a *ngIf="testroledir || testroleadmin || testrole" href="" [routerLink]="['/details-pointage-emp']">
-          <span class="icon"><i class="fa fa-calendar-alt"></i></span>
-          الحضور و الإنصراف
-        </a>
+      <div class="row">
 
-        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/menurequests']">
-          <span class="icon"><i class="fa fa-sign-out-alt"></i></span>طلبات
-          الإجازات
-        </a>
 
-        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/permission-list-dir']">
-          <span class="icon"><i class="fa fa-walking"></i></span>
-          طلبات الإذن
-        </a>
-        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/recrutmenet-dir-list']">
-          <span class="icon"><i class="fa fa-list"></i></span>
-          طلبات الانتدابات
-        </a>
 
-        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/equipement-list-dir']">
-          <span class="icon"><i class="fa fa-toolbox"></i></span>
-          طلبات العهد
-        </a>
+        <div class="notification-ui_dd-content">
+          <div class="notification-list notification-list--unread" *ngFor="let item of ListUnreadServices;let i = index ">
+            <div class="notification-list_content">
 
-        <a *ngIf="testrole || testroleadmin " href="" [routerLink]="['/cre-finan-list-director']">
-          <span class="icon"><i class="fa fa-funnel-dollar"></i></span>
-          طلبات المستحقات المالية
-        </a>
+              <div class="notification-list_detail">
+                <p><b>{{item.transmitterName}}</b></p>
+                <p class="text-muted">{{item.text}}</p>
+                <p class="text-muted"><small>{{item.shortDate}}-{{item.shortTime}}</small></p>
+              </div>
+            </div>
+            <div class="notification-list_feature-img">
+              <a [routerLink]="['/'+item.pageUrl]" (click)="updateNotif(item)"><i class="fas fa-check-circle"></i></a>
+            </div>
+          </div>
+        </div>
 
-        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/demande-formation-listdir']">
-          <span class="icon"><i class="fa fa-graduation-cap"></i></span>
-          طلبات الدورات التدريبية
-        </a>
 
-        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/plaint-listdir']">
-          <span class="icon"><i class="fa fa-user-times"></i></span>
-          شكوى
-        </a>
 
-        <a *ngIf="testrole || testroleadmin || testroledir" href="" [routerLink]="['/new-cheque-list-dir-directe']">
-          <span class="icon"><i class="fa fa-hand-holding-usd"></i></span>
-          طلبات صرف شيك
-        </a>
-
-        <a *ngIf="testrole || testroleadmin" href="" [routerLink]="['/new-cheque-list-dir-general']">
-          <span class="icon"><i class="fa fa-hand-holding-usd"></i></span>
-          طلبات صرف شيك
-        </a>
-
-        <a *ngIf="testrole || testroleadmin" href="" [routerLink]="['/avance-list-d']">
-          <span class="icon"><i class="fa fa-hand-holding-usd"></i></span>
-          طلبات سلفة
-        </a>
-
-        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/creation-list-dir-g']">
-          <span class="icon"><i class="fa fa-briefcase"></i></span>
-          طلبات استحداث وظيفة
-        </a>
-
-        <a *ngIf="testrole || testroleadmin" href="" [routerLink]="['/creation-list-dir']">
-          <span class="icon"><i class="fa fa-briefcase"></i></span>
-          طلبات استحداث وظيفة
-        </a>
-
-        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/demande-supp-heure-list-director']">
-          <span class="icon"><i class="fa fa-clock"></i></span>
-          طلبات ساعات إضافية
-        </a>
-
-        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/gest-ben-list-dir']">
-          <span class="icon"><i class="fa fa-users"></i></span>
-          المستفيدين
-        </a>
-
-        <a *ngIf="testroledir || testroleadmin|| testrole" [routerLink]="['/pointage-director-list']">
-          <span class="icon"><i class="fa fa-clock"></i></span>
-          الحضور و الإنصراف
-        </a>
-
-        <a *ngIf="testroledir || testroleadmin|| testrole" [routerLink]="['/list-dir-ordre-pay']">
-          <span class="icon"><i class="fa fa-money-bill"></i></span>
-          أوامر الصرف
-        </a>
-
-        <a *ngIf="testroleadmin|| testrole" href="" [routerLink]="['/demissio-listdir']">
-          <span class="icon"><i class="fa fa-times-circle"></i></span>
-          طلبات إستقالة
-        </a>
-        <a *ngIf="testroledir || testroleadmin|| testrole" href="" [routerLink]="['/dem-assistance-listdir']">
-          <span class="icon"><i class="fa fa-address-book"></i></span>
-          طلبات  مباشرة عمل
-        </a>
 
       </div>
     </div>
-
   </div>
 
 </div>
 <!-- Footer -->
 <footer class="text-center">
-  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <a class="navbar-brand" href="#"> <img src="assets/images/awal.png" style="width:40px;height:40px;"></a> </p>
 </footer>
 
-<!---<app-nav-menu></app-nav-menu>
 
-<div class="content">
-  <div class="row">
-    <div class="col-md-3 col-sm-4">
-      <app-side-menu></app-side-menu>
-    </div>
-
-    <div class="col-md-9 col-sm-8">
-      <div class="boxes">
-        <div class="row">
-          <div class="col-md">
-            <div class="box tasks">
-              <h4>طلبات الموظفين</h4>
-              <div class="row">
-                <div class="col text-center px-2 py-3">
-                  <span class="num" *ngIf="testroledir">{{nbd}}</span>
-                  <span class="num" *ngIf="testrole">{{nbr}}</span>
-
-                  <br />
-                  <a class="show" [routerLink]="['/cheque-pay-list-pay']">عرض</a>
-                </div>
-                <div class="col text-center px-2 py-4">
-                  <span class="sympol"><i class="fa fa-tasks fa-3x"></i></span>
-                </div>
-              </div>
-            </div>
-            <div class="box decisions">
-              <h4>طلبات الإجازة</h4>
-              <div class="row">
-                <div class="col text-center px-2 py-3">
-
-                  <a class="show" [routerLink]="['/menurequests']">طلبات الإجازة</a>
-                </div>
-                <div class="col text-center px-2 py-4">
-                  <span class="sympol"><i class="fa fa-cog fa-3x"></i></span>
-                </div>
-              </div>
-            </div>
-      </div>
-  <div class="col-md">
-    <div class="box rings">
-      <h4>الاشعارات</h4>
-      <div class="row">
-        <div class="col text-center px-2 py-3">
-          <span class="num">01</span>
-          <p class="show">عرض</p>
-        </div>
-        <div class="col text-center px-2 py-4">
-          <span class="sympol"><i class="fa fa-bell fa-3x"></i></span>
-        </div>
-      </div>
-    </div>
-    <div class="box orders">
-      <h4>طلباتي</h4>
-      <div class="row">
-        <div class="col text-center px-2 py-3">
-          <span class="num">00</span>
-          <p class="show">عرض</p>
-        </div>
-        <div class="col text-center px-2 py-4">
-          <span class="sympol"><i class="fa fa-clipboard-list fa-3x"></i></span>
-        </div>
-      </div>
-    </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-<footer class="text-center">
- <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج بالتنسيق و التعاون مع جمعية الدعوة بالطائف  <img src="assets/images/awal.png" style="width:40px;height:40px;"> </p>
-</footer>-->

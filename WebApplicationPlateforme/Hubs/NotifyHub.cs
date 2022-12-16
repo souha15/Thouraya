@@ -48,7 +48,21 @@ namespace WebApplicationPlateforme.Hubs
         public async Task askServer(string userId, string userName, string conn)
         {
             ApplicationUser user = new ApplicationUser();
+            List<connection> conList = new List<connection>();
             user = GetUserProfile(userId);
+
+            // Delete Previous Connection 
+
+            conList = _context.Connections.Where(item => item.userId == user.Id).ToList();
+            if (conList.Count() > 0)
+            {
+                foreach (connection item in conList)
+                {
+                    _context.Connections.Remove(item);
+                    _context.SaveChanges();
+                }
+            }
+                        
            
             if (user != null)
             {
@@ -70,9 +84,10 @@ namespace WebApplicationPlateforme.Hubs
                 _context.SaveChanges();
                 connection newConn = curUser;
                 await Clients.Caller.SendAsync("authResponseSuccess", userId, userName, conn);
+
                 // Get current UserOnline  
                 await Clients.Others.SendAsync("userOn", newConn);
-                //             await Clients.Client(this.Context.ConnectionId).SendAsync("authResponseFail");
+
             }
             else
             {

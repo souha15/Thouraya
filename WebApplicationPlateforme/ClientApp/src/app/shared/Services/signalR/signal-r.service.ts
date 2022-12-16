@@ -21,7 +21,7 @@ export class AutomaticNotification {
   public id: number;
   public transmitterName: string;
   public transmitterId: string;
-  public text: string;
+  text: string;
   public shortDate: string;
   public shortTime: string;
   public receiverName: string;
@@ -121,6 +121,8 @@ export class SignalRService {
 
   GetNotificationsNumber(idReceiver) {
     return this.http.get<number>(this.rootURL + '/AutomaticNotifs/GetNotificationsNumber/' + idReceiver);
+  } GetNotificationsNumberForUserSender(idReceiver) {
+    return this.http.get<number>(this.rootURL + '/AutomaticNotifs/GetNotificationsNumberForUserSender/' + idReceiver);
   }
   GetNotification(idReceiver, idSender) {
     return this.http.get<number>(this.rootURL + '/AutomaticNotifs/GetNotification/' + idReceiver + '/' + idSender);
@@ -136,6 +138,9 @@ export class SignalRService {
   }
   GetUnreadNotificationByUser(idReceiver) {
     return this.http.get<AutomaticNotification[]>(this.rootURL + '/AutomaticNotifs/GetUnreadNotificationByUser/' + idReceiver);
+  }
+  GetUnreadNotificationsForUserSenderList(idReceiver) {
+    return this.http.get<AutomaticNotification[]>(this.rootURL + '/AutomaticNotifs/GetUnreadNotificationsForUserSenderList/' + idReceiver);
   }
 
   GetUnreadServicesNotificationByUser(idReceiver) {

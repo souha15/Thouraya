@@ -24,6 +24,8 @@ using WebApplicationPlateforme.Model.TechnicalDemands;
 using WebApplicationPlateforme.Model.VenteServices;
 using WebApplicationPlateforme.Model.ServiceRh;
 using WebApplicationPlateforme.Model.FinancePartTwo.Cheques;
+using WebApplicationPlateforme.Model.ServicesConfiguration;
+using WebApplicationPlateforme.Controllers.ServicesConfiguration;
 
 namespace WebApplicationPlateforme.Data
 {
@@ -129,6 +131,10 @@ namespace WebApplicationPlateforme.Data
         public DbSet<TypeDetailsActivite> TypeDetailsActivites { get; set; }
         public DbSet<ActiviteDetails> ActiviteDetails { get; set; }
         public DbSet<demandePayChequesReceive> demandePayChequesReceive { get; set; }
+
+        /**** Configuration Service System **/
+        public DbSet<ConfigService> ConfigServices { get; set; }
+        public DbSet<QuerysTable> QuerysTables { get; set; }
 
     }
 }
