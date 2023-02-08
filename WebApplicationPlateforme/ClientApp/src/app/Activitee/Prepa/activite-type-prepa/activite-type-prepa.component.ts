@@ -80,15 +80,26 @@ export class ActiviteTypePrepaComponent implements OnInit {
 
   //Edit
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   updateRecord(form: NgForm) {
     this.tblService.EditP().subscribe(
       res => {
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
         this.resetForm(form);
         this.toastr.success("تم التحديث  بنجاح", "نجاح");
         this.ShowDotations();
 
       },
       err => {
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
         console.log(err);
         this.toastr.warning('لم يتم التحديث ', ' فشل');
 
@@ -103,11 +114,19 @@ export class ActiviteTypePrepaComponent implements OnInit {
   insertRecord(form: NgForm) {
     this.tblService.PostP().subscribe(
       res => {
+
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تمت الإضافة بنجاح"
         this.resetForm(form);
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         this.ShowDotations();
       },
       err => {
+        this.failed = true;
+        this.succ = false;
+
+        this.msg = " فشل عند الإضافة"
         console.log(err);
         this.toastr.warning('لم تتم الإضافة', ' فشل');
       }

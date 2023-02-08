@@ -80,15 +80,21 @@ export class TypeActiviteeDawaaComponent implements OnInit {
 
   //Edit
 
+  succ: boolean = false;
+  failed: boolean = false;
   updateRecord(form: NgForm) {
     this.tblService.EditD().subscribe(
       res => {
+        this.succ = true;
+        this.failed = false;
         this.resetForm(form);
         this.toastr.success("تم التحديث  بنجاح", "نجاح");
         this.ShowDotations();
 
       },
       err => {
+        this.failed = true;
+        this.succ = false;
         console.log(err);
         this.toastr.warning('لم يتم التحديث ', ' فشل');
 
@@ -103,12 +109,16 @@ export class TypeActiviteeDawaaComponent implements OnInit {
   insertRecord(form: NgForm) {
     this.tblService.PostD().subscribe(
       res => {
+        this.succ = true;
+        this.failed = false;
         this.resetForm(form);
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         this.ShowDotations();
       },
       err => {
         console.log(err);
+        this.failed = true;
+        this.succ = false;
         this.toastr.warning('لم تتم الإضافة', ' فشل');
       }
     )

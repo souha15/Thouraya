@@ -114,15 +114,6 @@ export class ActiviteeListComponent implements OnInit {
     this.activiteService.ListDetail().subscribe(res => {
 
       this.ListDetail = res.filter(item => item.idActivite == this.ac.id)
-
-      //this.ListDetail.forEach(item1 => {
-      //  this.ListTypeSelected.push(this.ListType.filter(item => item.nom == item1.details)[0]); 
-      //})
-
-      //this.ListTypeSelected.forEach(item => {
-      //  this.selecteditems.push({ id: item.id, text: item.nom });
-      //})
-
      
     })
     
@@ -142,6 +133,8 @@ export class ActiviteeListComponent implements OnInit {
   ac: Activite = new Activite();
   acD: ActiviteDetail = new ActiviteDetail();
   id: number;
+  succ: boolean = false;
+  failed: boolean = false;
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -154,7 +147,8 @@ export class ActiviteeListComponent implements OnInit {
       this.ac.dateEnreg = this.date;
       this.activiteService.PutObservableE(this.ac).subscribe(
         res => {
-     
+          this.succ = true;
+          this.failed = false;
           this.selecteditems.forEach(item => {
             
             this.acD.details = item.text;
@@ -169,6 +163,8 @@ export class ActiviteeListComponent implements OnInit {
           form.resetForm();
         },
         err => {
+          this.failed = true;
+          this.succ = false;
           this.toastr.error('لم يتم التحديث  ', ' فشل');
         }
       )
@@ -177,7 +173,6 @@ export class ActiviteeListComponent implements OnInit {
 
 
   //Delete
-
   onDelete(Id) {
     if (confirm('Are you sure to delete this record ?')) {
 

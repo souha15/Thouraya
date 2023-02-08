@@ -83,12 +83,16 @@ export class TypeActiviteeEducationComponent implements OnInit {
   updateRecord(form: NgForm) {
     this.tblService.EditE().subscribe(
       res => {
+        this.succ = true;
+        this.failed = false;
         this.resetForm(form);
         this.toastr.success("تم التحديث  بنجاح", "نجاح");
         this.ShowDotations();
 
       },
       err => {
+        this.failed = true;
+        this.succ = false;
         console.log(err);
         this.toastr.warning('لم يتم التحديث ', ' فشل');
 
@@ -97,7 +101,8 @@ export class TypeActiviteeEducationComponent implements OnInit {
   }
 
   // Insert
-
+  succ: boolean = false;
+  failed: boolean = false;
   dotation: TbListening = new TbListening();
 
   insertRecord(form: NgForm) {
@@ -108,6 +113,8 @@ export class TypeActiviteeEducationComponent implements OnInit {
         this.ShowDotations();
       },
       err => {
+        this.failed = true;
+        this.succ = false;
         console.log(err);
         this.toastr.warning('لم تتم الإضافة', ' فشل');
       }

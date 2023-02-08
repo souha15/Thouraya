@@ -50,7 +50,8 @@ export class ActiviteDawaElecAddComponent implements OnInit {
       this.typeList = res;
     })
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
   date = new Date().toLocaleDateString();
   isValidFormSubmitted = false;
   ac: Activite = new Activite();
@@ -73,10 +74,15 @@ export class ActiviteDawaElecAddComponent implements OnInit {
       this.ac.dateEnreg = this.date;
       this.activiteService.CreateDE(this.ac).subscribe(
         res => {
+
+          this.succ = true;
+          this.failed = false;
           this.toastr.success('تم التحديث بنجاح', 'نجاح')
           form.resetForm();
         },
         err => {
+          this.failed = true;
+          this.succ = false;
           this.toastr.error('لم يتم التحديث  ', ' فشل');
         }
       )

@@ -13,7 +13,7 @@ import { NgForm } from '@angular/forms';
 export class TypeActiviteeComponent implements OnInit {
 
 
-
+  
   constructor(private tblService: FilesActiviteeService,
     private toastr: ToastrService) { }
 
@@ -38,7 +38,9 @@ export class TypeActiviteeComponent implements OnInit {
   ShowDotations() {
     this.allDotation = this.tblService.GetTalent();
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   //Delete Dotation
   onDelete(Id) {
     if (confirm('Are you sure to delete this record ?')) {
@@ -83,12 +85,21 @@ export class TypeActiviteeComponent implements OnInit {
   updateRecord(form: NgForm) {
     this.tblService.EditTalent().subscribe(
       res => {
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
         this.resetForm(form);
         this.toastr.success("تم التحديث  بنجاح", "نجاح");
         this.ShowDotations();
 
       },
       err => {
+
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
         console.log(err);
         this.toastr.warning('لم يتم التحديث ', ' فشل');
 
@@ -103,11 +114,20 @@ export class TypeActiviteeComponent implements OnInit {
   insertRecord(form: NgForm) {
     this.tblService.PostTalent().subscribe(
       res => {
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
         this.resetForm(form);
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         this.ShowDotations();
       },
       err => {
+        this.failed = true;
+        this.succ = false;
+
+        this.msg = " فشل عند الإضافة"
         console.log(err);
         this.toastr.warning('لم تتم الإضافة', ' فشل');
       }

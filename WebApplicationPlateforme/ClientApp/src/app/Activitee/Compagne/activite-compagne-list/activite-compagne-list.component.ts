@@ -69,7 +69,8 @@ export class ActiviteCompagneListComponent implements OnInit {
       this.typeList = res;
     })
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
   date = new Date().toLocaleDateString();
   isValidFormSubmitted = false;
   ac: Activite = new Activite();
@@ -85,11 +86,16 @@ export class ActiviteCompagneListComponent implements OnInit {
       this.ac.dateEnreg = this.date;
       this.activiteService.PutObservableEC(this.ac).subscribe(
         res => {
+          this.succ = true;
+          this.failed = false;
           this.getActiviteList();
           this.toastr.success('تم التحديث بنجاح', 'نجاح')
           form.resetForm();
         },
         err => {
+
+          this.failed = true;
+          this.succ = false;
           this.toastr.error('لم يتم التحديث  ', ' فشل');
         }
       )

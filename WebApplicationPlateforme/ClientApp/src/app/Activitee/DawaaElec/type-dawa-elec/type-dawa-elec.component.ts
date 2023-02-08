@@ -79,16 +79,21 @@ export class TypeDawaElecComponent implements OnInit {
   }
 
   //Edit
-
+  succ: boolean = false;
+  failed: boolean = false;
   updateRecord(form: NgForm) {
     this.tblService.EditDE().subscribe(
       res => {
+        this.succ = true;
+        this.failed = false;
         this.resetForm(form);
         this.toastr.success("تم التحديث  بنجاح", "نجاح");
         this.ShowDotations();
 
       },
       err => {
+        this.failed = true;
+        this.succ = false;
         console.log(err);
         this.toastr.warning('لم يتم التحديث ', ' فشل');
 
@@ -103,11 +108,15 @@ export class TypeDawaElecComponent implements OnInit {
   insertRecord(form: NgForm) {
     this.tblService.PostDE().subscribe(
       res => {
+        this.succ = true;
+        this.failed = false;
         this.resetForm(form);
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         this.ShowDotations();
       },
       err => {
+        this.failed = true;
+        this.succ = false;
         console.log(err);
         this.toastr.warning('لم تتم الإضافة', ' فشل');
       }

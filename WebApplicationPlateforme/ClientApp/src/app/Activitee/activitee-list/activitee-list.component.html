@@ -124,13 +124,13 @@
 
               </div>
 
-              
+
               <div class="col-sm-6">
                 <label for="from">
                   التفاصيل
                 </label>
 
-                <div *ngFor="let i of ListDetail" >
+                <div *ngFor="let i of ListDetail">
                   {{i.details}}
                 </div>
 
@@ -153,6 +153,21 @@
               <div class="col-12 text-left">
                 <input class="btn btn-primary px-4" type="submit" value="تعديل">
               </div>
+
+
+              <div class="col-md-6">
+                <div class="success-msg" *ngIf="succ">
+                  <i class="fa fa-check"></i>
+                  تم التحديث بنجاح
+                </div>
+
+                <div class="error-msg" *ngIf="failed">
+                  <i class="fa fa-times-circle"></i>
+                  لم يتم التحديث
+                </div>
+              </div>
+
+
             </form>
 
           </div>

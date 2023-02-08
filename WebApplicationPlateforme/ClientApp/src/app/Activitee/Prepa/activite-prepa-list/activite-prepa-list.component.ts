@@ -14,7 +14,9 @@ import { NgForm } from '@angular/forms';
 })
 export class ActivitePrepaListComponent implements OnInit {
 
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   constructor(private activiteService: ActiviteeService,
     private typeService: FilesActiviteeService,
     private UserService: UserServiceService,
@@ -74,6 +76,7 @@ export class ActivitePrepaListComponent implements OnInit {
   date = new Date().toLocaleDateString();
   isValidFormSubmitted = false;
   ac: Activite = new Activite();
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -86,11 +89,20 @@ export class ActivitePrepaListComponent implements OnInit {
       this.ac.dateEnreg = this.date;
       this.activiteService.PutObservableEP(this.ac).subscribe(
         res => {
+          this.msg = "  تم التحديث بنجاح"
+
+          this.succ = true;
+          this.failed = false;
           this.getActiviteList();
           this.toastr.success('تم التحديث بنجاح', 'نجاح')
           form.resetForm();
         },
         err => {
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
+
           this.toastr.error('لم يتم التحديث  ', ' فشل');
         }
       )
