@@ -89,6 +89,19 @@
                  value="تسجيل" />
         </div>
 
+
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            تمت الإضافة بنجاح
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            فشل عند الإضافة
+          </div>
+        </div>
+
       </form>
     </div>
   </div>

@@ -85,18 +85,24 @@ export class ActiviteForWomensListComponent implements OnInit {
       this.ac.dateEnreg = this.date;
       this.activiteService.PutObservableEW(this.ac).subscribe(
         res => {
+
+          this.succ = true;
+          this.failed = false;
           this.getActiviteList();
           this.toastr.success('تم التحديث بنجاح', 'نجاح')
           form.resetForm();
         },
         err => {
+          this.failed = true;
+          this.succ = false;
           this.toastr.error('لم يتم التحديث  ', ' فشل');
         }
       )
     }
   }
 
-
+  succ: boolean = false;
+  failed: boolean = false;
   //Delete
 
   onDelete(Id) {

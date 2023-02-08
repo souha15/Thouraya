@@ -80,15 +80,22 @@ export class TypeActiviteeCompagneComponent implements OnInit {
 
   //Edit
 
+  succ: boolean = false;
+  failed: boolean = false;
+
   updateRecord(form: NgForm) {
     this.tblService.EditC().subscribe(
       res => {
+        this.succ = true;
+        this.failed = false;
         this.resetForm(form);
         this.toastr.success("تم التحديث  بنجاح", "نجاح");
         this.ShowDotations();
-
+      
       },
       err => {
+        this.succ = true;
+        this.failed = false;
         console.log(err);
         this.toastr.warning('لم يتم التحديث ', ' فشل');
 
@@ -103,11 +110,15 @@ export class TypeActiviteeCompagneComponent implements OnInit {
   insertRecord(form: NgForm) {
     this.tblService.PostC().subscribe(
       res => {
+        this.succ = true;
+        this.failed = false;
         this.resetForm(form);
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         this.ShowDotations();
       },
       err => {
+        this.failed = true;
+        this.succ = false;
         console.log(err);
         this.toastr.warning('لم تتم الإضافة', ' فشل');
       }

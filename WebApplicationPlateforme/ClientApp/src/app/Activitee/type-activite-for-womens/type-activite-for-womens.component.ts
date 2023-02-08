@@ -19,6 +19,9 @@ export class TypeActiviteForWomensComponent implements OnInit {
     this.ShowDotations();
     this.resetForm();
   }
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   // Type Dotation List
 
@@ -81,12 +84,21 @@ export class TypeActiviteForWomensComponent implements OnInit {
   updateRecord(form: NgForm) {
     this.tblService.Edit().subscribe(
       res => {
+
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
         this.resetForm(form);
         this.toastr.success("تم التحديث  بنجاح", "نجاح");
         this.ShowDotations();
 
       },
       err => {
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
         console.log(err);
         this.toastr.warning('لم يتم التحديث ', ' فشل');
 
@@ -101,11 +113,21 @@ export class TypeActiviteForWomensComponent implements OnInit {
   insertRecord(form: NgForm) {
     this.tblService.Post().subscribe(
       res => {
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
         this.resetForm(form);
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         this.ShowDotations();
       },
       err => {
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
         console.log(err);
         this.toastr.warning('لم تتم الإضافة', ' فشل');
       }

@@ -51,7 +51,9 @@ export class ActiviteImmigrationAddComponent implements OnInit {
       this.typeList = res;
     })
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   date = new Date().toLocaleDateString();
   isValidFormSubmitted = false;
   ac: Activite = new Activite();
@@ -74,10 +76,17 @@ export class ActiviteImmigrationAddComponent implements OnInit {
       this.ac.dateEnreg = this.date;
       this.activiteService.CreateI(this.ac).subscribe(
         res => {
+          this.succ = true;
+          this.failed = false;
+          this.msg = "  تمت الإضافة بنجاح"
           this.toastr.success('تم التحديث بنجاح', 'نجاح')
           form.resetForm();
         },
         err => {
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
           this.toastr.error('لم يتم التحديث  ', ' فشل');
         }
       )

@@ -54,6 +54,9 @@ export class ActivitePrepaAddComponent implements OnInit {
   date = new Date().toLocaleDateString();
   isValidFormSubmitted = false;
   ac: Activite = new Activite();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -73,10 +76,17 @@ export class ActivitePrepaAddComponent implements OnInit {
       this.ac.dateEnreg = this.date;
       this.activiteService.CreateP(this.ac).subscribe(
         res => {
+          this.succ = true;
+          this.failed = false;
+          this.msg = "  تمت الإضافة بنجاح"
           this.toastr.success('تم التحديث بنجاح', 'نجاح')
           form.resetForm();
         },
         err => {
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
           this.toastr.error('لم يتم التحديث  ', ' فشل');
         }
       )
