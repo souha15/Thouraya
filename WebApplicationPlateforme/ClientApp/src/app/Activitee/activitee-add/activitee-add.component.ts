@@ -132,6 +132,7 @@ export class ActiviteeAddComponent implements OnInit {
 
           this.id = res.id;
           this.succ = true;
+          this.failed = false;
           this.selecteditems.forEach(item => {
 
             this.acD.details = item.text;
@@ -146,6 +147,7 @@ export class ActiviteeAddComponent implements OnInit {
           form.resetForm();
         },
         err => {
+          this.succ = false;
           this.failed = true;
           this.toastr.error('لم يتم التحديث  ', ' فشل');
             }
