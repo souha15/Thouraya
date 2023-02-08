@@ -105,6 +105,10 @@ export class ActiviteeAddComponent implements OnInit {
   ac: Activite = new Activite();
   acD: ActiviteDetail = new ActiviteDetail();
   id: number;
+
+  succ: boolean = false;
+  failed: boolean = false;
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -125,7 +129,9 @@ export class ActiviteeAddComponent implements OnInit {
       this.activiteService.Create(this.ac).subscribe(
         
         res => {
+
           this.id = res.id;
+          this.succ = true;
           this.selecteditems.forEach(item => {
 
             this.acD.details = item.text;
@@ -135,11 +141,12 @@ export class ActiviteeAddComponent implements OnInit {
        
           })
           })
-          this.toastr.success('تم التحديث بنجاح', 'نجاح');
+          this.toastr.success('تم التحديث بنجاح', 'نجاح');      
           this.selecteditems = [];
           form.resetForm();
         },
         err => {
+          this.failed = true;
           this.toastr.error('لم يتم التحديث  ', ' فشل');
             }
         

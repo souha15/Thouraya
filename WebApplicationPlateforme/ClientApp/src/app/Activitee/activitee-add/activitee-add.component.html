@@ -60,12 +60,11 @@
         </div>
 
 
-        <div class="col-sm-6" >
+        <div class="col-sm-6">
           <label for="from">
             التفاصيل
           </label>
-          <ng-multiselect-dropdown 
-                                   name="employeead"
+          <ng-multiselect-dropdown name="employeead"
                                    [placeholder]="'التفاصيل '"
                                    [settings]="dropdownSettings"
                                    [data]="ListType"
@@ -88,7 +87,21 @@
                  style="width: 130px;"
                  class="btn btn-primary next"
                  value="تسجيل" />
+
+      
         </div>
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            تم التحديث بنجاح
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            لم يتم التحديث
+          </div>
+        </div>
+       
 
       </form>
     </div>
