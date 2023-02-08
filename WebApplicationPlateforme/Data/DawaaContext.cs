@@ -26,6 +26,7 @@ using WebApplicationPlateforme.Model.ServiceRh;
 using WebApplicationPlateforme.Model.FinancePartTwo.Cheques;
 using WebApplicationPlateforme.Model.ServicesConfiguration;
 using WebApplicationPlateforme.Controllers.ServicesConfiguration;
+using WebApplicationPlateforme.Model.Chat;
 
 namespace WebApplicationPlateforme.Data
 {
@@ -135,6 +136,7 @@ namespace WebApplicationPlateforme.Data
         /**** Configuration Service System **/
         public DbSet<ConfigService> ConfigServices { get; set; }
         public DbSet<QuerysTable> QuerysTables { get; set; }
+        public DbSet<ChatMsg> ChatMsgs { get; set; }
 
     }
 }

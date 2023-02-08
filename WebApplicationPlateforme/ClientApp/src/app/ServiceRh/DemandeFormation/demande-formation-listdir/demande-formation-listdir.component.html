@@ -20,12 +20,12 @@
               <th scope="col">الجهة المقدمة</th>
               <th scope="col">مدة الدورة</th>
               <th scope="col">عرض التفاصيل</th>
-              <th scope="col">رفض/موافقة</th>
+              <th scope="col">الحالة</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
-              <th scope="row">{{cg.id}}</th>
+            <tr *ngFor="let cg of formationList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p };let i = index">
+              <th scope="row">{{(p-1) * count + i + 1}}</th>
               <td>{{cg.userNameCreator}}</td>
               <td>{{cg.titre}}</td>
               <td>{{cg.org}}</td>
@@ -35,9 +35,9 @@
                   <i class="fa fa-eye fa-lg"></i>
                 </a>
               </td>
-              <td (click)="populateForm(cg)">
-                <a class="btn btn-danger ml-3" data-toggle="modal" data-target="#myModal1">رفض</a>
-                <a class="btn btn-success" data-toggle="modal" data-target="#myModal2">موافقة</a>
+              <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
+                  class="wait">
+                في الإنتظار
               </td>
             </tr>
           </tbody>
@@ -99,21 +99,23 @@
 
 
       <div class="page-wrapper">
-        <h3 class="popup-head">موافقة على الطلب</h3>
+        <h3 class="popup-head">تعديل حالة الطلب</h3>
         <div class="modal-body" style="direction:rtl; text-align:right;">
-          <div class="task-form form-row stop-form">
+          <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <label for="user"><span><i class="fa fa-check"></i></span>حالة الطلب</label>
+            <select id="user" class="" (change)="etattest($event)">
+              <option [ngValue]="undefined" selected disabled>-حالة الطلب-</option>
+              <option value="موافق">موافق</option>
+              <option value="رفض">رفض</option>
 
+            </select>
 
-            <p class="text-center" style="text-align:center">هل أنت متأكد من الموافقة على الطلب  ؟</p>
+            <div class="save">
+              <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
 
-
-
-            <div class="mx-auto my-3 text-center">
-              <button class="btn btn-success px-2 ml-3" (click)="accept()"><span class="ml-2"><i class="fa fa-save"></i></span> موافق</button>
-              <button class="btn btn-danger px-2 ml-3"><span class="ml-2"><i class="fa fa-times"></i></span> إلغاء</button>
             </div>
-
-          </div>
+   
+          </form>
 
         </div>
       </div>

@@ -25,8 +25,6 @@ export class AvanceListDComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
-    this.getDep();
-
     this.userOnLis();
     this.userOffLis();
     this.logOutLis();
@@ -150,29 +148,18 @@ export class AvanceListDComponent implements OnInit {
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-      this.notif.userTransmitterId = res.id;
-      this.notif.userTransmitterName = res.fullName;
-      this.notif.dateTime = this.date;
-      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
-      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
-      this.notif.TextNotification = " تمت الموافقة على طلب سلفة  من قبل" + ' ' + res.fullName
-      this.notif.serviceName = "طلب سلفة"
-      this.notif.readUnread = "0";
-      this.notif.serviceId = 5;
-      this.UserService.GetEtabFin().subscribe(resDir => {
-        this.notif.userReceiverId = resDir.id;
-        this.notif.userReceiverName = resDir.fullName;
-      })
+      this.avanceService.GetDemand(this.UserIdConnected).subscribe(res => {
+        this.AvanceList = res;
+      }
+      )
 
     })
   }
 
-  factList: Avance[] = [];
-  GfactList: Avance[] = [];
-  getDep() {
-    this.avanceService.Get().subscribe(res => {
-      this.GfactList = res;
-      this.factList = this.GfactList.filter(item => item.etatD == "في الإنتظار")
+  AvanceList: Avance[] = [];
+  GetAvanceList() {
+    this.avanceService.GetDemand(this.UserIdConnected).subscribe(res => {
+      this.AvanceList = res;
     })
   }
 
@@ -191,41 +178,35 @@ export class AvanceListDComponent implements OnInit {
     this.raisonRefus = event.target.value;
   }
 
+  etat: string;
+  etattest(event) {
+    this.etat = event.target.value;
+  }
+
   date = new Date().toLocaleDateString();
   autoNotif: AutomaticNotification = new AutomaticNotification();
-  accept() {
-    //this.fact.attribut2 = "موافقة"
-    this.fact.etatD = "موافقة"
-    this.fact.dateD = this.date;
-    this.fact.idD = this.UserIdConnected
-    this.fact.idC = this.UserNameConnected;
+  updateRecord(form: NgForm) {
+    this.avanceService.EditDemandByRole(this.fact.id, this.etat).subscribe(res => {
+      this.fact = res;
+      this.avanceService.PutObservableE(this.fact).subscribe(res2 => {
 
-
-    this.fact.idD = this.UserIdConnected;
-    this.fact.nomD = this.UserNameConnected;
-    this.avanceService.PutObservableE(this.fact).subscribe(res => {
-
-      this.UserService.GetEtabFinList().subscribe(res => {
-        this.ComptaList = res
-        let rand = Math.floor(Math.random() * (1 - 0 + 1) + 0);
-        this.dirId = this.ComptaList[rand].id
-        this.dirName = this.ComptaList[rand].fullName
+        if (this.etat == "موافق" && this.fact.etat != 'موافق') {
         //Send Notification
         this.text = "طلب سلفة"
         this.autoNotif.serviceId = this.fact.id;
-        this.autoNotif.pageUrl = "avance-list-c"
+          this.autoNotif.pageUrl = "avance-list-d"
         this.autoNotif.userType = "5";
-        this.autoNotif.reponse = "10";
-        this.signalService.GetConnectionByIdUser(this.dirId).subscribe(res1 => {
+          this.autoNotif.reponse = "10";
+          this.signalService.GetConnectionByIdUser(this.fact.idD).subscribe(res1 => {
           this.userOnline = res1;
           this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
             .catch(err => console.error(err));
-        }, err => {
-          this.autoNotif.receiverName = this.dirName;
-          this.autoNotif.receiverId = this.dirId;
+          }, err => {
+           this.autoNotif.receiverName = this.fact.nomD;
+           this.autoNotif.receiverId = this.fact.idD;
           this.autoNotif.transmitterId = this.UserIdConnected;
           this.autoNotif.transmitterName = this.UserNameConnected;
-            this.text = "طلب  سلفة"
+          this.autoNotif.text = "طلب  سلفة"
           this.autoNotif.vu = "0";
 
 
@@ -233,43 +214,72 @@ export class AvanceListDComponent implements OnInit {
 
           })
         })
-      })
-      this.notifService.Add(this.notif).subscribe(res => {
+      }
 
-      })
+        if (this.fact.etat == "رفض") {
+          this.autoNotif.serviceId = this.fact.id;
+          this.autoNotif.pageUrl = "avance-list-e"
+          this.autoNotif.userType = "0";
+          this.autoNotif.reponse = "19";
+          this.text = " لقد تم رفض طلب السلفة ";
+          this.signalService.GetConnectionByIdUser(this.fact.idUserCreator).subscribe(res1 => {
+            this.userOnline = res1;
+            this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+              .catch(err => console.error(err));
+          }, err => {
+            this.autoNotif.receiverName = this.fact.userNameCreator;
+            this.autoNotif.receiverId = this.fact.idUserCreator;
+            this.autoNotif.transmitterId = this.UserIdConnected;
+            this.autoNotif.transmitterName = this.UserNameConnected;
+              this.autoNotif.text = " لقد تم رفض طلب السلفة";
+            this.autoNotif.vu = "0";
 
-      this.getDep();
+
+            this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+
+            })
+          })
+        }
+
+        if (this.fact.etat == "موافق") {
+          this.autoNotif.serviceId = this.fact.id;
+          this.autoNotif.pageUrl = "avance-list-e"
+          this.autoNotif.userType = "0";
+          this.autoNotif.reponse = "19";
+          this.text = " لقد تمت الموافقة على طلب السلفة ";
+          this.signalService.GetConnectionByIdUser(this.fact.idUserCreator).subscribe(res1 => {
+            this.userOnline = res1;
+            this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+              .catch(err => console.error(err));
+          }, err => {
+            this.autoNotif.receiverName = this.fact.userNameCreator;
+            this.autoNotif.receiverId = this.fact.idUserCreator;
+            this.autoNotif.transmitterId = this.UserIdConnected;
+            this.autoNotif.transmitterName = this.UserNameConnected;
+              this.autoNotif.text = " لقد تمت الموافقة على طلب السلفة";
+            this.autoNotif.vu = "0";
+
+
+            this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+
+            })
+          })
+        }
+      this.GetAvanceList();
       this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
 
     },
       err => {
         this.toastr.warning('لم يتم  قبول الطلب', ' فشل');
       })
+      })
 
   }
-  refuse() {
 
 
-    if (this.raisonRefus != null) {
-      this.fact.raisonRefusD = this.raisonRefus;
-      this.fact.attribut2 = "رفض"
-      this.fact.etatD = "رفض"
-      this.fact.dateD = this.date;
-      this.fact.idD = this.UserIdConnected
-      this.fact.idC = this.UserNameConnected;
+  onSubmit(form: NgForm) {
 
-
-      this.avanceService.PutObservableE(this.fact).subscribe(res => {
-        this.getDep();
-        this.toastr.success("تم  رفض الطلب بنجاح", "نجاح");
-      },
-        err => {
-          this.toastr.warning('لم يتم رفض الطلب ', ' فشل');
-        })
-    } else {
-      this.toastr.error('اكتب سبب الرفض ', ' فشل');
-    }
+    this.updateRecord(form)
   }
-
 }
 

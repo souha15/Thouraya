@@ -25,49 +25,40 @@
               <th scope="col">آلية اختيار المرشح</th>
               <th scope="col">المهام الوظيفية</th>
               <th scope="col">تاريخ بداية العمل</th>
-              <th scope="col">الحالة</th>
               <th scope="col">تفاصيل الدورة</th>
-              <th scope="col">تعديل</th>
+              <th scope="col">الحالة</th>
               <th scope="col">سير الإجراء</th>
-              <th scope="col">حذف</th>
+
 
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
-              <th scope="row">{{cg.id}}</th>
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
+              <th scope="row">{{(p-1) * count + i + 1}}</th>
               <th scope="row">{{cg.userNameCreator}}</th>
               <td (click)="populateForm(cg)">{{cg.selection}}</td>
               <td (click)="populateForm(cg)">{{cg.tacheTravail}}</td>
               <td (click)="populateForm(cg)">{{cg.datedebut}}</td>
-
-              <td (click)="populateForm(cg)"
-                  [ngClass]="{
-
-  'success': cg.etatdir === 'موافقة',
-  'denied': cg.etatdir === 'رفض',
-  'wait': cg.etatdir === 'في الإنتظار'
-}">
-                {{cg.etat}}
-              </td>
               <td>
                 <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-eye fa-lg"></i>
                 </a>
               </td>
-              <td (click)="populateForm(cg)">
-                <a class="btn btn-danger ml-3" data-toggle="modal" data-target="#myModal1">رفض</a>
-                <a class="btn btn-success" data-toggle="modal" data-target="#myModal2">موافقة</a>
+              <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal2"
+                  [ngClass]="{
+
+  'success': cg.etat === 'موافق',
+  'denied': cg.etat === 'رفض',
+  'wait': cg.etat === 'في الإنتظار'
+}">
+                {{cg.etat}}
               </td>
+
+
               <td (click)="populateForm(cg)">
                 <a class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal3"><i class="fa fa-road"></i>  </a>
               </td>
 
-              <td>
-                <a class="btn show-details-btn text-danger" (click)="onDelete(cg.id)">
-                  <i class="fa fa-trash fa-lg"></i>
-                </a>
-              </td>
             </tr>
           </tbody>
         </table>
@@ -162,27 +153,7 @@
 
       </div>
       <div class="modal-body" style="direction:rtl; text-align:right">
-        <div class="lables">
-          <div style="color:#db5a60; font-weight:bold"> تقديم الطلب</div>
-          <div style="color:dimgrey;font-weight:bold"> مدير الإدارة</div>
-          <div style="color:#276985;font-weight:bold"> مدير الشؤون المالية و الإدارية</div>
-          <div style="color:green;font-weight:bold">المدير العام</div>
-
-        </div>
-        <div class="w3-light-grey w3-round" *ngIf="test0">
-          <div id="myBar" class="w3-container w3-round w3-red" style="height:24px;width:{{val}}">0</div>
-        </div>
-
-        <div class="w3-light-grey w3-round" *ngIf="test50">
-          <div id="myBar" class="w3-container w3-round w3-blue-grey" style="height:24px;width:{{val}}">50%</div>
-        </div>
-
-        <div class="w3-light-grey w3-round" *ngIf="test75">
-          <div id="myBar" class="w3-container w3-round w3-blue" style="height:24px;width:{{val}}">75%</div>
-        </div>
-        <div class="w3-light-grey w3-round" *ngIf="test100">
-          <div id="myBar" class="w3-container w3-round w3-green" style="height:24px;width:{{val}}">100%</div>
-        </div>
+        <p style="font-weight:bold"> {{rslt}}</p>
       </div>
 
     </div>
@@ -229,21 +200,22 @@
 
 
       <div class="page-wrapper">
-        <h3 class="popup-head">موافقة على الطلب</h3>
+        <h3 class="popup-head">تعديل حالة الطلب</h3>
         <div class="modal-body" style="direction:rtl; text-align:right;">
-          <div class="task-form form-row stop-form">
+          <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <label for="user"><span><i class="fa fa-check"></i></span> حالة الطلب</label>
+            <select id="user" class="" name="etat" #etat="ngModel" [(ngModel)]="fact.etat">
+              <option [ngValue]="undefined" selected disabled>-حالة الطلب-</option>
+              <option value="موافق">موافق</option>
+              <option value="رفض">رفض</option>
 
+            </select>
 
-            <p class="text-center" style="text-align:center">هل أنت متأكد من الموافقة على الطلب  ؟</p>
+            <div class="save">
+              <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
 
-
-
-            <div class="mx-auto my-3 text-center">
-              <button class="btn btn-success px-2 ml-3" (click)="accept()"><span class="ml-2"><i class="fa fa-save"></i></span> موافق</button>
-              <button class="btn btn-danger px-2 ml-3"><span class="ml-2"><i class="fa fa-times"></i></span> إلغاء</button>
             </div>
-
-          </div>
+          </form>
 
         </div>
       </div>

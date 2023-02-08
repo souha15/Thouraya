@@ -59,4 +59,22 @@ export class ResidenceService {
   Delete(id) {
     return this.http.delete(this.rootURL + '/Residences/' + id);
   }
+
+
+  GetByUserCreator(userId) {
+    return this.http.get<Residence[]>(this.rootURL + '/Residences/GetByUserCreator/' + userId);
+  }
+
+  GetDemand(userId) {
+    return this.http.get<Residence[]>(this.rootURL + '/Residences/GetDemand/' + userId);
+  }
+
+  GetHistorique(id) {
+    return this.http.get<Residence>(this.rootURL + '/Residences/GetHistorique/' + id);
+  }
+
+  EditDemandByRole(Id: number, userEtat: string) {
+    return this.http.get<Residence>(this.rootURL + '/Residences/EditDemandByRole/' + Id + '/' + userEtat, this.headers);
+
+  }
 }

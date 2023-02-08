@@ -27,16 +27,15 @@
               <th scope="col">عدد أشهر الاستقطاع</th>
               <th scope="col">الاستقطاع شهر/سنة</th>
               <th scope="col">الحالة</th>
-              <th scope="col">عرض التفاصيل</th>
-
+              <th scope="col"> التفاصيل</th>
               <th scope="col">تعديل</th>
               <th scope="col">حذف</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; let i = index">
 
-              <td (click)="populateForm(cg)">{{cg.id}}</td>
+              <td (click)="populateForm(cg)">{{(p-1) * count + i + 1}}</td>
               <td (click)="populateForm(cg)">{{cg.etatAvance}}</td>
               <td (click)="populateForm(cg)">{{cg.prix}}</td>
               <td (click)="populateForm(cg)">{{cg.nbMoisDeduire}}</td>
@@ -45,19 +44,19 @@
               <td (click)="populateForm(cg)"
                   [ngClass]="{
 
-  'success': cg.attribut2 === 'موافقة',
-  'denied': cg.attribut2 === 'رفض',
-  'wait': cg.attribut2 === 'في الإنتظار'
+  'success': cg.etat === 'موافق',
+  'denied': cg.etat === 'رفض',
+  'wait': cg.etat === 'في الإنتظار'
 }">
-                {{cg.attribut2}}
+                {{cg.etat}}
               </td>
               <td (click)="populateForm(cg)">
                 <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-eye fa-lg"></i>
                 </a>
               </td>
-              <td *ngIf="etatok" (click)="populateForm(cg)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1">تعديل</a></td>
-              <td *ngIf="etatok" (click)="populateForm(cg)"><a class="btn btn-danger" (click)="onDelete(cg.id)">حذف</a></td>
+              <td (click)="populateForm(cg)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1">تعديل</a></td>
+              <td (click)="populateForm(cg)"><a class="btn btn-danger" (click)="onDelete(cg.id)">حذف</a></td>
             </tr>
           </tbody>
         </table>

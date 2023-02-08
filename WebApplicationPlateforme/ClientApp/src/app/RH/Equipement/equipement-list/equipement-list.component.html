@@ -9,7 +9,9 @@
       <header>
         <h3 class="task-head">كشف طلبات  العهد</h3>
       </header>
+      <br />
       <input class="form-control" type="text" name="search" [(ngModel)]="filter" placeholder="بحث">
+      <br />
       <div class="leave-request-list">
         <div class="table-responsive">
           <table class="table table-bordered text-center table-striped">
@@ -20,26 +22,24 @@
                 <th scope="col">نوع العهدة</th>
                 <th scope="col">جوال</th>
                 <th scope="col">الايميل الرسمي</th>
-                <th scope="col">تحويله</th>
                 <th scope="col">الحالة</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
-                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.id}}</th>
+              <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; let i = index;">
+                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{(p-1) * count + i + 1}}</th>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.nom}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.type}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.tel}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.email}}</td>
-                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.transfert}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1"
                     [ngClass]="{
 
-  'ok': cg.attribut4 === 'موافق',
-  'refused': cg.attribut4 === 'رفض',
-  'wait': cg.attribut4 === 'في الانتظار'
+  'ok': cg.etat === 'موافق',
+  'refused': cg.etat === 'رفض',
+  'wait': cg.etat === 'في الإنتظار'
 }">
-                  {{cg.attribut4}}
+                  {{cg.etat}}
                 </td>
               </tr>
 

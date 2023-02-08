@@ -553,7 +553,8 @@ namespace WebApplicationPlateforme.Controllers.RH
 
             return conge;
         }
-         [HttpGet]
+        
+        [HttpGet]
         [Route("EditDemandByRole/{Id}/{userEtat}")]
 
         public Conge EditDemandByRole(int Id, string userEtat)

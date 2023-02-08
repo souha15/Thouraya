@@ -59,6 +59,39 @@ namespace WebApplicationPlateforme.Model.FinancePartTwo.Cheques
 
         [ForeignKey("ApplicationUser")]
         public string idUserCreator { get; set; }
+        public string etat { get; set; }
+        public string userName1 { get; set; }
+        public string userId1 { get; set; }
+        public string userEtat1 { get; set; }
+        public string userDate1 { get; set; }
+        public string userName2 { get; set; }
+        public string userId2 { get; set; }
+        public string userEtat2 { get; set; }
+        public string userDate2 { get; set; }
+        public string userName3 { get; set; }
+        public string userId3 { get; set; }
+        public string userEtat3 { get; set; }
+        public string userDate3 { get; set; }
+        public string userName4 { get; set; }
+        public string userId4 { get; set; }
+        public string userEtat4 { get; set; }
+        public string userDate4 { get; set; }
+        public string userName5 { get; set; }
+        public string userId5 { get; set; }
+        public string userEtat5 { get; set; }
+        public string userDate5 { get; set; }
+        public string userName6 { get; set; }
+        public string userId6 { get; set; }
+        public string userEtat6 { get; set; }
+        public string userDate6 { get; set; }
+        public string userName7 { get; set; }
+        public string userId7 { get; set; }
+        public string userEtat7 { get; set; }
+        public string userDate7 { get; set; }
+        public string userName8 { get; set; }
+        public string userId8 { get; set; }
+        public string userEtat8 { get; set; }
+        public string userDate8 { get; set; }
         public virtual ApplicationUser ApplicationUser { get; set; }
     }
 }

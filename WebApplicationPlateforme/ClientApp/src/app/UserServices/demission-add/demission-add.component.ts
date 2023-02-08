@@ -19,8 +19,6 @@ export class DemissionAddComponent implements OnInit {
   constructor(private demService: DemissionService,
     private toastr: ToastrService,
     private UserService: UserServiceService,
-    private notifService: NotifService,
-    private adminService: AdministrationService,
     private signalService: SignalRService) { }
 
   ngOnInit(): void {
@@ -130,39 +128,17 @@ export class DemissionAddComponent implements OnInit {
   }
   dirId: string;
   dirName: string;
-  getDirg() {
-    this.UserService.GetAdminDirG().subscribe(res => {
-      this.dirId = res.id;
-      this.dirName = res.fullName;
-    })
-  }
-
-
   today;
 
   //Get UserConnected
 
   UserIdConnected: string;
   UserNameConnected: string;
-  notif: Notif = new Notif();
-  dirID: string;
-  adminId: number = 28;
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-      this.notif.userTransmitterId = res.id;
-      this.notif.userTransmitterName = res.fullName;
-      this.notif.dateTime = this.date;
-      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
-      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
-      this.notif.TextNotification = "طلب إستقالة  من الموظف  " + res.fullName
-      this.notif.serviceName = "طلب إستقالة "
-      this.notif.readUnread = "0";
-      this.notif.serviceId = 1;
-      this.notif.userReceiverId = "32618446-df21-4ca1-b366-f639f41a7a7c";
-      this.notif.userReceiverName = "د. محمد بن إبراهيم عوض الصواط ";
     })
 
   }
@@ -173,16 +149,13 @@ export class DemissionAddComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.dem.idUserCreator = this.UserIdConnected;
     this.dem.creatorName = this.UserNameConnected;
-    this.dem.datenereg = this.date;
-    this.dem.etat = "في الانتظار";
-    this.dem.etatdir = "في الانتظار";
-    this.dem.etatrh = "في الانتظار";
-    this.dem.attribut3 = "في الانتظار";
     this.demService.Add(this.dem).subscribe(
       res => {
-        this.UserService.GetAdminDirG().subscribe(resDir => {
-          this.dirId = resDir.id;
-          this.dirName = resDir.fullName
+
+        this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+        form.resetForm();
+        this.dirId = res.userId1;
+        this.dirName = res.userName1;
           this.autoNotif.serviceId = res.id;
           this.autoNotif.pageUrl = "demissio-listdir"
           this.autoNotif.userType = "6";
@@ -204,14 +177,9 @@ export class DemissionAddComponent implements OnInit {
             this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
 
             })
-          })
-        })
-        this.notifService.Add(this.notif).subscribe(res => {
-
          
         })
-        this.toastr.success("تمت الإضافة بنجاح", "نجاح");
-        form.resetForm();
+
       },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');

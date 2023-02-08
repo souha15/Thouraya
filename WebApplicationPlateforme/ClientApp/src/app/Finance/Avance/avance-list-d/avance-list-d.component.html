@@ -27,13 +27,13 @@
               <th scope="col">المبلغ</th>
               <th scope="col">عدد أشهر الاستقطاع</th>
               <th scope="col">الاستقطاع شهر/سنة</th>
+              <th scope="col"> التفاصيل</th>
               <th scope="col">الحالة</th>
-              <th scope="col">عرض التفاصيل</th>
-              <th scope="col">رفض/موافقة</th>
+
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
+            <tr *ngFor="let cg of AvanceList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
 
               <td (click)="populateForm(cg)">{{(p-1) * count + i + 1}}</td>
               <td (click)="populateForm(cg)">{{cg.userNameCreator}}</td>
@@ -41,24 +41,17 @@
               <td (click)="populateForm(cg)">{{cg.prix}}</td>
               <td (click)="populateForm(cg)">{{cg.nbMoisDeduire}}</td>
               <td (click)="populateForm(cg)">{{cg.dateDeduire}}</td>
-              <td (click)="populateForm(cg)"
-                  [ngClass]="{
-
-  'ok': cg.etatD === 'موافق',
-  'refused': cg.etatD === 'رفض',
-  'wait': cg.etatD === 'في الانتظار'
-}">
-                {{cg.etatD}}
-              </td>
               <td (click)="populateForm(cg)">
                 <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-eye fa-lg"></i>
                 </a>
               </td>
-              <td (click)="populateForm(cg)">
-                <a class="btn btn-danger ml-3" data-toggle="modal" data-target="#myModal1">رفض</a>
-                <a class="btn btn-success" data-toggle="modal" data-target="#myModal2">إعتماد</a>
-              </td>
+              <td (click)="populateForm(cg)"
+               data-toggle="modal" data-target="#myModal2" 
+              class ="wait">
+                  في الإنتظار
+                </td>
+
 
             </tr>
           </tbody>
@@ -194,21 +187,22 @@
 
 
       <div class="page-wrapper">
-        <h3 class="popup-head">إعتماد الطلب</h3>
+        <h3 class="popup-head">تعديل حالة الطلب</h3>
         <div class="modal-body" style="direction:rtl; text-align:right;">
-          <div class="task-form form-row stop-form">
+          <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+            <label for="user"><span><i class="fa fa-check"></i></span>حالة الطلب</label>
+            <select id="user" class="" (change)="etattest($event)">
+              <option [ngValue]="undefined" selected disabled>-حالة الطلب-</option>
+              <option value="موافق">موافق</option>
+              <option value="رفض">رفض</option>
 
+            </select>
 
-            <p class="text-center" style="text-align:center">هل أنت متأكد من إعتماد الطلب  ؟</p>
+            <div class="save">
+              <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
 
-
-
-            <div class="mx-auto my-3 text-center">
-              <button class="btn btn-success px-2 ml-3" (click)="accept()"><span class="ml-2"><i class="fa fa-save"></i></span> موافق</button>
-              <button class="btn btn-danger px-2 ml-3"><span class="ml-2"><i class="fa fa-times"></i></span> إلغاء</button>
             </div>
-
-          </div>
+          </form>
 
         </div>
       </div>

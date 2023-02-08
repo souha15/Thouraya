@@ -19,13 +19,11 @@ export class ResidenceAddComponent implements OnInit {
   constructor(private residenceService: ResidenceService,
     private toastr: ToastrService,
     private UserService: UserServiceService,
-    private notifService: NotifService,
     private signalService: SignalRService
  ) { }
 
   ngOnInit(): void {
     this.getUserConnected();
-
     this.userOnLis();
     this.userOffLis();
     this.logOutLis();
@@ -40,9 +38,14 @@ export class ResidenceAddComponent implements OnInit {
       });
     }
   }
-  //Handle Notification
-  // Hub Configuration
+
   users: connection[] = [];
+  dirId: string;
+  dirName: string;
+  autoNotif: AutomaticNotification = new AutomaticNotification();
+
+  // Hub Configuration
+
   userOnLis(): void {
     this.signalService.hubConnection.on("userOn", (newUser: connection) => {
 
@@ -103,6 +106,7 @@ export class ResidenceAddComponent implements OnInit {
   getOnlineUsersList(UserIdConnected) {
     this.signalService.GetConnectionList(UserIdConnected).subscribe(res => {
       this.users = res;
+      console.log(this.users)
     })
   }
 
@@ -125,16 +129,6 @@ export class ResidenceAddComponent implements OnInit {
       this.userConnected = true
     }
   }
-
-  // Get Etab Fin List Comptable
-  ComptaList: UserDetail[] = [];
-  dirId: string;
-  dirName: string;
-  GetEtabFinList() {
-    this.UserService.GetEtabFinList().subscribe(res => {
-      this.ComptaList = res;
-    })
-  }
   //Get UserConnected
 
   UserIdConnected: string;
@@ -153,25 +147,11 @@ export class ResidenceAddComponent implements OnInit {
       this.bureau = res.mention;
       this.frontiere = res.paysetude;
       this.datefin = res.unite;
-      this.notif.userTransmitterId = res.id;
-      this.notif.userTransmitterName = res.fullName;
-      this.notif.dateTime = this.date;
-      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
-      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
-      this.notif.TextNotification = "طلب تجديد إقامة من الموظف  " + res.fullName
-      this.notif.serviceName = "طلب تجديد إقامة"
-      this.notif.readUnread = "0";
-      this.notif.serviceId = 6;
-
-      this.UserService.GetRhDepartement().subscribe(resDir => {
-        this.notif.userReceiverId = resDir.id;
-        this.notif.userReceiverName = resDir.fullName;
-      })
 
     })
 
   }
-  autoNotif: AutomaticNotification = new AutomaticNotification();
+
   date = new Date().toLocaleDateString();
   isValidFormSubmitted = false;
   onSubmit(form: NgForm) {
@@ -188,22 +168,19 @@ export class ResidenceAddComponent implements OnInit {
     this.rs.creatorName = this.UserNameConnected;
     this.rs.numfrontiere = this.frontiere;
     this.rs.datefin = this.datefin
-    this.rs.etat ="في الانتظار"
-    this.rs.etatdir ="في الانتظار"
-    this.rs.etatrh = "في الانتظار"
+
     this.residenceService.Add(this.rs).subscribe(
       res => {
-        this.notifService.Add(this.notif).subscribe(res => {
-
           form.resetForm();
           this.toastr.success("تم التسجيل  بنجاح", " تسجيل ");
-
+          this.dirId = res.userId1;
+          this.dirName = res.userName1;
           this.autoNotif.serviceId = res.id;
           this.autoNotif.pageUrl = "residence-list-dir"
           this.autoNotif.userType = "3";
           this.autoNotif.reponse = "6";
           this.text = "طلب تجديد الإقامة";
-          this.signalService.GetConnectionByIdUser(this.notif.userReceiverId).subscribe(res1 => {
+        this.signalService.GetConnectionByIdUser(this.dirId).subscribe(res1 => {
             this.userOnline = res1;
             this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
               .catch(err => console.error(err));
@@ -212,14 +189,14 @@ export class ResidenceAddComponent implements OnInit {
             this.autoNotif.receiverId = this.dirId;
             this.autoNotif.transmitterId = this.UserIdConnected;
             this.autoNotif.transmitterName = this.UserNameConnected;
-              this.text = "طلب تجديد الإقامة";
+            this.autoNotif.text = "طلب تجديد الإقامة";
             this.autoNotif.vu = "0";  
 
             this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
 
             })
           })
-        })
+        
       },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');

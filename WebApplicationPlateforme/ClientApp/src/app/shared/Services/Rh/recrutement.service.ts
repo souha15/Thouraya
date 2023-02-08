@@ -58,12 +58,33 @@ export class RecrutementService {
   Edit() {
     return this.http.put(this.rootURL + '/Recrutements/' + this.formData.id, this.formData, this.headers);
   }
+  PutObservableE(Transaction: Recrutement) {
+    return this.http.put<Recrutement>(this.rootURL + '/Recrutements/' + Transaction.id, Transaction, this.headers);
 
+  }
 
   //Delete Type Dotation
 
   Delete(id) {
-    return this.http.delete(this.rootURL + '/Recrutement/' + id);
+    return this.http.delete(this.rootURL + '/Recrutements/' + id);
+  }
+
+
+  GetByUserCreator(userId) {
+    return this.http.get<Recrutement[]>(this.rootURL + '/Recrutements/GetByUserCreator/' + userId);
+  }
+
+  GetDemand(userId) {
+    return this.http.get<Recrutement[]>(this.rootURL + '/Recrutements/GetDemand/' + userId);
+  }
+
+  GetHistorique(id) {
+    return this.http.get<Recrutement>(this.rootURL + '/Recrutements/GetHistorique/' + id);
+  }
+
+  EditDemandByRole(Id: number, userEtat: string) {
+    return this.http.get<Recrutement>(this.rootURL + '/Recrutements/EditDemandByRole/' + Id + '/' + userEtat, this.headers);
+
   }
 }
 

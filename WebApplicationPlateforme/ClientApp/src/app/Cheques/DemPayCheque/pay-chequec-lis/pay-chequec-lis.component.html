@@ -35,23 +35,32 @@
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.sujet}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.prixnb}}</td>
 
-
-                <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
+                <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal2"
                     [ngClass]="{
 
-
-  'success': cg.etatgeneral === 'معتمدة' || cg.etatgeneral === 'تم الصرف',
-  'denied': cg.etatgeneral === 'مرفوضة' ||cg.etatgeneral === 'لم يتم الصرف',
-  'worke': cg.etatgeneral === 'تحت الإجراء',
-  'wait': cg.etatgeneral === 'في الإنتظار'
-
+  'ok': cg.etat === 'موافق',
+  'refused': cg.etat === 'رفض',
+  'wait': cg.etat === 'في الإنتظار'
 }">
-                  {{cg.etatgeneral}}
+                  {{cg.etat}}
                 </td>
-                <td (click)="populateForm(cg)"><a *ngIf="cg.etatgeneral === 'معتمدة' && cg.retour === null" class="btn btn-primary" data-toggle="modal" data-target="#myModal2"><i class="fa fa-paper-plane"></i></a></td>
-                <td (click)="populateForm(cg)"><a *ngIf="cg.etatgeneral === 'في الإنتظار'" class="btn btn-success" [routerLink]="['/pay-chequec-edit', cg.id]"><i class="fa fa-edit"></i></a></td>
-                <td (click)="populateForm(cg)"><a *ngIf="cg.etatgeneral === 'في الإنتظار'" (click)="populateForm(cg);onDelete(cg.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
-            </tbody>
+                <!--<td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
+                      [ngClass]="{
+
+
+    'success': cg.etatgeneral === 'معتمدة' || cg.etatgeneral === 'تم الصرف',
+    'denied': cg.etatgeneral === 'مرفوضة' ||cg.etatgeneral === 'لم يتم الصرف',
+    'worke': cg.etatgeneral === 'تحت الإجراء',
+    'wait': cg.etatgeneral === 'في الإنتظار'
+
+  }">
+
+                {{cg.etatgeneral}}
+                </td>    -->
+                <td (click)="populateForm(cg)"><a *ngIf="cg.etat === 'موافق' && cg.retour === null" class="btn btn-primary" data-toggle="modal" data-target="#myModal2"><i class="fa fa-paper-plane"></i></a></td>
+                <td (click)="populateForm(cg)"><a *ngIf="cg.etat === 'في الإنتظار'" class="btn btn-success" [routerLink]="['/pay-chequec-edit', cg.id]"><i class="fa fa-edit"></i></a></td>
+                <td (click)="populateForm(cg)"><a *ngIf="cg.etat === 'في الإنتظار'" (click)="populateForm(cg);onDelete(cg.id)" class="btn btn-danger"><i class="fa fa-trash"></i></a></td>
+</tbody>
           </table>
         </div>
         <!-- Pagination -->

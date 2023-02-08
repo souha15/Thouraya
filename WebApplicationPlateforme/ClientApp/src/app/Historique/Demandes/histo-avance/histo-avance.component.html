@@ -32,7 +32,6 @@
               <th scope="col"> التفاصيل</th>
               <th scope="col">رفض / موافقة</th>
               <th scope="col">سير الإجراء</th>
-              <th scope="col">حذف</th>
             </tr>
           </thead>
           <tbody>
@@ -45,14 +44,14 @@
               <td (click)="populateForm(cg)">{{cg.nbMoisDeduire}}</td>
               <td (click)="populateForm(cg)">{{cg.dateDeduire}}</td>
               <td (click)="populateForm(cg)"
-                  [ngClass]="{
+                [ngClass]="{
 
-  'ok': cg.etatD === 'موافق',
-  'refused': cg.etatD === 'رفض',
-  'wait': cg.etatD === 'في الانتظار'
+  'ok': cg.etat === 'موافق',
+  'refused': cg.etat === 'رفض',
+  'wait': cg.etat === 'في الإنتظار'
 }">
-                {{cg.etatD}}
-              </td>
+                  {{cg.etat}}
+                </td>
               <td (click)="populateForm(cg)">
                 <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-eye fa-lg"></i>
@@ -69,11 +68,7 @@
               </td>
 
 
-              <td>
-                <a class="btn show-details-btn text-danger" (click)="onDelete(cg.id)">
-                  <i class="fa fa-trash fa-lg"></i>
-                </a>
-              </td>
+         
             </tr>
           </tbody>
         </table>
@@ -246,28 +241,7 @@
 
       </div>
       <div class="modal-body" style="direction:rtl; text-align:right">
-        <div class="lables">
-          <div style="color:#db5a60; font-weight:bold"> تقديم الطلب</div>
-          <div style="color:dimgrey;font-weight:bold"> المدير العام</div>
-
-          <div style="color:green;font-weight:bold">المحاسب</div>
-          <div style="color:#276985;font-weight:bold"> مدير الشؤون المالية و الإدارية</div>
-
-        </div>
-        <div class="w3-light-grey w3-round" *ngIf="test0">
-          <div id="myBar" class="w3-container w3-round w3-red" style="height:24px;width:{{val}}">0</div>
-        </div>
-
-        <div class="w3-light-grey w3-round" *ngIf="test50">
-          <div id="myBar" class="w3-container w3-round w3-blue-grey" style="height:24px;width:{{val}}">50%</div>
-        </div>
-
-        <div class="w3-light-grey w3-round" *ngIf="test75">
-          <div id="myBar" class="w3-container w3-round w3-blue" style="height:24px;width:{{val}}">75%</div>
-        </div>
-        <div class="w3-light-grey w3-round" *ngIf="test100">
-          <div id="myBar" class="w3-container w3-round w3-green" style="height:24px;width:{{val}}">100%</div>
-        </div>
+        <p style="font-weight:bold"> {{rslt}}</p>
       </div>
 
     </div>

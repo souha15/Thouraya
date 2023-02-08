@@ -59,4 +59,22 @@ export class DemissionService {
   Delete(id) {
     return this.http.delete(this.rootURL + '/Demissions/' + id);
   }
+
+
+  GetByUserCreator(userId) {
+    return this.http.get<Demissioon[]>(this.rootURL + '/Demissions/GetByUserCreator/' + userId);
+  }
+
+  GetDemand(userId) {
+    return this.http.get<Demissioon[]>(this.rootURL + '/Demissions/GetDemand/' + userId);
+  }
+
+  GetHistorique(id) {
+    return this.http.get<Demissioon>(this.rootURL + '/Demissions/GetHistorique/' + id);
+  }
+
+  EditDemandByRole(Id: number, userEtat: string) {
+    return this.http.get<Demissioon>(this.rootURL + '/Demissions/EditDemandByRole/' + Id + '/' + userEtat, this.headers);
+
+  }
 }

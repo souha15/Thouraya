@@ -217,7 +217,7 @@ export class RhCongeListComponent implements OnInit {
     this.congeService.EditDemandByRole(this.conge.id, this.etat).subscribe(res => {
       this.conge = res;
       this.congeService.PutObservableE(this.conge).subscribe(res1 => {
-        if (this.etat == "موافق") {
+        if (this.etat == "موافق" && this.conge.etat != 'موافق') {
           this.autoNotif.serviceId = this.conge.id;
           this.autoNotif.pageUrl = "rh-conge-list"
           this.autoNotif.userType = "3";

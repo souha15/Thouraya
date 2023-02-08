@@ -19,47 +19,21 @@ export class HistoHeureSuppComponent implements OnInit {
   //Populate Form 
   factId: number
   fact: DemandeSuppHeure = new DemandeSuppHeure();
-  test0: boolean = false;
-  test50: boolean = false;
-  test75: boolean = false;
-  test100: boolean = false;
-  val: string;
+
+  rslt: any;
   populateForm(facture: DemandeSuppHeure) {
     this.suppheureService.formData = Object.assign({}, facture)
     this.factId = facture.id;
     this.fact = Object.assign({}, facture);
-    console.log(this.fact)
-    if (this.fact.etat == "موافقة") {
-      this.test0 = false;
-      this.test50 = false;
-      this.test75 = false;
-      this.test100 = true;
-      this.val = "100%"
-    } else if (this.fact.etatdir == "موافقة" && this.fact.etatetab == null && this.fact.etatrh == null) {
-      this.test0 = false;
-      this.test50 = true;
-      this.test75 = false;
-      this.test100 = false;
-      this.val = "50%"
-    } else if (this.fact.etatdir == "موافقة" && this.fact.etatetab == null && this.fact.etatrh == null) {
-      this.test0 = false;
-      this.test50 = false;
-      this.test75 = true;
-      this.test100 = false;
-      this.val = "75%"
-    }
+    this.suppheureService.GetHistorique(this.fact.id).subscribe(res => {
+      this.rslt = res.attribut6
 
-    else if (this.fact.etatdir == "في الإنتظار" && this.fact.etatetab == null && this.fact.etatrh == null) {
-      this.test0 = true;
-      this.test50 = false;
-      this.test75 = false;
-      this.test100 = false;
-      this.val = "0%"
-    }
+    })
 
   }
 
-
+  p: Number = 1;
+  count: Number = 5;
   factList: DemandeSuppHeure[] = [];
   GfactList: DemandeSuppHeure[] = [];
   getCreance() {

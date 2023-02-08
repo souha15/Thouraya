@@ -23,7 +23,6 @@ export class DemissioListdirComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
-    this.CongeList();
     this.userOnLis();
     this.userOffLis();
     this.logOutLis();
@@ -142,32 +141,22 @@ export class DemissioListdirComponent implements OnInit {
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-      this.notif.userTransmitterId = res.id;
-      this.notif.userTransmitterName = res.fullName;
-      this.notif.dateTime = this.date;
-      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
-      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
-      this.notif.TextNotification = " تمت الموافقة على طلب انهاء عقد  من قبل" + ' ' + res.fullName
-      this.notif.serviceName = "طلب انهاء عقد"
-      this.notif.readUnread = "0";
-      this.notif.serviceId = 6;
-      this.UserService.GetRhDepartement().subscribe(resDir => {
-        this.notif.userReceiverId = resDir.id;
-        this.notif.userReceiverName = resDir.fullName;
-      })
+      this.demService.GetDemand(this.UserIdConnected).subscribe(res => {
+        this.DemissionList = res;
+      }
+      )
     })
 
   }
   //Get Conge Demand Lis
 
-  congeList: Demissioon[] = [];
+  DemissionList: Demissioon[] = [];
   dem: Demissioon = new Demissioon();
-  filtredCongeList: Demissioon[] = [];
-  CongeList() {
-    this.demService.Get().subscribe(res => {
-      this.congeList = res
-      this.filtredCongeList = this.congeList.filter(item => item.etatdir == 'في الانتظار')
-    })
+  GetDemissionList() {
+    this.demService.GetDemand(this.UserIdConnected).subscribe(res => {
+      this.DemissionList = res;
+    }
+    )
   }
 
   per: Demissioon = new Demissioon();
@@ -177,63 +166,102 @@ export class DemissioListdirComponent implements OnInit {
 
   }
 
-  date = new Date().toLocaleDateString();
+
 
   etat: string;
   etattest(event) {
     this.etat = event.target.value;
   }
   updateRecord(form: NgForm) {
-    this.per.datedir = this.date;
-    this.per.iddir = this.UserIdConnected;
-    this.per.nomdir = this.UserNameConnected;
-    this.per.etatdir = this.etat;
+    this.demService.EditDemandByRole(this.per.id, this.etat).subscribe(res => {
+      this.per = res;
 
-    this.demService.PutObservableE(this.per).subscribe(res => {
+      this.demService.PutObservableE(this.per).subscribe(res2 => {
+        if (this.etat == "موافق" && this.per.etat !='موافق') {
+          this.autoNotif.serviceId = this.per.id;
+          this.autoNotif.pageUrl = "demissio-listdir";
+          this.autoNotif.userType = "3";
+          this.autoNotif.reponse = "2";
+          this.text = "طلب إستقالة";
+          this.signalService.GetConnectionByIdUser(this.per.iddir).subscribe(res1 => {
+            this.userOnline = res1;
+            this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+              .catch(err => console.error(err));
+          }, err => {
+            this.autoNotif.receiverName = this.per.nomdir;
+            this.autoNotif.receiverId = this.per.iddir;
+            this.autoNotif.transmitterId = this.UserIdConnected;
+            this.autoNotif.transmitterName = this.UserNameConnected;
+            this.autoNotif.text = "طلب إستقالة";
+            this.autoNotif.vu = "0";
 
-      this.UserService.GetRhDepartement().subscribe(resDir => {
-        this.dirId = resDir.id;
-        this.dirName = resDir.fullName
-        this.autoNotif.serviceId = this.per.id;
-        this.autoNotif.pageUrl = "demission-edit"
-        this.autoNotif.userType = "3";
-        this.autoNotif.reponse = "11";
-        this.autoNotif.vu = "0";
-        this.text = "طلب إستقالة";
-        this.autoNotif.receiverName = this.dirName;
-        this.autoNotif.receiverId = this.dirId;
-        this.signalService.GetConnectionByIdUser(this.dirId).subscribe(res1 => {
-          this.userOnline = res1;
-          this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
-            .catch(err => console.error(err));
-        }, err => {
-          this.autoNotif.receiverName = this.dirName;
-          this.autoNotif.receiverId = this.dirId;
-          this.autoNotif.transmitterId = this.UserIdConnected;
-          this.autoNotif.transmitterName = this.UserNameConnected;
-            this.text = "طلب إستقالة";
 
-          this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
-
+            this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+              
+            })
           })
+         
+        }
+          if (this.per.etat == "رفض") {
+            this.autoNotif.serviceId = this.per.id;
+            this.autoNotif.pageUrl = "demissio-list"
+            this.autoNotif.userType = "0";
+            this.autoNotif.reponse = "2";
+            this.text = " لقد تم رفض طلب الإستقالة ";
+            this.signalService.GetConnectionByIdUser(this.per.idUserCreator).subscribe(res1 => {
+              this.userOnline = res1;
+              this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+                .catch(err => console.error(err));
+            }, err => {
+              this.autoNotif.receiverName = this.per.creatorName;
+              this.autoNotif.receiverId = this.per.idUserCreator;
+              this.autoNotif.transmitterId = this.UserIdConnected;
+              this.autoNotif.transmitterName = this.UserNameConnected;
+                this.autoNotif.text = " لقد تم رفض طلب الإستقالة";
+              this.autoNotif.vu = "0";
+
+
+              this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+
+              })
+            })
+        }
+        if (this.per.etat == "موافق") {
+          this.autoNotif.serviceId = this.per.id;
+          this.autoNotif.pageUrl = "demissio-list"
+          this.autoNotif.userType = "0";
+          this.autoNotif.reponse = "2";
+          this.text = " لقد تمت الموافقة على طلب الإستقالة ";
+          this.signalService.GetConnectionByIdUser(this.per.idUserCreator).subscribe(res1 => {
+            this.userOnline = res1;
+            this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+              .catch(err => console.error(err));
+          }, err => {
+            this.autoNotif.receiverName = this.per.creatorName;
+            this.autoNotif.receiverId = this.per.idUserCreator;
+            this.autoNotif.transmitterId = this.UserIdConnected;
+            this.autoNotif.transmitterName = this.UserNameConnected;
+              this.autoNotif.text = " لقد تمت الموافقة على طلب الإستقالة";
+            this.autoNotif.vu = "0";
+
+
+            this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+
+            })
+          })
+        }
+        console.log(this.autoNotif)
+          this.toastr.success('تم التحديث بنجاح', 'نجاح')
+          form.resetForm();
+          this.GetDemissionList();
         })
-      })
-      this.notifService.Add(this.notif).subscribe(res => {
-     
-      })
+       
 
-      this.toastr.success('تم التحديث بنجاح', 'نجاح')
-      this.CongeList();
-      form.resetForm();
- 
-    },
-      err => {
-        this.toastr.error('لم يتم التحديث  ', ' فشل');
-      }
-
-
-    )
-
+      },
+        err => {
+          this.toastr.error('لم يتم التحديث  ', ' فشل');
+        })
+    
   }
 
   onSubmit(form: NgForm) {

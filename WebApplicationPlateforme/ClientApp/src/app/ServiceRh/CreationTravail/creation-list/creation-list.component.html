@@ -24,28 +24,34 @@
               <th scope="col">المهام الوظيفية</th>
               <th scope="col">الخبرات المطلوبة</th>
               <th scope="col">تاريخ بداية العمل</th>
-              <th scope="col">الحالة</th>
               <th scope="col">تفاصيل الدورة</th>
+              <th scope="col">الحالة</th>
               <th scope="col">تعديل</th>
               <th scope="col">حذف</th>
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
-              <th scope="row">{{cg.id}}</th>
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; let i = index">
+              <th scope="row">{{(p-1) * count + i + 1}}</th>
               <td (click)="populateForm(cg)">{{cg.selection}}</td>
               <td (click)="populateForm(cg)">{{cg.tacheTravail}}</td>
               <td (click)="populateForm(cg)">{{cg.competence}}</td>
               <td (click)="populateForm(cg)">{{cg.datedebut}}</td>
-              <td (click)="populateForm(cg)">{{cg.etat}}</td>
+
 
               <td>
                 <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
                   <i class="fa fa-eye fa-lg"></i>
                 </a>
               </td>
+              <td (click)="populateForm(cg)" [ngClass]="{
 
-              <td (click)="populateForm(cg)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1">تعديل</a></td>
+  'ok': cg.etat === 'موافق',
+  'refused': cg.etat === 'رفض',
+  'wait': cg.etat === 'في الإنتظار'
+}">
+                {{cg.etat}}
+<td (click)="populateForm(cg)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1">تعديل</a></td>
               <td (click)="populateForm(cg)"><a class="btn btn-danger" (click)="onDelete(cg.id)">حذف</a></td>
             </tr>
           </tbody>

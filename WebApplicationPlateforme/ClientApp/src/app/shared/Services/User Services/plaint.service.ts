@@ -61,4 +61,21 @@ export class PlaintService {
   Delete(id) {
     return this.http.delete(this.rootURL + '/Plaints/' + id);
   }
+
+  GetByUserCreator(userId) {
+    return this.http.get<Plaint[]>(this.rootURL + '/Plaints/GetByUserCreator/' + userId);
+  }
+
+  GetDemand(userId) {
+    return this.http.get<Plaint[]>(this.rootURL + '/Plaints/GetDemand/' + userId);
+  }
+
+  GetHistorique(id) {
+    return this.http.get<Plaint>(this.rootURL + '/Plaints/GetHistorique/' + id);
+  }
+
+  EditDemandByRole(Id: number, userEtat: string) {
+    return this.http.get<Plaint>(this.rootURL + '/Plaints/EditDemandByRole/' + Id + '/' + userEtat, this.headers);
+
+  }
 }

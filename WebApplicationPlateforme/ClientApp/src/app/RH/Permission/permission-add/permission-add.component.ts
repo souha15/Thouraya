@@ -191,7 +191,6 @@ export class PermissionAddComponent implements OnInit {
   date = new Date().toLocaleDateString();
   dateTime = new Date();
   onSubmit(form: NgForm) {
-    this.per.datenereg = this.date;
     console.log(form.invalid)
     if (form.invalid) {
       this.isValidFormSubmitted = false;

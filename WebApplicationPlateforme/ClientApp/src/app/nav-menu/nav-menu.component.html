@@ -37,7 +37,7 @@
       </li>
     </ul>
     <div class="my-2 my-lg-0" *ngIf="UserNameConnected!=''">
-      <a [routerLink]="['/msg-interne-add']" class="ml-2 alert-btn notification"><i class="fa fa-envelope-open fa-lg"></i></a>
+      <a [routerLink]="['/chat-msg']" class="ml-2 alert-btn notification"><i class="fa fa-envelope-open fa-lg"><span class="notify-badge">{{nbMsg}}</span></i></a>
       <div class="dropdown d-inline-block">
         <a class="ml-2 alert-btn notification" id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fa fa-comments fa-lg"></i>

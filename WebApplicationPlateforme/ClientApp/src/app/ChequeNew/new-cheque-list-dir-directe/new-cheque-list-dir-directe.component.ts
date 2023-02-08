@@ -12,6 +12,7 @@ import { NotifService } from '../../shared/Services/NotifSystem/notif.service';
 import { Notif } from '../../shared/Models/NotifSystem/notif.model';
 import { SignalRService, connection, AutomaticNotification } from '../../shared/Services/signalR/signal-r.service';
 import { UserDetail } from '../../shared/Models/User/user-detail.model';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-new-cheque-list-dir-directe',
@@ -44,8 +45,7 @@ export class NewChequeListDirDirecteComponent implements OnInit {
         console.log(err);
       },
     );
-    this.getUserConnected();
-    this.getDemPayList();
+
     this.userOnLis();
     this.userOffLis();
     this.logOutLis();
@@ -191,19 +191,10 @@ export class NewChequeListDirDirecteComponent implements OnInit {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
       this.sexe = res.sexe;
-      this.notif.userTransmitterId = res.id;
-      this.notif.userTransmitterName = res.fullName;
-      this.notif.dateTime = this.dateTime.toString();
-      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
-      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
-      this.notif.TextNotification = "طلب صرف شيك من الموظف  " + res.fullName
-      this.notif.serviceName = "طلب صرف شيك"
-      this.notif.readUnread = "0";
-      this.notif.serviceId = 5;
-      this.UserService.GetEtabFin().subscribe(resDir => {
-        this.notif.userReceiverId = resDir.id;
-        this.notif.userReceiverName = resDir.fullName;    
-    })
+      this.demandeService.GetDemand(this.UserIdConnected).subscribe(res => {
+        this.dem6 = res;
+      }
+      )
     })
   }
 
@@ -215,11 +206,11 @@ export class NewChequeListDirDirecteComponent implements OnInit {
   arlis: ArticlePayCheque[] = [];
   arlis2: ArticlePayCheque[] = [];
   getDemPayList() {
-    this.demandeService.Get().subscribe(res => {
-      this.dem5 = res
-      this.dem6 = this.dem5.filter(item => item.etatdirecteur == "في الإنتظار" && item.iddir == this.UserIdConnected)
-
-    })
+    
+    this.demandeService.GetDemand(this.UserIdConnected).subscribe(res => {
+      this.dem6 = res;
+    }
+    )
   }
 
 
@@ -243,50 +234,94 @@ export class NewChequeListDirDirecteComponent implements OnInit {
 
   date = new Date().toLocaleDateString();
   autoNotif: AutomaticNotification = new AutomaticNotification();
-  accept() {
-    if (this.etat == "مرفوضة") { this.per.etatgeneral == "مرفوضة" }
-  
-    this.per.datedir = this.date;
-    this.per.etatdirecteur = this.etat
-    this.per.nomdir = this.UserNameConnected;
-   // this.per.iddir = this.UserIdConnected;
+  updateRecord(form: NgForm)  {
+    this.demandeService.EditDemandByRole(this.per.id, this.etat).subscribe(res => {
+      this.per = res;
+    
     this.demandeService.PutObservableE(this.per).subscribe(res => {
-        
-        this.UserService.GetEtabFinList().subscribe(res => {
-          this.ComptaList = res
-          let rand = Math.floor(Math.random() * (1 - 0 + 1) + 0);
-          this.dirId = this.ComptaList[rand].id
-          this.dirName = this.ComptaList[rand].fullName
-          //Send Notification
-          this.text = "طلب صرف شيك"
-          this.autoNotif.serviceId = this.per.id;
-          this.autoNotif.pageUrl = "new-cheque-list-etab-fin"
-          this.autoNotif.userType = "5";
-          this.autoNotif.reponse = "9";
-          this.signalService.GetConnectionByIdUser(this.dirId).subscribe(res1 => {
-            this.userOnline = res1;
-            this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
-              .catch(err => console.error(err));
-          }, err => {
-            this.autoNotif.receiverName = this.dirName;
-            this.autoNotif.receiverId = this.dirId;
-            this.autoNotif.transmitterId = this.UserIdConnected;
-            this.autoNotif.transmitterName = this.UserNameConnected;
-              this.text = "طلب صرف شيك"
-            this.autoNotif.vu = "0";
+      if (this.etat == "موافق" && this.per.etat != 'موافق') {
+        this.autoNotif.serviceId = this.per.id;
+        this.autoNotif.pageUrl = "new-cheque-list-dir-directe";
+        this.autoNotif.userType = "3";
+        this.autoNotif.reponse = "19";
+        this.text = "طلب صرف شيك"
+        this.signalService.GetConnectionByIdUser(this.per.iddir).subscribe(res1 => {
+          this.userOnline = res1;
+          this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+            .catch(err => console.error(err));
+        }, err => {
+          this.autoNotif.receiverName = this.per.nomdir;
+          this.autoNotif.receiverId = this.per.iddir;
+          this.autoNotif.transmitterId = this.UserIdConnected;
+          this.autoNotif.transmitterName = this.UserNameConnected;
+            this.autoNotif.text = "طلب صرف شيك"
+          this.autoNotif.vu = "0";
 
 
-            this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+          this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
 
-            })
           })
         })
-      this.notifService.Add(this.notif).subscribe(res => {
-      })
 
+      }
+
+      if (this.per.etat == "رفض") {
+        this.autoNotif.serviceId = this.per.id;
+        this.autoNotif.pageUrl = "pay-chequec-lis"
+        this.autoNotif.userType = "0";
+        this.autoNotif.reponse = "19";
+        this.text = " لقد تم رفض طلب صرف شيك ";
+        this.signalService.GetConnectionByIdUser(this.per.idUserCreator).subscribe(res1 => {
+          this.userOnline = res1;
+          this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+            .catch(err => console.error(err));
+        }, err => {
+          this.autoNotif.receiverName = this.per.creatorName;
+          this.autoNotif.receiverId = this.per.idUserCreator;
+          this.autoNotif.transmitterId = this.UserIdConnected;
+          this.autoNotif.transmitterName = this.UserNameConnected;
+            this.autoNotif.text = " لقد تم رفض طلب صرف شيك";
+          this.autoNotif.vu = "0";
+
+
+          this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+
+          })
+        })
+      }
+
+      if (this.per.etat == "موافق") {
+        this.autoNotif.serviceId = this.per.id;
+        this.autoNotif.pageUrl = "pay-chequec-lis"
+        this.autoNotif.userType = "0";
+        this.autoNotif.reponse = "19";
+        this.text = " لقد تمت الموافقة على طلب صرف شيك ";
+        this.signalService.GetConnectionByIdUser(this.per.idUserCreator).subscribe(res1 => {
+          this.userOnline = res1;
+          this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+            .catch(err => console.error(err));
+        }, err => {
+          this.autoNotif.receiverName = this.per.creatorName;
+          this.autoNotif.receiverId = this.per.idUserCreator;
+          this.autoNotif.transmitterId = this.UserIdConnected;
+          this.autoNotif.transmitterName = this.UserNameConnected;
+            this.autoNotif.text = " لقد تمت الموافقة على طلب صرف شيك";
+          this.autoNotif.vu = "0";
+
+
+          this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+
+          })
+        })
+      }
       this.toastr.success('تم التحديث بنجاح', 'نجاح');
       this.getUserConnected()
       this.getDemPayList();
+    },
+    
+      err => {
+        this.toastr.error('لم يتم التحديث  ', ' فشل');
+      })
       })
    
 
@@ -294,5 +329,10 @@ export class NewChequeListDirDirecteComponent implements OnInit {
   }
 
 
+
+  onSubmit(form: NgForm) {
+
+    this.updateRecord(form)
+  }
 
 }

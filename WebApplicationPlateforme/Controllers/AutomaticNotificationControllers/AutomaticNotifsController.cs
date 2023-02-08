@@ -258,6 +258,16 @@ namespace WebApplicationPlateforme.Controllers.AutomaticNotificationControllers
             return count;
         }
 
+        [HttpGet]
+        [Route("GetMsgNotif/{idReceiver}")]
+        public int GetMsgNotif(string idReceiver)
+        {
+            int count = 0;
+            var List = _context.AutomaticNotifs.Where(item => item.vu == "0" && item.receiverId == idReceiver && item.reponse == "Msg").ToList();
+            count = List.Count();
+            return count;
+        }
+
         public int CountNotif(string idReceiver)
         {
             int count = 0;

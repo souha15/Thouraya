@@ -1,0 +1,123 @@
+<app-nav-menu></app-nav-menu>
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+      <div id="container">
+        <aside>
+          <header>
+            <input type="text" placeholder="بحث" [(ngModel)]="name" (ngModelChange)="Search()">
+          </header>
+
+          <ul>
+            <!-- Online -->
+            <li *ngFor="let user of users" (click)="selectedUser = user;GetselectedUser(user)" class="liDesignOnline">
+              <div class='icon-container'>
+                <div class='status-circle-Online'>
+                </div>
+                <img src="assets/images/user.jpg" alt="" *ngIf="user.photo==null">
+                <span class="badge" *ngIf="user.vu!=0">{{user.vu}}</span>
+                <div class='status-circle-Online'>
+                </div>
+                <img src="/uploads/{{user.photo}}" alt="" *ngIf="user.photo!=null">
+
+                <span class="badge" *ngIf="user.vu!=0">{{user.vu}}</span>
+              </div>
+              {{user.userName}}
+
+            </li>
+
+            <!-- Offline -->
+            <li *ngFor="let user of UsersList" (click)="GetConversation(user)">
+              <div class='icon-container'>
+                <img src="assets/images/user.jpg" alt="" *ngIf="user.photo==null">
+                <span class="badge" *ngIf="user.etatuser != '0'">{{user.etatuser}}</span>
+                <div class='status-circle-Offline'>
+                </div>
+                <img src="/uploads/{{user.photo}}" alt="" *ngIf="user.photo!=null">
+                <span class="badge" *ngIf="user.etatuser != '0'">{{user.etatuser}}</span>
+                <div class='status-circle-Offline'>
+                </div>
+              </div>
+              <div>
+                <h2>{{user.fullName}}</h2>
+              </div>
+            </li>
+
+
+          </ul>
+        </aside>
+        <main *ngIf="showconvOnline">
+          <header>
+            <img src="assets/images/user.jpg" alt="" *ngIf="photo==null">
+            <img src="/uploads/{{photo}}" alt="" *ngIf="photo!=null">
+            <div>
+              <h2>{{RecepteurName}}</h2>
+            </div>
+          </header>
+          <ul id="chat" #scrollMe style="overflow-y: scroll; height: xyz;">
+            <li class="you" *ngFor="let msg of ConversationList">
+              <div class="entete">
+                <span class="status green"></span>
+                <h2>{{msg.emeteurNom}}</h2>&nbsp;&nbsp;
+                <h3>{{msg.dateEnvoi}} , {{msg.timeEnvoi}}</h3>
+              </div>
+              <div class="triangle"></div>
+              <div class="message">
+                {{msg.text}}
+              </div>
+            </li>
+
+          </ul>
+          <footer>
+            <textarea placeholder="اكتب رسالتك ...." [value]="text"
+                      (input)="text=$event.target.value" (keydown.enter)="sendMsgInv()"></textarea>
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_picture.png" alt="">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png" alt="">
+            <button class="btn btn-outline-primary" (click)="sendMsgInv()">Send</button>
+          </footer>
+        </main>
+
+        <main *ngIf="showconvOffline">
+          <header>
+            <img src="assets/images/user.jpg" alt="" *ngIf="photo==null">
+            <img src="/uploads/{{photo}}" alt="" *ngIf="photo!=null">
+            <div>
+              <h2>{{RecepteurName}}</h2>
+            </div>
+          </header>
+          <ul id="chat" #scrollMe style="overflow-y: scroll; height: xyz;">
+            <li class="you" *ngFor="let msg of ConversationList">
+              <div class="entete">
+                <span class="status green"></span>
+                <h2>{{msg.emeteurNom}}</h2>&nbsp;&nbsp;
+                <h3>{{msg.dateEnvoi}} , {{msg.timeEnvoi}}</h3>
+              </div>
+              <div class="triangle"></div>
+              <div class="message">
+                {{msg.text}}
+              </div>
+            </li>
+
+
+          </ul>
+          <footer>
+            <textarea placeholder="اكتب رسالتك ...." [value]="text"
+                      (input)="text=$event.target.value" (keydown.enter)="SendMsg()"> </textarea>
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_picture.png" alt="">
+            <img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/1940306/ico_file.png" alt="">
+            <button class="btn btn-outline-primary" (click)="SendMsg()">Send</button>
+          </footer>
+        </main>
+      </div>
+
+    </div><!-- End col-9 -->
+  </div>
+
+</div>
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <a class="navbar-brand" href="#"> <img src="assets/images/awal.png" style="width:40px;height:40px;"></a> </p>
+</footer>

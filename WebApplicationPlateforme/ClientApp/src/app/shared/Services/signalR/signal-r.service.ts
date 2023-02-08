@@ -127,6 +127,9 @@ export class SignalRService {
   GetNotification(idReceiver, idSender) {
     return this.http.get<number>(this.rootURL + '/AutomaticNotifs/GetNotification/' + idReceiver + '/' + idSender);
   }
+  GetMsgNotif(idReceiver) {
+    return this.http.get<number>(this.rootURL + '/AutomaticNotifs/GetMsgNotif/' + idReceiver );
+  }
 
   GetLastNotif(idTransmitter,idReceiver) {
     return this.http.get<AutomaticNotification>(this.rootURL + '/AutomaticNotifs/GetLastNotif/' + idTransmitter +'/' + idReceiver);
@@ -161,6 +164,8 @@ export class SignalRService {
   CreateNotif(model: AutomaticNotification) {
     return this.http.post<AutomaticNotification>(this.rootURL + '/AutomaticNotifs', model, this.headers);
   }
+  
+  
 
 
   GetLastConnection(idUser) {

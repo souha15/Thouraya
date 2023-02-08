@@ -33,13 +33,13 @@
               <th scope="col">التفاصيل</th>
               <th scope="col">رفض/موافقة</th>
               <th scope="col">سير الإجراء</th>
-              <th scope="col">حذف</th>
+
             </tr>
           </thead>
           <tbody>
 
-            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: 5, currentPage: p }">
-              <th scope="row">{{cg.id}}</th>
+            <tr *ngFor="let cg of factList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; let i = index; ">
+              <th scope="row">{{(p-1) * count + i + 1}}</th>
               <th scope="row">{{cg.userNameCreator}}</th>
               <td (click)="populateForm(cg)">{{cg.date}}</td>
               <td (click)="populateForm(cg)">{{cg.nbheure}}</td>
@@ -47,11 +47,11 @@
               <td (click)="populateForm(cg)"
                   [ngClass]="{
 
-  'success': cg.etatdir === 'موافقة',
-  'denied': cg.etatdir === 'رفض',
-  'wait': cg.etatdir === 'في الإنتظار'
+  'success': cg.etat === 'موافق',
+  'denied': cg.etat === 'رفض',
+  'wait': cg.etat === 'في الإنتظار'
 }">
-                {{cg.etatdir}}
+                {{cg.etat}}
               </td>
               <td>
                 <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
@@ -66,11 +66,7 @@
               <td (click)="populateForm(cg)">
                 <a class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal3"><i class="fa fa-road"></i>  </a>
               </td>
-              <td>
-                <a class="btn show-details-btn text-danger" (click)="onDelete(cg.id)">
-                  <i class="fa fa-trash fa-lg"></i>
-                </a>
-              </td>
+      
             </tr>
           </tbody>
         </table>
@@ -224,28 +220,7 @@
 
       </div>
       <div class="modal-body" style="direction:rtl; text-align:right">
-        <div class="lables">
-          <div style="color:#db5a60; font-weight:bold"> تقديم الطلب</div>
-          <div style="color:dimgrey;font-weight:bold"> المدير المباشر</div>
-          <div style="color:green;font-weight:bold">شؤون الموظفين</div>
-          <div style="color:#276985;font-weight:bold"> مدير الشؤون المالية و الإدارية</div>
-
-
-        </div>
-        <div class="w3-light-grey w3-round" *ngIf="test0">
-          <div id="myBar" class="w3-container w3-round w3-red" style="height:24px;width:{{val}}">0</div>
-        </div>
-
-        <div class="w3-light-grey w3-round" *ngIf="test50">
-          <div id="myBar" class="w3-container w3-round w3-blue-grey" style="height:24px;width:{{val}}">50%</div>
-        </div>
-
-        <div class="w3-light-grey w3-round" *ngIf="test70">
-          <div id="myBar" class="w3-container w3-round w3-blue" style="height:24px;width:{{val}}">70%</div>
-        </div>
-        <div class="w3-light-grey w3-round" *ngIf="test100">
-          <div id="myBar" class="w3-container w3-round w3-green" style="height:24px;width:{{val}}">100%</div>
-        </div>
+        <p style="font-weight:bold"> {{rslt}}</p>
       </div>
 
     </div>

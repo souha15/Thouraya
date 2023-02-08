@@ -1,7 +1,9 @@
 .task-form {
   padding: 10px 0;
 }
-
+.wait {
+  background-color: #fcba03 !important;
+}
   .task-form label {
     min-width: 126px;
     background: #91c3d8;

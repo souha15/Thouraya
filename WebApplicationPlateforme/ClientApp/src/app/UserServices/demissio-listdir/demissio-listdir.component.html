@@ -26,20 +26,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; let i = index; ">
+              <tr *ngFor="let cg of DemissionList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; let i = index; ">
                 <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{(p-1) * count + i + 1}}</th>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.creatorName}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.raison}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.date}}</td>
 
                 <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
-                    [ngClass]="{
-
-  'ok': cg.etatdir === 'موافق',
-  'refused': cg.etatdir === 'رفض',
-  'wait': cg.etatdir === 'في الانتظار'
-}">
-                  {{cg.etatdir}}
+          class ="wait">
+                  في الإنتظار
                 </td>
 
               </tr>
@@ -124,7 +119,7 @@
       <div class="modal-body" style="direction:rtl; text-align:right">
         <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
           <label for="user"><span><i class="fa fa-check"></i></span>حالة الإستقالة</label>
-          <select id="user" class="" name="etatdir" #etatdir="ngModel" [(ngModel)]="per.etatdir" (change)="etattest($event)">
+          <select id="user" class=""  (change)="etattest($event)">
             <option [ngValue]="undefined" selected disabled>-حالة الإذن-</option>
             <option value="موافق">موافق</option>
             <option value="رفض">رفض</option>

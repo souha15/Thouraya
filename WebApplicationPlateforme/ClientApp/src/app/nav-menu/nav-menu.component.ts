@@ -147,7 +147,7 @@ export class NavMenuComponent implements OnInit, OnDestroy {
 
     this.GetNotifList(this.UserIdConnected)
     this.GetNotifListUser(this.UserIdConnected)
-    
+    this.GetNotifMsg(this.UserIdConnected)
 
     // GetNotif Count
 
@@ -202,5 +202,10 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     })
   }
 
-
+  nbMsg: number;
+  GetNotifMsg(UserIdConnected) {
+    this.signalrService.GetMsgNotif(UserIdConnected).subscribe(res => {
+      this.nbMsg = res
+    })
+  }
 }

@@ -24,7 +24,6 @@ export class EquipementAddComponent implements OnInit {
     private UserService: UserServiceService,
     private equipementService: EquipementService,
     private adminService: AdministrationService,
-    private notifService: NotifService,
     private signalService: SignalRService,) { }
 
   ngOnInit(): void {
@@ -151,33 +150,6 @@ export class EquipementAddComponent implements OnInit {
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-      if (res.attribut1 != null) {
-        this.equ.nomdir = res.directeur;
-        this.equ.iddir = res.attribut1;
-        this.notif.userReceiverId = res.attribut1;
-        this.notif.userReceiverName = res.directeur;
-        this.dirId = res.attribut1;
-        this.dirName = res.directeur
-      }
-      this.notif.userTransmitterId = res.id;
-      this.notif.userTransmitterName = res.fullName;
-      this.notif.dateTime = this.date;
-      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
-      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
-      this.notif.TextNotification = "طلب عهدة من الموظف  " + res.fullName
-      this.notif.serviceName = "طلب عهدة"
-      this.notif.readUnread = "0";
-      this.equ.userNameCreator = res.fullName;
-      this.equ.idUserCreator = res.id;
-      this.nom = "الأوقاف والخدمات";
-      this.adminService.GetAdminData(this.nom).subscribe(resp => {
-
-        this.UserService.GetUserByUserName2(resp.nomDirecteur).subscribe(res => {
-          this.equ.attribut3 = res.id;
-          this.equ.attribut5 = res.fullName;
-        })
-      })
-
     })
 
   }
@@ -209,11 +181,6 @@ export class EquipementAddComponent implements OnInit {
   equ: Equipement = new Equipement();
   dateTime = new Date();
   onSubmit(form: NgForm) {
-    this.equ.etatdir = "في الانتظار";
-    this.equ.attribut2 = "في الانتظار";
-    this.equ.attribut4 = "في الانتظار";
-    this.equ.dateenreg = this.date;
-    this.equ.date = this.date;
     if (form.invalid) {
       this.isValidFormSubmitted = false;
 
@@ -221,16 +188,16 @@ export class EquipementAddComponent implements OnInit {
     else {
 
       this.isValidFormSubmitted = true
-
+      this.equ.userNameCreator = this.UserNameConnected;
+      this.equ.idUserCreator = this.UserIdConnected;
       this.equipementService.Add(this.equ).subscribe(
         res => {
-          this.notif.serviceId = res.id;
-          this.notifService.Add(this.notif).subscribe(res => {
-
+          
           this.toastr.success("تمت الإضافة بنجاح", "نجاح");
             form.resetForm();
 
-
+            this.dirId = res.userId1;
+            this.dirName = res.userName1;
             this.text = "طلب عهدة";
             this.autoNotif.serviceId = res.id;
             this.autoNotif.pageUrl = "equipement-list-dir"
@@ -253,7 +220,7 @@ export class EquipementAddComponent implements OnInit {
               this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
 
               })
-            })
+            
           })
         },
         err => {

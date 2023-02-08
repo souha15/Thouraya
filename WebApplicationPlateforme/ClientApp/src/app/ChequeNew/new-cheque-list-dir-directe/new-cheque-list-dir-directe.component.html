@@ -36,13 +36,8 @@
 
 
                 <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
-                    [ngClass]="{
-
-  'success': cg.etatdirecteur === 'معتمدة',
-  'denied': cg.etatdirecteur === 'مرفوضة',
-  'wait': cg.etatdirecteur === 'في الإنتظار'
-}">
-                  {{cg.etatdirecteur}}
+               class ="wait">
+                  في الإنتظار
                 </td>
             </tbody>
           </table>
@@ -182,25 +177,19 @@
 
       </div>
       <div class="modal-body" style="direction:rtl; text-align:right">
-        <form class="row events-form">
+        <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+          <label for="user"><span><i class="fa fa-check"></i></span>حالة الشيك</label>
+          <select id="user" class="" (change)="etattest($event)">
+            <option [ngValue]="undefined" selected disabled>-حالة الشيك-</option>
+            <option value="موافق">موافق</option>
+            <option value="رفض">رفض</option>
 
-          <div class="col-md-12 d-flex flex-column flex-wrap">
-            <!-- Attachments -->
-            <div class="">
-              <label>الحالة</label>
-              <select (change)="etattest($event)" style="width:150px;">
-                <option [ngValue]="undefined" selected disabled>-الحالة-</option>
-                <option value="معتمدة">إعتماد </option>
-                <option value="مرفوضة">رفض </option>
+          </select>
 
-
-              </select>
-              &nbsp;&nbsp;&nbsp;&nbsp;
-              <input class="btn btn-success" type="button" value="إغلاق" (click)="accept()" style="width:100px;" />
-            </div>
+          <div class="save">
+            <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
 
           </div>
-
         </form>
       </div>
       <div class="modal-footer">

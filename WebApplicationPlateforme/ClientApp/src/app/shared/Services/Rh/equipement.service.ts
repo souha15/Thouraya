@@ -32,7 +32,10 @@ export class EquipementService {
   Post() {
     return this.http.post(this.rootURL + '/Equipements', this.formData, this.headers);
   }
+  PutObservableE(Transaction: Equipement) {
+    return this.http.put<Equipement>(this.rootURL + '/Equipements/' + Transaction.id, Transaction, this.headers);
 
+  }
   //Save Type Dotation
   GetByUser(id) {
     return this.http.get<Equipement[]>(this.rootURL + '/EquipementByUserCreator/'+id);
@@ -63,6 +66,23 @@ export class EquipementService {
   //Delete Type Dotation
 
   Delete(id) {
-    return this.http.delete(this.rootURL + '/Equipement/' + id);
+    return this.http.delete(this.rootURL + '/Equipements/' + id);
+  }
+
+  GetEquipementByUserCreator(userId) {
+    return this.http.get<Equipement[]>(this.rootURL + '/Equipements/GetEquipementByUserCreator/' + userId);
+  }
+
+  GetEquipementDemand(userId) {
+    return this.http.get<Equipement[]>(this.rootURL + '/Equipements/GetEquipementDemand/' + userId);
+  }
+
+  GetEquipementHistorique(id) {
+    return this.http.get<Equipement>(this.rootURL + '/Equipements/GetEquipementHistorique/' + id);
+  }
+
+  EditDemandByRole(Id: number, userEtat: string) {
+    return this.http.get<Equipement>(this.rootURL + '/Equipements/EditDemandByRole/' + Id + '/' + userEtat, this.headers);
+
   }
 }

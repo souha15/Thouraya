@@ -18,7 +18,6 @@ export class DemandeSuppHeureAddComponent implements OnInit {
   constructor(private suppheureService: DemandeSuppHeureService,
     private toastr: ToastrService,
     private UserService: UserServiceService,
-    private notifService: NotifService,
     private signalService: SignalRService,) { }
 
   ngOnInit(): void {
@@ -147,23 +146,6 @@ export class DemandeSuppHeureAddComponent implements OnInit {
       this.UserNameConnected = res.fullName;
       this.sup.idUserCreator = res.id;
       this.sup.userNameCreator = res.fullName;
-      if (res.attribut1 != null) {
-        this.sup.iddir = res.attribut1;
-        this.sup.nomdir = res.directeur;
-        this.notif.userReceiverId = res.attribut1;
-        this.notif.userReceiverName = res.directeur;
-        this.dirId = res.attribut1;
-        this.dirName = res.directeur
-      }
-      this.notif.userTransmitterId = res.id;
-      this.notif.userTransmitterName = res.fullName;
-      this.notif.dateTime = this.date;
-      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
-      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
-      this.notif.TextNotification = "طلب ساعات إضافية من الموظف  " + res.fullName
-      this.notif.serviceName = "طلب ساعات إضافية"
-      this.notif.readUnread = "0";
-
 
     })
 
@@ -181,21 +163,15 @@ export class DemandeSuppHeureAddComponent implements OnInit {
 
     else {
       this.isValidFormSubmitted = true;
-      this.sup.dateenreg = this.date;
-      this.sup.etat = "في الإنتظار";
-      this.sup.etatdir = "في الإنتظار";
-      this.sup.attribut2 = "في الإنتظار";
-      this.sup.attribut3 = "في الإنتظار";
-      this.suppheureService.Add(this.sup).subscribe(res => {
-        this.notif.serviceId = res.id;
-        this.notifService.Add(this.notif).subscribe(res => {
-        
-        form.resetForm();
-          this.toastr.success("تم تسجيل  الطلب بنجاح", " تسجيل ");
 
+      this.suppheureService.Add(this.sup).subscribe(res => {
+        this.dirId = res.userId1;
+        this.dirName = res.userName1;       
+        form.resetForm();
+        this.toastr.success("تم تسجيل  الطلب بنجاح", " تسجيل ");
           this.text = "طلب ساعات إضافية";
           this.autoNotif.serviceId = res.id;
-          this.autoNotif.pageUrl = "menurequests"
+        this.autoNotif.pageUrl = "demande-supp-heure-list-director"
           this.autoNotif.userType = "1";
           this.autoNotif.reponse = "7";
           //if (this.users.filter(item => item.userId == this.dirId).length > 0) {
@@ -208,12 +184,11 @@ export class DemandeSuppHeureAddComponent implements OnInit {
             this.autoNotif.receiverId = this.dirId;
             this.autoNotif.transmitterId = this.UserIdConnected;
             this.autoNotif.transmitterName = this.UserNameConnected;
-              this.autoNotif.text = "طلب ساعات إضافية";
+            this.autoNotif.text = "طلب ساعات إضافية";
             this.autoNotif.vu = "0";
             this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
 
-            })
-          })
+             })
 
         })
       },

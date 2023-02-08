@@ -25,7 +25,7 @@
             </thead>
             <tbody>
               <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; let i = index">
-                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{(p-1) * count + i + 1}}}</th>
+                <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{(p-1) * count + i + 1}}</th>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.type}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.datedebut}}</td>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.dure}}</td>
@@ -33,11 +33,11 @@
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1"
                     [ngClass]="{
 
-  'ok': cg.attribut2 === 'موافق',
-  'refused': cg.attribut2 === 'رفض',
-  'wait': cg.attribut2 === 'في الانتظار'
+  'ok': cg.etat === 'موافق',
+  'refused': cg.etat === 'رفض',
+  'wait': cg.etat === 'في الإنتظار'
 }">
-                  {{cg.attribut2}}
+                  {{cg.etat}}
                 </td>
               </tr>
 

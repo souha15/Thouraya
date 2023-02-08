@@ -26,7 +26,7 @@
                 <th scope="col">طلب شيك</th>
                 <th scope="col"> الحالة</th>
                 <th scope="col">سير الإجراء</th>
-                <th scope="col">حذف</th>
+    
 
               </tr>
             </thead>
@@ -44,7 +44,7 @@
 
   'ok': cg.etat === 'موافق',
   'refused': cg.etat === 'رفض',
-  'wait': cg.etat === 'في الانتظار'
+  'wait': cg.etat === 'في الإنتظار'
 }">
                   {{cg.etat}}
                 </td>
@@ -52,11 +52,7 @@
                 <td (click)="populateForm(cg)">
                   <a class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal3"><i class="fa fa-road"></i>  </a>
                 </td>
-                <td>
-                  <a class="btn show-details-btn text-danger" (click)="onDelete(cg.id)">
-                    <i class="fa fa-trash fa-lg"></i>
-                  </a>
-                </td>
+          
               </tr>
 
             </tbody>
@@ -226,23 +222,10 @@
 
         <h4 class="modal-title">سير الإجراء</h4>
 
+
       </div>
       <div class="modal-body" style="direction:rtl; text-align:right">
-        <div class="lables">
-          <div style="color:#db5a60; font-weight:bold"> تقديم الطلب</div>
-          <div style="color:green;font-weight:bold">شؤون الموظفين</div>
-
-        </div>
-        <div class="w3-light-grey w3-round" *ngIf="test0">
-          <div id="myBar" class="w3-container w3-round w3-red" style="height:24px;width:{{val}}">0</div>
-        </div>
-
-
-        <div class="w3-light-grey w3-round" *ngIf="test100">
-          <div id="myBar" class="w3-container w3-round w3-green" style="height:24px;width:{{val}}">100%</div>
-        </div>
-
-
+        <p style="font-weight:bold"> {{rslt}}</p>
       </div>
 
     </div>

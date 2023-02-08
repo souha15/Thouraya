@@ -824,6 +824,7 @@ import { EditWorkflowConfigurationComponent } from './ServicesConfiguration/edit
 import { ListWorkflowServicesComponent } from './ServicesConfiguration/list-workflow-services/list-workflow-services.component';
 import { DetailWorkflowConfigurationComponent } from './ServicesConfiguration/detail-workflow-configuration/detail-workflow-configuration.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ChatMsgComponent } from './Chat/chat-msg/chat-msg.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -1611,6 +1612,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     EditWorkflowConfigurationComponent,
     ListWorkflowServicesComponent,
     DetailWorkflowConfigurationComponent,
+    ChatMsgComponent,
   ],
   imports: [
 
@@ -1871,7 +1873,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 
       { path: 'my-list-recrutment', component: MyListRecrutmentComponent, canActivate: [AuthGuard] },
 
-      { path: 'rh-recrutment-list', component: RhRecrutmentListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] } },
+      { path: 'rh-recrutment-list', component: RhRecrutmentListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN', 'DIRECTORETAB', 'DIRDIRECTE', 'FINPRIV', 'DOTPRIV', 'RHPRIV', 'COMPTAPRIV','BOXPRIV'] } },
 
       { path: 'rh-conge-list', component: RhCongeListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] }},
 
@@ -3365,6 +3367,10 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
       { path: 'list-workflow-services', component: ListWorkflowServicesComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
       { path: 'detail-workflow-configuration', component: DetailWorkflowConfigurationComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
 
+
+      /** Chat ***/
+
+  { path: 'chat-msg', component: ChatMsgComponent, canActivate: [AuthGuard] },
 
     ])
   ],/*,  {

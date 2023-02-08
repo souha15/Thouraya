@@ -119,4 +119,21 @@ export class DemPayChequeService {
   DeletePayChequeReceive(id) {
     return this.http.delete(this.rootURL + '/demandePayChequesReceives/' + id);
   }
+
+  GetByUserCreator(userId) {
+    return this.http.get<DemPayCheque[]>(this.rootURL + '/DemandePayCheques/GetByUserCreator/' + userId);
+  }
+
+  GetDemand(userId) {
+    return this.http.get<DemPayCheque[]>(this.rootURL + '/DemandePayCheques/GetDemand/' + userId);
+  }
+
+  GetHistorique(id) {
+    return this.http.get<DemPayCheque>(this.rootURL + '/DemandePayCheques/GetHistorique/' + id);
+  }
+
+  EditDemandByRole(Id: number, userEtat: string) {
+    return this.http.get<DemPayCheque>(this.rootURL + '/DemandePayCheques/EditDemandByRole/' + Id + '/' + userEtat, this.headers);
+
+  }
 }

@@ -198,27 +198,7 @@ export class PayChequecAddComponent implements OnInit {
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-      if (res.attribut1 != null) {
       this.admindir = res.attribut1
-      this.notif.userReceiverId = res.attribut1;
-      this.notif.userReceiverName = res.directeur;
-        this.ch.iddir = res.attribut1;
-      }
-      this.UserService.getAdminDir(res.id).subscribe(resDir => {
-        if (resDir != null) {
-          this.dirId = resDir.id;
-          this.dirName = resDir.fullName;
-        }
-      })
-      this.notif.userTransmitterId = res.id;
-      this.notif.userTransmitterName = res.fullName;
-      this.notif.dateTime = this.date;
-      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
-      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
-      this.notif.TextNotification = "طلب صرف شيك من الموظف  " + res.fullName
-      this.notif.serviceName = "طلب صرف شيك"
-      this.notif.readUnread = "0";
-      this.notif.serviceId = 2;
     })
 
   }
@@ -279,19 +259,14 @@ export class PayChequecAddComponent implements OnInit {
 
     } else {
       this.isValidFormSubmitted = true;
-      this.ch.dateenreg = this.date;
       this.ch.creatorName = this.UserNameConnected;
       this.ch.idUserCreator = this.UserIdConnected;
-
-      this.ch.etatgeneral = "في الإنتظار"
-      this.ch.etatfinacier = "في الإنتظار"
-      this.ch.etatdirecteur = "في الإنتظار"
-      this.ch.etatparfinancier = "في الإنتظار"
-      this.ch.etatpart = "في الإنتظار"
-      this.ch.etatadmin = "في الإنتظار"
       this.ch.etatnum = "0"
       this.demandeService.Add(this.ch).subscribe(res => {
         this.chId = res.id
+
+        this.dirId = res.userId1;
+        this.dirName = res.userName1;
         this.autoNotif.serviceId = this.chId;
         this.autoNotif.pageUrl = "new-cheque-list-dir-directe"
         this.autoNotif.userType = "7";

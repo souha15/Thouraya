@@ -24,9 +24,6 @@ export class CreationListDirComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
-    this.getCreance();
-
-
     this.userOnLis();
     this.userOffLis();
     this.logOutLis();
@@ -149,79 +146,120 @@ export class CreationListDirComponent implements OnInit {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
       this.position = res.position;
-      this.notif.userTransmitterId = res.id;
-      this.notif.userTransmitterName = res.fullName;
-      this.notif.dateTime = this.dateTime.toString();
-      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
-      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
-      this.notif.TextNotification = " تمت الموافقة على طلب استحداث وظيفة  من قبل" + ' ' + res.fullName
-      this.notif.serviceName = "طلب استحداث وظيفة"
-      this.notif.readUnread = "0";
-      this.notif.serviceId = 3;
-      this.UserService.getAdminFinDir().subscribe(resDir => {
-        this.notif.userReceiverId = resDir.id;
-        this.notif.userReceiverName = resDir.fullName;
-      })
+      this.ctService.GetDemand(this.UserIdConnected).subscribe(res => {
+        this.creationList = res;
+      }
+      )
       })
 
   }
 
 
-  factList: CrationTravailDemande[] = [];
-  GfactList: CrationTravailDemande[] = [];
+  p: Number = 1;
+  count: Number = 5;
+  creationList: CrationTravailDemande[] = [];
 
-  getCreance() {
-    this.ctService.Get().subscribe(res => {
-      this.GfactList = res;
-
-      this.factList = this.GfactList.filter(item => item.etatdg == "في الإنتظار" && item.etatrh == "موافقة")
-
+  GetCreationList() {
+    this.ctService.GetDemand(this.UserIdConnected).subscribe(res => {
+      this.creationList = res;     
     })
 
   }
 
+
+  etat: string;
+  etattest(event) {
+    this.etat = event.target.value;
+  }
   date = new Date().toLocaleDateString();
-  accept() {
-     this.fact.etat = "موافقة"
-    this.fact.datedg = this.date;
-    this.fact.etatdg = "موافقة"
-    this.fact.iddg = this.UserIdConnected;
-    this.fact.nomdg = this.UserNameConnected;
-    this.ctService.PutObservableE(this.fact).subscribe(res => {
-      this.notifService.Add(this.notif).subscribe(res => {
-        this.getCreance();
-        this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
-        this.UserService.GetAdminDirG().subscribe(resDir => {
-          this.dirId = resDir.id;
-          this.dirName = resDir.fullName
+  updateRecord(form: NgForm) {
+    this.ctService.EditDemandByRole(this.fact.id, this.etat).subscribe(res => {
+      this.fact = res;
+      this.ctService.PutObservableE(this.fact).subscribe(res2 => {
+
+        if (this.etat == "موافق" && this.fact.etat != 'موافق') {
+        this.autoNotif.serviceId = this.fact.id;
+        this.autoNotif.pageUrl = "creation-list-dir"
+        this.autoNotif.userType = "6";
+        this.autoNotif.reponse = "8";
+        this.text = "طلب استحداث وظيفة";
+          this.signalService.GetConnectionByIdUser(this.fact.iddir).subscribe(res1 => {
+          this.userOnline = res1;
+          this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+            .catch(err => console.error(err));
+          }, err => {
+              this.autoNotif.receiverName = this.fact.nomdir;
+              this.autoNotif.receiverId = this.fact.iddir;
+          this.autoNotif.transmitterId = this.UserIdConnected;
+          this.autoNotif.transmitterName = this.UserNameConnected;
+          this.autoNotif.text = "طلب استحداث وظيفة";
+          this.autoNotif.vu = "0";
+          this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+
+          })
+
+
+        })
+        }
+
+        if (this.fact.etat == "رفض") {
           this.autoNotif.serviceId = this.fact.id;
-          this.autoNotif.pageUrl = "cre-finan-list-director"
-          this.autoNotif.userType = "6";
+          this.autoNotif.pageUrl = "creation-list"
+          this.autoNotif.userType = "0";
           this.autoNotif.reponse = "8";
-          this.text = "طلب استحداث وظيفة";
-          this.autoNotif.receiverName = this.dirName;
-          this.autoNotif.receiverId = this.dirId;
-          this.signalService.GetConnectionByIdUser(this.dirId).subscribe(res1 => {
+          this.text = " لقد تم رفض طلب استحداث وظيفة ";
+          this.signalService.GetConnectionByIdUser(this.fact.idUserCreator).subscribe(res1 => {
             this.userOnline = res1;
             this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
               .catch(err => console.error(err));
           }, err => {
-            this.autoNotif.receiverName = this.dirName;
-            this.autoNotif.receiverId = this.dirId;
+            this.autoNotif.receiverName = this.fact.userNameCreator;
+            this.autoNotif.receiverId = this.fact.idUserCreator;
             this.autoNotif.transmitterId = this.UserIdConnected;
             this.autoNotif.transmitterName = this.UserNameConnected;
-              this.text = "طلب استحداث وظيفة";
+            this.autoNotif.text = " لقد تم رفض طلب استحداث وظيفة";
             this.autoNotif.vu = "0";
+
+
             this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
 
             })
           })
-        })
-      })
-    
+        }
+
+
+
+        if (this.fact.etat == "موافق") {
+          this.autoNotif.serviceId = this.fact.id;
+          this.autoNotif.pageUrl = "creation-list"
+          this.autoNotif.userType = "0";
+          this.autoNotif.reponse = "8";
+          this.text = " لقد تمت الموافقة على طلب استحداث وظيفة ";
+          this.signalService.GetConnectionByIdUser(this.fact.idUserCreator).subscribe(res1 => {
+            this.userOnline = res1;
+            this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+              .catch(err => console.error(err));
+          }, err => {
+            this.autoNotif.receiverName = this.fact.userNameCreator;
+            this.autoNotif.receiverId = this.fact.idUserCreator;
+            this.autoNotif.transmitterId = this.UserIdConnected;
+            this.autoNotif.transmitterName = this.UserNameConnected;
+            this.autoNotif.text = " لقد تمت الموافقة على طلب استحداث وظيفة";
+            this.autoNotif.vu = "0";
+
+
+            this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+
+            })
+          })
+        }
+
+        this.GetCreationList();
+        this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
     },
       err => {
         this.toastr.warning('لم يتم  قبول الطلب', ' فشل');
+      })
       })
 
   }
@@ -234,23 +272,8 @@ export class CreationListDirComponent implements OnInit {
     this.factId = facture.id;
     this.fact = Object.assign({}, facture);
   }
+  onSubmit(form: NgForm) {
 
-
-  refuse() {
-    this.fact.etat = "رفض"
-    this.fact.datedg = this.date;
-    this.fact.etatdg = "رفض"
-    this.fact.iddg = this.UserIdConnected;
-    this.fact.nomdg = this.UserNameConnected;
-
-      this.ctService.PutObservableE(this.fact).subscribe(res => {
-        this.getCreance();
-        this.toastr.success("تم  رفض الطلب بنجاح", "نجاح");
-      },
-        err => {
-          this.toastr.warning('لم يتم رفض الطلب ', ' فشل');
-        })
-
+    this.updateRecord(form)
   }
-
 }

@@ -59,4 +59,21 @@ export class CreationTravailDemandeService {
   Delete(id) {
     return this.http.delete(this.rootURL + '/CreationTravailDemandes/' + id);
   }
+
+  GetByUserCreator(userId) {
+    return this.http.get<CrationTravailDemande[]>(this.rootURL + '/CreationTravailDemandes/GetByUserCreator/' + userId);
+  }
+
+  GetDemand(userId) {
+    return this.http.get<CrationTravailDemande[]>(this.rootURL + '/CreationTravailDemandes/GetDemand/' + userId);
+  }
+
+  GetHistorique(id) {
+    return this.http.get<CrationTravailDemande>(this.rootURL + '/CreationTravailDemandes/GetHistorique/' + id);
+  }
+
+  EditDemandByRole(Id: number, userEtat: string) {
+    return this.http.get<CrationTravailDemande>(this.rootURL + '/CreationTravailDemandes/EditDemandByRole/' + Id + '/' + userEtat, this.headers);
+
+  }
 }

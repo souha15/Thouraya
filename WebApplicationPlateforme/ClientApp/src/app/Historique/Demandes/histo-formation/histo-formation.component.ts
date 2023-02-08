@@ -16,7 +16,8 @@ export class HistoFormationComponent implements OnInit {
   ngOnInit(): void {
     this.getCreance();
   }
-
+  p: Number = 1;
+  count: Number = 5;
   factList: NewFormation[] = [];
   GfactList: NewFormation[] = [];
 
@@ -31,46 +32,19 @@ export class HistoFormationComponent implements OnInit {
   //Populate Form 
   factId: number
   fact: NewFormation = new NewFormation();
-  test0: boolean = false;
-  test50: boolean = false;
-  test75: boolean = false;
-  test100: boolean = false;
-  val: string;
+  rslt: any;
   populateForm(facture: NewFormation) {
     this.formationService.formData = Object.assign({}, facture)
     this.factId = facture.id;
     this.fact = Object.assign({}, facture);
-    if (this.fact.etat == "موافقة") {
-      this.test0 = false;
-      this.test50 = false;
-      this.test75 = false;
-      this.test100 = true;
-      this.val = "100%"
-    } else if (this.fact.etatdir == "موافقة" && this.fact.etatc == "في الإنتظار" && this.fact.etatrh == "في الإنتظار") {
-      this.test0 = false;
-      this.test50 = true;
-      this.test75 = false;
-      this.test100 = false;
-      this.val = "50%"
-    } else if (this.fact.etatdir == "موافقة" && this.fact.etatc == "موافقة" && this.fact.etatrh == "في الإنتظار" ) {
-      this.test0 = false;
-      this.test50 = false;
-      this.test75 = true;
-      this.test100 = false;
-      this.val = "75%"
-    }
+    this.formationService.GetFormationHistorique(this.fact.id).subscribe(res => {
+      this.rslt = res.attribut6
 
-    else if (this.fact.etatdir == "في الإنتظار" && this.fact.etatc == "في الإنتظار" && this.fact.etatrh == "في الإنتظار") {
-      this.test0 = true;
-      this.test50 = false;
-      this.test75 = false;
-      this.test100 = false;
-      this.val = "0%"
-    }
+    })
   }
   date = new Date().toLocaleDateString();
   accept() {
-    this.fact.etat = "موافقة"
+    this.fact.etat = "موافق"
     this.formationService.PutObservableE(this.fact).subscribe(res => {
       this.getCreance();
       this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
@@ -92,23 +66,4 @@ export class HistoFormationComponent implements OnInit {
   }
 
 
-  onDelete(id: number) {
-
-
-    if (confirm('هل أنت متأكد من حذف هذا السجل؟')) {
-      this.formationService.Delete(id)
-        .subscribe(res => {
-          this.getCreance();
-          this.toastr.success("تم الحذف  بنجاح", "نجاح");
-        },
-
-          err => {
-            console.log(err);
-            this.toastr.warning('لم يتم الحذف  ', ' فشل');
-          }
-        )
-
-    }
-
-  }
 }

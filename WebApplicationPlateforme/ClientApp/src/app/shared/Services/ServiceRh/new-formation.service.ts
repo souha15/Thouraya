@@ -53,7 +53,22 @@ export class NewFormationService {
     return this.http.put(this.rootURL + '/newFormationRequests/' + this.formData.id, this.formData, this.headers);
   }
 
+  GetFormationByUserCreator(userId) {
+    return this.http.get<NewFormation[]>(this.rootURL + '/newFormationRequests/GetFormationByUserCreator/' + userId);
+  }
 
+  GetFormationDemand(userId) {
+    return this.http.get<NewFormation[]>(this.rootURL + '/newFormationRequests/GetFormationDemand/' + userId);
+  }
+
+  GetFormationHistorique(id) {
+    return this.http.get<NewFormation>(this.rootURL + '/newFormationRequests/GetFormationHistorique/' + id);
+  }
+
+  EditDemandByRole(Id: number, userEtat: string) {
+    return this.http.get<NewFormation>(this.rootURL + '/newFormationRequests/EditDemandByRole/' + Id + '/' + userEtat, this.headers);
+
+  }
   //Delete NewFormation
 
   Delete(id) {

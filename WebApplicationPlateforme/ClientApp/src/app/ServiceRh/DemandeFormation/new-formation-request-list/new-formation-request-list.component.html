@@ -50,7 +50,7 @@
               <td (click)="populateForm(cg)"
                   [ngClass]="{
 
-  'success': cg.etat === 'موافقة',
+  'success': cg.etat === 'موافق',
   'denied': cg.etat === 'رفض',
   'wait': cg.etat === 'في الإنتظار'
 }">
@@ -62,8 +62,8 @@
                   <i class="fa fa-eye fa-lg"></i>
                 </a>
               </td>
-              <td (click)="populateForm(cg)"><a class="btn btn-danger" (click)="onDelete(cg.id)">حذف</a></td>
-              <td (click)="populateForm(cg)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1">تعديل</a></td>
+              <td (click)="populateForm(cg)"><a class="btn btn-danger" (click)="onDelete(cg.id)" *ngIf="cg.userEtat1==='في الإنتظار'">حذف</a></td>
+              <td (click)="populateForm(cg)"><a class="btn btn-info" data-toggle="modal" data-target="#myModal1" *ngIf="cg.userEtat1==='في الإنتظار'">تعديل</a></td>
 
             </tr>
 
@@ -79,11 +79,11 @@
 
               </td>
               <td>
-                <a class="btn show-details-btn text-info" (click)="populateForm1(cg)" data-toggle="modal" data-target="#myModal2">
+                <a class="btn show-details-btn text-info" (click)="populateForm1(cg)" data-toggle="modal" data-target="#myModal2" *ngIf="cg.userEtat1==='في الإنتظار'">
                   <i class="fa fa-eye fa-lg"></i>
                 </a>
               </td>
-              <td (click)="populateForm1(cg)"><a class="btn btn-danger" (click)="onDelete1(cg.id)">حذف</a></td>
+              <td (click)="populateForm1(cg)"><a class="btn btn-danger" (click)="onDelete1(cg.id)" *ngIf="cg.userEtat1==='في الإنتظار'">حذف</a></td>
               <td></td>
 
             </tr>

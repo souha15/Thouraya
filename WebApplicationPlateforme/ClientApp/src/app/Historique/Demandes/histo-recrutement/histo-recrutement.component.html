@@ -30,7 +30,6 @@
                 <th scope="col">الموظف المعوض</th>
                 <th scope="col">الحالة</th>
                 <th scope="col">سير الإجراء</th>
-                <th scope="col">حذف</th>
               </tr>
             </thead>
             <tbody>
@@ -45,21 +44,17 @@
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal2"
                     [ngClass]="{
 
-  'ok': cg.attribut2 === 'موافق',
-  'refused': cg.attribut2 === 'رفض',
-  'wait': cg.attribut2 === 'في الانتظار'
+  'ok': cg.etat === 'موافق',
+  'refused': cg.etat === 'رفض',
+  'wait': cg.etat === 'في الإنتظار'
 }">
-                  {{cg.attribut2}}
+                  {{cg.etat}}
                 </td>
 
                 <td (click)="populateForm(cg)">
                   <a class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal3"><i class="fa fa-road"></i>  </a>
                 </td>
-                <td>
-                  <a class="btn show-details-btn text-danger" (click)="onDelete(cg.id)">
-                    <i class="fa fa-trash fa-lg"></i>
-                  </a>
-                </td>
+
               </tr>
             </tbody>
           </table>
@@ -175,7 +170,7 @@
       <div class="modal-body" style="direction:rtl; text-align:right">
         <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
           <label for="user"><span><i class="fa fa-check"></i></span>حالة الإنتداب</label>
-          <select id="user" class="" name="attribut2" #attribut2="ngModel" [(ngModel)]="congeService.formData.attribut2" (change)="percentageetat($event)">
+          <select id="user" class="" name="etat" #etat="ngModel" [(ngModel)]="congeService.formData.etat">
             <option [ngValue]="undefined" selected disabled>-حالة الإنتداب-</option>
             <option value="موافق">موافق</option>
             <option value="رفض">رفض</option>
@@ -208,24 +203,8 @@
 
       </div>
       <div class="modal-body" style="direction:rtl; text-align:right">
-        <div class="lables">
-          <div style="color:#db5a60; font-weight:bold"> تقديم الطلب</div>
-          <div style="color:dimgrey;font-weight:bold"> المدير المباشر</div>
-          <div style="color:green;font-weight:bold">شؤون الموظفين</div>
-
-        </div>
-        <div class="w3-light-grey w3-round" *ngIf="per.attribut3 === '5%'">
-          <div id="myBar" class="w3-container w3-round w3-red" style="height:24px;width:{{per.attribut3}}">0</div>
-        </div>
-
-        <div class="w3-light-grey w3-round" *ngIf="per.attribut3 === '50%'">
-          <div id="myBar" class="w3-container w3-round w3-blue-grey" style="height:24px;width:{{per.attribut3}}">50%</div>
-        </div>
-        <div class="w3-light-grey w3-round" *ngIf="per.attribut3 === '100%'">
-          <div id="myBar" class="w3-container w3-round w3-green" style="height:24px;width:{{per.attribut3}}">100%</div>
-        </div>
+        <p style="font-weight:bold"> {{rslt}}</p>
       </div>
-
     </div>
 
   </div>

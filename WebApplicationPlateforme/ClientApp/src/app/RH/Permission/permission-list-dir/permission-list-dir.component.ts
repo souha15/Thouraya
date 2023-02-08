@@ -183,7 +183,7 @@ export class PermissionUListDirComponent implements OnInit {
       this.per = res;    
       this.permissionService.PutObservableE(this.per).subscribe(res1 => {
 
-        if (this.etat == "موافق") {
+        if (this.etat == "موافق" && this.per.etat != 'موافق') {
           this.autoNotif.serviceId = this.per.id;
           this.autoNotif.pageUrl = "permission-list-dir"
           this.autoNotif.userType = "3";

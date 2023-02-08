@@ -22,7 +22,6 @@ export class DemandeSuppHeureListDirectorComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
-    this.getCreance();
 
     this.userOnLis();
     this.userOffLis();
@@ -38,6 +37,10 @@ export class DemandeSuppHeureListDirectorComponent implements OnInit {
       });
     }
   }
+
+
+  p: Number = 1;
+  count: Number = 5;
   //Handle Notification
   // Hub Configuration
   users: connection[] = [];
@@ -85,7 +88,7 @@ export class DemandeSuppHeureListDirectorComponent implements OnInit {
   text: string;
   sendMsgInv(): void {
 
-    this.signalService.GetConnectionByIdUser(this.dirId).subscribe(res => {
+    this.signalService.GetConnectionByIdUser(this.fact.iddir).subscribe(res => {
       this.userOnline = res;
       this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text)
         .catch(err => console.error(err));
@@ -136,21 +139,10 @@ export class DemandeSuppHeureListDirectorComponent implements OnInit {
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-
-      this.notif.userTransmitterId = res.id;
-      this.notif.userTransmitterName = res.fullName;
-      this.notif.dateTime = this.date;
-      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
-      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
-      this.notif.TextNotification = " تمت الموافقة على طلب ساعات إضافية  من قبل" + ' ' + res.fullName
-      this.notif.serviceName = "طلب ساعات إضافية"
-      this.notif.readUnread = "0";
-      this.notif.serviceId = 6;
-      this.UserService.GetRhDepartement().subscribe(resDir => {
-        this.notif.userReceiverId = resDir.id;
-        this.notif.userReceiverName = resDir.fullName;
-      })
-
+      this.suppheureService.GetDemand(this.UserIdConnected).subscribe(res => {
+        this.SuppHeureList = res;
+      }
+      )
     })
 
   }
@@ -163,61 +155,101 @@ export class DemandeSuppHeureListDirectorComponent implements OnInit {
     this.factId = facture.id;
     this.fact = Object.assign({}, facture);
   }
+  etat: string;
+  etattest(event) {
+    this.etat = event.target.value;
+  }
 
-
-  factList: DemandeSuppHeure[] = [];
-  GfactList: DemandeSuppHeure[] = [];
-  getCreance() {
-    this.suppheureService.Get().subscribe(res => {
-      this.GfactList = res;
-
-      this.factList = this.GfactList.filter(item => item.etatdir == "في الإنتظار" && item.iddir == this.UserIdConnected)
-
-    })
+  SuppHeureList: DemandeSuppHeure[] = [];
+  getSuppHeureList() {
+    this.suppheureService.GetDemand(this.UserIdConnected).subscribe(res => {
+      this.SuppHeureList = res;
+    }
+    )
 
   }
 
   date = new Date().toLocaleDateString();
-  accept() {
-    //this.fact.etat = "موافقة"
-    this.fact.datedir = this.date;
-    this.fact.etatdir = "موافقة"
-    this.fact.iddir = this.UserIdConnected;
-    this.fact.nomdir = this.UserNameConnected;
-    this.suppheureService.PutObservableE(this.fact).subscribe(res => {
-      this.notifService.Add(this.notif).subscribe(res => {
-        this.getCreance();
-        this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
-
-        this.UserService.GetRhDepartement().subscribe(resDir => {
-          this.dirId = resDir.id;
-          this.dirName = resDir.fullName
-          this.autoNotif.serviceId = this.fact.id;
-          this.autoNotif.pageUrl = "demande-supp-heure-listcreator"
-          this.autoNotif.userType = "3";
-          this.autoNotif.reponse = "7";
+  updateRecord(form: NgForm) {
+    this.suppheureService.EditDemandByRole(this.fact.id, this.etat).subscribe(res => {
+      this.fact = res;
+    this.suppheureService.PutObservableE(this.fact).subscribe(res1 => {
+      if (this.etat == "موافق" && this.fact.etat != 'موافق') {
+        this.autoNotif.serviceId = this.fact.id;
+        this.autoNotif.pageUrl = "demande-supp-heure-list-director"
+        this.autoNotif.userType = "3";
+        this.autoNotif.reponse = "2";
+         this.text = "طلب ساعات الإضافية";
+        this.signalService.GetConnectionByIdUser(this.fact.iddir).subscribe(res1 => {
+          this.userOnline = res1;
+          this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+            .catch(err => console.error(err));
+        }, err => {
+          this.autoNotif.receiverName = this.fact.nomdir;
+          this.autoNotif.receiverId = this.fact.iddir;
+          this.autoNotif.transmitterId = this.UserIdConnected;
+          this.autoNotif.transmitterName = this.UserNameConnected;
+           this.autoNotif.text = "طلب ساعات الإضافية";
           this.autoNotif.vu = "0";
-          this.text = "طلب ساعات الإضافية";
-          this.autoNotif.receiverName = this.dirName;
-          this.autoNotif.receiverId = this.dirId;
-          this.signalService.GetConnectionByIdUser(this.dirId).subscribe(res1 => {
-            this.userOnline = res1;
-            this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
-              .catch(err => console.error(err));
-          }, err => {
-            this.autoNotif.receiverName = this.dirName;
-            this.autoNotif.receiverId = this.dirId;
-            this.autoNotif.transmitterId = this.UserIdConnected;
-            this.autoNotif.transmitterName = this.UserNameConnected;
-              this.text = "طلب ساعات الإضافية";
+
 
             this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
-
-            })
+              this.etat=""
           })
         })
-      })
+      }
+      if (this.fact.etat == "رفض") {
+        this.autoNotif.serviceId = this.fact.id;
+        this.autoNotif.pageUrl = "demande-supp-heure-list"
+        this.autoNotif.userType = "0";
+        this.autoNotif.reponse = "2";
+        this.text = " لقد تم رفض طلب ساعات الإضافية ";
+        this.signalService.GetConnectionByIdUser(this.fact.idUserCreator).subscribe(res1 => {
+          this.userOnline = res1;
+          this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+            .catch(err => console.error(err));
+        }, err => {
+          this.autoNotif.receiverName = this.fact.userNameCreator;
+          this.autoNotif.receiverId = this.fact.idUserCreator;
+          this.autoNotif.transmitterId = this.UserIdConnected;
+          this.autoNotif.transmitterName = this.UserNameConnected;
+            this.autoNotif.text = " لقد تم رفض طلب ساعات الإضافية";
+          this.autoNotif.vu = "0";
 
+
+          this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+
+          })
+        })
+      }
+      if (this.fact.etat == "موافق") {
+        this.autoNotif.serviceId = this.fact.id;
+        this.autoNotif.pageUrl = "demande-supp-heure-list"
+        this.autoNotif.userType = "0";
+        this.autoNotif.reponse = "2";
+        this.text = " لقد تمت الموافقة على طلب ساعات الإضافية ";
+        this.signalService.GetConnectionByIdUser(this.fact.idUserCreator).subscribe(res1 => {
+          this.userOnline = res1;
+          this.signalService.hubConnection.invoke("sendMsg", this.userOnline.signalrId, this.text, this.autoNotif)
+            .catch(err => console.error(err));
+        }, err => {
+          this.autoNotif.receiverName = this.fact.userNameCreator;
+          this.autoNotif.receiverId = this.fact.idUserCreator;
+          this.autoNotif.transmitterId = this.UserIdConnected;
+          this.autoNotif.transmitterName = this.UserNameConnected;
+            this.autoNotif.text = " لقد تمت الموافقة على طلب ساعات الإضافية";
+          this.autoNotif.vu = "0";
+
+
+          this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+
+          })
+        })
+      }
+      form.resetForm();
+      this.getSuppHeureList()
+      this.toastr.success('تم التحديث بنجاح', 'نجاح');
+    })
     },
       err => {
         this.toastr.warning('لم يتم  قبول الطلب', ' فشل');
@@ -225,19 +257,9 @@ export class DemandeSuppHeureListDirectorComponent implements OnInit {
 
   }
 
-  refuse() {
-    this.fact.etat = "رفض"
-    this.fact.datedir = this.date;
-    this.fact.etatdir = "رفض"
-    this.fact.iddir = this.UserIdConnected;
-    this.fact.nomdir = this.UserNameConnected;
+  onSubmit(form: NgForm) {
 
-    this.suppheureService.PutObservableE(this.fact).subscribe(res => {
-      this.getCreance();
-      this.toastr.success("تم  رفض الطلب بنجاح", "نجاح");
-    },
-      err => {
-        this.toastr.warning('لم يتم رفض الطلب ', ' فشل');
-      })
+    this.updateRecord(form)
   }
+
 }

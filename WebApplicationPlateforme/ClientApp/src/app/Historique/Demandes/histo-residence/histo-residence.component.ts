@@ -30,24 +30,14 @@ export class HistoResidenceComponent implements OnInit {
       this.filtredCongeList = res
     })
   }
-  test100: boolean = false;
-  val: string;
-  test0: boolean = false;
+  rslt: any;
   populateForm(conge: Residence) {
     this.residenceService.formData = Object.assign({}, conge)
     this.dem = Object.assign({}, conge)
+    this.residenceService.GetHistorique(this.dem.id).subscribe(res => {
+      this.rslt = res.attribut6
 
-    if (this.dem.etatdir == 'موافق') {
-      this.val = '100%'
-      this.test100 = true;
-      this.test0 = false;
-    }
-
-    if (this.dem.etatdir == 'في الانتظار') {
-      this.val = '0%'
-      this.test100 = false;
-      this.test0 = true;
-    }
+    })
 
   }
 

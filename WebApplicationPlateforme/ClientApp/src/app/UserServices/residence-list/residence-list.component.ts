@@ -44,7 +44,7 @@ export class ResidenceListComponent implements OnInit {
       this.congeList = res
       this.filtredCongeList = this.congeList.filter(item => item.idUserCreator == this.UserIdConnected)
       this.filtredCongeList.forEach(item => {
-        if (item.etat == "في الانتظار") {
+        if (item.userEtat1 == "في الإنتظار") {
           this.testEdit = true;
 
         } else {

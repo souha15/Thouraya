@@ -20,9 +20,6 @@ export class AvanceAddComponent implements OnInit {
   constructor(private avanceService: AvanceService,
     private toastr: ToastrService,
     private UserService: UserServiceService,
-    private adminService: AdministrationService,
-    private depService: EtablissementService,
-    private notifService: NotifService,
     private signalService: SignalRService) { }
 
   ngOnInit(): void {
@@ -153,22 +150,7 @@ export class AvanceAddComponent implements OnInit {
       this.av.userNameCreator = res.fullName;
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-      this.notif.userTransmitterId = res.id;
-      this.notif.userTransmitterName = res.fullName;
       this.nom = res.nomAdministration
-      this.notif.dateTime = this.date;
-      this.notif.date = this.dateTime.getDate().toString() + '-' + (this.dateTime.getMonth() + 1).toString() + '-' + this.dateTime.getFullYear().toString();
-      this.notif.time = this.dateTime.getHours().toString() + ':' + this.dateTime.getMinutes().toString();
-      this.notif.TextNotification = "طلب سلفة   من الموظف  " + res.fullName
-      this.notif.serviceName = "طلب سلفة  "
-      this.notif.readUnread = "0";
-      this.notif.serviceId = 1;
-      this.av.attribut3 = "32618446-df21-4ca1-b366-f639f41a7a7c";
-      this.av.attribut4 = "د. محمد بن إبراهيم عوض الصواط ";
-      this.notif.userReceiverId = "32618446-df21-4ca1-b366-f639f41a7a7c";
-      this.notif.userReceiverName = "د. محمد بن إبراهيم عوض الصواط ";
-
-
     })
   }
 
@@ -178,12 +160,6 @@ export class AvanceAddComponent implements OnInit {
   date = new Date().toLocaleDateString();
   dateTime = new Date();
   onSubmit(form: NgForm) {
-    this.av.dateenreg = this.date;
-    this.av.attribut2 = "في الإنتظار";
-    this.av.etatC = "في الإنتظار";
-    this.av.etatD = "في الإنتظار"
-    this.av.attribut5 = "في الإنتظار"
-    this.av.etatetab = "في الإنتظار"
     if (form.invalid) {
       this.isValidFormSubmitted = false;
 
@@ -193,9 +169,9 @@ export class AvanceAddComponent implements OnInit {
       this.isValidFormSubmitted = true;
       this.avanceService.Add(this.av).subscribe(
         res => {
-          this.UserService.GetAdminDirG().subscribe(resDir => {
-            this.dirId = resDir.id;
-            this.dirName = resDir.fullName
+ 
+          this.dirId = res.userId1;
+          this.dirName = res.userName1;
             this.autoNotif.serviceId =res.id;
             this.autoNotif.pageUrl = "avance-list-d"
             this.autoNotif.userType = "6";
@@ -211,18 +187,15 @@ export class AvanceAddComponent implements OnInit {
               this.autoNotif.receiverName = this.dirName;
               this.autoNotif.receiverId = this.dirId;
               this.autoNotif.transmitterId = this.UserIdConnected;
-              this.autoNotif.transmitterName = this.UserNameConnected;
-                this.text = "طلب سلفة";
+                this.autoNotif.transmitterName = this.UserNameConnected;
+                this.autoNotif.text = "طلب سلفة";
               this.autoNotif.vu = "0";
               this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
 
               })
             })
-          })
-          this.notifService.Add(this.notif).subscribe(res => {
-          
          
-          })
+       
 
           this.toastr.success("تمت الإضافة بنجاح", "نجاح");
           form.resetForm();

@@ -29,7 +29,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
+              <tr *ngFor="let cg of equipementList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
                 <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{(p-1) * count + i + 1}}</th>
                 <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.userNameCreator}}</th>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.nom}}</td>
@@ -38,13 +38,8 @@
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.email}}</td>
 
                 <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
-                    [ngClass]="{
-
-  'ok': cg.etatdir === 'موافق',
-  'refused': cg.etatdir === 'رفض',
-  'wait': cg.etatdir === 'في الانتظار'
-}">
-                  {{cg.etatdir}}
+   class ="wait">
+                  في الإنتظار
                 </td>
 
               </tr>
@@ -88,25 +83,25 @@
 
               <div class="col-md-4">
                 <label for="permision-hours">الرقم التسلسلي</label>
-                {{per.id}}
+                {{equi.id}}
 
               </div>
 
               <div class="col-md-4">
                 <label for="permision-hours">الموظف</label>
-                {{per.userNameCreator}}
+                {{equi.userNameCreator}}
 
               </div>
               <div class="col-md-4">
                 <label for="permision-hours">التاريخ</label>
-                {{per.date}}
+                {{equi.date}}
 
               </div>
 
 
               <div class="col-md-4">
                 <label for="permision-hours">العهدة</label>
-                {{per.nom}}
+                {{equi.nom}}
 
               </div>
 
@@ -114,29 +109,29 @@
 
               <div class="col-md-4">
                 <label for="permision-hours">نوع العهدة</label>
-                {{per.type}}
+                {{equi.type}}
 
               </div>
 
               <div class="col-md-4">
                 <label for="permision-hours">جوال</label>
-                {{per.tel}}
+                {{equi.tel}}
 
               </div>
               <div class="col-md-4">
                 <label for="permision-hours">الايميل الرسمي</label>
-                {{per.email}}
+                {{equi.email}}
 
               </div>
               <div class="col-md-4">
                 <label for="permision-hours">تحويله</label>
-                {{per.transfert}}
+                {{equi.transfert}}
 
               </div>
 
               <div class="col-md-4">
                 <label for="permision-hours">الحالة</label>
-                {{per.etatdir}}
+                {{equi.etatdir}}
 
               </div>
 
@@ -165,7 +160,7 @@
       <div class="modal-body" style="direction:rtl; text-align:right">
         <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
           <label for="user"><span><i class="fa fa-check"></i></span>حالة العهدة</label>
-          <select id="user" class="" name="etatdir" #etatdir="ngModel" [(ngModel)]="congeService.formData.etatdir" (change)="etattest($event)">
+          <select id="user" class=""  (change)="etattest($event)">
             <option [ngValue]="undefined" selected disabled>-حالة العهدة-</option>
             <option value="موافق">موافق</option>
             <option value="رفض">رفض</option>

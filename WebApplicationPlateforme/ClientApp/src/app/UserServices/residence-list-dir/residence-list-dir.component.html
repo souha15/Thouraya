@@ -37,13 +37,8 @@
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.datefin}}</td>
                 <td (click)="openInNewTab('/pay-chequec-add')"><a class="btn show-details-btn text-info"><i class="fa fa-hand-holding-usd fa-lg"></i> </a></td>
                 <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
-                    [ngClass]="{
-
-  'ok': cg.etatdir === 'موافق',
-  'refused': cg.etatdir === 'رفض',
-  'wait': cg.etatdir === 'في الانتظار'
-}">
-                  {{cg.etatdir}}
+                    class="wait">
+                  في الإنتظار
                 </td>
 
               </tr>
@@ -183,7 +178,7 @@
       <div class="modal-body" style="direction:rtl; text-align:right">
         <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
           <label for="user"><span><i class="fa fa-check"></i></span>حالة الإقامة</label>
-          <select id="user" class="" name="etatdir" #etatdir="ngModel" [(ngModel)]="dem.etatdir" (change)="etattest($event)">
+          <select id="user" class="" (change)="etattest($event)">
             <option [ngValue]="undefined" selected disabled>-حالة الإقامة-</option>
             <option value="موافق">موافق</option>
             <option value="رفض">رفض</option>

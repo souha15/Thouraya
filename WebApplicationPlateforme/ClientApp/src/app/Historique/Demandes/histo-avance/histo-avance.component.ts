@@ -32,47 +32,16 @@ export class HistoAvanceComponent implements OnInit {
   factId: number
   fact: Avance = new Avance();
   etatok: boolean;
-  test0: boolean = false;
-  test50: boolean = false;
-  test75: boolean = false;
-  test100: boolean = false;
-  val: string;
+
+  rslt: string;
   populateForm(facture: Avance) {
     this.avanceService.formData = Object.assign({}, facture)
     this.factId = facture.id;
     this.fact = Object.assign({}, facture);
+    this.avanceService.GetHistorique(this.fact.id).subscribe(res => {
+      this.rslt = res.attribut6
 
-    if (this.fact.etatD == "في الإنتظار" && this.fact.etatC == "في الإنتظار" && this.fact.etatetab == "في الانتظار") {
-      this.test0 = true;
-      this.test50= false;
-      this.test75 = false;
-      this.test100 = false;
-      this.val="0%";
-    }
- 
-    else if (this.fact.etatD == "موافقة" && this.fact.etatC == "في الإنتظار" && this.fact.etatetab == "في الإنتظار") {
-      this.test0 = false;
-      this.test50 = true;
-      this.test75 = false;
-      this.test100 = false;
-      this.val = "50%";
-    }
-    else if (this.fact.etatetab == "موافقة" && this.fact.etatD == "موافقة" && this.fact.etatC == "في الإنتظار") {
-      this.test0 = false;
-      this.test50 = false;
-      this.test75 = true;
-      this.test100 = false;
-      this.val = "75%";
-    }
-    else if ((this.fact.etatC == "موافقة" && this.fact.etatD == "موافقة" && this.fact.etatetab == "موافقة") || this.fact.attribut2 =="موافقة") {
-      this.test0 = false;
-      this.test50 = false;
-      this.test75 = false;
-      this.test100 = true;
-      this.val = "100%";
-    }
-
-
+    })
 
   }
 

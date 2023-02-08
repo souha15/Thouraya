@@ -101,7 +101,7 @@ export class RecrutementListComponent implements OnInit {
     this.congeId = this.conge.id;
     console.log(this.conge.attribut3)
     this.congeService.formData.nomremplacant = this.rempl
-    if (this.conge.etatdir == "في الانتظار") {
+    if (this.conge.userEtat1 == "في الإنتظار") {
       this.congeService.Edit().subscribe(res => {
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
         this.resetForm();
@@ -113,9 +113,9 @@ export class RecrutementListComponent implements OnInit {
 
 
       )
-    } if (this.conge.attribut3 == 'موافق') {
+    } if (this.conge.etat == 'موافق') {
       this.toastr.error('لقد تمت الموافقة على طلب الإنتداب', ' لم يتم التحديث');
-    } if (this.conge.attribut3 == 'رفض') {
+    } if (this.conge.etat == 'رفض') {
       this.toastr.error('لقد تم رفض طلب الإنتداب', ' لم يتم التحديث');
     }
   }
@@ -158,6 +158,15 @@ export class RecrutementListComponent implements OnInit {
       dateenreg: '',
       userNameCreator: '',
       idUserCreator: '',
+      etat: '',
+      userName1: '', userId1: '', userEtat1: '', userDate1: '',
+      userName2: '', userId2: '', userEtat2: '', userDate2: '',
+      userName3: '', userId3: '', userEtat3: '', userDate3: '',
+      userName4: '', userId4: '', userEtat4: '', userDate4: '',
+      userName5: '', userId5: '', userEtat5: '', userDate5: '',
+      userName6: '', userId6: '', userEtat6: '', userDate6: '',
+      userName7: '', userId7: '', userEtat7: '', userDate7: '',
+      userName8: '', userId8: '', userEtat8: '', userDate8: '',
 
     }
   }

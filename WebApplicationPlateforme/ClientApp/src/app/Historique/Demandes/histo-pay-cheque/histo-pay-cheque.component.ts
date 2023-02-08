@@ -38,11 +38,15 @@ export class HistoPayChequeComponent implements OnInit {
   //PopulateForm
   per: DemPayCheque = new DemPayCheque();
 
-
+  rslt
   populateForm(conge: DemPayCheque) {
     this.per = Object.assign({}, conge)
     this.articleService.Get().subscribe(res => {
       this.arlis = res;
+    })
+    this.demandeService.GetHistorique(this.per.id).subscribe(res => {
+      this.rslt = res.attribut6
+
     })
   }
 

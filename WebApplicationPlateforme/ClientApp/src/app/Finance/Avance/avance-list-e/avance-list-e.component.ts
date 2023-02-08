@@ -39,26 +39,7 @@ export class AvanceListEComponent implements OnInit {
       this.GfactList = res;
       this.factList = this.GfactList.filter(item => item.idUserCreator == this.UserIdConnected)
       this.factList.forEach(item => {
-        if (item.transferera != null) {
-
-          if (item.transferera == "1") {
-
-            item.attribut2 = item.etatetab
-
-          } else if (item.transferera == "2") {
-            item.attribut2 = item.etattrh
-          } else {
-            if (item.etattrh == "موافقة" && item.etatetab == "موافقة") {
-              item.attribut2 = "موافقة"
-            } else if (item.etattrh == "رفض" || item.etatetab == "رفض") {
-              item.attribut2 = "رفض"
-            } else if (item.etattrh == "في الإنتظار" || item.etatetab == null) {
-              item.attribut2 = "في الإنتظار"
-            }
-          }
-        }
-
-        if (item.etatC == "في الإنتظار") {
+        if (item.userEtat1 == "في الإنتظار") {
           this.etatok = true;
         } else this.etatok = false;
       })
@@ -91,14 +72,15 @@ export class AvanceListEComponent implements OnInit {
       this.updateRecord(form)
     }
   }
-
+  p: Number = 1;
+  count: Number = 5;
   factur: Avance = new Avance();
 
   updateRecord(form: NgForm) {
 
     this.factur = Object.assign(this.factur, form.value);
     this.factId = this.factur.id;
-    if (this.avanceService.formData.etatC == "في الإنتظار") {
+    if (this.avanceService.formData.userEtat1 == "في الإنتظار") {
       this.avanceService.Edit().subscribe(res => {
 
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
@@ -168,7 +150,15 @@ export class AvanceListEComponent implements OnInit {
       dateenreg: '',
       userNameCreator: '',
       idUserCreator: '',
-
+      etat: '',
+      userName1: '', userId1: '', userEtat1: '', userDate1: '',
+      userName2: '', userId2: '', userEtat2: '', userDate2: '',
+      userName3: '', userId3: '', userEtat3: '', userDate3: '',
+      userName4: '', userId4: '', userEtat4: '', userDate4: '',
+      userName5: '', userId5: '', userEtat5: '', userDate5: '',
+      userName6: '', userId6: '', userEtat6: '', userDate6: '',
+      userName7: '', userId7: '', userEtat7: '', userDate7: '',
+      userName8: '', userId8: '', userEtat8: '', userDate8: '',
     }
   }
 

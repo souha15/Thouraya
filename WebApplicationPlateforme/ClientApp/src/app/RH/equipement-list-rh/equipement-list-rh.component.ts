@@ -27,7 +27,7 @@ export class EquipementListRHComponent implements OnInit {
     this.getUserConnected();
     this.CongeList();
     this.Etablist();
-    this.resetForm();
+
 
 
   }
@@ -98,7 +98,7 @@ export class EquipementListRHComponent implements OnInit {
     this.congeService.formData.attribut6 = this.UserIdConnected;
     this.congeService.Edit().subscribe(res => {
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
-      this.resetForm();
+
       this.CongeList();
     },
       err => {
@@ -118,33 +118,5 @@ export class EquipementListRHComponent implements OnInit {
 
   }
 
-  resetForm(form?: NgForm) {
 
-    if (form != null)
-      form.resetForm();
-    this.congeService.formData = {
-      id: null,
-      type: '',
-      nom: '',
-      email: '',
-      tel: '',
-      transfert: '',
-      remarque: '',
-      etatdir: '',
-      date: '',
-      datedir: '',
-      iddir: '',
-      nomdir: '',
-      attribut1: null,
-      attribut2: '',
-      attribut3: '',
-      attribut4: '',
-      attribut5: '',
-      attribut6: '',
-      dateenreg: '',
-      userNameCreator: '',
-      idUserCreator: '',
-
-    }
-  }
 }

@@ -25,7 +25,7 @@
                 <th scope="col">الإجراء</th>
                 <th scope="col">الحالة</th>
                 <th scope="col">سير الإجراء</th>
-                <th scope="col">حذف</th>
+          
               </tr>
             </thead>
             <tbody>
@@ -41,24 +41,19 @@
                 <td (click)="populateForm(cg)" data-target="#myModal2" data-toggle="modal"
                     [ngClass]="{
 
-  'success': cg.etatgeneral === 'معتمدة',
-  'denied': cg.etatgeneral === 'مرفوضة',
-  'accord': cg.etatgeneral === 'موافقة',
-  'worke': cg.etatgeneral === 'تحت الإجراء',
-  'wait': cg.etatgeneral === 'في الإنتظار',
-  'towork': cg.etatgeneral === 'للإنجاز'
+
+  'denied': cg.etat === 'رفض',
+  'accord': cg.etat === 'موافق',
+  'wait': cg.etat === 'في الإنتظار'
+
 }">
-                  {{cg.etatgeneral}}
+                  {{cg.etat}}
                 </td>
 
                 <td (click)="populateForm(cg)">
                   <a class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal3"><i class="fa fa-road"></i>  </a>
                 </td>
-                <td>
-                  <a class="btn show-details-btn text-danger" (click)="onDelete(cg.id)">
-                    <i class="fa fa-trash fa-lg"></i>
-                  </a>
-                </td>
+                
             </tbody>
           </table>
         </div>
@@ -147,7 +142,7 @@
 
               <div class="col-md-4">
                 <label for="permision-hours">الحالة</label>
-                {{per.etatgeneral}}
+                {{per.etat}}
 
               </div>
               <div class="col-md-12">
@@ -242,14 +237,7 @@
 
       </div>
       <div class="modal-body" style="direction:rtl; text-align:right">
-        <div class="lables">
-          <div style="color:red; font-weight:bold">المدير المباشر <br />
-          {{per.etatdirecteur}}</div> 
-          <div style="color:dimgrey;font-weight:bold"> المحاسبة  <br /> {{per.etatfinacier}}</div>
-          <div style="color:#276985;font-weight:bold"> مدير إدارة المالية  <br /> {{per.etatparfinancier}}</div>
-          <div style="color:#db5a60;font-weight:bold">المدير العام  <br /> {{per.etatadmin}}</div>
-          <div style="color:green;font-weight:bold">أمين الصندوق   <br />  {{per.etatpart}}</div>
-        </div>
+        <p style="font-weight:bold"> {{rslt}}</p>
       </div>
 
     </div>

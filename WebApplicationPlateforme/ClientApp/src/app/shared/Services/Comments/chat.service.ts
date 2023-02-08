@@ -1,50 +1,70 @@
-/*import { Injectable, EventEmitter } from '@angular/core';
-import { Message } from '../../Models/Comments/message.model';
+import { Injectable, EventEmitter } from '@angular/core';
 import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';  
+import { Chat } from '../../../Chat/chat.model';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { PathSharedService } from '../../path-shared.service';
 
+export class Message {
+  constructor(
+    public content: string,
+    public mine: boolean
+  ) { }
+}
 @Injectable({
   providedIn: 'root'
 })
 export class ChatService {
-  messageReceived = new EventEmitter<Message>();
-  connectionEstablished = new EventEmitter<Boolean>();
 
-  private connectionIsEstablished = false;
-  private _hubConnection: HubConnection;
+  constructor(private pathService: PathSharedService,
+    private http: HttpClient) { }
 
-  constructor() {
-    this.createConnection();
-    this.registerOnServerEvents();
-    this.startConnection();
+  readonly rootURL = this.pathService.getPath();
+  formData: Chat;
+
+  headers = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
+    })
   }
 
-  sendMessage(message: Message) {
-    this._hubConnection.invoke('NewMessage', message);
+  Create(model: Chat) {
+    return this.http.post<Chat>(this.rootURL + '/ChatMsgs', model, this.headers);
   }
 
-  private createConnection() {
-    this._hubConnection = new HubConnectionBuilder()
-      .withUrl(window.location.href + 'MessageHub')
-      .build();
+  Post() {
+    return this.http.post(this.rootURL + '/ChatMsgs', this.formData, this.headers);
   }
 
-  private startConnection(): void {
-    this._hubConnection
-      .start()
-      .then(() => {
-        this.connectionIsEstablished = true;
-        console.log('Hub connection started');
-        this.connectionEstablished.emit(true);
-      })
-      .catch(err => {
-        console.log('Error while establishing connection, retrying...');
-        setTimeout(function () { this.startConnection(); }, 5000);
-      });
+  Edit() {
+    return this.http.put(this.rootURL + '/ChatMsgs/' + this.formData.id, this.formData, this.headers);
   }
 
-  private registerOnServerEvents(): void {
-    this._hubConnection.on('MessageReceived', (data: any) => {
-      this.messageReceived.emit(data);
-    });
+
+  List(): Observable<Chat[]> {
+    return this.http.get<Chat[]>(this.rootURL + '/ChatMsgs');
   }
-}  */
+
+  Delete(id) {
+    return this.http.delete(this.rootURL + '/ChatMsgs/' + id);
+  }
+
+
+  PutObservable(model: Chat) {
+    return this.http.put<Chat>(this.rootURL + '/ChatMsgs/' + model.id, model, this.headers);
+  }
+
+  Put(Id) {
+    return this.http.put(this.rootURL + '/ChatMsgs/' + this.formData.id, this.formData, this.headers);
+  }
+
+
+  GetById(Id) {
+    return this.http.get<Chat>(this.rootURL + '/ChatMsgs/' + Id);
+  }
+
+  GetConversations(IdEmeteur, IdRecepteur) {
+    return this.http.get<Chat[]>(this.rootURL + '/ChatMsgs/GetMessagesWithUserSelected/' + IdEmeteur + '/' + IdRecepteur);
+  }
+}  

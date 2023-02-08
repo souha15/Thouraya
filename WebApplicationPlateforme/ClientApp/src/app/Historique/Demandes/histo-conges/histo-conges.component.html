@@ -42,11 +42,11 @@
                 <td data-toggle="modal" data-target="#myModal4" (click)="populateForm(cg)"
                     [ngClass]="{
 
- 'success': cg.attribut2 === 'موافق',
-  'denied': cg.attribut2 === 'رفض',
-  'wait': cg.attribut2 === 'في الانتظار'
+ 'success': cg.etat === 'موافق',
+  'denied': cg.etat === 'رفض',
+  'wait': cg.etat === 'في الإنتظار'
 }">
-                  {{cg.attribut2}}
+                  {{cg.etat}}
                 </td>
                 <td (click)="populateForm(cg)">
                   <a class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal3"><i class="fa fa-road"></i>  </a>
@@ -177,13 +177,12 @@
       <div class="modal-body" style="direction:rtl; text-align:right">
         <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
           <label for="user"><span><i class="fa fa-check"></i></span>حالة الطلب</label>
-          <select id="user" class="" name="attribut2" #attribut2="ngModel" [(ngModel)]="congeService.formData.attribut2">
+          <select id="user" class="" name="etat" #etat="ngModel" [(ngModel)]="conge.etat">
             <option [ngValue]="undefined" selected disabled>-حالة الطلب-</option>
             <option value="موافق">موافق</option>
             <option value="رفض">رفض</option>
 
           </select>
-          <input type="text" name="etat" #etat="ngModel" [(ngModel)]="congeService.formData.etat" hidden />
           <div class="save">
             <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
 
@@ -211,32 +210,7 @@
 
       </div>
       <div class="modal-body" style="direction:rtl; text-align:right">
-        <div class="lables">
-          <div style="color:#db5a60; font-weight:bold"> تقديم الطلب</div>
-          <div style="color:dimgrey;font-weight:bold"> المدير المباشر</div>
-          <div style="color:#276985;font-weight:bold"> مدير الشؤون المالية و الإدارية</div>
-          <div style="color:green;font-weight:bold">المحاسب / شؤون الموظفين</div>
-
-        </div>
-        <div class="w3-light-grey w3-round" *ngIf="test0">
-          <div id="myBar" class="w3-container w3-round w3-red" style="height:24px;width:{{val}}">0</div>
-        </div>
-
-
-        <div class="w3-light-grey w3-round" *ngIf="test25">
-          <div id="myBar" class="w3-container w3-round w3-amber" style="height:24px;width:{{val}}">25%</div>
-        </div>
-
-        <div class="w3-light-grey w3-round" *ngIf="test50">
-          <div id="myBar" class="w3-container w3-round w3-blue-grey" style="height:24px;width:{{val}}">50%</div>
-        </div>
-
-        <div class="w3-light-grey w3-round" *ngIf="test70">
-          <div id="myBar" class="w3-container w3-round w3-blue" style="height:24px;width:{{val}}">70%</div>
-        </div>
-        <div class="w3-light-grey w3-round" *ngIf="test100">
-          <div id="myBar" class="w3-container w3-round w3-green" style="height:24px;width:{{val}}">100%</div>
-        </div>
+        <p style="font-weight:bold"> {{rslt}}</p>
       </div>
 
     </div>

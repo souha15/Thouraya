@@ -31,7 +31,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let cg of filtredCongeList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
+              <tr *ngFor="let cg of RecList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
                 <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{(p-1) * count + i + 1}}</th>
                 <th (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.userNameCreator}}</th>
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.type}}</td>
@@ -40,13 +40,8 @@
                 <td (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal1">{{cg.nomremplacant}}</td>
 
                 <td data-toggle="modal" data-target="#myModal2" (click)="populateForm(cg)"
-                    [ngClass]="{
-
-  'ok': cg.etatrh === 'موافق',
-  'refused': cg.etatrh === 'رفض',
-  'wait': cg.etatrh === 'في الانتظار'
-}">
-                  {{cg.etatrh}}
+              class ="wait">
+                  في الإنتظار
                 </td>
 
               </tr>
@@ -165,7 +160,7 @@
       <div class="modal-body" style="direction:rtl; text-align:right">
         <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
           <label for="user"><span><i class="fa fa-check"></i></span>حالة الإنتداب</label>
-          <select id="user" class="" name="etatrh" #etatrh="ngModel" [(ngModel)]="congeService.formData.etatrh" (change)="percentageetat($event)">
+          <select id="user" class=""  (change)="etattest($event)">
             <option [ngValue]="undefined" selected disabled>-حالة الإنتداب-</option>
             <option value="موافق">موافق</option>
             <option value="رفض">رفض</option>

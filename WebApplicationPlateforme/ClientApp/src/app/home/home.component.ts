@@ -40,7 +40,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserConnected();
-    this.showdec = false;
+
+
 
   }
 
@@ -50,11 +51,6 @@ export class HomeComponent implements OnInit {
   showUser: boolean = false;
   showAll: boolean = false;
   ListDecision: DecisionTwo[]=[];
-  getDecision() {
- 
-
-  }
-
   // Get User Connected
   notifnb: number = 0;
   testnotifnb: boolean = false;
@@ -85,27 +81,6 @@ export class HomeComponent implements OnInit {
       this.idetab = this.user.idDepartement;
     }
   
-    //this.trinService.TestDecision(this.UserIdConnected, this.idadmin).subscribe(resultat => {
-    //  if (resultat == "Toadmin") {
-    //    this.trinService.DecisionGetByAdmin(this.user.idAdministration).subscribe(res => {
-    //      this.showAdmin = res
-
-    //    })
-    //  } else if (resultat == "ToUser") {
-    //    this.trinService.GetDecision(this.user.id).subscribe(res => {
-    //      this.showUser = res
-    //    })
-
-
-    //  } else {
-    //    this.trinService.DecisionGetAllAdmin().subscribe(res => {
-    //      this.showAll = res
-    //    })
-    //  }
-    //})
-
-
-
       this.TacheService.ListTache().subscribe(res => {
         this.task = res
         this.task2 = this.task.filter(item => item.affectedName == this.UserIdConnected && item.etat == "في الإنتظار");
@@ -136,6 +111,37 @@ export class HomeComponent implements OnInit {
           this.testnotifnb = false;
         }
       })
+
+
+    this.trinService.TestDecision(this.UserIdConnected, this.idadmin).subscribe(resultat => {
+      if (resultat == "Toadmin") {
+        this.trinService.DecisionGetByAdmin(this.user.idAdministration).subscribe(res => {
+          this.showAdmin = res
+
+
+        })
+      }  if (resultat == "ToUser") {
+        this.trinService.GetDecision(this.user.id).subscribe(res => {
+          this.showUser = res
+        })
+
+
+      }  if (resultat == "ToAll") {
+        this.trinService.DecisionGetAllAdmin().subscribe(res => {
+          this.showAll = res
+        })
+      }
+
+      if (!this.showAll && !this.showAdmin && !this.showUser) {
+        this.showdec = true;
+      }
+      console.log("all", this.showAll)
+      console.log("user", this.showUser)
+      console.log("admin", this.showAdmin)
+      console.log("dec", this.showdec)
+    })
+
+
  
   }
 

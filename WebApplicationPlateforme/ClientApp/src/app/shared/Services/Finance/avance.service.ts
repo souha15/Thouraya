@@ -64,5 +64,23 @@ export class AvanceService {
   Delete(id) {
     return this.http.delete(this.rootURL + '/DemandeAvances/' + id);
   }
+
+
+  GetByUserCreator(userId) {
+    return this.http.get<Avance[]>(this.rootURL + '/DemandeAvances/GetByUserCreator/' + userId);
+  }
+
+  GetDemand(userId) {
+    return this.http.get<Avance[]>(this.rootURL + '/DemandeAvances/GetDemand/' + userId);
+  }
+
+  GetHistorique(id) {
+    return this.http.get<Avance>(this.rootURL + '/DemandeAvances/GetHistorique/' + id);
+  }
+
+  EditDemandByRole(Id: number, userEtat: string) {
+    return this.http.get<Avance>(this.rootURL + '/DemandeAvances/EditDemandByRole/' + Id + '/' + userEtat, this.headers);
+
+  }
 }
 

@@ -51,6 +51,7 @@ using WebApplicationPlateforme.Model.MediaCenter.Rondonnee;
 using WebApplicationPlateforme.Model.MediaCenter.SoireeOccasion;
 using WebApplicationPlateforme.Model.MediaCenter.Visite;
 using WebApplicationPlateforme.Model.NouveauMusulman;
+using WebApplicationPlateforme.Model.Chat;
 
 namespace WebApplicationPlateforme.Data
 {

@@ -295,3 +295,15 @@ ul {
 .file-label {
   cursor: pointer;
 }
+
+ .ok {
+  background-color: #28a745 !important;
+}
+
+ .refused {
+  background-color: #dc3545 !important;
+}
+
+ .wait {
+  background-color: #fcba03 !important;
+}

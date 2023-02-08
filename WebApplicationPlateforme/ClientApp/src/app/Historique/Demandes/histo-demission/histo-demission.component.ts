@@ -29,41 +29,15 @@ export class HistoDemissionComponent implements OnInit {
       this.filtredCongeList = res
     })
   }
-  val: string;
-  test0: boolean = false;
-  test50: boolean = false;
-  test100: boolean = false;
+  rslt: any;
   per: Demissioon = new Demissioon();
   populateForm(conge: Demissioon) {
     this.demService.formData = Object.assign({}, conge);
     this.per = Object.assign({}, conge);
+    this.demService.GetHistorique(this.per.id).subscribe(res => {
+      this.rslt = res.attribut6
 
-    if (this.per.etatrh == 'موافق' && this.per.etatdir == "موافق") {
-      this.val = "100%"
-      this.test100 = true;
-      this.test50 = false;
-      this.test0 = false;
-
-    } else if (this.per.etat == "موافق") {
-      this.val = "100%"
-      this.test100 = true;
-      this.test50 = false;
-      this.test0 = false;
-    }
-    else if (this.per.etatdir == 'في الانتظار' && this.per.etatrh == "في الانتظار" && this.per.etat =="في الانتظار") {
-      this.val = "0%"
-      this.test100 = false;
-      this.test50 = false;
-      this.test0 = true;
-    }
-
-    else if (this.per.etatdir == "موافق" && this.per.etatrh == "في الانتظار" && this.per.etat == "في الانتظار") {
-      this.val = "50%"
-      console.log("3" + this.val)
-      this.test100 = false;
-      this.test50 = true;
-      this.test0 = false;
-    }
+    })
 
   }
   p: Number = 1;

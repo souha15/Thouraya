@@ -60,4 +60,22 @@ export class DemandeSuppHeureService {
   Delete(id) {
     return this.http.delete(this.rootURL + '/DemandeSupHeures/' + id);
   }
+
+
+  GetByUserCreator(userId) {
+    return this.http.get<DemandeSuppHeure[]>(this.rootURL + '/DemandeSupHeures/GetByUserCreator/' + userId);
+  }
+
+  GetDemand(userId) {
+    return this.http.get<DemandeSuppHeure[]>(this.rootURL + '/DemandeSupHeures/GetDemand/' + userId);
+  }
+
+  GetHistorique(id) {
+    return this.http.get<DemandeSuppHeure>(this.rootURL + '/DemandeSupHeures/GetHistorique/' + id);
+  }
+
+  EditDemandByRole(Id: number, userEtat: string) {
+    return this.http.get<DemandeSuppHeure>(this.rootURL + '/DemandeSupHeures/EditDemandByRole/' + Id + '/' + userEtat, this.headers);
+
+  }
 }

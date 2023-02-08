@@ -84,7 +84,7 @@
     </style>
     <!--showAdmin||showUser||showAll-->
     <div class="col-md-9 col-sm-8">
-      <div class="banner animated tada" *ngIf="showdec">
+      <div class="banner animated tada" *ngIf="showdec||showAll||showUser||showAdmin">
 
         <a [routerLink]="['/decision-list']">قرار أو تعميم وارد</a>
       </div>
@@ -93,17 +93,17 @@
           <div class="row">
 
             <!--<div class="col-sm-6 col-md-3 my-4">
-              <div class="link-box">
-                <a [routerLink]="['/notif-show']">
-                  <span class="notify-badge" *ngIf="testNotif">{{notif}}</span>
-                  <span class="d-block">
-                    <i class="fa fa-bell fa-3x"></i>
-                  </span>
-                  <h4>الإشعارات </h4>
-                </a>
+    <div class="link-box">
+      <a [routerLink]="['/notif-show']">
+        <span class="notify-badge" *ngIf="testNotif">{{notif}}</span>
+        <span class="d-block">
+          <i class="fa fa-bell fa-3x"></i>
+        </span>
+        <h4>الإشعارات </h4>
+      </a>
 
-              </div>
-            </div>-->
+    </div>
+  </div>-->
 
             <div class="col-sm-6 col-md-3 my-4">
               <div class="link-box">
@@ -170,7 +170,7 @@
                 </a>
               </div>
             </div>
-       
+
 
             <div class="col-sm-6 col-md-3 my-4">
               <div class="link-box">
@@ -302,6 +302,61 @@
                     <i class="fa fa-cogs fa-3x"></i>
                   </span>
                   <h4>الصيانة</h4>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 my-4">
+              <div class="link-box">
+                <a [routerLink]="['/gest-ben-list-accepte']">
+                  <span class="d-block">
+                    <i class="fa fa-user-circle fa-3x"></i>
+                  </span>
+                  <h4>ادارة المستفيدين </h4>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 my-4">
+              <div class="link-box">
+                <a [routerLink]="['/list-stockage']">
+                  <span class="d-block">
+                    <i class="fa fa fa-archive fa-3x"></i>
+                  </span>
+                  <h4>المستودع </h4>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-sm-6 col-md-3 my-4">
+              <div class="link-box">
+                <a [routerLink]="['/orphelin-list']">
+                  <span class="d-block">
+                    <i class="fa fa fa-users fa-3x"></i>
+                  </span>
+                  <h4>كفالة الايتام  </h4>
+                </a>
+              </div>
+            </div>
+
+
+            <div class="col-sm-6 col-md-3 my-4">
+              <div class="link-box">
+                <a [routerLink]="['/list-tuteur']">
+                  <span class="d-block">
+                    <i class="fa fa fa-users-cog fa-3x"></i>
+                  </span>
+                  <h4>إدارة الكفالات </h4>
+                </a>
+              </div>
+            </div>
+            <div class="col-sm-6 col-md-3 my-4">
+              <div class="link-box">
+                <a [routerLink]="['/projet-list']">
+                  <span class="d-block">
+                    <i class="fa fa-project-diagram fa-3x"></i>
+                  </span>
+                  <h4>إدارة المشاريع</h4>
                 </a>
               </div>
             </div>

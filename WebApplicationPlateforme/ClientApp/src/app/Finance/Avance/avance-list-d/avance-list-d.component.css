@@ -14,7 +14,9 @@
     border: 1px solid #ccc;
     width: 50%;
   }
-
+.wait {
+  background-color: #fcba03 !important;
+}
 .theme-table thead {
   background-color: #276985;
   color: #fff;
