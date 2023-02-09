@@ -126,14 +126,25 @@ export class AttetionAddComponent implements OnInit {
         this.admin = "";
         this.etab = "";
         this.daterec = "";
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
       },
         err => {
           this.toastr.error("لم تتم إضافة القرار الطلب", "فشل ")
 
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         })
     }
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   update(form: NgForm) {
 
     if (form.invalid) {
@@ -169,10 +180,17 @@ export class AttetionAddComponent implements OnInit {
         this.admin = "";
         this.etab = "";
         this.daterec = "";
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
       },
         err => {
           this.toastr.error("لم تتم إضافة القرار الطلب", "فشل ")
+          this.msg = "  فشل عند التحديث"
 
+          this.failed = true;
+          this.succ = false;
         })
     }
   }

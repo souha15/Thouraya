@@ -652,12 +652,22 @@ export class EnregIComponent implements OnInit {
           this.FiltredList = [];
           this.TransactionList();
           this.toastr.success("تم تعديل المعاملة بنجاح", "نجاح");
+          this.msg = "  تم التحديث بنجاح"
+
+          this.succ = true;
+          this.failed = false;
         },
         err => {
           this.toastr.warning('لم يتم تعديل المعاملة', ' فشل');
-        }
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;}
       )
     }
   }
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 }
 

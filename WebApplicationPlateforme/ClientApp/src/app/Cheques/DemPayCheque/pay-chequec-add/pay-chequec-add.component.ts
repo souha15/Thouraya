@@ -246,6 +246,9 @@ export class PayChequecAddComponent implements OnInit {
     })
   }
   //Create Cheque
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   ch: DemPayCheque = new DemPayCheque();
   isValidFormSubmitted: boolean = false;
@@ -264,7 +267,11 @@ export class PayChequecAddComponent implements OnInit {
       this.ch.etatnum = "0"
       this.demandeService.Add(this.ch).subscribe(res => {
         this.chId = res.id
+        this.succ = true;
+        this.failed = false;
 
+
+        this.msg = "  تمت الإضافة بنجاح"
         this.dirId = res.userId1;
         this.dirName = res.userName1;
         this.autoNotif.serviceId = this.chId;
@@ -317,6 +324,11 @@ export class PayChequecAddComponent implements OnInit {
       },
         err => {
           this.toastr.error("فشل في التسجيل", "فشل")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
+
         }
       )
     }

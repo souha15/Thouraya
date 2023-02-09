@@ -117,6 +117,11 @@ export class RabattreAddComponent implements OnInit {
 
       this.decService.Create(this.dem).subscribe(res => {
         this.toastr.success("  تمت إضافة القرار  بنجاح", "نجاح");
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
         form.resetForm();
         this.num = "";
         this.emploi = "";
@@ -126,11 +131,17 @@ export class RabattreAddComponent implements OnInit {
       },
         err => {
           this.toastr.error("لم تتم إضافة القرار الطلب", "فشل ")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
           
         })
     }
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   update(form: NgForm) {
 
     if (form.invalid) {
@@ -161,6 +172,11 @@ export class RabattreAddComponent implements OnInit {
       this.decService.PutObservableE(this.dem).subscribe(res => {
         this.toastr.success("  تمت إضافة القرار  بنجاح", "نجاح");
         form.resetForm();
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تم التحديث بنجاح"  
         this.num = "";
         this.emploi = "";
         this.admin = "";
@@ -169,6 +185,10 @@ export class RabattreAddComponent implements OnInit {
       },
         err => {
           this.toastr.error("لم تتم إضافة القرار الطلب", "فشل ")
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
 
         })
     }

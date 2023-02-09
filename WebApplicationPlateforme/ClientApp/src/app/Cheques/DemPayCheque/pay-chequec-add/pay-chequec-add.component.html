@@ -12,7 +12,7 @@
         <h3 class="task-head">طلب صرف شيك</h3>
       </header>
       <div class="events1">
-        <form class="form-row events-form mb-3"  #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+        <form class="form-row events-form mb-3" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
           <div class="col-md-12">
             <div class="w-100">
               <label class="main">
@@ -38,7 +38,7 @@
               </div>
               <div class="col-md-4">
                 <label for="entry-date">تاريخ الادخال</label>
-                <input type="date" id="entry-date" name="dateEntre" #dateEntre="ngModel" [(ngModel)]="ch.dateEntre" style="width:150px"   [min]="today"/>
+                <input type="date" id="entry-date" name="dateEntre" #dateEntre="ngModel" [(ngModel)]="ch.dateEntre" style="width:150px" [min]="today" />
               </div>
 
               <div class="col-md-4">
@@ -86,8 +86,8 @@
 
               <div class="col-md-4">
                 <label for="devision">التاريخ</label>
-                <input type="date" id="devision" name="description" #description="ngModel" [(ngModel)]="ar.description"   [min]="today"/>
-                 
+                <input type="date" id="devision" name="description" #description="ngModel" [(ngModel)]="ar.description" [min]="today" />
+
               </div>
               <div class="col-md-8">
                 <label for="topic">الملاحظات</label>
@@ -132,6 +132,19 @@
           <div class="col-12 text-left mt-3">
             <input class="btn btn-info px-4" type="submit" value="حفظ" />
           </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
+
         </form>
       </div>
     </div>

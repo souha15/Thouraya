@@ -90,6 +90,9 @@ export class AlarmeAddComponent implements OnInit {
   dem: Commun = new Commun();
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   add(form: NgForm) {
 
     if (form.invalid) {
@@ -125,10 +128,18 @@ export class AlarmeAddComponent implements OnInit {
         this.admin = "";
         this.etab = "";
         this.daterec = "";
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
       },
         err => {
           this.toastr.error("لم تتم إضافة القرار الطلب", "فشل ")
+          this.failed = true;
+          this.succ = false;
 
+          this.msg = " فشل عند الإضافة"
         })
     }
   }
@@ -168,10 +179,18 @@ export class AlarmeAddComponent implements OnInit {
         this.admin = "";
         this.etab = "";
         this.daterec = "";
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
+
       },
         err => {
           this.toastr.error("لم تتم إضافة القرار الطلب", "فشل ")
+          this.msg = "  فشل عند التحديث"
 
+          this.failed = true;
+          this.succ = false;
         })
     }
   }

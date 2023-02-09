@@ -627,6 +627,9 @@ export class EnregEComponent implements OnInit {
     })
   }
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   isValidFormSubmittedTR = false;
   editTr(form: NgForm) {
@@ -641,10 +644,19 @@ export class EnregEComponent implements OnInit {
         res => {
           form.resetForm()
           this.FiltredList = [];
+          this.msg = "  تم التحديث بنجاح"
+
+          this.succ = true;
+          this.failed = false;
+
           this.TransactionList();
           this.toastr.success("تم تعديل المعاملة بنجاح", "نجاح");
         },
         err => {
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
           this.toastr.warning('لم يتم تعديل المعاملة', ' فشل');
         }
       )

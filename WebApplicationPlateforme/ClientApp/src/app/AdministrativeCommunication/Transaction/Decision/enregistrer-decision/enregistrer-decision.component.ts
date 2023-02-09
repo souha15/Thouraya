@@ -118,6 +118,9 @@ export class EnregistrerDecisionComponent implements OnInit {
       this.UserList = res;
     })
   }
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   de: DecisionTwo = new DecisionTwo();
   isValidFormSubmitted = false;
@@ -135,6 +138,9 @@ export class EnregistrerDecisionComponent implements OnInit {
       this.trinService.Add(this.de).subscribe(res => {
         form.resetForm();
         this.toastr.success("تم التسجيل  بنجاح", " تسجيل ");
+        this.succ = true;
+        this.failed = false
+        this.msg = "  تمت الإضافة بنجاح"
         this.files1 = [];   
         this.fileslist.forEach(item => {
           this.pj.path = item;
@@ -149,7 +155,10 @@ export class EnregistrerDecisionComponent implements OnInit {
       },
         err => {
           this.toastr.error("فشل التسجيل  الطلب", " تسجيل ")
-        }
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"}
       )
     }
   }

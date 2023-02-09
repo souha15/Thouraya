@@ -265,6 +265,10 @@ export class EnregistrerTRIComponent implements OnInit {
   Idtransaction: number;
   liaison: Liaison = new Liaison();
   affectation: AffectationI = new AffectationI();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     this.tr.userNameCreator = this.UserNameConnected;
     this.tr.dateenreg = this.date;
@@ -281,6 +285,11 @@ export class EnregistrerTRIComponent implements OnInit {
       this.isValidFormSubmittedTR = true;
       this.transactionRecueService.CreateI(this.tr).subscribe(
         res => {
+          this.succ = true;
+          this.failed = false;
+
+
+          this.msg = "  تمت الإضافة بنجاح"
           this.Idtransaction = res.id
 
 
@@ -346,6 +355,11 @@ export class EnregistrerTRIComponent implements OnInit {
         err => {
           console.log(err);
           this.toastr.warning('لم تتم الإضافة', ' فشل');
+
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         }
 
       )

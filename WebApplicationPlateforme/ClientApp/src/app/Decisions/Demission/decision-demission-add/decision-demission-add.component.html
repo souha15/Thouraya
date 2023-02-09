@@ -63,7 +63,7 @@
 
               <div class="col-sm-6">
                 <label for="replace-emp">التاريخ </label>
-                <select id="stop-status" (change)="getDateType($event)" name="dateFinContratMil" #dateFinContratMil="ngModel" [(ngModel)]="dem.dateFinContratMil" >
+                <select id="stop-status" (change)="getDateType($event)" name="dateFinContratMil" #dateFinContratMil="ngModel" [(ngModel)]="dem.dateFinContratMil">
                   <option [ngValue]="undefined" selected disabled>-التاريخ-</option>
                   <option value="1">هجري </option>
                   <option value="2">ميلادي </option>
@@ -118,6 +118,17 @@
 
               <div class="col-12 text-left">
                 <input class="btn btn-primary px-4" type="submit" value="تسجيل">
+              </div>
+              <div class="col-md-6">
+                <div class="success-msg" *ngIf="succ">
+                  <i class="fa fa-check"></i>
+                  {{msg}}
+                </div>
+
+                <div class="error-msg" *ngIf="failed">
+                  <i class="fa fa-times-circle"></i>
+                  {{msg}}
+                </div>
               </div>
             </form>
           </div>

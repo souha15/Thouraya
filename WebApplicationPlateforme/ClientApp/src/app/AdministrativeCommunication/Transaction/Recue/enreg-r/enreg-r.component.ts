@@ -654,6 +654,10 @@ export class EnregRComponent implements OnInit {
 
 
   isValidFormSubmittedTR = false;
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   editTr(form: NgForm) {
 
     this.tr.dateenreg = this.date
@@ -663,6 +667,10 @@ export class EnregRComponent implements OnInit {
       this.isValidFormSubmittedTR = true;
       this.transactionService.PutObservable(this.tr).subscribe(
         res => {
+          this.msg = "  تم التحديث بنجاح"
+
+          this.succ = true;
+          this.failed = false;
 
           this.pj.idUserCreator = this.tr.idUserCreator;
           let datef = Date.now();
@@ -688,6 +696,10 @@ export class EnregRComponent implements OnInit {
           this.toastr.success("تم تعديل المعاملة بنجاح", "نجاح");
         },
         err => {
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
           this.toastr.warning('لم يتم تعديل المعاملة', ' فشل');
         }
       )

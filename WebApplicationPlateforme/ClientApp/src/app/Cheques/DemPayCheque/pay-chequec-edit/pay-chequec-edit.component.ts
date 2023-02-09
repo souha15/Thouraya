@@ -152,7 +152,9 @@ export class PayChequecEditComponent implements OnInit {
   isValidFormSubmitted: boolean = false;
   date = new Date().toLocaleDateString();
   chId: number;
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -193,10 +195,19 @@ export class PayChequecEditComponent implements OnInit {
         this.arlis3.splice(0, this.arlis3.length)
         this.i = 0;
         this.toastr.success("تم التسجيل بنجاح", "نجاح")
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
+
         form.resetForm();
       },
         err => {
           this.toastr.error("فشل في التسجيل", "فشل")
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
         }
       )
     }

@@ -75,16 +75,25 @@ export class DemandeVoitureListDirComponent implements OnInit {
     this.etat = event.target.value;
   }
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     this.dem.iddot = this.UserIdConnected;
     this.dem.namedot = this.UserNameConnected
     this.dem.datedot = this.date
     this.demService.PutObservableE(this.dem).subscribe(res => {
       this.getDemList();
-      this.toastr.success("تم الحذف  بنجاح", "نجاح");
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
     },
       err => {
-        this.toastr.error("فشل تحديث الطلب ", " تحديث الطلب")
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       })
   }
 }

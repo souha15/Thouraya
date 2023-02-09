@@ -45,7 +45,9 @@ export class NewAdministrationComponent implements OnInit {
 
 
   
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form:NgForm) {
 
     if (this.nomAd == null) {
@@ -58,11 +60,20 @@ export class NewAdministrationComponent implements OnInit {
           this.vider(form);
         this.CreatedAdministration = res;
         this.adminId = this.CreatedAdministration.id;
+          this.succ = true;
+          this.failed = false;
 
+
+          this.msg = "  تمت الإضافة بنجاح"
           this.toastr.success("تم تسجيل الإدارة بنجاح", " تسجيل الإدارة");
   
       },
-      err => {
+        err => {
+
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         this.toastr.error("فشل تسجيل الإدارة", " تسجيل الإدارة")
       }
 
