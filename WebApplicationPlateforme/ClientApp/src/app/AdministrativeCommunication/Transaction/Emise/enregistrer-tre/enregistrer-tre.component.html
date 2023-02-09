@@ -290,7 +290,7 @@
               <div *ngIf="shortnom.errors?.required && formO.submitted && !isValidFormSubmittedO" class="alert alert-danger">
                 مطلوب اسم.
               </div>
-              <input type="text" class="mb-2" placeholder="الإسم الكامل" name="nomcomplet" #nomcomplet="ngModel" [(ngModel)]="organisme.nomcomplet"  />
+              <input type="text" class="mb-2" placeholder="الإسم الكامل" name="nomcomplet" #nomcomplet="ngModel" [(ngModel)]="organisme.nomcomplet" />
 
               <input type="text" class="mb-2" placeholder="الهاتف" name="tel" #tel="ngModel" [(ngModel)]="organisme.tel" />
               <input type="text" class="mb-2" placeholder="العنوان" name="addresse" #addresse="ngModel" [(ngModel)]="organisme.addresse" />
@@ -302,6 +302,18 @@
               <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
               <button class="btn btn-danger px-2 ml-3" type="reset"><span class="ml-4"><i class="fa fa-trash"></i></span>حذف الحقول</button>
 
+            </div>
+
+            <div class="col-md-6">
+              <div class="success-msg" *ngIf="succ">
+                <i class="fa fa-check"></i>
+                {{msg}}
+              </div>
+
+              <div class="error-msg" *ngIf="failed">
+                <i class="fa fa-times-circle"></i>
+                {{msg}}
+              </div>
             </div>
           </form>
         </div>

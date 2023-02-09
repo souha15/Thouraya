@@ -66,36 +66,59 @@
 
       <input class="search form-control" type="text" name="search" [(ngModel)]="filter" placeholder="ما الذي تبحث عنه ؟">
 
-    <br />
+      <div class="col-md-6">
+        <div class="success-msg" *ngIf="succReception">
+          <i class="fa fa-check"></i>
+          {{msgReception}}
+        </div>
+
+        <div class="error-msg" *ngIf="failedReception">
+          <i class="fa fa-times-circle"></i>
+          {{msgReception}}
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <div class="success-msg" *ngIf="succEnreg">
+          <i class="fa fa-check"></i>
+          {{msgEnreg}}
+        </div>
+
+        <div class="error-msg" *ngIf="failedEnreg">
+          <i class="fa fa-times-circle"></i>
+          {{msgEnreg}}
+        </div>
+      </div>
+      <br />
       <span class="counter pull-right"></span>
 
-        <div class="table-responsive">
-          <table class="table table-striped results table-bordered">
-            <thead>
-              <tr>
+      <div class="table-responsive">
+        <table class="table table-striped results table-bordered">
+          <thead>
+            <tr>
 
-                <th scope="col">#</th>
-                <th scope="col">رقم المعاملة</th>
-                <th scope="col">الجهة</th>
-                <th scope="col">الموضوع</th>
-                <th scope="col"> التاريخ</th>
-                <th scope="col">الأولوية</th>
-                <th scope="col">درجة السرية</th>
-                <th scope="col">الاستلام</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let tr of FiltredList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; index as i;">
+              <th scope="col">#</th>
+              <th scope="col">رقم المعاملة</th>
+              <th scope="col">الجهة</th>
+              <th scope="col">الموضوع</th>
+              <th scope="col"> التاريخ</th>
+              <th scope="col">الأولوية</th>
+              <th scope="col">درجة السرية</th>
+              <th scope="col">الاستلام</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let tr of FiltredList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p }; index as i;">
 
-                <td (click)="populateForm(tr,i)"><input type="radio" name="modelGroup" value="modelGroup"></td>
-                <td (click)="populateForm(tr,i)">{{(p-1) * count + i + 1}}</td>
-                <td (click)="populateForm(tr,i)" *ngIf="tr.nomOrg!==null">{{tr.nomOrg}}</td>
-                <td (click)="populateForm(tr,i)" *ngIf="tr.nomProp!==null">{{tr.nomProp}}</td>
-                <td (click)="populateForm(tr,i)">{{tr.sujet}}</td>
-                <td (click)="populateForm(tr,i)">{{tr.date}}</td>
-                <td (click)="populateForm(tr,i)">{{tr.priorite}}</td>
-                <td (click)="populateForm(tr,i)">{{tr.securite}}</td>
-                <td [ngClass]="{
+              <td (click)="populateForm(tr,i)"><input type="radio" name="modelGroup" value="modelGroup"></td>
+              <td (click)="populateForm(tr,i)">{{(p-1) * count + i + 1}}</td>
+              <td (click)="populateForm(tr,i)" *ngIf="tr.nomOrg!==null">{{tr.nomOrg}}</td>
+              <td (click)="populateForm(tr,i)" *ngIf="tr.nomProp!==null">{{tr.nomProp}}</td>
+              <td (click)="populateForm(tr,i)">{{tr.sujet}}</td>
+              <td (click)="populateForm(tr,i)">{{tr.date}}</td>
+              <td (click)="populateForm(tr,i)">{{tr.priorite}}</td>
+              <td (click)="populateForm(tr,i)">{{tr.securite}}</td>
+              <td [ngClass]="{
 
     'wait': tr.etat === 'تحت الإجراء',
     'done': tr.etat === 'مستلمة',
@@ -103,26 +126,26 @@
 
 
 }">
-                  <a (click)="populateForm(tr,i)">{{tr.etat}} </a>
-                </td>
+                <a (click)="populateForm(tr,i)">{{tr.etat}} </a>
+              </td>
 
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        
-        <!-- Pagination -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
-        <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center">
-            <pagination-controls (pageChange)="p = $event"
-                                 previousLabel="السابق"
-                                 nextLabel="التالي"></pagination-controls>
-          </ul>
-        </nav>
+      <!-- Pagination -->
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <pagination-controls (pageChange)="p = $event"
+                               previousLabel="السابق"
+                               nextLabel="التالي"></pagination-controls>
+        </ul>
+      </nav>
 
 
-      </div><!-- End col-9 -->
+    </div><!-- End col-9 -->
 
     </div>
 
@@ -402,6 +425,17 @@
                     <div class="mx-auto my-3">
                       <button class="btn btn-success px-2 ml-3" type="submit"><span class="ml-2"><i class="fa fa-save"></i></span> حفظ</button>
                       <button class="btn btn-danger px-2 ml-3" type="reset"><span class="ml-2"><i class="fa fa-times"></i></span> حذف</button>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="success-msg" *ngIf="succ">
+                        <i class="fa fa-check"></i>
+                        {{msg}}
+                      </div>
+
+                      <div class="error-msg" *ngIf="failed">
+                        <i class="fa fa-times-circle"></i>
+                        {{msg}}
+                      </div>
                     </div>
                   </form>
 

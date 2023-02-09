@@ -109,9 +109,9 @@
       </div>
       <div class="modal-body" style="direction:rtl; text-align:right">
         <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-      
 
-          <div class="col-sm-6" >
+
+          <div class="col-sm-6">
             <label><span><i class="fa fa-sort-numeric-down"></i></span>رمز الإدارة</label>
             <span class="task-num">{{adminId}}</span>
           </div>
@@ -141,6 +141,18 @@
           <div class="save">
             <button type="submit" class="btn btn-success"><span><i class="fa fa-save"></i></span> حفظ</button>
 
+          </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
           </div>
         </form>
       </div>

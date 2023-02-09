@@ -159,6 +159,9 @@ export class DecisionDemissionAddComponent implements OnInit {
   dem: Commun = new Commun();
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   add(form: NgForm) {
 
     if (form.invalid) {
@@ -188,6 +191,11 @@ export class DecisionDemissionAddComponent implements OnInit {
 
       this.decService.Create(this.dem).subscribe(res => {
         this.toastr.success("  تمت إضافة القرار  بنجاح", "نجاح");
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
         form.resetForm();
         this.num = "";
         this.emploi = "";
@@ -197,7 +205,10 @@ export class DecisionDemissionAddComponent implements OnInit {
       },
         err => {
           this.toastr.error("لم تتم إضافة القرار الطلب", "فشل ")
+          this.failed = true;
+          this.succ = false;
 
+          this.msg = " فشل عند الإضافة"
         })
     }
   }
@@ -231,6 +242,10 @@ export class DecisionDemissionAddComponent implements OnInit {
 
       this.decService.PutObservableE(this.dem).subscribe(res => {
         this.toastr.success("  تم تحديث القرار  بنجاح", "نجاح");
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
         form.resetForm();
         this.num = "";
         this.emploi = "";
@@ -240,6 +255,10 @@ export class DecisionDemissionAddComponent implements OnInit {
       },
         err => {
           this.toastr.error("لم تتم التحديث القرار الطلب", "فشل ")
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
 
         })
     }

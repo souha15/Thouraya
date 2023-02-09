@@ -46,6 +46,9 @@ export class OrganismeComponent implements OnInit {
   organisme: Organisme = new Organisme();
   date = new Date().toLocaleDateString();
   isValidFormSubmitted = false;
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     this.organisme.creatorName = this.UserNameConnected;
     this.organisme.datenereg = this.date;
@@ -56,11 +59,19 @@ export class OrganismeComponent implements OnInit {
     } else {
       this.isValidFormSubmitted = true
       this.organismeService.Create(this.organisme).subscribe(res => {
+        this.succ = true;
+        this.failed = false;
 
+
+        this.msg = "  تمت الإضافة بنجاح"
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         form.resetForm();
       },
         err => {
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
           console.log(err);
           this.toastr.warning('لم تتم الإضافة', ' فشل');
         })

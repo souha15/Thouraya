@@ -60,6 +60,9 @@ export class ProprietaireComponent implements OnInit {
   }
 
   //Create prop
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   prop: Proprietaire = new Proprietaire();
   date = new Date().toLocaleDateString();
@@ -75,15 +78,29 @@ export class ProprietaireComponent implements OnInit {
       if (this.cinexist) {
         this.isValidFormSubmitted = true
         this.proprietaireService.Create(this.prop).subscribe(res => {
+          this.succ = true;
+          this.failed = false;
 
+
+          this.msg = "  تمت الإضافة بنجاح"
           this.toastr.success("تمت الإضافة بنجاح", "نجاح");
           form.resetForm();
         },
           err => {
+
+            this.failed = true;
+            this.succ = false;
+
+            this.msg = " فشل عند الإضافة"
             console.log(err);
             this.toastr.warning('لم تتم الإضافة', ' فشل');
           })
       } else {
+
+        this.failed = true;
+        this.succ = false;
+
+        this.msg = " فشل عند الإضافة رقم الهوية موجود"
         this.toastr.warning('لم تتم الإضافة رقم الهوية موجود', ' فشل');
       }
     }

@@ -129,10 +129,30 @@ export class TransactionsAffectedToMyAdminOrToMeComponent implements OnInit {
   FilesListR: PiecesJointesTr[] = [];
   tr: Transaction = new Transaction();
   TypeOfTrI: boolean =false ;
-  TypeOfTrR: boolean =false ;
+  TypeOfTrR: boolean = false;
+  succReception: boolean = false;
+  failedReception: boolean = false;
+  msgReception: string = '';
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+  succEnreg: boolean = false;
+  failedEnreg: boolean = false;
+  msgEnreg: string = "";
   //tr: TransactionsAffectationsViewModel
   PopulateFormTrI(transaction: Transaction) {
     this.tr = transaction;
+    if (this.tr) {
+      this.succReception = false;
+      this.failedReception = false;
+      this.msgReception = '';
+      this.succ = false;
+      this.failed = false;
+      this.msg = '';
+      this.succEnreg = false;
+      this.failedEnreg = false;
+      this.msgEnreg = '';
+    }
     if (this.tr.type == "معاملة داخلية") {
       this.TypeOfTrI = true;
       this.TypeOfTrR = false;
@@ -196,12 +216,16 @@ export class TransactionsAffectedToMyAdminOrToMeComponent implements OnInit {
   }
 
 
+
   affectationI: AffectationI = new AffectationI();
   receptionI() {
       this.affectationService.GetByIdI(this.tr.idAff).subscribe(res => {
         this.affectationI = res;
         if (this.affectationI.attribut2 != "غير مستلمة") {
           this.toastrService.warning("لا يمكن إستلام المعاملة لأنها مستلمة أو تحت الإجراء", " المعاملة مستلمة")
+          this.succReception = false;
+          this.failedReception  = true;
+          this.msgReception = 'لا يمكن إستلام المعاملة لأنها مستلمة أو تحت الإجراء';
         } else {
         this.affectationI.dateFin = this.today;
         this.affectationI.attribut3 = this.UserId;
@@ -209,9 +233,15 @@ export class TransactionsAffectedToMyAdminOrToMeComponent implements OnInit {
           this.affectationI.attribut2 ="مستلمة"
         this.affectationService.PutObservableI(this.affectationI).subscribe(res => {
           this.toastrService.success(" تم إستلام المعاملة بنجاح", "إستلام المعاملة")
+          this.succReception = true;
+          this.failedReception = false;
+          this.msgReception = 'تم إستلام المعاملة بنجاح';
           this.SuivieI(this.trI.id);
           this.GetTransactionList();
         }, err => {
+            this.succReception = false;
+            this.failedReception = true;
+            this.msgReception = 'فشل  إستلام المعاملة ';
           this.toastrService.error(" فشل  إستلام المعاملة ", " إستلام المعاملة")
         })
         }
@@ -229,16 +259,25 @@ export class TransactionsAffectedToMyAdminOrToMeComponent implements OnInit {
       this.affectationR = res;
       if (this.affectationR.attribut2 != "غير مستلمة") {
         this.toastrService.warning("لا يمكن إستلام المعاملة لأنها مستلمة أو تحت الإجراء", " المعاملة مستلمة")
+        this.succReception = false;
+        this.failedReception = true;
+        this.msgReception = 'لا يمكن إستلام المعاملة لأنها مستلمة أو تحت الإجراء';
       } else {
         this.affectationR.dateFin = this.today;
         this.affectationR.attribut5 = this.UserId;
         this.affectationR.attribut6 = this.UserName;
         this.affectationR.attribut2 = "مستلمة"
         this.affectationService.PutObservable(this.affectationR).subscribe(res => {
+          this.succReception = true;
+          this.failedReception = false;
+          this.msgReception = 'تم إستلام المعاملة بنجاح';
           this.toastrService.success(" تم إستلام المعاملة بنجاح", "إستلام المعاملة")
           this.SuivieR(this.trR.id);
           this.GetTransactionList();
         }, err => {
+            this.succReception = false;
+            this.failedReception = true;
+            this.msgReception = 'فشل  إستلام المعاملة ';
           this.toastrService.error(" فشل  إستلام المعاملة ", " إستلام المعاملة")
         })
       }
@@ -258,7 +297,7 @@ export class TransactionsAffectedToMyAdminOrToMeComponent implements OnInit {
   }
   
 
-
+  
   affectationIAdd: AffectationI = new AffectationI();
   onSubmitI(form: NgForm) {
     if (this.tr.etat =="مستلمة") {
@@ -270,6 +309,9 @@ export class TransactionsAffectedToMyAdminOrToMeComponent implements OnInit {
       this.affectationIAdd.nomUserQuiAffecte = this.UserName;
       this.affectationIAdd.idUserQuiAffecte = this.UserId;
       this.affectationService.CreateI(this.affectationIAdd).subscribe(res => {
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تمت إحالة المعاملة بنجاح"
         this.toastrService.success("تمت إحالة المعاملة بنجاح", "نجاح");
         form.resetForm();
         this.SuivieI(this.trI.id);
@@ -292,10 +334,18 @@ export class TransactionsAffectedToMyAdminOrToMeComponent implements OnInit {
             });
         })
       }, err => {
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإحالة"
         this.toastrService.warning('لم تتم الإحالة ', ' فشل');
       })
     } else {
       this.toastrService.warning('المعاملة غير مستلمة ', ' فشل');
+      this.failed = true;
+      this.succ = false;
+
+      this.msg = "   فشل عند الإحالة المعاملة غير مستلمة"
     }
   }
 
@@ -311,6 +361,9 @@ export class TransactionsAffectedToMyAdminOrToMeComponent implements OnInit {
       this.affectationRAdd.idUserQuiAffecte = this.UserId;
       this.affectationService.Create(this.affectationRAdd).subscribe(res => {
         this.toastrService.success("تمت إحالة المعاملة بنجاح", "نجاح");
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تمت إحالة المعاملة بنجاح"
         form.resetForm();
         this.SuivieR(this.trR.id);
         this.GetTransactionList();
@@ -332,10 +385,18 @@ export class TransactionsAffectedToMyAdminOrToMeComponent implements OnInit {
             });
         })
       }, err => {
-        this.toastrService.warning('لم تتم الإحالة ', ' فشل');
+          this.toastrService.warning('لم تتم الإحالة ', ' فشل');
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإحالة"
       })
     } else {
       this.toastrService.warning('المعاملة غير مستلمة ', ' فشل');
+      this.failed = true;
+      this.succ = false;
+
+      this.msg = "   فشل عند الإحالة المعاملة غير مستلمة"
     }
   }
 
@@ -376,30 +437,48 @@ export class TransactionsAffectedToMyAdminOrToMeComponent implements OnInit {
       this.transactionService.PutObservableI(this.trI).subscribe(res => {
         this.toastrService.success("تم الحفظ بنجاح", "نجاح");
         this.GetTransactionList();
+        this.succEnreg = true;
+        this.failedEnreg = false;
+        this.msgEnreg = "تم الحفظ بنجاح"
       },
         err => {
           this.toastrService.warning('فشل حفظ المعاملة ', ' فشل');
+          this.succEnreg = false;;
+          this.failedEnreg = true;
+          this.msgEnreg = "فشل حفظ المعاملة"
         })
     } else {
       this.toastrService.warning('المعاملة غير مستلمة ', ' فشل');
+      this.succEnreg = false;;
+      this.failedEnreg = true;
+      this.msgEnreg = "المعاملة غير مستلمة"
     }
   }
 
   // Enreg TR
-
+ 
   EnregTR() {
 
     if (this.tr.etat == "مستلمة") {
       this.trR.etat = "محفوظة"
       this.transactionService.PutObservable(this.trR).subscribe(res => {
         this.toastrService.success("تم الحفظ بنجاح", "نجاح");
+        this.succEnreg = true;
+        this.failedEnreg = false;
+        this.msgEnreg ="تم الحفظ بنجاح"
         this.GetTransactionList();
       },
         err => {
           this.toastrService.warning('فشل حفظ المعاملة ', ' فشل');
+          this.succEnreg = false;;
+          this.failedEnreg = true;
+          this.msgEnreg = "فشل حفظ المعاملة"
         })
     } else {
       this.toastrService.warning('المعاملة غير مستلمة ', ' فشل');
+      this.succEnreg = false;;
+      this.failedEnreg = true;
+      this.msgEnreg = "المعاملة غير مستلمة"
     }
   }
 

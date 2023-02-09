@@ -94,14 +94,26 @@
             <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
             <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
               <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-              </ngx-dropzone-preview>
-</ngx-dropzone>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
         </div>
         <div class="col-12 text-center text-md-left mt-3">
           <input class="btn btn-info"
                  style="width: 130px;"
                  type="submit"
                  value="إضافة" />
+        </div>
+
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            {{msg}}
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            {{msg}}
+          </div>
         </div>
       </form>
     </div>

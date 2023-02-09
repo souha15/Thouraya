@@ -297,10 +297,30 @@ export class MyListeTrComponent implements OnInit {
   indexId: number;
   p: Number = 1;
   count: Number = 5;
+  succReception: boolean = false;
+  failedReception: boolean = false;
+  msgReception: string = '';
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+  succEnreg: boolean = false;
+  failedEnreg: boolean = false;
+  msgEnreg: string = "";
   populateForm(transaction: Transaction,i:number) {
     this.indexId = i + 1;
     this.transactionService.formData = Object.assign({}, transaction);
     this.tr = Object.assign({}, transaction)
+    if (this.tr) {
+      this.succReception = false;
+      this.failedReception = false;
+      this.msgReception = '';
+      this.succ = false;
+      this.failed = false;
+      this.msg = '';
+      this.succEnreg = false;
+      this.failedEnreg = false;
+      this.msgEnreg = '';
+    }
     let d: string;
     d = this.tr.dateenreg.replace(/\//g, '')
 
@@ -509,14 +529,23 @@ export class MyListeTrComponent implements OnInit {
             this.transactionService.PutObservable(this.tr).subscribe(res => {
               this.toastr.success("تمت إستلام المعاملة بنجاح", "نجاح");
               this.TransactionList();
+              this.succReception = true;
+              this.failedReception = false;
+              this.msgReception = 'تم إستلام المعاملة بنجاح';
             
             })
           },
           err => {
             this.toastr.warning('لم تتم الإضافة', ' فشل');
+            this.succReception = false;
+            this.failedReception = true;
+            this.msgReception = 'فشل  إستلام المعاملة ';
           }
         );//end create reception
-      } else {
+        } else {
+          this.succReception = false;
+          this.failedReception = true;
+          this.msgReception = 'لا يمكن إستلام المعاملة لأنها مستلمة أو تحت الإجراء';
           this.toastr.warning('المعاملة  مستلمة', ' فشل');
       }
     },
@@ -697,6 +726,9 @@ export class MyListeTrComponent implements OnInit {
               this.transactionService.PutObservable(this.tr).subscribe(res => {
                 this.TransactionList();
                 this.toastr.success("تمت إحالة المعاملة بنجاح", "نجاح");
+                this.succ = true;
+                this.failed = false;
+                this.msg = "  تمت إحالة المعاملة بنجاح"
                 //Create File
 
 
@@ -722,13 +754,19 @@ export class MyListeTrComponent implements OnInit {
 
             },
             err => {
+              this.failed = true;
+              this.succ = false;
+
+              this.msg = " فشل عند الإحالة"
               this.toastr.warning('لم تتم الإحالة ', ' فشل');
             }
           );
 
         } else {
           this.toastr.warning('المعاملة غير مستلمة مستلمة', ' فشل');
-
+          this.msg='المعاملة غير مستلمة '
+          this.failed = true;
+          this.succ = false;
 
         }
       },
@@ -757,12 +795,21 @@ export class MyListeTrComponent implements OnInit {
           this.transactionService.PutObservable(this.tr).subscribe(res => {
             this.toastr.success("تم الحفظ بنجاح", "نجاح");
             this.TransactionList();
+            this.succEnreg = true;
+            this.failedEnreg = false;
+            this.msgEnreg = "تم الحفظ بنجاح"
           });
         } else {
           this.toastr.warning('المعاملة غير مستلمة ', ' فشل');
+          this.succEnreg = false;;
+          this.failedEnreg = true;
+          this.msgEnreg = "المعاملة غير مستلمة"
         }
       },
         err => {
+          this.succEnreg = false;;
+          this.failedEnreg = true;
+          this.msgEnreg = "فشل حفظ المعاملة"
           console.log(err)
         })//end reception
     })//end affectation test
@@ -792,13 +839,22 @@ export class MyListeTrComponent implements OnInit {
           this.transactionService.PutObservable(this.tr).subscribe(res => {
             this.toastr.success("تم الحفظ بنجاح", "نجاح");
             this.TransactionList();
+            this.succEnreg = true;
+            this.failedEnreg = false;
+            this.msgEnreg = "تم الحفظ بنجاح"
           });
         } else {
           this.toastr.warning('المعاملة غير مستلمة ', ' فشل');
+          this.succEnreg = false;;
+          this.failedEnreg = true;
+          this.msgEnreg = "المعاملة غير مستلمة"
         }
       },
         err => {
           console.log(err)
+          this.succEnreg = false;;
+          this.failedEnreg = true;
+          this.msgEnreg = "فشل حفظ المعاملة"
         })//end reception
     })//end affectation test
    

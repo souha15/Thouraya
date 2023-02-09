@@ -124,17 +124,28 @@ export class CloseChequeForBoxMenComponent implements OnInit {
   }
 
   date = new Date().toLocaleDateString();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   onSubmit(form: NgForm) {
     this.per.transfert = "1";
     this.demandeService.PutObservableE(this.per).subscribe(res => {
-      this.toastr.success("تم التسجيل بنجاح", "نجاح")
+      this.toastr.success("تم التسجيل الإستلام أو التسليم بنجاح", "نجاح")
       this.getDemPayList();
       form.resetForm();
+      this.msg = "تم التسجيل الإستلام أو التسليم بنجاح"
 
+      this.succ = true;
+      this.failed = false;
     }, err => {
       this.toastr.error("  فشل في تسجيل ا الإستلام أو التسليم"
         , "فشل")
+
+        this.failed = true;
+        this.succ = false;
+
+        this.msg = "  فشل في تسجيل الإستلام أو التسليم"
     })
   }
 

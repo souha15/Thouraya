@@ -75,7 +75,10 @@ export class AdministrationListComponent implements OnInit {
   
   }
 
-  //Edit Administration
+  //Edit Administration$
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   adminId: number;
   onSubmit(form:NgForm) {
     this.updateRecord(form)
@@ -86,11 +89,22 @@ export class AdministrationListComponent implements OnInit {
     this.admin = Object.assign(this.admin, form.value);
     this.adminId = this.admin.id;
     this.AdministrationService.EditAdministration().subscribe(res => {
+
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
       this.resetForm();
       this.ShowListAdministration();
     },
       err => {
+
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
+
         this.toastr.error('لم يتم التحديث  ', ' فشل');
       }
 

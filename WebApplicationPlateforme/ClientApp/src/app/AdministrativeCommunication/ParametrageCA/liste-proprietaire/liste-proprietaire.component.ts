@@ -94,16 +94,27 @@ export class ListeProprietaireComponent implements OnInit {
   }
 
   //Edit
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   updateRecord(form: NgForm) {
     this.organismeService.Edit().subscribe(
       res => {
         this.resetForm(form);
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
+
         this.toastr.success("تم التحديث  بنجاح", "نجاح");
         this.ShowOrganismes();
 
       },
       err => {
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
         console.log(err);
         this.toastr.warning('لم يتم التحديث ', ' فشل');
 
@@ -118,10 +129,20 @@ export class ListeProprietaireComponent implements OnInit {
     this.organismeService.Post().subscribe(
       res => {
         this.resetForm(form);
+
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         this.ShowOrganismes();
       },
       err => {
+        this.failed = true;
+        this.succ = false;
+
+        this.msg = " فشل عند الإضافة"
         console.log(err);
         this.toastr.warning('لم تتم الإضافة', ' فشل');
       }

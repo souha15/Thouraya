@@ -21,7 +21,7 @@
                 <option *ngFor="let item of classesList" value="{{item.nom}}">{{item.nom}}</option>
               </select>
             </div>
-      
+
           </div>
 
           <div class="col-md-12">
@@ -73,7 +73,7 @@
 
               <div>
                 <label for="entry-date">
-               رقم سند القبض
+                  رقم سند القبض
                 </label>
                 <input type="text" name="dateEntre" #dateEntre="ngModel" [(ngModel)]="ch.dateEntre" id="entry-date" />
               </div>
@@ -222,7 +222,7 @@
                 </ngx-dropzone-preview>
               </ngx-dropzone>
             </div>
-       
+
             <br />
             <label for="status">الحالة</label>
             <select name="etat" #etat="ngModel" [(ngModel)]="ch.etat" id="status">
@@ -236,6 +236,18 @@
           <div class="col-12 text-left">
             <input class="btn btn-info px-4" type="submit" value="حفظ" />
 
+          </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
           </div>
         </form>
       </div>

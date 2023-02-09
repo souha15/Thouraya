@@ -66,6 +66,29 @@
 
             <input class="search form-control" type="text" name="search" [(ngModel)]="filter" placeholder="ما الذي تبحث عنه ؟">
           </div>
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succReception">
+              <i class="fa fa-check"></i>
+              {{msgReception}}
+            </div>
+
+            <div class="error-msg" *ngIf="failedReception">
+              <i class="fa fa-times-circle"></i>
+              {{msgReception}}
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succEnreg">
+              <i class="fa fa-check"></i>
+              {{msgEnreg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failedEnreg">
+              <i class="fa fa-times-circle"></i>
+              {{msgEnreg}}
+            </div>
+          </div>
           <span class="counter pull-right"></span>
           <div class="tabel-cont table-responsive">
             <table class="table table-striped results table-bordered sortable" id="myTable">
@@ -394,6 +417,18 @@
                     <div class="mx-auto my-3">
                       <button class="btn btn-success px-2 ml-3" type="submit"><span class="ml-2"><i class="fa fa-save"></i></span> حفظ</button>
                       <button class="btn btn-danger px-2 ml-3" type="reset"><span class="ml-2"><i class="fa fa-times"></i></span> حذف</button>
+                    </div>
+
+                    <div class="col-md-6">
+                      <div class="success-msg" *ngIf="succ">
+                        <i class="fa fa-check"></i>
+                        {{msg}}
+                      </div>
+
+                      <div class="error-msg" *ngIf="failed">
+                        <i class="fa fa-times-circle"></i>
+                        {{msg}}
+                      </div>
                     </div>
                   </form>
 

@@ -112,7 +112,9 @@ export class ChequecAddComponent implements OnInit {
   isValidFormSubmitted: boolean = false;
   date = new Date().toLocaleDateString();
   chId: number;
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -229,9 +231,18 @@ export class ChequecAddComponent implements OnInit {
           this.i = 0;
           this.toastr.success("تم التسجيل بنجاح", "نجاح")
           form.resetForm();
+          this.succ = true;
+          this.failed = false;
+
+
+          this.msg = "  تمت الإضافة بنجاح"
         },
         err => {
           this.toastr.error("فشل في التسجيل", "فشل")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         }
       )
     }

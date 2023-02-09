@@ -189,27 +189,39 @@
                 <p>هل أنت متأكد من استلام و تحويل الطلب  للمحاسب</p>
               </div>
 
-                <div class="col-md-4">
-                  <label for="permision-hours">مسترجع</label>
-                  {{per.retour}}
+              <div class="col-md-4">
+                <label for="permision-hours">مسترجع</label>
+                {{per.retour}}
 
+              </div>
+
+              <div class="col-md-4">
+                <label for="permision-hours">المبلغ</label>
+                {{per.prixRetour}}
+
+              </div>
+
+              <div class="col-md-4">
+                <label for="permision-hours">الإيصال</label>
+                <i class="ml-2 fa fa-arrow-down" style="color:dodgerblue"></i>
+                <a (click)="download(per.fileRetour)" class="ml-3" style="color:dodgerblue">{{per.fileRetour}}</a>
+              </div>
+
+              <div class="col-12 text-left mt-3">
+                <input class="btn btn-info px-4" type="submit" value="استلام و تحويل" />
+              </div>
+
+              <div class="col-md-6">
+                <div class="success-msg" *ngIf="succ">
+                  <i class="fa fa-check"></i>
+                  {{msg}}
                 </div>
 
-                <div class="col-md-4">
-                  <label for="permision-hours">المبلغ</label>
-                  {{per.prixRetour}}
-
+                <div class="error-msg" *ngIf="failed">
+                  <i class="fa fa-times-circle"></i>
+                  {{msg}}
                 </div>
-
-                <div class="col-md-4">
-                  <label for="permision-hours">الإيصال</label>
-                  <i class="ml-2 fa fa-arrow-down" style="color:dodgerblue"></i>
-                  <a (click)="download(per.fileRetour)" class="ml-3" style="color:dodgerblue">{{per.fileRetour}}</a>
-                </div>
-
-                <div class="col-12 text-left mt-3">
-                  <input class="btn btn-info px-4" type="submit" value="استلام و تحويل" />
-                </div>
+              </div>
             </form>
 
           </div>

@@ -105,7 +105,9 @@ export class DecisifAddComponent implements OnInit {
       this.userList = res;
     })
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
   add(form: NgForm) {
@@ -124,11 +126,19 @@ export class DecisifAddComponent implements OnInit {
       this.decService.Create(this.dem).subscribe(res => {
         this.toastr.success("  تمت إضافة القرار  بنجاح", "نجاح");
         form.resetForm();
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
 
       },
         err => {
           this.toastr.error("لم تتم إضافة القرار الطلب", "فشل ")
+          this.failed = true;
+          this.succ = false;
 
+          this.msg = " فشل عند الإضافة"
         })
     }
   }

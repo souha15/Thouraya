@@ -51,6 +51,9 @@ export class DemandeVoitureAddComponent implements OnInit {
   }
 
   //Add demipement
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
   dem: DemandeVoiture = new DemandeVoiture();
@@ -72,10 +75,19 @@ export class DemandeVoitureAddComponent implements OnInit {
         res => {
           this.toastr.success("تمت الإضافة بنجاح", "نجاح");
           form.resetForm();
+          this.succ = true;
+          this.failed = false;
+
+
+          this.msg = "  تمت الإضافة بنجاح"
         },
         err => {
           this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
-        })
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
+    })
     }
   }
 }
