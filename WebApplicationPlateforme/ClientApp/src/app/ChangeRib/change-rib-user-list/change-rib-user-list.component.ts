@@ -97,6 +97,11 @@ export class ChangeRibUserListComponent implements OnInit {
 
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -105,17 +110,24 @@ export class ChangeRibUserListComponent implements OnInit {
 
       this.isValidFormSubmitted = true;
 
-      this.demService.PutObservableE(this.dem).subscribe(res => {
+      this.demService.PutObservableE(this.dem).subscribe(
+        res => {
         this.pj.idDem = this.Id;
         this.fileslist.forEach(item => {
           this.pj.path = item;
 
-          this.filesService.Create(this.pj).subscribe(res => {
-            this.serviceupload.refreshList();
-            this.GetFileName();
+          this.filesService.Create(this.pj).subscribe(
+
+            res => {
+              
+              this.serviceupload.refreshList();
+              this.GetFileName();
           })
 
         })
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تم التحديث بنجاح"
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         form.resetForm();
         this.fileslist = [];
@@ -124,6 +136,9 @@ export class ChangeRibUserListComponent implements OnInit {
         this.GetDemandList();
       },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = "  فشل عند التحديث"
           this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
         })
     }

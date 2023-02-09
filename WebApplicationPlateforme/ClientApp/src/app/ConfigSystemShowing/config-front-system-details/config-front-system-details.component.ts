@@ -44,13 +44,20 @@ export class ConfigFrontSystemDetailsComponent implements OnInit {
 
   userdetail: UserDetail = new UserDetail();
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   onSubmit(form: NgForm) {
     this.userdetail.id = this.UserIdConnected;
 
-    this.userService.ChangePassword(this.userdetail).subscribe(res => {
-      form.resetForm();
-      this.toastr.success('تم إعادة تعيين كلمة المرور الخاصة بك', 'نجاح');
+    this.userService.ChangePassword(this.userdetail).subscribe(
+      res => {
+        form.resetForm();
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تم التحديث بنجاح"
+        this.toastr.success('تم إعادة تعيين كلمة المرور الخاصة بك', 'نجاح');
     })
   }
 }

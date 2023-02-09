@@ -62,7 +62,7 @@
                 <tr>
 
                   <th scope="col">كشف الحساب</th>
-             
+
                   <th scope="col">حذف</th>
                 </tr>
               </thead>
@@ -70,7 +70,7 @@
                 <tr *ngFor="let dp of filelist">
 
                   <td>{{dp.path}}</td>
-                
+
                   <td><a (click)="deleteFiles(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
                 </tr>
               </tbody>
@@ -84,6 +84,19 @@
                  class="btn btn-info ml-2"
                  style="width: 130px" />
         </div>
+
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            {{msg}}
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            {{msg}}
+          </div>
+        </div>
+
       </form>
     </div>
   </div>

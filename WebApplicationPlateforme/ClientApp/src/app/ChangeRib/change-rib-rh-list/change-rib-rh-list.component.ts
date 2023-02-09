@@ -96,6 +96,11 @@ export class ChangeRibRhListComponent implements OnInit {
   /*** Accepter *****/
 
   date = new Date().toLocaleDateString();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   accept() {
     this.dem.etatrh = "موافقة"
     this.dem.daterh = this.date
@@ -104,13 +109,21 @@ export class ChangeRibRhListComponent implements OnInit {
     this.user.dateQualification = this.dem.rib
     this.user.faculteEcole = this.dem.nomBanque
     this.demService.PutObservableE(this.dem).subscribe(res => {
-      this.UserService.PutObservable(this.user).subscribe(res => {
-        this.GetDemandList();
-        this.toastr.success("تم  قبول الطلب بنجاح و تعديل بيانات الموظف", "نجاح");
+      this.UserService.PutObservable(this.user).subscribe(
+
+        res => {
+          this.succ = true;
+          this.failed = false;
+          this.msg = "  تم التحديث بنجاح"
+          this.GetDemandList();
+          this.toastr.success("تم  قبول الطلب بنجاح و تعديل بيانات الموظف", "نجاح");
       })
 
     },
       err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg = "  فشل عند التحديث"
         this.toastr.warning('لم يتم  قبول الطلب', ' فشل');
       })
 

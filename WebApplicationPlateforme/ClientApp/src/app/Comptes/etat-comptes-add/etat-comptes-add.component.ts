@@ -99,6 +99,11 @@ export class EtatComptesAddComponent implements OnInit {
   cptId: number;
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
 
     this.cpt.idUserCreator = this.UserIdConnected;
@@ -125,7 +130,10 @@ export class EtatComptesAddComponent implements OnInit {
             this.pj.path = item;
             console.log(item)
             this.http.post(path + '/FilesEtatComptes', this.pj)
-              .subscribe(res => {
+              .subscribe(
+
+                res => {
+
                 this.serviceupload.refreshList();
                 this.GetFileName();
               });
@@ -134,10 +142,16 @@ export class EtatComptesAddComponent implements OnInit {
           this.files1 = [];
 
           form.resetForm();
+          this.succ = true;
+          this.failed = false;
+          this.msg = "  تمت الإضافة بنجاح"
           this.toastr.success("تم تسجيل  بنجاح", " تسجيل ");
           this.isValidFormSubmitted = false;
         },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = " فشل عند الإضافة"
           this.toastr.error("فشل تسجيل ", " تسجيل ")
         }
 

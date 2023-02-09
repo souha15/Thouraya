@@ -138,6 +138,11 @@ export class MenuSettingsCompteComponent implements OnInit {
   cptId: number;
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
 
     this.cpt.idUserCreator = this.UserIdConnected;
@@ -173,10 +178,17 @@ export class MenuSettingsCompteComponent implements OnInit {
           this.files1 = [];
           this.bentest = false;
           form.resetForm();
+
+          this.succ = true;
+          this.failed = false;
+          this.msg = "  تمت الإضافة بنجاح"
           this.toastr.success("تم تسجيل  بنجاح", " تسجيل ");
           this.isValidFormSubmitted = false;
         },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = " فشل عند الإضافة"
           this.toastr.error("فشل تسجيل ", " تسجيل ")
         }
 
