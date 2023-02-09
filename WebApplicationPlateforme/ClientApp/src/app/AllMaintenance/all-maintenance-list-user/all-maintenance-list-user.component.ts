@@ -75,18 +75,30 @@ export class AllMaintenanceListUserComponent implements OnInit {
   isValidFormSubmitted = false;
   path: string;
   date = new Date().toLocaleDateString();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
     }
     else {
       this.isValidFormSubmitted = true
-      this.demService.PutObservableE(this.dem).subscribe(res => {
-        this.toastr.success("تمت الإضافة بنجاح", "نجاح");
-        this.GetList();
+      this.demService.PutObservableE(this.dem).subscribe(
+        res => {
+          this.succ = true;
+          this.failed = false;
+          this.msg = "  تم التحديث بنجاح"
+          this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+          this.GetList();
         form.resetForm();
       },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = "  فشل عند التحديث"
           this.toastr.error("لم يتم التسجيل", "فشل في التسجيل");
         })
     }

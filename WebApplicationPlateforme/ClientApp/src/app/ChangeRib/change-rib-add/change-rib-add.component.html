@@ -34,7 +34,7 @@
 
           <div class="col-md-6">
             <label for="date">	رقم الايبان الجديد  </label>
-            <input type="text" id="date" name="rib" #rib="ngModel" [(ngModel)]="dem.rib" required style="width:300px"/>
+            <input type="text" id="date" name="rib" #rib="ngModel" [(ngModel)]="dem.rib" required style="width:300px" />
             <div *ngIf="rib.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
               مطلوب 	 	رقم الايبان الجديد    .
             </div>
@@ -58,6 +58,19 @@
                    type="submit"
                    value="ارسال" />
           </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
+
         </form>
       </div>
     </div><!-- End col-9 -->

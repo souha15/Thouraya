@@ -72,6 +72,11 @@ export class ServiceBanqueAddComponent implements OnInit {
 
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
 
     this.bs.idUserCreator = this.UserIdConnected;
@@ -88,13 +93,20 @@ export class ServiceBanqueAddComponent implements OnInit {
       this.isValidFormSubmitted = true;
       this.banqueService.Add(this.bs).subscribe(
         (res: any) => {
+          this.succ = true;
+          this.failed = false;
+          this.msg = "  تمت الإضافة بنجاح"
           this.bs2 = res;
           form.resetForm();
+          
           this.toastr.success("تم تسجيل  بنجاح", " تسجيل ");
           this.numCompte=""
             this.isValidFormSubmitted = false;
         },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = " فشل عند الإضافة"
           this.toastr.error("فشل تسجيل ", " تسجيل ")
         }
 

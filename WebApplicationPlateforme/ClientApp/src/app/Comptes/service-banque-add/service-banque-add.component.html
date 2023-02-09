@@ -40,8 +40,21 @@
                  class="btn btn-success ml-2"
                  style="width: 130px" />
 
-          <input type="button" class="btn btn-primary ml-2" (click)="print()" value="طباعة"/>
+          <input type="button" class="btn btn-primary ml-2" (click)="print()" value="طباعة" />
         </div>
+
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            {{msg}}
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            {{msg}}
+          </div>
+        </div>
+
       </form>
     </div>
   </div>

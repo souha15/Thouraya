@@ -23,11 +23,11 @@
         </div>
         <div class="col-md-6">
           <label for="account">الحساب</label>
-          <input type="text"  id="account" value="{{numCompte}}" disabled/>
+          <input type="text" id="account" value="{{numCompte}}" disabled />
         </div>
         <div class="col-md-6">
           <label for="funds">الرصيد</label>
-          <input type="text"  id="funds" name="solde" #solde="ngModel" [(ngModel)]="cpt.solde" />
+          <input type="text" id="funds" name="solde" #solde="ngModel" [(ngModel)]="cpt.solde" />
         </div>
 
         <div class="col-md-6">
@@ -50,6 +50,19 @@
                  class="btn btn-success ml-2"
                  style="width: 130px" />
         </div>
+
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            {{msg}}
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            {{msg}}
+          </div>
+        </div>
+
       </form>
     </div>
   </div>

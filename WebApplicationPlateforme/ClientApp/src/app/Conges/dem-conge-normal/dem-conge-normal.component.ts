@@ -283,6 +283,11 @@ today;
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
   dateTime = new Date();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     this.conge.etat = "في الإنتظار";
     this.conge.type = "إجازة إعتيادية"
@@ -302,6 +307,9 @@ today;
 
         this.congeService.Add(this.conge).subscribe(
           res => {
+            this.succ = true;
+            this.failed = false;
+            this.msg = "  تمت الإضافة بنجاح"
             this.toastr.success(" تم تقديم الطلب بنجاح", "نجاح");
             form.resetForm();
 
@@ -338,11 +346,17 @@ today;
 
           },
           err => {
+            this.failed = true;
+            this.succ = false;
+            this.msg = " فشل عند الإضافة"
             this.toastr.error("  يجب أن يبدأ التاريخ من هذا اليوم", "لم يتم تقديم الطلب ")
             this.diffDays = 0
           })
       } else {
         this.diffDays = 0
+        this.failed = true;
+        this.succ = false;
+        this.msg = "تثبت من التاريخ رصيد إجازتك أقل من المطلوب"
         this.toastr.warning("تثبت من التاريخ رصيد إجازتك أقل من المطلوب", "")
       }
 

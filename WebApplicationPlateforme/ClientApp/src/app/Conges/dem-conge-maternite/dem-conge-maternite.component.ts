@@ -258,6 +258,11 @@ export class DemCongeMaterniteComponent implements OnInit {
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
   dateTime = new Date();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     this.conge.etat = "في الإنتظار";
     this.conge.type = "إجازة امومة"
@@ -271,6 +276,9 @@ export class DemCongeMaterniteComponent implements OnInit {
 
       this.congeService.Add(this.conge).subscribe(
         res => {
+          this.succ = true;
+          this.failed = false;
+          this.msg = "  تمت الإضافة بنجاح"
           this.toastr.success(" تم تقديم الطلب بنجاح", "نجاح");
           form.resetForm();
           this.pj.idConge = res.id;
@@ -319,6 +327,9 @@ export class DemCongeMaterniteComponent implements OnInit {
          
         },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = " فشل عند الإضافة"
           this.toastr.error("لم يتم تقديم الطلب", "فشل ")
           this.diffDays = 0
         })

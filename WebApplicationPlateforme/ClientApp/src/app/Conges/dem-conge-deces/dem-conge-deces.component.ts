@@ -256,6 +256,11 @@ export class DemCongeDecesComponent implements OnInit {
   conge: Conge = new Conge();
   isValidFormSubmitted = false;
   dateTime = new Date();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     this.conge.etat = "في الإنتظار";
     this.conge.type = "إجازة وفاة"
@@ -268,7 +273,10 @@ export class DemCongeDecesComponent implements OnInit {
 
       if (this.testdays) {
         this.congeService.Add(this.conge).subscribe(
-          res => {       
+          res => {
+            this.succ = true;
+            this.failed = false;
+            this.msg = "  تمت الإضافة بنجاح"
             this.toastr.success(" تم تقديم الطلب بنجاح", "نجاح");
             form.resetForm();
             this.pj.idConge = res.id;
@@ -302,7 +310,8 @@ export class DemCongeDecesComponent implements OnInit {
                   this.autoNotif.text = "طلب إجازة وفاة";
                   this.autoNotif.vu = "0";
                   this.autoNotif.reponse = "1";
-                this.signalService.CreateNotif(this.autoNotif).subscribe(res => {
+                this.signalService.CreateNotif(this.autoNotif).subscribe(
+                  res => {
                 
                 })
 
@@ -310,12 +319,18 @@ export class DemCongeDecesComponent implements OnInit {
               })          
           },
           err => {
+            this.failed = true;
+            this.succ = false;
+            this.msg = " فشل عند الإضافة"
             this.toastr.error("لم يتم تقديم الطلب", "فشل ")
             this.diffDays = 0
           })
 
 
       } else {
+        this.failed = true;
+        this.succ = false;
+        this.msg = "لا يمكنك تجاوز 5 أيام"
         this.toastr.error("لا يمكنك تجاوز 5 أيام", "فشل ")
       }
     }
