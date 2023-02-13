@@ -155,6 +155,19 @@
                  class="btn btn-info next"
                  value="إضافة" />
         </div>
+
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            {{msg}}
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            {{msg}}
+          </div>
+        </div>
+
       </form>
     </div>
   </div>
@@ -222,6 +235,19 @@
                            class="btn btn-success"
                            value="تسجيل" />
                   </div>
+
+                  <div class="col-md-6">
+                    <div class="success-msg" *ngIf="succPar">
+                      <i class="fa fa-check"></i>
+                      {{msgPar}}
+                    </div>
+
+                    <div class="error-msg" *ngIf="failedPar">
+                      <i class="fa fa-times-circle"></i>
+                      {{msgPar}}
+                    </div>
+                  </div>
+
                 </form>
               </div>
               <div class="content2">
@@ -268,6 +294,19 @@
                            class="btn btn-success"
                            value="تسجيل" />
                   </div>
+
+                  <div class="col-md-6">
+                    <div class="success-msg" *ngIf="succOr">
+                      <i class="fa fa-check"></i>
+                      {{msgOr}}
+                    </div>
+
+                    <div class="error-msg" *ngIf="failedOr">
+                      <i class="fa fa-times-circle"></i>
+                      {{msgOr}}
+                    </div>
+                  </div>
+
                 </form>
               </div>
             </div>

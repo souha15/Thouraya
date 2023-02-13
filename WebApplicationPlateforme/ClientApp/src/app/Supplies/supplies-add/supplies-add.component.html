@@ -30,7 +30,7 @@
       </header>
       
       <form action="" class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-     
+
         <div class="col-md-6">
           <div *ngIf="sudata">
             <div class="alert alert-success" role="alert" *ngIf="quatite>0">
@@ -61,7 +61,7 @@
             </div>
           </div>
         </div>
-  
+
         <div class="col-md-6">
           <label for="item-num">رقم الصنف</label>
           <input type="number" min="0" id="item-num" name="num" #num="ngModel" [(ngModel)]="sup.num" />
@@ -117,6 +117,19 @@
                  class="btn btn-info"
                  style="width: 130px" />
         </div>
+
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            {{msg}}
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            {{msg}}
+          </div>
+        </div>
+
       </form>
     </div>
   </div>

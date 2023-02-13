@@ -93,7 +93,6 @@
                               <input id="inputhijdate" class="form-control" style="width:160px;"
                                      name="datehij" #datehij="ngModel"
                                      [(ngModel)]="model" ngbDatepicker
-
                                      #d="ngbDatepicker" (dateSelect)="onDateSelect($event)">
 
                             </div>
@@ -518,14 +517,14 @@
 
 
                         </div>
-                        <br /> <br /> 
+                        <br /> <br />
                         <div class="col-md-12">
                           <div class="table-responsive new-table2">
                             <table class="table table-bordered text-center table-striped">
                               <thead class="thead-gestimary">
                                 <tr>
 
-                                
+
                                   <th scope="col">النوع</th>
                                   <th scope="col">	الاسم </th>
 
@@ -534,7 +533,7 @@
                               </thead>
                               <tbody>
                                 <tr *ngFor="let dp of listResi; let i = index;">
-                                
+
                                   <td>{{dp.typefile}}</td>
                                   <td>{{dp.paths}}</td>
                                   <td><a (click)="delFiles(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
@@ -544,7 +543,7 @@
 
                               <tbody>
                                 <tr *ngFor="let dp of listPass; let i = index;">
-                                  
+
                                   <td>{{dp.typefile}}</td>
                                   <td>{{dp.paths}}</td>
                                   <td><a (click)="delFiles(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
@@ -554,7 +553,7 @@
 
                               <tbody>
                                 <tr *ngFor="let dp of listphoto; let i = index;">
-                                  
+
                                   <td>{{dp.typefile}}</td>
                                   <td>{{dp.paths}}</td>
                                   <td><a (click)="delFiles(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
@@ -581,6 +580,19 @@
         <div class="col-12 text-left">
           <button class="btn btn-info px-4" type="submit">حفظ</button>
         </div>
+
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            {{msg}}
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            {{msg}}
+          </div>
+        </div>
+
       </form>
     </div>
 

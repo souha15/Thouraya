@@ -419,9 +419,16 @@ export class GestBenEditChercheurComponent implements OnInit {
   isValidFormSubmitted: boolean = false;
   date = new Date().toLocaleDateString();
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
+      this.failed = true;
+      this.succ = false;
+      this.msg = "تأكد من  من صحة الحقول من فضلك"
       this.toastr.warning("تأكد من  من صحة الحقول من فضلك")
 
     } else {
@@ -445,6 +452,9 @@ export class GestBenEditChercheurComponent implements OnInit {
 
             },
               err => {
+                this.failed = true;
+                this.succ = false;
+                this.msg = "  فشل في تسجيل	 "
                 this.toastr.error("  فشل في تسجيل	 ", "فشل")
               })
           }
@@ -463,6 +473,9 @@ export class GestBenEditChercheurComponent implements OnInit {
 
             },
               err => {
+                this.failed = true;
+                this.succ = false;
+                this.msg = "  فشل في تسجيل	 "
                 this.toastr.error("  فشل في تسجيل	 ", "فشل")
               })
           }
@@ -482,6 +495,9 @@ export class GestBenEditChercheurComponent implements OnInit {
 
             },
               err => {
+                this.failed = true;
+                this.succ = false;
+                this.msg = "  فشل في تسجيل	 "
                 this.toastr.error("  فشل في تسجيل	 ", "فشل")
               })
           }
@@ -500,6 +516,9 @@ export class GestBenEditChercheurComponent implements OnInit {
 
             },
               err => {
+                this.failed = true;
+                this.succ = false;
+                this.msg = "  فشل في تسجيل	 "
                 this.toastr.error("  فشل في تسجيل	 ", "فشل")
               })
           }
@@ -533,10 +552,16 @@ export class GestBenEditChercheurComponent implements OnInit {
         this.resitest = false;
         this.revtest = false;
         form.resetForm();
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تمت الإضافة بنجاح"
         this.toastr.success("تم التسجيل بنجاح", "نجاح")
 
       },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = "  فشل في تسجيل	 "
           this.toastr.error("  فشل في تسجيل	 ", "فشل")
         }
       )
@@ -545,10 +570,17 @@ export class GestBenEditChercheurComponent implements OnInit {
 
   envoyer() {
     this.gest.etatchercheur ="مرسلة"
-    this.benService.PutObservableE(this.gest).subscribe(res => {
-      this.toastr.success("تم الإرسال بنجاح", "نجاح")
+    this.benService.PutObservableE(this.gest).subscribe(
+      res => {
+        this.succ = true;
+        this.failed = false;
+        this.msg = "تم الإرسال بنجاح"
+        this.toastr.success("تم الإرسال بنجاح", "نجاح")
     },
       err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg = "  فشل في الإرسال 	 "
         this.toastr.error("  فشل في الإرسال 	 ", "فشل")
       }
     )

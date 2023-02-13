@@ -103,7 +103,9 @@ export class RecueDonsListComponent implements OnInit {
 
 
   factur: RecueDons = new RecueDons();
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   updateRecord(form: NgForm) {
 
     this.factur = Object.assign(this.factur, form.value);
@@ -117,7 +119,9 @@ export class RecueDonsListComponent implements OnInit {
     })
       this.factureService.Edit().subscribe(res => {
 
-
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تمت الإضافة بنجاح"
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
         this.serviceupload.refreshListf();
         this.resetForm();
@@ -125,6 +129,9 @@ export class RecueDonsListComponent implements OnInit {
         this.files1 = [];
       },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = " فشل عند الإضافة"
           this.toastr.error(' لم يتم التحديث  ', ' فشل');
         }
 

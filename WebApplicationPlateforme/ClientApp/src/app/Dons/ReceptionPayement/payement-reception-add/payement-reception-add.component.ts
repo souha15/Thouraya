@@ -156,6 +156,10 @@ export class PayementReceptionAddComponent implements OnInit {
  
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -170,16 +174,26 @@ export class PayementReceptionAddComponent implements OnInit {
 
         this.pr.dateenreg = this.date;
         this.pr.typeDons = this.typedons;
-      this.prService.Add(this.pr).subscribe(res => {
-        this.toastr.success("تمت الإضافة بنجاح", "نجاح");
-        this.files1 = [];
-        form.resetForm();
-        this.prC = res
+        this.prService.Add(this.pr).subscribe(
+        res => {
+          this.succ = true;
+          this.failed = false;
+          this.msg = "  تمت الإضافة بنجاح"
+          this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+          this.files1 = [];
+          form.resetForm();
+          this.prC = res
       },
-        err => {
-          this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
+          err => {
+            this.failed = true;
+            this.succ = false;
+            this.msg = " فشل عند الإضافة"
+            this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
         })
       } else {
+        this.failed = true;
+        this.succ = false;
+        this.msg = "رقم العملية موجود من قبل"
         this.toastr.error("رقم العملية موجود من قبل", "فشل في التسجيل")
       }
     }
@@ -190,18 +204,29 @@ export class PayementReceptionAddComponent implements OnInit {
 
   or: Doneur = new Doneur();
 
+  succOr: boolean = false;
+  failedOr: boolean = false;
+  msgOr: string = '';
+
   onSubmitOr(form: NgForm) {
 
     this.or.dateenreg = this.date;
     this.or.idUserCreator = this.UserIdConnected;
     this.or.userNameCreator = this.UserNameConnected;
     this.or.type = "or";
-    this.doneurService.Add(this.or).subscribe(res => {
+    this.doneurService.Add(this.or).subscribe(
+      res => {
+        this.succOr = true;
+        this.failedOr = false;
+        this.msgOr = "  تمت الإضافة بنجاح"
   
-      this.toastr.success("تمت الإضافة بنجاح", "نجاح");
-      form.resetForm();
+        this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+        form.resetForm();
     },
       err => {
+        this.failedOr = true;
+        this.succOr = false;
+        this.msgOr = " فشل عند الإضافة"
         this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
       }
     )
@@ -221,19 +246,30 @@ export class PayementReceptionAddComponent implements OnInit {
 
   par: Doneur = new Doneur();
 
+  succPar: boolean = false;
+  failedPar: boolean = false;
+  msgPar: string = '';
+
   onSubmitPar(form: NgForm) {
 
     this.par.dateenreg = this.date;
     this.par.idUserCreator = this.UserIdConnected;
     this.par.userNameCreator = this.UserNameConnected;
     this.par.type = "par";
-    this.doneurService.Add(this.par).subscribe(res => {
-      this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+    this.doneurService.Add(this.par).subscribe(
+      res => {
+        this.succPar = true;
+        this.failedPar = false;
+        this.msgPar = "  تمت الإضافة بنجاح"
+        this.toastr.success("تمت الإضافة بنجاح", "نجاح");
 
       this.getDonLis();
       form.resetForm();
     },
       err => {
+        this.failedPar = true;
+        this.succPar = false;
+        this.msgPar = " فشل عند الإضافة"
         this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
       }
     )

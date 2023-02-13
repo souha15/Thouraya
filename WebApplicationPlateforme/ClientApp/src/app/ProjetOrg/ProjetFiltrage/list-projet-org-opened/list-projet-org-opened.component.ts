@@ -31,13 +31,23 @@ export class ListProjetOrgOpenedComponent implements OnInit {
     })
   }
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     this.projetService.PutObservableE(this.pr).subscribe(res => {
+      this.succ = true;
+      this.failed = false;
+      this.msg = "  تم التحديث بنجاح"
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
       this.getList();
       form.resetForm
     },
       err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg = "  فشل عند التحديث"
         this.toastr.error('لم يتم التحديث  ', ' فشل');
       })
   }

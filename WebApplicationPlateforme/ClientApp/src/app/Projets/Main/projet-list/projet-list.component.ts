@@ -78,6 +78,9 @@ export class ProjetListComponent implements OnInit {
     this.factId = facture.id;
     this.fact = Object.assign({}, facture);
   }
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   accept() {
     this.fact.etat = "مغلق"
@@ -85,12 +88,21 @@ export class ProjetListComponent implements OnInit {
     if (this.projetService.formData.etat != 'مغلق') {
       this.projetService.PutObservableE(this.fact).subscribe(res => {
         this.GetProjet();
+        this.succ = true;
+        this.failed = false;
+        this.msg = "تم غلق المشروع"
         this.toastr.success("تم غلق المشروع", "نجاح");
       },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = 'لم يتم غلق المشروع'
           this.toastr.warning('لم يتم غلق المشروع', ' فشل');
         })
     } else {
+      this.failed = true;
+      this.succ = false;
+      this.msg = ' المشروع مغلق'
       this.toastr.warning(' المشروع مغلق', ' فشل');
     }
   }

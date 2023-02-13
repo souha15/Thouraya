@@ -162,6 +162,9 @@ export class PayementReceptionListComponent implements OnInit {
     })
   }
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   updateRecord(form: NgForm) {
 
     this.factureService.formData.attribut5 = this.date;
@@ -173,7 +176,9 @@ export class PayementReceptionListComponent implements OnInit {
     })
     this.factureService.Edit().subscribe(res => {
 
-
+      this.succ = true;
+      this.failed = false;
+      this.msg = "  تم التحديث بنجاح"
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
       this.serviceupload.refreshListf();
       this.resetForm();
@@ -181,6 +186,9 @@ export class PayementReceptionListComponent implements OnInit {
       this.files1 = [];
     },
       err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg = "  فشل عند التحديث"
         this.toastr.error(' لم يتم التحديث  ', ' فشل');
       }
 

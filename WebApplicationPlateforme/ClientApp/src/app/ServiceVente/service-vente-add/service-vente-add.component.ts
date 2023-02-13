@@ -60,6 +60,11 @@ export class ServiceVenteAddComponent implements OnInit {
   isValidFormSubmitted = false;
   path: string;
   date = new Date().toLocaleDateString();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -80,11 +85,16 @@ export class ServiceVenteAddComponent implements OnInit {
       }
       this.demService.Add(this.dem).subscribe(
         res => {
+          this.succ = true;
+          this.failed = false;
+          this.msg = "  تمت الإضافة بنجاح"
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         form.resetForm();
       },
         err => {
-         
+          this.failed = true;
+          this.succ = false;
+          this.msg = "لا يمنك إضافة أكثر من طلبين شراء في الشهر الواحد"
           this.toastr.error("لا يمنك إضافة أكثر من طلبين شراء في الشهر الواحد", "فشل في التسجيل");
         })
     }

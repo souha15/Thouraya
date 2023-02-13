@@ -77,17 +77,25 @@ export class TypeBenCrudComponent implements OnInit {
   }
 
   //Edit
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   updateRecord(form: NgForm) {
     this.tblService.EditTBen().subscribe(
       res => {
         this.resetForm(form);
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تم التحديث بنجاح"
         this.toastr.success("تم التحديث  بنجاح", "نجاح");
         this.ShowDotations();
 
       },
       err => {
         console.log(err);
+        this.failed = true;
+        this.succ = false;
+        this.msg = "  فشل عند التحديث"
         this.toastr.warning('لم يتم التحديث ', ' فشل');
 
       }
@@ -102,10 +110,16 @@ export class TypeBenCrudComponent implements OnInit {
     this.tblService.PostTBen().subscribe(
       res => {
         this.resetForm(form);
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تمت الإضافة بنجاح"
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         this.ShowDotations();
       },
       err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg = " فشل عند الإضافة"
         console.log(err);
         this.toastr.warning('لم تتم الإضافة', ' فشل');
       }

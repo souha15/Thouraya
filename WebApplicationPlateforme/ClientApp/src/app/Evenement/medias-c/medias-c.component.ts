@@ -276,11 +276,18 @@ export class MediasCComponent implements OnInit {
   //Edit
   isValidFormSubmitted: boolean = false;
   date = new Date().toLocaleDateString();
- 
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
 
     if (form.invalid) {
       this.isValidFormSubmitted = false;
+      this.failed = true;
+      this.succ = false;
+      this.msg = "تأكد من  من صحة الحقول من فضلك"
       this.toastr.warning("تأكد من  من صحة الحقول من فضلك")
 
     } else {
@@ -288,6 +295,9 @@ export class MediasCComponent implements OnInit {
 
       this.eventService.PutObservableTr(this.ev).subscribe(
         res => {
+          this.succ = true;
+          this.failed = false;
+          this.msg = "  تمت الإضافة بنجاح"
           this.toastr.success("تم التسجيل بنجاح", "نجاح")
           form.resetForm();
           this.deptest = false;
@@ -298,6 +308,9 @@ export class MediasCComponent implements OnInit {
           this.medialF.length = 0;
         },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = " فشل عند الإضافة"
           this.toastr.error("فشل في التسجيل", "فشل")
         }
       )

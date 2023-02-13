@@ -131,9 +131,17 @@ export class ProjetAddComponent implements OnInit {
   date = new Date().toLocaleDateString();
   prId: number;
   path: string;
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
+      this.failed = true;
+      this.succ = false;
+      this.msg = "تأكد من  من صحة الحقول من فضلك"
       this.toastr.warning("تأكد من  من صحة الحقول من فضلك")
 
     } else {
@@ -155,6 +163,9 @@ export class ProjetAddComponent implements OnInit {
 
               },
                 err => {
+                  this.failed = true;
+                  this.succ = false;
+                  this.msg = "  فشل في تسجيل   بنود الصرف"
                   this.toastr.error("  فشل في تسجيل   بنود الصرف", "فشل")
                 })
             }
@@ -253,10 +264,16 @@ export class ProjetAddComponent implements OnInit {
           this.paytest = false;
           this.payList.splice(0, this.payList.length)
           this.i = 0;
+          this.succ = true;
+          this.failed = false;
+          this.msg = "  تمت الإضافة بنجاح"
           this.toastr.success("تم التسجيل بنجاح", "نجاح")
           form.resetForm();
       },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = "فشل في التسجيل"
           this.toastr.error("فشل في التسجيل", "فشل")
         })
     }

@@ -80,11 +80,18 @@ export class GestBenListDirComponent implements OnInit {
 
   }
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
-    this.benService.PutObservableE(this.gest).subscribe(res => {
-      this.toastr.success('تم التحديث بنجاح', 'نجاح');
-      this.getDataBen();
-      form.resetForm();
+    this.benService.PutObservableE(this.gest).subscribe(
+      res => {
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تم التحديث بنجاح"
+        this.toastr.success('تم التحديث بنجاح', 'نجاح');
+        this.getDataBen();
+        form.resetForm();
     })
   }
 }

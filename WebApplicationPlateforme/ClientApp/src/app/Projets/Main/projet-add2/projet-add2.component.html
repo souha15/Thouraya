@@ -138,27 +138,27 @@
               <div class="d-flex w-100 justify-content-start flex-wrap">
                 <div class="ml-3">
                   <label for="target">الهدف</label>
-                  <input type="text"  id="target"
-                         name="but" #but="ngModel" [(ngModel)]="buti.but"/>
+                  <input type="text" id="target"
+                         name="but" #but="ngModel" [(ngModel)]="buti.but" />
                 </div>
                 <div>
                   <label for="number">العدد</label>
                   <input type="number" min="0" id="number"
-                         name="nbbut" #nbbut="ngModel" [(ngModel)]="buti.nbbut"/>
+                         name="nbbut" #nbbut="ngModel" [(ngModel)]="buti.nbbut" />
                 </div>
               </div>
               <div class="d-flex w-100 justify-content-start flex-wrap">
                 <div class="ml-3">
                   <label for="cost">التكلفة</label>
                   <input type="text" id="cost"
-                     name="prix" #prix="ngModel" [(ngModel)]="buti.prix"/>
+                         name="prix" #prix="ngModel" [(ngModel)]="buti.prix" />
                 </div>
                 <div>
                   <label for="number2">الاجمالي</label>
                   <input type="number"
                          min="0"
                          id="number2"
-                         name="tot" #tot="ngModel" [(ngModel)]="buti.tot"/>
+                         name="tot" #tot="ngModel" [(ngModel)]="buti.tot" />
                 </div>
               </div>
               <div class="d-flex w-100 justify-content-start flex-wrap">
@@ -173,7 +173,7 @@
                   <label for="number3">العدد</label>
                   <input type="number"
                          min="0"
-                        name="nbbenef" #nbbenef="ngModel" [(ngModel)]="buti.nbbenef"
+                         name="nbbenef" #nbbenef="ngModel" [(ngModel)]="buti.nbbenef"
                          id="number3" />
                 </div>
               </div>
@@ -194,7 +194,7 @@
               <table class="table table-bordered text-center table-striped">
                 <thead class="thead-primary">
                   <tr>
-                   
+
                     <th scope="col">الهدف</th>
                     <th scope="col">العدد</th>
                     <th scope="col">التكلفة</th>
@@ -243,7 +243,7 @@
                 <label for="cost2">التكلفة</label>
                 <input type="number"
                        name="prix" #prix="ngModel" [(ngModel)]="pay.prix"
-                        (change)="testprix($event);test($event)"
+                       (change)="testprix($event);test($event)"
                        id="cost2"
                        min="0"
                        class="ml-4" />
@@ -274,7 +274,7 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr  *ngFor="let dp of payList">
+                    <tr *ngFor="let dp of payList">
                       <td>{{dp.but}}</td>
                       <td>{{dp.activite}}</td>
                       <td>{{dp.nb}}</td>
@@ -323,25 +323,25 @@
                 <span class="mr-2"><i class="fa fa-upload"></i></span>
               </label>
 
-            <div class="table-responsive my-3" *ngIf="filetest">
-              <table class="table table-bordered table-striped theme-table">
-                <thead>
-                  <tr>
-                    <th scope="col">الإسم</th>
-          
-                    <th scope="col">حذف</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let dp of filelist">
-                    <td>{{dp}}</td>
-                
-                    <td><a (click)="del9(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
+              <div class="table-responsive my-3" *ngIf="filetest">
+                <table class="table table-bordered table-striped theme-table">
+                  <thead>
+                    <tr>
+                      <th scope="col">الإسم</th>
+
+                      <th scope="col">حذف</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let dp of filelist">
+                      <td>{{dp}}</td>
+
+                      <td><a (click)="del9(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                    </tr>
+                  </tbody>
+                </table>
               </div>
+            </div>
           </div>
           <div class="form-box w-100">
             <div class="col-md-12">
@@ -403,7 +403,7 @@
               </div>
             </div>
           </div>
-          <div class="col-md-12" >
+          <div class="col-md-12">
             <label for="resume" class="main">
               <span><i class="fa fa-file-signature"></i></span> تقييم
               الأداء
@@ -413,8 +413,21 @@
 
           <div class="col-12 text-left">
             <input class="btn btn-info px-4" type="submit" value="حفظ" />
-    
+
           </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
+
         </form>
       </div>
     </div>

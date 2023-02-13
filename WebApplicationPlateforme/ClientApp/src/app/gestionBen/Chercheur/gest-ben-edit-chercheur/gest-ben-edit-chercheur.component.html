@@ -60,13 +60,13 @@
 
             <div>
               <label for="start-date">	الجنسية </label>
-              <input type="text" id="start-date" name="natio" #natio="ngModel" [(ngModel)]="gest.natio" disabled/>
+              <input type="text" id="start-date" name="natio" #natio="ngModel" [(ngModel)]="gest.natio" disabled />
 
             </div>
 
             <div>
               <label for="start-date">		رقم الجوال  </label>
-              <input type="text" id="start-date" name="tel" #tel="ngModel" [(ngModel)]="gest.tel" disabled/>
+              <input type="text" id="start-date" name="tel" #tel="ngModel" [(ngModel)]="gest.tel" disabled />
 
             </div>
 
@@ -96,7 +96,7 @@
             </div>
           </div>
 
-          <div class="row w-100 d-flex form-box" >
+          <div class="row w-100 d-flex form-box">
             <div class="col-md-8 col-sm-12">
               <label class="main">
                 <span><i class="fa fa-users"></i></span>
@@ -116,7 +116,7 @@
                 <div>
                   <label for="number">	الهوية</label>
                   <input type="number" maxlength="10" id="number"
-                         name="cin" #cin="ngModel" [(ngModel)]="fm.cin"  />
+                         name="cin" #cin="ngModel" [(ngModel)]="fm.cin" />
                 </div>
                 <div class="ml-3">
                   <label for="cost">	تاريخ الميلاد</label>
@@ -195,7 +195,7 @@
               </table>
             </div>
           </div>
-          <div class="form-box w-100" >
+          <div class="form-box w-100">
             <div class="col-md-12">
               <div class="">
                 <label class="main">
@@ -221,7 +221,7 @@
             </div>
           </div>
 
-          <div class="form-box w-100" >
+          <div class="form-box w-100">
             <div class="col-md-8 col-sm-12">
               <label class="main">
                 <span><i class="fa fa-home"></i></span>
@@ -301,7 +301,7 @@
           </div>
 
 
-          <div class="form-box w-100" >
+          <div class="form-box w-100">
             <div class="col-md-12">
               <div class="">
                 <label class="main">
@@ -352,7 +352,7 @@
 
 
 
-          <div class="form-box w-100" >
+          <div class="form-box w-100">
             <div class="col-md-12">
               <div class="">
                 <label class="main">
@@ -423,7 +423,7 @@
             </div>
           </div>
 
-          <div class="form-box w-100" >
+          <div class="form-box w-100">
             <div class="col-md-12">
               <label class="main">
                 <span><i class="fa fa-file-upload"></i></span>  المرفقات
@@ -465,6 +465,19 @@
             &nbsp; &nbsp; &nbsp; &nbsp;
             <a class="btn btn-success px-4" (click)="envoyer()">إرسال</a>
           </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
+
         </form>
       </div>
     </div>

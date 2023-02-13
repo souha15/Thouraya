@@ -420,9 +420,16 @@ export class GestBenEditComponent implements OnInit {
   isValidFormSubmitted: boolean = false;
   date = new Date().toLocaleDateString();
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
+      this.failed = true;
+      this.succ = false;
+      this.msg = "تأكد من  من صحة الحقول من فضلك"
       this.toastr.warning("تأكد من  من صحة الحقول من فضلك")
 
     } else {
@@ -446,6 +453,9 @@ export class GestBenEditComponent implements OnInit {
 
             },
               err => {
+                this.failed = true;
+                this.succ = false;
+                this.msg = " فشل عند الإضافة"
                 this.toastr.error("  فشل في تسجيل	 ", "فشل")
               })
           }
@@ -464,6 +474,9 @@ export class GestBenEditComponent implements OnInit {
 
             },
               err => {
+                this.failed = true;
+                this.succ = false;
+                this.msg = " فشل عند الإضافة"
                 this.toastr.error("  فشل في تسجيل	 ", "فشل")
               })
           }
@@ -483,6 +496,9 @@ export class GestBenEditComponent implements OnInit {
 
             },
               err => {
+                this.failed = true;
+                this.succ = false;
+                this.msg = " فشل عند الإضافة"
                 this.toastr.error("  فشل في تسجيل	 ", "فشل")
               })
           }
@@ -501,6 +517,9 @@ export class GestBenEditComponent implements OnInit {
 
             },
               err => {
+                this.failed = true;
+                this.succ = false;
+                this.msg = " فشل عند الإضافة"
                 this.toastr.error("  فشل في تسجيل	 ", "فشل")
               })
           }
@@ -534,10 +553,16 @@ export class GestBenEditComponent implements OnInit {
         this.resitest = false;
         this.revtest = false;
         form.resetForm();
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تمت الإضافة بنجاح"
         this.toastr.success("تم التسجيل بنجاح", "نجاح")
 
       },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = " فشل عند الإضافة"
           this.toastr.error("  فشل في تسجيل	 ", "فشل")
         }
       )

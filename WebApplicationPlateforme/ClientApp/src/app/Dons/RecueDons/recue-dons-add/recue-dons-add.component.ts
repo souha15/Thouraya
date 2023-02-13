@@ -77,6 +77,11 @@ export class RecueDonsAddComponent implements OnInit {
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
   id: number;
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -95,16 +100,24 @@ export class RecueDonsAddComponent implements OnInit {
 
         this.donsService.Add(this.rd).subscribe(
           res => {
-
+            this.succ = true;
+            this.failed = false;
+            this.msg = "  تمت الإضافة بنجاح"
             this.toastr.success("تمت الإضافة بنجاح", "نجاح");
             this.files1 = [];
             form.resetForm();
           },
           err => {
+            this.failed = true;
+            this.succ = false;
+            this.msg = " فشل عند الإضافة"
             this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
           }
         )
       } else {
+        this.failed = true;
+        this.succ = false;
+        this.msg = "رقم العملية موجود من قبل"
         this.toastr.error("رقم العملية موجود من قبل", "فشل في التسجيل")
       }
 

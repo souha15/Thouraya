@@ -38,6 +38,11 @@ export class OrgPartAddComponent implements OnInit {
   organisme: OrgPart = new OrgPart();
   date = new Date().toLocaleDateString();
   isValidFormSubmitted = false;
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     this.organisme.CreatorName = this.UserNameConnected;
     this.organisme.datenereg = this.date;
@@ -49,11 +54,18 @@ export class OrgPartAddComponent implements OnInit {
       this.isValidFormSubmitted = true
       this.OgPartService.Add(this.organisme).subscribe(res => {
 
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تمت الإضافة بنجاح"
+
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         form.resetForm();
       },
         err => {
           console.log(err);
+          this.failed = true;
+          this.succ = false;
+          this.msg = " فشل عند الإضافة"
           this.toastr.warning('لم تتم الإضافة', ' فشل');
         })
     }

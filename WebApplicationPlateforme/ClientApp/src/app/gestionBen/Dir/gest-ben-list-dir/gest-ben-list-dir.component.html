@@ -114,14 +114,23 @@
 
               </select>
             </div>
-              <div>
+            <div>
               <label>الملاحظات</label>
               <textarea name="remarque" #remarque="ngModel" [(ngModel)]="gest.remarque"></textarea>
             </div>
-              <div>
+            <div>
               &nbsp;&nbsp;&nbsp;&nbsp;
               <input class="btn btn-success" type="submit" value="حفظ" style="width:100px;" />
             </div>
+
+          </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
 
           </div>
 

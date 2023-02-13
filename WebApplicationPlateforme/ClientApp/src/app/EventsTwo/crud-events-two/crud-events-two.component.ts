@@ -82,6 +82,11 @@ export class CrudEventsTwoComponent implements OnInit {
 
   factur: EventsTwo = new EventsTwo();
   factId: number;
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   updateRecord(form: NgForm) {
 
     this.factur = Object.assign(this.factur, form.value);
@@ -121,11 +126,17 @@ export class CrudEventsTwoComponent implements OnInit {
 
       this.files1 = [];
       this.files2 = [];
+      this.succ = true;
+      this.failed = false;
+      this.msg = "  تم التحديث بنجاح"
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
       this.resetForm();
       this.getNewsList();
     },
       err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg = "  فشل عند التحديث"
         this.toastr.error(' لم يتم التحديث  ', ' فشل');
       }
 

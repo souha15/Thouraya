@@ -150,18 +150,31 @@
               <textarea id="news-detail" class="form-control" name="contenu" #contenu="ngModel" [(ngModel)]="newsService.formData.contenu"></textarea>
             </div>
             <div class="col-sm-12">
-                <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
-                  <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
-                  <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
-                    <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-                  </ngx-dropzone-preview>
-                </ngx-dropzone>
-         
+              <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
+                <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
+                <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
+                  <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                </ngx-dropzone-preview>
+              </ngx-dropzone>
+
             </div>
             <div class="col-12 text-left mt-3">
               <input class="btn btn-primary px-4" type="submit" value="ارسال">
               <input class="btn btn-danger px-4" type="reset" value="إلغاء">
             </div>
+
+            <div class="col-md-6">
+              <div class="success-msg" *ngIf="succ">
+                <i class="fa fa-check"></i>
+                {{msg}}
+              </div>
+
+              <div class="error-msg" *ngIf="failed">
+                <i class="fa fa-times-circle"></i>
+                {{msg}}
+              </div>
+            </div>
+
           </form>
         </div>
       </div>
