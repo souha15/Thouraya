@@ -194,7 +194,9 @@ export class LocataireDetailsComponent implements OnInit {
     })
 
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   editloc: Location = new Location();
   updateRecord(form: NgForm) {
     this.editloc = Object.assign(this.editloc, form.value);
@@ -205,9 +207,18 @@ export class LocataireDetailsComponent implements OnInit {
     this.locationService.Edit().subscribe(res => {
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
       this.LocationList();
+
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
     },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       }
 
 

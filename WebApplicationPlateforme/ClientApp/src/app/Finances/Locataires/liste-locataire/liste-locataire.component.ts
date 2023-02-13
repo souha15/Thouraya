@@ -69,6 +69,9 @@ export class ListeLocataireComponent implements OnInit {
 
   }
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   editloc: Locataire = new Locataire();
   updateRecord(form: NgForm) {
     this.editloc = Object.assign(this.editloc, form.value);
@@ -77,9 +80,17 @@ export class ListeLocataireComponent implements OnInit {
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
       form.resetForm();
       this.LocataireList();
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
     },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       }
 
 

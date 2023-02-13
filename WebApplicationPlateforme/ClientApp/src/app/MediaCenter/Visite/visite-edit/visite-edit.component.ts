@@ -96,6 +96,9 @@ export class VisiteEditComponent implements OnInit {
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
   Dem2: Visite = new Visite();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -120,12 +123,20 @@ export class VisiteEditComponent implements OnInit {
         }
 
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
         form.resetForm();
         this.guestTest = false;
         this.guestTest2 = false;
       },
         err => {
           this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
         })
     }
   }

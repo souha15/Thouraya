@@ -79,6 +79,9 @@ export class RecepChequeListComponent implements OnInit {
   }
 
   factur: RecepCheque = new RecepCheque();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   updateRecord(form: NgForm) {
     this.factur = Object.assign(this.factur, form.value);
@@ -86,12 +89,19 @@ export class RecepChequeListComponent implements OnInit {
 
     this.recpService.Edit().subscribe(res => {
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
-  
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
       this.resetForm();
       this.getrecpList();
     },
       err => {
         this.toastr.error(' لم يتم التحديث ', ' فشل');
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       }
     )
 

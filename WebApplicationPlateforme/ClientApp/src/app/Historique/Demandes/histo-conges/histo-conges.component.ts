@@ -72,6 +72,9 @@ export class HistoCongesComponent implements OnInit {
   }
   date = new Date().toLocaleDateString();
   conge: Conge = new Conge();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   updateRecord(form: NgForm) {
 
@@ -83,10 +86,18 @@ export class HistoCongesComponent implements OnInit {
       form.reset();
         this.CongeList();
 
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
     
     },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       })
   }
 

@@ -159,6 +159,10 @@ export class AvanceAddComponent implements OnInit {
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
   dateTime = new Date();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -197,11 +201,20 @@ export class AvanceAddComponent implements OnInit {
          
        
 
+          this.succ = true;
+          this.failed = false;
+
+
+          this.msg = "  تمت الإضافة بنجاح"
           this.toastr.success("تمت الإضافة بنجاح", "نجاح");
           form.resetForm();
         },
         err => {
           this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         }
 
       )

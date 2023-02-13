@@ -20,7 +20,9 @@ export class HistoDemissionComponent implements OnInit {
   }
 
   //Get Conge Demand Lis
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   congeList: Demissioon[] = [];
   dem: Demissioon = new Demissioon();
   filtredCongeList: Demissioon[] = [];
@@ -53,10 +55,18 @@ export class HistoDemissionComponent implements OnInit {
     this.demService.PutObservableE(this.per).subscribe(res => {
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
         this.CongeList();
-        form.resetForm();
+      form.resetForm();
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
     },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       })
 
   }

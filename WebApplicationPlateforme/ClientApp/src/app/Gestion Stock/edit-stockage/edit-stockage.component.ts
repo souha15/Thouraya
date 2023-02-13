@@ -170,6 +170,9 @@ export class EditStockageComponent implements OnInit {
   date = new Date().toLocaleDateString();
 
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -212,9 +215,18 @@ export class EditStockageComponent implements OnInit {
         this.toastr.success("تم التسجيل بنجاح", "نجاح");
         this.stockList.splice(0, this.stockList.length);
         this.stocktest = false;
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
       },
         err => {
           this.toastr.error("  فشل في تسجيل	 ", "فشل")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         })
     }
   }

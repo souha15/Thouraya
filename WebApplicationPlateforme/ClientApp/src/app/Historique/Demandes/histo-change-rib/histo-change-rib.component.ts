@@ -47,6 +47,9 @@ export class HistoChangeRibComponent implements OnInit {
     })
   }
   /* Populate Form */
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   dem: ChangerRib = new ChangerRib();
   oc: boolean = false;
@@ -120,11 +123,17 @@ export class HistoChangeRibComponent implements OnInit {
       this.UserService.PutObservable(this.user).subscribe(res => {
         this.GetDemandList();
         this.toastr.success("تم  قبول الطلب بنجاح و تعديل بيانات الموظف", "نجاح");
+        this.msg = "تم  قبول الطلب بنجاح و تعديل بيانات الموظف"
+        this.succ = true;
+        this.failed = false;
       })
 
     },
       err => {
         this.toastr.warning('لم يتم  قبول الطلب', ' فشل');
+        this.failed = true;
+        this.succ = false;
+        this.msg = "لم يتم  قبول الطلب"
       })
 
   }
@@ -137,9 +146,15 @@ export class HistoChangeRibComponent implements OnInit {
     this.demService.PutObservableE(this.dem).subscribe(res => {
       this.GetDemandList();
       this.toastr.success("تم  رفض الطلب بنجاح", "نجاح");
+      this.succ = true;
+      this.failed = false;
+      this.msg = "تم  رفض الطلب بنجاح"
     },
       err => {
         this.toastr.warning('لم يتم رفض الطلب ', ' فشل');
+        this.msg = "لم يتم رفض الطلب "
+        this.failed = true;
+        this.succ = false;
       })
   }
 

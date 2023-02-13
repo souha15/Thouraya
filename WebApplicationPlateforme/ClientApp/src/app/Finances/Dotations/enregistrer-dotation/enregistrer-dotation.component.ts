@@ -130,6 +130,10 @@ export class EnregistrerDotationComponent implements OnInit {
   Cdotation: Dotation = new Dotation();
   idot: number;
   isValidFormSubmitted = false;
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     this.dotation.creatorName = this.UserNameConnected;
     this.dotation.idUserCreator = this.UserIdConnected;
@@ -170,6 +174,11 @@ export class EnregistrerDotationComponent implements OnInit {
 
         }
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
         this.i = 0;
         this.paytest = false;
         this.payList.splice(0, this.payList.length)      
@@ -178,6 +187,12 @@ export class EnregistrerDotationComponent implements OnInit {
       err => {
         console.log(err);
         this.toastr.warning('لم تتم الإضافة', ' فشل');
+
+        this.failed = true;
+        this.succ = false;
+
+        this.msg = " فشل عند الإضافة"
+
       }
     )
   }

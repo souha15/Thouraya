@@ -90,6 +90,18 @@
             <button class="btn btn-danger px-2 ml-3" type="reset"><span class="ml-4"><i class="fa fa-trash"></i></span>حذف الحقول</button>
             <button class="btn btn-secondary px-2" (click)="openPDF()" type="button"><span class="ml-4"><i class="fa fa-print"></i></span> طباعة</button>
           </div>
+
+          <div class="col-md-12">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
         </form>
       </section>
     </div><!-- End col-9 -->

@@ -151,7 +151,9 @@ export class MontageAddComponent implements OnInit {
 
 
   /** OnSubmit **/
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   dem: Montage = new Montage();
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
@@ -198,10 +200,19 @@ export class MontageAddComponent implements OnInit {
           })
         })
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
         form.resetForm();
       },
         err => {
           this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         })
     }
   }

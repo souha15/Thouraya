@@ -123,7 +123,9 @@ export class FactureListDirecteurComponent implements OnInit {
   }
 
   factur: Facture = new Facture();
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   updateRecord(form: NgForm) {
 
     this.factur = Object.assign(this.factur, form.value);
@@ -154,15 +156,27 @@ export class FactureListDirecteurComponent implements OnInit {
         this.serviceupload.refreshListf();
         this.resetForm();
         this.getFactures();
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
       },
         err => {
           this.toastr.error(' لم يتم التحديث  ', ' فشل');
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
         }
 
 
       )
     } else {
       this.toastr.error(' لم يتم التحديث ', ' فشل');
+      this.msg = "  فشل عند التحديث"
+
+      this.failed = true;
+      this.succ = false;
     }
   }
 
@@ -176,9 +190,17 @@ export class FactureListDirecteurComponent implements OnInit {
     this.factureService.PutObservableE(this.fact).subscribe(res => {
       this.getFactures();
       this.toastr.success("تم صرف الفاتورة بنجاح", "نجاح");
+
+      this.succ = true;
+      this.failed = false;
+      this.msg = "تم صرف الفاتورة بنجاح"
     },
       err => {
         this.toastr.warning('لم يتم صرف الفاتورة', ' فشل');
+
+        this.failed = true;
+        this.succ = false;
+        this.msg = 'لم يتم صرف الفاتورة'
       })
 
 

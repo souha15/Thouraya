@@ -151,7 +151,7 @@ export class UniteEditComponent implements OnInit {
           this.uniteService.Add(this.pay).subscribe(res => {
           },
             err => {
-              this.toastr.error("  فشل في تسجيل  الوحدات", "فشل")
+              this.toastr.error("  فشل في تسجيل  الوحدات", "فشل")            
             })
 
         }
@@ -161,15 +161,27 @@ export class UniteEditComponent implements OnInit {
       this.paytest = false;
       this.payList.splice(0, this.payList.length)
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
+
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
       form.resetForm();
     },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       }
 
 
     )
   }
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   onSubmit(form: NgForm) {
     this.updateRecord(form)

@@ -129,9 +129,9 @@
 
 
           <!--- <div class="col-md-5 mb-3">
-      <label for="cost1"><span><i class="fa fa-coins fa-lg"></i></span>المبلغ</label>
-      <input type="text" id="cost1" />
-    </div>-->
+    <label for="cost1"><span><i class="fa fa-coins fa-lg"></i></span>المبلغ</label>
+    <input type="text" id="cost1" />
+  </div>-->
 
 
           <div class="col-12 mb-3">
@@ -152,6 +152,18 @@
             <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
             <button class="btn btn-danger px-2 ml-3" type="reset" (click)="resetingdata()"><span class="ml-4"><i class="fa fa-trash"></i></span>حذف الحقول</button>
             <button class="btn btn-secondary px-2" (click)="openPDF()" type="button"><span class="ml-4"><i class="fa fa-print fa-lg"></i></span> طباعة</button>
+          </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
           </div>
         </form>
         <div style="border-bottom: 2px solid #adb5bd; margin-bottom: 50px">

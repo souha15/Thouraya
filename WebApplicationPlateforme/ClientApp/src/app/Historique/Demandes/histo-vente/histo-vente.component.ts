@@ -120,15 +120,26 @@ export class HistoVenteComponent implements OnInit {
       this.demService.PutObservableE(this.dem).subscribe(res => {
         this.getList();
         form.resetForm();
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
 
       },
         err => {
           this.toastr.error("لم يتم التسجيل", "فشل في التسجيل");
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
+
         })
     }
   }
 
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onDelete(id: number) {
 
 

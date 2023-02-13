@@ -31,6 +31,9 @@ export class ListDirOrdrePayComponent implements OnInit {
   }
 
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   p: Number = 1;
   count: Number = 5;
   allist: boolean =true;
@@ -149,22 +152,40 @@ export class ListDirOrdrePayComponent implements OnInit {
         this.OrdrePayService.PutObservableE(this.orPay).subscribe(res => {
           this.toastr.success("تم التسجيل بنجاح", "نجاح");
           this.getList();
+          this.succ = true;
+          this.failed = false;
+
+
+          this.msg = "  تمت الإضافة بنجاح"
         },
           err => {
             this.toastr.error(" فشل في التسجيل", "فشل")
+            this.failed = true;
+            this.succ = false;
+
+            this.msg = " فشل عند الإضافة"
           })
       } else {
         this.OrdrePayService.PutObservableE(this.orPay).subscribe(res => {
           this.Stock.quantite = (+this.Stock.quantite + this.tot).toString();
           this.TypeStockageService.PutObservableE(this.Stock).subscribe(res => {
             this.toastr.success("تم التسجيل بنجاح", "نجاح");
+            this.succ = true;
+            this.failed = false;
+
+
+            this.msg = "  تمت الإضافة بنجاح"
             this.getList();
           })
 
         },
           err => {
 
-            this.toastr.error(" فشل في التسجيل","فشل")
+            this.toastr.error(" فشل في التسجيل", "فشل")
+            this.failed = true;
+            this.succ = false;
+
+            this.msg = " فشل عند الإضافة"
           })
       }
      

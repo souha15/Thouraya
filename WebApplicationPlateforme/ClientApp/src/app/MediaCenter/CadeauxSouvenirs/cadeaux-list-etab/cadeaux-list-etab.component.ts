@@ -431,8 +431,15 @@ export class CadeauxListEtabComponent implements OnInit {
 
       })
       this.toastr.success("تم القبول  بنجاح", "نجاح");
+      this.succ = true;
+      this.failed = false;
+      this.msg ="تم القبول  بنجاح"
     })
   }
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   m: string;
   saldel: SalaireD[] = [];
   saldelF: SalaireD[] = [];
@@ -490,6 +497,9 @@ export class CadeauxListEtabComponent implements OnInit {
        
         })
       this.toastr.success("تم الرفض ", "نجاح");
+      this.succ = true;
+      this.failed = false;
+      this.msg = "تم  رفض الطلب بنجاح"
     })
   }
 

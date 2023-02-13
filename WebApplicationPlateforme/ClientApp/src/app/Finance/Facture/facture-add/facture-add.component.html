@@ -36,25 +36,25 @@
           <label for="the-type">الصنف</label>
           <input type="text" id="payee" name="categorie" #categorie="ngModel" [(ngModel)]="facture.categorie" />
           <!--<select id="the-type" (change)="typeTest($event)">
-    <option [ngValue]="undefined" selected disabled>-الصنف-</option>
-    <option *ngFor="let item of typeFacture" value="{{item.id}}">{{item.nom}}</option>
-  </select>-->
+      <option [ngValue]="undefined" selected disabled>-الصنف-</option>
+      <option *ngFor="let item of typeFacture" value="{{item.id}}">{{item.nom}}</option>
+    </select>-->
         </div>
         <div class="col-md-6">
           <label for="the-type">الفرع الأول</label>
           <input type="text" id="payee" name="brancheone" #brancheone="ngModel" [(ngModel)]="facture.brancheone" />
           <!--<select id="the-type" (change)="TestBO($event)">
-    <option [ngValue]="undefined" selected disabled>-الفرع-</option>
-    <option *ngFor="let item of brancheOne" value="{{item.id}}">{{item.nom}}</option>
-  </select>-->
+      <option [ngValue]="undefined" selected disabled>-الفرع-</option>
+      <option *ngFor="let item of brancheOne" value="{{item.id}}">{{item.nom}}</option>
+    </select>-->
         </div>
         <div class="col-md-6">
           <label for="the-type">الفرع الثاني</label>
           <input type="text" id="payee" name="branchetwo" #branchetwo="ngModel" [(ngModel)]="facture.branchetwo" />
           <!--<select id="the-type" name="branchetwo" #branchetwo="ngModel" [(ngModel)]="facture.branchetwo">
-    <option [ngValue]="undefined" selected disabled>-الفرع-</option>
-    <option *ngFor="let item of brancheTwo" value="{{item.nom}}">{{item.nom}}</option>
-  </select>-->
+      <option [ngValue]="undefined" selected disabled>-الفرع-</option>
+      <option *ngFor="let item of brancheTwo" value="{{item.nom}}">{{item.nom}}</option>
+    </select>-->
         </div>
 
         <div class="col-md-6">
@@ -83,6 +83,18 @@
                  value="إضافة" />
           &nbsp;&nbsp;&nbsp;&nbsp;
           <button type="reset" class="btn btn-danger"><span><i class="fa fa-trash-restore"></i></span> حذف الحقول</button>
+        </div>
+
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            {{msg}}
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            {{msg}}
+          </div>
         </div>
       </form>
     </div>

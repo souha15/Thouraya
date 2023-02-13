@@ -36,7 +36,7 @@
 
           </div>
 
-          <div class="col-md-12" >
+          <div class="col-md-12">
             <div class="form-box p-4">
               <div class="w-100 text-right">
                 <label class="main">
@@ -57,15 +57,15 @@
                   <input type="text" id="amount" name="BenefBut" #BenefBut="ngModel" [(ngModel)]="inter.BenefBut" />
 
                 </div>
-             
+
                 <div class="ml-3">
                   <label for="account">   الميزانية المعتمدة </label>
 
-                  <input type="text"  id="amount" name="Budget" #Budget="ngModel" [(ngModel)]="inter.Budget" />
+                  <input type="text" id="amount" name="Budget" #Budget="ngModel" [(ngModel)]="inter.Budget" />
 
                 </div>
               </div>
-             
+
             </div>
           </div>
 
@@ -105,7 +105,7 @@
                 </div>
 
               </div>
-        
+
             </div>
           </div>
 
@@ -114,7 +114,7 @@
               <div class="w-100 text-right">
                 <label class="main">
                   <span><i class="fa fa-bell"></i></span>
-                  	تغطية صحفية
+                  تغطية صحفية
                 </label>
               </div>
 
@@ -146,6 +146,18 @@
           <div class="col-12 text-left">
             <input class="btn btn-info px-4" type="submit" value="حفظ" />
 
+          </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
           </div>
         </form>
       </div>

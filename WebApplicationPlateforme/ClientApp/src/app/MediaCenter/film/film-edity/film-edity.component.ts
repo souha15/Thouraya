@@ -69,21 +69,35 @@ export class FilmEdityComponent implements OnInit {
     this.demandeService.PutObservableE(this.per).subscribe(res => {
       this.toastr.success("تم الصرف")
       this.getDemPayList();
+      this.succ = true;
+      this.failed = false;
+      this.msg ="تم الصرف"
     },
       err => {
         this.toastr.error("لم يتم الصرف")
+        this.failed = true;
+        this.succ = false;
+        this.msg ="لم يتم الصرف"
       })
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   notpay(cg: DemPayCheque) {
     this.per = Object.assign({}, cg);
     this.per.etatgeneral = "لم يتم الصرف";
     this.demandeService.PutObservableE(this.per).subscribe(res => {
       this.toastr.success("لم يتم الصرف")
       this.getDemPayList();
+      this.succ = true;
+      this.failed = false;
+      this.msg ="لم يتم الصرف"
     },
       err => {
         this.toastr.error("لم يتم الصرف")
+        this.failed = true;
+        this.succ = false;
+        this.msg ="لم يتم الصرف"
       })
   }
 }

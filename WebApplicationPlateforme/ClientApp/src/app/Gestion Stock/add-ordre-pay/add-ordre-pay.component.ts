@@ -317,6 +317,10 @@ export class AddOrdrePayComponent implements OnInit {
   isValidFormSubmitted: boolean = false;
   date = new Date().toLocaleDateString();
   IdO: number;
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -425,6 +429,12 @@ export class AddOrdrePayComponent implements OnInit {
         }
 
         this.toastr.success("تم التسجيل بنجاح", "نجاح");
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
+
         this.selecteditems = [];
         this.benPartList = [];
         this.benPartTest = false;
@@ -441,6 +451,10 @@ export class AddOrdrePayComponent implements OnInit {
       },
         err => {
           this.toastr.error(" فشل في التسجيل", "فشل")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         })
     }
   }

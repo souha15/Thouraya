@@ -95,16 +95,30 @@ export class MontageListEmployeeComponent implements OnInit {
         this.toastr.success('تم الإستلام   بنجاح', 'نجاح')
         form.resetForm();
         this.GetDemandList();
+        this.succ = true;
+        this.failed = false;
+        this.msg ="تم الإستلام   بنجاح"
       },
         err => {
+
+          this.failed = true;
+          this.succ = false;
           this.toastr.error(' لم يتم الإستلام  ', ' فشل');
+          this.msg ="لم يتم الإستلام "
         })
     } else {
+
+      this.failed = true;
+      this.succ = false;
       this.toastr.error('تم إستلام الطلب', ' فشل');
+      this.msg ="تم إستلام الطلب"
     }
   }
 
   //Renvoi
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   Renvoi(form: NgForm) {
     if (this.dem.etat == "مستلمة") {
@@ -126,11 +140,22 @@ export class MontageListEmployeeComponent implements OnInit {
         this.toastr.success('تم التسليم    بنجاح', 'نجاح')
         form.resetForm();
         this.GetDemandList();
+        this.succ = true;
+        this.failed = false;
+        this.msg ="تم التسليم    بنجاح"
       },
         err => {
+
+          this.failed = true;
+          this.succ = false;
           this.toastr.error(' لم يتم التسليم   ', ' فشل');
+          this.msg =" لم يتم التسليم  "
         })
     } else {
+
+      this.failed = true;
+      this.succ = false;
+      this.msg ="لم يتم  إستلام الطلب"
       this.toastr.error('لم يتم  إستلام الطلب', ' فشل');
     }
   }

@@ -335,7 +335,9 @@ export class RevenusListComponent implements OnInit {
 
   //updateRecord
 
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   editloc: Revenus = new Revenus();
   updateRecord(form: NgForm) {
     this.editloc = Object.assign(this.editloc, form.value);
@@ -343,9 +345,17 @@ export class RevenusListComponent implements OnInit {
     this.revenusService.Edit().subscribe(res => {
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
       this.RevenusList();
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
     },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       }
 
 

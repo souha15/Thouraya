@@ -119,7 +119,9 @@ export class FactureListComptableComponent implements OnInit {
   }
 
   factur: Facture = new Facture();
-  
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   updateRecord(form: NgForm) {
 
     this.factur = Object.assign(this.factur, form.value);
@@ -150,15 +152,27 @@ export class FactureListComptableComponent implements OnInit {
         this.serviceupload.refreshListf();
         this.resetForm();
         this.getFactures();
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
       },
         err => {
           this.toastr.error(' لم يتم التحديث  ', ' فشل');
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
         }
 
 
       )
     } else {
       this.toastr.error(' لم يتم التحديث ', ' فشل');
+      this.msg = "  فشل عند التحديث"
+
+      this.failed = true;
+      this.succ = false;
     }
   }
 
@@ -172,9 +186,15 @@ export class FactureListComptableComponent implements OnInit {
     this.factureService.PutObservableE(this.fact).subscribe(res => {
       this.getFactures();
       this.toastr.success("تم إعتماد الفاتورة بنجاح", "نجاح");
+      this.succ = true;
+      this.failed = false;
+      this.msg = "تم إعتماد الفاتورة بنجاح"
     },
       err => {
         this.toastr.warning('لم يتم إعتماد الفاتورة', ' فشل');
+        this.failed = true;
+        this.succ = false;
+        this.msg = 'لم يتم إعتماد الفاتورة';
       })
 
 

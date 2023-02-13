@@ -144,6 +144,9 @@ export class RetyourStockAddComponent implements OnInit {
   date = new Date().toLocaleDateString();
   Id: number;
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -160,10 +163,19 @@ export class RetyourStockAddComponent implements OnInit {
         form.resetForm();
 
         this.toastr.success("تم التسجيل بنجاح", "نجاح");
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
 
       },
         err => {
           this.toastr.error("  فشل في تسجيل	 ", "فشل")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         })
     }
   }

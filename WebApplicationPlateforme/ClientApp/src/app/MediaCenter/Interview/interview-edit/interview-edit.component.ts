@@ -145,6 +145,9 @@ export class InterviewEditComponent implements OnInit {
   }
 
   //Create Interview
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   inter: Interview = new Interview();
   isValidFormSubmitted: boolean = false;
@@ -160,10 +163,20 @@ export class InterviewEditComponent implements OnInit {
       this.inter.dateenreg = this.date;
       this.interviewService.PutObservableTr(this.inter).subscribe(res => {
         this.toastr.success("تم التسجيل بنجاح", "نجاح");
+
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
         form.resetForm();
       },
         err => {
           this.toastr.error("  فشل في تسجيل	 ", "فشل")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         })
     }
 

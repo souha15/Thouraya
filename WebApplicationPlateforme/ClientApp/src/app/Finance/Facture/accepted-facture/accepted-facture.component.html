@@ -233,6 +233,18 @@
                      class="btn btn-info next"
                      value="إضافة" />
             </div>
+
+            <div class="col-md-6">
+              <div class="success-msg" *ngIf="succ">
+                <i class="fa fa-check"></i>
+                {{msg}}
+              </div>
+
+              <div class="error-msg" *ngIf="failed">
+                <i class="fa fa-times-circle"></i>
+                {{msg}}
+              </div>
+            </div>
           </form>
         </div>
       </div>
@@ -263,6 +275,18 @@
             <div class="mx-auto my-3 text-center">
               <button class="btn btn-success px-2 ml-3" (click)="getBack()"><span class="ml-2"><i class="fa fa-save"></i></span> موافق</button>
               <button class="btn btn-danger px-2 ml-3"><span class="ml-2"><i class="fa fa-times"></i></span> إلغاء</button>
+            </div>
+
+            <div class="col-md-6">
+              <div class="success-msg" *ngIf="succ">
+                <i class="fa fa-check"></i>
+                {{msg}}
+              </div>
+
+              <div class="error-msg" *ngIf="failed">
+                <i class="fa fa-times-circle"></i>
+                {{msg}}
+              </div>
             </div>
 
           </div>

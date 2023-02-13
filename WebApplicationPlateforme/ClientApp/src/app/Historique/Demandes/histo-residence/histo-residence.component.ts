@@ -41,7 +41,9 @@ export class HistoResidenceComponent implements OnInit {
 
   }
 
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   etat: string;
   etattest(event) {
     this.etat = event.target.value;
@@ -55,9 +57,17 @@ export class HistoResidenceComponent implements OnInit {
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
       this.CongeList();
       form.resetForm();
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
     },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       }
 
 

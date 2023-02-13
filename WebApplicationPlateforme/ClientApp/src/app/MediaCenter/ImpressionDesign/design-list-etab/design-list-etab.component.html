@@ -114,6 +114,18 @@
                      class="btn btn-info next"
                      value="تسليم" />
             </div>
+
+            <div class="col-md-6">
+              <div class="success-msg" *ngIf="succ">
+                <i class="fa fa-check"></i>
+                {{msg}}
+              </div>
+
+              <div class="error-msg" *ngIf="failed">
+                <i class="fa fa-times-circle"></i>
+                {{msg}}
+              </div>
+            </div>
           </form>
 
         </div>
@@ -152,6 +164,18 @@
                      style="width: 130px;"
                      class="btn btn-info next"
                      value="إستلام" />
+            </div>
+
+            <div class="col-md-6">
+              <div class="success-msg" *ngIf="succ">
+                <i class="fa fa-check"></i>
+                {{msg}}
+              </div>
+
+              <div class="error-msg" *ngIf="failed">
+                <i class="fa fa-times-circle"></i>
+                {{msg}}
+              </div>
             </div>
           </form>
 

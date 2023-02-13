@@ -88,6 +88,9 @@ export class EnregistrerUniteComponent implements OnInit {
   impressionTest: boolean = true;
   date = new Date().toLocaleDateString();
   isValidFormSubmitted = false;
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     this.unite.creatorName = this.UserNameConnected;
     this.unite.idUserCreator = this.UserIdConnected;
@@ -105,6 +108,11 @@ export class EnregistrerUniteComponent implements OnInit {
         res => {
           
           this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+          this.succ = true;
+          this.failed = false;
+
+
+          this.msg = "  تمت الإضافة بنجاح"
           this.uniteI.attribue4 = this.unite.attribue4
             this.uniteI.attribut1 = this.unite.attribut1
             this.uniteI.attribut2 = this.unite.attribut2
@@ -156,6 +164,10 @@ export class EnregistrerUniteComponent implements OnInit {
         err => {
           console.log(err);
           this.toastr.warning('لم تتم الإضافة', ' فشل');
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         }
       )
     }

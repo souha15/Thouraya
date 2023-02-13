@@ -34,7 +34,7 @@
           <label for="months">عدد أشهر الاستقطاع</label>
           <input type="number" min="0" id="months" name="nbMoisDeduire" #nbMoisDeduire="ngModel" [(ngModel)]="av.nbMoisDeduire" />
           <label for="first-month"> أول شهر استقطاع</label>
-          <input type="month" id="first-month" name="dateDeduire" #dateDeduire="ngModel" [(ngModel)]="av.dateDeduire" [min]="today"/>
+          <input type="month" id="first-month" name="dateDeduire" #dateDeduire="ngModel" [(ngModel)]="av.dateDeduire" [min]="today" />
         </div>
 
         <div class="col-md-12 text-left">
@@ -43,6 +43,19 @@
                  class="btn btn-info next"
                  value="تقديم" />
         </div>
+
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            {{msg}}
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            {{msg}}
+          </div>
+        </div>
+
       </form>
     </div>
   </div>

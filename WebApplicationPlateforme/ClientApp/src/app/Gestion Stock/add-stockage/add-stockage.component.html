@@ -27,7 +27,7 @@
               مطلوب اسم المستودع .
             </div>
           </div>
-   
+
           <div class="col-md-6">
             <label class="main main1" for="gestoject">
               <span><i class="fa fa-spinner"></i></span>
@@ -146,6 +146,18 @@
           <div class="col-12 text-left">
             <input class="btn btn-info px-4" type="submit" value="حفظ" />
 
+          </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
           </div>
         </form>
       </div>

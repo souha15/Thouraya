@@ -64,6 +64,9 @@ export class VisiteListDirComponent implements OnInit {
   /*** Accepter *****/
 
   date = new Date().toLocaleDateString();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   accept() {
     this.dem.diretat = "موافقة"
     this.dem.dirdate = this.date
@@ -72,9 +75,15 @@ export class VisiteListDirComponent implements OnInit {
     this.demService.PutObservableE(this.dem).subscribe(res => {
       this.GetDemandList();
       this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
+      this.succ = true;
+      this.failed = false;
+      this.msg ="تم  قبول الطلب بنجاح"
     },
       err => {
         this.toastr.warning('لم يتم  قبول الطلب', ' فشل');
+        this.failed = true;
+        this.succ = false;
+        this.msg ="لم يتم  قبول الطلب"
       })
 
   }
@@ -97,9 +106,15 @@ export class VisiteListDirComponent implements OnInit {
     this.demService.PutObservableE(this.dem).subscribe(res => {
       this.GetDemandList();
       this.toastr.success("تم  رفض الطلب بنجاح", "نجاح");
+      this.succ = true;
+      this.failed = false;
+      this.msg ="تم  رفض الطلب بنجاح"
     },
       err => {
         this.toastr.warning('لم يتم رفض الطلب ', ' فشل');
+        this.failed = true;
+        this.succ = false;
+        this.msg ="لم يتم رفض الطلب "
       })
   }
 }

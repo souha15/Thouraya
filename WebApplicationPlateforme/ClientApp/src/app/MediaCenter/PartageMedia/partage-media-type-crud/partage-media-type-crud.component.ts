@@ -85,18 +85,26 @@ export class PartageMediaTypeCrudComponent implements OnInit {
         this.resetForm(form);
         this.toastr.success("تم التحديث  بنجاح", "نجاح");
         this.ShowDotations();
+        this.msg = "  تم التحديث بنجاح"
 
+        this.succ = true;
+        this.failed = false;
       },
       err => {
         console.log(err);
         this.toastr.warning('لم يتم التحديث ', ' فشل');
+        this.msg = "  فشل عند التحديث"
 
+        this.failed = true;
+        this.succ = false;
       }
     )
   }
 
   // Insert
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   dotation: TbListening = new TbListening();
 
   insertRecord(form: NgForm) {
@@ -105,10 +113,19 @@ export class PartageMediaTypeCrudComponent implements OnInit {
         this.resetForm(form);
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         this.ShowDotations();
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
       },
       err => {
         console.log(err);
         this.toastr.warning('لم تتم الإضافة', ' فشل');
+        this.failed = true;
+        this.succ = false;
+
+        this.msg = " فشل عند الإضافة"
       }
     )
   }

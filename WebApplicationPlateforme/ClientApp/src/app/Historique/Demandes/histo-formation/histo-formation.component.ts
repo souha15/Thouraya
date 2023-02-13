@@ -33,6 +33,9 @@ export class HistoFormationComponent implements OnInit {
   factId: number
   fact: NewFormation = new NewFormation();
   rslt: any;
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   populateForm(facture: NewFormation) {
     this.formationService.formData = Object.assign({}, facture)
     this.factId = facture.id;
@@ -48,9 +51,15 @@ export class HistoFormationComponent implements OnInit {
     this.formationService.PutObservableE(this.fact).subscribe(res => {
       this.getCreance();
       this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
+      this.msg = "تم  قبول الطلب بنجاح"
+      this.succ = true;
+      this.failed = false;
     },
       err => {
         this.toastr.warning('لم يتم  قبول الطلب', ' فشل');
+        this.failed = true;
+        this.succ = false;
+        this.msg = "لم يتم  قبول الطلب"
       })
 
   }
@@ -59,9 +68,15 @@ export class HistoFormationComponent implements OnInit {
     this.formationService.PutObservableE(this.fact).subscribe(res => {
       this.getCreance();
       this.toastr.success("تم  رفض الطلب بنجاح", "نجاح");
+      this.succ = true;
+      this.failed = false;
+      this.msg = "تم  رفض الطلب بنجاح"
     },
       err => {
         this.toastr.warning('لم يتم رفض الطلب ', ' فشل');
+        this.msg = "لم يتم رفض الطلب "
+        this.failed = true;
+        this.succ = false;
       })
   }
 

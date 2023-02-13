@@ -41,15 +41,25 @@ export class HistoRecrutementComponent implements OnInit {
   rslt: string;
   date = new Date().toLocaleDateString();
   conge: Recrutement = new Recrutement();
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   updateRecord(form: NgForm) {
     this.congeService.Edit().subscribe(res => {
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
       this.resetForm();
       this.CongeList();
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
     },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       }
 
 
