@@ -181,7 +181,10 @@ export class EditLocataireComponent implements OnInit {
   locaname: string;
   isValidFormSubmitted1 = false;
   locationId: number;
-  unitedit: Unite=new Unite();
+  unitedit: Unite = new Unite();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     this.location.creatorName = this.UserNameConnected;
     this.location.idUserCreator = this.UserIdConnected;
@@ -236,7 +239,12 @@ export class EditLocataireComponent implements OnInit {
         this.locataireService.GetById
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
    
-      
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
+
         this.pjC.idlocation = this.locationId;
         console.log(this.locationId)
         this.pjC.date = this.date;
@@ -257,6 +265,11 @@ export class EditLocataireComponent implements OnInit {
         err => {
           console.log(err);
           this.toastr.warning('لم تتم الإضافة', ' فشل');
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
+
         }
       )
     }

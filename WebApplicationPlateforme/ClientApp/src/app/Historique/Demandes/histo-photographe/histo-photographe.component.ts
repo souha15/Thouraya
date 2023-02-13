@@ -74,13 +74,21 @@ export class HistoPhotographeComponent implements OnInit {
     this.demService.PutObservableE(this.dem).subscribe(res => {
       this.GetDemandList();
       this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
+      this.msg = "تم  قبول الطلب بنجاح"
+      this.succ = true;
+      this.failed = false;
     },
       err => {
         this.toastr.warning('لم يتم  قبول الطلب', ' فشل');
+        this.failed = true;
+        this.succ = false;
+        this.msg = "لم يتم  قبول الطلب"
       })
 
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   /**  Refuser **/
 
   refuse() {
@@ -92,9 +100,16 @@ export class HistoPhotographeComponent implements OnInit {
     this.demService.PutObservableE(this.dem).subscribe(res => {
       this.GetDemandList();
       this.toastr.success("تم  رفض الطلب بنجاح", "نجاح");
+      this.succ = true;
+      this.failed = false;
+      this.msg = "تم  رفض الطلب بنجاح"
     },
       err => {
         this.toastr.warning('لم يتم رفض الطلب ', ' فشل');
+
+        this.msg = "لم يتم رفض الطلب "
+        this.failed = true;
+        this.succ = false;
       })
   }
 

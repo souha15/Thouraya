@@ -234,6 +234,10 @@ export class EDitPayDirecteComponent implements OnInit {
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
 
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     if (form.invalid && this.quantiteC >= 0) {
 
@@ -257,9 +261,18 @@ export class EDitPayDirecteComponent implements OnInit {
         this.toastr.success("تم التسجيل بنجاح", "نجاح");
         this.selecteditems = [];
         form.resetForm();
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
       },
         err => {
           this.toastr.error("  فشل في تسجيل	 ", "فشل")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         }
       )
     }

@@ -211,7 +211,17 @@
               &nbsp;&nbsp;&nbsp;&nbsp;
               <input class="btn btn-success" type="button" value="إغلاق" (click)="accept()" style="width:100px;" />
             </div>
+            <div class="col-md-6">
+              <div class="success-msg" *ngIf="succ">
+                <i class="fa fa-check"></i>
+                {{msg}}
+              </div>
 
+              <div class="error-msg" *ngIf="failed">
+                <i class="fa fa-times-circle"></i>
+                {{msg}}
+              </div>
+            </div>
           </div>
 
         </form>

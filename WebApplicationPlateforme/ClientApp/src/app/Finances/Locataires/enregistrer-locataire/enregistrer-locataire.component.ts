@@ -84,6 +84,10 @@ export class EnregistrerLocataireComponent implements OnInit {
   locataireId: number;
   locatairenom: string;
   isValidFormSubmitted = false;
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     this.locataire.creatorName = this.UserNameConnected;
     this.locataire.idUserCreator = this.UserIdConnected;
@@ -113,6 +117,11 @@ export class EnregistrerLocataireComponent implements OnInit {
               this.locataireI.profession = this.locataire.profession
               this.toastr.success("تمت الإضافة بنجاح", "نجاح");
 
+              this.succ = true;
+              this.failed = false;
+
+
+              this.msg = "  تمت الإضافة بنجاح"
               // Create file
               this.pj.idlocataire = this.locataireId;
               this.pj.nomLocataire = this.locatairenom;
@@ -135,10 +144,20 @@ export class EnregistrerLocataireComponent implements OnInit {
             err => {
               console.log(err);
               this.toastr.warning('لم تتم الإضافة', ' فشل');
+
+              this.failed = true;
+              this.succ = false;
+
+              this.msg = " فشل عند الإضافة"
             }
           )
         } else {
           this.toastr.warning('لم تتم الإضافة رقم الهوية موجود', ' فشل');
+
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " لم تتم الإضافة رقم الهوية موجود"
         }
  
       }

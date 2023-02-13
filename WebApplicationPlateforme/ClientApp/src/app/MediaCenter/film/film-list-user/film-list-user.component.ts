@@ -134,14 +134,25 @@ export class FilmListUserComponent implements OnInit {
         this.fileslist = [];
         this.TestListFiles = false;
         this.GetDemandList();
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
       },
         err => {
-          this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
+          this.toastr.error("لم يتم التسجيل", "فشل في التسجيل");
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         })
     }
   }
 
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   occ: boolean = false;
   getOccasion(event) {
 

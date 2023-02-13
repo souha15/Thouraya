@@ -45,7 +45,7 @@
             </div>
             <div>
               <label for="stop-name"><span><i class="fa fa-genderless"></i></span> رقم الصنف</label>
-              <input type="text" id="stop-name" name="num" #num="ngModel" [(ngModel)]="typeStockService.formData.num"  />&nbsp;&nbsp;
+              <input type="text" id="stop-name" name="num" #num="ngModel" [(ngModel)]="typeStockService.formData.num" />&nbsp;&nbsp;
 
             </div>
             <div>
@@ -57,6 +57,18 @@
             <div>
               <div class="col-sm-12">
                 <button type="submit" class="btn btn-primary" [disabled]="nom.invalid"><span><i class="fa fa-save"></i></span> حفظ</button>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="success-msg" *ngIf="succ">
+                <i class="fa fa-check"></i>
+                {{msg}}
+              </div>
+
+              <div class="error-msg" *ngIf="failed">
+                <i class="fa fa-times-circle"></i>
+                {{msg}}
               </div>
             </div>
           </form>

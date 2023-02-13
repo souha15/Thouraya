@@ -71,6 +71,10 @@ export class CreanceFinancireListComponent implements OnInit {
   }
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -97,12 +101,20 @@ export class CreanceFinancireListComponent implements OnInit {
     this.depService.Edit().subscribe(res => {
 
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
-   
+
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
       this.resetForm();
       this.getDep();
       },
         err => {
           this.toastr.error(' لم يتم التحديث  ', ' فشل');
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
         }
 
 

@@ -33,16 +33,27 @@ export class HistoMaintenanceVoitureComponent implements OnInit {
     this.fact = Object.assign({}, facture);
 
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   getBack() {
     this.fact.etat = "معتمدة"
     this.fact.etatdir = "معتمدة"
     this.recpService.PutObservableE(this.fact).subscribe(res => {
       this.getrecpList();
       this.toastr.success("تم إعتماد طلب صيانة السيارة بنجاح", "نجاح");
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
     },
       err => {
         this.toastr.warning('لم يتم إعتماد طلب صيانة السيارة', ' فشل');
+
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       })
 
 

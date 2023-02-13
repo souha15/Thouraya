@@ -180,8 +180,9 @@ export class ListeUniteComponent implements OnInit {
       this.uniteI.cuisine = '0'
     }
 
-  }
-
+  } succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   editdot: Unite = new Unite();
   updateRecord(form: NgForm) {
     this.editdot = Object.assign(this.editdot, form.value);
@@ -190,9 +191,17 @@ export class ListeUniteComponent implements OnInit {
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
       form.resetForm();
       this.Unitelist();
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
     },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       }
 
 

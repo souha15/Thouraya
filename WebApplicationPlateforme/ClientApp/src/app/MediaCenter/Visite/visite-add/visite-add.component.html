@@ -28,7 +28,7 @@
                 <option value="زيارة شريك">زيارة شريك</option>
                 <option value="زيارة عمل شراكة">زيارة عمل شراكة</option>
                 <option value="أخرى">أخرى</option>
-          
+
               </select>
             </div>
 
@@ -66,7 +66,7 @@
             <div class="col-md-8 col-sm-12">
               <label class="main">
                 <span><i class="fa fa-file-pdf"></i></span>
-                	العروض والمطبوعات
+                العروض والمطبوعات
               </label>
               <div class="d-flex w-100 justify-content-start flex-wrap">
                 <div class="ml-3">
@@ -115,6 +115,18 @@
           <div class="col-12 text-left">
             <input class="btn btn-info px-4" type="submit" value="حفظ" />
 
+          </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
           </div>
         </form>
       </div>

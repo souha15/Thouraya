@@ -36,7 +36,7 @@
 
             <div class="col-md-6">
               <label for="time1">	التاريخ  </label>
-              <input type="datetime-local" id="time1" name="dateTime" #dateTime="ngModel" [(ngModel)]="dem.dateTime"   [min]="today"/>
+              <input type="datetime-local" id="time1" name="dateTime" #dateTime="ngModel" [(ngModel)]="dem.dateTime" [min]="today" />
             </div>
 
             <div class="col-md-6">
@@ -53,9 +53,9 @@
             <div class="col-md-12">
               <label for="resume" class="main">
                 <span><i class="fa fa-file-signature"></i></span> التوصيات
-                
+
               </label>
-              <input type="text" id="resume" name="detail" #detail="ngModel" [(ngModel)]="dem.detail" style="width:500px;"/>
+              <input type="text" id="resume" name="detail" #detail="ngModel" [(ngModel)]="dem.detail" style="width:500px;" />
             </div>
           </div>
 
@@ -77,30 +77,30 @@
                      class="btn mt-md-4"
                      style="
 											width: 120px;
-											height: 40px;										
+											height: 40px;
 											color: #fff;
 											background: #344760;
 										">إضافة</a>
 
                 </div>
-                </div>
-
-
               </div>
-  
+
+
+            </div>
+
             <div class="table-responsive new-table2" *ngIf="guestTest">
               <table class="table table-bordered text-center table-striped">
                 <thead class="thead-primary">
                   <tr>
 
-                    <th scope="col">إسم الضيف</th>        
+                    <th scope="col">إسم الضيف</th>
                     <th scope="col">حذف</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr *ngFor="let dp of guestList">
                     <td>{{dp.nom}}</td>
-    
+
                     <td><a (click)="del(dp,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
                   </tr>
 
@@ -112,6 +112,17 @@
           <div class="col-12 text-left">
             <input class="btn btn-info px-4" type="submit" value="حفظ" />
 
+          </div>
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
           </div>
         </form>
       </div>

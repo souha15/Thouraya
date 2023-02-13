@@ -104,6 +104,9 @@ export class AddStockComponent implements OnInit {
     this.getUserConnected();
   }
   //Edit
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   updateRecord(form: NgForm) {
     this.stockService.EditStock().subscribe(
@@ -112,10 +115,19 @@ export class AddStockComponent implements OnInit {
         this.toastr.success("تم التحديث  بنجاح", "نجاح");
         this.ShowDotations();
         this.getUserConnected();
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
+
       },
       err => {
         console.log(err);
         this.toastr.warning('لم يتم التحديث ', ' فشل');
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
 
       }
     )
@@ -152,10 +164,19 @@ export class AddStockComponent implements OnInit {
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         this.ShowDotations();
         this.getUserConnected();
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
       },
       err => {
         console.log(err);
         this.toastr.warning('لم تتم الإضافة', ' فشل');
+        this.failed = true;
+        this.succ = false;
+
+        this.msg = " فشل عند الإضافة"
       }
     )
   }

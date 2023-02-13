@@ -96,27 +96,39 @@
       <div class="modal-body" style="direction:rtl; text-align:right">
         <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
           <input type="hidden" name="id" [value]="locataireService.formData.id" />
-            <div class="col-3">
-              <label for="renter"><span><i class="fa fa-user fa-lg"></i></span>المستأجر</label>
+          <div class="col-3">
+            <label for="renter"><span><i class="fa fa-user fa-lg"></i></span>المستأجر</label>
+          </div>
+          <div class="col-9 renter">
+            <input type="text" id="renter" class="mb-2" placeholder="الاسم" name="nom" #nom="ngModel" [(ngModel)]="locataireService.formData.nom" required />
+            <div *ngIf="nom.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب اسم.
             </div>
-            <div class="col-9 renter">
-              <input type="text" id="renter" class="mb-2" placeholder="الاسم" name="nom" #nom="ngModel" [(ngModel)]="locataireService.formData.nom" required />
-              <div *ngIf="nom.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
-                مطلوب اسم.
-              </div>
-              <input type="text" class="mb-2" placeholder="الهوية" name="cin" #cin="ngModel" [(ngModel)]="locataireService.formData.cin" required maxlength="10"/>
-              <div *ngIf="cin.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
-                مطلوب هوية.
-              </div>
-              <input type="text" class="mb-2" placeholder="الجنسية" name="nationnalite" #nationnalite="ngModel" [(ngModel)]="locataireService.formData.nationnalite" />
-              <input type="text" class="mb-2" placeholder="العمل" name="profession" #profession="ngModel" [(ngModel)]="locataireService.formData.profession" />
-              <input type="text" class="mb-2" placeholder="العنوان" name="adresse" #adresse="ngModel" [(ngModel)]="locataireService.formData.adresse" />
-              <input type="text" class="mb-2" placeholder="الجوال" name="tel" #tel="ngModel" [(ngModel)]="locataireService.formData.tel" />
-            </div>         
-            <div class="mx-auto my-3">
-              <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save"></i></span> حفظ</button>
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">خروج</button>
+            <input type="text" class="mb-2" placeholder="الهوية" name="cin" #cin="ngModel" [(ngModel)]="locataireService.formData.cin" required maxlength="10" />
+            <div *ngIf="cin.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+              مطلوب هوية.
             </div>
+            <input type="text" class="mb-2" placeholder="الجنسية" name="nationnalite" #nationnalite="ngModel" [(ngModel)]="locataireService.formData.nationnalite" />
+            <input type="text" class="mb-2" placeholder="العمل" name="profession" #profession="ngModel" [(ngModel)]="locataireService.formData.profession" />
+            <input type="text" class="mb-2" placeholder="العنوان" name="adresse" #adresse="ngModel" [(ngModel)]="locataireService.formData.adresse" />
+            <input type="text" class="mb-2" placeholder="الجوال" name="tel" #tel="ngModel" [(ngModel)]="locataireService.formData.tel" />
+          </div>
+          <div class="mx-auto my-3">
+            <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save"></i></span> حفظ</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">خروج</button>
+          </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
         </form>
       </div>
     </div>

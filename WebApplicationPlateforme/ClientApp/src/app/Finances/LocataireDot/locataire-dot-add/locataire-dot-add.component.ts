@@ -219,15 +219,28 @@ export class LocataireDotAddComponent implements OnInit {
 
         form.resetForm();
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
       },
         err => {
           console.log(err);
           this.toastr.warning('لم تتم الإضافة', ' فشل');
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
+
         }
       )
     }
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onDelete1(dp, i) {
     this.fileslist.splice(this.fileslist.indexOf(dp), 1);
   }

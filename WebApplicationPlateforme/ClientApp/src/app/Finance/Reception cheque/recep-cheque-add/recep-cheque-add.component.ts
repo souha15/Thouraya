@@ -49,6 +49,9 @@ export class RecepChequeAddComponent implements OnInit {
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
   id: number;
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -77,11 +80,20 @@ export class RecepChequeAddComponent implements OnInit {
               });
           })
           this.files1 = [];
+          this.succ = true;
+          this.failed = false;
+
+
+          this.msg = "  تمت الإضافة بنجاح"
           this.toastr.success("تمت الإضافة بنجاح", "نجاح");
           form.resetForm();
       },
         err => {
           this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         })
   }
   }

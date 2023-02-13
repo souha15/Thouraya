@@ -222,6 +222,17 @@
               <input class="btn btn-primary px-4" type="submit" value="إضافة" />
               <input class="btn btn-danger px-4" type="reset" value="إلغاء" />
             </div>
+            <div class="col-md-6">
+              <div class="success-msg" *ngIf="succ">
+                <i class="fa fa-check"></i>
+                {{msg}}
+              </div>
+
+              <div class="error-msg" *ngIf="failed">
+                <i class="fa fa-times-circle"></i>
+                {{msg}}
+              </div>
+            </div>
           </form>
         </div>
       </div>

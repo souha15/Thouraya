@@ -61,12 +61,18 @@ export class HistoPayChequeComponent implements OnInit {
     this.per.etatgeneral = this.etat
     this.demandeService.PutObservableE(this.per).subscribe(res => {
         this.toastr.success('تم التحديث بنجاح', 'نجاح');
-        this.getDemPayList();
+      this.getDemPayList();
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
     })
 
 
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   onDelete(id: number) {
 

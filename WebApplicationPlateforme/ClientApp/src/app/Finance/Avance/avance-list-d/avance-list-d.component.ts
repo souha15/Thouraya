@@ -185,6 +185,10 @@ export class AvanceListDComponent implements OnInit {
 
   date = new Date().toLocaleDateString();
   autoNotif: AutomaticNotification = new AutomaticNotification();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   updateRecord(form: NgForm) {
     this.avanceService.EditDemandByRole(this.fact.id, this.etat).subscribe(res => {
       this.fact = res;
@@ -267,10 +271,15 @@ export class AvanceListDComponent implements OnInit {
         }
       this.GetAvanceList();
       this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
-
+        this.succ = true;
+        this.failed = false;
+        this.msg ="تم  قبول الطلب بنجاح"
     },
       err => {
         this.toastr.warning('لم يتم  قبول الطلب', ' فشل');
+        this.failed = true;
+        this.succ = false;
+        this.msg ="لم يتم  قبول الطلب"
       })
       })
 

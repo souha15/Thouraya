@@ -30,6 +30,9 @@ export class HistoAssistanceComponent implements OnInit {
     this.assis = Object.assign({}, assistance);
   }
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   date = new Date().toLocaleDateString();
   accept() {
@@ -40,9 +43,15 @@ export class HistoAssistanceComponent implements OnInit {
     this.assistanceService.PutObservableE(this.assis).subscribe(res => {
       this.getAsList();
       this.toastr.success("تم  موافقة الطلب بنجاح", "نجاح");
+      this.msg = "تم  قبول الطلب بنجاح"
+      this.succ = true;
+      this.failed = false;
     },
       err => {
         this.toastr.warning('لم  موافقة الطلب ', ' فشل');
+        this.failed = true;
+        this.succ = false;
+        this.msg = "لم يتم  قبول الطلب"
       })
   }
 
@@ -54,9 +63,15 @@ export class HistoAssistanceComponent implements OnInit {
     this.assistanceService.PutObservableE(this.assis).subscribe(res => {
       this.getAsList();
       this.toastr.success("تم  رفض الطلب بنجاح", "نجاح");
+      this.succ = true;
+      this.failed = false;
+      this.msg = "تم  رفض الطلب بنجاح"
     },
       err => {
         this.toastr.warning('لم  ترفض الطلب ', ' فشل');
+        this.msg = "لم يتم رفض الطلب "
+        this.failed = true;
+        this.succ = false;
       })
   }
 

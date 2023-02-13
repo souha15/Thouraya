@@ -50,7 +50,7 @@
 
           <div class="col-md-6">
             <label for="time1">الوقت</label>
-            <input type="datetime-local" id="time1" name="dateTime" #dateTime="ngModel" [(ngModel)]="dem.dateTime" [min]="today"/>
+            <input type="datetime-local" id="time1" name="dateTime" #dateTime="ngModel" [(ngModel)]="dem.dateTime" [min]="today" />
           </div>
 
           <div class="col-md-6">
@@ -79,6 +79,18 @@
                    type="submit"
                    value="ارسال" />
           </div>
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
+
         </form>
       </div>
     </div><!-- End col-9 -->

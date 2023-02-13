@@ -10,7 +10,7 @@
       <header>
         <h3 class="task-head">إضافة سند قبض شيك</h3>
       </header>
-      <form class="task-form form-row"  #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+      <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
         <div class="col-md-6">
           <label for="recipe-date">تاريخ إضافة السند </label>
           <input type="text" id="recipe-date" value="{{datee}}" disabled />
@@ -33,11 +33,11 @@
         </div>
         <div class="col-md-6">
           <label for="check-payee">صاحب الشيك</label>
-          <input type="text"  name="propCheque" #propCheque="ngModel" [(ngModel)]="rc.propCheque" />
+          <input type="text" name="propCheque" #propCheque="ngModel" [(ngModel)]="rc.propCheque" />
         </div>
         <div class="col-md-6">
           <label for="sender">المراسل</label>
-          <input type="text"  name="livreur" #livreur="ngModel" [(ngModel)]="rc.livreur" />
+          <input type="text" name="livreur" #livreur="ngModel" [(ngModel)]="rc.livreur" />
         </div>
         <div class="col-md-6">
           <label for="amount">المبلغ</label>
@@ -66,6 +66,18 @@
                  style="width: 130px;"
                  class="btn btn-info"
                  value="إضافة" />
+        </div>
+
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            {{msg}}
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            {{msg}}
+          </div>
         </div>
       </form>
     </div>

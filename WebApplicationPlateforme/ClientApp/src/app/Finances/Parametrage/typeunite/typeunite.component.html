@@ -31,15 +31,26 @@
                 </div>
               </div>
             
-                <div>
-                  <label for="stop-address"><span><i class="fa fa-info"></i></span>وصف الوحدة</label>
-                  <input type="text" id="stop-address" class="" name="description" #description="ngModel" [(ngModel)]="dotationService.formData.description" required>
-                  <br />
+              <div>
+                <label for="stop-address"><span><i class="fa fa-info"></i></span>وصف الوحدة</label>
+                <input type="text" id="stop-address" class="" name="description" #description="ngModel" [(ngModel)]="dotationService.formData.description" required>
+                <br />
 
-                  <div class="col-sm-12">
-                    <button type="submit" class="btn btn-primary" [disabled]="nom.invalid"><span><i class="fa fa-save"></i></span> حفظ</button>
+                <div class="col-sm-12">
+                  <button type="submit" class="btn btn-primary" [disabled]="nom.invalid"><span><i class="fa fa-save"></i></span> حفظ</button>
+                </div>
+                <div class="col-md-6">
+                  <div class="success-msg" *ngIf="succ">
+                    <i class="fa fa-check"></i>
+                    {{msg}}
+                  </div>
+
+                  <div class="error-msg" *ngIf="failed">
+                    <i class="fa fa-times-circle"></i>
+                    {{msg}}
                   </div>
                 </div>
+              </div>
             </form>
           </div>
 

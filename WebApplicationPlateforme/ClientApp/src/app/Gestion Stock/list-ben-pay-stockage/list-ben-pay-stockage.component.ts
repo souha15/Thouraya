@@ -129,20 +129,35 @@ export class ListBenPayStockageComponent implements OnInit {
     }
   }
 
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit1(form: NgForm) {
     if (this.or) {
       this.BenOrdreService.PutObservableE(this.orPay).subscribe(res => {
         this.toastr.success("تم التسجيل بنجاح", "نجاح");
         this.Chercher();
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
       },
         err => {
 
           this.toastr.error(" فشل في التسجيل", "فشل")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         })
     } else {
 
       this.toastr.error(" لقد تم الصرف من قبل", "فشل")
+      this.failed = true;
+      this.succ = false;
+
+      this.msg = " لقد تم الصرف من قبل"
     }
   }
 

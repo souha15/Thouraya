@@ -51,6 +51,10 @@ export class HistoPermissionComponent implements OnInit {
   date = new Date().toLocaleDateString();
   conge: PermissionU = new PermissionU();
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   updateRecord(form: NgForm) {
 
     this.conge = Object.assign(this.conge, form.value);
@@ -59,11 +63,19 @@ export class HistoPermissionComponent implements OnInit {
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
         this.resetForm();
         this.CongeList();
-    
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
 
     },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');
+
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       }
 
 

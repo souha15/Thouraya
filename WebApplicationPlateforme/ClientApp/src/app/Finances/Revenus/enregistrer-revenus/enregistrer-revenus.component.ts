@@ -294,6 +294,9 @@ export class EnregistrerRevenusComponent implements OnInit {
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
   revenusId: number;
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
 
     let path = this.rootUrl.getPath();
@@ -331,6 +334,7 @@ export class EnregistrerRevenusComponent implements OnInit {
         this.dette = calc
 
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+
         this.listr2.push(this.revenus)
 
         //Eau
@@ -341,7 +345,11 @@ export class EnregistrerRevenusComponent implements OnInit {
         //upload 3
 
 
+        this.succ = true;
+        this.failed = false;
 
+
+        this.msg = "  تمت الإضافة بنجاح"
 
         form.resetForm();
 
@@ -349,6 +357,11 @@ export class EnregistrerRevenusComponent implements OnInit {
         err => {
           console.log(err);
           this.toastr.warning('لم تتم الإضافة', ' فشل');
+
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         }
       )
 

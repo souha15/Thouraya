@@ -98,7 +98,7 @@
                   </tr>
                 </thead>
                 <tbody *ngIf="guestTest">
-                  <tr *ngFor="let dp of guestList" >
+                  <tr *ngFor="let dp of guestList">
                     <td>{{dp.nom}}</td>
 
                     <td><a (click)="del2(dp.id)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
@@ -119,6 +119,18 @@
           <div class="col-12 text-left">
             <input class="btn btn-info px-4" type="submit" value="حفظ" />
 
+          </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
           </div>
         </form>
       </div>

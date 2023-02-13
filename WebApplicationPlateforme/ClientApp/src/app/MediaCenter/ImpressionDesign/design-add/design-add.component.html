@@ -31,14 +31,14 @@
 
           <div class="col-md-8">
             <label for="demm-type"> الموضوع  </label>
-            <input type="text" id="target" 
-                   name="attribut6" #attribut6="ngModel" [(ngModel)]="dem.attribut6" style="width:300px"/>
+            <input type="text" id="target"
+                   name="attribut6" #attribut6="ngModel" [(ngModel)]="dem.attribut6" style="width:300px" />
           </div>
 
           <div class="col-md-12">
             <label for="demm-type"> الملاحظات   </label>
-            <input type="text"  id="target"
-                      name="attribut5" #attribut5="ngModel" [(ngModel)]="dem.attribut5" style="width:630px"/>
+            <input type="text" id="target"
+                   name="attribut5" #attribut5="ngModel" [(ngModel)]="dem.attribut5" style="width:630px" />
           </div>
 
           <div class="row w-100 d-flex form-box" *ngIf="autre">
@@ -665,6 +665,18 @@
                    style="width: 130px"
                    type="submit"
                    value="ارسال" />
+          </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
           </div>
         </form>
   </div>

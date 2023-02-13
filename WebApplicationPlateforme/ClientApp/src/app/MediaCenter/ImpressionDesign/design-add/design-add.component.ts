@@ -294,7 +294,9 @@ export class DesignAddComponent implements OnInit {
 
 
   /** OnSubmit **/
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   dem: DesignImpression = new DesignImpression();
   dem2: DesignImpression = new DesignImpression();
   isValidFormSubmitted = false;
@@ -354,7 +356,9 @@ export class DesignAddComponent implements OnInit {
             })
           })
         })
-
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تمت الإضافة بنجاح"
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         form.resetForm();
         this.TypeImpList.splice(0, this.TypeImpList.length)
@@ -363,6 +367,9 @@ export class DesignAddComponent implements OnInit {
       },
         err => {
           this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
+          this.failed = true;
+          this.succ = false;
+          this.msg = " فشل عند الإضافة"
         })
     }
   }

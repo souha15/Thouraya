@@ -158,12 +158,22 @@ export class TicketListClientComponent implements OnInit {
         form.resetForm();
         this.files1 = [];
         this.isValidFormSubmitted = false;
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
       }, err => {
         this.toastr.error("فشل تحديث التذكرة", " تحديث التذكرة")
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       }
         )
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   resetForm(form?: NgForm) {
     if (form != null)

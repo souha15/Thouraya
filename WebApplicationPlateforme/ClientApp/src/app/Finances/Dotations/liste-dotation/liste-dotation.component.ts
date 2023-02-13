@@ -245,12 +245,16 @@ export class ListeDotationComponent implements OnInit {
       this.paytest = false;
 
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   editdot: Dotation = new Dotation();
   updateRecord(form: NgForm) {
     this.editdot = Object.assign(this.editdot, form.value);
     
     this.dotationService.Edit().subscribe(res => {
+
+ 
 
       if (this.paytest2) {
 
@@ -270,6 +274,10 @@ export class ListeDotationComponent implements OnInit {
               },
             err => {
               this.toastr.error("  فشل في تسجيل  الوحدات", "فشل")
+              this.msg = " فشل في تسجيل  الوحدات"
+
+              this.failed = true;
+              this.succ = false;
             })
 
         }
@@ -279,11 +287,19 @@ export class ListeDotationComponent implements OnInit {
       this.paytest = false;
       this.payList.splice(0, this.payList.length)      
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
       this.resetForm();
       this.dotationlist();
     },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
       }
 
 
