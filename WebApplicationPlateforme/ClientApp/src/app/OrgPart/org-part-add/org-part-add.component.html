@@ -20,28 +20,41 @@
               <option value="فرد">فرد</option>
             </select>
           </div>
-            <div class="col-3" >
-              <label for="renter" *ngIf="org"><span><i class="fa fa-home"></i></span>جهة</label>
-              <label for="renter" *ngIf="part"><span><i class="fa fa-user"></i></span>فرد</label>
-            </div>
-            <div class="col-9 renter" *ngIf="orgpart||org">
-              <input type="text" id="renter" class="mb-2" placeholder="الإسم المختصر " name="shortnom" #shortnom="ngModel" [(ngModel)]="organisme.shortnom"  *ngIf="org" />
-              <input type="text" class="mb-2" placeholder="الإسم الكامل" name="nomcomplet" #nomcomplet="ngModel" [(ngModel)]="organisme.nomcomplet" *ngIf="org" />
-              <input type="text" id="renter" class="mb-2" placeholder="الإسم  " name="shortnom" #shortnom="ngModel" [(ngModel)]="organisme.shortnom"  *ngIf="part" />         
-              <input type="text" class="mb-2" placeholder="االلقب" name="nomcomplet" #nomcomplet="ngModel" [(ngModel)]="organisme.nomcomplet" *ngIf="part" />
+          <div class="col-3">
+            <label for="renter" *ngIf="org"><span><i class="fa fa-home"></i></span>جهة</label>
+            <label for="renter" *ngIf="part"><span><i class="fa fa-user"></i></span>فرد</label>
+          </div>
+          <div class="col-9 renter" *ngIf="orgpart||org">
+            <input type="text" id="renter" class="mb-2" placeholder="الإسم المختصر " name="shortnom" #shortnom="ngModel" [(ngModel)]="organisme.shortnom" *ngIf="org" />
+            <input type="text" class="mb-2" placeholder="الإسم الكامل" name="nomcomplet" #nomcomplet="ngModel" [(ngModel)]="organisme.nomcomplet" *ngIf="org" />
+            <input type="text" id="renter" class="mb-2" placeholder="الإسم  " name="shortnom" #shortnom="ngModel" [(ngModel)]="organisme.shortnom" *ngIf="part" />
+            <input type="text" class="mb-2" placeholder="االلقب" name="nomcomplet" #nomcomplet="ngModel" [(ngModel)]="organisme.nomcomplet" *ngIf="part" />
 
-              <input type="text" class="mb-2" placeholder="الهوية" name="cin" #cin="ngModel" [(ngModel)]="organisme.cin" *ngIf="part" />
-              <input type="text" class="mb-2" placeholder="الهاتف" name="tel" #tel="ngModel" [(ngModel)]="organisme.tel" />
-              <input type="text" class="mb-2" placeholder="العنوان" name="addresse" #addresse="ngModel" [(ngModel)]="organisme.addresse" />
-              <input type="text" class="mb-2" placeholder="الفاكس" name="fax" #fax="ngModel" [(ngModel)]="organisme.fax" />
-              <input type="text" class="mb-2" placeholder="البريد الإلكتروني" name="email" #email="ngModel" [(ngModel)]="organisme.email" />
+            <input type="text" class="mb-2" placeholder="الهوية" name="cin" #cin="ngModel" [(ngModel)]="organisme.cin" *ngIf="part" />
+            <input type="text" class="mb-2" placeholder="الهاتف" name="tel" #tel="ngModel" [(ngModel)]="organisme.tel" />
+            <input type="text" class="mb-2" placeholder="العنوان" name="addresse" #addresse="ngModel" [(ngModel)]="organisme.addresse" />
+            <input type="text" class="mb-2" placeholder="الفاكس" name="fax" #fax="ngModel" [(ngModel)]="organisme.fax" />
+            <input type="text" class="mb-2" placeholder="البريد الإلكتروني" name="email" #email="ngModel" [(ngModel)]="organisme.email" />
+          </div>
+
+          <div class="mx-auto my-3">
+            <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
+            <button class="btn btn-danger px-2 ml-3" type="reset"><span class="ml-4"><i class="fa fa-trash"></i></span>حذف الحقول</button>
+
+          </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
             </div>
 
-            <div class="mx-auto my-3">
-              <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
-              <button class="btn btn-danger px-2 ml-3" type="reset"><span class="ml-4"><i class="fa fa-trash"></i></span>حذف الحقول</button>
-
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
             </div>
+          </div>
+
         </form>
       </section>
     </div><!-- End col-9 -->

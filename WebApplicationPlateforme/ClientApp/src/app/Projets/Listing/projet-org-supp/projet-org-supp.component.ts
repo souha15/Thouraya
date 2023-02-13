@@ -94,17 +94,26 @@ export class ProjetOrgSuppComponent implements OnInit {
   }
 
   //Edit
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   updateRecord(form: NgForm) {
     this.tblService.Edit().subscribe(
       res => {
         this.resetForm(form);
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تم التحديث بنجاح"
         this.toastr.success("تم التحديث  بنجاح", "نجاح");
         this.ShowDotations();
 
       },
       err => {
         console.log(err);
+        this.failed = true;
+        this.succ = false;
+        this.msg = "  فشل عند التحديث"
         this.toastr.warning('لم يتم التحديث ', ' فشل');
 
       }
@@ -119,11 +128,17 @@ export class ProjetOrgSuppComponent implements OnInit {
     this.tblService.Post().subscribe(
       res => {
         this.resetForm(form);
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تمت الإضافة بنجاح"
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         this.ShowDotations();
       },
       err => {
         console.log(err);
+        this.failed = true;
+        this.succ = false;
+        this.msg = " فشل عند الإضافة"
         this.toastr.warning('لم تتم الإضافة', ' فشل');
       }
     )

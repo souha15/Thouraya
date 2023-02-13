@@ -244,7 +244,7 @@
             </div>
             <div class="col-md-6">
               <label>المشروع/البرنامج</label><br />
-  
+
               <div class="programs">
                 <label>المشروع/البرنامج</label>
                 <select id="prog" name="projet" #projet="ngModel" [(ngModel)]="factureService.formData.projet">
@@ -268,7 +268,7 @@
                 </select>
 
               </div>
-    
+
               <div>
                 <label for="mob-num">رقم الجوال</label>
                 <input type="text" id="mob-num" name="tel" #tel="ngModel" [(ngModel)]="factureService.formData.tel" />
@@ -296,6 +296,19 @@
                      class="btn btn-info next"
                      value="تعديل" />
             </div>
+
+            <div class="col-md-6">
+              <div class="success-msg" *ngIf="succ">
+                <i class="fa fa-check"></i>
+                {{msg}}
+              </div>
+
+              <div class="error-msg" *ngIf="failed">
+                <i class="fa fa-times-circle"></i>
+                {{msg}}
+              </div>
+            </div>
+
           </form>
         </div>
       </div>

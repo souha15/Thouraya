@@ -24,11 +24,11 @@
             <div>
               <label for="pro-manager"><span><i class="fa fa-user"></i></span> مدير المشروع</label>
               <input type="text" id="pro-manager" name="dirnom" #dirnom="ngModel" [(ngModel)]="pr.dirnom" />
-             
+
             </div>
             <div>
               <label for="status"><span><i class="fa fa-edit"></i></span> الصفة</label>
-              <input type="text" id="status"  name="descriptiondir" #descriptiondir="ngModel" [(ngModel)]="pr.descriptiondir" />
+              <input type="text" id="status" name="descriptiondir" #descriptiondir="ngModel" [(ngModel)]="pr.descriptiondir" />
             </div>
           </div>
           <div class="col-md-12">
@@ -48,7 +48,7 @@
             <div *ngIf="moisjours.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
               مطلوب مدة المشروع .
             </div>
-               &nbsp;&nbsp;<input type="number" min="0" id="pro-time" name="duree" #duree="ngModel" [(ngModel)]="pr.duree" required />    &nbsp;&nbsp;    &nbsp;&nbsp;
+            &nbsp;&nbsp;<input type="number" min="0" id="pro-time" name="duree" #duree="ngModel" [(ngModel)]="pr.duree" required />    &nbsp;&nbsp;    &nbsp;&nbsp;
             <div *ngIf="duree.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
               مطلوب مدة المشروع .
             </div>
@@ -75,7 +75,7 @@
               </div>
               <div>
                 <label for="amount">مبلغ الدعم</label>
-                <input type="number" min="0"  id="amount" name="prix" #prix="ngModel" [(ngModel)]="pr.prix" />
+                <input type="number" min="0" id="amount" name="prix" #prix="ngModel" [(ngModel)]="pr.prix" />
               </div>
               <div>
                 <label for="pay-method">طريقة الايداع</label>
@@ -101,7 +101,7 @@
               </div>
               <div>
                 <label for="pay-date">تاريخ الدعم</label>
-                <input type="date"  id="pay-date" name="datesupport" #datesupport="ngModel" [(ngModel)]="pr.datesupport" />
+                <input type="date" id="pay-date" name="datesupport" #datesupport="ngModel" [(ngModel)]="pr.datesupport" />
               </div>
               <div>
                 <label for="pay-num">رقم سند القبض</label>
@@ -269,7 +269,7 @@
               <option value="ختامي">ختامي</option>
             </select>
             <label for="up-date">تاريخ الرفع</label>
-            <input type="date" id="up-date" style="width:150px;" name="date" #date="ngModel" [(ngModel)]="rf.date"/>
+            <input type="date" id="up-date" style="width:150px;" name="date" #date="ngModel" [(ngModel)]="rf.date" />
 
             <ngx-dropzone (change)="upload6($event);onSelect6($event)" class="dropzone1" #inputFile>
               <ngx-dropzone-label class="file-label" for="photos">
@@ -291,6 +291,19 @@
           <div class="col-12 text-left">
             <input class="btn btn-info px-4" type="submit" value="حفظ" />
           </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
+
         </form>
       </div>
     </div>

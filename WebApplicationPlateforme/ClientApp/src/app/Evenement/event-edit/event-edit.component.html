@@ -182,7 +182,7 @@
                 </thead>
                 <tbody>
                   <tr *ngFor="let dp of entrerlis ; let i = index">
-         
+
                     <td>{{dp.nat}}</td>
                     <td>{{dp.langue}}</td>
                     <td>{{dp.nb}}</td>
@@ -487,6 +487,19 @@
             <input class="btn btn-primary" type="submit" value="تعديل" />&nbsp;&nbsp;
 
           </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
+
         </form>
       </div>
     </div><!-- End col-9 -->

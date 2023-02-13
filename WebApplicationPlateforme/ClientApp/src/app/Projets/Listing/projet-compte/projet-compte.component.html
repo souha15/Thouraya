@@ -36,14 +36,14 @@
               <div>
                 <label for="stop-name"><span><i class="fa fa-genderless"></i></span>النوع</label>
 
-                  <select id="account" name="nom" #nom="ngModel" [(ngModel)]="tblService.formData2.nom" required >
-                    <option [ngValue]="undefined" selected disabled>-اختر-</option>
-                    <option value="وقف">وقف</option>
-                    <option value="زكاة">زكاة</option>
-                    <option value="عام">عام</option>
-                    <option value="إفطار صائم">إفطار صائم</option>
-                  </select>
-           
+                <select id="account" name="nom" #nom="ngModel" [(ngModel)]="tblService.formData2.nom" required>
+                  <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                  <option value="وقف">وقف</option>
+                  <option value="زكاة">زكاة</option>
+                  <option value="عام">عام</option>
+                  <option value="إفطار صائم">إفطار صائم</option>
+                </select>
+
                 <div *ngIf="nom.invalid && (nom.dirty || nom.touched)" class="alert alert-danger">
 
                   <div *ngIf="nom.errors.required">
@@ -71,6 +71,19 @@
                   <button type="submit" class="btn btn-primary" [disabled]="nom.invalid"><span><i class="fa fa-save"></i></span> حفظ</button>
                 </div>
               </div>
+
+              <div class="col-md-6">
+                <div class="success-msg" *ngIf="succ">
+                  <i class="fa fa-check"></i>
+                  {{msg}}
+                </div>
+
+                <div class="error-msg" *ngIf="failed">
+                  <i class="fa fa-times-circle"></i>
+                  {{msg}}
+                </div>
+              </div>
+
             </form>
           </div>
 

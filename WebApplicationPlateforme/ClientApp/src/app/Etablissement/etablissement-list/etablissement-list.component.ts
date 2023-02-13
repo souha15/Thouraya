@@ -96,15 +96,25 @@ ngOnInit(): void {
   }
 
   admin: Etablissement = new Etablissement();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   updateRecord(form: NgForm) {
     this.admin = Object.assign(this.admin, form.value);
     this.etaId = this.admin.id;
-    this.AdministrationService.EditEtablissement().subscribe(res => {
-      this.toastr.success('تم التحديث بنجاح', 'نجاح')
-      this.resetForm();
-      this.ShowListAdministration();
+    this.AdministrationService.EditEtablissement().subscribe(
+      res => {
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تم التحديث بنجاح"
+        this.toastr.success('تم التحديث بنجاح', 'نجاح')
+        this.resetForm();
+        this.ShowListAdministration();
     },
       err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg = "  فشل عند التحديث"
         this.toastr.error('لم يتم التحديث  ', ' فشل');
       }
 

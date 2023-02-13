@@ -108,6 +108,11 @@ export class MusuWomenAddComponent implements OnInit {
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
   Id: number;
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
 
     //if (form.invalid) {
@@ -120,7 +125,8 @@ export class MusuWomenAddComponent implements OnInit {
       this.mus.dateenreg = this.date;
       this.mus.idusercreator = this.UserId;
       this.mus.usernamecreator = this.UserName;
-      this.musService.Create(this.mus).subscribe(res => {
+    this.musService.Create(this.mus).subscribe(
+      res => {
         this.Id = res.id;
         /* Pass Files */
 
@@ -159,18 +165,26 @@ export class MusuWomenAddComponent implements OnInit {
 
 
         form.resetForm();
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تمت الإضافة بنجاح"
         this.toastr.success("تم التسجيل بنجاح", "نجاح")
         this.files1 = [];
         this.files2 = [];
         this.files3 = [];
       }, err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg = " فشل عند الإضافة"
         this.toastr.error("  فشل في تسجيل	 ", "فشل")
       })
     //}
   }
 
   onSubmitOk() {
-
+    this.succ = true;
+    this.failed = false;
+    this.msg = "  تمت الإضافة بنجاح"
     this.toastr.success("تم التسجيل بنجاح", "نجاح")
   }
   //Files

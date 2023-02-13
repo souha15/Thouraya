@@ -93,6 +93,11 @@ export class SuppliesAddComponent implements OnInit {
   cptId: number;
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
 
     this.sup.idUserCreator = this.UserIdConnected;
@@ -137,15 +142,25 @@ export class SuppliesAddComponent implements OnInit {
             this.good = false;
             this.sudata = false;
             form.resetForm();
+
+            this.succ = true;
+            this.failed = false;
+            this.msg = "  تمت الإضافة بنجاح"
             this.toastr.success("تم تسجيل  بنجاح", " تسجيل ");
             this.isValidFormSubmitted = false;
           },
           err => {
+            this.failed = true;
+            this.succ = false;
+            this.msg = "فشل تسجيل "
             this.toastr.error("فشل تسجيل ", " تسجيل ")
           }
 
         )
-    }else {
+      } else {
+        this.failed = true;
+        this.succ = false;
+        this.msg = "تثبت من الكمية "
         this.toastr.error("تثبت من الكمية ", " تسجيل ")
     }
 

@@ -159,7 +159,7 @@
               <br />
             </div>
 
-            <div class="table-responsive new-table2"  *ngIf="fmtest || famille">
+            <div class="table-responsive new-table2" *ngIf="fmtest || famille">
               <table class="table table-bordered text-center table-striped">
                 <thead class="thead-gestimary">
                   <tr>
@@ -274,7 +274,7 @@
               <br />
             </div>
 
-            <div class="table-responsive new-table2" >
+            <div class="table-responsive new-table2">
               <table class="table table-bordered text-center table-striped" *ngIf="resitest || residance">
                 <thead class="thead-gestimary">
                   <tr>
@@ -468,6 +468,19 @@
             <input class="btn btn-info px-4" type="submit" value="حفظ" />
 
           </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
+
         </form>
       </div>
     </div>

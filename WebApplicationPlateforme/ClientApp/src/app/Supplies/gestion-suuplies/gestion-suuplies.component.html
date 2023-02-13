@@ -45,9 +45,9 @@
               <input type="hidden" name="id" [value]="tblService.formData.id" />
               <div>
                 <label for="stop-name"><span><i class="fa fa-genderless"></i></span>إسم العهدة</label>
-                <select type="text" id="stop-name" name="sup" #sup="ngModel" [(ngModel)]="tblService.formData.sup" required >
-                <option [ngValue]="undefined" selected disabled>-اختر-</option>
-                <option *ngFor="let item of tbnom" value="{{item.nom}}">{{item.nom}}</option>
+                <select type="text" id="stop-name" name="sup" #sup="ngModel" [(ngModel)]="tblService.formData.sup" required>
+                  <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                  <option *ngFor="let item of tbnom" value="{{item.nom}}">{{item.nom}}</option>
 
                 </select>
                 <div *ngIf="sup.invalid && (sup.dirty || sup.touched)" class="alert alert-danger">
@@ -61,8 +61,8 @@
               <div>
                 <label for="stop-name"><span><i class="fa fa-genderless"></i></span>نوع العهدة</label>
                 <select type="text" id="stop-name" name="type" #type="ngModel" [(ngModel)]="tblService.formData.type" required>
-                <option [ngValue]="undefined" selected disabled>-اختر-</option>
-                <option *ngFor="let item of tbtype" value="{{item.nom}}">{{item.nom}}</option>
+                  <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                  <option *ngFor="let item of tbtype" value="{{item.nom}}">{{item.nom}}</option>
                 </select>
                 <div *ngIf="type.invalid && (type.dirty || type.touched)" class="alert alert-danger">
 
@@ -95,6 +95,19 @@
                   <button type="submit" class="btn btn-primary" [disabled]="quanitite.invalid"><span><i class="fa fa-save"></i></span> حفظ</button>
                 </div>
               </div>
+
+              <div class="col-md-6">
+                <div class="success-msg" *ngIf="succ">
+                  <i class="fa fa-check"></i>
+                  {{msg}}
+                </div>
+
+                <div class="error-msg" *ngIf="failed">
+                  <i class="fa fa-times-circle"></i>
+                  {{msg}}
+                </div>
+              </div>
+
             </form>
           </div>
 

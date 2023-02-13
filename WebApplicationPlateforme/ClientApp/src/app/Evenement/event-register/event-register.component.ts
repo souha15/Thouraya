@@ -283,11 +283,19 @@ export class EventRegisterComponent implements OnInit {
   ev2: Evenement = new Evenement();
  
   eventId: number;
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     
     if (form.invalid) {
       this.isValidFormSubmitted = false;
       console.log(this.isValidFormSubmitted)
+      this.failed = true;
+      this.succ = false;
+      this.msg = "تأكد من  من صحة الحقول من فضلك"
       this.toastr.warning("تأكد من  من صحة الحقول من فضلك")
       
     } else {
@@ -311,6 +319,9 @@ export class EventRegisterComponent implements OnInit {
                 this.parlis2[i] = res
               },
                 err => {
+                  this.failed = true;
+                  this.succ = false;
+                  this.msg = "  فشل في تسجيل المستفيدون"
                   this.toastr.error("  فشل في تسجيل المستفيدون", "فشل")
                 })
             }
@@ -332,6 +343,9 @@ export class EventRegisterComponent implements OnInit {
                 console.log(this.somme)
               },
                 err => {
+                  this.failed = true;
+                  this.succ = false;
+                  this.msg = "  فشل في تسجيل المصروفات"
                   this.toastr.error("  فشل في تسجيل المصروفات", "فشل")
                 })
             }
@@ -354,6 +368,9 @@ export class EventRegisterComponent implements OnInit {
               },
               
                 err => {
+                  this.failed = true;
+                  this.succ = false;
+                  this.msg = "  فشل في تسجيل وسائل الاعلام"
                   this.toastr.error("  فشل في تسجيل وسائل الاعلام", "فشل")
                 })
             }
@@ -376,6 +393,9 @@ export class EventRegisterComponent implements OnInit {
              
               },
                 err => {
+                  this.failed = true;
+                  this.succ = false;
+                  this.msg = "  فشل في تسجيل  المستفيدون"
                   this.toastr.error("  فشل في تسجيل  المستفيدون", "فشل")
                 })
             }
@@ -394,6 +414,9 @@ export class EventRegisterComponent implements OnInit {
                 this.otiList2[i] = res
               },
                 err => {
+                  this.failed = true;
+                  this.succ = false;
+                  this.msg = "  فشل في تسجيل   الاعلام"
                   this.toastr.error("  فشل في تسجيل   الاعلام", "فشل")
                 })
             }
@@ -411,6 +434,9 @@ export class EventRegisterComponent implements OnInit {
                 this.entrerlis2[i] = res
               },
                 err => {
+                  this.failed = true;
+                  this.succ = false;
+                  this.msg = "  فشل في تسجيل    الداخلين في الإسلام"
                   this.toastr.error("  فشل في تسجيل    الداخلين في الإسلام", "فشل")
                 })
             }
@@ -460,7 +486,9 @@ export class EventRegisterComponent implements OnInit {
               })
           })*/
          
-
+          this.succ = true;
+          this.failed = false;
+          this.msg = "  تمت الإضافة بنجاح"
           this.toastr.success("تم التسجيل بنجاح", "نجاح")
           form.resetForm();
           this.files1 = [];
@@ -489,6 +517,9 @@ export class EventRegisterComponent implements OnInit {
    
       },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = " فشل عند الإضافة"
           this.toastr.error("فشل في التسجيل", "فشل")
           console.log(err)
         }

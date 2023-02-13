@@ -99,7 +99,7 @@
           <label for="user"><span><i class="fa fa-check"></i></span>حالة الطلب</label>
           <select id="user" class="" name="etat" #etat="ngModel" [(ngModel)]="pr.etat">
             <option [ngValue]="undefined" selected disabled>-حالة الطلب-</option>
-            <option value="مفعلة">مفعلة</option>         
+            <option value="مفعلة">مفعلة</option>
             <option value="مغلقة">مغلقة</option>
             <option value="مفتوحة">مفتوحة</option>
             <option value="تحت الإنجاز">تحت الإنجاز</option>
@@ -111,6 +111,19 @@
             <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
 
           </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
+
         </form>
       </div>
       <div class="modal-footer">

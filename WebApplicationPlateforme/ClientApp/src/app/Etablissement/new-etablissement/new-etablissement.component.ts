@@ -66,9 +66,16 @@ export class NewEtablissementComponent implements OnInit {
   CreatedEtablissement: Etablissement = new Etablissement();
   etaId: number;
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     this.eta.idAdministration = this.ConvertedId;
     if (this.nomAd == null) {
+      this.failed = true;
+this.succ = false;
+      this.msg = "فشل، أكتب اسم القسم "
       this.toastr.warning(" اكتب اسم القسم", "فشل")
     }
     else {
@@ -78,10 +85,16 @@ export class NewEtablissementComponent implements OnInit {
           this.CreatedEtablissement = res;
           this.etaId = this.CreatedEtablissement.id;
 
+          this.succ = true;
+          this.failed = false;
+          this.msg = "  تم التحديث بنجاح"
           this.toastr.success("تم تسجيل القسم بنجاح", " تسجيل القسم");
           this.vider(form);
       },
-      err => {
+        err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = "  فشل عند التحديث"
         this.toastr.error("فشل تسجيل القسم", " تسجيل القسم")
       }
 

@@ -342,7 +342,7 @@
                 <span class="mr-2"><i class="fa fa-upload"></i></span>
               </label>
 
-             
+
             </div>
 
             <div class="table-responsive my-3" *ngIf="doctest">
@@ -380,7 +380,7 @@
                   <span><i class="fa fa-file-alt fa-lg"></i></span> التقرير
                   <span class="mr-2"><i class="fa fa-upload"></i></span>
                 </label>
-               
+
               </div>
 
               <div class="table-responsive my-3" *ngIf="rapporttest">
@@ -439,6 +439,19 @@
             <input class="btn btn-info px-4" type="submit" value="حفظ" />
 
           </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
+
         </form>
       </div>
     </div>

@@ -163,6 +163,11 @@ export class EditMusulmanComponent implements OnInit {
   /* Create Musulman */
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
 
     if (form.invalid) {
@@ -214,18 +219,26 @@ export class EditMusulmanComponent implements OnInit {
 
 
         form.resetForm();
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تمت الإضافة بنجاح"
         this.toastr.success("تم التسجيل بنجاح", "نجاح")
         this.files1 = [];
         this.files2 = [];
         this.files3 = [];
       }, err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg = " فشل عند الإضافة"
         this.toastr.error("  فشل في تسجيل	 ", "فشل")
       })
     }
   }
 
   onSubmitOk() {
-
+    this.succ = true;
+    this.failed = false;
+    this.msg = "  تمت الإضافة بنجاح"
     this.toastr.success("تم التسجيل بنجاح", "نجاح")
   }
   //Files

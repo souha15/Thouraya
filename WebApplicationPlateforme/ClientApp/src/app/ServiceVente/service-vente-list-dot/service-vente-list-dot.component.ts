@@ -99,6 +99,11 @@ export class ServiceVenteListDotComponent implements OnInit {
   isValidFormSubmitted = false;
   path: string;
   date = new Date().toLocaleDateString();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -111,6 +116,9 @@ export class ServiceVenteListDotComponent implements OnInit {
       this.dem.datedot = this.date
       this.dem.iddot = this.userId;
       this.dem.nomdot = this.userName;
+      this.succ = true;
+      this.failed = false;
+      this.msg = "  تم التحديث بنجاح"
       this.toastr.success("تمت الإضافة بنجاح", "نجاح");
       this.demService.PutObservableE(this.dem).subscribe(res => {
         
@@ -154,6 +162,9 @@ export class ServiceVenteListDotComponent implements OnInit {
 
       },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = "  فشل عند التحديث"
           this.toastr.error("لم يتم التسجيل", "فشل في التسجيل");
         })
     }

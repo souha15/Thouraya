@@ -210,9 +210,16 @@ export class EditProjetOrgComponent implements OnInit {
   prCreated: ProjetOrg = new ProjetOrg();
   path: string;
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
+      this.failed = true;
+      this.succ = false;
+      this.msg = "تأكد من  من صحة الحقول من فضلك"
       this.toastr.warning("تأكد من  من صحة الحقول من فضلك")
 
     } else {
@@ -233,6 +240,9 @@ export class EditProjetOrgComponent implements OnInit {
 
             },
               err => {
+                this.failed = true;
+                this.succ = false;
+                this.msg = "  فشل في تسجيل    فريق المشروع"
                 this.toastr.error("  فشل في تسجيل    فريق المشروع", "فشل")
               })
 
@@ -246,13 +256,18 @@ export class EditProjetOrgComponent implements OnInit {
 
             },
               err => {
+                this.failed = true;
+                this.succ = false;
+                this.msg = "  فشل في تسجيل المستندات"
                 this.toastr.error("  فشل في تسجيل المستندات", "فشل")
               })
           }
 
         }
 
-
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تم التحديث بنجاح"
         this.toastr.success("تم التسجيل بنجاح", "نجاح")
         form.resetForm();
         this.OuvTest = false;

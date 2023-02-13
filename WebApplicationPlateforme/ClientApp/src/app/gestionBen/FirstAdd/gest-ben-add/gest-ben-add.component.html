@@ -19,7 +19,7 @@
               نوع التسجيل
             </label>
 
-            &nbsp; &nbsp; <input type="radio" name="date" value="directe" (click)="setradio('directe')" [checked]='true'  ngModel>&nbsp; &nbsp; مباشر
+            &nbsp; &nbsp; <input type="radio" name="date" value="directe" (click)="setradio('directe')" [checked]='true' ngModel>&nbsp; &nbsp; مباشر
             &nbsp; &nbsp; <input type="radio" name="date" value="chercheur" (click)="setradio('chercheur')" ngModel>&nbsp; &nbsp;ارسال الى الباحث
             &nbsp; &nbsp; <input type="radio" name="date" value="accept" (click)="setradio('accept')" ngModel>&nbsp; &nbsp;طلب اعتماد التسجيل
 
@@ -472,6 +472,19 @@
             <input class="btn btn-info px-4" type="submit" value="حفظ" />
 
           </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
+
         </form>
       </div>
     </div>

@@ -80,16 +80,24 @@ export class DepenseCComponent implements OnInit {
   }
 
   //Edit
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   updateRecord(form: NgForm) {
     this.tblService.EditDep().subscribe(
       res => {
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تم التحديث بنجاح"
         this.resetForm(form);
         this.toastr.success("تم التحديث  بنجاح", "نجاح");
         this.ShowDotations();
 
       },
       err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg = "  فشل عند التحديث"
         console.log(err);
         this.toastr.warning('لم يتم التحديث ', ' فشل');
 
@@ -104,11 +112,17 @@ export class DepenseCComponent implements OnInit {
   insertRecord(form: NgForm) {
     this.tblService.PostDep().subscribe(
       res => {
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تمت الإضافة بنجاح"
         this.resetForm(form);
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
         this.ShowDotations();
       },
       err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg = " فشل عند الإضافة"
         console.log(err);
         this.toastr.warning('لم تتم الإضافة', ' فشل');
       }

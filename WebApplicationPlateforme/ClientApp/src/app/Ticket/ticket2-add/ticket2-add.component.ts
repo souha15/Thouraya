@@ -138,6 +138,11 @@ export class Ticket2AddComponent implements OnInit {
   date = new Date().toLocaleDateString();
   isValidFormSubmitted = false;
   notif: NotifTicket2 = new NotifTicket2();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
 
@@ -183,10 +188,16 @@ export class Ticket2AddComponent implements OnInit {
 
           this.files1 = [];
           form.resetForm();
+          this.succ = true;
+          this.failed = false;
+          this.msg = "  تمت الإضافة بنجاح"
           this.toastr.success("تم التسجيل  بنجاح", " تسجيل ");
           this.isValidFormSubmitted = false;
       },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = " فشل عند الإضافة"
           this.toastr.error("فشل التسجيل ", " تسجيل ")
         })
     }

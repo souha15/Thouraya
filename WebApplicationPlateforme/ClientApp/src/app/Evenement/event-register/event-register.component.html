@@ -363,25 +363,25 @@
             <div class="row">
               <div class="col-md-2"></div>
               <!-- <ngx-dropzone (change)="upload1($event);onSelect1($event)" class="dropzone" #inputFile>
-            <ngx-dropzone-label class="file-label" for="photos">
-              <span><i class="fa fa-images fa-lg"></i></span> صور
-              <span class="mr-4"><i class="fa fa-upload"></i></span>
-            </ngx-dropzone-label>
-            <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove1(f)">
-              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-            </ngx-dropzone-preview>
-          </ngx-dropzone>
-          <p>&nbsp; &nbsp; &nbsp; </p>
-          <ngx-dropzone (change)="upload2($event);onSelect2($event)" class="dropzone" #inputFile>
-            <ngx-dropzone-label for="audio" class="file-label">
-              <span><i class="fa fa-file fa-lg"></i></span>
-              المستندات و الفواتير
-              <span class="mr-4"><i class="fa fa-upload"></i></span>
-            </ngx-dropzone-label>
-            <ngx-dropzone-preview *ngFor="let f of files2" [removable]="true" (removed)="onRemove2(f)">
-              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-            </ngx-dropzone-preview>
-          </ngx-dropzone>-->
+        <ngx-dropzone-label class="file-label" for="photos">
+          <span><i class="fa fa-images fa-lg"></i></span> صور
+          <span class="mr-4"><i class="fa fa-upload"></i></span>
+        </ngx-dropzone-label>
+        <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove1(f)">
+          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+        </ngx-dropzone-preview>
+      </ngx-dropzone>
+      <p>&nbsp; &nbsp; &nbsp; </p>
+      <ngx-dropzone (change)="upload2($event);onSelect2($event)" class="dropzone" #inputFile>
+        <ngx-dropzone-label for="audio" class="file-label">
+          <span><i class="fa fa-file fa-lg"></i></span>
+          المستندات و الفواتير
+          <span class="mr-4"><i class="fa fa-upload"></i></span>
+        </ngx-dropzone-label>
+        <ngx-dropzone-preview *ngFor="let f of files2" [removable]="true" (removed)="onRemove2(f)">
+          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+        </ngx-dropzone-preview>
+      </ngx-dropzone>-->
 
             </div>
           </div>
@@ -432,6 +432,19 @@
             <input class="btn btn-primary" type="submit" value="حفظ" />&nbsp;&nbsp;
             <input type="button" class="btn btn-dark" value="طباعة " (click)="PDFEv()" />
           </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
+
         </form>
       </div>
     </div><!-- End col-9 -->
