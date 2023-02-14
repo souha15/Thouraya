@@ -156,7 +156,7 @@ export class HistoMediaComponent implements OnInit {
     },
       err => {
         this.toastr.warning('لم يتم رفض الطلب ', ' فشل');
-        his.msg = "لم يتم رفض الطلب "
+        this.msg = "لم يتم رفض الطلب "
         this.failed = true;
         this.succ = false;
       })
