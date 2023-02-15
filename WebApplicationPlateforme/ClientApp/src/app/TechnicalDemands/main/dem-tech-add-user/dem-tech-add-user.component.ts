@@ -96,6 +96,11 @@ export class DemTechAddUserComponent implements OnInit {
   dem: TechDem = new TechDem();
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
 
     if (form.invalid) {
@@ -108,11 +113,17 @@ export class DemTechAddUserComponent implements OnInit {
       this.dem.dateenreg = this.date;
       this.demTechService.Create(this.dem).subscribe(res =>{
 
+        this.succ = true;
+        this.failed = false;
+        this.msg = "تم تسجيل الطلب   بنجاح"
         this.toastr.success("تم تسجيل الطلب   بنجاح", " تسجيل الطلب  ");
             form.resetForm();
       },
-    err => {
-      this.toastr.error("فشل تسجيل الطلب ", " تسجيل الطلب")
+        err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = "فشل تسجيل الطلب "
+          this.toastr.error("فشل تسجيل الطلب ", " تسجيل الطلب")
         })
     }
   }

@@ -43,6 +43,10 @@ export class EditTuteurComponent implements OnInit {
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
 
@@ -52,10 +56,16 @@ export class EditTuteurComponent implements OnInit {
 
       this.isValidFormSubmitted = true;
       this.tutService.PutObservableE(this.tut).subscribe(res => {
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تم التحديث بنجاح"
         this.toastr.success("تم تعديل الكفيل بنجاح", " تعديل الكفيل");
         form.resetForm();
       },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = "  فشل عند التحديث"
           this.toastr.error("فشل تعديل الكفيل", " تعديل الكفيل")
         })
     }

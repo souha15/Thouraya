@@ -27,20 +27,20 @@
             <option value="employee">إلى الموظف</option>
           </select>
 
-    
-           
-            <select name="department" id="department" class="form-control  mr-2 ml-3" (change)="selectAdmin($event)" *ngIf="isAdminSelected">
-              <option [ngValue]="undefined" selected disabled>-من الإدارة-</option>
-              <option *ngFor="let item of administrationList" value="{{item.id}}">{{item.nom}}</option>
-            </select>
-     
-     
-           
-            <select name="to-employee" id="to-employee" class="form-control mr-2" (change)="selectEmployee($event)" *ngIf="isEmployeeSelected">
-              <option [ngValue]="undefined" selected disabled>- إلى الموظف-</option>
-              <option *ngFor="let item of UsersList" value="{{item.id}}">{{item.fullName}}</option>
-            </select>
-       
+
+
+          <select name="department" id="department" class="form-control  mr-2 ml-3" (change)="selectAdmin($event)" *ngIf="isAdminSelected">
+            <option [ngValue]="undefined" selected disabled>-من الإدارة-</option>
+            <option *ngFor="let item of administrationList" value="{{item.id}}">{{item.nom}}</option>
+          </select>
+
+
+
+          <select name="to-employee" id="to-employee" class="form-control mr-2" (change)="selectEmployee($event)" *ngIf="isEmployeeSelected">
+            <option [ngValue]="undefined" selected disabled>- إلى الموظف-</option>
+            <option *ngFor="let item of UsersList" value="{{item.id}}">{{item.fullName}}</option>
+          </select>
+
         </div>
         <hr>
         <div class="form-group text-center">
@@ -48,6 +48,19 @@
           <input type="reset" value="حذف الحقول" class="btn btn-danger form-inline mb-3" (click)="clear()">
 
         </div>
+
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            {{msg}}
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            {{msg}}
+          </div>
+        </div>
+
       </form>
 
 

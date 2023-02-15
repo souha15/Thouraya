@@ -80,6 +80,11 @@ export class TransfertInterneAddComponent implements OnInit {
   ti: TransfertInterne = new TransfertInterne();
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
 
@@ -92,9 +97,15 @@ export class TransfertInterneAddComponent implements OnInit {
 
       this.trinService.Add(this.ti).subscribe(res => {
         form.resetForm();
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تمت الإضافة بنجاح"
         this.toastr.success("تم التسجيل  بنجاح", " تسجيل ");
       },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = " فشل عند الإضافة"
           this.toastr.error("فشل التسجيل  الطلب", " تسجيل ")
         }
       )

@@ -157,12 +157,20 @@ export class AddParrainageComponent implements OnInit {
     })
   }
 
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   addOrph() {
     this.parService.Add(this.par).subscribe(res => {
+      this.succ = true;
+      this.failed = false;
+      this.msg = "  تمت الإضافة بنجاح"
       this.toastr.success("تم التسجيل  بنجاح", " تسجيل الكفيل");
     },
       err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg = " فشل عند الإضافة"
         this.toastr.error("فشل في التسجيل ", " تسجيل الكفيل");
       }
     )
@@ -171,8 +179,14 @@ export class AddParrainageComponent implements OnInit {
 
   addBen() {
     this.parService.Add(this.par).subscribe(res => {
+      this.succ = true;
+      this.failed = false;
+      this.msg = "  تمت الإضافة بنجاح"
       this.toastr.success("تم التسجيل  بنجاح", " التسجيل الكفيل");
     }, err => {
+      this.failed = true;
+      this.succ = false;
+      this.msg = " فشل عند الإضافة"
         this.toastr.error("فشل في التسجيل  ", " التسجيل الكفيل");
     })
   }

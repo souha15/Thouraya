@@ -3370,7 +3370,8 @@ import { ChatMsgComponent } from './Chat/chat-msg/chat-msg.component';
 
       /** Chat ***/
 
-  { path: 'chat-msg', component: ChatMsgComponent, canActivate: [AuthGuard] },
+      { path: 'chat-msg', component: ChatMsgComponent, canActivate: [AuthGuard] },
+      { path: 'tasks-up-menu', component: TasksUpMenuComponent, canActivate: [AuthGuard] },
 
     ])
   ],/*,  {

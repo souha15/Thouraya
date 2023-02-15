@@ -96,9 +96,9 @@
 
 
               <div class="d-flex w-100 justify-content-start flex-wrap">
-                
+
                 <div class="col-md-6">
-            
+
                   <label for="number">    نوع المكفول </label>
 
                   &nbsp; &nbsp; <input type="radio" name="date" value="orphelin" (click)="setradio('orphelin')" [checked]='true' ngModel>&nbsp; &nbsp; يتيم
@@ -152,10 +152,22 @@
                   </div>
                 </div>
 
-                </div>
-
-
               </div>
+
+
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
           </div>
 
         </form>

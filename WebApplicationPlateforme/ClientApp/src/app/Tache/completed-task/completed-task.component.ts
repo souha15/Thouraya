@@ -95,6 +95,11 @@ export class CompletedTaskComponent implements OnInit {
   date = Date.now();
   CurrentDate = new Date(this.date)
   chec: boolean;
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
 
     if (this.tache.etat == "منجزة") {
@@ -109,13 +114,24 @@ export class CompletedTaskComponent implements OnInit {
         this.Createdevaluation = res
         form.resetForm();
         this.chec = false;
+
+        this.succ = true;
+        this.failed = false;
+        this.msg = "تم تقييم المهمة بنجاح"
+
         this.toastr.success("تم تقييم المهمة بنجاح", " تقييم المهمة");
       },
       err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg = "وقع تقييم المهمة مسبقا"
         this.toastr.error("وقع تقييم المهمة مسبقا", " تقييم المهمة")
       }
     )
     } else {
+      this.failed = true;
+      this.succ = false;
+      this.msg = " المهمة تحت الإجراء أو غير منجزة"
       this.toastr.error(" المهمة تحت الإجراء أو غير منجزة", " تقييم المهمة")
     }
 

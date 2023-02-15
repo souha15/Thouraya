@@ -150,6 +150,11 @@ export class TacheARecevoirDetailsComponent implements OnInit {
   testyrec: boolean = true;
   tp: TacheProcess = new TacheProcess();
   date = new Date().toLocaleDateString();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   chageetat() {
 
     if (this.retarde == "في الإنتظار") {
@@ -158,6 +163,9 @@ export class TacheARecevoirDetailsComponent implements OnInit {
       this.ev.Attribut1 = this.UserNameConnected;
       this.tacheService.PutObservableE(this.ev).subscribe(
         res => {
+          this.succ = true;
+          this.failed = false;
+          this.msg = ' تم إستلام المهمة'
           this.toastr.success(' تم إستلام المهمة', 'إستلام المهمة')
           this.testyrec = false;
           this.tp.idtache = this.ev.id;
@@ -178,10 +186,16 @@ export class TacheARecevoirDetailsComponent implements OnInit {
           )
         },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = "فشل في إستلام المهمة"
           this.toastr.warning("فشل في إستلام المهمة", 'إستلام المهمة')
         }
       )
     } else {
+      this.failed = true;
+      this.succ = false;
+      this.msg = "فشل في إستلام المهمة"
       this.toastr.warning("فشل في إستلام المهمة", 'إستلام المهمة')
     }
   }

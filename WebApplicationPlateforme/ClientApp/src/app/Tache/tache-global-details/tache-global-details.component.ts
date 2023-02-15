@@ -210,6 +210,9 @@ export class TacheGlobalDetailsComponent implements OnInit {
     );
   }
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   chageetat() {
 
@@ -219,14 +222,23 @@ export class TacheGlobalDetailsComponent implements OnInit {
       this.ev.Attribut1 = this.UserNameConnected;
       this.tacheService.PutObservableE(this.ev).subscribe(
         res => {
+          this.succ = true;
+          this.failed = false;
+          this.msg = ' تم إستلام المهمة'
           this.toastr.success(' تم إستلام المهمة', 'إستلام المهمة')
 
         },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = "فشل في إستلام المهمة"
           this.toastr.warning("فشل في إستلام المهمة", 'إستلام المهمة')
         }
       )
     } else {
+      this.failed = true;
+      this.succ = false;
+      this.msg = "فشل في إستلام المهمة"
       this.toastr.warning("فشل في إستلام المهمة", 'إستلام المهمة')
     }
   }
@@ -274,6 +286,9 @@ export class TacheGlobalDetailsComponent implements OnInit {
         this.tp.etataff = this.ev.etat
         this.tp.etatuserscreator ="مغلقة"
         this.getIdUrl();
+        this.succ = true;
+        this.failed = false;
+        this.msg = ' تم غلق المهمة'
         this.toastr.success(' تم غلق المهمة', 'غلق المهمة')
         this.test = false;
         this.procTacheService.CreateTache(this.tp).subscribe(res => {
@@ -282,6 +297,9 @@ export class TacheGlobalDetailsComponent implements OnInit {
 
       },
       err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg = "فشل في غلق المهمة"
         this.toastr.warning("فشل في غلق المهمة", 'غلق المهمة')
       }
     )
@@ -311,7 +329,10 @@ export class TacheGlobalDetailsComponent implements OnInit {
             this.tp.etataff = this.ev.etat
         this.tp.etatuserscreator = "إعادة"
         this.tp.raison = this.retourdata
-            this.getIdUrl();
+        this.getIdUrl();
+            this.succ = true;
+            this.failed = false;
+            this.msg = ' تم إعادة المهمة'
             this.toastr.success(' تم إعادة المهمة', 'إعادة المهمة')
             this.test = false;
             this.procTacheService.CreateTache(this.tp).subscribe(res => {
@@ -320,6 +341,9 @@ export class TacheGlobalDetailsComponent implements OnInit {
 
       },
       err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg = "فشل في إعادة المهمة"
         this.toastr.warning("فشل في إعادة المهمة", 'إعادة المهمة')
       }
     )  
@@ -350,12 +374,18 @@ export class TacheGlobalDetailsComponent implements OnInit {
         this.tp.raison = this.notfinisheddata
         this.getIdUrl();
         this.test = false;
+        this.succ = true;
+        this.failed = false;
+        this.msg = ' تم غلق المهمة'
         this.toastr.success(' تم غلق المهمة', 'غلق المهمة')
         this.procTacheService.CreateTache(this.tp).subscribe(res => {
 
         })
       },
       err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg = "فشل في غلق المهمة"
         this.toastr.warning("فشل في غلق المهمة", 'غلق المهمة')
       }
     )  

@@ -120,6 +120,18 @@
             <button type="submit" *ngIf="testyrec" (click)="chageetat()" class="btn btn-lg btn-outline-primary">&nbsp;&nbsp;&nbsp;إستلام&nbsp;&nbsp;&nbsp;</button>
           </div>
 
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
