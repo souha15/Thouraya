@@ -119,15 +119,25 @@ export class DemTechListDirrComponent implements OnInit {
     this.etat = event.target.value;
   }
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     this.dem.techid = this.UserIdConnected;
     this.dem.technnom = this.UserNameConnected
     this.dem.etatdate = this.date
     this.demTechService.PutObservableE(this.dem).subscribe(res => {
       this.getDemList();
-      this.toastr.success("تم الحذف  بنجاح", "نجاح");
+      this.succ = true;
+      this.failed = false;
+      this.msg = "  تم التحديث بنجاح"
+      this.toastr.success("تم التحديث  بنجاح", "نجاح");
     },
       err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg = "  فشل عند التحديث"
         this.toastr.error("فشل تحديث الطلب ", " تحديث الطلب")})
   }
 }

@@ -151,6 +151,11 @@ export class DemTechListUserComponent implements OnInit {
   dem: TechDem = new TechDem();
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
 
     if (form.invalid) {
@@ -161,11 +166,17 @@ export class DemTechListUserComponent implements OnInit {
       this.isValidFormSubmitted = true;
       this.demTechService.PutObservableE(this.dem).subscribe(res => {
 
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تم التحديث بنجاح"
         this.toastr.success("تم تحديث الطلب   بنجاح", " تحديث الطلب  ");
         form.resetForm();
         this.getDemList();
       },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = "  فشل عند التحديث"
           this.toastr.error("فشل تحديث الطلب ", " تحديث الطلب")
         })
     }
@@ -190,6 +201,9 @@ export class DemTechListUserComponent implements OnInit {
       }
     }
     else {
+      this.failed = true;
+      this.succ = false;
+      this.msg = ' لم يتم التحديث الطلب تحت الإجرء   '
       this.toastr.error(' لم يتم التحديث الطلب تحت الإجرء   ', ' فشل');
     }
   }

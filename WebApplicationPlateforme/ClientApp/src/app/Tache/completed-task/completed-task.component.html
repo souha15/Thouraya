@@ -72,25 +72,38 @@
                 تقييم
               </a>
               <form #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-              <div>
-                <label class="d-block">
-                  <input type="checkbox" name="value1" (change)='onSelect($event)' [checked]="chec">
-                  إنجاز جميع عناصر المهمة
-                </label>
-                <label class="d-block">
-                  <input type="checkbox" name="value2" (change)='onSelect($event)' [checked]="chec">
-                  الإنجاز في الوقت المحدد
-                </label>
-                <label class="d-block">
-                  <input type="checkbox" name="value3" (change)='onSelect($event)' [checked]="chec">
-                  سرعة التفاعل والرد
-                </label>
-                <label class="d-block">
-                  <input type="checkbox" name="value4" (change)='onSelect($event)' [checked]="chec">
-                  جودة العمل
-                </label>
-              </div>
-              <button class="btncolor" type="submit"><i class="fa fa-star"></i> تقييم</button>
+                <div>
+                  <label class="d-block">
+                    <input type="checkbox" name="value1" (change)='onSelect($event)' [checked]="chec">
+                    إنجاز جميع عناصر المهمة
+                  </label>
+                  <label class="d-block">
+                    <input type="checkbox" name="value2" (change)='onSelect($event)' [checked]="chec">
+                    الإنجاز في الوقت المحدد
+                  </label>
+                  <label class="d-block">
+                    <input type="checkbox" name="value3" (change)='onSelect($event)' [checked]="chec">
+                    سرعة التفاعل والرد
+                  </label>
+                  <label class="d-block">
+                    <input type="checkbox" name="value4" (change)='onSelect($event)' [checked]="chec">
+                    جودة العمل
+                  </label>
+                </div>
+                <button class="btncolor" type="submit"><i class="fa fa-star"></i> تقييم</button>
+
+                <div class="col-md-6">
+                  <div class="success-msg" *ngIf="succ">
+                    <i class="fa fa-check"></i>
+                    {{msg}}
+                  </div>
+
+                  <div class="error-msg" *ngIf="failed">
+                    <i class="fa fa-times-circle"></i>
+                    {{msg}}
+                  </div>
+                </div>
+
               </form>
             </div>
           </div>

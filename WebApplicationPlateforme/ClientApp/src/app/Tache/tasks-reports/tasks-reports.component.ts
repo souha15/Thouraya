@@ -169,20 +169,39 @@ export class TasksReportsComponent implements OnInit {
   adminname: string;
   nodata: boolean;
   filtredtachelist: Tache[] = [];
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   formRapport() {
     if (this.adminOremp == null) {
 
+      this.failed = true;
+      this.succ = false;
+      this.msg = "اختر اسم الموظف/الإدارة"
+
       this.toastr.warning("اختر اسم الموظف/الإدارة", 'تحذير')
       if (this.employee == null || this.admin == null) {
+
+        this.failed = true;
+        this.succ = false;
+        this.msg = "اختر اسم الموظف/الإدارة"
 
         this.toastr.warning("اختر اسم الموظف/الإدارة", 'تحذير')
 
       } 
     }
-  else if (this.datedepart == null) {
+    else if (this.datedepart == null) {
+      this.failed = true;
+      this.succ = false;
+      this.msg = "اختر تاريخ البدء"
       this.toastr.error("اختر تاريخ البدء", 'تحذير')
 
     } else if (this.datefin == null) {
+      this.failed = true;
+      this.succ = false;
+      this.msg = "اختر تاريخ الانتهاء"
       this.toastr.error("اختر تاريخ الانتهاء", 'تحذير')
     }
    

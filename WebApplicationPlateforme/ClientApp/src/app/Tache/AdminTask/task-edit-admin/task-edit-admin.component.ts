@@ -132,6 +132,11 @@ export class TaskEditAdminComponent implements OnInit {
   testchamp: boolean;
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
 
     if (form.invalid) {
@@ -168,11 +173,17 @@ export class TaskEditAdminComponent implements OnInit {
 
            this.files1 = [];
           
-           form.resetForm();   
+          form.resetForm();
+          this.succ = true;
+          this.failed = false;
+          this.msg = "  تمت الإضافة بنجاح"
           this.toastr.success("تم تعديل  المهمة بنجاح", " تسجيل المهمة");
           this.isValidFormSubmitted = false;
         },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = " فشل عند الإضافة"
           this.toastr.error("فشل تعديل  المهمة", " تسجيل المهمة")
         }
 

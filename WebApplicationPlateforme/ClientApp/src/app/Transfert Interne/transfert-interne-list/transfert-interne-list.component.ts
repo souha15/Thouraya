@@ -97,14 +97,24 @@ export class TransfertInterneListComponent implements OnInit {
     this.fact = Object.assign({}, facture);
   }
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   updateRecord(form: NgForm) {
 
     this.trinService.Edit().subscribe(res => {
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تم التحديث بنجاح"
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
         this.resetForm();
         this.getCreance();
       },
-        err => {
+      err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = "  فشل عند التحديث"
           this.toastr.error(' لم يتم التحديث  ', ' فشل');
         }
 

@@ -66,6 +66,11 @@ export class AddSoldeComponent implements OnInit {
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
   stut: SoldeTuteur = new SoldeTuteur();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
 
@@ -77,11 +82,17 @@ export class AddSoldeComponent implements OnInit {
       this.stut.idUserCreator = this.UserIdConnected;
       this.stut.attribut6 = this.UserNameConnected;
       this.stutService.Add(this.stut).subscribe(res => {
+        this.succ = true;
+        this.failed = false;
+        this.msg = "تم تعديل  رصيد  الكفيل بنجاح"
         this.toastr.success("تم تعديل  رصيد  الكفيل بنجاح", " تعديل  رصيد  الكفيل");
         this.ShowListTaches();
         form.resetForm();
       },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = "فشل تعديل  رصيد  الكفيل"
           this.toastr.error("فشل تعديل  رصيد  الكفيل", " تعديل  رصيد  الكفيل")
         })
     }

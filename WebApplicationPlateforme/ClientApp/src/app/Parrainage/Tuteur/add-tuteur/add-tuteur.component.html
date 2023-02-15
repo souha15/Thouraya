@@ -17,7 +17,7 @@
 
               <div class="events1">
 
-                <form class="form-row events-form mb-3"  #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+                <form class="form-row events-form mb-3" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
                   <div class="row w-100 d-flex form-box">
                     <div class="col-md-12 col-sm-12">
 
@@ -41,7 +41,7 @@
 
                         <div class="ml-3">
                           <label for="number"> رقم الهوية</label>
-                          <input type="number" name="cin" #cin="ngModel" [(ngModel)]="tut.cin" (change)="cintest($event)"  required/>
+                          <input type="number" name="cin" #cin="ngModel" [(ngModel)]="tut.cin" (change)="cintest($event)" required />
                           <div *ngIf="cin.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
                             مطلوب رقم الهوية .
                           </div>
@@ -80,7 +80,7 @@
                           <input type="text" name="nat" #nat="ngModel" [(ngModel)]="tut.nat" />
                         </div>
 
-                        
+
                         <div class="ml-3">
                           <label for="number">	عدد المعالين   </label>
                           <input type="number" name="nbParrainage" #nbParrainage="ngModel" [(ngModel)]="tut.nbParrainage" />
@@ -93,11 +93,23 @@
 
 
                         <div class="col-12 text-left">
-                          <input class="btn btn-info px-4" type="submit" value="حفظ"/>
+                          <input class="btn btn-info px-4" type="submit" value="حفظ" />
 
                         </div>
                       </div>
 
+                    </div>
+                  </div>
+
+                  <div class="col-md-6">
+                    <div class="success-msg" *ngIf="succ">
+                      <i class="fa fa-check"></i>
+                      {{msg}}
+                    </div>
+
+                    <div class="error-msg" *ngIf="failed">
+                      <i class="fa fa-times-circle"></i>
+                      {{msg}}
                     </div>
                   </div>
 

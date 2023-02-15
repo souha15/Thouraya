@@ -68,6 +68,10 @@ export class AddTuteurComponent implements OnInit {
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
 
@@ -80,10 +84,16 @@ export class AddTuteurComponent implements OnInit {
       this.tut.attribut6 = this.UserNameConnected;
       this.tut.dateenreg = this.date;
       this.tutService.Add(this.tut).subscribe(res => {
+        this.succ = true;
+        this.failed = false;
+        this.msg = "تم تسجيل الكفيل بنجاح"
         this.toastr.success("تم تسجيل الكفيل بنجاح", " تسجيل الكفيل");
         form.resetForm();
       },
         err => {
+          this.failed = true;
+          this.succ = false;
+          this.msg = "فشل تسجيل الكفيل"
           this.toastr.error("فشل تسجيل الكفيل", " تسجيل الكفيل")
         })
     }

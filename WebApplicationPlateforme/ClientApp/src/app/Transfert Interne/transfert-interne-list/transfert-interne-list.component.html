@@ -164,7 +164,7 @@
                 مطلوب رقم التحويلة .
               </div>
             </div>
-     
+
 
             <div class="col-md-6">
               <label for="">المكتب</label>
@@ -175,6 +175,18 @@
                      style="width: 130px;"
                      type="submit"
                      value="إضافة" />
+            </div>
+
+            <div class="col-md-6">
+              <div class="success-msg" *ngIf="succ">
+                <i class="fa fa-check"></i>
+                {{msg}}
+              </div>
+
+              <div class="error-msg" *ngIf="failed">
+                <i class="fa fa-times-circle"></i>
+                {{msg}}
+              </div>
             </div>
 
           </form>

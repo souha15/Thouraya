@@ -206,6 +206,11 @@ export class NewTaskComponent implements OnInit {
   date = new Date().toLocaleDateString();
   tp: TacheProcess = new TacheProcess();
   notiftask: TacheNotif = new TacheNotif();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (this.selecteditems.length == 1) {
       if (form.invalid) {
@@ -279,10 +284,16 @@ export class NewTaskComponent implements OnInit {
 
             }
             )
+            this.succ = true;
+            this.failed = false;
+            this.msg = "  تمت الإضافة بنجاح"
             this.toastr.success("تم تسجيل المهمة بنجاح", " تسجيل المهمة");
             this.isValidFormSubmitted = false;
           },
           err => {
+            this.failed = true;
+            this.succ = false;
+            this.msg = " فشل عند الإضافة"
             this.toastr.error("فشل تسجيل المهمة", " تسجيل المهمة")
           }
 
@@ -429,10 +440,16 @@ export class NewTaskComponent implements OnInit {
               /* this.files1 = [];
               
                form.resetForm();   */
+              this.succ = true;
+              this.failed = false;
+              this.msg = "  تمت الإضافة بنجاح"
               this.toastr.success("تم تسجيل المهمة بنجاح", " تسجيل المهمة");
               this.isValidFormSubmitted = false;
             },
             err => {
+              this.failed = true;
+              this.succ = false;
+              this.msg = " فشل عند الإضافة"
               this.toastr.error("فشل تسجيل المهمة", " تسجيل المهمة")
             }
 
@@ -516,10 +533,15 @@ export class NewTaskComponent implements OnInit {
               this.isValidFormSubmitted = false;
             },
             err => {
+              this.failed = true;
+              this.succ = false;
+              this.msg = " فشل عند الإضافة"
               this.toastr.error("فشل تسجيل المهمة", " تسجيل المهمة")
             })
         }
-
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  تمت الإضافة بنجاح"
         this.toastr.success("تم تسجيل المهمة بنجاح", " تسجيل المهمة");
       }
     }
