@@ -79,21 +79,37 @@ export class PermissionListComponent implements OnInit {
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
         this.resetForm();
         this.CongeList();
+
+        this.succ = true;
+        this.failed = false;
+        this.msg ="تم التحديث بنجاح"
       },
         err => {
           this.toastr.error('لم يتم التحديث  ', ' فشل');
+          this.failed = true;
+          this.succ = false;
+          this.msg ="لم يتم التحديث"
         }
 
 
       )
     } if (this.congeService.formData.etat == 'موافق') {
       this.toastr.error('لقد تمت الموافقة على طلب الإذن', ' لم يتم التحديث');
+      this.failed = true;
+      this.succ = false;
+      this.msg ="لقد تمت الموافقة على طلب الإذن"
     } if (this.congeService.formData.etat == 'رفض') {
       this.toastr.error('لقد تم رفض طلب الإذن', ' لم يتم التحديث');
+      this.failed = true;
+      this.succ = false;
+      this.msg ="لقد تم رفض طلب الإذن"
     }
   }
 
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   populateForm(conge: PermissionU) {
     this.congeService.formData = Object.assign({}, conge)
     this.congeId = conge.id

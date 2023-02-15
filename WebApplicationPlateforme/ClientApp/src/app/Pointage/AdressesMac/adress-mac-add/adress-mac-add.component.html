@@ -68,6 +68,19 @@
                  class="btn btn-info"
                  style="width: 130px" />
         </div>
+
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            {{msg}}
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            {{msg}}
+          </div>
+        </div>
+
       </form>
 
       <div style="border-bottom: 2px solid #adb5bd; margin-bottom: 50px">

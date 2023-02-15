@@ -86,7 +86,10 @@ export class TicketAddComponent implements OnInit {
   ticket: Ticket = new Ticket();
   isValidFormSubmitted = false;
   options = { year: 'numeric', month: 'numeric', day: 'numeric' };
-  date = new Date().toLocaleDateString('fr-Fr',this.options);
+  date = new Date().toLocaleDateString('fr-Fr', this.options);
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
 
   if (form.invalid) {
@@ -119,9 +122,19 @@ export class TicketAddComponent implements OnInit {
         this.numTicket = '[' + res.numTicket +1 +']';
         this.files1 = [];
         this.isValidFormSubmitted = false;
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
       },
         err => {
           this.toastr.error("فشل تسجيل التذكرة", " تسجيل التذكرة")
+
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         })
         }
    // this.toastr.error("لايمكن رفع تذكرة جديدة في الوقت الحالي")

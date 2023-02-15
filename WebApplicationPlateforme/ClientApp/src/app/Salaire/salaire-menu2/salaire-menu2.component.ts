@@ -189,6 +189,9 @@ export class SalaireMenu2Component implements OnInit {
 
   }
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   accept() {
     this.fact.etatdirproj = "موافقة"
@@ -198,7 +201,10 @@ export class SalaireMenu2Component implements OnInit {
     this.creanceService.PutObservableE(this.fact).subscribe(res => {
       this.getCreance();
       this.toastr.success("تم  موافقة الطلب بنجاح", "نجاح");
+      this.msg = "  فشل عند التحديث"
 
+      this.failed = true;
+      this.succ = false;
       this.UserService.GetRhDepartement().subscribe(resDir => {
         this.dirId = resDir.id;
         this.dirName = resDir.fullName
@@ -229,6 +235,10 @@ export class SalaireMenu2Component implements OnInit {
     },
       err => {
         this.toastr.warning('لم  موافقة الطلب ', ' فشل');
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
       })
   }
 
@@ -241,9 +251,17 @@ export class SalaireMenu2Component implements OnInit {
     this.creanceService.PutObservableE(this.fact).subscribe(res => {
       this.getCreance();
       this.toastr.success("تم  رفض الطلب بنجاح", "نجاح");
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
     },
       err => {
         this.toastr.warning('لم  ترفض الطلب ', ' فشل');
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       })
   }
 

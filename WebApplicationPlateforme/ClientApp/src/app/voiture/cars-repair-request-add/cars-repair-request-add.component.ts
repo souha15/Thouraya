@@ -87,6 +87,9 @@ getUserConnected() {
   voiture: RepairRequest = new RepairRequest();
   isValidFormSubmitted = false;
   path: string;
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 date = new Date().toLocaleDateString();
   onSubmit(form: NgForm) {
     if (form.invalid) {
@@ -123,10 +126,19 @@ date = new Date().toLocaleDateString();
             this.files2 = [];
             this.files3 = [];
             form.resetForm();
+            this.succ = true;
+            this.failed = false;
+
+
+            this.msg = "  تمت الإضافة بنجاح"
 
           },
           err => {
             this.toastr.error("لم يتم التسجيل", "فشل في التسجيل");
+            this.failed = true;
+            this.succ = false;
+
+            this.msg = " فشل عند الإضافة"
           }
         )
 

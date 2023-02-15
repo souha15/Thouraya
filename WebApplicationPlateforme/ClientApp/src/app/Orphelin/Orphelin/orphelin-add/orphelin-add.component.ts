@@ -141,7 +141,9 @@ export class OrphelinAddComponent implements OnInit {
   date = new Date().toLocaleDateString();
   orph: Orphelin = new Orphelin();
   Id: number;
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmitOr(form: NgForm) {
     if (form.invalid) {
 
@@ -170,10 +172,15 @@ export class OrphelinAddComponent implements OnInit {
             });
         })
 
-
+        this.succ = true;
+        this.failed = false;
+        this.msg = "تم تسجيل اليتيم بنجاح"
         this.toastr.success("تم تسجيل اليتيم بنجاح", " تسجيل اليتيم");
       },
         err => {
+          this.succ = false;
+          this.failed = true;
+          this.msg ="فشل تسجيل اليتيم"
           console.log(err)
           this.toastr.error("فشل تسجيل اليتيم", " تسجيل اليتيم")
         })
@@ -191,11 +198,16 @@ export class OrphelinAddComponent implements OnInit {
 
     this.edu.idOrph = this.Id
     this.educationService.Add(this.edu).subscribe(res => {
-
+      this.succ = true;
+      this.failed = false;
+      this.msg ="تم تسجيل البيانات الدراسية بنجاح"
       this.toastr.success("تم تسجيل البيانات الدراسية بنجاح", " تسجيل اليتيم");
     },
       err => {
         this.toastr.error("فشل تسجيل البيانات الدراسية", " تسجيل اليتيم")
+        this.succ = false;
+        this.failed = true;
+        this.msg = "فشل تسجيل البيانات الدراسية"
       }
     )
   }
@@ -245,8 +257,14 @@ export class OrphelinAddComponent implements OnInit {
       this.tal.idOrph = this.Id;
       this.talentService.Add(this.tal).subscribe(res => {
         this.toastr.success("تم تسجيل المهارات بنجاح", "نجاح")
+        this.succ = true;
+        this.failed = false;
+        this.msg = "تم تسجيل المهارات بنجاح"
       }, err => {
           this.toastr.error("  فشل في تسجيل المهارات	 ", "فشل")
+          this.succ = false;
+          this.failed = true;
+          this.msg = " فشل في تسجيل المهارات"
       })
     }
 
@@ -278,8 +296,14 @@ export class OrphelinAddComponent implements OnInit {
       this.mat.idOrph = this.Id
       this.matiereService.Add(this.mat).subscribe(res => {
         this.toastr.success("تم تسجيل المواد بنجاح", "نجاح")
+        this.succ = true;
+        this.failed = false;
+        this.msg ="تم تسجيل المواد بنجاح"
       }, err => {
           this.toastr.error("  فشل في تسجيل المواد 	 ", "فشل")
+          this.succ = false;
+          this.failed = true;
+          this.msg ="فشل في تسجيل المواد"
       })
     }
   }
@@ -311,9 +335,14 @@ export class OrphelinAddComponent implements OnInit {
     this.san.idOrph = this.Id;
     this.santeService.Add(this.san).subscribe(res => {
       this.toastr.success("تم تسجيل المعلومات الصحية بنجاح", "نجاح")
+      this.succ = true;
+      this.failed = false
+      this.msg = "تم تسجيل المعلومات الصحية بنجاح"
     },
       err => {
-
+        this.succ = false;
+        this.failed = true;
+        this.msg = " فشل في تسجيل المعلومات الصحية "
         this.toastr.error("  فشل في تسجيل المعلومات الصحية 	 ", "فشل")
       })
   }
@@ -482,7 +511,14 @@ export class OrphelinAddComponent implements OnInit {
       this.sub.idOrph = this.Id
       this.subventionOrphelinService.Add(this.sub).subscribe(res => {
         this.toastr.success("تم تسجيل اعانات بنجاح", "نجاح")
+        this.succ = true;
+        this.failed = false;
+        this.msg ="تم تسجيل اعانات بنجاح"
+
       }, err => {
+          this.succ = false;
+          this.failed = true;
+          this.msg ="فشل في تسجيل اعانات "
           this.toastr.error("  فشل في تسجيل اعانات 	 ", "فشل")
       })
     }
@@ -505,8 +541,14 @@ export class OrphelinAddComponent implements OnInit {
     this.per.idOrph = this.Id;
     this.pereOrphelinService.Add(this.per).subscribe(res => {
       this.toastr.success("تم تسجيل بيانات والد اليتيم بنجاح", "نجاح")
+      this.succ = true;
+      this.failed = false;
+      this.msg ="تم تسجيل بيانات والد اليتيم بنجاح"
     },
       err => {
+        this.succ = false;
+        this.failed = true;
+        this.msg ="فشل في تسجيل بيانات والد اليتيم"
         this.toastr.error("  فشل في تسجيل بيانات والد اليتيم 	 ", "فشل")
         console.log(err)
       })
@@ -533,10 +575,17 @@ export class OrphelinAddComponent implements OnInit {
     this.mer.idOrph = this.Id;
     this.mereOrphelinService.Add(this.mer).subscribe(res => {
       this.toastr.success("تم تسجيل بيانات والدة  اليتيم بنجاح", "نجاح")
+      this.succ = true;
+      this.failed = false;
+      this.msg = "تم تسجيل بيانات والدة اليتيم بنجاح"
     },
       err => {
         this.toastr.error("  فشل في تسجيل بيانات والدة  اليتيم 	 ", "فشل")
         console.log(err)
+        this.succ = false;
+        this.failed = true;
+        this.msg = "فشل في تسجيل بيانات والدة اليتيم"
+
       })
   }
 
@@ -564,10 +613,16 @@ export class OrphelinAddComponent implements OnInit {
     this.tut.idOrph = this.Id;
     this.tuteurOrphelinSerive.Add(this.tut).subscribe(res => {
       this.toastr.success("تم تسجيل بيانات والدة  اليتيم بنجاح", "نجاح")
+      this.succ = true;
+      this.failed = false;
+      this.msg = "تم تسجيل بيانات والدة اليتيم بنجاح"
     },
       err => {
         this.toastr.error("  فشل في تسجيل بيانات والدة  اليتيم 	 ", "فشل")
         console.log(err)
+        this.succ = false;
+        this.failed = true;
+        this.msg = "فشل في تسجيل بيانات والدة اليتيم"
       })
   }
 

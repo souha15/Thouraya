@@ -47,10 +47,14 @@
                 </div>
                 <div>
                   <label for="account">العميل</label>
-                  <select id="account" name="idClient" #idClient="ngModel" [(ngModel)]="pr.idClient" (change)="getClt($event)">
+                  <select id="account" name="idClient" #idClient="ngModel" [(ngModel)]="pr.idClient" (change)="getClt($event)" required>
                     <option [ngValue]="undefined" selected disabled>-اختر-</option>
                     <option *ngFor="let item of cltList" value="{{item.id}}">{{item.nom}}</option>
                   </select>
+
+                  <div *ngIf="idClient.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                    مطلوب العميل .
+                  </div>
                 </div>
               </div>
 

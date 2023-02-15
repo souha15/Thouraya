@@ -154,6 +154,9 @@ export class DemandeFormationUserAddComponent implements OnInit {
   }
 
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   fm: NewFormation = new NewFormation();
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
@@ -199,9 +202,19 @@ export class DemandeFormationUserAddComponent implements OnInit {
         })  
         form.resetForm();
         this.toastr.success("تم التسجيل  بنجاح", " تسجيل ");
+
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
       },
         err => {
           this.toastr.error("فشل التسجيل  الطلب", " تسجيل ")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         }
       )
     }

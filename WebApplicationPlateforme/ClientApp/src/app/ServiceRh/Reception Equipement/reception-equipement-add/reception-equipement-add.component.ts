@@ -62,6 +62,10 @@ export class ReceptionEquipementAddComponent implements OnInit {
   re: ReceptionEquipement = new ReceptionEquipement();
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     if (form.invalid) {
 
@@ -76,9 +80,18 @@ export class ReceptionEquipementAddComponent implements OnInit {
       this.trinService.Add(this.re).subscribe(res => {
         form.resetForm();
         this.toastr.success("تم التسجيل  بنجاح", " تسجيل ");
+
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
       },
         err => {
           this.toastr.error("فشل التسجيل  الطلب", " تسجيل ")
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
         }
       )
     }

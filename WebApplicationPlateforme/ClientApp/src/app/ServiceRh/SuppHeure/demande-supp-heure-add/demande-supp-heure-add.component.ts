@@ -150,7 +150,9 @@ export class DemandeSuppHeureAddComponent implements OnInit {
     })
 
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   sup: DemandeSuppHeure = new DemandeSuppHeure();
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
@@ -169,6 +171,12 @@ export class DemandeSuppHeureAddComponent implements OnInit {
         this.dirName = res.userName1;       
         form.resetForm();
         this.toastr.success("تم تسجيل  الطلب بنجاح", " تسجيل ");
+
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
           this.text = "طلب ساعات إضافية";
           this.autoNotif.serviceId = res.id;
         this.autoNotif.pageUrl = "demande-supp-heure-list-director"
@@ -194,6 +202,11 @@ export class DemandeSuppHeureAddComponent implements OnInit {
       },
         err => {
           this.toastr.error("فشل تسجيل  الطلب", " تسجيل ")
+          
+   this.failed = true;
+   this.succ = false;
+   
+   this.msg =" فشل عند الإضافة"
         }
       )
     }

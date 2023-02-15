@@ -53,6 +53,9 @@ export class SalaialeAddComponent implements OnInit {
 
 
   //Conge Submit
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   conge: DemandeSalariale = new DemandeSalariale();
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
@@ -73,10 +76,20 @@ export class SalaialeAddComponent implements OnInit {
           res => {
             this.toastr.success("تمت الإضافة بنجاح", "نجاح");
             form.resetForm();
+          this.succ = true;
+          this.failed = false;
+
+
+          this.msg = "  تمت الإضافة بنجاح"
 
           },
           err => {
             this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
+            this.failed = true;
+            this.succ = false;
+
+            this.msg = " فشل عند الإضافة"
+
           })
       }
 

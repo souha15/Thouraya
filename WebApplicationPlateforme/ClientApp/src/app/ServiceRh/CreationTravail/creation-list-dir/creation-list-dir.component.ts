@@ -256,14 +256,24 @@ export class CreationListDirComponent implements OnInit {
 
         this.GetCreationList();
         this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
+
+        this.msg = "تم  قبول الطلب بنجاح"
+        this.succ = true;
+        this.failed = false;
     },
       err => {
         this.toastr.warning('لم يتم  قبول الطلب', ' فشل');
+        this.failed = true;
+        this.succ = false;
+        this.msg = "لم يتم  قبول الطلب"
       })
       })
 
   }
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   factId: number
   fact: CrationTravailDemande = new CrationTravailDemande();

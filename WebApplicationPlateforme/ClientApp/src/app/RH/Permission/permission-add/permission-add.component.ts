@@ -171,9 +171,17 @@ export class PermissionAddComponent implements OnInit {
     if (this.start != null) {
       if (this.start > this.end) {
         this.toastr.error("يجب أن يكون وقت البدء أقل من وقت الانتهاء")
+
+        this.failed = true;
+        this.succ = false;
+        this.msg ="يجب أن يكون وقت البدء أقل من وقت الانتهاء"
       }
     } else {
       this.toastr.error("يجب عليك ملئ وقت البداية")
+
+      this.failed = true;
+      this.succ = false;
+      this.msg ="يجب عليك ملئ وقت البداية"
     }
   }
 
@@ -204,6 +212,9 @@ export class PermissionAddComponent implements OnInit {
         this.permissionService.Add(this.per).subscribe(
           res => {
             this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+            this.succ = true;
+            this.failed = false;
+            this.msg = "  تمت الإضافة بنجاح"
             form.resetForm();
             this.text = "طلب إذن";
             this.dirId = res.userId1;
@@ -231,13 +242,22 @@ export class PermissionAddComponent implements OnInit {
           },
           err => {
             this.toastr.error(" لم يتم تقديم الطلب ", "لم يتم تقديم الطلب ")
+            this.failed = true;
+            this.succ = false;
+            this.msg = " لم يتم تقديم الطلب"
           },
         )
 
       } else {
         this.toastr.error(" لم يتم تقديم الطلب ", "لم يتم تقديم الطلب ")
+        this.failed = true;
+        this.succ = false;
+        this.msg = " لم يتم تقديم الطلب"
       }
     }
     }
-  
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 }

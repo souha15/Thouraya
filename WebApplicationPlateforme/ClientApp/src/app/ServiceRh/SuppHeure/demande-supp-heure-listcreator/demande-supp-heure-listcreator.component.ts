@@ -207,6 +207,9 @@ export class DemandeSuppHeureListcreatorComponent implements OnInit {
       this.notifService.Add(this.notif).subscribe(res => {
         this.getCreance();
         this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
+        this.msg = "تم  قبول الطلب بنجاح"
+        this.succ = true;
+        this.failed = false;
         //Send Notification
         this.text = "طلب ساعات إضافية";
         this.autoNotif.serviceId = res.id;
@@ -233,10 +236,15 @@ export class DemandeSuppHeureListcreatorComponent implements OnInit {
     },
       err => {
         this.toastr.warning('لم يتم  قبول الطلب', ' فشل');
+        this.failed = true;
+        this.succ = false;
+        this.msg = "لم يتم  قبول الطلب"
       })
 
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   refuse() {
     this.fact.etat = "رفض"
     this.fact.attribut3 = this.date;
@@ -248,9 +256,15 @@ export class DemandeSuppHeureListcreatorComponent implements OnInit {
     this.suppheureService.PutObservableE(this.fact).subscribe(res => {
       this.getCreance();
       this.toastr.success("تم  رفض الطلب بنجاح", "نجاح");
+      this.succ = true;
+      this.failed = false;
+      this.msg = "تم  رفض الطلب بنجاح"
     },
       err => {
         this.toastr.warning('لم يتم رفض الطلب ', ' فشل');
+        this.msg = "لم يتم رفض الطلب "
+        this.failed = true;
+        this.succ = false;
       })
   }
 }

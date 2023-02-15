@@ -15,7 +15,7 @@
 
         <div class="col-md-6">
           <label for="cares">نوع السيارة </label>
-          <select id="cares" name="type" #type="ngModel" [(ngModel)]="voiture.type" required (change)="mattest($event)" >
+          <select id="cares" name="type" #type="ngModel" [(ngModel)]="voiture.type" required (change)="mattest($event)">
             <option [ngValue]="undefined" selected disabled>-اختر-</option>
             <option *ngFor="let item of voiList" value="{{item.marque}}">{{item.marque}}</option>
           </select>
@@ -28,13 +28,13 @@
 
         <div class="col-md-6">
           <label for="card-num">رقم اللوحة </label>
-          <input type="text" id="card-num" name="matricule" #matricule="ngModel" [(ngModel)]="voiture.matricule" disabled/>
+          <input type="text" id="card-num" name="matricule" #matricule="ngModel" [(ngModel)]="voiture.matricule" disabled />
         </div>
 
 
         <div class="col-md-6">
           <label for="buy-date">تاريخ الصيانة </label>
-          <input type="date" id="buy-date" name="daterepair" #daterepair="ngModel" [(ngModel)]="voiture.daterepair"  [min]="today"/>
+          <input type="date" id="buy-date" name="daterepair" #daterepair="ngModel" [(ngModel)]="voiture.daterepair" [min]="today" />
         </div>
         <div class="col-md-6">
           <label for="repairs">الأعطال </label>
@@ -94,6 +94,18 @@
                  style="width: 130px;"
                  class="btn btn-primary mt-2"
                  value="تقديم" />
+        </div>
+
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            {{msg}}
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            {{msg}}
+          </div>
         </div>
       </form>
     </div>

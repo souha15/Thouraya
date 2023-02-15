@@ -195,15 +195,36 @@ export class RhCongeListComponent implements OnInit {
       this.conge.attribut2 = "إعتماد بخصم"
       this.congeService.CreditSoldeReduit(this.conge.idUserCreator, this.conge.id).subscribe(res => {
         this.toastr.success("تم الخصم من رصيد إجازة الموظف")
+        this.msg = " تم الخصم من رصيد إجازة الموظف"
+
+        this.succ = true;
+        this.failed = false;
+
       }, err => {
-        this.toastr.error("لم يتم الخصم من رصيد إجازة الموظف ", "فشل")
+          this.toastr.error("لم يتم الخصم من رصيد إجازة الموظف ", "فشل")
+
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
+
       })
     } if (this.reduit == 'إعتماد بغير خصم') {
       this.conge.attribut2 = "إعتماد بغير خصم"
       this.congeService.PutObservableE(this.conge).subscribe(res => {
         this.toastr.success("تم التحديث بنجاح")
+        this.msg = " إعتماد بغير خصم"
+
+        this.succ = true;
+        this.failed = false;
       }, err => {
-        this.toastr.error("لم يتم التحديث ", "فشل")
+          this.toastr.error("لم يتم التحديث ", "فشل")
+
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
+
       })
     }
   }
@@ -289,6 +310,11 @@ export class RhCongeListComponent implements OnInit {
           })
         }
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
+
         this.CongeList();
         if (this.conge.type == "إجازة إستثنائية" || this.conge.type == "إجازة إعتيادية" || this.conge.type == "إجازة إضطرارية") {
           this.congeService.TestTheLastUser(this.conge.id).subscribe(res => {
@@ -297,6 +323,10 @@ export class RhCongeListComponent implements OnInit {
       }
       }, err => {
           this.toastr.error('لم يتم التحديث  ', ' فشل');
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
       })
 
       if (this.etat == "موافق") {
@@ -305,6 +335,9 @@ export class RhCongeListComponent implements OnInit {
     })
   }
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
 
     this.updateRecord(form)

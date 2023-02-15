@@ -451,7 +451,7 @@ export class NewTaskComponent implements OnInit {
         this.tache.etat = "في الإنتظار"
         this.tache.Attribut2 = "0";
         this.tache.sousProjet = "يوم"
-        for (let i = 0; i <= this.UsersList.length; i++) {
+        for (let i = 0; i < this.UsersList.length; i++) {
           this.tache.createur = this.UsersList[i].fullName;
           this.tache.affectedName = this.UsersList[i].id;
 

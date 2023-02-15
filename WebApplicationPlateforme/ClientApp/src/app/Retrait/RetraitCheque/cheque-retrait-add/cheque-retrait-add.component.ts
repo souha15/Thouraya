@@ -180,6 +180,9 @@ export class ChequeRetraitAddComponent implements OnInit {
   date = new Date().toLocaleDateString();
   isValidFormSubmitted = false;
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -196,10 +199,19 @@ export class ChequeRetraitAddComponent implements OnInit {
         form.resetForm();
 
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
       },
         err => {
           console.log(err);
           this.toastr.warning('لم تتم الإضافة', ' فشل');
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
       })
     }
   }

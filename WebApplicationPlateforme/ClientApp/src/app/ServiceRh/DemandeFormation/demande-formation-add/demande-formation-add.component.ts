@@ -219,6 +219,10 @@ export class DemandeFormationAddComponent implements OnInit {
   fm: DemandeFormation = new DemandeFormation();
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
     this.testformation();
     this.FormationRequestService.Get().subscribe(res => {
@@ -250,7 +254,11 @@ export class DemandeFormationAddComponent implements OnInit {
       this.FormationRequestService.Add(this.fm).subscribe(res => {
         form.resetForm();
         this.toastr.success("تم التسجيل  بنجاح", " تسجيل ");
+        this.succ = true;
+        this.failed = false;
 
+
+        this.msg = "  تمت الإضافة بنجاح"
         this.text = "طلب دورة تدريبية";
         this.autoNotif.serviceId = res.id;
         this.autoNotif.pageUrl = "demande-formation-listdir"
@@ -276,11 +284,19 @@ export class DemandeFormationAddComponent implements OnInit {
       },
         err => {
           this.toastr.error("فشل التسجيل  الطلب", " تسجيل ")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         }
       )
     }
     else {
       this.toastr.error("لقد تم التسجيل من قبل", " تسجيل ")
+      this.failed = true;
+      this.succ = false;
+
+      this.msg = " فشل عند الإضافة"
       }
     }) 
   }

@@ -187,6 +187,11 @@ export class RecrutementAddComponent implements OnInit {
   date = new Date().toLocaleDateString();
   recId: number;
   dateTime = new Date();
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit(form: NgForm) {
 
 
@@ -244,9 +249,19 @@ export class RecrutementAddComponent implements OnInit {
           this.files1 = [];
           this.toastr.success("تمت الإضافة بنجاح", "نجاح");
           form.resetForm();
+
+          this.succ = true;
+          this.failed = false;
+
+
+          this.msg = "  تمت الإضافة بنجاح"
         },
         err => {
           this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         }
       )
     }

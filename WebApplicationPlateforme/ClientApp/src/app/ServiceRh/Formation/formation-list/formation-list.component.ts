@@ -86,6 +86,9 @@ export class FormationListComponent implements OnInit {
 
 
   factur: Formation = new Formation();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   updateRecord(form: NgForm) {
 
@@ -97,9 +100,18 @@ export class FormationListComponent implements OnInit {
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
         this.resetForm();
         this.getCreance();
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
       },
         err => {
           this.toastr.error(' لم يتم التحديث  ', ' فشل');
+
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
         }
 
 

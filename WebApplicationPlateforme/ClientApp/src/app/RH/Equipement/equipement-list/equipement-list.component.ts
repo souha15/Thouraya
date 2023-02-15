@@ -114,7 +114,9 @@ export class EquipementListComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.updateRecord(form)
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   conge: Equipement = new Equipement();
   updateRecord(form: NgForm) {
     this.conge = Object.assign(this.conge, form.value);
@@ -125,17 +127,31 @@ export class EquipementListComponent implements OnInit {
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
         this.resetForm();
         this.CongeList(this.UserIdConnected);
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
       },
         err => {
           this.toastr.error('لم يتم التحديث  ', ' فشل');
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
         }
 
 
       )
     } if (this.conge.etatdir == 'موافق') {
       this.toastr.error('لقد تمت الموافقة على طلب العهد', ' لم يتم التحديث');
+      this.failed = true;
+      this.succ = false;
+      this.msg ="لقد تمت الموافقة على طلب العهد"
     } if (this.conge.etatdir == 'رفض') {
       this.toastr.error('لقد تم رفض طلب العهد', ' لم يتم التحديث');
+      this.failed = true;
+      this.succ = false;
+      this.msg = "لقد تم رفض طلب العهد"
     }
   }
 

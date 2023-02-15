@@ -91,14 +91,26 @@ export class MaitenanceRequestMecanicalListComponent implements OnInit {
       this.mnService.PutObservableE(this.fact).subscribe(res => {
         this.getCreance();
         this.toastr.success("تم تحويل بنجاح", "نجاح");
+        this.msg = "تم تحويل بنجاح"
+        this.succ = true;
+        this.failed = false;
       },
         err => {
           this.toastr.warning('لم يتم تحويل', ' فشل');
+          this.failed = true;
+          this.succ = false;
+          this.msg ="لم يتم تحويل"
         })
   }else{
       this.toastr.warning('لقد تم تحويل الطلب مسبقا', ' فشل');
+      this.failed = true;
+      this.succ = false;
+      this.msg ="لقد تم تحويل الطلب مسبقا"
 }
   }
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   refuse() {
    
     if (this.fact.etat != "تم استلام الطلب") {
@@ -110,12 +122,21 @@ export class MaitenanceRequestMecanicalListComponent implements OnInit {
       this.mnService.PutObservableE(this.fact).subscribe(res => {
         this.getCreance();
         this.toastr.success("تم استلام الطلب بنجاح", "نجاح");
+        this.failed = true;
+        this.succ = false;
+        this.msg ="تم استلام الطلب بنجاح"
       },
         err => {
           this.toastr.warning('لم يتم استلام الطلب', ' فشل');
+          this.failed = true;
+          this.succ = false;
+          this.msg ="لم يتم استلام الطلب"
         })
     } else {
       this.toastr.warning(' الطلب مستلم', ' فشل');
+      this.failed = true;
+      this.succ = false;
+      this.msg ="الطلب مستلم"
     }
   }
 

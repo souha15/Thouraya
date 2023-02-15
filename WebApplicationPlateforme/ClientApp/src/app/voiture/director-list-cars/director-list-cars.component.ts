@@ -64,6 +64,10 @@ export class DirectorListCarsComponent implements OnInit {
 
   }
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   getBack() {
     this.fact.etat = "معتمدة"
     this.fact.etatdir = "معتمدة"
@@ -73,9 +77,16 @@ export class DirectorListCarsComponent implements OnInit {
     this.recpService.PutObservableE(this.fact).subscribe(res => {
       this.getrecpList();
       this.toastr.success("تم إعتماد طلب صيانة السيارة بنجاح", "نجاح");
+
+      this.succ = true;
+      this.failed = false;
+      this.msg ="تم إعتماد طلب صيانة السيارة بنجاح"
     },
       err => {
         this.toastr.warning('لم يتم إعتماد طلب صيانة السيارة', ' فشل');
+        this.failed = true;
+        this.succ = false;
+        this.msg ="لم يتم إعتماد طلب صيانة السيارة"
       })
 
 

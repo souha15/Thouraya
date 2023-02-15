@@ -505,7 +505,7 @@
               <div class="col-md-11">
                 <p></p>
               </div>
-              <div class="col-md-6" >
+              <div class="col-md-6">
                 <label for="e" style="width:25%;font-weight:bold">البريد الالكتروني </label>
                 <input type="text" id="e" formControlName="email" />
 
@@ -536,16 +536,16 @@
 
               <div class="col-md-6" formGroupName="Passwords">
                 <label for="n" style="width:25%;font-weight:bold">كلمة المرور </label>
-                <input type="password" id="n" formControlName="Password"  style="width:230px" [(ngModel)]="password" />
+                <input type="password" id="n" formControlName="Password" style="width:230px" [(ngModel)]="password" />
                 <div class="alert alert-danger" *ngIf="UserService.formModel.get('Passwords.Password').touched && UserService.formModel.get('Passwords.Password').errors?.required">
                   <p *ngIf="UserService.formModel.get('Passwords.Password').touched && UserService.formModel.get('Passwords.Password').errors?.required">هذا الحقل إجباري</p>
 
                 </div>
               </div>
 
-              <div class="col-md-6" formGroupName="Passwords" >
+              <div class="col-md-6" formGroupName="Passwords">
                 <label for="n" style="width:25%;font-weight:bold">تأكيد كلمة المرور </label>
-                <input type="password" id="n" formControlName="ConfirmPassword"  style="width:230px;" [(ngModel)]="password" />
+                <input type="password" id="n" formControlName="ConfirmPassword" style="width:230px;" [(ngModel)]="password" />
                 <div class="alert alert-danger" *ngIf="UserService.formModel.get('Passwords.ConfirmPassword').touched && UserService.formModel.get('Passwords.ConfirmPassword').errors?.required">
                   <p *ngIf="UserService.formModel.get('Passwords.ConfirmPassword').touched && UserService.formModel.get('Passwords.ConfirmPassword').errors?.required">هذا الحقل إجباري</p>
 
@@ -566,13 +566,24 @@
                        data-toggle="pill"
                        href="#salary"
                        role="tab"
-                       aria-controls="pills-contact"/>
+                       aria-controls="pills-contact" />
                 &nbsp;&nbsp;&nbsp;
                 <input type="submit"
                        style="width: 130px;"
                        class="btn btn-success"
                        value="حفظ" />
-                
+
+              </div>
+              <div class="col-md-6">
+                <div class="success-msg" *ngIf="succ">
+                  <i class="fa fa-check"></i>
+                  {{msg}}
+                </div>
+
+                <div class="error-msg" *ngIf="failed">
+                  <i class="fa fa-times-circle"></i>
+                  {{msg}}
+                </div>
               </div>
             </form>
 

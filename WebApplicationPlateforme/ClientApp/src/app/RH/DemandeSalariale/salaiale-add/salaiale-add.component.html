@@ -31,7 +31,7 @@
           </div>
           <div class="col-md-6">
             <label for="show-place">التاريخ </label>
-            <input type="date" id="show-place" name="date" #date="ngModel" [(ngModel)]="conge.date"   [min]="today">
+            <input type="date" id="show-place" name="date" #date="ngModel" [(ngModel)]="conge.date" [min]="today">
           </div>
 
           <div class="col-md-6">
@@ -44,6 +44,18 @@
           </div>
           <div class="col-12 text-left">
             <input class="btn btn-primary px-4" type="submit" value=" تقديم">
+          </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
           </div>
         </form>
       </div>

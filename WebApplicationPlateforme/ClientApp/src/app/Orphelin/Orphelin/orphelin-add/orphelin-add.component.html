@@ -20,15 +20,15 @@
 
         <div class="card">
 
-          <div class="courses" id="headingOne">
+          <div class="courses" id="headingSix">
 
-            <a class="accord" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <a class="accord" data-toggle="collapse" data-target="#collapseSix" aria-expanded="true" aria-controls="collapseSix">
               البيانات الأساسية
             </a>
 
           </div>
 
-          <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionExample">
+          <div id="collapseSix" class="collapse" aria-labelledby="headingSix" data-parent="#accordionExample">
             <div class="card-body">
 
 
@@ -144,6 +144,18 @@
                         <div class="col-12 text-left">
                           <input class="btn btn-info px-4" type="submit" value="حفظ" />
 
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="success-msg" *ngIf="succ">
+                            <i class="fa fa-check"></i>
+                            {{msg}}
+                          </div>
+
+                          <div class="error-msg" *ngIf="failed">
+                            <i class="fa fa-times-circle"></i>
+                            {{msg}}
+                          </div>
                         </div>
                       </div>
 
@@ -274,6 +286,18 @@
                           <input class="btn btn-info px-4" type="submit" value="حفظ" (click)="onSubmitEdu()" />
 
                         </div>
+
+                        <div class="col-md-6">
+                          <div class="success-msg" *ngIf="succ">
+                            <i class="fa fa-check"></i>
+                            {{msg}}
+                          </div>
+
+                          <div class="error-msg" *ngIf="failed">
+                            <i class="fa fa-times-circle"></i>
+                            {{msg}}
+                          </div>
+                        </div>
                       </div>
 
                     </div>
@@ -298,7 +322,7 @@
 
                         <div class="ml-3">
                           <label for="number">		مهارات اليتيم   </label>
-                          <select id="account" name="nomOrph" #nomOrph="ngModel" [(ngModel)]="tal.nomOrph"  (change)="addTal(event)" >
+                          <select id="account" name="nomOrph" #nomOrph="ngModel" [(ngModel)]="tal.nomOrph" (change)="addTal(event)">
                             <option [ngValue]="undefined" selected disabled>-اختر-</option>
                             <option *ngFor="let item of talentList" value="{{item.nom}}">{{item.nom}}</option>
                           </select>
@@ -334,6 +358,18 @@
                         <input class="btn btn-info px-4" type="submit" value="إضافة" (click)="submitTal()" />
 
                       </div>
+
+                      <div class="col-md-6">
+                        <div class="success-msg" *ngIf="succ">
+                          <i class="fa fa-check"></i>
+                          {{msg}}
+                        </div>
+
+                        <div class="error-msg" *ngIf="failed">
+                          <i class="fa fa-times-circle"></i>
+                          {{msg}}
+                        </div>
+                      </div>
                     </div>
                   </div>
 
@@ -364,7 +400,7 @@
                         </div>
 
 
-     
+
                       </div>
 
                     </div>
@@ -394,6 +430,18 @@
                       <div class="col-12 text-left">
                         <input class="btn btn-info px-4" type="submit" value="إضافة" (click)="submitMat()" />
 
+                      </div>
+
+                      <div class="col-md-6">
+                        <div class="success-msg" *ngIf="succ">
+                          <i class="fa fa-check"></i>
+                          {{msg}}
+                        </div>
+
+                        <div class="error-msg" *ngIf="failed">
+                          <i class="fa fa-times-circle"></i>
+                          {{msg}}
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -461,6 +509,18 @@
                           <input class="btn btn-info px-4" type="submit" value="حفظ" (click)="onSubmitSante()" />
 
                         </div>
+
+                        <div class="col-md-6">
+                          <div class="success-msg" *ngIf="succ">
+                            <i class="fa fa-check"></i>
+                            {{msg}}
+                          </div>
+
+                          <div class="error-msg" *ngIf="failed">
+                            <i class="fa fa-times-circle"></i>
+                            {{msg}}
+                          </div>
+                        </div>
                       </div>
 
                     </div>
@@ -476,7 +536,7 @@
 
                       <label class="main">
                         <span><i class="fa fa-book"></i></span>
-                       	معلومات الجانب الاجتماعي و النفسي
+                        معلومات الجانب الاجتماعي و النفسي
                       </label>
 
                       <div class="d-flex w-100 justify-content-start flex-wrap">
@@ -537,6 +597,18 @@
                           <input class="btn btn-info px-4" type="submit" value="حفظ" (click)="onSubmitPsy()" />
 
                         </div>
+
+                        <div class="col-md-6">
+                          <div class="success-msg" *ngIf="succ">
+                            <i class="fa fa-check"></i>
+                            {{msg}}
+                          </div>
+
+                          <div class="error-msg" *ngIf="failed">
+                            <i class="fa fa-times-circle"></i>
+                            {{msg}}
+                          </div>
+                        </div>
                       </div>
 
                     </div>
@@ -557,7 +629,7 @@
           <div class="courses" id="headingFour">
 
             <a class="accord" data-toggle="collapse" data-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-              	معلومات الجانب الاقتصادي
+              معلومات الجانب الاقتصادي
             </a>
 
           </div>
@@ -633,6 +705,18 @@
                           <input class="btn btn-info px-4" type="submit" value="حفظ" (click)="onSubmitFinance()" />
 
                         </div>
+
+                        <div class="col-md-6">
+                          <div class="success-msg" *ngIf="succ">
+                            <i class="fa fa-check"></i>
+                            {{msg}}
+                          </div>
+
+                          <div class="error-msg" *ngIf="failed">
+                            <i class="fa fa-times-circle"></i>
+                            {{msg}}
+                          </div>
+                        </div>
                       </div>
 
                     </div>
@@ -691,6 +775,17 @@
 
                         </div>
 
+                        <div class="col-md-6">
+                          <div class="success-msg" *ngIf="succ">
+                            <i class="fa fa-check"></i>
+                            {{msg}}
+                          </div>
+
+                          <div class="error-msg" *ngIf="failed">
+                            <i class="fa fa-times-circle"></i>
+                            {{msg}}
+                          </div>
+                        </div>
                       </div>
 
                     </div>
@@ -782,6 +877,17 @@
 
                         </div>
 
+                        <div class="col-md-6">
+                          <div class="success-msg" *ngIf="succ">
+                            <i class="fa fa-check"></i>
+                            {{msg}}
+                          </div>
+
+                          <div class="error-msg" *ngIf="failed">
+                            <i class="fa fa-times-circle"></i>
+                            {{msg}}
+                          </div>
+                        </div>
                       </div>
 
                     </div>
@@ -798,14 +904,14 @@
 
         <!--------Finan-------->
         <div class="card">
-          <div class="courses" id="headingFive">
+          <div class="courses" id="OrFive">
 
-            <a class="accord" data-toggle="collapse" data-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-             	بيانات عائلة اليتيم
+            <a class="accord" data-toggle="collapse" data-target="#collapseOrFive" aria-expanded="false" aria-controls="collapseOrFive">
+              بيانات عائلة اليتيم
             </a>
 
           </div>
-          <div id="collapseFive" class="collapse" aria-labelledby="headingFive" data-parent="#accordionExample">
+          <div id="collapseOrFive" class="collapse" aria-labelledby="OrFive" data-parent="#accordionExample">
             <div class="card-body">
 
               <div class="events1">
@@ -887,6 +993,18 @@
                         <div class="col-12 text-left">
                           <input class="btn btn-info px-4" type="submit" value="حفظ" (click)="onSubmitPere()" />
 
+                        </div>
+
+                        <div class="col-md-6">
+                          <div class="success-msg" *ngIf="succ">
+                            <i class="fa fa-check"></i>
+                            {{msg}}
+                          </div>
+
+                          <div class="error-msg" *ngIf="failed">
+                            <i class="fa fa-times-circle"></i>
+                            {{msg}}
+                          </div>
                         </div>
                       </div>
 
@@ -1025,6 +1143,18 @@
                           <input class="btn btn-info px-4" type="submit" value="حفظ" (click)="onSubmitMere()" />
 
                         </div>
+
+                        <div class="col-md-6">
+                          <div class="success-msg" *ngIf="succ">
+                            <i class="fa fa-check"></i>
+                            {{msg}}
+                          </div>
+
+                          <div class="error-msg" *ngIf="failed">
+                            <i class="fa fa-times-circle"></i>
+                            {{msg}}
+                          </div>
+                        </div>
                       </div>
 
                     </div>
@@ -1039,7 +1169,7 @@
 
                       <label class="main">
                         <span><i class="fa fa-user"></i></span>
-                        	بيانات وصي اليتيم
+                        بيانات وصي اليتيم
                       </label>
 
 
@@ -1085,7 +1215,7 @@
 
                         <div class="ml-3" *ngIf="tutOui">
                           <label for="number">	مكان العمل </label>
-                          <input type="text"  name="raison" #raison="ngModel" [(ngModel)]="tut.lieuTravail"/>
+                          <input type="text" name="raison" #raison="ngModel" [(ngModel)]="tut.lieuTravail" />
 
                         </div>
 
@@ -1127,6 +1257,18 @@
                           <input class="btn btn-info px-4" type="submit" value="حفظ" (click)="onSubmitTuteur()" />
 
                         </div>
+
+                        <div class="col-md-6">
+                          <div class="success-msg" *ngIf="succ">
+                            <i class="fa fa-check"></i>
+                            {{msg}}
+                          </div>
+
+                          <div class="error-msg" *ngIf="failed">
+                            <i class="fa fa-times-circle"></i>
+                            {{msg}}
+                          </div>
+                        </div>
                       </div>
 
                     </div>
@@ -1135,8 +1277,8 @@
                 </form>
 
               </div>
-              </div>
             </div>
+          </div>
         </div>
 
         <!--------Famille--------
@@ -1157,7 +1299,7 @@
         </div>
 
 
-      
+
         <div class="card">
           <div class="courses" id="headingSeven">
 
@@ -1177,7 +1319,7 @@
 
     </div>
 
-    </div>
+  </div>
 
 
 </div>

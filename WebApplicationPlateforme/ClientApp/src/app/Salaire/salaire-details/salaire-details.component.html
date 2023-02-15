@@ -51,7 +51,7 @@
         <div class="col-md-6">
           <div>
             <label for="other-cuts">خصميات أخرى</label>
-            <input type="text" id="other-cuts" name="retrait" #retrait="ngModel" [(ngModel)]="salaire.retrait"  required />
+            <input type="text" id="other-cuts" name="retrait" #retrait="ngModel" [(ngModel)]="salaire.retrait" required />
             <div *ngIf="retrait.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
               مطلوب  خصميات أخرى .
             </div>
@@ -81,7 +81,7 @@
         <div class="col-md-6">
           <div>
             <label for="net-sal">صافي الدخل</label>
-            <input type="text" id="net-sal" name="tot" #tot="ngModel" [(ngModel)]="salaire.tot"/>
+            <input type="text" id="net-sal" name="tot" #tot="ngModel" [(ngModel)]="salaire.tot" />
           </div>
         </div>
         <div class="col-12 text-left">
@@ -89,6 +89,17 @@
                  value="حفظ"
                  class="btn btn-info"
                  style="width: 130px" />
+        </div>
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            {{msg}}
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            {{msg}}
+          </div>
         </div>
       </form>
     </div>

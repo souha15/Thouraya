@@ -80,7 +80,7 @@
           <div class="task-form form-row stop-form">
     
             <form class="task-form form-row service-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
-              <input type="date" id="date" name="etat" #etat="ngModel" [(ngModel)]="congeService.formData.etat" hidden/>
+              <input type="date" id="date" name="etat" #etat="ngModel" [(ngModel)]="congeService.formData.etat" hidden />
               <div class="col-md-6">
                 <label for="date">التاريخ</label>
                 <input type="date" id="date" name="date" #date="ngModel" [(ngModel)]="congeService.formData.date" />
@@ -120,6 +120,19 @@
                        type="submit"
                        value="ارسال" />
               </div>
+
+              <div class="col-md-6">
+                <div class="success-msg" *ngIf="succ">
+                  <i class="fa fa-check"></i>
+                  {{msg}}
+                </div>
+
+                <div class="error-msg" *ngIf="failed">
+                  <i class="fa fa-times-circle"></i>
+                  {{msg}}
+                </div>
+              </div>
+
             </form>
 
           </div>

@@ -182,6 +182,9 @@ export class CarsListComponent implements OnInit {
     })
   }
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   idvoiture: number;
   onSubmit(form: NgForm) {
@@ -288,9 +291,17 @@ export class CarsListComponent implements OnInit {
           this.tabList.splice(0, this.tabList.length);
           this.tabtest = false;
           this.getrecpList();
+          this.msg = "  تم التحديث بنجاح"
+
+          this.succ = true;
+          this.failed = false;
         },
         err => {
           this.toastr.error("لم يتم التسجيل", "فشل في التسجيل");
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
         }
       )
 

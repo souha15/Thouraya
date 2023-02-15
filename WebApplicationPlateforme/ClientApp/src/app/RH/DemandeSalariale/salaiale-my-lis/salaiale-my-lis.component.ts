@@ -60,6 +60,10 @@ export class SalaialeMyLisComponent implements OnInit {
   }
   date = new Date().toLocaleDateString();
   conge: DemandeSalariale = new DemandeSalariale();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   updateRecord(form: NgForm) {
     
     this.conge = Object.assign(this.conge, form.value);
@@ -69,18 +73,33 @@ export class SalaialeMyLisComponent implements OnInit {
     if (this.conge.etat == "في الانتظار") {
       this.congeService.Edit().subscribe(res => {
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
         this.resetForm();
         this.CongeList();
       },
         err => {
           this.toastr.error('لم يتم التحديث  ', ' فشل');
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
         }
 
 
       )
     } if (this.conge.etat == 'موافق') {
       this.toastr.error('لقد تمت الموافقة على طلب  مشهد براتب', ' لم يتم التحديث');
+      this.msg = "لقد تمت الموافقة على طلب  مشهد براتب"
+
+      this.failed = true;
+      this.succ = false;
     } if (this.conge.etat == 'رفض') {
+      this.failed = true;
+      this.succ = false;
+      this.msg ="لقد تم رفض طلب  مشهد براتب"
       this.toastr.error('لقد تم رفض طلب  مشهد براتب', ' لم يتم التحديث');
     }
   }

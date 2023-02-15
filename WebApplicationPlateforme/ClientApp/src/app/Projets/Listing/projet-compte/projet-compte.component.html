@@ -12,7 +12,7 @@
       <section class="page-content">
         <h4 class="my-2 task-head">الحسابات البنكية</h4>
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-4">
             <div>
               <p>&nbsp;</p>
             </div>
@@ -21,7 +21,7 @@
               <input type="hidden" name="id" [value]="tblService.formData2.id" />
 
               <div>
-                <label for="stop-name"><span><i class="fa fa-genderless"></i></span>البنك</label>
+                <label for="stop-name" style="width:20px"><span><i class="fa fa-genderless"></i></span>البنك</label>
                 <input type="text" id="stop-name" name="type" #type="ngModel" [(ngModel)]="tblService.formData2.type" required />
 
                 <div *ngIf="type.invalid && (type.dirty || type.touched)" class="alert alert-danger">
@@ -87,7 +87,7 @@
             </form>
           </div>
 
-          <div class="col-sm-6">
+          <div class="col-sm-8">
             <div>
               <p>&nbsp;</p>
             </div>

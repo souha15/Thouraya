@@ -41,7 +41,7 @@ export class ConfigFrontSystemCrudComponent implements OnInit {
     this.configService.Get().subscribe(res => {
       this.List = res;
       this.c = this.List[0];
-console.log(this.c)
+
     })
   }
 
@@ -130,9 +130,15 @@ console.log(this.c)
   file4: any;
   file5: any;
   fileslist1: string[] = [];
+  fileslist2: string[] = [];
   filelist: ConfigFrontSystem[] = [];
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   filetest: boolean = false;
+
   public upload1(event) {
     if (event.target.files && event.target.files.length > 0) {
       this.file1 = event.target.files[0];
@@ -145,7 +151,7 @@ console.log(this.c)
                 this.uploadStatuss.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
                 break;
               case HttpEventType.Response:
-                this.inputFile.nativeElement.value = '';
+                //this.inputFile.nativeElement.value = '';
                 this.uploadStatuss.emit({ status: ProgressStatusEnum.COMPLETE });
                 break;
             }
@@ -157,8 +163,8 @@ console.log(this.c)
 
         },
 
-        error => {
-          this.inputFile.nativeElement.value = '';
+       error => {
+        //  this.inputFile.nativeElement.value = '';
           this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
         }
       );
@@ -167,21 +173,34 @@ console.log(this.c)
       this.configService.PutObservableE(this.c).subscribe(res => {
         this.getConfig();
         this.toastr.success("نجاح في إضافة شعار الجمعية")
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  نجاح في إضافة شعار الجمعية"
       },
         err => {
           this.toastr.error("فشل في إضافة شعار الجمعية")
+
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل في إضافة شعار الجمعية"
         })
     }
   }
-
+  //configfiles: ConfigFrontSystem = new ConfigFrontSystem();
+  populateForm(c: ConfigFrontSystem) {
+    this.c= Object.assign({}, c);
+  }
   public upload2(event) {
-    console.log("before")
+    
     if (event.target.files && event.target.files.length > 0) {
-      console.log("after")
-      this.file1 = event.target.files[0];
+      
+      this.file2 = event.target.files[0];
       console.log(this.file1)
       this.uploadStatuss.emit({ status: ProgressStatusEnum.START });
-      this.serviceupload.uploadFile(this.file1).subscribe(
+      this.serviceupload.uploadFile(this.file2).subscribe(
         data => {
           if (data) {
             switch (data.type) {
@@ -189,7 +208,7 @@ console.log(this.c)
                 this.uploadStatuss.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
                 break;
               case HttpEventType.Response:
-                this.inputFile.nativeElement.value = '';
+                //this.inputFile.nativeElement.value = '';
                 this.uploadStatuss.emit({ status: ProgressStatusEnum.COMPLETE });
                 break;
             }
@@ -203,15 +222,13 @@ console.log(this.c)
         },
 
         error => {
-          this.inputFile.nativeElement.value = '';
+          //this.inputFile.nativeElement.value = '';
           this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
         }
       );
 
-      this.fileslist1[1] = this.file1.name;
-      this.c.homeBackground = this.fileslist1[1]
-      console.log(this.file1.name)
-      console.log(this.c.homeBackground)
+      this.fileslist2[0] = this.file2.name;
+      this.c.homeBackground = this.fileslist2[0]
       this.configService.PutObservableE(this.c).subscribe(res => {
         this.getConfig();
         this.toastr.success("نجاح في إضافةالخلفية")
@@ -253,7 +270,7 @@ console.log(this.c)
           this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
         }
       );
-      this.fileslist1[2] = this.file1.name;
+      this.fileslist1[2] = this.file3.name;
       this.c.reportRightIcon = this.fileslist1[2]
     
       this.configService.PutObservableE(this.c).subscribe(res => {
@@ -297,7 +314,7 @@ console.log(this.c)
           this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
         }
       );
-      this.fileslist1[3] = this.file1.name;
+      this.fileslist1[3] = this.file4.name;
       this.c.reportLeftIcon = this.fileslist1[3]
    
       this.configService.PutObservableE(this.c).subscribe(res => {
@@ -340,7 +357,7 @@ console.log(this.c)
           this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
         }
       );
-      this.fileslist1[4] = this.file1.name;
+      this.fileslist1[4] = this.file5.name;
       this.c.reportSignature = this.fileslist1[4]
       this.configService.PutObservableE(this.c).subscribe(res => {
         this.getConfig();
