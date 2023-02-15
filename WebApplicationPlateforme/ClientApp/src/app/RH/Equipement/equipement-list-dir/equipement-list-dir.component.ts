@@ -256,13 +256,25 @@ export class EquipementListDirComponent implements OnInit {
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
       form.resetForm();
       this.EquipementList();
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
+
 
     }, err => {
-          this.toastr.error('لم يتم التحديث  ', ' فشل');
+        this.toastr.error('لم يتم التحديث  ', ' فشل');
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
         })
 
   }
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     this.updateRecord(form)
   }

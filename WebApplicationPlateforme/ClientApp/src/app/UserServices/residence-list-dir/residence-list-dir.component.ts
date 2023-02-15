@@ -158,6 +158,9 @@ export class ResidenceListDirComponent implements OnInit {
   }
   date = new Date().toLocaleDateString();
   autoNotif: AutomaticNotification = new AutomaticNotification();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   updateRecord(form: NgForm) {
     this.residenceService.EditDemandByRole(this.dem.id, this.etat).subscribe(res3 => {
       this.dem = res3;  
@@ -236,10 +239,19 @@ export class ResidenceListDirComponent implements OnInit {
 
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
       this.CongeList();
-      form.resetForm();
+        form.resetForm();
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
     },
       err => {
         this.toastr.error('لم يتم التحديث  ', ' فشل');
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
+
       }
 
 

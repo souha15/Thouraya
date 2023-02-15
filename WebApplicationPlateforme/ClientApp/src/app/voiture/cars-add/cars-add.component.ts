@@ -119,7 +119,9 @@ export class CarsAddComponent implements OnInit {
     })
 
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   voiture: Voiture = new Voiture();
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
@@ -229,10 +231,19 @@ export class CarsAddComponent implements OnInit {
           this.getrecpList();
           this.tabList.splice(0, this.tabList.length);
           this.tabtest = false;
+          this.succ = true;
+          this.failed = false;
 
+
+          this.msg = "  تمت الإضافة بنجاح"
         },
         err => {
           this.toastr.error("لم يتم التسجيل", "فشل في التسجيل");
+
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         }
       )
 

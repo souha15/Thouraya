@@ -172,6 +172,9 @@ export class DemissioListdirComponent implements OnInit {
   etattest(event) {
     this.etat = event.target.value;
   }
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   updateRecord(form: NgForm) {
     this.demService.EditDemandByRole(this.per.id, this.etat).subscribe(res => {
       this.per = res;
@@ -253,13 +256,22 @@ export class DemissioListdirComponent implements OnInit {
         console.log(this.autoNotif)
           this.toastr.success('تم التحديث بنجاح', 'نجاح')
           form.resetForm();
-          this.GetDemissionList();
+        this.GetDemissionList();
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
         })
        
 
       },
         err => {
           this.toastr.error('لم يتم التحديث  ', ' فشل');
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
+
         })
     
   }

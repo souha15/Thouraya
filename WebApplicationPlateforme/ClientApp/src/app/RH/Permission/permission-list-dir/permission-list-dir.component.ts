@@ -178,6 +178,9 @@ export class PermissionUListDirComponent implements OnInit {
   
   date = new Date().toLocaleDateString();
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   updateRecord(form: NgForm) {
     this.permissionService.EditDemandByRole(this.per.id, this.etat).subscribe(res => {
       this.per = res;    
@@ -256,7 +259,10 @@ export class PermissionUListDirComponent implements OnInit {
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
         form.resetForm();
         this.CongeList();
+        this.msg = "  تم التحديث بنجاح"
 
+        this.succ = true;
+        this.failed = false;
       })
     
 
@@ -268,6 +274,11 @@ export class PermissionUListDirComponent implements OnInit {
       },
         err => {
           this.toastr.error('لم يتم التحديث  ', ' فشل');
+
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
         }
 
 

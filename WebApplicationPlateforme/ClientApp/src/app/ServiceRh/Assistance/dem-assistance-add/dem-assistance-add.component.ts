@@ -50,7 +50,9 @@ export class DemAssistanceAddComponent implements OnInit {
   isValidFormSubmitted = false;
   assis: Assistance = new Assistance();
   date = new Date().toLocaleDateString();
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
 
   
@@ -69,9 +71,18 @@ export class DemAssistanceAddComponent implements OnInit {
       this.toastr.success("تم التسجيل  بنجاح", " تسجيل ");
       this.position=""
       form.resetForm();
+      this.succ = true;
+      this.failed = false;
+
+
+      this.msg = "  تمت الإضافة بنجاح"
     },
       err => {
         this.toastr.error("فشل التسجيل  الطلب", " تسجيل ")
+        this.failed = true;
+        this.succ = false;
+
+        this.msg = " فشل عند الإضافة"
       });
 }
 }

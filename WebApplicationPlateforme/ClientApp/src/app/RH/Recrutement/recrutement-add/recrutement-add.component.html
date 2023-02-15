@@ -21,7 +21,7 @@
           </div>
           <div class="col-md-6">
             <label for="mandate-date">تاريخ الانتداب</label>
-            <input type="date" id="mandate-date" name="datedebut" #datedebut="ngModel" [(ngModel)]="rec.datedebut" [min]="today" required >
+            <input type="date" id="mandate-date" name="datedebut" #datedebut="ngModel" [(ngModel)]="rec.datedebut" [min]="today" required>
           </div>
           <div *ngIf="datedebut.errors?.required && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
 
@@ -62,7 +62,7 @@
           </div>
 
           <div class="col-sm-8">
-          
+
             <ngx-dropzone (change)="upload($event);onSelect($event)" class="dropzone" #inputFile>
               <ngx-dropzone-label>اسحب الملفات هنا او اضغط للتحميل</ngx-dropzone-label>
               <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove(f)">
@@ -75,6 +75,18 @@
 
           <div class="col-12 text-left">
             <input class="btn btn-primary px-4" type="submit" value="ارسال">
+          </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
           </div>
         </form>
       </div>

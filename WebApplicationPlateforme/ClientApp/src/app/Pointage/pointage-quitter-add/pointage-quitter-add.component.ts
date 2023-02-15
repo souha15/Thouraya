@@ -74,7 +74,9 @@ export class PointageQuitterAddComponent implements OnInit {
   point: Pointage = new Pointage();
   point1: Pointage = new Pointage();
   btnshow: boolean = true;
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     if (this.codesaisie == this.code) {
 
@@ -83,15 +85,26 @@ export class PointageQuitterAddComponent implements OnInit {
       this.point.idUserCreator = this.UserIdConnected;
       this.PointageService.PutObservableE(this.point).subscribe(res => {
         this.toastr.success(" تم تسجيل الإنصراف بنجاح ")
+        this.msg = " تم تسجيل الإنصراف بنجاح";
+        this.succ = true;
+        this.failed = false;
         this.getData()
       },
         err => {
           this.toastr.error("فشل في تسجيل الإنصراف")
-          console.log(err)
+          console.log(err);
+
+          this.failed = true;
+          this.succ = false;
+          this.msg ="فشل في تسجيل الإنصراف"
         })
     } else {
       this.toastr.error("تثبت من الرمز")
       this.code = Math.floor(Math.random() * (this.max - this.min)) + this.min;
+
+      this.failed = true;
+      this.succ = false;
+      this.msg ="تثبت من الرمز"
     }
   }
 }

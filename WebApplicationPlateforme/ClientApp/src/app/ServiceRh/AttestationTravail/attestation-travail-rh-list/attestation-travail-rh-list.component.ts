@@ -59,6 +59,10 @@ export class AttestationTravailRhListComponent implements OnInit {
     this.reason = event.target.value;
   }
   date = new Date().toLocaleDateString();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   accept() {
     this.fact.etat = "موافقة"
     this.fact.daterh = this.date;
@@ -68,9 +72,15 @@ export class AttestationTravailRhListComponent implements OnInit {
     this.atService.PutObservableE(this.fact).subscribe(res => {
       this.getCreance();
       this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
+      this.msg = "تم  قبول الطلب بنجاح"
+      this.succ = true;
+      this.failed = false;
     },
       err => {
         this.toastr.warning('لم يتم  قبول الطلب', ' فشل');
+        this.failed = true;
+        this.succ = false;
+        this.msg = "لم يتم  قبول الطلب"
       })
 
   }
@@ -84,10 +94,17 @@ export class AttestationTravailRhListComponent implements OnInit {
 
     this.atService.PutObservableE(this.fact).subscribe(res => {
       this.getCreance();
-        this.toastr.success("تم  رفض الطلب بنجاح", "نجاح");
+      this.toastr.success("تم  رفض الطلب بنجاح", "نجاح");
+      this.succ = true;
+      this.failed = false;
+      this.msg = "تم  رفض الطلب بنجاح"
+
       },
         err => {
           this.toastr.warning('لم يتم رفض الطلب ', ' فشل');
+          this.msg = "لم يتم رفض الطلب "
+          this.failed = true;
+          this.succ = false;
         })
     }
   p: Number = 1;

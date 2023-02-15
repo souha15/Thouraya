@@ -20,7 +20,7 @@
         </div>
         <div class="col-md-6">
           <label for="">التاريخ</label>
-          <input type="date" name="date" #date="ngModel" [(ngModel)]="sup.date"   [min]="today" required />
+          <input type="date" name="date" #date="ngModel" [(ngModel)]="sup.date" [min]="today" required />
           <div *ngIf="date.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
             مطلوب التاريخ .
           </div>
@@ -28,8 +28,7 @@
 
         <div class="col-md-6">
           <label for="req-det">التفاصيل</label>
-          <textarea 
-                    id="req-det"
+          <textarea id="req-det"
                     class="form-control"
                     name="detail" #detail="ngModel" [(ngModel)]="sup.detail"></textarea>
         </div>
@@ -38,6 +37,18 @@
                  style="width: 130px;"
                  type="submit"
                  value="ارسال الطلب" />
+        </div>
+
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            {{msg}}
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            {{msg}}
+          </div>
         </div>
       </form>
     </div>

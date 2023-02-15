@@ -462,6 +462,10 @@ export class EmployeeAddComponent implements OnInit {
     }
   }
   activiation: string = "0";
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   onSubmit() {
 
     var x = this.roles.filter(x => x.selected).map(y => y.name);
@@ -472,14 +476,24 @@ export class EmployeeAddComponent implements OnInit {
                 this.UserService.formModel.reset();
                 this.UserService.formModel.invalid
                 this.toastr.success('تم إنشاء المستخدم', 'تم التسجيل بنجاح');
+                this.msg ="تم إنشاء المستخدم"
+                this.succ = true;
+                this.failed = false;
                 res.errors.forEach(element => {
                   switch (element.code) {
                     case 'DuplicateUserName':
                       this.toastr.error('اسم المستخدم مسجل من قبل', 'فشل في التسجيل');
+
+                      this.failed = true;
+                      this.succ = false;
+                      this.msg ="اسم المستخدم مسجل من قبل"
                       break;
 
                     default:
                       this.toastr.error(element.description, 'فشل في التسجيل');
+                      this.failed = true;
+                      this.succ = false;
+                      this.msg = " فشل في التسجيل"
                       break;
                   }
                 });

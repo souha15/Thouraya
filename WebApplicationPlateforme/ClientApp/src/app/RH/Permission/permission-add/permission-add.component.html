@@ -15,7 +15,7 @@
         <form class="task-form form-row service-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
           <div class="col-md-6">
             <label for="date">التاريخ</label>
-            <input type="date" id="date" name="date" #date="ngModel" [(ngModel)]="per.date" [min]="today"/>
+            <input type="date" id="date" name="date" #date="ngModel" [(ngModel)]="per.date" [min]="today" />
           </div>
           <div class="col-md-6">
             <label for="perm-type">نوع الاستئذان</label>
@@ -31,19 +31,19 @@
           </div>
           <div class="col-md-6" *ngIf="autre">
             <label for="other-type">إذن آخر</label>
-            <input type="text" id="other-type" name="autre" #autre="ngModel" [(ngModel)]="per.autre"/>
+            <input type="text" id="other-type" name="autre" #autre="ngModel" [(ngModel)]="per.autre" />
           </div>
           <div class="col-md-6">
             <label for="time1">من الساعة</label>
-            <input type="time"  id="time1" name="heuredeb" #heuredeb="ngModel" [(ngModel)]="per.heuredeb" (change)="startTime($event)" />
+            <input type="time" id="time1" name="heuredeb" #heuredeb="ngModel" [(ngModel)]="per.heuredeb" (change)="startTime($event)" />
           </div>
           <div class="col-md-6">
             <label for="time2">إلى الساعة</label>
-            <input type="time"  id="time2" name="heurefin" #heurefin="ngModel" [(ngModel)]="per.heurefin" (change)="endTime($event)" />
+            <input type="time" id="time2" name="heurefin" #heurefin="ngModel" [(ngModel)]="per.heurefin" (change)="endTime($event)" />
           </div>
           <div class="col-md-6">
             <label for="reason">سبب الاستئذان</label>
-            <textarea  class="form-control" id="reason" name="raison" #raison="ngModel" [(ngModel)]="per.raison"></textarea>
+            <textarea class="form-control" id="reason" name="raison" #raison="ngModel" [(ngModel)]="per.raison"></textarea>
           </div>
 
           <div class="col-12 text-center text-md-left mt-3">
@@ -51,6 +51,18 @@
                    style="width: 130px"
                    type="submit"
                    value="ارسال" />
+          </div>
+          
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
           </div>
         </form>
       </div>

@@ -170,6 +170,10 @@ export class DemandeFormationListdirComponent implements OnInit {
 
   date = new Date().toLocaleDateString();
   autoNotif: AutomaticNotification = new AutomaticNotification();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   updateRecord(form: NgForm) {
     this.formationService.EditDemandByRole(this.fact.id, this.etat).subscribe(res3 => {
       this.fact = res3
@@ -247,10 +251,15 @@ export class DemandeFormationListdirComponent implements OnInit {
       }
       this.getFormationList();
       this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
-    
+      this.msg = "تم  قبول الطلب بنجاح"
+      this.succ = true;
+      this.failed = false;
     },
       err => {
         this.toastr.warning('لم يتم  قبول الطلب', ' فشل');
+        this.failed = true;
+        this.succ = false;
+        this.msg = "لم يتم  قبول الطلب"
       })
     })
   }

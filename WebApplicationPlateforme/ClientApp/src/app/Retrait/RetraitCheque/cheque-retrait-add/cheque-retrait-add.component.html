@@ -161,6 +161,19 @@
           <div class="mx-auto my-3">
             <button class="btn btn-primary px-2 ml-3" type="submit"><span class="ml-4"><i class="fa fa-save fa-lg"></i></span> حفظ</button>
           </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
+
         </form>
       </section>
     </div><!-- End col-9 -->

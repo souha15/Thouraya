@@ -144,7 +144,9 @@ export class AddWorkflowConfigurationComponent implements OnInit {
   }
   exist:boolean =  false;
   isValidFormSubmitted = false;
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     if (form.invalid) {
       this.isValidFormSubmitted = false;
@@ -152,9 +154,15 @@ export class AddWorkflowConfigurationComponent implements OnInit {
     else if (this.selecteditems.length < this.nbRoles) {
       this.isValidFormSubmitted = false;
       this.toastr.error(" يجب عليك تحديد" + this.nbRoles + ' أطراف')
+      this.failed = true;
+      this.succ = false;
+      this.msg = " يجب عليك تحديد" + this.nbRoles + ' أطراف';
     } else if (this.exist) {
       this.isValidFormSubmitted = false;
       this.toastr.error("تم تسجيل هذه الخدمة مسبقا الرجاء التوجه للتعديل ")
+      this.msg ="تم تسجيل هذه الخدمة مسبقا الرجاء التوجه للتعديل "
+      this.failed = true;
+      this.succ = false;
     }
     else {
 
@@ -296,10 +304,17 @@ export class AddWorkflowConfigurationComponent implements OnInit {
       this.WorkFolwService.Add(this.wf).subscribe(res => {
         form.resetForm();
         this.toastr.success("نجاح إضافة سير إجراء الخدمات", "نجاح");
+        this.succ = true;
+        this.failed = false;
+        this.msg ="نجاح إضافة سير إجراء الخدمات"
         this.itemselected = [];
         this.selecteditems = [];
       }, err => {
           this.toastr.error("فشل إضافة سير إجراء الخدمات", "فشل");
+
+          this.failed = true;
+          this.succ = false;
+          this.msg ="فشل إضافة سير إجراء الخدمات"
       })
     }
   }

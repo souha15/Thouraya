@@ -89,14 +89,26 @@ export class MaitenanceRequestAddComponent implements OnInit {
         form.resetForm();
         this.files1 = [];
         this.toastr.success("تم تسجيل  الطلب بنجاح", " تسجيل ");
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
       },
         err => {
           this.toastr.error("فشل تسجيل  الطلب", " تسجيل ")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         }
       )
     }
   }
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   //Files
   files1: File[] = [];

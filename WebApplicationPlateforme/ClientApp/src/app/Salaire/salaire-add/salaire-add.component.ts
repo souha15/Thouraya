@@ -74,6 +74,9 @@ export class SalaireAddComponent implements OnInit {
   tot: number;
   resi: number = 0;
   userData: UserDetail = new UserDetail();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   getSalaireDetail(event) {
     this.user = event.target.value;
     this.UserService.GetUserById(event.target.value).subscribe(res => {
@@ -139,9 +142,18 @@ export class SalaireAddComponent implements OnInit {
         this.salaire.retrait = null;
         this.getSDetails();
         this.isValidFormSubmitted = false;
+        this.succ = true;
+        this.failed = false;
+
+
+        this.msg = "  تمت الإضافة بنجاح"
       },
         err => {
           this.toastr.error("فشل تسجيل ", " تسجيل ")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         })
     }
   }

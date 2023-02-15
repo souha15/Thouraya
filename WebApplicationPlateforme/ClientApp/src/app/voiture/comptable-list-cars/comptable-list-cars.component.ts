@@ -64,6 +64,9 @@ export class ComptableListCarsComponent implements OnInit {
     this.fact = Object.assign({}, facture);
 
   }
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   getBack() {
     this.fact.etat = "تم الصرف"
@@ -74,9 +77,15 @@ export class ComptableListCarsComponent implements OnInit {
     this.recpService.PutObservableE(this.fact).subscribe(res => {
       this.getrecpList();
       this.toastr.success("تم صرف طلب صيانة السيارة بنجاح", "نجاح");
+      this.succ = true;
+      this.failed = false;
+      this.msg ="تم صرف طلب صيانة السيارة بنجاح"
     },
       err => {
         this.toastr.warning('لم يتم صرف طلب صيانة السيارة', ' فشل');
+        this.failed = true;
+        this.succ = false;
+        this.msg ="لم يتم صرف طلب صيانة السيارة"
       })
 
 

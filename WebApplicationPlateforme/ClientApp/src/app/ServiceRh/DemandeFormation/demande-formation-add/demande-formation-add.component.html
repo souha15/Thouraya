@@ -48,13 +48,25 @@
 
         <div class="col-md-6">
           <label for="">التفاصيل</label>
-          <textarea class="form-control" value="{{detail}}" disabled ></textarea>
+          <textarea class="form-control" value="{{detail}}" disabled></textarea>
         </div>
         <div class="col-12 text-center text-md-left mt-3">
           <input class="btn btn-info"
                  style="width: 130px;"
                  type="submit"
                  value="تقديم" />
+        </div>
+
+        <div class="col-md-6">
+          <div class="success-msg" *ngIf="succ">
+            <i class="fa fa-check"></i>
+            {{msg}}
+          </div>
+
+          <div class="error-msg" *ngIf="failed">
+            <i class="fa fa-times-circle"></i>
+            {{msg}}
+          </div>
         </div>
       </form>
     </div>

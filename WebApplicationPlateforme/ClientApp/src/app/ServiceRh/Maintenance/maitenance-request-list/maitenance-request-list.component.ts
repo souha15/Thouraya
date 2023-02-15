@@ -68,6 +68,10 @@ export class MaitenanceRequestListComponent implements OnInit {
   }
 
   //editing Facture
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
   onSubmit(form: NgForm) {
@@ -130,15 +134,28 @@ export class MaitenanceRequestListComponent implements OnInit {
         this.files1 = [];
         this.resetForm();
         this.getCreance();
+
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
       },
         err => {
           this.toastr.error(' لم يتم التحديث  ', ' فشل');
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
         }
 
 
       )
     } else {
       this.toastr.error(' لم يتم التحديث ', ' فشل');
+      this.msg = "  فشل عند التحديث"
+
+      this.failed = true;
+      this.succ = false;
     }
   }
 

@@ -82,18 +82,41 @@ export class AdressMacAddComponent implements OnInit {
       form.resetForm();
       this.mac = new MacAddressTable();
       this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+      this.succ = true;
+      this.failed = false;
+
+
+      this.msg = "  تمت الإضافة بنجاح"
     }, err => {
         this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
+
+        this.failed = true;
+        this.succ = false;
+
+        this.msg = " فشل عند الإضافة"
+
     })
   }
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   update(form: NgForm) {
     this.macService.PutObservableE(this.mac).subscribe(res => {
       this.getMacList();
       form.resetForm();
       this.mac = new MacAddressTable();
       this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
     }, err => {
-      this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
+        this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
+
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
     })
   }
   onSubmit(form: NgForm) {

@@ -69,6 +69,9 @@ export class SuppEquipementComponent implements OnInit {
 
   supp: SuppEquipement = new SuppEquipement();
   isValidFormSubmitted = false;
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   onSubmit(form: NgForm) {
     if (form.invalid) {
@@ -90,11 +93,20 @@ export class SuppEquipementComponent implements OnInit {
         this.trinService.PutObservableE(this.fact).subscribe(res => {
           form.resetForm();
           this.toastr.success("تم التسجيل  بنجاح", " تسجيل ");
+          this.succ = true;
+          this.failed = false;
+
+
+          this.msg = "  تمت الإضافة بنجاح"
           this.getCreance();
         })
       },
         err => {
           this.toastr.error("فشل التسجيل  الطلب", " تسجيل ")
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         })
 
     }

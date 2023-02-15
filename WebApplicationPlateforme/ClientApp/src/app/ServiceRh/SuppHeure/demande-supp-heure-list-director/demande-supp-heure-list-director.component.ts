@@ -168,7 +168,9 @@ export class DemandeSuppHeureListDirectorComponent implements OnInit {
     )
 
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   date = new Date().toLocaleDateString();
   updateRecord(form: NgForm) {
     this.suppheureService.EditDemandByRole(this.fact.id, this.etat).subscribe(res => {
@@ -249,10 +251,19 @@ export class DemandeSuppHeureListDirectorComponent implements OnInit {
       form.resetForm();
       this.getSuppHeureList()
       this.toastr.success('تم التحديث بنجاح', 'نجاح');
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
     })
     },
       err => {
         this.toastr.warning('لم يتم  قبول الطلب', ' فشل');
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
+
       })
 
   }

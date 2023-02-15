@@ -102,14 +102,26 @@ export class PointagePresenceAddComponent implements OnInit {
         this.btnshow = false;
         this.toastr.success(" تم تسجيل الحضور بنجاح ")
         this.tableshow = true;
+        this.msg = " تم تسجيل الحضور بنجاح";
+        this.succ = true;
+        this.failed = false;
       },
         err => {
-          this.toastr.error("فشل في تسجيل الحضور")
+          this.toastr.error("فشل في تسجيل الحضور");
+          this.failed = true;
+          this.succ = false;
+          this.msg = "فشل في تسجيل الحضور"
         })
     } else {
       this.tableshow = false;
       this.toastr.error("تثبت من الرمز")
       this.code = Math.floor(Math.random() * (this.max - this.min)) + this.min;
+      this.failed = true;
+      this.succ = false;
+      this.msg = "تثبت من الرمز"
     }
   }
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 }

@@ -62,6 +62,9 @@ export class AttestationTravailLisComponent implements OnInit {
   }
 
   factur: DemandeAttestationTravail = new DemandeAttestationTravail();
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   updateRecord(form: NgForm) {
 
@@ -73,15 +76,28 @@ export class AttestationTravailLisComponent implements OnInit {
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
       this.resetForm();
       this.getCreance();
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
+
     },
       err => {
         this.toastr.error(' لم يتم التحديث  ', ' فشل');
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       }
 
 
     )
   }else{
       this.toastr.error(' لم يتم التحديث الطلب تحت الإجرء   ', ' فشل');
+      this.msg = "   لم يتم التحديث الطلب تحت الإجرء "
+
+      this.failed = true;
+      this.succ = false;
 }
   }
   isValidFormSubmitted = false;

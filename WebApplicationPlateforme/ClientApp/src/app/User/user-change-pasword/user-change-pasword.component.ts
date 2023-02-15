@@ -45,12 +45,23 @@ export class UserChangePaswordComponent implements OnInit {
   userdetail: UserDetail = new UserDetail();
   
 
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   onSubmit(form: NgForm) {
     this.userdetail.id = this.UserIdConnected;
     
     this.userService.ChangePassword(this.userdetail).subscribe(res => {
       form.resetForm();
       this.toastr.success('تم إعادة تعيين كلمة المرور الخاصة بك', 'نجاح');
+
+      this.succ = true;
+      this.failed = false;
+      this.msg ="تم إعادة تعيين كلمة المرور الخاصة بك"
+    }, err => {
+        this.failed = true;
+        this.succ = false;
+        this.msg ="فشل في إعادة تعيين كلمة المرور"
     })
   }
 }

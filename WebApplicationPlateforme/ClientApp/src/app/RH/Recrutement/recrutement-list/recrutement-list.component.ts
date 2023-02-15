@@ -94,7 +94,9 @@ export class RecrutementListComponent implements OnInit {
   onSubmit(form: NgForm) {
     this.updateRecord(form)
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   conge: Recrutement = new Recrutement();
   updateRecord(form: NgForm) {
     this.conge = Object.assign(this.conge, form.value);
@@ -106,17 +108,31 @@ export class RecrutementListComponent implements OnInit {
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
         this.resetForm();
         this.CongeList();
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
       },
         err => {
           this.toastr.error('لم يتم التحديث  ', ' فشل');
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
         }
 
 
       )
     } if (this.conge.etat == 'موافق') {
       this.toastr.error('لقد تمت الموافقة على طلب الإنتداب', ' لم يتم التحديث');
+      this.failed = true;
+      this.succ = false;
+      this.msg ="لقد تمت الموافقة على طلب الإنتداب"
     } if (this.conge.etat == 'رفض') {
       this.toastr.error('لقد تم رفض طلب الإنتداب', ' لم يتم التحديث');
+      this.failed = true;
+      this.succ = false;
+      this.msg = "لقد تم رفض طلب الإنتداب"
     }
   }
 

@@ -170,7 +170,7 @@
             </div>
             <div class="col-md-6">
               <label for="">القسم/الادارة</label>
-              <input type="text" name="admin" #admin="ngModel" [(ngModel)]="trinService.formData.admin"  disabled />
+              <input type="text" name="admin" #admin="ngModel" [(ngModel)]="trinService.formData.admin" disabled />
 
             </div>
             <div class="col-md-6">
@@ -209,6 +209,18 @@
                      style="width: 130px;"
                      type="submit"
                      value="استلام" />
+            </div>
+
+            <div class="col-md-6">
+              <div class="success-msg" *ngIf="succ">
+                <i class="fa fa-check"></i>
+                {{msg}}
+              </div>
+
+              <div class="error-msg" *ngIf="failed">
+                <i class="fa fa-times-circle"></i>
+                {{msg}}
+              </div>
             </div>
 
           </form>

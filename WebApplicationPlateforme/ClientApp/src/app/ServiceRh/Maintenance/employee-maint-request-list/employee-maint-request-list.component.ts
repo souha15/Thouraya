@@ -82,14 +82,26 @@ export class EmployeeMaintRequestListComponent implements OnInit {
       this.mnService.PutObservableE(this.fact).subscribe(res => {
         this.getCreance();
         this.toastr.success("تم تحويل بنجاح", "نجاح");
+        this.succ = true;
+        this.failed = false;
+        this.msg ="تم تحويل بنجاح"
       },
         err => {
           this.toastr.warning('لم يتم تحويل', ' فشل');
+          this.failed = true;
+          this.succ = false;
+          this.msg ="لم يتم تحويل"
         })
     } else {
       this.toastr.warning('الطلب غير مستلم', ' فشل');
+      this.failed = true;
+      this.succ = false;
+      this.msg ="الطلب غير مستلم"
     }
   }
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   refuse() {
 
     if (this.fact.etat == "تم التحويل") {
@@ -98,12 +110,21 @@ export class EmployeeMaintRequestListComponent implements OnInit {
       this.mnService.PutObservableE(this.fact).subscribe(res => {
         this.getCreance();
         this.toastr.success("تم استلام الطلب بنجاح", "نجاح");
+        this.succ = true;
+        this.failed = false;
+        this.msg ="تم استلام الطلب بنجاح"
       },
         err => {
           this.toastr.warning('لم يتم استلام الطلب', ' فشل');
+          this.failed = true;
+          this.succ = false;
+          this.msg ="لم يتم استلام الطلب'"
         })
     } else {
       this.toastr.warning(' الطلب  مستلم', ' فشل');
+      this.failed = true;
+      this.succ = false;
+      this.msg ="الطلب  مستلم"
     }
   }
 

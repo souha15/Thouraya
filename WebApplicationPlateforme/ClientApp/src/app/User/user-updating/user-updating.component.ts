@@ -88,12 +88,24 @@ export class UserUpdatingComponent implements OnInit {
       this.toastr.success("تم تحديث المستخدم", "تحديث")
       this.resetForm();
 
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
     },
       err => {
         this.toastr.success("فشل تحديث المستخدم", "فشل")
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       })
     //  this.updateRecord(form);
   }
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
 
   //Administration Liste
 

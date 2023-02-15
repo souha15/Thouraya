@@ -66,6 +66,11 @@ export class PlaintListdirComponent implements OnInit {
 
   }
 
+
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
+
   isValidFormSubmitted = false;
   path: string;
   date = new Date().toLocaleDateString();
@@ -81,11 +86,20 @@ export class PlaintListdirComponent implements OnInit {
 
       this.plaintService.PutObservableE(this.dem).subscribe(res => {
         this.toastr.success("تمت الإضافة بنجاح", "نجاح");
+
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
         this.CongeList();
         form.resetForm();
       },
         err => {
           this.toastr.error("لم يتم التسجيل", "فشل في التسجيل");
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
         })
     }
   }

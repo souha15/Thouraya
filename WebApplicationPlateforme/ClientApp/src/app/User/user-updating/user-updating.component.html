@@ -373,7 +373,7 @@
 
               <div class="col-md-6">
                 <label for="e" style="width:25%;font-weight:bold">البريد الالكتروني </label>
-                <input type="text" id="e"  name="email" #email="ngModel" [(ngModel)]="UserService.formData.email" />
+                <input type="text" id="e" name="email" #email="ngModel" [(ngModel)]="UserService.formData.email" />
 
                 <div class="alert alert-danger" *ngIf="UserService.formModel.get('email').touched && UserService.formModel.get('email').errors?.required">
                   <p *ngIf="UserService.formModel.get('email').touched && UserService.formModel.get('email').errors?.required">هذا الحقل إجباري</p>
@@ -387,7 +387,7 @@
               <div class="col-md-6">
                 <!--name=""  #="ngModel" [(ngModel)]="UserService.formData."-->
                 <label for="n" style="width:25%;font-weight:bold">اسم المستخدم </label>
-                <input type="text" id="n"  name="userName" #userName="ngModel" [(ngModel)]="UserService.formData.userName"  required />
+                <input type="text" id="n" name="userName" #userName="ngModel" [(ngModel)]="UserService.formData.userName" required />
                 <div class="alert alert-danger" *ngIf="UserService.formModel.get('UserName').touched && UserService.formModel.get('UserName').errors?.minlength">
                   <p *ngIf="UserService.formModel.get('UserName').touched && UserService.formModel.get('UserName').errors?.minlength">الحد الأدنى 6 أحرف</p>
 
@@ -404,6 +404,18 @@
                        style="width: 130px;"
                        class="btn btn-success"
                        value="حفظ" />
+              </div>
+
+              <div class="col-md-6">
+                <div class="success-msg" *ngIf="succ">
+                  <i class="fa fa-check"></i>
+                  {{msg}}
+                </div>
+
+                <div class="error-msg" *ngIf="failed">
+                  <i class="fa fa-times-circle"></i>
+                  {{msg}}
+                </div>
               </div>
             </form>
 

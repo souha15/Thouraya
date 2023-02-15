@@ -112,7 +112,9 @@ export class NewFormationRequestListComponent implements OnInit {
     } else
       this.etatok = true
   }
-
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   fact1: DemandeFormation = new DemandeFormation();
   populateForm1(facture: DemandeFormation) {
     this.atforService.formData = Object.assign({}, facture)
@@ -130,13 +132,27 @@ export class NewFormationRequestListComponent implements OnInit {
       this.atforService.PutObservableE(this.fact1).subscribe(res => {
         this.getCreance();
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
 
       },
         err => {
           this.toastr.error(' لم يتم التحديث  ', ' فشل');
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
+
         })
     } else {
       this.toastr.error('لم يتم الموافقة على الطلب بعد ', ' فشل');
+      this.msg = " لم يتم الموافقة على الطلب بعد"
+
+      this.failed = true;
+      this.succ = false;
+
     }
   }
 
@@ -146,13 +162,28 @@ export class NewFormationRequestListComponent implements OnInit {
     this.atService.PutObservableE(this.fact).subscribe(res => {
       this.getCreance();
       this.toastr.success('تم التحديث بنجاح', 'نجاح')
+      
+      this.msg = "  تم التحديث بنجاح"
+
+      this.succ = true;
+      this.failed = false;
 
     },
       err => {
         this.toastr.error(' لم يتم التحديث  ', ' فشل');
+
+        this.msg = "  فشل عند التحديث"
+
+        this.failed = true;
+        this.succ = false;
       })
     } else {
       this.toastr.error('لم يتم الموافقة على الطلب بعد ', ' فشل');
+
+      this.msg = "  لم يتم الموافقة على الطلب بعد"
+
+      this.failed = true;
+      this.succ = false;
     }
   }
   updateRecord(form: NgForm) {
@@ -162,15 +193,29 @@ export class NewFormationRequestListComponent implements OnInit {
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
         this.resetForm();
         this.getCreance();
+
+        this.msg = "  تم التحديث بنجاح"
+
+        this.succ = true;
+        this.failed = false;
       },
         err => {
           this.toastr.error(' لم يتم التحديث  ', ' فشل');
+          this.msg = "  فشل عند التحديث"
+
+          this.failed = true;
+          this.succ = false;
         }
 
 
       )
     } else {
       this.toastr.error(' لم يتم التحديث الطلب تحت الإجرء   ', ' فشل');
+
+      this.msg = " لم يتم التحديث الطلب تحت الإجرء "
+
+      this.failed = true;
+      this.succ = false;
     }
   }
 

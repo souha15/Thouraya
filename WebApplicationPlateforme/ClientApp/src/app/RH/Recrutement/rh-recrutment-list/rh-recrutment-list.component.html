@@ -160,7 +160,7 @@
       <div class="modal-body" style="direction:rtl; text-align:right">
         <form class="task-form form-row" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
           <label for="user"><span><i class="fa fa-check"></i></span>حالة الإنتداب</label>
-          <select id="user" class=""  (change)="etattest($event)">
+          <select id="user" class="" (change)="etattest($event)">
             <option [ngValue]="undefined" selected disabled>-حالة الإنتداب-</option>
             <option value="موافق">موافق</option>
             <option value="رفض">رفض</option>
@@ -171,6 +171,19 @@
             <button type="submit" class="btn btn-success"><span><i class="fa fa-edit"></i></span>تحديث</button>
 
           </div>
+
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
+
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
+
         </form>
       </div>
       <div class="modal-footer">

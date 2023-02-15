@@ -176,6 +176,9 @@ export class EquipementAddComponent implements OnInit {
   }
 
   //Add Equipement
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string = '';
   isValidFormSubmitted = false;
   date = new Date().toLocaleDateString();
   equ: Equipement = new Equipement();
@@ -194,7 +197,12 @@ export class EquipementAddComponent implements OnInit {
         res => {
           
           this.toastr.success("تمت الإضافة بنجاح", "نجاح");
-            form.resetForm();
+          form.resetForm();
+          this.succ = true;
+          this.failed = false;
+
+
+          this.msg = "  تمت الإضافة بنجاح"
 
             this.dirId = res.userId1;
             this.dirName = res.userName1;
@@ -225,6 +233,11 @@ export class EquipementAddComponent implements OnInit {
         },
         err => {
           this.toastr.error("لم يتم التسجيل", "فشل في التسجيل")
+
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل عند الإضافة"
         })
     }
   }
