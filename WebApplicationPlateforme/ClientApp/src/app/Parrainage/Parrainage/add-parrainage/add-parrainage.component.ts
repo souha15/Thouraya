@@ -41,10 +41,10 @@ export class AddParrainageComponent implements OnInit {
   // Type Parrainage
 
   par: Parriner = new Parriner()
-  private selectedLink: string = "";
-  setradio(e: string): void {
+  selectedLink: string = "";
+  setradio(event){
 
-    this.selectedLink = e;
+    this.selectedLink = event.target.value;
     if (this.selectedLink == "orphelin") {
       this.par.type = "يتيم"
     }
@@ -127,7 +127,7 @@ export class AddParrainageComponent implements OnInit {
   BenList: GestBen[] = [];
   Ben: GestBen = new GestBen();
   Benxist: boolean = false;
-  msg: string;
+ 
   getFemme(event) {
     this.beneficiaireService.ListGestBen().subscribe(res => {
       this.BenList2 = res;

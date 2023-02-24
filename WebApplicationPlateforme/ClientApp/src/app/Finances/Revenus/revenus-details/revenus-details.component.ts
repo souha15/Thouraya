@@ -54,9 +54,9 @@ export class RevenusDetailsComponent implements OnInit {
 
   private selectedLink: string = "newone";
 
-  setradio(e: string): void {
+  setradio(event) {
 
-    this.selectedLink = e;
+    this.selectedLink = event.target.value;
     if (this.selectedLink == "newone") {
       this.location.date = "جديد"
     }
@@ -223,6 +223,7 @@ export class RevenusDetailsComponent implements OnInit {
 
       this.iddot = this.location.idDotation;
       this.idunite = this.location.idUnite;
+      this.location.date = this.selectedLink;
       this.locationService.PutObservable(this.location).subscribe(res => {
      
     

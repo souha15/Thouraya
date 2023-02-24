@@ -39,11 +39,11 @@
                 <label class="target">
                   قيم المتغيرات
                 </label>
-
-                &nbsp; &nbsp; <input type="radio" name="date" value="day" (click)="setradio('classe')" [checked]='true' ngModel>&nbsp; &nbsp; القسم
-                &nbsp; &nbsp; <input type="radio" name="date" value="month" (click)="setradio('event')" ngModel>&nbsp; &nbsp;الفعالية
-                &nbsp; &nbsp; <input type="radio" name="date" value="year" (click)="setradio('date')" ngModel>&nbsp; &nbsp;التاريخ
-
+                <select  (change)="setradio($event)">
+                  <option value="classe" selected>القسم</option>
+                  <option value="event">الفعالية</option>
+                  <option value="date">التاريخ</option>
+                </select>
               </div>
 
               <div class="d-flex w-100 justify-content-start flex-wrap" *ngIf="isSelected('classe')">

@@ -22,10 +22,10 @@ export class ListSoldeComponent implements OnInit {
 
   p: Number = 1;
   count: Number = 5;
-  private selectedLink: string = "";
-  setradio(e: string): void {
+  selectedLink: string ="";
+  setradio(event) {
 
-    this.selectedLink = e;
+    this.selectedLink = event.target.value;
     if (this.selectedLink == "orphelin") {
       this.getOrph();
     }

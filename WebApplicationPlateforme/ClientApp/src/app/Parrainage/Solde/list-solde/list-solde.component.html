@@ -34,9 +34,11 @@
 
                   <label for="number">    نوع المكفول </label>
 
-                  &nbsp; &nbsp; <input type="radio" name="date" value="orphelin" (click)="setradio('orphelin')" [checked]='true' ngModel>&nbsp; &nbsp; يتيم
-                  &nbsp; &nbsp; <input type="radio" name="date" value="femme" (click)="setradio('femme')" ngModel>&nbsp; &nbsp;ارملة  او مطلقة
-
+                  <select id="building" (change)="setradio($event)">
+                    <option [ngValue]="undefined" selected disabled>-نوع المكفول -</option>
+                    <option value="orphelin">يتيم</option>
+                    <option value="femme">ارملة  او مطلقة</option>
+                  </select>
                 </div>
 
                 <div class="col-md-12" *ngIf="isSelected('orphelin')">

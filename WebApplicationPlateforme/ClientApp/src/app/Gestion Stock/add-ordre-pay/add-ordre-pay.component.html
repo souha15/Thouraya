@@ -19,11 +19,10 @@
 
               امر الصرف
             </label>
-
-
-            &nbsp; &nbsp; <input type="radio" name="date" value="directe" (click)="setradio('directe')" ngModel>&nbsp; &nbsp; مباشر
-            &nbsp; &nbsp; <input type="radio" name="date" value="toAccepte" (click)="setradio('toAccepte')" [checked]='true' ngModel>&nbsp; &nbsp;للاعتماد
-
+            <select id="building" (change)="setradio($event)">
+              <option value="directe" selected>مباشر</option>
+              <option value="toAccepte">للاعتماد</option>
+            </select>
 
           </div>
 

@@ -14,8 +14,10 @@
         <form action="" class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)" (keydown.enter)="$event.target.tagName == 'TEXTAREA'">
           <div class="col-sm-6">
             <label for="reg-date"><span><i class="fa fa-money-check"></i></span> الاستقطاع  </label>
-            &nbsp; &nbsp; <input type="radio" name="date" value="newone" (click)="setradio('newone')" ngModel>&nbsp; &nbsp; استقطاع بنكي
-            &nbsp; &nbsp; <input type="radio" name="date" value="oldone" (click)="setradio('oldone')" [checked]='true' ngModel>&nbsp; &nbsp;استقطاع يدوي
+            <select id="building" (change)="setradio($event)">
+              <option value="newone" selected>استقطاع بنكي</option>
+              <option value="oldone">استقطاع يدوي</option>
+            </select>
           </div>
           <div class="col-md-6">
             <label for="rent-stop-name"><span><i class="fa fa-pen-square fa-lg"></i></span>	نوع التبرع  </label>

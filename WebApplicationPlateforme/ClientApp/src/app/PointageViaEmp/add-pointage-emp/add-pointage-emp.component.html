@@ -15,9 +15,13 @@
 
         <div class="col-sm-12">
           <label for="reg-date"><span><i class="fa fa-user-check"></i></span> التسجيل  </label>
-          &nbsp; &nbsp; <input type="radio" name="date" value="presence" (click)="setradio('presence')" [checked]='true' ngModel>&nbsp; &nbsp; الحضور
-          &nbsp; &nbsp; <input type="radio" name="date" value="depart" (click)="setradio('depart')" [checked]='true' ngModel>&nbsp; &nbsp;الإنصراف
-          &nbsp; &nbsp; <input type="radio" name="date" value="two" (click)="setradio('two')" [checked]='true' ngModel>&nbsp; &nbsp; حضور و إنصراف
+  
+          <select id="building" (change)="setradio($event)">
+            <option value="presence" selected>الحضور</option>
+            <option value="depart">الإنصراف</option>
+            <option value="two">حضور و إنصراف</option>
+          </select>
+
         </div>
       </form>
       <div class="row" *ngIf="isSelected('two') ">

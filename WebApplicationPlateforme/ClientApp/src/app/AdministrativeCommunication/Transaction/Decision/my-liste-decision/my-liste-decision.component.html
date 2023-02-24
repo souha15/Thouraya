@@ -168,11 +168,11 @@
             <div class="col-md-6">
               <label for="">داخلي/خارجي</label>
 
-              <input type="radio" name="in-out" id="ch1" (change)="test($event)" value="داخلي" checked />
-              <label for="ch1" class="radio-lab">داخلي</label>
+              <select id="building" (change)="test($event)">
+                <option value="داخلي" selected>داخلي</option>
+                <option value="خارجي">خارجي</option>
+              </select>
 
-              <input type="radio" class="choise2" name="in-out" id="ch2" (change)="test($event)" value="خارجي" />
-              <label for="ch2" class="radio-lab">خارجي</label>
               <div class="content2">
                 <label for="">الجهة</label>
                 <input type="text" name="org" #org="ngModel" [(ngModel)]="trinService.formData.org" />

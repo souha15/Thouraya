@@ -19,11 +19,11 @@
               <label class="target">
                 قيم المتغيرات
               </label>
-
-              &nbsp; &nbsp; <input type="radio" name="date" value="day" (click)="setradio('day')" [checked]='true' ngModel>&nbsp; &nbsp; باليوم
-              &nbsp; &nbsp; <input type="radio" name="date" value="month" (click)="setradio('month')" ngModel>&nbsp; &nbsp;بالشهر
-              &nbsp; &nbsp; <input type="radio" name="date" value="ben" (click)="setradio('ben')" ngModel>&nbsp; &nbsp;بالموظف
-
+              <select id="building" (change)="setradio($event)">
+                <option value="day" selected>باليوم</option>
+                <option value="month">بالشهر</option>
+                <option value="ben">بالموظف</option>
+              </select>
 
             </div>
 

@@ -25,11 +25,11 @@ export class EventsReportComponent implements OnInit {
 
   //Search
 
-  private selectedLink: string = "classe";
+  selectedLink: string = "classe";
   search: string;
-  setradio(e: string): void {
+  setradio(event) {
 
-    this.selectedLink = e;
+    this.selectedLink = event.target.value;
     if (this.selectedLink == "classe") {
       this.search = "classe"
     }

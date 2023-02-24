@@ -104,9 +104,9 @@ export class EnregEComponent implements OnInit {
 
   private selectedLink1: string = "org";
   affectation: Affectation = new Affectation();
-  setradio1(e: string): void {
+  setradio1(event): void {
 
-    this.selectedLink1 = e;
+    this.selectedLink1 = event.target.value;
     if (this.selectedLink1 == "org") {
       this.affectation.type = "إدارة"
     }
@@ -469,6 +469,7 @@ export class EnregEComponent implements OnInit {
     this.affectation.nomUserQuiAffecte = this.UserNameConnected;
     this.affectation.idTransaction = this.tr.id
     this.affectation.attribut2 = "غير مستلمة"
+    this.affectation.type = this.selectedLink1;
     this.affectationService.CreateE(this.affectation).subscribe(
       res => {
         this.tr.etat = "غير مستلمة"
@@ -518,6 +519,7 @@ export class EnregEComponent implements OnInit {
     this.affectation.nomUserQuiAffecte = this.UserNameConnected;
     this.affectation.idTransaction = this.tr.id
     this.affectation.attribut2 = "غير مستلمة"
+    this.affectation.type = this.selectedLink1;
     this.affectationService.CreateE(this.affectation).subscribe(
       res => {
         this.tr.etat = "غير مستلمة"

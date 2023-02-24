@@ -29,7 +29,7 @@ export class AddPointageEmpComponent implements OnInit {
   listdate: PointageEmp[] = [];
   listdate2: PointageEmp[] = [];
   date = new Date().toLocaleDateString();
-  presenceTest: boolean = false;
+  presenceTest: boolean = true;
   getdate() {
     this.viaempService.Get().subscribe(res => {
       this.listdate = res
@@ -69,13 +69,13 @@ export class AddPointageEmpComponent implements OnInit {
       }
     })
   }
-  private selectedLink: string;
+  private selectedLink: string ="presence";
 
-  setradio(e: string): void {
+  setradio(event): void {
 
-    this.selectedLink = e;
+    this.selectedLink = event.target.value;
     if (this.selectedLink == "presence") {
-      this.getdate()
+      this.getdate();
     }
 
     if (this.selectedLink == "depart") {

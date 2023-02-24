@@ -29,9 +29,9 @@ export class ListPointageEmpComponent implements OnInit {
 
   private selectedLink: string = "day";
   search: string;
-  setradio(e: string): void {
+  setradio(event): void {
 
-    this.selectedLink = e;
+    this.selectedLink = event.target.value;
     if (this.selectedLink == "day") {
       this.search = "day"
     }
