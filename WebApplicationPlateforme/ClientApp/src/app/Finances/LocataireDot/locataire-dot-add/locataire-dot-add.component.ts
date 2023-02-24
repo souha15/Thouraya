@@ -53,9 +53,9 @@ export class LocataireDotAddComponent implements OnInit {
 
   private selectedLink: string = "newone";
 
-  setradio(e: string): void {
+  setradio(event) {
 
-    this.selectedLink = e;
+    this.selectedLink = event.target.value;
     if (this.selectedLink == "newone") {
       this.location.date = "جديد"
     }
@@ -66,6 +66,7 @@ export class LocataireDotAddComponent implements OnInit {
 
 
   }
+  
 
   isSelected(name: string): boolean {
 
@@ -177,7 +178,7 @@ export class LocataireDotAddComponent implements OnInit {
       if (this.location.attribut5 == null) {
         this.location.attribut5 = "0";
       }
- 
+      this.location.date=this.selectedLink
       this.locationService.Add(this.location).subscribe(res => {
         this.locationId = res.id
         this.iddot = res.idDotation;

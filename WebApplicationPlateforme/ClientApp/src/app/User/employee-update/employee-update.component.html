@@ -261,8 +261,12 @@
               <div class="col-md-6 mb-2"><p></p></div>
               <div class="col-md-6 mb-2">
                 <label for="emp-id" style="width:25%;font-weight:bold"> ٱلي</label>
-                <input type="radio"
-                       name="contacts" id="contacts" (change)="numrandom($event)">
+      
+                <select class="" name="contacts"(change)="numrandom($event)">
+                  <option [ngValue]="undefined" selected disabled>-ٱلي-</option>
+                  <option value="yes">نعم </option>
+                  <option value="no">لا</option>
+                </select>
 
               </div>
 

@@ -160,9 +160,9 @@ export class AddOrdrePayComponent implements OnInit {
 
   private selectedLink: string = "directe";
 
-  setradio(e: string): void {
+  setradio(event): void {
 
-    this.selectedLink = e;
+    this.selectedLink = event.target.value;
     if (this.selectedLink == "toAccepte") {
       this.pay.typeOrdre = "للاعتماد";
       this.pay.etatDir = "في الإنتظار"
@@ -334,7 +334,11 @@ export class AddOrdrePayComponent implements OnInit {
       this.pay.dateenreg = this.date;
       this.pay.idUserCreator = this.UserIdConnected;
       this.pay.userNameCreator = this.UserNameConnected;
-      this.pay.etatOrdre ="في الإنتظار"
+      this.pay.etatOrdre = "في الإنتظار"
+      if (this.selectedLink == "directe") {
+        this.pay.typeOrdre = this.selectedLink
+        this.pay.etatDir = "في الإنتظار"
+      }
       this.OrdrePayService.CreateOrdrePayStockage(this.pay).subscribe(res => {
         this.IdO = res.id
         if (this.part && this.benPartTest) {

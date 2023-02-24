@@ -43,7 +43,7 @@ export class EmployeeAddComponent implements OnInit {
 
   AutomaticDirector: boolean = false;
   automaticDir(event) {
-    if (event.target.checked) {
+    if (event.target.value=="yes") {
       this.AutomaticDirector = true
     } else {
       this.AutomaticDirector = false;
@@ -422,7 +422,7 @@ export class EmployeeAddComponent implements OnInit {
   password: string;
   usernameg: string;
   numrandom(event) {
-    if (event.target.checked) {
+    if (event.target.value == "yes") {
       this.randomnumbertest = true;
       this.notrandom = false;
 

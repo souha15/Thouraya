@@ -71,10 +71,10 @@ export class GestBenAddComponent implements OnInit {
 
   // Type Ben
 
-  private selectedLink: string ="";
-  setradio(e: string): void {
+  private selectedLink: string ="directe";
+  setradio(event): void {
 
-    this.selectedLink = e;
+    this.selectedLink = event.target.value;
     if (this.selectedLink == "chercheur") {
       this.gest.typeEnreg = "ارسال الى الباحث "
     }
@@ -325,7 +325,7 @@ export class GestBenAddComponent implements OnInit {
     } else {
 
       this.isValidFormSubmitted = true;
-
+      this.gest.typeEnreg = this.selectedLink
       this.gest.dateenreg = this.date;
       this.gest.idUserCreator = this.UserIdConnected;
       this.gest.userNameCreator = this.UserNameConnected;

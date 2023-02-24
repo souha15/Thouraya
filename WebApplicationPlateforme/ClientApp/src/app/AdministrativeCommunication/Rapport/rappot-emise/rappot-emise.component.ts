@@ -29,7 +29,33 @@ export class RappotEmiseComponent implements OnInit {
     this.GetPropList();
     this.GetOrganismeList();
   }
+  //Listing
+  private selectedLink: string;
 
+  setradio(event) {
+
+    this.selectedLink = event.target.value;
+    if (this.selectedLink == "mine") {
+      this.testMyTr(this.selectedLink)
+    }
+
+    if (this.selectedLink == "temp") {
+      this.testEnregTemp(this.selectedLink)
+    }
+
+    if (this.selectedLink == "def") {
+      this.testEnregDef(this.selectedLink)
+    }
+  }
+
+  isSelected(name: string): boolean {
+
+    if (!this.selectedLink) { // if no radio button is selected, always return false so every nothing is shown  
+      return false;
+    }
+
+    return (this.selectedLink === name); // if current radio button is selected, return true, else return false  
+  }
   //User Connected
 
   UserIdConnected: string;

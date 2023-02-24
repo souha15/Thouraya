@@ -341,11 +341,14 @@
 
               <div class="col-md-6 mb-2">
                 <label for="emp-id" style="width:25%;font-weight:bold"> ٱلي</label>
-                <input type="radio"
-                       name="contacts" id="contacts" (change)="numrandom($event)">
+
+                <select class="" name="contacts" (change)="numrandom($event)">
+                  <option [ngValue]="undefined" selected disabled>-ٱلي-</option>
+                  <option value="yes">نعم </option>
+                  <option value="no">لا</option>
+                </select>
 
               </div>
-
               <div class="col-md-6 mb-2">
                 <label for="emp-id" style="width:25%;font-weight:bold">الترقيم الوظيفي</label>
                 <input class="" type="text" name="new-user-password" placeholder="الرقم الوظيفي" id="new-user-password2" formControlName="num" *ngIf="notrandom" (change)="changenum($event)" maxlength="4">
@@ -370,8 +373,13 @@
 
               <div class="col-md-6 mb-2">
                 <label for="emp-id" style="width:25%;font-weight:bold"> الرئيس المباشر </label>
-                <input type="radio"
-                       name="conta" id="conta" (change)="automaticDir($event)">
+          
+
+                <select class="" name="conta" (change)="automaticDir($event)">
+                  <option [ngValue]="undefined" selected disabled>- الرئيس المباشر-</option>
+                  <option value="yes">نعم </option>
+                  <option value="no">لا</option>
+                </select>
 
               </div>
 

@@ -19,10 +19,11 @@
               نوع التسجيل
             </label>
             <label for="start-date">  {{gest.typeEnreg}}</label>
-            &nbsp; &nbsp; <input type="radio" name="date" value="directe" (click)="setradio('directe')" ngModel>&nbsp; &nbsp; مباشر
-            &nbsp; &nbsp; <input type="radio" name="date" value="chercheur" (click)="setradio('chercheur')" [checked]='true' ngModel>&nbsp; &nbsp;ارسال الى الباحث
-            &nbsp; &nbsp; <input type="radio" name="date" value="accept" (click)="setradio('accept')" [checked]='true' ngModel>&nbsp; &nbsp;طلب اعتماد التسجيل
-
+            <select id="building" (change)="setradio($event)">
+              <option value="directe" selected>مباشر</option>
+              <option value="chercheur">ارسال الى الباحث</option>
+              <option value="accept">طلب اعتماد التسجيل</option>
+              </select>
           </div>
 
           <div class="col-md-12 d-flex flex-wrap w-100 justify-content-between">

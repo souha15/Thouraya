@@ -127,11 +127,11 @@ export class ChequeRetraitAddComponent implements OnInit {
   // Old Or new Locataire
   //Test Type Transaction Particulier ou bien Organisation
 
-  private selectedLink: string = "newone";
+  selectedLink: string ="newone";
 
-  setradio(e: string): void {
+  setradio(event) {
 
-    this.selectedLink = e;
+    this.selectedLink = event.target.value;
     if (this.selectedLink == "newone") {
       this.retrait.typeRetrait = "بنكي"
     }
@@ -194,6 +194,7 @@ export class ChequeRetraitAddComponent implements OnInit {
       this.retrait.dateenreg = this.date;
       this.retrait.userNameCreator = this.UserNameConnected;
       this.retrait.idUserCreator = this.UserIdConnected;
+      this.retrait.typeRetrait = this.selectedLink;
 
       this.retraitService.Create(this.retrait).subscribe(res => {
         form.resetForm();

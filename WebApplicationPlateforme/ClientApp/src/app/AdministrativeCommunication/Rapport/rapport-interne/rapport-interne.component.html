@@ -32,26 +32,17 @@
               <option *ngFor="let item of ListProp" value="{{item.id}}">{{item.nom}} {{item.prenom}}</option>
             </select>
           </div>
-
           <div class="col-sm-6">
+            <label>نوع المعاملة</label>
+            <select id="building" (change)="setradio($event)">
+              <option [ngValue]="undefined" selected disabled>-المعاملة-</option>
 
-            <div class="form-group">
-              <input type="radio" name="tra" id="t2" (change)="testEnregTemp($event)" [disabled]="!testenregtemp">
-              <label for="t2"> المعاملات المحفوظة مؤقتا</label>
-            </div>
-            <div class="form-group">
-              <input type="radio" name="tra" id="t1" (change)="testMyTr($event)" [disabled]="!testmytr">
-              <label for="t1">معاملاتي </label>
-            </div>
+              <option value="mine">معاملاتي</option>
+              <option value="temp">المعاملات المحفوظة مؤقتا</option>
+              <option value="def">المعاملات المحفوظة نهائيا</option>
+            </select>
           </div>
-          <div class="col-sm-6">
-
-            <div class="form-group">
-              <input type="radio" name="tra" id="t4" (change)="testEnregDef($event)" [disabled]="!testenregdef">
-              <label for="t4">المعاملات المحفوظة نهائيا</label>
-            </div>
-
-          </div>
+    
           <div class="buttons col-12 text-left">
             <button class="px-2 ml-3" type="submit" (click)="listTr()"><span class="ml-2"><i class="fa fa-print"></i></span> تكوين</button>
             <button class="px-2 ml-3" type="reset"><span class="ml-2"><i class="fa fa-times"></i></span> حذف</button>

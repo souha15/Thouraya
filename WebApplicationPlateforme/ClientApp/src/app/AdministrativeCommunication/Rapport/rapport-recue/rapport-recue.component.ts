@@ -184,8 +184,8 @@ export class RapportRecueComponent implements OnInit {
 
   testmytr: boolean = true;
 
-  testMyTr(event) {
-    if (event.target.value != null) {
+  testMyTr(ev) {
+    if (ev == "mine") {
       this.testor = false;
       this.testprop = false;
       this.testaffected = false;
@@ -196,8 +196,8 @@ export class RapportRecueComponent implements OnInit {
   }
 
   testenregtemp: boolean = true;
-  testEnregTemp(event) {
-    if (event.target.value != null) {
+  testEnregTemp(ev) {
+    if (ev == "temp") {
       this.testor = false;
       this.testprop = false;
       this.testaffected = false;
@@ -220,8 +220,8 @@ export class RapportRecueComponent implements OnInit {
   }
 
   testenregdef: boolean = true;
-  testEnregDef(event) {
-    if (event.target.value != null) {
+  testEnregDef(ev) {
+    if (ev == "def") {
       this.testor = false;
       this.testprop = false;
       this.testaffected = false;
@@ -230,7 +230,33 @@ export class RapportRecueComponent implements OnInit {
       this.testmytr = false;
     }
   }
+  //Listing
+  private selectedLink: string = "mine";
 
+  setradio(event) {
+
+    this.selectedLink = event.target.value;
+    if (this.selectedLink == "mine") {
+      this.testMyTr(this.selectedLink)
+    }
+
+    if (this.selectedLink == "temp") {
+      this.testEnregTemp(this.selectedLink)
+    }
+
+    if (this.selectedLink == "def") {
+      this.testEnregDef(this.selectedLink)
+    }
+  }
+
+  isSelected(name: string): boolean {
+
+    if (!this.selectedLink) { // if no radio button is selected, always return false so every nothing is shown  
+      return false;
+    }
+
+    return (this.selectedLink === name); // if current radio button is selected, return true, else return false  
+  }
   path: string;
   public openPDF() {
 

@@ -345,14 +345,11 @@
 
                   <div class="input-group">
                     <div class="input-group-prepend">
-                      <div class="input-group-text">
-                        <input type="radio" id="rad1" aria-label="Radio button for following text input" name="affectationtest" value="org" (click)="setradio1('org')" [checked]='true' ngModel>
-                        <label for="rad1" class="mr-2 mb-0">إحالة إلى الإدارة</label>
-                      </div>
-                      <div class="input-group-text">
-                        <input type="radio" id="rad2" aria-label="Radio button for following text input" name="affectationtest" value="emp" (click)="setradio1('emp')" ngModel>
-                        <label for="rad2" class="mr-2 mb-0">إحالة إلى موظف</label>
-                      </div>
+                      <select id="building" (change)="setradio1($event)">
+                        <option value="org" selected>إحالة إلى الإدارة</option>
+                        <option value="emp">إحالة إلى موظف</option>
+                      </select>
+
                     </div>
                   </div>
 

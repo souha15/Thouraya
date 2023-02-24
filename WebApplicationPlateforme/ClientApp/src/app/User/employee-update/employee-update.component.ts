@@ -57,7 +57,7 @@ export class EmployeeUpdateComponent implements OnInit {
   usernameid: string;
 
   findid(event) {
-    console.log("souha")
+
     this.username = event.target.value;
     this.UserService.GetUserByUserName2(this.username).subscribe(res => {
       this.usernameid = res.id;
@@ -327,7 +327,7 @@ export class EmployeeUpdateComponent implements OnInit {
   password: string;
   usernameg: string;
   numrandom(event) {
-    if (event.target.checked) {
+    if (event.target.value =="yes") {
       this.randomnumbertest = true;
       this.notrandom = false;
 
@@ -337,7 +337,6 @@ export class EmployeeUpdateComponent implements OnInit {
         this.testrandom = true
         this.password = this.randomnumber + "123"
         this.usernameg = "00" + this.randomnumber;
-        console.log(this.password)
       } else {
         this.testrandom = false;
       }

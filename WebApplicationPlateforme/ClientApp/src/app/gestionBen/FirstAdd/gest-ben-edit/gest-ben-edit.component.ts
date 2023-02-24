@@ -216,9 +216,9 @@ export class GestBenEditComponent implements OnInit {
 
   private selectedLink: string = "directe";
 
-  setradio(e: string): void {
+  setradio(event): void {
 
-    this.selectedLink = e;
+    this.selectedLink = event.target.value;
     if (this.selectedLink == "chercheur") {
       this.gest.typeEnreg = "ارسال الى الباحث "
     }
@@ -435,7 +435,7 @@ export class GestBenEditComponent implements OnInit {
     } else {
 
       this.isValidFormSubmitted = true;
-
+      this.gest.typeEnreg = this.selectedLink;
 
       this.benService.PutObservableE(this.gest).subscribe(res => {
 

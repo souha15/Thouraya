@@ -14,8 +14,12 @@
         <form action="" class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)" (keydown.enter)="$event.target.tagName == 'TEXTAREA'">
           <div class="col-sm-12">
             <label for="reg-date"><span><i class="fa fa-user-check"></i></span>نوع المستأجر  </label>
-            &nbsp; &nbsp; <input type="radio" name="date" value="newone" (click)="setradio('newone')" ngModel>&nbsp; &nbsp; جديد
-            &nbsp; &nbsp; <input type="radio" name="date" value="oldone" (click)="setradio('oldone')" [checked]='true' ngModel>&nbsp; &nbsp;قديم
+            <select id="building" (change)="setradio($event)">
+              <option value="newone" selected>جديد</option>
+              <option value="oldone" >قديم</option>
+
+
+            </select>
           </div>
           <div class="col-md-6">
             <label for="rent-stop-name"><span><i class="fa fa-pen-square fa-lg"></i></span>اسم الوقف</label>
