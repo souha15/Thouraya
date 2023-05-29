@@ -65,4 +65,10 @@ export class TacheService {
   GetById(Id) {
     return this.http.get<Tache>(this.rootURL + '/Taches/' + Id);
   }
+
+  SearchByEmployee(Id) {
+    return this.http.get<Tache[]>(this.rootURL + '/Taches/SearchByEmployee/' + Id);
+  } SearchByEtat(Etat, IdUser) {
+    return this.http.get<Tache[]>(this.rootURL + '/Taches/SearchByEtat/' + Etat + '/' + IdUser);
+  }
 }

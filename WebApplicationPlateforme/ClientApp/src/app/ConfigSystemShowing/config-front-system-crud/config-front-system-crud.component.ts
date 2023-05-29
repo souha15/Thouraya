@@ -41,52 +41,82 @@ export class ConfigFrontSystemCrudComponent implements OnInit {
     this.configService.Get().subscribe(res => {
       this.List = res;
       this.c = this.List[0];
+      if (this.c.loginText != null) {
+        this.nameArabic = this.c.loginText;
+      }
+      if (this.c.icon8 != null) {
+        this.nameEnglish = this.c.icon8
+      }
+
+      if (this.c.icon1 != null) {
+
+      } if (this.c.homeBackground != null) {
+
+      } if (this.c.reportRightIcon != null) {
+
+      } if (this.c.reportLeftIcon != null) {
+
+      } if (this.c.reportSignature != null) {
+
+      }
 
     })
   }
 
-  // Download
+  nameArabic: string;
+  getNameArabic(event) {
+    this.nameArabic = event.target.value;
+  }
 
-  //Download
+  nameEnglish: string;
+  getNameEnglish(event) {
+    this.nameEnglish = event.target.value;
+  }
+  succ: boolean = false;
+  failed: boolean = false;
+  msg: string;
 
-  public download(filepath) {
-    this.downloadStatus.emit({ status: ProgressStatusEnum.START });
-    this.serviceupload.downloadFile(filepath).subscribe(
-      data => {
-        switch (data.type) {
-          case HttpEventType.DownloadProgress:
-            this.downloadStatus.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
-            break;
-          case HttpEventType.Response:
-            this.downloadStatus.emit({ status: ProgressStatusEnum.COMPLETE });
-            const downloadedFile = new Blob([data.body], { type: data.body.type });
-            const a = document.createElement('a');
-            a.setAttribute('style', 'display:none;');
-            document.body.appendChild(a);
-            a.download = filepath;
-            a.href = URL.createObjectURL(downloadedFile);
-            a.target = '_blank';
-            a.click();
-            document.body.removeChild(a);
-            break;
-        }
-      },
-      error => {
-        this.downloadStatus.emit({ status: ProgressStatusEnum.ERROR });
-      }
-    );
+  onSubmit() {
+    if (this.fileslist1.length != 0) {
+      this.c.icon1 = this.fileslist1[0];
+    }
+    if (this.fileslist2.length != 0) {
+      this.c.homeBackground = this.fileslist2[0];
+
+    }
+    if (this.fileslist3.length != 0) {
+      this.c.reportRightIcon = this.fileslist3[0];
+
+    }
+    if (this.fileslist4.length != 0) {
+      this.c.reportLeftIcon = this.fileslist4[0];
+
+    }
+    if (this.fileslist5.length != 0) {
+      this.c.reportSignature = this.fileslist5[0];
+
+    }
+    this.c.loginText = this.nameArabic;
+    this.c.icon8 = this.nameEnglish;
+      this.configService.PutObservableE(this.c).subscribe(res => {
+        this.succ = true;
+        this.failed = false;
+        this.msg = "  نجاح  إضافة المرفقات"
+      }, err => {
+          this.failed = true;
+          this.succ = false;
+
+          this.msg = " فشل  إضافة المرفقات "})
+    
+
+   
   }
 
 
-  //Files
-  public pj: ConfigFrontSystem = new ConfigFrontSystem();
-
-  public pjs: ConfigFrontSystem[];
-
-
-  public files: string[];
   //get List of Files
-
+  public response: { 'dbpathsasstring': '' };
+  public isCreate: boolean;
+  public files: string[];
   private getFiles() {
     this.serviceupload.getFiles().subscribe(
       data => {
@@ -118,32 +148,68 @@ export class ConfigFrontSystemCrudComponent implements OnInit {
 
   }
 
+
+  // onSelect On remove files
+  files1: File[] = [];
+  files2: File[] = [];
+  files3: File[] = [];
+  files4: File[] = [];
+  files5: File[] = [];
+  onSelect1(event) {
+    //console.log(event);
+    this.files1.push(...event.addedFiles);
+  }
+
+  onRemove1(event) {
+    this.files1.splice(this.files1.indexOf(event), 1);
+  }
+
+  onSelect2(event) {
+    //console.log(event);
+    this.files2.push(...event.addedFiles);
+  }
+
+  onRemove2(event) {
+    this.files2.splice(this.files2.indexOf(event), 1);
+  }
+
+  onSelect3(event) {
+    //console.log(event);
+    this.files3.push(...event.addedFiles);
+  }
+
+  onRemove3(event) {
+    this.files3.splice(this.files3.indexOf(event), 1);
+  }
+
+
+  onSelect4(event) {
+    //console.log(event);
+    this.files4.push(...event.addedFiles);
+  }
+
+  onRemove4(event) {
+    this.files4.splice(this.files4.indexOf(event), 1);
+  }
+
+  onSelect5(event) {
+    //console.log(event);
+    this.files5.push(...event.addedFiles);
+  }
+
+  onRemove5(event) {
+    this.files5.splice(this.files5.indexOf(event), 1);
+  }
+
   //Upload
-
-
-  //Save it ToDatabase
-
   url: any;
-  file1: any;
-  file2: any;
-  file3: any;
-  file4: any;
-  file5: any;
+  file: any;
   fileslist1: string[] = [];
-  fileslist2: string[] = [];
-  filelist: ConfigFrontSystem[] = [];
-
-  succ: boolean = false;
-  failed: boolean = false;
-  msg: string = '';
-
-  filetest: boolean = false;
-
   public upload1(event) {
-    if (event.target.files && event.target.files.length > 0) {
-      this.file1 = event.target.files[0];
+    if (event.addedFiles && event.addedFiles.length > 0) {
+      this.file = event.addedFiles[0];
       this.uploadStatuss.emit({ status: ProgressStatusEnum.START });
-      this.serviceupload.uploadFile(this.file1).subscribe(
+      this.serviceupload.uploadFile(this.file).subscribe(
         data => {
           if (data) {
             switch (data.type) {
@@ -151,11 +217,12 @@ export class ConfigFrontSystemCrudComponent implements OnInit {
                 this.uploadStatuss.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
                 break;
               case HttpEventType.Response:
-                //this.inputFile.nativeElement.value = '';
+                // this.inputFile.nativeElement.value = '';
                 this.uploadStatuss.emit({ status: ProgressStatusEnum.COMPLETE });
                 break;
             }
-     
+            this.getFiles();
+            this.GetFileName();
 
 
 
@@ -163,44 +230,21 @@ export class ConfigFrontSystemCrudComponent implements OnInit {
 
         },
 
-       error => {
-        //  this.inputFile.nativeElement.value = '';
+        error => {
+          /// this.inputFile.nativeElement.value = '';
           this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
         }
       );
-      this.fileslist1[0] = this.file1.name;
-      this.c.icon1 = this.fileslist1[0];
-      this.configService.PutObservableE(this.c).subscribe(res => {
-        this.getConfig();
-        this.toastr.success("نجاح في إضافة شعار الجمعية")
-        this.succ = true;
-        this.failed = false;
-
-
-        this.msg = "  نجاح في إضافة شعار الجمعية"
-      },
-        err => {
-          this.toastr.error("فشل في إضافة شعار الجمعية")
-
-          this.failed = true;
-          this.succ = false;
-
-          this.msg = " فشل في إضافة شعار الجمعية"
-        })
+      this.fileslist1.push(this.file.name);
     }
   }
-  //configfiles: ConfigFrontSystem = new ConfigFrontSystem();
-  populateForm(c: ConfigFrontSystem) {
-    this.c= Object.assign({}, c);
-  }
+
+  fileslist2: string[] = [];
   public upload2(event) {
-    
-    if (event.target.files && event.target.files.length > 0) {
-      
-      this.file2 = event.target.files[0];
-      console.log(this.file1)
+    if (event.addedFiles && event.addedFiles.length > 0) {
+      this.file = event.addedFiles[0];
       this.uploadStatuss.emit({ status: ProgressStatusEnum.START });
-      this.serviceupload.uploadFile(this.file2).subscribe(
+      this.serviceupload.uploadFile(this.file).subscribe(
         data => {
           if (data) {
             switch (data.type) {
@@ -208,7 +252,7 @@ export class ConfigFrontSystemCrudComponent implements OnInit {
                 this.uploadStatuss.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
                 break;
               case HttpEventType.Response:
-                //this.inputFile.nativeElement.value = '';
+                // this.inputFile.nativeElement.value = '';
                 this.uploadStatuss.emit({ status: ProgressStatusEnum.COMPLETE });
                 break;
             }
@@ -222,29 +266,20 @@ export class ConfigFrontSystemCrudComponent implements OnInit {
         },
 
         error => {
-          //this.inputFile.nativeElement.value = '';
+          /// this.inputFile.nativeElement.value = '';
           this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
         }
       );
-
-      this.fileslist2[0] = this.file2.name;
-      this.c.homeBackground = this.fileslist2[0]
-      this.configService.PutObservableE(this.c).subscribe(res => {
-        this.getConfig();
-        this.toastr.success("نجاح في إضافةالخلفية")
-      },
-        err => {
-          this.toastr.error("فشل في إضافة الخلفية")
-        })
-
+      this.fileslist2.push(this.file.name);
     }
   }
 
+  fileslist3: string[] = [];
   public upload3(event) {
-    if (event.target.files && event.target.files.length > 0) {
-      this.file3 = event.target.files[0];
+    if (event.addedFiles && event.addedFiles.length > 0) {
+      this.file = event.addedFiles[0];
       this.uploadStatuss.emit({ status: ProgressStatusEnum.START });
-      this.serviceupload.uploadFile(this.file3).subscribe(
+      this.serviceupload.uploadFile(this.file).subscribe(
         data => {
           if (data) {
             switch (data.type) {
@@ -252,7 +287,7 @@ export class ConfigFrontSystemCrudComponent implements OnInit {
                 this.uploadStatuss.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
                 break;
               case HttpEventType.Response:
-                this.inputFile.nativeElement.value = '';
+                // this.inputFile.nativeElement.value = '';
                 this.uploadStatuss.emit({ status: ProgressStatusEnum.COMPLETE });
                 break;
             }
@@ -266,29 +301,20 @@ export class ConfigFrontSystemCrudComponent implements OnInit {
         },
 
         error => {
-          this.inputFile.nativeElement.value = '';
+          /// this.inputFile.nativeElement.value = '';
           this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
         }
       );
-      this.fileslist1[2] = this.file3.name;
-      this.c.reportRightIcon = this.fileslist1[2]
-    
-      this.configService.PutObservableE(this.c).subscribe(res => {
-        this.getConfig();
-        this.toastr.success("نجاح في إضافة شعار التقارير (الأيمن)")
-      },
-        err => {
-          this.toastr.error("فشل في إضافة شعار التقارير (الأيمن)")
-        })
+      this.fileslist3.push(this.file.name);
     }
   }
 
-
+  fileslist4: string[] = [];
   public upload4(event) {
-    if (event.target.files && event.target.files.length > 0) {
-      this.file4 = event.target.files[0];
+    if (event.addedFiles && event.addedFiles.length > 0) {
+      this.file = event.addedFiles[0];
       this.uploadStatuss.emit({ status: ProgressStatusEnum.START });
-      this.serviceupload.uploadFile(this.file4).subscribe(
+      this.serviceupload.uploadFile(this.file).subscribe(
         data => {
           if (data) {
             switch (data.type) {
@@ -296,7 +322,7 @@ export class ConfigFrontSystemCrudComponent implements OnInit {
                 this.uploadStatuss.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
                 break;
               case HttpEventType.Response:
-                this.inputFile.nativeElement.value = '';
+                // this.inputFile.nativeElement.value = '';
                 this.uploadStatuss.emit({ status: ProgressStatusEnum.COMPLETE });
                 break;
             }
@@ -310,28 +336,20 @@ export class ConfigFrontSystemCrudComponent implements OnInit {
         },
 
         error => {
-          this.inputFile.nativeElement.value = '';
+          /// this.inputFile.nativeElement.value = '';
           this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
         }
       );
-      this.fileslist1[3] = this.file4.name;
-      this.c.reportLeftIcon = this.fileslist1[3]
-   
-      this.configService.PutObservableE(this.c).subscribe(res => {
-        this.getConfig();
-        this.toastr.success("نجاح في إضافة شعار شعار التقارير (الأيسر)")
-      },
-        err => {
-          this.toastr.error("فشل في إضافة شعار التقارير (الأيسر)")
-        })
+      this.fileslist4.push(this.file.name);
     }
   }
 
+  fileslist5: string[] = [];
   public upload5(event) {
-    if (event.target.files && event.target.files.length > 0) {
-      this.file5 = event.target.files[0];
+    if (event.addedFiles && event.addedFiles.length > 0) {
+      this.file = event.addedFiles[0];
       this.uploadStatuss.emit({ status: ProgressStatusEnum.START });
-      this.serviceupload.uploadFile(this.file5).subscribe(
+      this.serviceupload.uploadFile(this.file).subscribe(
         data => {
           if (data) {
             switch (data.type) {
@@ -339,7 +357,7 @@ export class ConfigFrontSystemCrudComponent implements OnInit {
                 this.uploadStatuss.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
                 break;
               case HttpEventType.Response:
-                this.inputFile.nativeElement.value = '';
+                // this.inputFile.nativeElement.value = '';
                 this.uploadStatuss.emit({ status: ProgressStatusEnum.COMPLETE });
                 break;
             }
@@ -353,19 +371,42 @@ export class ConfigFrontSystemCrudComponent implements OnInit {
         },
 
         error => {
-          this.inputFile.nativeElement.value = '';
+          /// this.inputFile.nativeElement.value = '';
           this.uploadStatuss.emit({ status: ProgressStatusEnum.ERROR });
         }
       );
-      this.fileslist1[4] = this.file5.name;
-      this.c.reportSignature = this.fileslist1[4]
-      this.configService.PutObservableE(this.c).subscribe(res => {
-        this.getConfig();
-        this.toastr.success("نجاح في إضافة الإمضاء")
-      },
-        err => {
-          this.toastr.error("فشل في إضافة الإمضاء")
-        })
+      this.fileslist5.push(this.file.name);
     }
+  }
+
+
+  //Download
+
+  public download(filepath) {
+    this.downloadStatus.emit({ status: ProgressStatusEnum.START });
+    this.serviceupload.downloadFile(filepath).subscribe(
+      data => {
+        switch (data.type) {
+          case HttpEventType.DownloadProgress:
+            this.downloadStatus.emit({ status: ProgressStatusEnum.IN_PROGRESS, percentage: Math.round((data.loaded / data.total) * 100) });
+            break;
+          case HttpEventType.Response:
+            this.downloadStatus.emit({ status: ProgressStatusEnum.COMPLETE });
+            const downloadedFile = new Blob([data.body], { type: data.body.type });
+            const a = document.createElement('a');
+            a.setAttribute('style', 'display:none;');
+            document.body.appendChild(a);
+            a.download = filepath;
+            a.href = URL.createObjectURL(downloadedFile);
+            a.target = '_blank';
+            a.click();
+            document.body.removeChild(a);
+            break;
+        }
+      },
+      error => {
+        this.downloadStatus.emit({ status: ProgressStatusEnum.ERROR });
+      }
+    );
   }
 }

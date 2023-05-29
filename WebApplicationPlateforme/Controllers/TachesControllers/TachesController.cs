@@ -114,5 +114,53 @@ namespace WebApplicationPlateforme.Controllers.TachesControllers
         {
             return _context.tache.Any(e => e.Id == id);
         }
+
+        [HttpGet]
+        [Route("SearchByEmployee/{Id}")]
+        public List<Tache> SearchByAllEmployee(string Id)
+        {
+            return _context.tache.Where(item => item.AffectedName == Id).OrderByDescending(item => item.Id).ToList();
+        }
+
+
+
+        [HttpGet]
+        [Route("SearchByEtat/{Etat}/{IdUser}")]
+        public List<Tache> SearchByEtat(string Etat, string IdUser)
+        {
+            List<Tache> ListTaches = new List<Tache>();
+
+            if (Etat == "1")
+            {
+                ListTaches = _context.tache.Where(item => item.Etat == "في الإنتظار" && item.AffectedName == IdUser).OrderByDescending(item => item.Id).ToList();
+
+            }
+
+            else if (Etat == "2")
+            {
+                ListTaches = _context.tache.Where(item => item.Etat == "تحت الإجراء" && item.AffectedName == IdUser).OrderByDescending(item => item.Id).ToList();
+            }
+            else if (Etat == "3")
+            {
+                ListTaches = _context.tache.Where(item => item.Etat == "منجزة" && item.AffectedName == IdUser).OrderByDescending(item => item.Id).ToList();
+            }
+            else if (Etat == "4")
+            {
+                ListTaches = _context.tache.Where(item => item.Etat == "غير منجزة" && item.AffectedName == IdUser).OrderByDescending(item => item.Id).ToList();
+            }
+            else if (Etat == "5")
+            {
+                ListTaches = _context.tache.Where(item => item.Etat == "متاخرة" && item.AffectedName == IdUser).OrderByDescending(item => item.Id).ToList();
+            }
+            else if (Etat == "6")
+            {
+                ListTaches = _context.tache.Where(item => item.Etat == "للتقييم" && item.AffectedName == IdUser).OrderByDescending(item => item.Id).ToList();
+            }
+            else if (Etat == "7")
+            {
+                ListTaches = _context.tache.Where(item => item.Etat == "مغلقة" && item.AffectedName == IdUser).OrderByDescending(item => item.Id).ToList();
+            }
+            return ListTaches;
+        }
     }
 }

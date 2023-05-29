@@ -23,6 +23,7 @@ export class RetraitService {
     })
   }
 
+
   PutObservableE(Transaction: Retrait) {
     return this.http.put<Retrait>(this.rootURL + '/RetraitPersonnes/' + Transaction.id, Transaction, this.headers);
 
@@ -62,4 +63,22 @@ export class RetraitService {
   GetById(Id) {
     return this.http.get<Retrait>(this.rootURL + '/RetraitPersonnes/' + Id);
   }
+
+  /**
+   *  Report **/
+
+ 
+  SearchByBen(Id) {
+    return this.http.get<Retrait[]>(this.rootURL + '/RetraitPersonnes/SearchByBen/' + Id);
+  }
+  SearchByEtat(etat) {
+    return this.http.get<Retrait[]>(this.rootURL + '/RetraitPersonnes/SearchByEtat/' + etat);
+  }
+  SearchBytypeDons(typedons) {
+    return this.http.get<Retrait[]>(this.rootURL + '/RetraitPersonnes/SearchBytypeDons/' + typedons);
+  }
+  SearchBytypeRetrait(typeretrait) {
+    return this.http.get<Retrait[]>(this.rootURL + '/RetraitPersonnes/SearchBytypeRetrait/' + typeretrait);
+  }
+
 }

@@ -121,8 +121,8 @@
             <input type="text" id="task" class="t" name="nom" #nom="ngModel" [(ngModel)]="AdministrationService.formData.nom">
           </div>
           <div class="col-12">
-            <label for="task-details"><span><i class="fa fa-list"></i></span>وصف الإدارة</label>
-            <input type="text" id="task-details" name="description" #description="ngModel" [(ngModel)]="AdministrationService.formData.description">
+
+            <input type="text" id="task-details" name="description" #description="ngModel" [(ngModel)]="AdministrationService.formData.description" hidden>
           </div>
 
           <div class="col-sm-6">

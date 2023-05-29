@@ -4,6 +4,8 @@ import { UserDetail } from '../../../shared/Models/User/user-detail.model';
 import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { DatePipe } from '@angular/common';
+import { ConfigFrontSystem } from '../../../shared/Models/ConfigSystemShowing/config-front-system.model';
+import { ConfigSystemFrontservice } from '../../../shared/Services/ConfigSystemShowing/config-front-system.service';
 @Component({
   selector: 'app-menu-dir-dem-tech',
   templateUrl: './menu-dir-dem-tech.component.html',
@@ -13,14 +15,23 @@ export class MenuDirDemTechComponent implements OnInit {
 
   @ViewChild('htmlData') htmlData: ElementRef;
 
-  constructor(private UserService: UserServiceService, ) { }
+  constructor(private UserService: UserServiceService,
+    private configService: ConfigSystemFrontservice,) { }
 
   ngOnInit(): void {
+    this.GetIcons();
     this.getUserConnected();
 
     const datePipe = new DatePipe('en-Us');
     this.today = datePipe.transform(new Date(), 'yyyy-MM-dd');
   }
+  icons: ConfigFrontSystem = new ConfigFrontSystem();
+  GetIcons() {
+    this.configService.GetById(1).subscribe(res => {
+      this.icons = res;
+    })
+  }
+
   today; 
 
 

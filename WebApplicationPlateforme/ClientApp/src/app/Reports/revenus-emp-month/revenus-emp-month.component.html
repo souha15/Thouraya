@@ -13,58 +13,101 @@
 
         <div class="que-serv">
 
-          <a href="" [routerLink]="['/dons-reports']">
-            <span class="icon"><i class="fa fa-hand-holding-usd"></i></span>
-            تقارير التبرعات
+          <a  href="" [routerLink]="['/menu-reports-dir-general']">
+            <span class="icon"><i class="fa fa-desktop"></i></span>
+            تقارير  مكتب المدير العام
+          </a>
+          <a  href="" [routerLink]="['/menu-reports-fin-admin']">
+            <span class="icon"><i class="fa fa-dollar-sign"></i></span>
+            تقارير الشؤون المالية والإدارية
           </a>
 
-          <a href="" [routerLink]="['/activitee-rap-dawaa-homme']">
-            <span class="icon"><i class="fa fa-running"></i></span>
-            تقارير الأنشطة (رجال)
+          <a  href="" [routerLink]="['/menu-reports-dot-admin']">
+            <span class="icon"><i class="fa fa-user-check "></i></span>
+            تقارير  الموارد البشرية
           </a>
 
-
-          <a href="" [routerLink]="['/activitee-rap-dawaawomen']">
-            <span class="icon"><i class="fa fa-running"></i></span>
-            تقارير الأنشطة (نساء)
+          <a href="" [routerLink]="['/menu-reports-dawaa-admin-women']">
+            <span class="icon"><i class="fa fa-users"></i></span>
+            تقارير  خدمات المستفيدين
           </a>
 
-          <a href="" [routerLink]="['/rap-men']">
-            <span class="icon"><i class="fa fa-male"></i></span>
-            تقارير المسلمين (رجال)
-          </a>
-
-
-          <a href="" [routerLink]="['/rap-women']">
-            <span class="icon"><i class="fa fa-female"></i></span>
-            تقارير المسلمين (نساء)
+          <a  href="" [routerLink]="['/menu-reports-media-admin']">
+            <span class="icon"><i class="fa fa-comment-dots"></i></span>
+            تقارير العلاقات العامة
           </a>
 
 
 
-          <a href="" [routerLink]="['/events-report']">
-            <span class="icon"><i class="fa fa-file-pdf"></i></span>
-            تقارير الفعاليات
+          <a  href="" [routerLink]="['/menu-reports-admins-dir']">
+            <span class="icon"><i class="fa fa-desktop"></i></span>
+            تقارير المدراء
           </a>
 
-          <a href="" [routerLink]="['/rappot-emise']">
-            <span class="icon"><i class="fa fa-file-alt"></i></span>
-            تقارير المعاملات الصادرة
-          </a>
 
-          <a href="" [routerLink]="['/rapport-recue']">
-            <span class="icon"><i class="fa fa-file-contract"></i></span>
-            تقارير المعاملات الواردة
-          </a>
 
-          <a href="" [routerLink]="['/rapport-interne']">
-            <span class="icon"><i class="fa fa-file-archive"></i></span>
-            تقارير المعاملات الداخلية
-          </a>
-          <a [routerLink]="['/home-stockage']">
-            <span class="icon"><i class="fa fa-archive"></i></span>
-            تقارير المستودع
-          </a>
+          <!--
+   <a *ngIf="AllRoles || DawaaRole" href="" [routerLink]="['/menu-reports-dawaa-admin-men']">
+     <span class="icon"><i class="fa fa-building"></i></span>
+     تقارير   البرامج والمشاريع
+   </a>
+     <a *ngIf="AllRoles || MediaCenterRole " href="" [routerLink]="['/menu-reports-media-admin']">
+    <span class="icon"><i class="fa fa-hand-holding-usd"></i></span>
+    تقارير  الشراكات
+  </a>
+          -->
+          <!--<a href="" [routerLink]="['/dons-reports']">
+    <span class="icon"><i class="fa fa-hand-holding-usd"></i></span>
+    تقارير التبرعات
+  </a>
+
+  <a href="" [routerLink]="['/activitee-rap-dawaa-homme']">
+    <span class="icon"><i class="fa fa-running"></i></span>
+    تقارير الأنشطة (رجال)
+  </a>
+
+
+  <a href="" [routerLink]="['/activitee-rap-dawaawomen']">
+    <span class="icon"><i class="fa fa-running"></i></span>
+    تقارير الأنشطة (نساء)
+  </a>
+
+  <a href="" [routerLink]="['/rap-men']">
+    <span class="icon"><i class="fa fa-male"></i></span>
+    تقارير المسلمين (رجال)
+  </a>
+
+
+  <a href="" [routerLink]="['/rap-women']">
+    <span class="icon"><i class="fa fa-female"></i></span>
+    تقارير المسلمين (نساء)
+  </a>
+
+
+
+  <a href="" [routerLink]="['/events-report']">
+    <span class="icon"><i class="fa fa-file-pdf"></i></span>
+    تقارير الفعاليات
+  </a>
+
+  <a href="" [routerLink]="['/rappot-emise']">
+    <span class="icon"><i class="fa fa-file-alt"></i></span>
+    تقارير المعاملات الصادرة
+  </a>
+
+  <a href="" [routerLink]="['/rapport-recue']">
+    <span class="icon"><i class="fa fa-file-contract"></i></span>
+    تقارير المعاملات الواردة
+  </a>
+
+  <a href="" [routerLink]="['/rapport-interne']">
+    <span class="icon"><i class="fa fa-file-archive"></i></span>
+    تقارير المعاملات الداخلية
+  </a>
+  <a [routerLink]="['/home-stockage']">
+    <span class="icon"><i class="fa fa-archive"></i></span>
+    تقارير المستودع
+  </a>-->
 
         </div>
 

@@ -5,6 +5,8 @@ import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { DemandeAttestationTravailService } from '../../../shared/Services/ServiceRh/demande-attestation-travail.service';
 import { ActivatedRoute } from '@angular/router';
+import { ConfigSystemFrontservice } from '../../../shared/Services/ConfigSystemShowing/config-front-system.service';
+import { ConfigFrontSystem } from '../../../shared/Models/ConfigSystemShowing/config-front-system.model';
 @Component({
   selector: 'app-partage-media-edit',
   templateUrl: './partage-media-edit.component.html',
@@ -15,13 +17,20 @@ export class PartageMediaEditComponent implements OnInit {
   @ViewChild('htmlData') htmlData: ElementRef;
 
   constructor(private UserService: UserServiceService,
+    private configService: ConfigSystemFrontservice,
   ) { }
 
   ngOnInit(): void {
+    this.GetIcons();
     this.getUserConnected();
 
   }
-
+  icons: ConfigFrontSystem = new ConfigFrontSystem();
+  GetIcons() {
+    this.configService.GetById(1).subscribe(res => {
+      this.icons = res;
+    })
+  }
   date = new Date().toLocaleDateString();
   user: UserDetail = new UserDetail();
   getUserConnected() {

@@ -12,13 +12,15 @@ import { NotifMsgInterneService } from '../shared/Services/Msg Interne/notif-msg
 import { NotifMsgInterne } from '../shared/Models/Msg Interne/notif-msg-interne.model';
 import { Ticket2Service } from '../shared/Services/Ticket2/ticket2.service';
 import { Ticket2 } from '../shared/Models/Ticket2/ticket2.model';
-import { PointageService } from '../shared/Services/Pointage/pointage.service'; 
+import { PointageService } from '../shared/Services/Pointage/pointage.service';
 import { Pointage } from '../shared/Models/Pointage/pointage.model';
 import { Tache } from '../shared/Models/Taches/tache.model';
 import { NotifService } from '../shared/Services/NotifSystem/notif.service';
 import { UserDetail } from '../shared/Models/User/user-detail.model';
 import { DecisionTwoService } from '../shared/Services/ServiceRh/decision-two.service';
 import { DecisionTwo } from '../shared/Models/ServiceRh/decision-two.model';
+import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-home',
@@ -28,6 +30,7 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private UserService: UserServiceService,
+    private router: Router,
     private notiftaskService: TacheNotifService,
     private TacheService: TacheService,
     private transactionService: TransactionService,
@@ -36,21 +39,19 @@ export class HomeComponent implements OnInit {
     private TicketService: Ticket2Service,
     private pointageService: PointageService,
     private notifService: NotifService,
-    private trinService: DecisionTwoService) { }
+    private trinService: DecisionTwoService) {
+  }
 
   ngOnInit(): void {
+
     this.getUserConnected();
-
-
 
   }
 
   // Decision Banner
 
-  showAdmin: boolean = false;
-  showUser: boolean = false;
-  showAll: boolean = false;
-  ListDecision: DecisionTwo[]=[];
+  ListDecision: DecisionTwo[] = [];
+
   // Get User Connected
   notifnb: number = 0;
   testnotifnb: boolean = false;
@@ -72,77 +73,106 @@ export class HomeComponent implements OnInit {
   testNotif: boolean = false;
   user: UserDetail = new UserDetail();
   showdec: boolean = false;
+  today;
   async getUserConnected(): Promise<any> {
     this.user = await this.UserService.getUserConnected();
     this.UserIdConnected = this.user.id;
+    if (this.UserIdConnected != null) {
+      this.trinService.GetDecisionToUser(this.UserIdConnected).subscribe(resultat => {
+        if (resultat != null) {
+          this.today = new Date()
+          let str1 = resultat.attribut6;
+          let d1 = new Date(str1);
+          var diff = Math.abs(this.today.getTime() - d1.getTime());
+          var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+
+          if ((diffDays <= 4) && (diffDays >= 1)) {
+            this.showdec = true;
+          } else {
+            this.showdec = false;
+          }
+        }
+      })
+    }
     this.UserNameConnected = this.user.fullName;
     if (this.user.idAdministration != null) {
       this.idadmin = this.user.idAdministration;
       this.idetab = this.user.idDepartement;
+
+      this.trinService.GetDecisionToAdmin(this.idadmin).subscribe(resultat => {
+        if (resultat != null) {
+          this.today = new Date()
+          let str1 = resultat.attribut6;
+          let d1 = new Date(str1);
+          var diff = Math.abs(this.today.getTime() - d1.getTime());
+          var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+
+          if ((diffDays <= 4) && (diffDays >= 1)) {
+            this.showdec = true;
+          } else {
+            this.showdec = false;
+          }
+        }
+      })
     }
-  
-      this.TacheService.ListTache().subscribe(res => {
-        this.task = res
-        this.task2 = this.task.filter(item => item.affectedName == this.UserIdConnected && item.etat == "في الإنتظار");
-        this.nb = this.task2.length;
-        if (this.nb != 0) {
-          this.shownb = true
+
+    this.trinService.GetDecisionAllAdmin().subscribe(resultat => {
+      if (resultat != null) {
+        this.today = new Date()
+        let str1 = resultat.attribut6;
+        let d1 = new Date(str1);
+        var diff = Math.abs(this.today.getTime() - d1.getTime());
+        var diffDays = Math.ceil(diff / (1000 * 3600 * 24));
+
+        if ((diffDays <= 4) && (diffDays >= 1)) {
+          this.showdec = true;
         } else {
-          this.shownb = false
-
+          this.showdec = false;
         }
-      })
-      this.notifService.GetByUserUnRead(this.UserIdConnected).subscribe(res => {
-        this.notif = res.length;
-        if (this.notif) {
-          this.testNotif = true;
-        } else {
-          this.testNotif = false;
-        }
-      })
-
-      this.notifmsgService.ListNotifMsgInterne().subscribe(res => {
-        this.notifMsgList2 = res;
-        this.notifMsgList = this.notifMsgList2.filter(item => item.userIdReceiver == this.UserIdConnected && item.seen == 0)
-        this.notifnb = this.notifMsgList.length;
-        if (this.notifnb != 0) {
-          this.testnotifnb = true;
-        } else {
-          this.testnotifnb = false;
-        }
-      })
-
-
-    this.trinService.TestDecision(this.UserIdConnected, this.idadmin).subscribe(resultat => {
-      if (resultat == "Toadmin") {
-        this.trinService.DecisionGetByAdmin(this.user.idAdministration).subscribe(res => {
-          this.showAdmin = res
-
-
-        })
-      }  if (resultat == "ToUser") {
-        this.trinService.GetDecision(this.user.id).subscribe(res => {
-          this.showUser = res
-        })
-
-
-      }  if (resultat == "ToAll") {
-        this.trinService.DecisionGetAllAdmin().subscribe(res => {
-          this.showAll = res
-        })
       }
+    })
+    //   
+    //this.trinService.TestDecision(this.UserIdConnected, this.idadmin).subscribe(resultat => {
+    //  if (resultat.length!=0) {
+    //    this.showdec = true;
+    //  } else {
+    //    this.showdec = false;
+    //  } 
+    //})
 
-      if (!this.showAll && !this.showAdmin && !this.showUser) {
-        this.showdec = true;
+
+
+    this.TacheService.ListTache().subscribe(res => {
+      this.task = res
+      this.task2 = this.task.filter(item => item.affectedName == this.UserIdConnected && item.etat == "في الإنتظار");
+      this.nb = this.task2.length;
+      if (this.nb != 0) {
+        this.shownb = true
+      } else {
+        this.shownb = false
+
       }
-      console.log("all", this.showAll)
-      console.log("user", this.showUser)
-      console.log("admin", this.showAdmin)
-      console.log("dec", this.showdec)
+    })
+    this.notifService.GetByUserUnRead(this.UserIdConnected).subscribe(res => {
+      this.notif = res.length;
+      if (this.notif) {
+        this.testNotif = true;
+      } else {
+        this.testNotif = false;
+      }
     })
 
+    this.notifmsgService.ListNotifMsgInterne().subscribe(res => {
+      this.notifMsgList2 = res;
+      this.notifMsgList = this.notifMsgList2.filter(item => item.userIdReceiver == this.UserIdConnected && item.seen == 0)
+      this.notifnb = this.notifMsgList.length;
+      if (this.notifnb != 0) {
+        this.testnotifnb = true;
+      } else {
+        this.testnotifnb = false;
+      }
+    })
 
- 
   }
 
 }

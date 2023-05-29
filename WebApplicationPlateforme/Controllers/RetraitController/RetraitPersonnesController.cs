@@ -106,5 +106,33 @@ namespace WebApplicationPlateforme.Controllers.RetraitController
         {
             return _context.RetraitPersonnes.Any(e => e.Id == id);
         }
+        
+        [HttpGet]
+        [Route("SearchByBen/{Id}")]
+        public List<RetraitPersonne> SearchByBen(string Id)
+        {
+            return _context.RetraitPersonnes.Where(item => item.nomben == Id).OrderByDescending(item => item.Id).ToList();
+        }
+
+
+        [HttpGet]
+        [Route("SearchByEtat/{etat}")]
+        public List<RetraitPersonne> SearchByEtat(string etat)
+        {
+            return _context.RetraitPersonnes.Where(item => item.etat == etat).OrderByDescending(item => item.Id).ToList();
+        }
+
+        [HttpGet]
+        [Route("SearchBytypeDons/{typedons}")]
+        public List<RetraitPersonne> SearchBytypeDons(string typedons)
+        {
+            return _context.RetraitPersonnes.Where(item => item.typedons == typedons).OrderByDescending(item => item.Id).ToList();
+        }
+        [HttpGet]
+        [Route("SearchBytypeRetrait/{typeretrait}")]
+        public List<RetraitPersonne> SearchBytypeRetrait(string typeretrait)
+        {
+            return _context.RetraitPersonnes.Where(item => item.typeRetrait == typeretrait).OrderByDescending(item => item.Id).ToList();
+        }
     }
 }

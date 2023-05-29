@@ -82,6 +82,18 @@ export class DecisionTwoService {
   }
 
 
+  GetDecisionAllAdmin() {
+    return this.http.get<DecisionTwo>(this.rootURL + '/DecisionTwoes/GetDecisionAllAdmin');
+  }
+
+  GetDecisionToAdmin(adminId?) {
+    return this.http.get<DecisionTwo>(this.rootURL + '/DecisionTwoes/GetDecisionToAdmin/' + adminId);
+  }
+
+  GetDecisionToUser(UserId) {
+    return this.http.get<DecisionTwo>(this.rootURL + '/DecisionTwoes/GetDecisionToUser/' + UserId);
+  }
+
   //Delete DecisionTwo
 
   Delete(id) {

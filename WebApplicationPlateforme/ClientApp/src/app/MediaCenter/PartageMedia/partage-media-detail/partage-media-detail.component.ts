@@ -4,6 +4,8 @@ import { UserDetail } from '../../../shared/Models/User/user-detail.model';
 import * as jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { DatePipe } from '@angular/common';
+import { ConfigSystemFrontservice } from '../../../shared/Services/ConfigSystemShowing/config-front-system.service';
+import { ConfigFrontSystem } from '../../../shared/Models/ConfigSystemShowing/config-front-system.model';
 @Component({
   selector: 'app-partage-media-detail',
   templateUrl: './partage-media-detail.component.html',
@@ -12,9 +14,11 @@ import { DatePipe } from '@angular/common';
 export class PartageMediaDetailComponent implements OnInit {
   @ViewChild('htmlData') htmlData: ElementRef;
 
-  constructor(private UserService: UserServiceService,) { }
+  constructor(private UserService: UserServiceService,
+    private configService: ConfigSystemFrontservice,) { }
 
   ngOnInit(): void {
+    this.GetIcons();
     this.getUserConnected();
     const datePipe = new DatePipe('en-Us');
     this.today = datePipe.transform(new Date(), 'yyyy-MM-dd');
@@ -29,6 +33,12 @@ export class PartageMediaDetailComponent implements OnInit {
  
     })
 
+  }
+  icons: ConfigFrontSystem = new ConfigFrontSystem();
+  GetIcons() {
+    this.configService.GetById(1).subscribe(res => {
+      this.icons = res;
+    })
   }
 
   path: string;

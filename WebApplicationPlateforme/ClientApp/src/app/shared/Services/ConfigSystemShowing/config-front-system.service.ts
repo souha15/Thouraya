@@ -23,6 +23,7 @@ export class ConfigSystemFrontservice {
     })
   }
 
+
   //Create ConfigFrontSystem
 
   Add(ConfigFrontSystem: ConfigFrontSystem) {

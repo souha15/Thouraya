@@ -13,125 +13,138 @@
       </header>
 
       <span class="counter pull-right"></span>
-      <div class="table-responsive">
-        <table class="table results text-center table-bordered theme-table">
-          <thead>
-            <tr>
-              <th scope="col">شعار الجمعية</th>
-              <th scope="col">الخلفية</th>
-              <th scope="col">شعار التقارير (الأيمن)</th>
-              <th scope="col">شعار التقارير (الأيسر) </th>
-              <th scope="col">الإمضاء</th>
-          
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let c of List">
+      <form class="task-form form-row">
+        <div class="col-md-6">
+          <label for="emp-mobile"> إسم الجمعية (عربي)</label>
+          <input type="text" (change)="getNameArabic($event)" [(ngModel)]="nameArabic" />
+        </div>
+        <div class="col-md-6">
+          <label for="emp-mobile"> إسم الجمعية (إنجليزي)</label>
+          <input type="text" (change)="getNameEnglish($event)" [(ngModel)]="nameEnglish" />
+        </div>
+        <div class="col-md-4">
+          <label for="emp-mobile" *ngIf="c.icon1!=null">
+            <a (click)="download(c.icon1)" class="ml-3">
+              إضغط لتحميل  شعار الجمعية
+            </a>
+          </label>
 
-              <td (click)="populateForm(c)">
+          <label for="emp-mobile" *ngIf="c.icon1==null">
+            <a (click)="download(c.icon1)" class="ml-3">
+              تحميل  شعار الجمعية
+            </a>
+          </label>
+          <ngx-dropzone (change)="upload1($event);onSelect1($event)" class="dropzone" #inputFile>
+            <ngx-dropzone-label>شعار الجمعية</ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files1" [removable]="true" (removed)="onRemove1(f)">
+              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
+        </div>
 
-                <a (click)="download(c.icon1)" class="ml-3" *ngIf="c.icon1!=null">
-                  <span><i class="fa fa-file-download fa-lg" style="color:dodgerblue"></i></span>
-                </a>
+        <div class="col-md-4">
 
-                <input type="file" id="report-copy" (change)="upload1($event)"  hidden />
-                <label for="report-copy" class="file-label">
-                  <span><i class="fa fa-file-upload fa-lg" style="color:red"></i></span>
-                </label>
+          <label for="emp-mobile" *ngIf="c.icon1!=null">
+            <a (click)="download(c.homeBackground)" class="ml-3">
+              إضغط لتحميل الخلفية
+            </a>
+          </label>
 
+          <label for="emp-mobile" *ngIf="c.homeBackground==null">
+            <a (click)="download(c.homeBackground)" class="ml-3">
+              تحميل  الخلفية
+            </a>
+          </label>
+          <ngx-dropzone (change)="upload2($event);onSelect2($event)" class="dropzone" #inputFile>
+            <ngx-dropzone-label>الخلفية</ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files2" [removable]="true" (removed)="onRemove2(f)">
+              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
+        </div>
 
-                <div class="col-md-6">
-                  <div class="success-msg" *ngIf="succ">
-                    <i class="fa fa-check"></i>
-                    {{msg}}
-                  </div>
+        <div class="col-md-4">
+          <label for="emp-mobile" *ngIf="c.reportRightIcon!=null">
+            <a (click)="download(c.reportRightIcon)" class="ml-3">
+              إضغط لتحميل شعار التقارير (الأيمن)
+            </a>
+          </label>
 
-                  <div class="error-msg" *ngIf="failed">
-                    <i class="fa fa-times-circle"></i>
-                    {{msg}}
-                  </div>
-                </div>
+          <label for="emp-mobile" *ngIf="c.reportRightIcon==null">
+            <a (click)="download(c.reportRightIcon)" class="ml-3">
+              تحميل  شعار التقارير (الأيمن)
+            </a>
+          </label>
+          <ngx-dropzone (change)="upload3($event);onSelect3($event)" class="dropzone" #inputFile>
+            <ngx-dropzone-label>شعار التقارير (الأيمن)</ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files3" [removable]="true" (removed)="onRemove3(f)">
+              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
+        </div>
+        <br />
+        <div class="col-md-12"><p>  </p></div>
+        <div class="col-md-4">
+          <label for="emp-mobile" *ngIf="c.reportLeftIcon!=null">
+            <a (click)="download(c.reportLeftIcon)" class="ml-3">
+              إضغط لتحميل شعار التقارير (الأيسر
+            </a>
+          </label>
 
+          <label for="emp-mobile" *ngIf="c.reportLeftIcon==null">
+            <a (click)="download(c.reportLeftIcon)" class="ml-3">
+              تحميل  شعار التقارير (الأيسر
+            </a>
+          </label>
+          <ngx-dropzone (change)="upload4($event);onSelect4($event)" class="dropzone" #inputFile>
+            <ngx-dropzone-label>شعار التقارير (الأيسر</ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files4" [removable]="true" (removed)="onRemove4(f)">
+              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
+        </div>
 
-              </td>
+        <div class="col-md-4">
+          <label for="emp-mobile" *ngIf="c.reportSignature!=null">
+            <a (click)="download(c.reportSignature)" class="ml-3">
+              إضغط لتحميل الإمضاء
+            </a>
+          </label>
 
-              <td (click)="populateForm(c)">
-               
-                  <a *ngIf="c.homeBackground!=null" (click)="download(c.homeBackground)" class="ml-3">
-                    <span><i class="fa fa-file-download fa-lg" style="color:dodgerblue"></i></span>
-                  </a>
+          <label for="emp-mobile" *ngIf="c.reportSignature==null">
+            <a (click)="download(c.reportSignature)" class="ml-3">
+              تحميل  الإمضاء
+            </a>
+          </label>
+          <ngx-dropzone (change)="upload5($event);onSelect5($event)" class="dropzone" #inputFile>
+            <ngx-dropzone-label>الإمضاء</ngx-dropzone-label>
+            <ngx-dropzone-preview *ngFor="let f of files5" [removable]="true" (removed)="onRemove5(f)">
+              <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
+        </div>
+        <div class="col-md-12">
+          <div class="col-md-6">
+            <div class="success-msg" *ngIf="succ">
+              <i class="fa fa-check"></i>
+              {{msg}}
+            </div>
 
-                  <input type="file" id="report-copy" (change)="upload2($event)"  hidden />
-                  <label for="report-copy" class="file-label">
-                    <span><i class="fa fa-file-upload fa-lg" style="color:red"></i></span>
-                  </label>
-                
+            <div class="error-msg" *ngIf="failed">
+              <i class="fa fa-times-circle"></i>
+              {{msg}}
+            </div>
+          </div>
+        </div>
+        <div class="col-12 text-center text-md-left mt-3">
+          <input class="btn btn-info"
+                 style="width: 130px;"
+                 type="submit"
+                 value="إرفاق" (click)="onSubmit()" />
+        </div>
 
-          
-              </td>
+      </form>
 
-              <td (click)="populateForm(c)">
-                
-                  <a *ngIf="c.reportRightIcon!=null" (click)="download(c.reportRightIcon)" class="ml-3">
-                    <span><i class="fa fa-file-download fa-lg" style="color:dodgerblue"></i></span>
-                  </a>
-
-                  <input type="file" id="report-copy" (change)="upload3($event)" #inputFile hidden />
-                  <label for="report-copy" class="file-label">
-                    <span><i class="fa fa-file-upload fa-lg" style="color:red"></i></span>
-                  </label>
-               
-
-
-       
-              </td>
-
-
-              <td (click)="populateForm(c)">
-           
-                  <a *ngIf="c.reportLeftIcon!=null" (click)="download(c.reportLeftIcon)" class="ml-3">
-                    <span><i class="fa fa-file-download fa-lg" style="color:dodgerblue"></i></span>
-                  </a>
-
-                  <input type="file" id="report-copy" (change)="upload4($event)" #inputFile hidden />
-                  <label for="report-copy" class="file-label">
-                    <span><i class="fa fa-file-upload fa-lg" style="color:red"></i></span>
-                  </label>
-               
-
-
-        
-              </td>
-
-
-              <td (click)="populateForm(c)">
-              
-                  <a *ngIf="c.reportSignature!=null" (click)="download(c.reportSignature)" class="ml-3">
-                    <span><i class="fa fa-file-download fa-lg" style="color:dodgerblue"></i></span>
-                  </a>
-
-                  <input type="file" id="report-copy" (change)="upload5($event)" #inputFile hidden />
-                  <label for="report-copy" class="file-label">
-                    <span><i class="fa fa-file-upload fa-lg" style="color:red"></i></span>
-                  </label>
-               
-
-
-       
-              </td>
-
-            </tr>
-          </tbody>
-        </table>
-
-
-        <nav aria-label="Page navigation example">
-          <ul class="pagination justify-content-center">
-            <pagination-controls (pageChange)="p = $event" previousLabel="السابق"
-                                 nextLabel="التالي"></pagination-controls>
-          </ul>
-        </nav>
-      </div>
     </div>
   </div>
 

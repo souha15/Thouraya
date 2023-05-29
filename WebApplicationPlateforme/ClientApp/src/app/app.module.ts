@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component'; 
 import { SideMenuComponent } from './side-menu/side-menu.component';
-import { LoginPageComponent } from './User/login-page/login-page.component';
+import { LoginPageComponent } from './User/login-page/login-page.component'; 
 import { UserInfoComponent } from './User/user-info/user-info.component';
 import { MainTasksComponent } from './Tache/main-tasks/main-tasks.component';
 import { NewTaskComponent } from './Tache/new-task/new-task.component';
@@ -825,6 +825,25 @@ import { ListWorkflowServicesComponent } from './ServicesConfiguration/list-work
 import { DetailWorkflowConfigurationComponent } from './ServicesConfiguration/detail-workflow-configuration/detail-workflow-configuration.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ChatMsgComponent } from './Chat/chat-msg/chat-msg.component';
+import { TasksReportUserComponent } from './Rapports/TasksReport/tasks-report-user/tasks-report-user.component';
+import { MenuReportsDirGeneralComponent } from './Rapports/Menus/menu-reports-dir-general/menu-reports-dir-general.component';
+import { TasksReportDirComponent } from './Rapports/TasksReport/tasks-report-dir/tasks-report-dir.component';
+import { TasksReportMenuComponent } from './Rapports/TasksReport/tasks-report-menu/tasks-report-menu.component';
+import { MenuReportsFinAdminComponent } from './Rapports/Menus/menu-reports-fin-admin/menu-reports-fin-admin.component';
+import { MenuReportsDotAdminComponent } from './Rapports/Menus/menu-reports-dot-admin/menu-reports-dot-admin.component';
+import { MenuReportsDawaaAdminMenComponent } from './Rapports/Menus/menu-reports-dawaa-admin-men/menu-reports-dawaa-admin-men.component';
+import { MenuReportsDawaaAdminWomenComponent } from './Rapports/Menus/menu-reports-dawaa-admin-women/menu-reports-dawaa-admin-women.component';
+import { MenuReportsMediaAdminComponent } from './Rapports/Menus/menu-reports-media-admin/menu-reports-media-admin.component';
+import { MenuReportsAdminsDirComponent } from './Rapports/Menus/menu-reports-admins-dir/menu-reports-admins-dir.component';
+import { PrintTasksReportUserComponent } from './Rapports/TasksReport/Print/print-tasks-report-user/print-tasks-report-user.component';
+import { PrintTasksReportDirComponent } from './Rapports/TasksReport/Print/print-tasks-report-dir/print-tasks-report-dir.component';
+import { RetraitReportComponent } from './Rapports/Retrait/retrait-report/retrait-report.component';
+import { PrintRetraitReportComponent } from './Rapports/Retrait/print-retrait-report/print-retrait-report.component';
+import { PointageEmpReportComponent } from './Rapports/Pointage/pointage-emp-report/pointage-emp-report.component';
+import { PointageEmpPrintComponent } from './Rapports/Pointage/pointage-emp-print/pointage-emp-print.component';
+import { SalaireReportComponent } from './Rapports/Salaire/salaire-report/salaire-report.component';
+import { SalaireRapportPrintComponent } from './Rapports/Salaire/salaire-rapport-print/salaire-rapport-print.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -1613,6 +1632,23 @@ import { ChatMsgComponent } from './Chat/chat-msg/chat-msg.component';
     ListWorkflowServicesComponent,
     DetailWorkflowConfigurationComponent,
     ChatMsgComponent,
+    TasksReportUserComponent,
+    MenuReportsDirGeneralComponent,
+    TasksReportDirComponent,
+    TasksReportMenuComponent,
+    MenuReportsFinAdminComponent,
+    MenuReportsDotAdminComponent,
+    MenuReportsDawaaAdminMenComponent,
+    MenuReportsDawaaAdminWomenComponent,
+    MenuReportsMediaAdminComponent,
+    MenuReportsAdminsDirComponent,
+    PrintTasksReportUserComponent,
+    RetraitReportComponent,
+    PrintRetraitReportComponent,
+    PointageEmpReportComponent,
+    PointageEmpPrintComponent,
+    SalaireReportComponent,
+    SalaireRapportPrintComponent,
   ],
   imports: [
 
@@ -1895,23 +1931,23 @@ import { ChatMsgComponent } from './Chat/chat-msg/chat-msg.component';
 
       { path: 'priv-list-rh', component: PrivListRhComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] } },
 
-      { path: 'cars-add', component: CarsAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
+      { path: 'cars-add', component: CarsAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV','FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] } },
 
-      { path: 'cars-list', component: CarsListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
+      { path: 'cars-list', component: CarsListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV','FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] }},
 
       { path: 'cars-repair-request-add', component: CarsRepairRequestAddComponent, canActivate: [AuthGuard]},
 
       { path: 'cars-repair-request-list', component: CarsRepairRequestListComponent, canActivate: [AuthGuard]},
 
-      { path: 'cars-menu', component: CarsMenuComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
+      { path: 'cars-menu', component: CarsMenuComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV','FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] }},
 
-      { path: 'type-voiture', component: TypeVoitureComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] }},
+      { path: 'type-voiture', component: TypeVoitureComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] }},
 
-      { path: 'organisme-voiture', component: OrganismeVoitureComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
+      { path: 'organisme-voiture', component: OrganismeVoitureComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] } },
 
-      { path: 'director-list-cars', component: DirectorListCarsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
+      { path: 'director-list-cars', component: DirectorListCarsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] } },
 
-      { path: 'comptable-list-cars', component: ComptableListCarsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV'] } },
+      { path: 'comptable-list-cars', component: ComptableListCarsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DOTPRIV', 'SERPRIV','FINPRIV','COMPTAPRIV','BOXPRIV','EVFINPRIV'] } },
 
 
 
@@ -2195,7 +2231,7 @@ import { ChatMsgComponent } from './Chat/chat-msg/chat-msg.component';
 
       { path: 'comptes-list', component: ComptesListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
 
-      { path: 'etat-comptes-add', component: EtatComptesAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTOR', 'SECRETAIRE', 'PARTRESP'] } },
+      { path: 'etat-comptes-add', component: EtatComptesAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTOR', 'SECRETAIRE', 'PARTRESP', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] } },
 
       { path: 'edit-etat-compte', component: EditEtatCompteComponent, canActivate: [AuthGuard] },
 
@@ -2213,50 +2249,50 @@ import { ChatMsgComponent } from './Chat/chat-msg/chat-msg.component';
 
 
     /*************   Suplies And Cars  *****************/
-      { path: 'supplies-add', component: SuppliesAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE'] }  },
+      { path: 'supplies-add', component: SuppliesAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] }  },
 
-      { path: 'supplies-list', component: SuppliesListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE'] } },
-      { path: 'gestion-suuplies', component: GestionSuupliesComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE'] } },
+      { path: 'supplies-list', component: SuppliesListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] } },
+      { path: 'gestion-suuplies', component: GestionSuupliesComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] } },
 
-      { path: 'supplies-edit', component: SuppliesEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE'] }},
-      { path: 'supplies-edit/:id', component: SuppliesEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE'] } },
+      { path: 'supplies-edit', component: SuppliesEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] }},
+      { path: 'supplies-edit/:id', component: SuppliesEditComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] } },
 
     /************************ Cheques ****************************/
 
-      { path: 'chequec-add', component: ChequecAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'BOXPRIV'] } },
+      { path: 'chequec-add', component: ChequecAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] } },
 
-      { path: 'chequec-lis', component: ChequecLisComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'BOXPRIV'] } },
+      { path: 'chequec-lis', component: ChequecLisComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] } },
 
       { path: 'chequec-edit', component: ChequecEditComponent, canActivate: [AuthGuard] },
       { path: 'chequec-edit/:id', component: ChequecEditComponent, canActivate: [AuthGuard]},
 
-      { path: 'chequec-details', component: ChequecDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] } },
+      { path: 'chequec-details', component: ChequecDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'SECRETAIRE','FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] } },
 
-      { path: 'chequec-details/:id', component: ChequecDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'RESPFINANCE', 'SECRETAIRE'] }},
+      { path: 'chequec-details/:id', component: ChequecDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'CONSEILADMIN', 'SUPCONSEILADMIN', 'DIRECTOR', 'PARTRESP', 'PARTNORMAL', 'RESP', 'SECRETAIRE','FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] }},
 
       { path: 'pay-chequec-add', component: PayChequecAddComponent, canActivate: [AuthGuard] },
 
       { path: 'pay-chequec-lis', component: PayChequecLisComponent, canActivate: [AuthGuard] },
 
-      { path: 'pay-chequec-detail', component: PayChequecDetailComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'BOXPRIV'] } },
+      { path: 'pay-chequec-detail', component: PayChequecDetailComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] } },
 
-      { path: 'pay-chequec-detail/:id', component: PayChequecDetailComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'BOXPRIV'] }},
+      { path: 'pay-chequec-detail/:id', component: PayChequecDetailComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] }},
 
       { path: 'pay-chequec-edit', component: PayChequecEditComponent, canActivate: [AuthGuard] },
       { path: 'pay-chequec-edit/:id', component: PayChequecEditComponent, canActivate: [AuthGuard] },
 
       { path: 'menu-cheque', component: MenuChequeComponent, canActivate: [AuthGuard] },
 
-      { path: 'cheque-pay-list-accept', component: ChequePayListAcceptComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL'] } },
+      { path: 'cheque-pay-list-accept', component: ChequePayListAcceptComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] } },
 
-      { path: 'cheque-pay-list-pay', component: ChequePayListPayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'BOXPRIV'] } },
+      { path: 'cheque-pay-list-pay', component: ChequePayListPayComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] } },
 
-      { path: 'chequeclasse', component: ChequeclasseComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] }},
+      { path: 'chequeclasse', component: ChequeclasseComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] }},
 
 
     /******** Salaire *****************/
 
-      { path: 'salaire-add', component: SalaireAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTOR', 'SECRETAIRE','PARTRESP'] } },
+      { path: 'salaire-add', component: SalaireAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTOR', 'SECRETAIRE', 'PARTRESP', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] } },
 
       { path: 'salaire-menu1', component: SalaireMenu1Component, canActivate: [AuthGuard] },
 
@@ -2266,9 +2302,9 @@ import { ChatMsgComponent } from './Chat/chat-msg/chat-msg.component';
 
       { path: 'salaire-list-global', component: SalaireListGlobalComponent, canActivate: [AuthGuard] },
 
-      { path: 'salaire-details', component: SalaireDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'salaire-details', component: SalaireDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] } },
 
-      { path: 'salaire-details/:id', component: SalaireDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'salaire-details/:id', component: SalaireDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV', 'BOXPRIV', 'EVFINPRIV'] } },
 
     /********* User Service Part 2  ***********/
 
@@ -3373,6 +3409,62 @@ import { ChatMsgComponent } from './Chat/chat-msg/chat-msg.component';
       { path: 'chat-msg', component: ChatMsgComponent, canActivate: [AuthGuard] },
       { path: 'tasks-up-menu', component: TasksUpMenuComponent, canActivate: [AuthGuard] },
 
+
+
+  /*** Reports**/
+
+    //Menu
+      { path: 'menu-reports-dir-general', component: MenuReportsDirGeneralComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] }   },
+      { path: 'tasks-report-menu', component: TasksReportMenuComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] }  },
+      { path: 'menu-reports-fin-admin', component: MenuReportsFinAdminComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] }   },
+      { path: 'menu-reports-dot-admin', component: MenuReportsDotAdminComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] }  },
+      { path: 'menu-reports-dawaa-admin-men', component: MenuReportsDawaaAdminMenComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] }   },
+      { path: 'menu-reports-dawaa-admin-women', component: MenuReportsDawaaAdminWomenComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] }   },
+      { path: 'menu-reports-media-admin', component: MenuReportsMediaAdminComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] }   },
+      { path: 'menu-reports-admins-dir', component: MenuReportsAdminsDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] }   },
+
+
+     //Tasks Report
+      { path: 'tasks-report-dir', component: TasksReportDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] }   },
+      { path: 'tasks-report-user', component: TasksReportUserComponent, canActivate: [AuthGuard] },  
+
+
+      { path: 'print-tasks-report-user', component: PrintTasksReportUserComponent, canActivate: [AuthGuard] },  
+      { path: 'print-tasks-report-user/:id/:etat', component: PrintTasksReportUserComponent, canActivate: [AuthGuard] },
+      { path: 'print-tasks-report-user/:datedeb/:datefin', component: PrintTasksReportUserComponent, canActivate: [AuthGuard] },
+
+      { path: 'print-tasks-report-dir', component: PrintTasksReportDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] }  },  
+      { path: 'print-tasks-report-dir/:id', component: PrintTasksReportDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] }   },
+      { path: 'print-tasks-report-dir/:datedeb/:datefin', component: PrintTasksReportDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] }   },
+
+    /** Retrait Reports **/
+
+      { path: 'retrait-report', component: RetraitReportComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] } },
+
+
+      { path: 'print-retrait-report', component: PrintRetraitReportComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] } },
+      { path: 'print-retrait-report/:nomben', component: PrintRetraitReportComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] } },
+      { path: 'print-retrait-report/:datedeb/:datefin', component: PrintRetraitReportComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] } },
+      { path: 'print-retrait-report/:etat', component: PrintRetraitReportComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] } },
+      { path: 'print-retrait-report/:typeDons', component: PrintRetraitReportComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] } },
+      { path: 'print-retrait-report/:typeRetrait', component: PrintRetraitReportComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN'] } },
+
+
+    /**Pointage Report **/
+
+      { path: 'pointage-emp-report', component: PointageEmpReportComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE'] } },
+
+
+      { path: 'pointage-emp-print', component: PointageEmpPrintComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE'] } },
+      { path: 'pointage-emp-print/:id', component: PointageEmpPrintComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE'] } },
+
+    /** Salaire ***/
+
+      { path: 'salaire-report', component: SalaireReportComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE'] } },
+
+
+      { path: 'salaire-rapport-print', component: SalaireRapportPrintComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE'] } },
+      { path: 'salaire-rapport-print/:id', component: SalaireRapportPrintComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE'] } },
     ])
   ],/*,  {
     provide: HTTP_INTERCEPTORS,
