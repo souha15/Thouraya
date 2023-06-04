@@ -8,6 +8,9 @@ import { Notif } from '../../../shared/Models/NotifSystem/notif.model';
 import { NotifService } from '../../../shared/Services/NotifSystem/notif.service';
 import { SignalRService, connection, AutomaticNotification } from '../../../shared/Services/signalR/signal-r.service';
 import { UserDetail } from '../../../shared/Models/User/user-detail.model';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+
 
 @Component({
   selector: 'app-avance-list-d',
@@ -16,12 +19,14 @@ import { UserDetail } from '../../../shared/Models/User/user-detail.model';
 })
 export class AvanceListDComponent implements OnInit {
 
+  private routeSub: Subscription;
 
   constructor(private UserService: UserServiceService,
     private toastr: ToastrService,
     private avanceService: AvanceService,
     private notifService: NotifService,
-    private signalService: SignalRService,) { }
+    private signalService: SignalRService,
+    private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
     this.getUserConnected();
@@ -144,22 +149,38 @@ export class AvanceListDComponent implements OnInit {
   notif: Notif = new Notif();
   dateTime = new Date();
 
+  Id: number = 0;
+  showrow: boolean = false;
   getUserConnected() {
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
+      this.routeSub = this.route.params.subscribe(params => {
+        if (params['id'] != undefined) {
+          this.Id = params['id'];
+          this.showrow = true;
+          this.avanceService.GetListNotif(this.Id, this.UserIdConnected).subscribe(res => {
+            this.AvanceList = res;
+          }, err => {
+            this.GetListGeneral(this.UserIdConnected);
+          })
+        } else {
+          this.GetListGeneral(this.UserIdConnected);
+        }
+      });
       this.avanceService.GetDemand(this.UserIdConnected).subscribe(res => {
         this.AvanceList = res;
-      }
-      )
+      })
 
     })
   }
 
+
   AvanceList: Avance[] = [];
-  GetAvanceList() {
+  GetListGeneral(UserIdConnected) {
     this.avanceService.GetDemand(this.UserIdConnected).subscribe(res => {
       this.AvanceList = res;
+      this.showrow = false;
     })
   }
 
@@ -269,7 +290,7 @@ export class AvanceListDComponent implements OnInit {
             })
           })
         }
-      this.GetAvanceList();
+        this.GetListGeneral(this.UserIdConnected);
       this.toastr.success("تم  قبول الطلب بنجاح", "نجاح");
         this.succ = true;
         this.failed = false;

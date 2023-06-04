@@ -12,13 +12,15 @@ import { UploadDownloadService } from '../../../shared/Services/Taches/upload-do
 import { HttpEventType } from '@angular/common/http';
 import { ProgressStatusEnum } from '../../../shared/Enum/progress-status-enum.enum';
 import { SignalRService, connection, AutomaticNotification } from '../../../shared/Services/signalR/signal-r.service';
-
+import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-rh-conge-list',
   templateUrl: './rh-conge-list.component.html',
   styleUrls: ['./rh-conge-list.component.css']
 })
 export class RhCongeListComponent implements OnInit {
+  private routeSub: Subscription;
   @Input() public disabled: boolean;
   @Input() public fileName: string;
   @Output() public downloadStatus: EventEmitter<ProgressStatus>;
@@ -28,7 +30,8 @@ export class RhCongeListComponent implements OnInit {
     private UserService: UserServiceService,
     private soldeCongeService: SoldeCongeService,
     public serviceupload: UploadDownloadService,
-    private signalService: SignalRService) {
+    private signalService: SignalRService,
+    private route: ActivatedRoute,) {
     this.downloadStatus = new EventEmitter<ProgressStatus>();
   }
   p: Number = 1;
@@ -57,22 +60,39 @@ export class RhCongeListComponent implements OnInit {
   UserNameConnected: string;
   adminisgtrationName: any;
   userc: UserDetail = new UserDetail();
-
+  Id: number = 0;
+  showrow: boolean = false;
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.userc = res
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-      this.congeService.GetCongeDemand(this.UserIdConnected).subscribe(res => {
-        this.filtredCongeList = res
-      })
+
+      this.routeSub = this.route.params.subscribe(params => {
+        if (params['id'] != undefined) {
+          this.Id = params['id'];
+          this.showrow = true;
+          this.congeService.GetListNotif(this.Id, this.UserIdConnected).subscribe(res => {
+            this.filtredCongeList = res;
+          }, err => {
+            this.GetListGeneral(this.UserIdConnected);
+          })
+        } else {
+          this.GetListGeneral(this.UserIdConnected);
+        }
+      });
+
+   
     })
 
-
-
   }
-
+  GetListGeneral(UserIdConnected) {
+    this.congeService.GetCongeDemand(UserIdConnected).subscribe(res => {
+      this.filtredCongeList = res;
+      this.showrow = false;
+    })
+  }
   //Handle Notification
   // Hub Configuration
   users: connection[] = [];
@@ -315,7 +335,7 @@ export class RhCongeListComponent implements OnInit {
         this.succ = true;
         this.failed = false;
 
-        this.CongeList();
+        this.GetListGeneral(this.UserIdConnected);
         if (this.conge.type == "إجازة إستثنائية" || this.conge.type == "إجازة إعتيادية" || this.conge.type == "إجازة إضطرارية") {
           this.congeService.TestTheLastUser(this.conge.id).subscribe(res => {
             this.test = res

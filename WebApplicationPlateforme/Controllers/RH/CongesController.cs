@@ -877,7 +877,28 @@ namespace WebApplicationPlateforme.Controllers.RH
 
             return conge;
         }
+        [HttpGet]
+        [Route("GetListNotif/{Id}/{userId}")]
+        public List<Conge> GetListNotif(int Id, string userId)
+        {
+            List<Conge> ListNotifGlob = new List<Conge>();
+            Conge NotifId = new Conge();
+            if (Id != 0)
+            {
+                NotifId = _context.conges.Where(item => item.Id == Id).FirstOrDefault();
+                ListNotifGlob = GetCongeDemand(userId);
+                var item = ListNotifGlob.Find(x => x.Id == NotifId.Id);
+                ListNotifGlob.Remove(item);
+                ListNotifGlob.Insert(ListNotifGlob.Count(), NotifId);
+            }
+            else
+            {
+                ListNotifGlob = GetCongeDemand(userId);
+            }
 
+
+            return ListNotifGlob;
+        }
         private bool CongeExists(int id)
         {
             return _context.conges.Any(e => e.Id == id);

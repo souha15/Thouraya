@@ -35,14 +35,15 @@
           <tbody>
             <tr *ngFor="let cg of AvanceList |  orderBy: key : reverse | filter:filter| paginate: { itemsPerPage: count, currentPage: p };let i = index">
 
-              <td (click)="populateForm(cg)">{{(p-1) * count + i + 1}}</td>
-              <td (click)="populateForm(cg)">{{cg.userNameCreator}}</td>
-              <td (click)="populateForm(cg)">{{cg.etatAvance}}</td>
-              <td (click)="populateForm(cg)">{{cg.prix}}</td>
-              <td (click)="populateForm(cg)">{{cg.nbMoisDeduire}}</td>
-              <td (click)="populateForm(cg)">{{cg.dateDeduire}}</td>
+              <td (click)="populateForm(cg)" [ngClass]="{'firstRow': i ===0 && showrow === true}">{{(p-1) * count + i + 1}}</td>
+              <td (click)="populateForm(cg)" [ngClass]="{'firstRow': i ===0 && showrow === true}">{{cg.userNameCreator}}</td>
+              <td (click)="populateForm(cg)" [ngClass]="{'firstRow': i ===0 && showrow === true}">{{cg.etatAvance}}</td>
+              <td (click)="populateForm(cg)" [ngClass]="{'firstRow': i ===0 && showrow === true}">{{cg.prix}}</td>
+              <td (click)="populateForm(cg)" [ngClass]="{'firstRow': i ===0 && showrow === true}">{{cg.nbMoisDeduire}}</td>
+              <td (click)="populateForm(cg)" [ngClass]="{'firstRow': i ===0 && showrow === true}">{{cg.dateDeduire}}</td>
               <td (click)="populateForm(cg)">
-                <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal">
+                <a class="btn show-details-btn text-info" (click)="populateForm(cg)" data-toggle="modal" data-target="#myModal"
+                   [ngClass]="{'firstRow': i ===0 && showrow === true}">
                   <i class="fa fa-eye fa-lg"></i>
                 </a>
               </td>

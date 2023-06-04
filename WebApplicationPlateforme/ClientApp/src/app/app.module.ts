@@ -843,6 +843,8 @@ import { PointageEmpReportComponent } from './Rapports/Pointage/pointage-emp-rep
 import { PointageEmpPrintComponent } from './Rapports/Pointage/pointage-emp-print/pointage-emp-print.component';
 import { SalaireReportComponent } from './Rapports/Salaire/salaire-report/salaire-report.component';
 import { SalaireRapportPrintComponent } from './Rapports/Salaire/salaire-rapport-print/salaire-rapport-print.component';
+import { SideMenuSettingsAddComponent } from './MenuSettings/side-menu-settings-add/side-menu-settings-add.component';
+import { SideMenuSettingsDetailsComponent } from './MenuSettings/side-menu-settings-details/side-menu-settings-details.component';
 
 @NgModule({
   declarations: [
@@ -1649,6 +1651,8 @@ import { SalaireRapportPrintComponent } from './Rapports/Salaire/salaire-rapport
     PointageEmpPrintComponent,
     SalaireReportComponent,
     SalaireRapportPrintComponent,
+    SideMenuSettingsAddComponent,
+    SideMenuSettingsDetailsComponent,
   ],
   imports: [
 
@@ -1881,6 +1885,7 @@ import { SalaireRapportPrintComponent } from './Rapports/Salaire/salaire-rapport
       { path: 'equipement-list-dir', component: EquipementListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN', 'DIRECTORETAB', 'DIRECTORGENERAL'] } },
 
       { path: 'permission-list-dir', component: PermissionUListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN', 'DIRECTORETAB', 'DIRECTORGENERAL', 'DIRDIRECTE', 'FINPRIV', 'DOTPRIV', 'RHPRIV', 'COMPTAPRIV','BOXPRIV']  } },
+      { path: 'permission-list-dir/:id', component: PermissionUListDirComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORADMN', 'DIRECTORETAB', 'DIRECTORGENERAL', 'DIRDIRECTE', 'FINPRIV', 'DOTPRIV', 'RHPRIV', 'COMPTAPRIV','BOXPRIV']  } },
 
       {
         path: 'menurequests', component: MenurequestsComponent,
@@ -1911,7 +1916,8 @@ import { SalaireRapportPrintComponent } from './Rapports/Salaire/salaire-rapport
 
       { path: 'rh-recrutment-list', component: RhRecrutmentListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL', 'DIRECTORADMN', 'DIRECTORETAB', 'DIRDIRECTE', 'FINPRIV', 'DOTPRIV', 'RHPRIV', 'COMPTAPRIV','BOXPRIV'] } },
 
-      { path: 'rh-conge-list', component: RhCongeListComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'RHPRIV'] }},
+      { path: 'rh-conge-list', component: RhCongeListComponent, canActivate: [AuthGuard]},
+      { path: 'rh-conge-list/:id', component: RhCongeListComponent, canActivate: [AuthGuard]},
 
       { path: 'news-detail', component: NewsDetailComponent, canActivate: [AuthGuard] },
 
@@ -2007,7 +2013,8 @@ import { SalaireRapportPrintComponent } from './Rapports/Salaire/salaire-rapport
 
       { path: 'avance-list-c', component: AvanceListCComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'FINPRIV', 'COMPTAPRIV'] }   },
 
-      { path: 'avance-list-d', component: AvanceListDComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'DIRECTORGENERAL'] } },
+      { path: 'avance-list-d', component: AvanceListDComponent, canActivate: [AuthGuard] },
+      { path: 'avance-list-d/:id', component: AvanceListDComponent, canActivate: [AuthGuard] },
 
       { path: 'avance-list-not-accepted', component: AvanceListNotAcceptedComponent, canActivate: [AuthGuard] },
 
@@ -3465,6 +3472,14 @@ import { SalaireRapportPrintComponent } from './Rapports/Salaire/salaire-rapport
 
       { path: 'salaire-rapport-print', component: SalaireRapportPrintComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE'] } },
       { path: 'salaire-rapport-print/:id', component: SalaireRapportPrintComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR', 'RESSOURCEHUMAINE'] } },
+
+    /*** SideMenu Settings **/
+
+
+      { path: 'side-menu-settings-add', component: SideMenuSettingsAddComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+      { path: 'side-menu-settings-details', component: SideMenuSettingsDetailsComponent, canActivate: [AuthGuard], data: { permittedRoles: ['ADMINISTRATEUR'] } },
+
+
     ])
   ],/*,  {
     provide: HTTP_INTERCEPTORS,

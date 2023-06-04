@@ -195,7 +195,7 @@ export class NavMenuComponent implements OnInit, OnDestroy {
     this.notif = Object.assign({}, item);
     this.notif.vu = "1"
     this.signalrService.UpdateNotif(this.notif).subscribe(res => {
-      this.router.navigate(['/' + this.notif.pageUrl])
+      this.router.navigate(['/' + this.notif.pageUrl, this.notif.serviceId])
       this.GetNotifList(this.UserIdConnected);
       this.CountNotif(this.UserIdConnected)
    

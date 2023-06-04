@@ -1,0 +1,256 @@
+
+<app-nav-menu></app-nav-menu>
+<div class="content">
+  <div class="row">
+    <div class="col-md-3 col-sm-4">
+      <app-side-menu></app-side-menu>
+    </div>
+    <div class="col-md-9 col-sm-8">
+
+
+      <nav class="d-flex p-0 bd-highlight tasks-nav mt-2 finance-nav">
+
+        <a [routerLink]="['/side-menu-settings-add']" class="p-2 flex-fill bd-highlight stop-btn">
+          <span><i class="fa fa-plus"></i></span>
+          إعدادات القائمة الجانبية
+        </a>
+
+        <a [routerLink]="['/side-menu-settings-details']" class="p-2 flex-fill bd-highlight">
+          <span><i class="fa fa-eye"></i></span>
+          عرض إعدادات القائمة الجانبية
+        </a>
+
+      </nav>
+
+      <h4 class="my-2 task-head">إعدادات القائمة الجانبية</h4>
+
+      <div class="row">
+        <div class="form-box w-100">
+          <div class="col-md-12">
+            <label class="main"><span><i class="fa fa-list-ul">  </i>  </span>   العناوين الرئيسية     </label>
+          </div>
+          <form class="task-form form-row stop-form" #form="ngForm" autocomplete="off" (submit)="onSubmit(form)">
+
+            <div class="col-md-6">
+              <label for="unit-num"><span><i class="fa fa-list-alt"></i></span> عدد العناوين </label>
+              <input type="number" id="user" class="" name="nbUnderMain" #nbUnderMain="ngModel" [(ngModel)]="main.nbUnderMain" (change)="getnbUnderMain($event)" required>
+
+              <div *ngIf="nbUnderMain.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب عدد العناوين الرئيسية .
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="unit-num"><span><i class="fa fa-sort"></i></span> ترتيب  العنوان </label>
+              <input type="number" id="user" class="" name="rang" #rang="ngModel" [(ngModel)]="main.rang" required>
+
+              <div *ngIf="rang.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب  رتبة العنوان .
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="unit-num"><span><i class="fa fa-building"></i></span> الإدارة </label>
+              <select id="devision" name="idAdmin" #idAdmin="ngModel" [(ngModel)]="main.idAdmin" (change)="getAdminName($event)" required>
+                <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                <option *ngFor="let item of adminList" value="{{item.id}}">{{item.nom}}</option>
+              </select>
+              <div *ngIf="idAdmin.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب الإدارة .
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <label for="unit-num"><span><i class="fa fa-sort"></i></span> العنوان </label>
+              <input type="text" id="user" class="" name="nom" #nom="ngModel" [(ngModel)]="main.nom" required>
+
+              <div *ngIf="nom.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب   العنوان .
+              </div>
+            </div>
+
+
+            <div class="col-md-6">
+              <label for="unit-num"><span><i class="fa fa-icons"></i></span> الأيقونة </label>
+              <select class="select1" id="devision" name="icon" #icon="ngModel" [(ngModel)]="main.icon" (change)="getAdminName($event)" required>
+                <option [ngValue]="undefined" selected disabled class="select1">-اختر-</option>
+                <option class="select1" value="fa fa-user">&#xf007;</option>
+                <option class="select1" value="fa fa-user-o">&#xf2c0;</option>
+                <option class="select1" value="fa fa-users">&#xf0c0;</option>
+                <option class="select1" value="fa fa-user-circle">&#xf2bd;</option>
+                <option class="select1" value="fa fa-user-circle-o">&#xf2be;</option>
+                <option class="select1" value="fa fa-comment-o">&#xf0e5;</option>
+                <option class="select1" value="fa fa-comments-o">&#xf0e6;</option>
+                <option class="select1" value="fa fa-rotate-left">&#xf0e2;</option>
+                <option class="select1" value="fa fa-building">&#xf1ad;</option>
+                <option class="select1" value="fa fa-building-o">&#xf0f7;</option>
+                <option class="select1" value="fa fa-money">&#xf0d6;</option>
+                <option class="select1" value="fa fa-usd">&#xf155;</option>
+                <option class="select1" value="fa fa-dollar">&#xf156;</option>
+                <option class="select1" value="fa fa-handshake-o">&#xf2b5;</option>
+                <option class="select1" value="fa fa-briefcase">&#xf0b1;</option>
+                <option class="select1" value="fa fa-laptop">&#xf109;</option>
+
+              </select>
+
+              <div *ngIf="icon.invalid && form.submitted && !isValidFormSubmitted" class="alert alert-danger">
+                مطلوب   الأيقونة .
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="text-left">
+                <input class="btn btn-primary" type="submit" value="حفظ" />&nbsp;&nbsp;
+              </div>
+            </div>
+
+          </form>
+          <!-- New Table To Add Values -->
+          <div class="col-md-12" *ngIf="showSub">
+            <div class="col-md-12">
+              <label class="main"><span><i class="fa fa-list-alt">  </i>  </span>   العناوين الثانوية     </label>
+            </div>
+
+
+            <form class="task-form form-row stop-form" #formSub="ngForm" autocomplete="off" (submit)="onSubmitSubTitle(formSub)">
+
+              <div class="col-md-6">
+                <label for="unit-num"><span><i class="fa fa-sort"></i></span> العنوان </label>
+                <input type="text" id="user" class="" name="nom" #nom="ngModel" [(ngModel)]="sub.nom" required>
+
+                <div *ngIf="nom.invalid && formSub.submitted && !isValidFormSubmittedSub" class="alert alert-danger">
+                  مطلوب   العنوان .
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="unit-num"><span><i class="fa fa-sort"></i></span> ترتيب  العنوان </label>
+                <input type="number" id="user" class="" name="rang" #rang="ngModel" [(ngModel)]="main.rang" required>
+                <div *ngIf="rang.invalid && formSub.submitted && !isValidFormSubmittedSub" class="alert alert-danger">
+                  مطلوب   ترتيب  العنوان .
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <label for="unit-num"><span><i class="fa fa-building"></i></span> القسم </label>
+                <select id="devision" name="idDep" #idDep="ngModel" [(ngModel)]="sub.idDep" (change)="getDepName($event)" required>
+                  <option [ngValue]="undefined" selected disabled>-اختر-</option>
+                  <option *ngFor="let item of etabList" value="{{item.id}}">{{item.nom}}</option>
+                </select>
+                <div *ngIf="idDep.invalid && formSub.submitted && !isValidFormSubmittedSub" class="alert alert-danger">
+                  مطلوب القسم .
+                </div>
+              </div>
+              <div class="col-md-6">
+                <label for="unit-num"><span><i class="fa fa-sort"></i></span>  عدد الأنظمة </label>
+                <input type="text" id="user" class="" name="nbModules" #nbModules="ngModel" [(ngModel)]="sub.nbModules" required>
+              </div>
+
+            </form>
+
+
+            <div class="table-responsive new-table1">
+              <table class="table table-bordered text-center table-striped">
+                <thead class="thead-primary">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col"> العنوان  الرئيسي</th>
+                    <th scope="col">الإدارة</th>
+                    <th scope="col">العنوان</th>
+                    <th scope="col">ترتيب  العنوان</th>
+                    <th scope="col">القسم</th>
+                    <th scope="col">حذف</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row"></th>
+                    <td>{{main.nom}}</td>
+                    <td>{{main.nom}}</td>
+                    <td>{{main.nom}}</td>
+                    <td>{{main.nom}}</td>
+                    <td>{{main.nomAdmin}}</td>
+                    <td><a (click)="del2(pr,i)"><i class="fa fa-times" style="color:red;font-size:20px"></i></a></td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+
+          <!--<div class="col-md-6">
+            <label for="unit-num"><span><i class="fa fa-icons"></i></span> الأنظمة </label>
+            <select id="devision" name="icon" #icon="ngModel" [(ngModel)]="sub.icon" (change)="getModuleData($event)" required>
+              <option [ngValue]="undefined" selected disabled>-اختر-</option>
+              <option *ngFor="let item of ModuleList" value="{{item.id}}">&#xf007;</option>
+
+
+            </select>
+
+            <div *ngIf="icon.invalid && formSub.submitted && !isValidFormSubmittedSub" class="alert alert-danger">
+              مطلوب   الأيقونة .
+            </div>
+          </div>-->
+
+
+        </div>
+      </div>
+
+
+      <!--<div class="row">
+    <div class="form-box w-100">
+
+      <div class="container">
+        <details open="open">
+          <summary>
+            <select id="user" class="">
+              <option [ngValue]="undefined" selected disabled>-الخدمة-</option>
+              <option value="إجازة">إجازة</option>
+              <option value="إذن">إذن</option>
+              <option value="انتداب">انتداب</option>
+              <option value="عهدة">عهدة</option>
+              <option value="تجديد إقامة">تجديد إقامة</option>
+              <option value="صرف شيك">صرف شيك</option>
+              <option value="مستحقات مالية">مستحقات مالية</option>
+              <option value="دورة تدريبية">دورة تدريبية</option>
+              <option value="إستقالة">إستقالة</option>
+              <option value="سلفة">سلفة</option>
+              <option value="استحداث وظيفة">استحداث وظيفة</option>
+              <option value="ساعات إضافية">ساعات إضافية</option>
+            </select>
+          </summary>
+          <div class="folder">
+            <p>app.py</p>
+            <p>package.json</p>
+            <details open="open">
+              <summary>static</summary>
+              <div class="folder">
+                <details>
+                  <summary>css</summary>
+                  <div class="folder">
+                    <p>index.css</p>
+                    <p>template.css</p>
+                  </div>
+                </details>
+
+              </div>
+            </details>
+
+          </div>
+        </details>
+      </div>
+
+
+    </div>
+
+  </div>-->
+
+    </div>
+
+  </div>
+
+</div>
+
+<footer class="text-center">
+  <p>كل الحقوق محفوظة لمؤسسة مواهب الخليج  <a class="navbar-brand" href="#"> <img src="assets/images/awal.png" style="width:40px;height:40px;"></a> </p>
+</footer>

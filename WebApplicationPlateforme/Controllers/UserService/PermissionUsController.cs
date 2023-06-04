@@ -776,6 +776,28 @@ namespace WebApplicationPlateforme.Controllers.UserService
             return permissionU;
         }
 
+        [HttpGet]
+        [Route("GetListNotif/{Id}/{userId}")] 
+        public List<PermissionU> GetListNotif(int Id, string userId)
+        {
+            List<PermissionU> ListNotifGlob = new List<PermissionU>();
+            PermissionU NotifId = new PermissionU();
+            if (Id != 0)
+            {
+                NotifId = _context.permissionUs.Where(item => item.Id == Id).FirstOrDefault();
+                ListNotifGlob = GetPermissionDemand(userId);
+                var item = ListNotifGlob.Find(x => x.Id == NotifId.Id);
+                ListNotifGlob.Remove(item);
+                ListNotifGlob.Insert(ListNotifGlob.Count(), NotifId);
+            }
+            else
+            {
+                ListNotifGlob = GetPermissionDemand(userId);
+            }
+           
+
+            return ListNotifGlob;
+        }
         private bool PermissionUExists(int id)
         {
             return _context.permissionUs.Any(e => e.Id == id);

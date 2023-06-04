@@ -82,5 +82,9 @@ export class AvanceService {
     return this.http.get<Avance>(this.rootURL + '/DemandeAvances/EditDemandByRole/' + Id + '/' + userEtat, this.headers);
 
   }
+
+  GetListNotif(Id, userId) {
+    return this.http.get<Avance[]>(this.rootURL + '/DemandeAvances/GetListNotif/' + Id + '/' + userId);
+  }
 }
 

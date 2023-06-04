@@ -72,6 +72,10 @@ export class CongeService {
     return this.http.get<Conge[]>(this.rootURL + '/Conges/GetCongeDemand/' + userId);
   }
 
+  GetListNotif(Id,userId) {
+    return this.http.get<Conge[]>(this.rootURL + '/Conges/GetListNotif/' +Id +'/'+ userId);
+  }
+
   GetCongeHistorique(id) {
     return this.http.get<Conge>(this.rootURL + '/Conges/GetCongeHistorique/' + id);
   }

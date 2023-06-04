@@ -9,9 +9,9 @@ export class PathSharedService {
 
   getPath() {
 
- return 'http://localhost:49599/api'
+return 'http://localhost:49599/api'
 
-  // return 'http://thooraya.com/api'
+   // return 'http://thooraya.com/api'
 
   }
 }

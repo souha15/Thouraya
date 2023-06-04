@@ -95,9 +95,12 @@ namespace WebApplicationPlateforme
             services.AddEntityFrameworkNpgsql()
       .AddDbContext<AdministrativeCommunicationContext>(
       options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
-            /* services.AddDefaultIdentity<ApplicationUser>()
-                 .AddEntityFrameworkStores<ApplicationDbContext>();
-                 */
+            
+            
+            services.AddEntityFrameworkNpgsql()
+      .AddDbContext<MainContext>(
+      options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+           
             services.AddIdentityCore<ApplicationUser>()
                 .AddRoles<IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()

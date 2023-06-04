@@ -59,6 +59,10 @@ export class PermissionUService {
     return this.http.get<PermissionU[]>(this.rootURL + '/PermissionUs/GetPermissionDemand/' + userId);
   }
 
+  GetListNotif(Id,userId) {
+    return this.http.get<PermissionU[]>(this.rootURL + '/PermissionUs/GetListNotif/' +Id+'/'+ userId);
+  }
+
   GetPersmissionHistorique(id) {
     return this.http.get<PermissionU>(this.rootURL + '/PermissionUs/GetPersmissionHistorique/' + id);
   }

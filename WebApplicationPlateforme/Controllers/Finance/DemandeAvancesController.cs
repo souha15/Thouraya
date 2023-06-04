@@ -774,5 +774,30 @@ namespace WebApplicationPlateforme.Controllers.Finance
         {
             return _context.demandeAvances.Any(e => e.Id == id);
         }
+
+
+
+        [HttpGet]
+        [Route("GetListNotif/{Id}/{userId}")]
+        public List<DemandeAvance> GetListNotif(int Id, string userId)
+        {
+            List<DemandeAvance> ListNotifGlob = new List<DemandeAvance>();
+            DemandeAvance NotifId = new DemandeAvance();
+            if (Id != 0)
+            {
+                NotifId = _context.demandeAvances.Where(item => item.Id == Id).FirstOrDefault();
+                ListNotifGlob = GetDemand(userId);
+                var item = ListNotifGlob.Find(x => x.Id == NotifId.Id);
+                ListNotifGlob.Remove(item);
+                ListNotifGlob.Insert(ListNotifGlob.Count(), NotifId);
+            }
+            else
+            {
+                ListNotifGlob = GetDemand(userId);
+            }
+
+
+            return ListNotifGlob;
+        }
     }
 }

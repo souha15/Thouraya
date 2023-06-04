@@ -6,6 +6,8 @@ import { NgForm } from '@angular/forms';
 import { PermissionUService } from '../../../shared/Services/User Services/permission-u.service';
 import { PermissionU } from '../../../shared/Models/User Services/permission-u.model';
 import { SignalRService, connection, AutomaticNotification } from '../../../shared/Services/signalR/signal-r.service';
+import { Subscription } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-permission-list-dir',
@@ -13,16 +15,16 @@ import { SignalRService, connection, AutomaticNotification } from '../../../shar
   styleUrls: ['./permission-list-dir.component.css']
 })
 export class PermissionUListDirComponent implements OnInit {
-
+  private routeSub: Subscription;
   filter;
   constructor(private permissionService: PermissionUService,
     private toastr: ToastrService,
     private UserService: UserServiceService,
-    private signalService: SignalRService) { }
+    private signalService: SignalRService,
+    private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
     this.getUserConnected();
-    this.CongeList();
     this.userOnLis();
     this.userOffLis();
     this.logOutLis();
@@ -142,27 +144,39 @@ export class PermissionUListDirComponent implements OnInit {
   adminisgtrationName: any;
   userc: UserDetail = new UserDetail();
   dateTime = new Date();
+  Id: number = 0;
+  showrow: boolean = false;
   getUserConnected() {
 
     this.UserService.getUserProfileObservable().subscribe(res => {
       this.userc = res
       this.UserIdConnected = res.id;
       this.UserNameConnected = res.fullName;
-      this.permissionService.GetPermissionDemand(this.UserIdConnected).subscribe(res => {
-        this.PermissionList = res;
-      }
-        )
-
+      this.routeSub = this.route.params.subscribe(params => {
+        if (params['id'] != undefined) {
+          this.Id = params['id'];
+          this.showrow = true;
+          this.permissionService.GetListNotif(this.Id, this.UserIdConnected).subscribe(res => {
+            this.PermissionList = res;
+          }, err => {
+            this.GetListGeneral(this.UserIdConnected);
+          })
+        } else {
+          this.GetListGeneral(this.UserIdConnected);
+        }
+      });
     })
 
   }
-
   PermissionList: PermissionU[] = [];
-  CongeList() {
-    this.permissionService.GetPermissionDemand(this.UserIdConnected).subscribe(res => {
-      this.PermissionList = res
+
+  GetListGeneral(UserIdConnected) {
+    this.permissionService.GetPermissionDemand(UserIdConnected).subscribe(res => {
+      this.PermissionList = res;
+      this.showrow = false;
     })
   }
+
 
   per: PermissionU = new PermissionU();
 
@@ -258,7 +272,7 @@ export class PermissionUListDirComponent implements OnInit {
         }
         this.toastr.success('تم التحديث بنجاح', 'نجاح')
         form.resetForm();
-        this.CongeList();
+        this.GetListGeneral(this.UserIdConnected);
         this.msg = "  تم التحديث بنجاح"
 
         this.succ = true;
